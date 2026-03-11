@@ -59,7 +59,7 @@ const OlimpiadePage = () => {
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {olimpiadeTopics.map((topik, i) => {
-            const hasContent = topik === "Bilangan Bulat" || topik === "Bilangan Rasional" || topik === "Bilangan Berpangkat" || topik === "Bilangan Irasional" || topik === "KPK dan FPB" || topik === "Modulo - Sisa Pembagian" || topik === "Himpunan" || topik === "Relasi dan Fungsi" || topik === "Perbandingan" || topik === "Aljabar" || topik === "Pola Bilangan" || topik === "Sistem Persamaan Linear Dua Variabel" || topik === "Garis dan Sudut" || topik === "Koordinat Cartesius" || topik === "Teorema Pythagoras" || topik === "Segitiga dan Segiempat (Bangun Datar)" || topik === "Lingkaran" || topik === "Bangun Ruang Sisi Datar" || topik === "Bangun Ruang Sisi Lengkung";
+            const hasContent = topik === "Bilangan Bulat" || topik === "Bilangan Rasional" || topik === "Bilangan Berpangkat" || topik === "Bilangan Irasional" || topik === "KPK dan FPB" || topik === "Modulo - Sisa Pembagian" || topik === "Himpunan" || topik === "Relasi dan Fungsi" || topik === "Perbandingan" || topik === "Aljabar" || topik === "Persamaan dan Pertidaksamaan Linear Satu Variabel" || topik === "Persamaan Garis" || topik === "Persamaan Kuadrat" || topik === "Fungsi Kuadrat" || topik === "Aritmetika Sosial" || topik === "Pola Bilangan" || topik === "Sistem Persamaan Linear Dua Variabel" || topik === "Garis dan Sudut" || topik === "Koordinat Cartesius" || topik === "Teorema Pythagoras" || topik === "Segitiga dan Segiempat (Bangun Datar)" || topik === "Lingkaran" || topik === "Bangun Ruang Sisi Datar" || topik === "Bangun Ruang Sisi Lengkung";
             return (
               <button
                 key={topik}
@@ -85,6 +85,16 @@ const OlimpiadePage = () => {
                     navigate("/olimpiade/perbandingan");
                   } else if (topik === "Aljabar") {
                     navigate("/olimpiade/aljabar");
+                  } else if (topik === "Persamaan dan Pertidaksamaan Linear Satu Variabel") {
+                    navigate("/olimpiade/plsv");
+                  } else if (topik === "Persamaan Garis") {
+                    navigate("/olimpiade/persamaan-garis");
+                  } else if (topik === "Persamaan Kuadrat") {
+                    navigate("/olimpiade/persamaan-kuadrat");
+                  } else if (topik === "Fungsi Kuadrat") {
+                    navigate("/olimpiade/fungsi-kuadrat");
+                  } else if (topik === "Aritmetika Sosial") {
+                    navigate("/olimpiade/aritmetika-sosial");
                   } else if (topik === "Pola Bilangan") {
                     navigate("/olimpiade/pola-bilangan");
                   } else if (topik === "Sistem Persamaan Linear Dua Variabel") {
