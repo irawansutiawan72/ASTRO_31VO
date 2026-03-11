@@ -59,7 +59,7 @@ const OlimpiadePage = () => {
 
         <div className="flex flex-col gap-3 animate-slide-up">
           {olimpiadeTopics.map((topik, i) => {
-            const hasContent = topik === "Bilangan Bulat" || topik === "Bilangan Rasional" || topik === "Bilangan Berpangkat" || topik === "Bilangan Irasional" || topik === "KPK dan FPB" || topik === "Modulo - Sisa Pembagian" || topik === "Himpunan" || topik === "Relasi dan Fungsi" || topik === "Perbandingan" || topik === "Aljabar" || topik === "Pola Bilangan" || topik === "Sistem Persamaan Linear Dua Variabel" || topik === "Garis dan Sudut" || topik === "Koordinat Cartesius" || topik === "Teorema Pythagoras";
+            const hasContent = topik === "Bilangan Bulat" || topik === "Bilangan Rasional" || topik === "Bilangan Berpangkat" || topik === "Bilangan Irasional" || topik === "KPK dan FPB" || topik === "Modulo - Sisa Pembagian" || topik === "Himpunan" || topik === "Relasi dan Fungsi" || topik === "Perbandingan" || topik === "Aljabar" || topik === "Pola Bilangan" || topik === "Sistem Persamaan Linear Dua Variabel" || topik === "Garis dan Sudut" || topik === "Koordinat Cartesius" || topik === "Teorema Pythagoras" || topik === "Segitiga dan Segiempat (Bangun Datar)" || topik === "Lingkaran" || topik === "Bangun Ruang Sisi Datar" || topik === "Bangun Ruang Sisi Lengkung";
             return (
               <button
                 key={topik}
@@ -95,6 +95,14 @@ const OlimpiadePage = () => {
                     navigate("/olimpiade/koordinat-cartesius");
                   } else if (topik === "Teorema Pythagoras") {
                     navigate("/olimpiade/teorema-pythagoras");
+                  } else if (topik === "Segitiga dan Segiempat (Bangun Datar)") {
+                    navigate("/olimpiade/segitiga-segiempat");
+                  } else if (topik === "Lingkaran") {
+                    navigate("/olimpiade/lingkaran");
+                  } else if (topik === "Bangun Ruang Sisi Datar") {
+                    navigate("/olimpiade/bangun-ruang-sisi-datar");
+                  } else if (topik === "Bangun Ruang Sisi Lengkung") {
+                    navigate("/olimpiade/bangun-ruang-sisi-lengkung");
                   }
                 }}
                 className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
