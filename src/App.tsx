@@ -29,6 +29,10 @@ import OlimpiadeSPLDVPage from "./pages/OlimpiadeSPLDVPage";
 import OlimpiadeGarisSudutPage from "./pages/OlimpiadeGarisSudutPage";
 import OlimpiadeKoordinatCartesiusPage from "./pages/OlimpiadeKoordinatCartesiusPage";
 import OlimpiadeTeoremaPage from "./pages/OlimpiadeTeoremaPage";
+import OlimpiadeSegitigaSegiempatPage from "./pages/OlimpiadeSegitigaSegiempatPage";
+import OlimpiadeLingkaranPage from "./pages/OlimpiadeLingkaranPage";
+import OlimpiadeBangunRuangSisiDatarPage from "./pages/OlimpiadeBangunRuangSisiDatarPage";
+import OlimpiadeBangunRuangSisiLengkungPage from "./pages/OlimpiadeBangunRuangSisiLengkungPage";
 import TKAPage from "./pages/TKAPage";
 import PapanPeringkatPage from "./pages/PapanPeringkatPage";
 import BankSoalPage from "./pages/BankSoalPage";
@@ -230,6 +234,10 @@ const AppInner = () => {
       <Route path="/olimpiade/garis-sudut" element={<OlimpiadeGarisSudutPage />} />
       <Route path="/olimpiade/koordinat-cartesius" element={<OlimpiadeKoordinatCartesiusPage />} />
       <Route path="/olimpiade/teorema-pythagoras" element={<OlimpiadeTeoremaPage />} />
+      <Route path="/olimpiade/segitiga-segiempat" element={<OlimpiadeSegitigaSegiempatPage />} />
+      <Route path="/olimpiade/lingkaran" element={<OlimpiadeLingkaranPage />} />
+      <Route path="/olimpiade/bangun-ruang-sisi-datar" element={<OlimpiadeBangunRuangSisiDatarPage />} />
+      <Route path="/olimpiade/bangun-ruang-sisi-lengkung" element={<OlimpiadeBangunRuangSisiLengkungPage />} />
       <Route path="/tka" element={<TKAPage />} />
       <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
       <Route path="/bank-soal" element={<BankSoalPage />} />
