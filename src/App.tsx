@@ -169,6 +169,7 @@ import PenjumlahanPenguranganMMK7Page from "./pages/materi-matematika/kelas7/bil
 import PerkalianPecahanMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianPecahanPage";
 import PembagianPecahanMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembagianPecahanPage";
 import BentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/BentukDesimalPage";
+import PenjumlahanPenguranganBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PenjumlahanPenguranganBentukDesimalPage";
 import PerkalianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PerkalianBentukDesimalPage";
 import PembagianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembagianBentukDesimalPage";
 import PembulatanBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembulatanBentukDesimalPage";
@@ -399,6 +400,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian-pecahan" element={<PerkalianPecahanMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-pecahan" element={<PembagianPecahanMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/bentuk-desimal" element={<BentukDesimalMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/bilangan-rasional/penjumlahan-pengurangan-bentuk-desimal" element={<PenjumlahanPenguranganBentukDesimalMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/perkalian-bentuk-desimal" element={<PerkalianBentukDesimalMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-bentuk-desimal" element={<PembagianBentukDesimalMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembulatan-bentuk-desimal" element={<PembulatanBentukDesimalMMK7Page />} />
