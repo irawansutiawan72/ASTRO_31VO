@@ -26,6 +26,26 @@ import gambar16 from "@/assets/Gambar_16_SOAL_1773289509183.png";
 import gambar17 from "@/assets/Gambar_17_SOAL_1773289509183.png";
 import gambar18 from "@/assets/Gambar_18_SOAL_1773289509184.png";
 import gambar19 from "@/assets/Gambar_19_SOAL_1773289509184.png";
+import gambar20 from "@/assets/Gambar_20_SOAL_1773290091432.png";
+import gambar21 from "@/assets/Gambar_21_SOAL_1773290091432.png";
+import gambar22 from "@/assets/Gambar_22_SOAL_1773290091433.png";
+import gambar23 from "@/assets/Gambar_23_SOAL_1773290091433.png";
+import gambar24 from "@/assets/Gambar_24_SOAL_1773290091434.png";
+import gambar25 from "@/assets/Gambar_25_SOAL_1773290091434.png";
+import gambar26 from "@/assets/Gambar_26_SOAL_1773290091435.png";
+import gambar27 from "@/assets/Gambar_27_SOAL_1773290091435.png";
+import gambar28 from "@/assets/Gambar_28_SOAL_1773290091436.png";
+import gambar29 from "@/assets/Gambar_29_SOAL_1773290091436.png";
+import gambar30 from "@/assets/Gambar_30_SOAL_1773290091436.png";
+import gambar31 from "@/assets/Gambar_31_SOAL_1773290091437.png";
+import gambar32 from "@/assets/Gambar_32_SOAL_1773290091437.png";
+import gambar33 from "@/assets/Gambar_33_SOAL_1773290091437.png";
+import gambar34 from "@/assets/Gambar_34_SOAL_1773290091438.png";
+import gambar35 from "@/assets/Gambar_35_SOAL_1773290091438.png";
+import gambar36 from "@/assets/Gambar_36_SOAL_1773290091438.png";
+import gambar37 from "@/assets/Gambar_37_SOAL_1773290091439.png";
+import gambar38 from "@/assets/Gambar_38_SOAL_1773290091440.png";
+import gambar39 from "@/assets/Gambar_39_SOAL_1773290091440.png";
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -279,85 +299,85 @@ const latihanDasar = [
   {
     no: 5,
     soal: "Perhatikan gambar\n\nDiketahui besar $\\angle CBD = (2x + 5)°$ dan $\\angle ABD = (3x - 25)°$. Besar pelurus sudut CBD adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar20,
+    imageCaption: "Gambar Soal 5",
     options: ["A. $82°$", "B. $85°$", "C. $95°$", "D. $104°$"]
   },
   {
     no: 6,
     soal: "Suatu sudut besarnya 3 kali pelurusnya, maka sudut tersebut adalah…",
-    image: null,
-    imageCaption: "",
+    image: gambar21,
+    imageCaption: "Gambar Soal 6",
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$"]
   },
   {
     no: 7,
     soal: "Perhatikan gambar berikut.\n\nDari gambar di atas besar $\\angle QPR$ adalah ..",
-    image: null,
-    imageCaption: "",
+    image: gambar22,
+    imageCaption: "Gambar Soal 7",
     options: ["A. $18°$", "B. $36°$", "C. $45°$", "D. $54°$"]
   },
   {
     no: 8,
     soal: "Perhatikan gambar berikut\n\nBesar $\\angle BAC$ adalah …",
-    image: null,
-    imageCaption: "",
+    image: gambar23,
+    imageCaption: "Gambar Soal 8",
     options: ["A. $80°$", "B. $70°$", "C. $60°$", "D. $50°$"]
   },
   {
     no: 9,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut ACB adalah ….",
-    image: null,
-    imageCaption: "",
+    image: gambar24,
+    imageCaption: "Gambar Soal 9",
     options: ["A. $55°$", "B. $85°$", "C. $95°$", "D. $125°$"]
   },
   {
     no: 10,
     soal: "Besar sudut terkecil dari dua jarum jam pada pukul 22.10 adalah …",
-    image: null,
-    imageCaption: "",
+    image: gambar25,
+    imageCaption: "Gambar Soal 10",
     options: ["A. $145°$", "B. $125°$", "C. $115°$", "D. $95°$"]
   },
   {
     no: 11,
     soal: "Besar sudut terkecil dari dua jarum jam pada pukul 07.20 adalah …",
-    image: null,
-    imageCaption: "",
+    image: gambar26,
+    imageCaption: "Gambar Soal 11",
     options: ["A. $90°$", "B. $100°$", "C. $105°$", "D. $110°$"]
   },
   {
     no: 12,
     soal: "Diketahui besar $\\angle A = (2x + 3)°$ dan $\\angle B = (3x - 8)°$ saling berpelurus, maka penyiku sudut A adalah....",
-    image: null,
-    imageCaption: "",
+    image: gambar27,
+    imageCaption: "Gambar Soal 12",
     options: ["A. $13°$", "B. $37°$", "C. $77°$", "D. $103°$"]
   },
   {
     no: 13,
     soal: "Perhatikan gambar berikut ini!\n\nJika $\\angle\\alpha = 3x° - y° - 15°$, $\\angle\\beta = 2y°$, $\\angle\\delta = y° - x° + 85°$, $\\angle\\theta = 2x° + y° - 20°$. Maka nilai dari $x + y = \\cdots$",
-    image: null,
-    imageCaption: "",
+    image: gambar28,
+    imageCaption: "Gambar Soal 13",
     options: ["A. 85", "B. 80", "C. 55", "D. 30"]
   },
   {
     no: 14,
     soal: "Perhatikan gambar berikut:\n\nJika besar $\\angle a = 95°$ dan $\\angle b = 70°$ maka selisih besar sudut x dan y adalah...",
-    image: null,
-    imageCaption: "",
+    image: gambar29,
+    imageCaption: "Gambar Soal 14",
     options: ["A. $25°$", "B. $45°$", "C. $65°$", "D. $85°$"]
   },
   {
     no: 15,
     soal: "Perhatikan gambar berikut:\n\nJika garis $l_1$ dan $l_2$ adalah dua garis yang sejajar, maka nilai x adalah...",
-    image: null,
-    imageCaption: "",
+    image: gambar30,
+    imageCaption: "Gambar Soal 15",
     options: ["A. $13°$", "B. $39°$", "C. $47°$", "D. $55°$"]
   },
   {
     no: 16,
     soal: "Empat sudut terbentuk oleh dua garis berpotongan seperti pada gambar berikut:\n\nBila diketahui $q° = 45°$ maka:",
-    image: null,
-    imageCaption: "",
+    image: gambar31,
+    imageCaption: "Gambar Soal 16",
     options: [
       "A. $p = 135°$; $s = 45°$; $r = 135°$",
       "B. $p = 130°$; $s = 45°$; $r = 130°$",
@@ -368,43 +388,43 @@ const latihanDasar = [
   {
     no: 17,
     soal: "Pada kubus ABCD.EFGH besar sudut BGE adalah...",
-    image: null,
-    imageCaption: "",
+    image: gambar32,
+    imageCaption: "Gambar Soal 17",
     options: ["A. $30°$", "B. $60°$", "C. $45°$", "D. $90°$"]
   },
   {
     no: 18,
     soal: "Perhatikan gambar.\n\nBesar sudut AOB adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar33,
+    imageCaption: "Gambar Soal 18",
     options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $160°$"]
   },
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar34,
+    imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar35,
+    imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar36,
+    imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
   {
     no: 22,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut nomor 1 adalah $95°$, dan sudut nomor 2 adalah $110°$. Besar sudut nomor 3 adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar37,
+    imageCaption: "Gambar Soal 22",
     options: ["A. $5°$", "B. $15°$", "C. $25°$", "D. $35°$"]
   },
   {
@@ -455,13 +475,13 @@ const latihanOlimpiade = [
   {
     no: 1,
     soal: "OSN Matematika 2003 Tingkat Kota\n\nPada gambar disamping, ABCD adalah persegi dan ABE adalah segitiga sama sisi. Besar sudut DAE adalah ...",
-    image: null,
+    image: gambar38,
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$", "E. $75°$"]
   },
   {
     no: 2,
     soal: "OSN Matematika 2004 Tingkat Kota\n\nPada gambar berikut, garis PQ dan garis RS sejajar, demikian juga garis PS dan QT sejajar. Nilai x sama dengan ...",
-    image: null,
+    image: gambar39,
     options: []
   },
   {
@@ -639,6 +659,15 @@ const OlimpiadeGarisSudutPage = () => {
                     </span>
                   ))}
                 </div>
+                {soal.image && (
+                  <div className="my-3 flex flex-col items-center">
+                    <img
+                      src={soal.image}
+                      alt={`Gambar Soal Olimpiade ${soal.no}`}
+                      className="max-w-full rounded-lg border border-border/40 bg-white/5"
+                    />
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
