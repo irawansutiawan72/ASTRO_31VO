@@ -6,7 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { name: "HUBUNGAN 2 GARIS", path: "/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis" },
-  { name: "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG", path: null },
+  { name: "SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG", path: "/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" },
   { name: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: null },
   { name: "JUMLAH SUDUT PADA SEGI BANYAK", path: null },
 ];
