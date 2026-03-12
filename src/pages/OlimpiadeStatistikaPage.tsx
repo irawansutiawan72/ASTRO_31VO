@@ -36,7 +36,19 @@ const materiSection = {
 - Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus representatif (mewakili) populasi agar kesimpulan yang ditarik akurat. Contoh: 100 siswa SMP yang dipilih secara acak dari kota Bandung.`
     },
     {
-      heading: "C. Penyajian Data",
+      heading: "C. Cara Mengumpulkan Data",
+      content: `Beberapa cara umum untuk mengumpulkan data:
+
+1. Wawancara: Mengumpulkan data dengan bertanya langsung kepada sumber data.
+
+2. Kuesioner (Angket): Mengumpulkan data dengan daftar pertanyaan tertulis yang diisi oleh responden.
+
+3. Observasi (Pengamatan): Mengumpulkan data dengan mengamati langsung peristiwa atau objek yang diteliti.
+
+4. Studi Literatur/Dokumentasi: Mengumpulkan data dari dokumen, buku, laporan, atau sumber-sumber yang sudah ada.`
+    },
+    {
+      heading: "D. Penyajian Data",
       content: `Data yang sudah dikumpulkan perlu disajikan agar lebih mudah dibaca dan dipahami.
 
 1. Tabel Distribusi Frekuensi: Tabel yang menunjukkan sebaran frekuensi (jumlah kemunculan) dari setiap kategori atau nilai data.
@@ -50,7 +62,7 @@ const materiSection = {
 - Persentase Sektor = $\\frac{\\text{Frekuensi Kategori}}{\\text{Total Frekuensi}} \\times 100\\%$`
     },
     {
-      heading: "D. Mean (Rata-rata)",
+      heading: "E. Mean (Rata-rata)",
       content: `Mean atau rata-rata adalah jumlah semua nilai data dibagi dengan banyaknya data.
 
 Rumus: $\\bar{x} = \\frac{\\text{Jumlah semua nilai data}}{\\text{Banyaknya data}}$
@@ -62,7 +74,7 @@ Contoh: Nilai ulangan Matematika Ani adalah 7, 8, 6, 9, 7. Berapa rata-rata nila
 $\\bar{x} = \\frac{7 + 8 + 6 + 9 + 7}{5} = \\frac{37}{5} = 7,4$`
     },
     {
-      heading: "E. Rata-rata Gabungan",
+      heading: "F. Rata-rata Gabungan",
       content: `Rata-rata gabungan adalah rata-rata yang dihitung dari gabungan beberapa kelompok data, di mana setiap kelompok memiliki rata-rata dan jumlah anggota (bobot) yang berbeda.
 
 Rumus rata-rata gabungan ($\\bar{x}_{gab}$):
@@ -75,7 +87,7 @@ Contoh: Rata-rata tinggi badan 15 siswa laki-laki adalah 160 cm, sedangkan rata-
 $\\bar{x}_{gab} = \\frac{160 \\times 15 + 150 \\times 10}{15 + 10} = \\frac{2400 + 1500}{25} = \\frac{3900}{25} = 156$ cm`
     },
     {
-      heading: "F. Median (Nilai Tengah)",
+      heading: "G. Median (Nilai Tengah)",
       content: `Median adalah nilai tengah dari kumpulan data yang telah diurutkan dari yang terkecil hingga terbesar (atau sebaliknya).
 
 Langkah Menentukan Median:
@@ -90,7 +102,7 @@ Contoh (Data Ganjil): Nilai ulangan Ani: 7, 8, 6, 9, 7
 3. Nilai pada posisi ke-3 adalah 7. Jadi, Median = 7.`
     },
     {
-      heading: "G. Modus (Nilai Paling Sering Muncul)",
+      heading: "H. Modus (Nilai Paling Sering Muncul)",
       content: `Modus adalah nilai atau kategori data yang paling sering muncul (memiliki frekuensi tertinggi). Sebuah data bisa memiliki satu modus atau lebih dari satu modus.
 
 Contoh 1: Nilai ulangan Ani: 6, 7, 7, 8, 9
@@ -104,7 +116,7 @@ Contoh 2: Ukuran sepatu siswa: 38, 39, 40, 38, 41, 39, 40, 38
 Modus = 38.`
     },
     {
-      heading: "H. Kuartil dan Jangkauan",
+      heading: "I. Kuartil dan Jangkauan",
       content: `Kuartil adalah ukuran yang membagi data menjadi empat kelompok yang sama banyak setelah diurutkan.
 - $Q_1$ = Kuartil bawah
 - $Q_2$ = Kuartil tengah (median)
