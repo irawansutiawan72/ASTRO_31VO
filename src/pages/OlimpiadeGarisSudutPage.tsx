@@ -306,77 +306,77 @@ const latihanDasar = [
   {
     no: 6,
     soal: "Suatu sudut besarnya 3 kali pelurusnya, maka sudut tersebut adalah…",
-    image: gambar21,
-    imageCaption: "Gambar Soal 6",
+    image: null,
+    imageCaption: "",
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$"]
   },
   {
     no: 7,
     soal: "Perhatikan gambar berikut.\n\nDari gambar di atas besar $\\angle QPR$ adalah ..",
-    image: gambar22,
+    image: gambar21,
     imageCaption: "Gambar Soal 7",
     options: ["A. $18°$", "B. $36°$", "C. $45°$", "D. $54°$"]
   },
   {
     no: 8,
     soal: "Perhatikan gambar berikut\n\nBesar $\\angle BAC$ adalah …",
-    image: gambar23,
+    image: gambar22,
     imageCaption: "Gambar Soal 8",
     options: ["A. $80°$", "B. $70°$", "C. $60°$", "D. $50°$"]
   },
   {
     no: 9,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut ACB adalah ….",
-    image: gambar24,
+    image: gambar23,
     imageCaption: "Gambar Soal 9",
     options: ["A. $55°$", "B. $85°$", "C. $95°$", "D. $125°$"]
   },
   {
     no: 10,
     soal: "Besar sudut terkecil dari dua jarum jam pada pukul 22.10 adalah …",
-    image: gambar25,
-    imageCaption: "Gambar Soal 10",
+    image: null,
+    imageCaption: "",
     options: ["A. $145°$", "B. $125°$", "C. $115°$", "D. $95°$"]
   },
   {
     no: 11,
     soal: "Besar sudut terkecil dari dua jarum jam pada pukul 07.20 adalah …",
-    image: gambar26,
-    imageCaption: "Gambar Soal 11",
+    image: null,
+    imageCaption: "",
     options: ["A. $90°$", "B. $100°$", "C. $105°$", "D. $110°$"]
   },
   {
     no: 12,
     soal: "Diketahui besar $\\angle A = (2x + 3)°$ dan $\\angle B = (3x - 8)°$ saling berpelurus, maka penyiku sudut A adalah....",
-    image: gambar27,
-    imageCaption: "Gambar Soal 12",
+    image: null,
+    imageCaption: "",
     options: ["A. $13°$", "B. $37°$", "C. $77°$", "D. $103°$"]
   },
   {
     no: 13,
     soal: "Perhatikan gambar berikut ini!\n\nJika $\\angle\\alpha = 3x° - y° - 15°$, $\\angle\\beta = 2y°$, $\\angle\\delta = y° - x° + 85°$, $\\angle\\theta = 2x° + y° - 20°$. Maka nilai dari $x + y = \\cdots$",
-    image: gambar28,
+    image: gambar24,
     imageCaption: "Gambar Soal 13",
     options: ["A. 85", "B. 80", "C. 55", "D. 30"]
   },
   {
     no: 14,
     soal: "Perhatikan gambar berikut:\n\nJika besar $\\angle a = 95°$ dan $\\angle b = 70°$ maka selisih besar sudut x dan y adalah...",
-    image: gambar29,
+    image: gambar25,
     imageCaption: "Gambar Soal 14",
     options: ["A. $25°$", "B. $45°$", "C. $65°$", "D. $85°$"]
   },
   {
     no: 15,
     soal: "Perhatikan gambar berikut:\n\nJika garis $l_1$ dan $l_2$ adalah dua garis yang sejajar, maka nilai x adalah...",
-    image: gambar30,
+    image: gambar26,
     imageCaption: "Gambar Soal 15",
     options: ["A. $13°$", "B. $39°$", "C. $47°$", "D. $55°$"]
   },
   {
     no: 16,
     soal: "Empat sudut terbentuk oleh dua garis berpotongan seperti pada gambar berikut:\n\nBila diketahui $q° = 45°$ maka:",
-    image: gambar31,
+    image: gambar27,
     imageCaption: "Gambar Soal 16",
     options: [
       "A. $p = 135°$; $s = 45°$; $r = 135°$",
@@ -388,85 +388,85 @@ const latihanDasar = [
   {
     no: 17,
     soal: "Pada kubus ABCD.EFGH besar sudut BGE adalah...",
-    image: gambar32,
+    image: gambar28,
     imageCaption: "Gambar Soal 17",
     options: ["A. $30°$", "B. $60°$", "C. $45°$", "D. $90°$"]
   },
   {
     no: 18,
     soal: "Perhatikan gambar.\n\nBesar sudut AOB adalah ...",
-    image: gambar33,
+    image: gambar29,
     imageCaption: "Gambar Soal 18",
     options: ["A. $70°$", "B. $120°$", "C. $140°$", "D. $160°$"]
   },
   {
     no: 19,
     soal: "Perhatikan gambar berikut!\n\nJika besar $\\angle a = 35°$ dan $\\angle b = 45°$ maka jumlah besar sudut x dan y adalah ...",
-    image: gambar34,
+    image: gambar30,
     imageCaption: "Gambar Soal 19",
     options: ["A. $285°$", "B. $300°$", "C. $315°$", "D. $330°$"]
   },
   {
     no: 20,
     soal: "Perhatikan gambar berikut!\n\nJika diketahui AB sejajar CD, maka nilai x adalah ...",
-    image: gambar35,
+    image: gambar31,
     imageCaption: "Gambar Soal 20",
     options: ["A. $15°$", "B. $30°$", "C. $40°$", "D. $45°$"]
   },
   {
     no: 21,
     soal: "Perhatikan gambar berikut!\n\nBesar penyiku $\\angle SQR$ adalah ...",
-    image: gambar36,
+    image: gambar32,
     imageCaption: "Gambar Soal 21",
     options: ["A. $9°$", "B. $32°$", "C. $48°$", "D. $58°$"]
   },
   {
     no: 22,
     soal: "Perhatikan gambar berikut!\n\nBesar sudut nomor 1 adalah $95°$, dan sudut nomor 2 adalah $110°$. Besar sudut nomor 3 adalah ...",
-    image: gambar37,
+    image: gambar33,
     imageCaption: "Gambar Soal 22",
     options: ["A. $5°$", "B. $15°$", "C. $25°$", "D. $35°$"]
   },
   {
     no: 23,
     soal: "Perhatikan gambar berikut.\n\nBesar $\\angle BAC$ adalah...",
-    image: null,
-    imageCaption: "",
+    image: gambar34,
+    imageCaption: "Gambar Soal 23",
     options: ["A. $24°$", "B. $48°$", "C. $72°$", "D. $98°$"]
   },
   {
     no: 24,
     soal: "Perhatikan gambar di bawah ini.\n\nDiketahui sudut SPT $= 83°$ dan sudut PQT $= 41°$. Garis PQ dan RS sejajar, demikian juga garis PS dan QT sejajar. Maka besar x = …",
-    image: null,
-    imageCaption: "",
+    image: gambar35,
+    imageCaption: "Gambar Soal 24",
     options: ["A. $41°$", "B. $82°$", "C. $124°$", "D. $139°$"]
   },
   {
     no: 25,
     soal: "Dari gambar berikut, diketahui perbandingan x:y adalah 2:7. Besar sudut x adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar36,
+    imageCaption: "Gambar Soal 25",
     options: ["A. $120°$", "B. $60°$", "C. $40°$", "D. $20°$"]
   },
   {
     no: 26,
     soal: "Perhatikan gambar. Jika $\\angle EFB = 65°$ dan $\\angle FCD = 120°$, maka besar $\\angle BFC$ adalah...",
-    image: null,
-    imageCaption: "",
+    image: gambar37,
+    imageCaption: "Gambar Soal 26",
     options: ["A. $55°$", "B. $45°$", "C. $50°$", "D. $35°$"]
   },
   {
     no: 27,
     soal: "Perhatikan gambar berikut. Besar sudut a adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar38,
+    imageCaption: "Gambar Soal 27",
     options: ["A. $30°$", "B. $50°$", "C. $80°$", "D. $100°$"]
   },
   {
     no: 28,
     soal: "Perhatikan gambar di bawah ini!\n\nNilai x adalah ...",
-    image: null,
-    imageCaption: "",
+    image: gambar39,
+    imageCaption: "Gambar Soal 28",
     options: ["A. $150°$", "B. $140°$", "C. $110°$", "D. $100°$"]
   },
 ];
@@ -475,13 +475,13 @@ const latihanOlimpiade = [
   {
     no: 1,
     soal: "OSN Matematika 2003 Tingkat Kota\n\nPada gambar disamping, ABCD adalah persegi dan ABE adalah segitiga sama sisi. Besar sudut DAE adalah ...",
-    image: gambar38,
+    image: null,
     options: ["A. $15°$", "B. $30°$", "C. $45°$", "D. $60°$", "E. $75°$"]
   },
   {
     no: 2,
     soal: "OSN Matematika 2004 Tingkat Kota\n\nPada gambar berikut, garis PQ dan garis RS sejajar, demikian juga garis PS dan QT sejajar. Nilai x sama dengan ...",
-    image: gambar39,
+    image: null,
     options: []
   },
   {
