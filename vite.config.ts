@@ -11,19 +11,11 @@ export default defineConfig({
       overlay: false,
     },
     proxy: {
-<<<<<<< HEAD
-      '/api': {
-        target: 'http://localhost:3001',
-        changeOrigin: true,
-      }
-    }
-=======
       "/api": {
         target: "http://localhost:3001",
         changeOrigin: true,
       },
     },
->>>>>>> origin/main
   },
   plugins: [react()],
   resolve: {

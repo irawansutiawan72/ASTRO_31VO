@@ -4,12 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-<<<<<<< HEAD
-    "dev": "concurrently \"vite\" \"tsx server.ts\"",
-=======
-    "dev": "concurrently \"npm run server\" \"vite\"",
+    "dev": "concurrently \"tsx watch server.ts\" \"vite\"",
     "server": "tsx watch server.ts",
->>>>>>> origin/main
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "start": "NODE_ENV=production node --loader tsx/esm server.ts",
@@ -50,11 +46,6 @@
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
     "@tanstack/react-query": "^5.83.0",
-<<<<<<< HEAD
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-=======
->>>>>>> origin/main
     "ai": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -87,6 +78,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.0.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^22.16.5",
     "@types/react": "^18.3.23",
