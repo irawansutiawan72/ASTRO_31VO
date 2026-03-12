@@ -5,10 +5,10 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "HUBUNGAN 2 GARIS",
-  "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG",
-  "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN",
-  "JUMLAH SUDUT PADA SEGI BANYAK",
+  { name: "HUBUNGAN 2 GARIS", path: "/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis" },
+  { name: "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG", path: null },
+  { name: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: null },
+  { name: "JUMLAH SUDUT PADA SEGI BANYAK", path: null },
 ];
 
 const GarisDanSudutPage = () => {
@@ -28,15 +28,16 @@ const GarisDanSudutPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => playPopSound()}
-              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-primary/60 transition-all duration-300
-                cursor-pointer text-left animate-slide-up"
+              key={subtopic.name}
+              onClick={() => { playPopSound(); if (subtopic.path) navigate(subtopic.path); }}
+              className={`group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
+                transition-all duration-300 text-left animate-slide-up
+                ${subtopic.path ? "hover:border-primary/60 cursor-pointer" : "opacity-50 cursor-not-allowed"}`}
               style={{ animationDelay: `${i * 0.03}s` }}
+              disabled={!subtopic.path}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
             </button>
           ))}
         </div>
