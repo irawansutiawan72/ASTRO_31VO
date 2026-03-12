@@ -5,6 +5,7 @@ expertMode = true
 [nix]
 channel = "stable-25_05"
 
+<<<<<<< HEAD
 [[ports]]
 localPort = 3001
 externalPort = 80
@@ -17,6 +18,8 @@ externalPort = 5000
 localPort = 5001
 externalPort = 3000
 
+=======
+>>>>>>> origin/main
 [workflows]
 runButton = "Project"
 
@@ -40,3 +43,14 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+<<<<<<< HEAD
+=======
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+>>>>>>> origin/main

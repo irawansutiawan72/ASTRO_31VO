@@ -81,6 +81,7 @@ import BungaTunggalK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial
 import PPNK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPNPage";
 import PPhK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPhPage";
 import GarisDanSudutK7Page from "./pages/latihan-mandiri/kelas7/GarisDanSudutPage";
+import HubunganDuaGarisK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/HubunganDuaGarisPage";
 import SegitigaSegiempatK7Page from "./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage";
 import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
 
@@ -172,7 +173,17 @@ import PembulatanBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bi
 import AljabarMMK7Page from "./pages/materi-matematika/kelas7/AljabarPage";
 import PLSVPtLSVMMK7Page from "./pages/materi-matematika/kelas7/PLSVPtLSVPage";
 import PerbandinganMMK7Page from "./pages/materi-matematika/kelas7/PerbandinganPage";
+import PerbandinganUmumMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage";
+import PerbandinganSenilaiMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganSenilaiPage";
+import PerbandinganCampuranMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganCampuranPage";
+import SkalaMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/SkalaPage";
 import AritmetikaSosialMMK7Page from "./pages/materi-matematika/kelas7/AritmetikaSosialPage";
+import JualBeliUntungRugiMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/JualBeliUntungRugiPage";
+import DiskonMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/DiskonPage";
+import BrutoNettoTaraMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/BrutoNettoTaraPage";
+import BungaTunggalMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/BungaTunggalPage";
+import PPNMMk7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/PPNPage";
+import PPhMMK7Page from "./pages/materi-matematika/kelas7/aritmetika-sosial/PPhPage";
 import GarisDanSudutMMK7Page from "./pages/materi-matematika/kelas7/GarisDanSudutPage";
 import SegitigaSegiempatMMK7Page from "./pages/materi-matematika/kelas7/SegitigaSegiempatPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
@@ -286,6 +297,7 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/ppn" element={<PPNK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/pph" element={<PPhK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut" element={<GarisDanSudutK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" element={<HubunganDuaGarisK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
       
@@ -377,7 +389,17 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/aljabar" element={<AljabarMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/skala" element={<SkalaMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/diskon" element={<DiskonMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/bunga-tunggal" element={<BungaTunggalMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/ppn" element={<PPNMMk7Page />} />
+      <Route path="/materi-matematika/kelas-7/aritmetika-sosial/pph" element={<PPhMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/garis-dan-sudut" element={<GarisDanSudutMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />

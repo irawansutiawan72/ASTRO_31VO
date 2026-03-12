@@ -1,4 +1,5 @@
 import express from 'express'
+<<<<<<< HEAD
 import cors from 'cors'
 import { convertToModelMessages, streamText, UIMessage } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
@@ -12,6 +13,12 @@ const app = express()
 const PORT = process.env.NODE_ENV === 'production' ? 5000 : 3001
 
 app.use(cors())
+=======
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
+import { convertToModelMessages, streamText, UIMessage } from 'ai'
+
+const app = express()
+>>>>>>> origin/main
 app.use(express.json())
 
 const NUMATIK_SYSTEM_PROMPT = `[IDENTITY & BRANDING]
@@ -43,23 +50,34 @@ app.post('/api/chat', async (req, res) => {
   try {
     const { messages }: { messages: UIMessage[] } = req.body
 
+<<<<<<< HEAD
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid request: messages array required' })
     }
 
+=======
+>>>>>>> origin/main
     const google = createGoogleGenerativeAI({
       apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     })
 
     const result = streamText({
+<<<<<<< HEAD
       model: google('gemini-2.0-flash-lite'),
+=======
+      model: google('gemini-2.5-flash-preview-05-20'),
+>>>>>>> origin/main
       system: NUMATIK_SYSTEM_PROMPT,
       messages: await convertToModelMessages(messages),
     })
 
     const response = result.toUIMessageStreamResponse()
 
+<<<<<<< HEAD
     res.setHeader('Content-Type', response.headers.get('content-type') || 'text/plain')
+=======
+    res.status(response.status)
+>>>>>>> origin/main
     response.headers.forEach((value, key) => {
       res.setHeader(key, value)
     })
@@ -76,6 +94,7 @@ app.post('/api/chat', async (req, res) => {
     res.end()
   } catch (error) {
     console.error('Chat API error:', error)
+<<<<<<< HEAD
     return res.status(500).json({ error: 'Internal server error' })
   }
 })
@@ -88,4 +107,13 @@ app.get('/{*path}', (req, res) => {
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`)
+=======
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+const PORT = process.env.API_PORT || 3001
+app.listen(PORT, () => {
+  console.log(`API server running on port ${PORT}`)
+>>>>>>> origin/main
 })

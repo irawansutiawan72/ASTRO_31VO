@@ -5,10 +5,10 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "HUBUNGAN 2 GARIS",
-  "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG",
-  "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN",
-  "JUMLAH SUDUT PADA SEGI BANYAK",
+  { label: "HUBUNGAN 2 GARIS", path: "/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" },
+  { label: "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG", path: null },
+  { label: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: null },
+  { label: "JUMLAH SUDUT PADA SEGI BANYAK", path: null },
 ];
 
 const GarisDanSudutPage = () => {
@@ -28,15 +28,18 @@ const GarisDanSudutPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => playPopSound()}
+              key={subtopic.label}
+              onClick={() => {
+                playPopSound();
+                if (subtopic.path) navigate(subtopic.path);
+              }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.label}</span>
             </button>
           ))}
         </div>
