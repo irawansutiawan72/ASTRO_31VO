@@ -1,8 +1,61 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
-import { spaceBg, logoNumatik } from "@/assets/placeholder";
+import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
+
+const RotatingSun = () => (
+  <div className="relative flex items-center justify-center" style={{ width: 96, height: 96 }}>
+    {/* Outer glow */}
+    <div className="absolute inset-0 rounded-full bg-yellow-400 opacity-20 blur-2xl animate-pulse" style={{ transform: 'scale(1.8)' }} />
+    {/* Rotating rays ring */}
+    <div
+      className="absolute"
+      style={{
+        width: 96,
+        height: 96,
+        animation: 'spin 8s linear infinite',
+      }}
+    >
+      {Array.from({ length: 12 }).map((_, i) => (
+        <div
+          key={i}
+          className="absolute bg-yellow-300 rounded-full opacity-70"
+          style={{
+            width: 4,
+            height: 18,
+            left: '50%',
+            top: '50%',
+            transformOrigin: '2px -26px',
+            transform: `translateX(-50%) rotate(${i * 30}deg) translateY(-100%)`,
+          }}
+        />
+      ))}
+    </div>
+    {/* Sun body */}
+    <div
+      className="relative rounded-full z-10"
+      style={{
+        width: 56,
+        height: 56,
+        background: 'radial-gradient(circle at 35% 35%, #ffe066, #ffb300 55%, #ff6f00 100%)',
+        boxShadow: '0 0 24px 8px rgba(255,200,0,0.5), 0 0 48px 16px rgba(255,150,0,0.25)',
+      }}
+    >
+      {/* Surface shimmer */}
+      <div
+        className="absolute rounded-full opacity-30"
+        style={{
+          width: 20,
+          height: 14,
+          top: 10,
+          left: 10,
+          background: 'radial-gradient(circle, #fff8dc, transparent)',
+        }}
+      />
+    </div>
+  </div>
+);
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -21,6 +74,20 @@ const WelcomePage = () => {
 
       {/* Main content */}
       <div className="relative z-10 text-center w-full max-w-2xl flex flex-col items-center px-4 py-16 sm:px-6">
+
+        {/* App Logo - best position: top, sets visual identity before text */}
+        <div className="mb-6 animate-fade-in" style={{ animationDelay: '0s' }}>
+          <div className="relative inline-block">
+            <div className="absolute inset-0 rounded-full bg-violet-500 opacity-30 blur-2xl scale-125 animate-pulse" />
+            <img
+              src="/logo-numatik-transparent.png"
+              alt="Logo NUMATIK"
+              className="relative w-28 h-28 sm:w-36 sm:h-36 object-contain drop-shadow-2xl"
+              style={{ filter: 'drop-shadow(0 0 18px rgba(167,139,250,0.7))' }}
+            />
+          </div>
+        </div>
+
         {/* Welcome text */}
         <p className="font-display text-2xl sm:text-3xl font-bold tracking-widest text-cyan-400 mb-6 animate-fade-in">
           Selamat Datang di Aplikasi
@@ -39,7 +106,7 @@ const WelcomePage = () => {
         </p>
 
         {/* Main button with pulse animation */}
-        <div className="relative mb-16">
+        <div className="relative mb-12">
           {/* Button background glow */}
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur-xl opacity-50 animate-button-pulse" />
 
@@ -55,16 +122,10 @@ const WelcomePage = () => {
           </button>
         </div>
 
-        {/* Logo */}
-        <div className="mt-8 mb-12">
-          <div className="relative w-24 h-24 mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full opacity-20 blur-lg animate-pulse" />
-            <img
-              src={logoNumatik}
-              alt="NUMATIK"
-              className="relative w-24 h-24 mx-auto opacity-70 hover:opacity-100 transition-opacity animate-rotate-slow"
-            />
-          </div>
+        {/* Rotating Sun */}
+        <div className="mb-12 flex flex-col items-center gap-3">
+          <RotatingSun />
+          <span className="text-xs text-yellow-300/60 tracking-widest font-display">☀ MATH SPACE</span>
         </div>
 
         {/* Marquee text */}
