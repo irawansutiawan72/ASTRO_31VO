@@ -12,6 +12,7 @@ export function canExitApp(): boolean {
   const n = navigator as any;
 
   return (
+    (typeof w?.AndroidInterface?.finishAffinity === "function") ||
     (typeof w?.AndroidInterface?.exitApp === "function") ||
     (typeof w?.Android?.exitApp === "function") ||
     (typeof n?.app?.exitApp === "function") ||
@@ -22,6 +23,15 @@ export function canExitApp(): boolean {
 export function exitApp(): boolean {
   const w = window as any;
   const n = navigator as any;
+
+  try {
+    if (typeof w?.AndroidInterface?.finishAffinity === "function") {
+      w.AndroidInterface.finishAffinity();
+      return true;
+    }
+  } catch {
+    // ignore
+  }
 
   try {
     if (typeof w?.AndroidInterface?.exitApp === "function") {
@@ -66,7 +76,9 @@ export function exitApp(): boolean {
 
 export function tutupAplikasi(): void {
   const w = window as any;
-  if (typeof w?.AndroidInterface?.exitApp === "function") {
+  if (typeof w?.AndroidInterface?.finishAffinity === "function") {
+    w.AndroidInterface.finishAffinity();
+  } else if (typeof w?.AndroidInterface?.exitApp === "function") {
     w.AndroidInterface.exitApp();
   } else {
     alert("Aplikasi tidak dapat ditutup secara otomatis dari browser");
