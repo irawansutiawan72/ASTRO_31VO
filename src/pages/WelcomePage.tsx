@@ -68,16 +68,23 @@ const WelcomePage = () => {
           </div>
         </div>
 
-        {/* Marquee text */}
-        <div className="overflow-hidden w-full max-w-lg mx-auto bg-background/60 rounded-xl p-5 border border-cyan-500/30 backdrop-blur-sm">
-          <div className="animate-marquee whitespace-nowrap">
-            <span className="font-body font-semibold text-cyan-300 inline-block px-6">
-              ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-            </span>
-            <span className="font-body font-semibold text-cyan-300 inline-block px-6">
-              ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-            </span>
-          </div>
+      </div>
+
+      {/* Marquee text - full width, pinned to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden bg-background/60 border-t border-cyan-500/30 backdrop-blur-sm py-4">
+        <div className="animate-marquee whitespace-nowrap">
+          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
+            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
+          </span>
+          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
+            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
+          </span>
+          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
+            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
+          </span>
+          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
+            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
+          </span>
         </div>
       </div>
     </div>
