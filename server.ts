@@ -48,7 +48,7 @@ app.post('/api/chat', async (req, res) => {
     }
 
     const result = streamText({
-      model: 'google/gemini-2.5-flash-preview-05-20',
+      model: google('gemini-2.0-flash'),
       system: NUMATIK_SYSTEM_PROMPT,
       messages: await convertToModelMessages(messages),
     })
