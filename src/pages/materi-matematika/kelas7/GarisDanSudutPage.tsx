@@ -7,8 +7,8 @@ import { playPopSound } from "@/hooks/useAudio";
 const subtopics = [
   { name: "HUBUNGAN 2 GARIS", path: "/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis" },
   { name: "SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG", path: "/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" },
-  { name: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: null },
-  { name: "JUMLAH SUDUT PADA SEGI BANYAK", path: null },
+  { name: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: "/materi-matematika/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar" },
+  { name: "JUMLAH SUDUT PADA SEGI BANYAK", path: "/materi-matematika/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" },
 ];
 
 const GarisDanSudutPage = () => {
