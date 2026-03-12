@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
-import { spaceBg, logoNumatik } from "@/assets/placeholder";
+import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 
 const WelcomePage = () => {
@@ -55,14 +55,15 @@ const WelcomePage = () => {
           </button>
         </div>
 
-        {/* Logo */}
+        {/* Rotating Sun */}
         <div className="mt-8 mb-12">
-          <div className="relative w-24 h-24 mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full opacity-20 blur-lg animate-pulse" />
+          <div className="relative w-28 h-28 mx-auto">
+            <div className="absolute inset-0 rounded-full bg-orange-400 opacity-30 blur-2xl animate-pulse scale-125" />
             <img
-              src={logoNumatik}
-              alt="NUMATIK"
-              className="relative w-24 h-24 mx-auto opacity-70 hover:opacity-100 transition-opacity animate-rotate-slow"
+              src="/sun.png"
+              alt="Matahari"
+              className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
+              style={{ filter: 'drop-shadow(0 0 16px rgba(251,146,60,0.8)) drop-shadow(0 0 32px rgba(234,88,12,0.4))' }}
             />
           </div>
         </div>
