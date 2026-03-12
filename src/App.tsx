@@ -171,6 +171,14 @@ import PerkalianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bil
 import PembagianBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembagianBentukDesimalPage";
 import PembulatanBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bilangan-rasional/PembulatanBentukDesimalPage";
 import AljabarMMK7Page from "./pages/materi-matematika/kelas7/AljabarPage";
+import PengertianUnsurMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PengertianUnsurPage";
+import PenjumlahanPenguranganAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PenjumlahanPenguranganPage";
+import PerkalianAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PerkalianPage";
+import PembagianAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PembagianPage";
+import PemangkatanAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/PemangkatanPage";
+import SubstitusiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/SubstitusiPage";
+import FaktorisasiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/FaktorisasiPage";
+import OperasiPecahanAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/OperasiPecahanPage";
 import PLSVPtLSVMMK7Page from "./pages/materi-matematika/kelas7/PLSVPtLSVPage";
 import PerbandinganMMK7Page from "./pages/materi-matematika/kelas7/PerbandinganPage";
 import PerbandinganUmumMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage";
@@ -387,6 +395,14 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembagian-bentuk-desimal" element={<PembagianBentukDesimalMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/bilangan-rasional/pembulatan-bentuk-desimal" element={<PembulatanBentukDesimalMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/aljabar" element={<AljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/pengertian-unsur" element={<PengertianUnsurMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/penjumlahan-pengurangan" element={<PenjumlahanPenguranganAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/perkalian" element={<PerkalianAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/pembagian" element={<PembagianAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/pemangkatan" element={<PemangkatanAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/substitusi" element={<SubstitusiAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
