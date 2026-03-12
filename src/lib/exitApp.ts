@@ -12,6 +12,7 @@ export function canExitApp(): boolean {
   const n = navigator as any;
 
   return (
+    (typeof w?.AndroidInterface?.exitApp === "function") ||
     (typeof w?.Android?.exitApp === "function") ||
     (typeof n?.app?.exitApp === "function") ||
     (typeof getCapacitorAppPlugin()?.exitApp === "function")
@@ -21,6 +22,15 @@ export function canExitApp(): boolean {
 export function exitApp(): boolean {
   const w = window as any;
   const n = navigator as any;
+
+  try {
+    if (typeof w?.AndroidInterface?.exitApp === "function") {
+      w.AndroidInterface.exitApp();
+      return true;
+    }
+  } catch {
+    // ignore
+  }
 
   try {
     if (typeof w?.Android?.exitApp === "function") {
@@ -44,7 +54,6 @@ export function exitApp(): boolean {
     const app = getCapacitorAppPlugin();
     const exit = app?.exitApp;
     if (typeof exit === "function") {
-      // Some runtimes return a Promise; we don't need to await.
       exit.call(app);
       return true;
     }
@@ -55,3 +64,15 @@ export function exitApp(): boolean {
   return false;
 }
 
+export function tutupAplikasi(): void {
+  const w = window as any;
+  if (typeof w?.AndroidInterface?.exitApp === "function") {
+    w.AndroidInterface.exitApp();
+  } else {
+    alert("Aplikasi tidak dapat ditutup secara otomatis dari browser");
+  }
+}
+
+if (typeof window !== "undefined") {
+  (window as any).tutupAplikasi = tutupAplikasi;
+}
