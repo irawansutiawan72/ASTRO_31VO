@@ -172,6 +172,10 @@ import PembulatanBentukDesimalMMK7Page from "./pages/materi-matematika/kelas7/bi
 import AljabarMMK7Page from "./pages/materi-matematika/kelas7/AljabarPage";
 import PLSVPtLSVMMK7Page from "./pages/materi-matematika/kelas7/PLSVPtLSVPage";
 import PerbandinganMMK7Page from "./pages/materi-matematika/kelas7/PerbandinganPage";
+import PerbandinganUmumMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage";
+import PerbandinganSenilaiMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganSenilaiPage";
+import PerbandinganCampuranMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganCampuranPage";
+import SkalaMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/SkalaPage";
 import AritmetikaSosialMMK7Page from "./pages/materi-matematika/kelas7/AritmetikaSosialPage";
 import GarisDanSudutMMK7Page from "./pages/materi-matematika/kelas7/GarisDanSudutPage";
 import SegitigaSegiempatMMK7Page from "./pages/materi-matematika/kelas7/SegitigaSegiempatPage";
@@ -377,6 +381,10 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/aljabar" element={<AljabarMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/campuran" element={<PerbandinganCampuranMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/perbandingan/skala" element={<SkalaMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/garis-dan-sudut" element={<GarisDanSudutMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMMK7Page />} />
