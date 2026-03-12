@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { convertToModelMessages, streamText, UIMessage } from 'ai'
-import { google } from '@ai-sdk/google'
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -47,8 +47,12 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: 'Invalid request: messages array required' })
     }
 
+    const google = createGoogleGenerativeAI({
+      apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    })
+
     const result = streamText({
-      model: google('gemini-2.0-flash'),
+      model: google('gemini-2.0-flash-lite'),
       system: NUMATIK_SYSTEM_PROMPT,
       messages: await convertToModelMessages(messages),
     })
