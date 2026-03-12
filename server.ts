@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { convertToModelMessages, streamText, UIMessage } from 'ai'
+import { google } from '@ai-sdk/google'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
