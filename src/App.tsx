@@ -81,6 +81,7 @@ import BungaTunggalK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial
 import PPNK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPNPage";
 import PPhK7Page from "./pages/latihan-mandiri/kelas7/aritmetika-sosial/PPhPage";
 import GarisDanSudutK7Page from "./pages/latihan-mandiri/kelas7/GarisDanSudutPage";
+import HubunganDuaGarisK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sudut/HubunganDuaGarisPage";
 import SegitigaSegiempatK7Page from "./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage";
 import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
 
@@ -296,6 +297,7 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/ppn" element={<PPNK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/aritmetika-sosial/pph" element={<PPhK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut" element={<GarisDanSudutK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" element={<HubunganDuaGarisK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
       
