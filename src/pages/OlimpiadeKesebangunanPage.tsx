@@ -7,7 +7,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-// Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
@@ -23,6 +22,10 @@ const materiSection = {
   title: "MATERI - KESEBANGUNAN DAN KEKONGRUENAN",
   sections: [
     {
+      heading: "Indikator 23",
+      content: `Menyelesaikan masalah menggunakan konsep perbandingan pada kesebangunan dan kongruenan.`
+    },
+    {
       heading: "A. Kesebangunan",
       content: `Bangun-bangun datar yang sebangun artinya bangun-bangun datar tersebut mempunyai bentuk yang sama namun ukurannya berbeda dapat lebih besar atau lebih kecil.
 
@@ -32,12 +35,14 @@ Untuk membuktikan dua buah bangun datar sebangun dapat dilakukan jika memenuhi s
 
 Sisi yang bersesuaian terletak di hadapan sudut yang sama besar.
 
-Terdapat segitiga ABC dan segitiga ADE dan BC sejajar DE.
+Terdapat segitiga ABC dan segitiga ADE, dengan BC sejajar DE.
 Segitiga ABC dan segitiga ADE sebangun, maka:
-$\\frac{AB}{AD} = \\frac{BC}{DE} = \\frac{AC}{AE}$ atau $\\frac{AD}{AB} = \\frac{DE}{BC} = \\frac{AE}{AC}$
+
+$\\dfrac{AB}{AD} = \\dfrac{BC}{DE} = \\dfrac{AC}{AE}$  atau  $\\dfrac{AD}{AB} = \\dfrac{DE}{BC} = \\dfrac{AE}{AC}$
 
 Pada segitiga siku-siku dapat dibuat garis tinggi ke sisi miring.
 Segitiga ABC sebangun dengan segitiga ADC. Dengan menggunakan konsep kesebangunan maka diperoleh:
+
 $AB^2 = BD \\times BC$
 $AC^2 = CD \\times CB$
 $AD^2 = BD \\times CD$`
@@ -47,56 +52,213 @@ $AD^2 = BD \\times CD$`
       content: `Dua bangun dikatakan kongruen jika semua panjang sisi-sisi yang bersesuaian sama besar dan begitu juga sudutnya. Mudahnya, kita katakan bahwa dua bangun itu sama ukurannya dan sama bentuknya.
 
 Syarat dua segitiga kongruen:
-1. Sisi-Sisi-Sisi (S.S.S): Ketiga sisi yang bersesuaian sama panjang
-2. Sisi-Sudut-Sisi (S.Sd.S): Dua sisi yang bersesuaian sama panjang dan sudut yang diapit sama besar
-3. Sudut-Sisi-Sudut (Sd.S.Sd): Dua sudut yang bersesuaian sama besar dan sisi di antara kedua sudut sama panjang`
+1. Sisi-Sisi-Sisi (S.S.S): Ketiga sisi yang bersesuaian sama panjang.
+2. Sisi-Sudut-Sisi (S.Sd.S): Dua sisi yang bersesuaian sama panjang dan sudut yang diapit sama besar.
+3. Sudut-Sisi-Sudut (Sd.S.Sd): Dua sudut yang bersesuaian sama besar dan sisi di antara kedua sudut sama panjang.
+4. Sisi-Sisi-Sudut (S.S.Sd): Dua sisi yang bersesuaian sama panjang dan salah satu sudut yang bersesuaian sama besar.`
     },
   ]
 };
 
 const latihanDasar = [
-  { no: 1, soal: "Pasangan bangun yang pasti sebangun adalah ...", options: ["A. (i) dan (ii)", "B. (i) dan (iii)", "C. (ii) dan (iii)", "D. (ii) dan (iv)"] },
-  { no: 2, soal: "Kertas berbentuk persegi panjang berukuran 30 cm x 20 cm, papan tulis berukuran 16 cm x 12 cm, map berukuran 14 cm x 21 cm, dinding tembok berukuran 25 cm x 15 cm. Pasangan bangun yang sebangun adalah ...", options: ["A. I dan II", "B. I dan III", "C. II dan III", "D. II dan IV"] },
-  { no: 3, soal: "$\\triangle$ ABC kongruen dengan $\\triangle$ BDE karena memenuhi syarat ...", options: ["A. Sisi, sisi, sisi", "B. Sisi, sudut, sisi", "C. Sisi, sisi, sudut", "D. Sudut, sudut, sudut"] },
-  { no: 4, soal: "Jika panjang AD = CE. Kedua segitiga kongruen dengan syarat ...", options: ["A. Sisi, sisi, sudut", "B. Sisi, sudut, sisi", "C. Sudut, sisi, sudut", "D. Sisi, sudut, sudut"] },
-  { no: 5, soal: "Diketahui $\\triangle$ABC dan $\\triangle$KLM adalah dua buah segitiga yang kongruen. Jika diketahui $\\angle$A = $\\angle$L dan $\\angle$C = $\\angle$K, maka pasangan sisi-sisi yang sama panjang adalah ...", options: ["A. AB = KM, BC = ML, AC = KL", "B. AB = ML, BC = KL, AC = KM", "C. AB = KL, BC = KM, AC = ML", "D. AB = ML, BC = KM, AC = KL"] },
-  { no: 6, soal: "ABCD trapesium sama kaki. Banyak pasangan segitiga kongruen pada gambar tersebut adalah ...", options: ["A. 4 pasang", "B. 5 pasang", "C. 6 pasang", "D. 7 pasang"] },
-  { no: 7, soal: "Dari gambar, panjang TR = ...", options: ["A. 2 cm", "B. 3 cm", "C. 4 cm", "D. 6 cm"] },
-  { no: 8, soal: "Panjang AD adalah ...", options: ["A. 3 cm", "B. 4 cm", "C. 4,5 cm", "D. 5 cm"] },
-  { no: 9, soal: "Panjang QR adalah ...", options: ["A. 3,8 cm", "B. 3,6 cm", "C. 3,4 cm", "D. 3,2 cm"] },
-  { no: 10, soal: "Bangun ABCD dan AEFG sebangun. Luas bangun ABCD adalah ...", options: ["A. 45 cm$^2$", "B. 62,5 cm$^2$", "C. 67,5 cm$^2$", "D. 90 cm$^2$"] },
-  { no: 11, soal: "Panjang DE adalah ...", options: ["A. 6 cm", "B. 7 cm", "C. 8 cm", "D. 9 cm"] },
-  { no: 12, soal: "Diketahui panjang AB = 6 cm dan DE = 14 cm. Jika panjang AE = 15 cm maka panjang CE adalah ...", options: ["A. 4,5 cm", "B. 10,5 cm", "C. 15 cm", "D. 21 cm"] },
-  { no: 13, soal: "ABCD trapesium sama kaki dan sebangun dengan EFGH. Jika panjang EF = 24 cm, HG = 14 cm, EH = 13 cm dan DC = 21 cm, maka luas daerah yang diarsir adalah ...", options: ["A. 212 cm$^2$", "B. 248 cm$^2$", "C. 265 cm$^2$", "D. 285 cm$^2$"] },
-  { no: 14, soal: "Sebuah tiang yang tingginya 4 m memiliki bayangan 300 cm. Pada saat yang sama bayangan sebuah pohon 10 m. Tinggi pohon tersebut adalah ...", options: ["A. 8 m", "B. 9 m", "C. 13,3 m", "D. 16 m"] },
-  { no: 15, soal: "Jika AE : EC = 2 : 3, maka panjang EF adalah ...", options: ["A. 15 cm", "B. 22 cm", "C. 25 cm", "D. 26 cm"] },
-  { no: 16, soal: "Jika PQRS persegi, maka panjang RT adalah ...", options: ["A. $5\\frac{1}{3}$ cm", "B. $6\\frac{2}{3}$ cm", "C. 7 cm", "D. $7\\frac{1}{4}$ cm"] },
-  { no: 17, soal: "Trapesium PQUT sebangun dengan TURS. Jika PT : TS = 2 : 3, panjang SR adalah ...", options: ["A. 18 cm", "B. 22 cm", "C. 24 cm", "D. 27 cm"] },
-  { no: 18, soal: "Panjang FC adalah ...", options: ["A. 5 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"] },
-  { no: 19, soal: "Foto yang ditempel pada kertas karton berukuran 10 cm x 15 cm. Di sebelah kiri, kanan, dan atas foto terdapat sisa karton selebar 2 cm. Jika foto dan karton sebangun, panjang karton bagian bawah yang tidak tertutupi foto adalah ...", options: ["A. 1 cm", "B. 2 cm", "C. 3 cm", "D. 4 cm"] },
-  { no: 20, soal: "Foto yang ditempel pada kertas karton berukuran 20 cm x 25 cm. Di sebelah kiri, kanan, dan atas foto terdapat sisa karton selebar 2 cm. Jika foto dan karton sebangun, luas karton bagian bawah foto adalah ...", options: ["A. 26 cm$^2$", "B. 30 cm$^2$", "C. 36 cm$^2$", "D. 72 cm$^2$"] },
-  { no: 21, soal: "Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah ...", options: ["A. 2 cm", "B. 8 cm", "C. 12 cm", "D. 13 cm"] },
-  { no: 22, soal: "Diketahui panjang ED = 11 cm, panjang AB = BC = CD = 15 cm. Panjang garis FB adalah ...", options: ["A. 10 cm", "B. 11 cm", "C. 12 cm", "D. 13 cm"] },
+  {
+    no: 1,
+    soal: "Perhatikan gambar bangun-bangun berikut:\n(i) Dua buah persegi\n(ii) Dua buah persegi panjang\n(iii) Dua buah segitiga sama sisi\n(iv) Dua buah belah ketupat\n\nPasangan bangun di samping yang pasti sebangun adalah ...",
+    options: ["A. (i) dan (ii)", "B. (i) dan (iii)", "C. (ii) dan (iii)", "D. (ii) dan (iv)"]
+  },
+  {
+    no: 2,
+    soal: "Perhatikan persyaratan berikut:\nI. Kertas berbentuk persegi panjang berukuran 30 cm × 20 cm\nII. Sebuah papan tulis berukuran 16 cm × 12 cm\nIII. Sebuah map berukuran 14 cm × 21 cm\nIV. Sebuah dinding tembok berukuran 25 cm × 15 cm\n\nPasangan bangun yang sebangun adalah …",
+    options: ["A. I dan II", "B. I dan III", "C. II dan III", "D. II dan IV"]
+  },
+  {
+    no: 3,
+    soal: "$\\triangle$ ABC kongruen dengan $\\triangle$ BDE karena memenuhi syarat ...",
+    options: ["A. Sisi, sisi, sisi", "B. Sisi, sudut, sisi", "C. Sisi, sisi, sudut", "D. Sudut, sudut, sudut"]
+  },
+  {
+    no: 4,
+    soal: "Jika panjang AD = CE. Kedua segitiga di atas kongruen dengan syarat .....",
+    options: ["A. Sisi, sisi, sudut", "B. Sisi, sudut, sisi", "C. Sudut, sisi, sudut", "D. Sisi, sudut, sudut"]
+  },
+  {
+    no: 5,
+    soal: "Diketahui $\\triangle$ABC dan $\\triangle$KLM adalah dua buah segitiga yang kongruen. Jika diketahui $\\angle A = \\angle L$ dan $\\angle C = \\angle K$, maka pasangan sisi-sisi yang sama panjang adalah ....",
+    options: ["A. AB = KM, BC = ML, AC = KL", "B. AB = ML, BC = KL, AC = KM", "C. AB = KL, BC = KM, AC = ML", "D. AB = ML, BC = KM, AC = KL"]
+  },
+  {
+    no: 6,
+    soal: "ABCD trapesium sama kaki. Banyak pasangan segitiga kongruen pada gambar tersebut adalah …",
+    options: ["A. 4 pasang", "B. 5 pasang", "C. 6 pasang", "D. 7 pasang"]
+  },
+  {
+    no: 7,
+    soal: "Dari gambar di samping, panjang TR = ..",
+    options: ["A. 2 cm", "B. 3 cm", "C. 4 cm", "D. 6 cm"]
+  },
+  {
+    no: 8,
+    soal: "Panjang AD adalah …",
+    options: ["A. 3 cm", "B. 4 cm", "C. 4,5 cm", "D. 5 cm"]
+  },
+  {
+    no: 9,
+    soal: "Panjang QR adalah ..",
+    options: ["A. 3,8 cm", "B. 3,6 cm", "C. 3,4 cm", "D. 3,2 cm"]
+  },
+  {
+    no: 10,
+    soal: "Bangun ABCD dan AEFG sebangun. Luas bangun ABCD adalah ..",
+    options: ["A. $45 \\text{ cm}^2$", "B. $62{,}5 \\text{ cm}^2$", "C. $67{,}5 \\text{ cm}^2$", "D. $90 \\text{ cm}^2$"]
+  },
+  {
+    no: 11,
+    soal: "Panjang DE adalah ....",
+    options: ["A. 6 cm", "B. 7 cm", "C. 8 cm", "D. 9 cm"]
+  },
+  {
+    no: 12,
+    soal: "Diketahui panjang AB = 6 cm dan DE = 14 cm. Jika panjang AE = 15 cm maka panjang CE adalah....",
+    options: ["A. 4,5 cm", "B. 10,5 cm", "C. 15 cm", "D. 21 cm"]
+  },
+  {
+    no: 13,
+    soal: "ABCD trapesium sama kaki dan sebangun dengan EFGH. Jika panjang EF = 24 cm, HG = 14 cm, EH = 13 cm dan DC = 21 cm, maka luas daerah yang diarsir adalah ....",
+    options: ["A. $212 \\text{ cm}^2$", "B. $248 \\text{ cm}^2$", "C. $265 \\text{ cm}^2$", "D. $285 \\text{ cm}^2$"]
+  },
+  {
+    no: 14,
+    soal: "Sebuah tiang yang tingginya 4 m memiliki bayangan 300 cm. Pada saat yang sama bayangan sebuah pohon 10 m. Tinggi pohon tersebut adalah ....",
+    options: ["A. 8 m", "B. 9 m", "C. 13,3 m", "D. 16 m"]
+  },
+  {
+    no: 15,
+    soal: "Jika AE : EC = 2 : 3, maka panjang EF adalah ….",
+    options: ["A. 15 cm", "B. 22 cm", "C. 25 cm", "D. 26 cm"]
+  },
+  {
+    no: 16,
+    soal: "Jika PQRS persegi, maka panjang RT adalah ....",
+    options: ["A. $5\\frac{1}{3}$ cm", "B. $6\\frac{2}{3}$ cm", "C. 7 cm", "D. $7\\frac{1}{4}$ cm"]
+  },
+  {
+    no: 17,
+    soal: "Trapesium PQUT sebangun dengan TURS. Jika PT : TS = 2 : 3, panjang SR adalah ...",
+    options: ["A. 18 cm", "B. 22 cm", "C. 24 cm", "D. 27 cm"]
+  },
+  {
+    no: 18,
+    soal: "Panjang FC adalah …",
+    options: ["A. 5 cm", "B. 10 cm", "C. 12 cm", "D. 14 cm"]
+  },
+  {
+    no: 19,
+    soal: "Foto yang ditempel pada kertas karton berukuran 10 cm × 15 cm. Di sebelah kiri, kanan, dan atas foto terdapat sisa karton selebar 2 cm. Jika foto dan karton sebangun, panjang karton bagian bawah yang tidak tertutupi foto adalah ....",
+    options: ["A. 1 cm", "B. 2 cm", "C. 3 cm", "D. 4 cm"]
+  },
+  {
+    no: 20,
+    soal: "Foto yang ditempel pada kertas karton berukuran 20 cm × 25 cm. Di sebelah kiri, kanan, dan atas foto terdapat sisa karton selebar 2 cm. Jika foto dan karton sebangun, luas karton bagian bawah foto adalah ....",
+    options: ["A. $26 \\text{ cm}^2$", "B. $30 \\text{ cm}^2$", "C. $36 \\text{ cm}^2$", "D. $72 \\text{ cm}^2$"]
+  },
+  {
+    no: 21,
+    soal: "Jika panjang BC = CD = DE = 15 cm dan AB = 11 cm, panjang CF adalah ...",
+    options: ["A. 2 cm", "B. 8 cm", "C. 12 cm", "D. 13 cm"]
+  },
+  {
+    no: 22,
+    soal: "Diketahui panjang ED = 11 cm, panjang AB = BC = CD = 15 cm. Panjang garis FB adalah …",
+    options: ["A. 10 cm", "B. 11 cm", "C. 12 cm", "D. 13 cm"]
+  },
 ];
 
 const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2006 Tingkat Kota\nPada segitiga PQR, S adalah titik tengah QP dan T titik tengah QR. Perbandingan antara TS dan QR adalah ...", options: ["A. 1 : 2", "B. 1 : 3", "C. 2 : 3", "D. 3 : 4", "E. 3 : 5"] },
-  { no: 2, soal: "OSN Matematika 2006 Tingkat Kota\nJika CE = EB, AD = DB, besar $\\angle ABC = 30^{\\circ}$ dan panjang CA = 4 cm, maka panjang CF adalah ...", options: ["A. $\\frac{4}{2}\\sqrt{8}{3}$", "B. $\\frac{1}{2}\\sqrt{8}{3}$", "C. $\\frac{2}{7}{3}$", "D. $\\frac{4}{7}{3}$", "E. $\\frac{1}{7}{3}$"] },
-  { no: 3, soal: "OSN Matematika 2006 Tingkat Kota\nJika luas BCDE = luas ABE, dan panjang CD = $\\sqrt{8}$, maka panjang BE = ...", options: ["A. 4", "B. 2", "C. $\\sqrt{2}$", "D. $\\frac{1}{2}\\sqrt{2}$", "E. Jawaban A, B, C dan D tidak ada yang benar"] },
-  { no: 4, soal: "OSN Matematika 2007 Tingkat Kota\nDiketahui PQRS adalah jajar genjang dan misalkan garis SU memotong diagonal PR di titik T, memotong ruas garis QR di titik U dan memotong garis PQ di titik V. Jika panjang ruas garis ST 16 cm dan panjang ruas garis TU 8 cm, maka panjang ruas garis UV adalah ... cm", options: ["A. 12", "B. 18", "C. 20", "D. 22", "E. 24"] },
-  { no: 5, soal: "OSN Matematika 2010 Tingkat Kota\nPada segitiga ABC (siku-siku di C) titik Q pada AC, titik P pada AB, dan PQ sejajar BC. Panjang AQ = 3; AP = 5; BC = 8, maka luas segitiga ABC adalah ...", options: ["A. 48", "B. 36", "C. 24", "D. 22", "E. 12"] },
-  { no: 6, soal: "OSN Matematika 2010 Tingkat Kota\nDiketahui jajargenjang ABCD; sudut A = sudut C = $45^{\\circ}$. Lingkaran K dengan pusat C melalui B dan D. AD diperpanjang memotong lingkaran di E dan BE memotong CD di H. Perbandingan antara luas segitiga BCH dengan segitiga EHD adalah ...", options: [] },
-  { no: 7, soal: "OSN Matematika 2012 Tingkat Kota\nDiketahui persegi panjang PQRS. Panjang PV = QT = PS = 6. Titik U adalah perpotongan antara garis SV dan RT. Jika PQ = 10 maka luas segiempat PTUS adalah ...", options: ["A. 15", "B. 17", "C. 19", "D. 21", "E. 23"] },
-  { no: 8, soal: "OSN Matematika 2014 Tingkat Kota\nDiketahui titik W, F dan G pada trapesium ABCD. Sisi FE sejajar dengan sisi AB. Jika AB = 7, DC = 14, DG = 8, FG = 4, BB = x dan GE = y, maka nilai x + y adalah ...", options: ["A. 10", "B. 11", "C. 12", "D. 13"] },
-  { no: 9, soal: "OSN Matematika 2016 Tingkat Kota\nJika BE = 2 cm, EF = 6 cm dan FC = 4 cm, maka panjang DE adalah ...", options: ["A. $\\frac{6}{4}$", "B. $\\frac{6}{3}$", "C. $\\frac{3}{4}$", "D. $\\frac{2\\sqrt{3}}{3}$"] },
-  { no: 10, soal: "OSN Matematika 2016 Tingkat Kota\nPada pagi hari yang cerah, suatu bola raksasa ditempatkan di tanah lapang yang datar. Panjang bayangan bola tersebut apabila diukur dari titik singgung bola dengan tanah adalah 15 m. Di samping bola tersebut terdapat tiang vertikal dengan tinggi 1 m yang mempunyai bayangan sepanjang 3 m. Radius bola tersebut adalah ... meter", options: ["A. $\\frac{15}{10 + \\sqrt{3}}$", "B. $\\frac{15}{10 - \\sqrt{3}}$", "C. $\\frac{10}{5\\sqrt{2}}$", "D. $\\frac{10}{5 - \\sqrt{2}}$"] },
-  { no: 11, soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui persegi panjang ABCD dengan AB = 12 dan BC = 5. Panjang lintasan DPQB pada gambar adalah ...", options: ["A. $\\frac{119}{13}$", "B. $\\frac{120}{13}$", "C. $\\frac{214}{13}$", "D. $\\frac{239}{13}$"] },
-  { no: 12, soal: "OSN Matematika 2018 Tingkat Kota\nDiketahui jajar genjang ABCD dengan AB = 10 cm. Titik P berada di garis diagonal BD dan sebagai titik potong garis BD dan AQ, serta titik Q terletak pada CD dan BP = 2 DP. Panjang DQ adalah ... cm", options: ["A. 2", "B. $\\frac{10}{3}$", "C. 7", "D. 5"] },
-  { no: 13, soal: "OSN Matematika 2020 Tingkat Kota\nDiketahui D titik tengah sisi AC. F titik tengah sisi BD dan DE sejajar BC. Jika G adalah titik potong AF dan DE, maka perbandingan BC : DG adalah ...", options: ["A. 12 : 1", "B. 8 : 1", "C. 6 : 1", "D. 4 : 1"] },
-  { no: 14, soal: "OSN Matematika 2022 Tingkat Kota\nABCD adalah suatu persegi panjang. Dari titik C ditarik garis lurus yang memotong sisi AB di titik X. Garis CX memotong perpanjangan sisi AD di titik Y. Jika panjang BX adalah b cm, panjang DY adalah d cm, dan luas persegi panjang ABCD adalah L cm$^2$, maka pernyataan yang benar adalah ...", options: ["A. b $\\times$ d = L", "B. b $\\times$ d = 2L", "C. L < b $\\times$ d < 2L", "D. b $\\times$ d < L"] },
-  { no: 15, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui dua buah segitiga OAB dan OCB dengan O(0,0), A(4,0), B(0,3) dan C(2,3). Jika segitiga OCB digeser searah sumbu-x sehingga titik O terletak di tengah sisi OA, maka perbandingan antara luas irisan kedua segitiga mula-mula dan luas irisan kedua segitiga setelah segitiga OCB digeser adalah ...", options: ["A. 3 : 2", "B. 2 : 1", "C. 3 : 1", "D. 4 : 1"] },
-  { no: 16, soal: "OSN Matematika 2023 Tingkat Kota\nSegitiga ABC siku-siku di A dan ADEC adalah persegi panjang. Titik H terletak pada DE dan lingkaran dengan pusat H menyinggung sisi segitiga ABC. Jika FG = 2 cm dan EF = 4 cm, maka segitiga ABC adalah ... cm$^2$", options: ["A. 8", "B. 27", "C. 54", "D. 108"] },
-  { no: 17, soal: "OSN Matematika 2025 Tingkat Kota\nJajargenjang ABCD memiliki keliling 106 cm dengan panjang sisi AB = (3x + 1) cm dan BC = (5x - 20) cm. Titik pada sisi AB sehingga DE tegak lurus AB. Titik F dan H pada ruas garis CE. Titik K pada sisi AB sehingga FK sejajar DE. Jika panjang DE = (3x - 7) cm, HC = 2 $\\times$ EF dan FK = 5 cm, luas daerah bangun datar yang diarsir adalah ...", options: ["A. 122,5", "B. 185", "C. 262,5", "D. 280"] },
+  {
+    no: 1,
+    soal: "OSN Matematika 2006 Tingkat Kota\nPada segitiga PQR, S adalah titik tengah QP dan T titik tengah QR. Perbandingan antara TS dan QR adalah ...",
+    options: ["A. 1 : 2", "B. 1 : 3", "C. 2 : 3", "D. 3 : 4", "E. 3 : 5"]
+  },
+  {
+    no: 2,
+    soal: "OSN Matematika 2006 Tingkat Kota\nJika CE = EB, AD = DB, besar $\\angle ABC = 30^{\\circ}$ dan panjang CA = 4 cm, maka panjang CF adalah …",
+    options: ["A. $\\frac{4}{3}\\sqrt{3}$", "B. $\\frac{2}{3}\\sqrt{3}$", "C. $\\frac{4\\sqrt{3}}{6}$", "D. $\\frac{2\\sqrt{3}}{6}$", "E. $\\frac{\\sqrt{3}}{3}$"]
+  },
+  {
+    no: 3,
+    soal: "OSN Matematika 2006 Tingkat Kota\nJika luas BCDE = luas ABE, dan panjang $CD = \\sqrt{8}$, maka panjang BE = …",
+    options: ["A. 4", "B. 2", "C. $\\sqrt{2}$", "D. $\\frac{1}{2}\\sqrt{2}$", "E. Jawaban A, B, C dan D tidak ada yang benar"]
+  },
+  {
+    no: 4,
+    soal: "OSN Matematika 2007 Tingkat Kota\nDiketahui PQRS adalah jajar genjang dan misalkan garis SU memotong diagonal PR di titik T, memotong ruas garis QR di titik U dan memotong garis PQ di titik V. Jika panjang ruas garis ST = 16 cm dan panjang ruas garis TU = 8 cm, maka panjang ruas garis UV adalah ... cm",
+    options: ["A. 12", "B. 18", "C. 20", "D. 22", "E. 24"]
+  },
+  {
+    no: 5,
+    soal: "OSN Matematika 2010 Tingkat Kota\nPada segitiga ABC (siku-siku di C), titik Q pada AC, titik P pada AB, dan PQ sejajar BC. Panjang AQ = 3, AP = 5, BC = 8, maka luas segitiga ABC adalah ...",
+    options: ["A. 48", "B. 36", "C. 24", "D. 22", "E. 12"]
+  },
+  {
+    no: 6,
+    soal: "OSN Matematika 2010 Tingkat Kota\nDiketahui jajar genjang ABCD dengan $\\angle A = \\angle C = 45^{\\circ}$. Lingkaran K dengan pusat C melalui B dan D. AD diperpanjang memotong lingkaran di E dan BE memotong CD di H. Perbandingan antara luas segitiga BCH dengan segitiga EHD adalah ...",
+    options: []
+  },
+  {
+    no: 7,
+    soal: "OSN Matematika 2012 Tingkat Kota\nDiketahui persegi panjang PQRS. Panjang PV = QT = PS = 6. Titik U adalah perpotongan antara garis SV dan RT. Jika PQ = 10 maka luas segiempat PTUS adalah ...",
+    options: ["A. 15", "B. 17", "C. 19", "D. 21", "E. 23"]
+  },
+  {
+    no: 8,
+    soal: "OSN Matematika 2014 Tingkat Kota\nDiketahui titik W, F dan G pada trapesium ABCD. Sisi FE sejajar dengan sisi AB. Jika AB = 7, DC = 14, DG = 8, FG = 4, BF = x dan GE = y, maka nilai x + y adalah ...",
+    options: ["A. 10", "B. 11", "C. 12", "D. 13"]
+  },
+  {
+    no: 9,
+    soal: "OSN Matematika 2016 Tingkat Kota\nJika BE = 2 cm, EF = 6 cm dan FC = 4 cm, maka panjang DE adalah ...",
+    options: ["A. $\\frac{6\\sqrt{6}}{4}$ cm", "B. $\\frac{6\\sqrt{3}}{3}$ cm", "C. $\\frac{3\\sqrt{6}}{4}$ cm", "D. $\\frac{2\\sqrt{3}}{3}$ cm"]
+  },
+  {
+    no: 10,
+    soal: "OSN Matematika 2016 Tingkat Kota\nPada pagi hari yang cerah, suatu bola raksasa ditempatkan di tanah lapang yang datar. Panjang bayangan bola tersebut apabila diukur dari titik singgung bola dengan tanah adalah 15 m. Di samping bola tersebut terdapat tiang vertikal dengan tinggi 1 m yang mempunyai bayangan sepanjang 3 m. Radius bola tersebut adalah ... meter",
+    options: ["A. $\\dfrac{15}{10+\\sqrt{3}}$", "B. $\\dfrac{15}{10-\\sqrt{3}}$", "C. $\\dfrac{10}{5\\sqrt{2}}$", "D. $\\dfrac{10}{5-\\sqrt{2}}$"]
+  },
+  {
+    no: 11,
+    soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui persegi panjang ABCD dengan AB = 12 dan BC = 5. Panjang lintasan DPQB pada gambar adalah ...",
+    options: ["A. $\\dfrac{119}{13}$", "B. $\\dfrac{120}{13}$", "C. $\\dfrac{214}{13}$", "D. $\\dfrac{239}{13}$"]
+  },
+  {
+    no: 12,
+    soal: "OSN Matematika 2018 Tingkat Kota\nDiketahui jajar genjang ABCD dengan AB = 10 cm. Titik P berada di garis diagonal BD dan sebagai titik potong garis BD dan AQ, serta titik Q terletak pada CD dan BP = 2 DP. Panjang DQ adalah ... cm",
+    options: ["A. 2", "B. $\\dfrac{10}{3}$", "C. 7", "D. 5"]
+  },
+  {
+    no: 13,
+    soal: "OSN Matematika 2020 Tingkat Kota\nDiketahui D titik tengah sisi AC, F titik tengah sisi BD dan DE sejajar BC. Jika G adalah titik potong AF dan DE, maka perbandingan BC : DG adalah ...",
+    options: ["A. 12 : 1", "B. 8 : 1", "C. 6 : 1", "D. 4 : 1"]
+  },
+  {
+    no: 14,
+    soal: "OSN Matematika 2022 Tingkat Kota\nABCD adalah suatu persegi panjang. Dari titik C ditarik garis lurus yang memotong sisi AB di titik X. Garis CX memotong perpanjangan sisi AD di titik Y. Jika panjang BX adalah b cm, panjang DY adalah d cm, dan luas persegi panjang ABCD adalah $L$ cm², maka pernyataan yang benar adalah ...",
+    options: ["A. $b \\times d = L$", "B. $b \\times d = 2L$", "C. $L < b \\times d < 2L$", "D. $b \\times d < L$"]
+  },
+  {
+    no: 15,
+    soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui dua buah segitiga OAB dan OCB dengan O(0,0), A(4,0), B(0,3) dan C(2,3). Jika segitiga OCB digeser searah sumbu-x sehingga titik O terletak di tengah sisi OA, maka perbandingan antara luas irisan kedua segitiga mula-mula dan luas irisan kedua segitiga setelah segitiga OCB digeser adalah ...",
+    options: ["A. 3 : 2", "B. 2 : 1", "C. 3 : 1", "D. 4 : 1"]
+  },
+  {
+    no: 16,
+    soal: "OSN Matematika 2023 Tingkat Kota\nSegitiga ABC siku-siku di A dan ADEC adalah persegi panjang. Titik H terletak pada DE dan lingkaran dengan pusat H menyinggung sisi segitiga ABC. Jika FG = 2 cm dan EF = 4 cm, maka luas segitiga ABC adalah ... $\\text{cm}^2$",
+    options: ["A. 8", "B. 27", "C. 54", "D. 108"]
+  },
+  {
+    no: 17,
+    soal: "OSN Matematika 2025 Tingkat Kota\nJajargenjang ABCD memiliki keliling 106 cm dengan panjang sisi AB = (3x + 1) cm dan BC = (5x - 20) cm. Titik E pada sisi AB sehingga DE tegak lurus AB. Titik F dan H pada ruas garis CE. Titik K pada sisi AB sehingga FK sejajar DE. Jika panjang DE = (3x - 7) cm, HC = 2 × EF dan FK = 5 cm, luas daerah bangun datar yang diarsir adalah ...",
+    options: ["A. 122,5", "B. 185", "C. 262,5", "D. 280"]
+  },
 ];
 
 const OlimpiadeKesebangunanPage = () => {
@@ -179,7 +341,13 @@ const OlimpiadeKesebangunanPage = () => {
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
+                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                  {soal.soal.split('\n').map((line, lineIdx) => (
+                    <span key={lineIdx}>
+                      {lineIdx > 0 && <br />}
+                      {renderWithLatex(line)}
+                    </span>
+                  ))}
                 </div>
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -201,7 +369,8 @@ const OlimpiadeKesebangunanPage = () => {
             {latihanOlimpiade.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
+                  <span className="text-accent font-bold">{soal.no}.</span>{" "}
+                  {soal.soal.split('\n').map((line, lineIdx) => (
                     <span key={lineIdx}>
                       {lineIdx > 0 && <br />}
                       {renderWithLatex(line)}
@@ -227,7 +396,7 @@ const OlimpiadeKesebangunanPage = () => {
             onClick={() => { playPopSound(); navigate("/olimpiade"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            &larr; Kembali ke Olimpiade
+            ← Kembali ke Olimpiade
           </button>
         </div>
       </div>
