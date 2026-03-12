@@ -226,12 +226,181 @@ const OlimpiadeTransformasiPage = () => {
                   )}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
+                  <div className="px-5 pb-5">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {section.content.split('\n').map((line, i) => (
                         <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                       ))}
                     </div>
+
+                    {/* Diagram: B. Translasi */}
+                    {idx === 2 && (
+                      <div className="mt-5 bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                        <p className="text-xs text-center text-cyan-400 font-display mb-2">Translasi: A(x, y) → A'(x+a, y+b)</p>
+                        <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto block" aria-label="Diagram translasi">
+                          <defs>
+                            <marker id="arr-tr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="#f59e0b" />
+                            </marker>
+                            <marker id="arr-ax" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="rgba(255,255,255,0.4)" />
+                            </marker>
+                          </defs>
+                          {/* Grid lines */}
+                          {[40,80,120,160,200,240].map(x => (
+                            <line key={`gx${x}`} x1={x} y1="10" x2={x} y2="190" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {[40,80,120,160].map(y => (
+                            <line key={`gy${y}`} x1="10" y1={y} x2="270" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {/* Axes */}
+                          <line x1="20" y1="120" x2="265" y2="120" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-ax)" />
+                          <line x1="80" y1="185" x2="80" y2="15" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-ax)" />
+                          <text x="270" y="124" fill="rgba(255,255,255,0.5)" fontSize="11">x</text>
+                          <text x="84" y="12" fill="rgba(255,255,255,0.5)" fontSize="11">y</text>
+                          <text x="76" y="133" fill="rgba(255,255,255,0.4)" fontSize="10">O</text>
+                          {/* Point A at (1,2) → pixel (120, 80) */}
+                          <circle cx="120" cy="80" r="5" fill="#22d3ee" />
+                          <text x="107" y="73" fill="#22d3ee" fontSize="12" fontWeight="bold">A(x,y)</text>
+                          {/* Point A' at (3,1) → pixel (200, 120-40=not exact, let's say (200,120)) */}
+                          {/* T(a,b) = (+80, +40) in pixel = (a=2, b=-1) */}
+                          <circle cx="210" cy="120" r="5" fill="#f59e0b" />
+                          <text x="214" y="115" fill="#f59e0b" fontSize="12" fontWeight="bold">A'(x+a,y+b)</text>
+                          {/* Arrow A → A' */}
+                          <line x1="125" y1="83" x2="203" y2="117" stroke="#f59e0b" strokeWidth="2" markerEnd="url(#arr-tr)" strokeDasharray="6 3" />
+                          {/* Vector label */}
+                          <text x="160" y="92" textAnchor="middle" fill="#f59e0b" fontSize="11">T(a,b)</text>
+                        </svg>
+                      </div>
+                    )}
+
+                    {/* Diagram: C. Refleksi */}
+                    {idx === 3 && (
+                      <div className="mt-5 bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                        <p className="text-xs text-center text-cyan-400 font-display mb-2">Refleksi terhadap sumbu-x: A(x,y) → A'(x,−y)</p>
+                        <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto block" aria-label="Diagram refleksi">
+                          <defs>
+                            <marker id="arr-rf" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="rgba(255,255,255,0.4)" />
+                            </marker>
+                          </defs>
+                          {/* Grid */}
+                          {[40,80,120,160,200,240].map(x => (
+                            <line key={`gx${x}`} x1={x} y1="10" x2={x} y2="190" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {[40,80,120,160].map(y => (
+                            <line key={`gy${y}`} x1="10" y1={y} x2="270" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {/* Axes */}
+                          <line x1="20" y1="100" x2="265" y2="100" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-rf)" />
+                          <line x1="80" y1="185" x2="80" y2="15" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-rf)" />
+                          <text x="270" y="104" fill="rgba(255,255,255,0.5)" fontSize="11">x</text>
+                          <text x="84" y="12" fill="rgba(255,255,255,0.5)" fontSize="11">y</text>
+                          <text x="76" y="113" fill="rgba(255,255,255,0.4)" fontSize="10">O</text>
+                          {/* Mirror axis label */}
+                          <text x="140" y="95" fill="#a78bfa" fontSize="10" textAnchor="middle">sumbu-x (cermin)</text>
+                          {/* Point A(2, 2) = pixel (160, 60) */}
+                          <circle cx="160" cy="60" r="5" fill="#22d3ee" />
+                          <text x="165" y="55" fill="#22d3ee" fontSize="12" fontWeight="bold">A(x, y)</text>
+                          {/* Point A'(2,-2) = pixel (160, 140) */}
+                          <circle cx="160" cy="140" r="5" fill="#f59e0b" />
+                          <text x="165" y="155" fill="#f59e0b" fontSize="12" fontWeight="bold">A'(x, −y)</text>
+                          {/* Dashed line connecting A to A' */}
+                          <line x1="160" y1="65" x2="160" y2="135" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeDasharray="5 3" />
+                          {/* Equal distance marks */}
+                          <line x1="155" y1="82" x2="165" y2="82" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+                          <line x1="155" y1="118" x2="165" y2="118" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+                        </svg>
+                      </div>
+                    )}
+
+                    {/* Diagram: D. Rotasi */}
+                    {idx === 4 && (
+                      <div className="mt-5 bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                        <p className="text-xs text-center text-cyan-400 font-display mb-2">Rotasi 90° berlawanan arah jarum jam: A(x,y) → A'(−y, x)</p>
+                        <svg viewBox="0 0 280 200" className="w-full max-w-xs mx-auto block" aria-label="Diagram rotasi">
+                          <defs>
+                            <marker id="arr-ro-ax" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="rgba(255,255,255,0.4)" />
+                            </marker>
+                            <marker id="arr-ro" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="#a78bfa" />
+                            </marker>
+                          </defs>
+                          {/* Grid */}
+                          {[40,80,120,160,200,240].map(x => (
+                            <line key={`gx${x}`} x1={x} y1="10" x2={x} y2="190" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {[40,80,120,160].map(y => (
+                            <line key={`gy${y}`} x1="10" y1={y} x2="270" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {/* Axes */}
+                          <line x1="20" y1="120" x2="265" y2="120" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-ro-ax)" />
+                          <line x1="140" y1="185" x2="140" y2="15" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-ro-ax)" />
+                          <text x="270" y="124" fill="rgba(255,255,255,0.5)" fontSize="11">x</text>
+                          <text x="144" y="12" fill="rgba(255,255,255,0.5)" fontSize="11">y</text>
+                          <text x="144" y="133" fill="rgba(255,255,255,0.4)" fontSize="10">O</text>
+                          {/* Radius lines from O to A and O to A' */}
+                          {/* A(2,1) → pixel: x=140+2*40=220, y=120-1*40=80 */}
+                          <line x1="140" y1="120" x2="220" y2="80" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="4 3" />
+                          {/* A'(-1,2) after 90° CCW: A'(-y,x)=(-1,2) → pixel: x=140-1*40=100, y=120-2*40=40 */}
+                          <line x1="140" y1="120" x2="100" y2="40" stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="4 3" />
+                          {/* Arc showing rotation */}
+                          <path d="M 213 88 A 85 85 0 0 1 107 46" fill="none" stroke="#a78bfa" strokeWidth="2" markerEnd="url(#arr-ro)" />
+                          <text x="145" y="68" fill="#a78bfa" fontSize="11" fontWeight="bold">90°</text>
+                          {/* Points */}
+                          <circle cx="220" cy="80" r="5" fill="#22d3ee" />
+                          <text x="225" y="76" fill="#22d3ee" fontSize="12" fontWeight="bold">A(x, y)</text>
+                          <circle cx="100" cy="40" r="5" fill="#f59e0b" />
+                          <text x="50" y="36" fill="#f59e0b" fontSize="12" fontWeight="bold">A'(−y, x)</text>
+                          <circle cx="140" cy="120" r="4" fill="white" fillOpacity="0.6" />
+                        </svg>
+                      </div>
+                    )}
+
+                    {/* Diagram: E. Dilatasi */}
+                    {idx === 5 && (
+                      <div className="mt-5 bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                        <p className="text-xs text-center text-cyan-400 font-display mb-2">Dilatasi dengan pusat O dan faktor k: A(x,y) → A'(kx, ky)</p>
+                        <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto block" aria-label="Diagram dilatasi">
+                          <defs>
+                            <marker id="arr-di" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                              <polygon points="0 0, 7 3.5, 0 7" fill="rgba(255,255,255,0.3)" />
+                            </marker>
+                          </defs>
+                          {/* Grid */}
+                          {[40,80,120,160,200,240].map(x => (
+                            <line key={`gx${x}`} x1={x} y1="10" x2={x} y2="210" stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {[40,80,120,160,200].map(y => (
+                            <line key={`gy${y}`} x1="10" y1={y} x2="270" y2={y} stroke="rgba(255,255,255,0.07)" strokeWidth="1" />
+                          ))}
+                          {/* Axes */}
+                          <line x1="20" y1="175" x2="265" y2="175" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-di)" />
+                          <line x1="40" y1="210" x2="40" y2="15" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" markerEnd="url(#arr-di)" />
+                          <text x="268" y="179" fill="rgba(255,255,255,0.5)" fontSize="11">x</text>
+                          <text x="44" y="12" fill="rgba(255,255,255,0.5)" fontSize="11">y</text>
+                          <text x="24" y="187" fill="rgba(255,255,255,0.4)" fontSize="10">O</text>
+                          {/* Triangle ABC small (original): A(1,2)→(80,95) B(1,1)→(80,135) C(2,1)→(120,135) */}
+                          <polygon points="80,95 80,135 120,135" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="2" />
+                          <text x="65" y="92" fill="#22d3ee" fontSize="11" fontWeight="bold">A</text>
+                          <text x="65" y="145" fill="#22d3ee" fontSize="11" fontWeight="bold">B</text>
+                          <text x="122" y="145" fill="#22d3ee" fontSize="11" fontWeight="bold">C</text>
+                          {/* Triangle A'B'C' large (k=2): A'(2,4)→(120,15) B'(2,2)→(120,95) C'(4,2)→(200,95) */}
+                          <polygon points="120,15 120,95 200,95" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" strokeWidth="2" strokeDasharray="6 3" />
+                          <text x="124" y="13" fill="#f59e0b" fontSize="11" fontWeight="bold">A'</text>
+                          <text x="124" y="108" fill="#f59e0b" fontSize="11" fontWeight="bold">B'</text>
+                          <text x="204" y="108" fill="#f59e0b" fontSize="11" fontWeight="bold">C'</text>
+                          {/* Rays from O through each vertex */}
+                          <line x1="40" y1="175" x2="125" y2="13" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="4 3" />
+                          <line x1="40" y1="175" x2="125" y2="93" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="4 3" />
+                          <line x1="40" y1="175" x2="205" y2="93" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeDasharray="4 3" />
+                          {/* k label */}
+                          <text x="160" y="140" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="bold">k = 2</text>
+                          <circle cx="40" cy="175" r="4" fill="white" fillOpacity="0.6" />
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

@@ -322,12 +322,122 @@ const OlimpiadeKesebangunanPage = () => {
                   )}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
+                  <div className="px-5 pb-5">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {section.content.split('\n').map((line, i) => (
                         <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                       ))}
                     </div>
+
+                    {/* Diagram: A. Kesebangunan */}
+                    {idx === 1 && (
+                      <div className="mt-5 space-y-5">
+                        {/* Diagram 1: Segitiga ABC dengan DE sejajar BC */}
+                        <div className="bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                          <p className="text-xs text-center text-cyan-400 font-display mb-2">Segitiga ABC dengan DE ∥ BC</p>
+                          <svg viewBox="0 0 280 210" className="w-full max-w-xs mx-auto block" aria-label="Segitiga ABC dengan DE sejajar BC">
+                            <defs>
+                              <marker id="arr-kb" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                                <path d="M0,0 L6,3 L0,6 Z" fill="#22d3ee" />
+                              </marker>
+                            </defs>
+                            {/* Triangle ABC */}
+                            <line x1="140" y1="25" x2="40" y2="185" stroke="#22d3ee" strokeWidth="2" />
+                            <line x1="140" y1="25" x2="240" y2="185" stroke="#22d3ee" strokeWidth="2" />
+                            <line x1="40" y1="185" x2="240" y2="185" stroke="#22d3ee" strokeWidth="2" />
+                            {/* Line DE parallel to BC */}
+                            <line x1="85" y1="113" x2="195" y2="113" stroke="#f59e0b" strokeWidth="2.2" />
+                            {/* Parallel marks on DE */}
+                            <line x1="137" y1="108" x2="137" y2="118" stroke="#f59e0b" strokeWidth="1.5" />
+                            <line x1="143" y1="108" x2="143" y2="118" stroke="#f59e0b" strokeWidth="1.5" />
+                            {/* Parallel marks on BC */}
+                            <line x1="137" y1="180" x2="137" y2="190" stroke="#22d3ee" strokeWidth="1.5" />
+                            <line x1="143" y1="180" x2="143" y2="190" stroke="#22d3ee" strokeWidth="1.5" />
+                            {/* Labels */}
+                            <text x="140" y="16" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">A</text>
+                            <text x="24" y="192" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">B</text>
+                            <text x="256" y="192" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">C</text>
+                            <text x="72" y="115" textAnchor="end" fill="#f59e0b" fontSize="13" fontWeight="bold">D</text>
+                            <text x="208" y="115" textAnchor="start" fill="#f59e0b" fontSize="13" fontWeight="bold">E</text>
+                            {/* Ratio label */}
+                            <text x="140" y="105" textAnchor="middle" fill="#94a3b8" fontSize="10">DE ∥ BC</text>
+                          </svg>
+                        </div>
+
+                        {/* Diagram 2: Segitiga siku-siku dengan garis tinggi ke sisi miring */}
+                        <div className="bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                          <p className="text-xs text-center text-cyan-400 font-display mb-2">Segitiga Siku-Siku dengan Garis Tinggi ke Sisi Miring</p>
+                          <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto block" aria-label="Segitiga siku-siku dengan garis tinggi">
+                            {/* Triangle ABC: right angle at A (140,55), B(40,190), C(240,190) */}
+                            <line x1="140" y1="55" x2="40" y2="190" stroke="#22d3ee" strokeWidth="2" />
+                            <line x1="140" y1="55" x2="240" y2="190" stroke="#22d3ee" strokeWidth="2" />
+                            <line x1="40" y1="190" x2="240" y2="190" stroke="#22d3ee" strokeWidth="2" />
+                            {/* Altitude from A down to D (140, 190) */}
+                            <line x1="140" y1="55" x2="140" y2="190" stroke="#f59e0b" strokeWidth="1.8" strokeDasharray="5 3" />
+                            {/* Right angle mark at A (isoceles, AD is vertical, BA and CA symmetric) */}
+                            <path d="M 131 64 L 140 73 L 149 64" fill="none" stroke="#94a3b8" strokeWidth="1.2" />
+                            {/* Right angle mark at D (foot of altitude) */}
+                            <rect x="140" y="181" width="9" height="9" fill="none" stroke="#94a3b8" strokeWidth="1.2" />
+                            {/* Labels */}
+                            <text x="140" y="46" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">A</text>
+                            <text x="26" y="197" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">B</text>
+                            <text x="254" y="197" textAnchor="middle" fill="#fbbf24" fontSize="14" fontWeight="bold">C</text>
+                            <text x="140" y="208" textAnchor="middle" fill="#f59e0b" fontSize="13" fontWeight="bold">D</text>
+                            {/* BD and DC labels */}
+                            <text x="90" y="208" textAnchor="middle" fill="#94a3b8" fontSize="10">BD</text>
+                            <text x="190" y="208" textAnchor="middle" fill="#94a3b8" fontSize="10">DC</text>
+                            {/* Formula labels */}
+                            <text x="60" y="130" textAnchor="middle" fill="#f59e0b" fontSize="10">AB²=BD×BC</text>
+                            <text x="220" y="130" textAnchor="middle" fill="#f59e0b" fontSize="10">AC²=DC×BC</text>
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Diagram: B. Kekongruenan */}
+                    {idx === 2 && (
+                      <div className="mt-5 bg-white/5 border border-cyan-500/20 rounded-xl p-3">
+                        <p className="text-xs text-center text-cyan-400 font-display mb-2">Dua Segitiga yang Kongruen (≅)</p>
+                        <svg viewBox="0 0 300 160" className="w-full max-w-sm mx-auto block" aria-label="Dua segitiga kongruen">
+                          {/* Triangle 1: A(50,30) B(20,140) C(110,140) */}
+                          <polygon points="50,30 20,140 110,140" fill="none" stroke="#22d3ee" strokeWidth="2" />
+                          {/* Tick marks - SSS */}
+                          {/* Side AB - 1 tick */}
+                          <line x1="29" y1="82" x2="39" y2="74" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Side BC - 2 ticks */}
+                          <line x1="59" y1="136" x2="59" y2="144" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="66" y1="136" x2="66" y2="144" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Side AC - 3 ticks */}
+                          <line x1="75" y1="78" x2="87" y2="90" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="80" y1="73" x2="92" y2="85" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="85" y1="68" x2="97" y2="80" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Labels */}
+                          <text x="50" y="22" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">A</text>
+                          <text x="10" y="148" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">B</text>
+                          <text x="118" y="148" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">C</text>
+
+                          {/* Congruent symbol */}
+                          <text x="150" y="90" textAnchor="middle" fill="#a78bfa" fontSize="22" fontWeight="bold">≅</text>
+
+                          {/* Triangle 2: P(230,30) Q(195,140) R(275,140) -- mirror */}
+                          <polygon points="230,30 195,140 275,140" fill="none" stroke="#22d3ee" strokeWidth="2" />
+                          {/* Tick marks matching */}
+                          {/* Side PQ - 1 tick */}
+                          <line x1="208" y1="78" x2="218" y2="86" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Side QR - 2 ticks */}
+                          <line x1="230" y1="136" x2="230" y2="144" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="237" y1="136" x2="237" y2="144" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Side PR - 3 ticks */}
+                          <line x1="248" y1="74" x2="260" y2="86" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="253" y1="69" x2="265" y2="81" stroke="#f59e0b" strokeWidth="2" />
+                          <line x1="258" y1="64" x2="270" y2="76" stroke="#f59e0b" strokeWidth="2" />
+                          {/* Labels */}
+                          <text x="230" y="22" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">P</text>
+                          <text x="184" y="148" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">Q</text>
+                          <text x="283" y="148" textAnchor="middle" fill="#fbbf24" fontSize="13" fontWeight="bold">R</text>
+                        </svg>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
