@@ -36,6 +36,8 @@ const BangunRuangSisiDatarPage = () => {
                 playPopSound();
                 if (subtopic === "KUBUS") {
                   navigate("/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kubus-game");
+                } else {
+                  navigate("/coming-soon");
                 }
               }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4

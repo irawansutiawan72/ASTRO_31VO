@@ -29,7 +29,7 @@ const PolaBilanganPage = () => {
           {subtopics.map((subtopic, i) => (
             <button
               key={subtopic}
-              onClick={() => playPopSound()}
+              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"

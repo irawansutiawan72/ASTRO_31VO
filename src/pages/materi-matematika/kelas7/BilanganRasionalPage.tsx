@@ -39,14 +39,13 @@ const BilanganRasionalPage = () => {
                 playPopSound(); 
                 if (subtopic.path) navigate(subtopic.path);
               }}
-              className={`group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-primary/60 transition-all duration-300
-                text-left animate-slide-up ${subtopic.path ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
+              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
+                hover:border-primary/60 transition-all duration-300 cursor-pointer
+                text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
               <span className="font-body text-sm text-white">{subtopic.name}</span>
-              {!subtopic.path && <span className="ml-auto text-xs text-white/40 font-body">Segera Hadir</span>}
             </button>
           ))}
         </div>
