@@ -18,6 +18,13 @@ const PetunjukPage = () => {
       <Starfield />
       <PageNavigation prevPath="/menu" nextPath="/materi" />
       <div className="relative z-10 max-w-2xl w-full px-4">
+        <div className="flex justify-center mb-5">
+          <img
+            src="/logo-numatik.png"
+            alt="NUMATIK Logo"
+            className="w-24 h-24 object-contain drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
+          />
+        </div>
         <h1 className="font-display text-3xl font-bold text-primary text-glow-cyan mb-8 text-center">
           PETUNJUK PENGGUNAAN
         </h1>

@@ -76,10 +76,12 @@ const ChatAIPage = () => {
       {/* Header */}
       <div className="relative z-10 pt-20 pb-4 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center border-2 border-purple-400/50 shadow-lg shadow-purple-500/30 animate-pulse-glow">
-              <Bot className="w-6 h-6 text-white" />
-            </div>
+          <div className="flex flex-col items-center mb-2">
+            <img
+              src="/logo-numatik.png"
+              alt="NUMATIK Logo"
+              className="w-24 h-24 object-contain mb-2 drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
+            />
             <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan">
               NUMATIK AI
             </h1>
