@@ -205,10 +205,10 @@ const PenjumlahanGamePage = () => {
             <div className="relative flex flex-col items-center">
               <img src={spaceshipImg} alt="" className="w-20 h-24 md:w-28 md:h-32 opacity-70 drop-shadow-[0_0_25px_rgba(0,200,255,0.4)]" />
               {/* Flame */}
-              <div className="absolute -bottom-2 w-10 h-12 md:w-12 md:h-14 animate-flame" style={{ left: "22%", transform: "translateX(-50%)" }}>
+              <div className="absolute -bottom-1 w-5 h-7 md:w-6 md:h-8 animate-flame" style={{ left: "22%", transform: "translateX(-50%)" }}>
                 <div className="w-full h-full flex flex-col items-center">
-                  <div className="w-4 md:w-5 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[2px] opacity-90" />
-                  <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-md" />
+                  <div className="w-2 md:w-2.5 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />
+                  <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-sm" />
                 </div>
               </div>
             </div>
@@ -511,11 +511,11 @@ const PenjumlahanGamePage = () => {
         <div className="absolute bottom-[8%] z-20 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
             <img src={spaceshipImg} alt="spaceship" className="w-16 h-20 md:w-20 md:h-24 drop-shadow-[0_0_20px_rgba(0,180,255,0.4)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
-            <div className="absolute -bottom-3 w-8 h-10 md:w-10 md:h-12 animate-flame" style={{ left: "22%", transform: "translateX(-50%)" }}>
+            <div className="absolute -bottom-2 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "22%", transform: "translateX(-50%)" }}>
               <div className="w-full h-full flex flex-col items-center">
-                <div className="w-3 md:w-4 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[2px] opacity-90" />
-                <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-md" />
-                <div className="absolute w-2 h-6 md:w-3 md:h-8 rounded-full bg-gradient-to-t from-yellow-100 via-orange-300 to-transparent blur-sm animate-pulse" />
+                <div className="w-1.5 md:w-2 h-full rounded-full bg-gradient-to-t from-white via-yellow-300 to-transparent blur-[1px] opacity-90" />
+                <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-orange-500/80 via-red-500/40 to-transparent blur-sm" />
+                <div className="absolute w-1 h-4 md:w-1.5 md:h-5 rounded-full bg-gradient-to-t from-yellow-100 via-orange-300 to-transparent blur-sm animate-pulse" />
               </div>
             </div>
           </div>
