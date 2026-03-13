@@ -15,10 +15,17 @@ const TKALatihan1Page = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
 
         {/* Header */}
-        <div className="bg-card/80 backdrop-blur border border-accent/30 rounded-2xl p-5 mb-6 text-center">
-          <p className="font-body text-white/60 text-xs mb-1">PEMANTAPAN DAN PERSIAPAN</p>
-          <h1 className="font-display text-lg font-bold text-primary text-glow-cyan mb-1">TES KEMAMPUAN AKADEMIK (TKA)</h1>
-          <p className="font-body text-white/60 text-xs mb-3">MKKS SMP/MTs DIY — TAHUN PELAJARAN 2025/2026</p>
+        <div className="bg-card/80 backdrop-blur border border-accent/30 rounded-2xl p-5 mb-6 relative">
+          <img
+            src="/logo-numatik.png"
+            alt="NUMATIK"
+            className="absolute top-4 left-4 w-12 h-12 object-contain drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]"
+          />
+          <div className="text-center">
+            <p className="font-body text-white/60 text-xs mb-1">PEMANTAPAN DAN PERSIAPAN</p>
+            <h1 className="font-display text-lg font-bold text-primary text-glow-cyan mb-1">TES KEMAMPUAN AKADEMIK (TKA)</h1>
+            <p className="font-body text-white/60 text-xs mb-3">TAHUN PELAJARAN 2025/2026</p>
+          </div>
           <div className="grid grid-cols-2 gap-2 text-left text-xs font-body">
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Mata Pelajaran:</span><span className="text-white ml-1">Matematika</span></div>
             <div className="bg-white/5 rounded-lg p-2"><span className="text-white/40">Kelas:</span><span className="text-white ml-1">IX (Sembilan)</span></div>
