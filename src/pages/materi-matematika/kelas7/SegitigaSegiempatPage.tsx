@@ -6,10 +6,10 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA",
-  "SEGITIGA (KELILING)",
-  "SEGITIGA (LUAS)",
-  "SEGIEMPAT (KELILING)",
-  "SEGIEMPAT (LUAS)",
+  "KELILING SEGITIGA DAN SEGIEMPAT",
+  "LUAS SEGITIGA",
+  "LUAS SEGIEMPAT",
+  "KELILING DAN LUAS BANGUN TAK BERATURAN",
 ];
 
 const SegitigaSegiempatPage = () => {
