@@ -205,6 +205,7 @@ import JumlahSudutSegiBanyakPage from "./pages/materi-matematika/kelas7/garis-da
 import SegitigaSegiempatMMK7Page from "./pages/materi-matematika/kelas7/SegitigaSegiempatPage";
 import GarisBeratBagiTinggiPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage";
 import KelilingSegitigaSegiempatPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage";
+import LuasSegitigaPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/LuasSegitigaPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
 
 // Materi Matematika - Kelas 8 Topic Pages
@@ -440,6 +441,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiPage />} />
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-segitiga-segiempat" element={<KelilingSegitigaSegiempatPage />} />
+      <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaPage />} />
       <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
       
       {/* Materi Matematika - Kelas 8 Topic Routes */}

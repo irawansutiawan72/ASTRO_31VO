@@ -7,7 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 const subtopics = [
   { name: "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" },
   { name: "KELILING SEGITIGA DAN SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-segitiga-segiempat" },
-  { name: "LUAS SEGITIGA", path: "/coming-soon" },
+  { name: "LUAS SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" },
   { name: "LUAS SEGIEMPAT", path: "/coming-soon" },
   { name: "KELILING DAN LUAS BANGUN TAK BERATURAN", path: "/coming-soon" },
 ];
