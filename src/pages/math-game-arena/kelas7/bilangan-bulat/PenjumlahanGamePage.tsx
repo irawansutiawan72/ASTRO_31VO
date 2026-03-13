@@ -454,14 +454,14 @@ const PenjumlahanGamePage = () => {
   const q = quizQuestions[currentQ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden select-none">
+    <div className="relative min-h-screen overflow-hidden select-none flex flex-col">
       <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <Starfield />
       <QuizNavigation />
 
-      {/* HUD - centered scoreboard */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex flex-col items-center px-4 py-3">
-        <div className="font-display text-xs text-muted-foreground mb-1">
+      {/* HUD — always at top, fixed height */}
+      <div className="relative z-20 shrink-0 flex flex-col items-center px-4 pt-14 pb-2">
+        <div className="font-display text-xs text-muted-foreground mb-0.5">
           SOAL {currentQ + 1}/{quizQuestions.length}
         </div>
         <div className="font-display text-xl md:text-2xl font-bold text-accent text-glow-accent">
@@ -469,88 +469,88 @@ const PenjumlahanGamePage = () => {
         </div>
       </div>
 
-      {/* Question bar at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 px-4 pb-4">
-        <div className="bg-card/90 backdrop-blur border border-primary/30 rounded-xl px-6 py-3 max-w-2xl mx-auto box-glow-cyan text-center">
-          <p className="font-body text-sm md:text-base text-foreground">{q.question}</p>
-        </div>
-      </div>
+      {/* Game canvas — fills all space between HUD and question bar */}
+      <div className="relative flex-1 min-h-0">
 
-      {/* Feedback popup */}
-      {feedback && (
-        <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
-          <div className={`rounded-2xl px-8 py-6 text-center animate-scale-in ${
-            feedback.type === "correct" ? "bg-primary/90 backdrop-blur" : "bg-destructive/90 backdrop-blur"
-          }`}>
-            {feedback.type === "correct" ? (
-              <>
-                <div className="flex justify-center gap-1 mb-2">
-                  {[1, 2, 3].map((s) => (
-                    <span key={s} className="text-3xl animate-bounce" style={{ animationDelay: `${s * 100}ms` }}>&#11088;</span>
-                  ))}
-                </div>
-                <p className="font-display text-xl font-black text-primary-foreground">JAWABAN BENAR</p>
-              </>
-            ) : (
-              <>
-                <p className="font-display text-xl font-black text-destructive-foreground mb-1">JAWABAN SALAH</p>
-                <p className="font-body text-sm text-destructive-foreground/80">Jawaban: {feedback.answer}</p>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Meteors */}
-      <div className="absolute top-[18%] left-0 right-0 z-10 h-[30%]">
-        {meteors.map((m) => (
-          <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
-            className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
-            style={{
-              left: `${m.x}%`, top: "50%",
-              transform: `translate(-50%, ${-50 + floatOffset * (m.id % 2 === 0 ? 1 : -1)}%) ${m.hit ? "scale(0)" : "scale(1)"}`,
-              opacity: m.hit ? 0 : 1,
-              transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
-            }}>
-            <div className="relative">
-              <img src={meteorImg} alt="meteor" className="w-16 h-16 md:w-20 md:h-20 drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
-              <span className="absolute inset-0 flex items-center justify-center font-display text-[9px] md:text-[10px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
-            </div>
-            {m.hit && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-20 h-20 rounded-full bg-accent/60 animate-ping" />
+        {/* Meteors — upper 45% of game canvas */}
+        <div className="absolute top-[5%] left-0 right-0 h-[45%] z-10">
+          {meteors.map((m) => (
+            <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
+              className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
+              style={{
+                left: `${m.x}%`, top: "50%",
+                transform: `translate(-50%, ${-50 + floatOffset * (m.id % 2 === 0 ? 1 : -1)}%) ${m.hit ? "scale(0)" : "scale(1)"}`,
+                opacity: m.hit ? 0 : 1,
+                transition: m.hit ? "all 0.3s ease-out" : "transform 0.5s ease",
+              }}>
+              <div className="relative">
+                <img src={meteorImg} alt="meteor" className="w-16 h-16 md:w-20 md:h-20 drop-shadow-[0_0_15px_rgba(255,60,30,0.6)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
+                <span className="absolute inset-0 flex items-center justify-center font-display text-[9px] md:text-[10px] font-bold text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] px-1 text-center leading-tight">{m.label}</span>
               </div>
-            )}
-          </button>
-        ))}
-      </div>
+              {m.hit && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-20 h-20 rounded-full bg-accent/60 animate-ping" />
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
 
-      {/* Laser */}
-      {laser && laser.active && (
-        <div className="absolute z-15 pointer-events-none" style={{
-          left: `${laser.fromX}%`, bottom: "18%", transform: "translateX(-50%)",
-          height: `${laser.progress * 55}%`, width: 12,
-          background: "linear-gradient(to top, hsl(50, 100%, 60%), hsl(50, 100%, 85%), hsl(50, 100%, 90%, 0.4))",
-          boxShadow: "0 0 20px hsl(50, 100%, 60%), 0 0 40px hsl(50, 100%, 55%), 0 0 60px hsl(50, 100%, 50%, 0.4)",
-          borderRadius: 6, transformOrigin: "bottom center",
-        }} />
-      )}
+        {/* Laser — originates from spaceship, travels up through game canvas */}
+        {laser && laser.active && (
+          <div className="absolute z-10 pointer-events-none" style={{
+            left: `${laser.fromX}%`, bottom: "10%", transform: "translateX(-50%)",
+            height: `${laser.progress * 80}%`, width: 12,
+            background: "linear-gradient(to top, hsl(50, 100%, 60%), hsl(50, 100%, 85%), hsl(50, 100%, 90%, 0.4))",
+            boxShadow: "0 0 20px hsl(50, 100%, 60%), 0 0 40px hsl(50, 100%, 55%), 0 0 60px hsl(50, 100%, 50%, 0.4)",
+            borderRadius: 6, transformOrigin: "bottom center",
+          }} />
+        )}
 
-      {/* Spaceship */}
-      <div className="absolute bottom-[12%] z-10 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
-        <div className="relative flex flex-col items-center">
-          <img src={spaceshipImg} alt="spaceship" className="w-16 h-20 md:w-20 md:h-24 drop-shadow-[0_0_20px_rgba(0,180,255,0.4)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
-          {/* Flame/thruster effect - shifted more to the left */}
-          <div className="absolute -bottom-3 w-8 h-10 md:w-10 md:h-12 animate-flame" style={{ left: "38%", transform: "translateX(-50%)" }}>
-            <div className="w-full h-full flex flex-col items-center">
-              {/* Inner bright core */}
-              <div className="w-3 md:w-4 h-full rounded-full bg-gradient-to-t from-cyan-300 via-cyan-400 to-transparent blur-[2px] opacity-90" />
-              {/* Outer glow */}
-              <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-cyan-500/80 via-blue-400/40 to-transparent blur-md" />
-              {/* Flickering particles */}
-              <div className="absolute w-2 h-6 md:w-3 md:h-8 rounded-full bg-gradient-to-t from-white via-cyan-200 to-transparent blur-sm animate-pulse" />
+        {/* Spaceship — lower section of game canvas, always above question bar */}
+        <div className="absolute bottom-[8%] z-20 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
+          <div className="relative flex flex-col items-center">
+            <img src={spaceshipImg} alt="spaceship" className="w-16 h-20 md:w-20 md:h-24 drop-shadow-[0_0_20px_rgba(0,180,255,0.4)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
+            <div className="absolute -bottom-3 w-8 h-10 md:w-10 md:h-12 animate-flame" style={{ left: "38%", transform: "translateX(-50%)" }}>
+              <div className="w-full h-full flex flex-col items-center">
+                <div className="w-3 md:w-4 h-full rounded-full bg-gradient-to-t from-cyan-300 via-cyan-400 to-transparent blur-[2px] opacity-90" />
+                <div className="absolute w-full h-full rounded-full bg-gradient-to-t from-cyan-500/80 via-blue-400/40 to-transparent blur-md" />
+                <div className="absolute w-2 h-6 md:w-3 md:h-8 rounded-full bg-gradient-to-t from-white via-cyan-200 to-transparent blur-sm animate-pulse" />
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Feedback popup — centred within game canvas */}
+        {feedback && (
+          <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
+            <div className={`rounded-2xl px-8 py-6 text-center animate-scale-in ${
+              feedback.type === "correct" ? "bg-primary/90 backdrop-blur" : "bg-destructive/90 backdrop-blur"
+            }`}>
+              {feedback.type === "correct" ? (
+                <>
+                  <div className="flex justify-center gap-1 mb-2">
+                    {[1, 2, 3].map((s) => (
+                      <span key={s} className="text-3xl animate-bounce" style={{ animationDelay: `${s * 100}ms` }}>&#11088;</span>
+                    ))}
+                  </div>
+                  <p className="font-display text-xl font-black text-primary-foreground">JAWABAN BENAR</p>
+                </>
+              ) : (
+                <>
+                  <p className="font-display text-xl font-black text-destructive-foreground mb-1">JAWABAN SALAH</p>
+                  <p className="font-body text-sm text-destructive-foreground/80">Jawaban: {feedback.answer}</p>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Question bar — always at bottom, never overlaps spaceship */}
+      <div className="relative z-20 shrink-0 px-4 pt-2 pb-3">
+        <div className="bg-card/90 backdrop-blur border border-primary/30 rounded-xl px-4 py-2 max-w-2xl mx-auto box-glow-cyan text-center">
+          <p className="font-body text-xs md:text-sm text-foreground leading-snug">{q.question}</p>
         </div>
       </div>
     </div>
