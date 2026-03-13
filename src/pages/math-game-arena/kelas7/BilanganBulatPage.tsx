@@ -6,11 +6,11 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { name: "PENJUMLAHAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan" },
-  { name: "PENGURANGAN BILANGAN BULAT", path: null },
-  { name: "PERKALIAN BILANGAN BULAT", path: null },
-  { name: "PEMBAGIAN BILANGAN BULAT", path: null },
-  { name: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: null },
-  { name: "KPK DAN FPB", path: null },
+  { name: "PENGURANGAN BILANGAN BULAT", path: "/coming-soon" },
+  { name: "PERKALIAN BILANGAN BULAT", path: "/coming-soon" },
+  { name: "PEMBAGIAN BILANGAN BULAT", path: "/coming-soon" },
+  { name: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: "/coming-soon" },
+  { name: "KPK DAN FPB", path: "/coming-soon" },
 ];
 
 const BilanganBulatPage = () => {
@@ -39,9 +39,9 @@ const BilanganBulatPage = () => {
             <button
               key={subtopic.name}
               onClick={() => handleClick(subtopic.path)}
-              className={`group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-accent/60 transition-all duration-300
-                text-left animate-slide-up ${subtopic.path ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}
+              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
+                hover:border-accent/60 transition-all duration-300 cursor-pointer
+                text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />

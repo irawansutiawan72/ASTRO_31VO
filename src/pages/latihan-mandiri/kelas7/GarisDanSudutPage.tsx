@@ -6,9 +6,9 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { label: "HUBUNGAN 2 GARIS", path: "/latihan-mandiri/kelas-7/garis-dan-sudut/hubungan-2-garis" },
-  { label: "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG", path: null },
-  { label: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: null },
-  { label: "JUMLAH SUDUT PADA SEGI BANYAK", path: null },
+  { label: "SUDUT PELURUS, SUDUT PENYIKUT DAN SUDUT BERTOLAK BELAKANG", path: "/coming-soon" },
+  { label: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: "/coming-soon" },
+  { label: "JUMLAH SUDUT PADA SEGI BANYAK", path: "/coming-soon" },
 ];
 
 const GarisDanSudutPage = () => {

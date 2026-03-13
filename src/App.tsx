@@ -47,6 +47,7 @@ import BankSoalBilanganBulatPage from "./pages/bank-soal/BilanganBulatPage";
 import ChatAIPage from "./pages/ChatAIPage";
 import PengaturanPage from "./pages/PengaturanPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
+import ComingSoonPage from "./pages/ComingSoonPage";
 import KalkulatorScientificPage from "./pages/KalkulatorScientificPage";
 import VideoPembelajaranPage from "./pages/VideoPembelajaranPage";
 import KumpulanRumusPage from "./pages/KumpulanRumusPage";
@@ -283,6 +284,7 @@ const AppInner = () => {
       <Route path="/chat-ai" element={<ChatAIPage />} />
       <Route path="/pengaturan" element={<PengaturanPage />} />
       <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
+      <Route path="/coming-soon" element={<ComingSoonPage />} />
       
       {/* Latihan Mandiri Routes */}
       <Route path="/latihan-mandiri" element={<LatihanMandiriPage />} />
