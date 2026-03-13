@@ -6,7 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const topics = [
   { label: "BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat" },
-  { label: "BILANGAN RASIONAL", path: "/math-game-arena/kelas-7/bilangan-rasional" },
+  { label: "PECAHAN", path: "/math-game-arena/kelas-7/bilangan-rasional" },
   { label: "ALJABAR", path: "/math-game-arena/kelas-7/aljabar" },
   { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", path: "/math-game-arena/kelas-7/plsv-ptlsv" },
   { label: "PERBANDINGAN", path: "/math-game-arena/kelas-7/perbandingan" },
