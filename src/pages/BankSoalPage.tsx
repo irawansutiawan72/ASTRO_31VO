@@ -16,7 +16,6 @@ import {
   ArrowLeftRight, 
   GitBranch, 
   LineChart, 
-  Pythagorean,
   Circle,
   Box,
   Zap,
@@ -32,32 +31,32 @@ import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 
 const bankSoalTopics = [
-  { label: "BILANGAN BULAT", icon: Calculator, path: "/bank-soal/bilangan-bulat" },
-  { label: "BILANGAN RASIONAL", icon: Sigma, path: "/bank-soal/bilangan-rasional" },
-  { label: "ALJABAR", icon: Variable, path: "/bank-soal/aljabar" },
-  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/bank-soal/persamaan-pertidaksamaan-linear" },
-  { label: "PERBANDINGAN", icon: Percent, path: "/bank-soal/perbandingan" },
-  { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/bank-soal/aritmetika-sosial" },
-  { label: "GARIS DAN SUDUT", icon: Ruler, path: "/bank-soal/garis-sudut" },
-  { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/bank-soal/segitiga-segiempat" },
-  { label: "HIMPUNAN", icon: CircleDot, path: "/bank-soal/himpunan" },
-  { label: "POLA BILANGAN", icon: Hash, path: "/bank-soal/pola-bilangan" },
-  { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/bank-soal/koordinat-cartesius" },
-  { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/bank-soal/relasi-fungsi" },
-  { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/bank-soal/spldv" },
-  { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/bank-soal/persamaan-garis-lurus" },
-  { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/bank-soal/teorema-pythagoras" },
-  { label: "LINGKARAN", icon: Circle, path: "/bank-soal/lingkaran" },
-  { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/bank-soal/garis-singgung-lingkaran" },
-  { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/bank-soal/bangun-ruang-sisi-datar" },
-  { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/bank-soal/bilangan-berpangkat" },
-  { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/bank-soal/kesebangunan-kekongruenan" },
-  { label: "TRANSFORMASI GEOMETRI", icon: RotateCcw, path: "/bank-soal/transformasi-geometri" },
-  { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/bank-soal/bangun-ruang-sisi-lengkung" },
-  { label: "STATISTIKA", icon: BarChart3, path: "/bank-soal/statistika" },
-  { label: "PELUANG", icon: Dices, path: "/bank-soal/peluang" },
-  { label: "PERSAMAAN KUADRAT (PENGAYAAN)", icon: X, path: "/bank-soal/persamaan-kuadrat" },
-  { label: "FUNGSI KUADRAT (PENGAYAAN)", icon: TrendingUp, path: "/bank-soal/fungsi-kuadrat" },
+  { label: "BILANGAN BULAT", icon: Calculator, path: "/bank-soal/bilangan-bulat", ready: true },
+  { label: "BILANGAN RASIONAL", icon: Sigma, path: "/coming-soon", ready: false },
+  { label: "ALJABAR", icon: Variable, path: "/coming-soon", ready: false },
+  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/coming-soon", ready: false },
+  { label: "PERBANDINGAN", icon: Percent, path: "/coming-soon", ready: false },
+  { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/coming-soon", ready: false },
+  { label: "GARIS DAN SUDUT", icon: Ruler, path: "/coming-soon", ready: false },
+  { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/coming-soon", ready: false },
+  { label: "HIMPUNAN", icon: CircleDot, path: "/coming-soon", ready: false },
+  { label: "POLA BILANGAN", icon: Hash, path: "/coming-soon", ready: false },
+  { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/coming-soon", ready: false },
+  { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/coming-soon", ready: false },
+  { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/coming-soon", ready: false },
+  { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/coming-soon", ready: false },
+  { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/coming-soon", ready: false },
+  { label: "LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
+  { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
+  { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/coming-soon", ready: false },
+  { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/coming-soon", ready: false },
+  { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/coming-soon", ready: false },
+  { label: "TRANSFORMASI GEOMETRI", icon: RotateCcw, path: "/coming-soon", ready: false },
+  { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/coming-soon", ready: false },
+  { label: "STATISTIKA", icon: BarChart3, path: "/coming-soon", ready: false },
+  { label: "PELUANG", icon: Dices, path: "/coming-soon", ready: false },
+  { label: "PERSAMAAN KUADRAT (PENGAYAAN)", icon: X, path: "/coming-soon", ready: false },
+  { label: "FUNGSI KUADRAT (PENGAYAAN)", icon: TrendingUp, path: "/coming-soon", ready: false },
 ];
 
 const BankSoalPage = () => {
@@ -84,7 +83,7 @@ const BankSoalPage = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {bankSoalTopics.map((topic, i) => (
             <button
-              key={topic.path}
+              key={topic.label}
               onClick={() => handleClick(topic.path)}
               className="group relative bg-card/80 backdrop-blur border border-border rounded-xl p-4 md:p-5
                 hover:border-primary/60 hover:box-glow-cyan transition-all duration-300 
