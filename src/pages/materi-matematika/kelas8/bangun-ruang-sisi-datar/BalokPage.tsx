@@ -536,80 +536,164 @@ const DiagRuangSVG = () => (
   </svg>
 );
 
-const LuasSVG = () => (
-  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2" aria-label="Luas permukaan balok">
-    <defs>
-      <style>{`
-        @keyframes luasB{0%,100%{fill-opacity:0.8;filter:drop-shadow(0 0 10px currentColor);}50%{fill-opacity:0.25;filter:none;}}
-        .lb-a{animation:luasB 2.2s ease-in-out infinite;}
-        .lb-b{animation:luasB 2.2s ease-in-out infinite 0.5s;}
-        .lb-c{animation:luasB 2.2s ease-in-out infinite 1s;}
-      `}</style>
-    </defs>
-    <polygon points="30,70 170,70 170,170 30,170" fill="#3b82f6" className="lb-a"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="#8b5cf6" className="lb-b"/>
-    <polygon points="30,70 70,30 210,30 170,70" fill="#eab308" className="lb-c"/>
-    <polygon points="30,70 70,30 70,130 30,170" fill="#22c55e" className="lb-b" fillOpacity="0.7"/>
-    <polygon points="30,170 70,130 210,130 170,170" fill="#ef4444" className="lb-a"/>
-    <polygon points="170,70 210,30 210,130 170,130" fill="#f97316" className="lb-c" fillOpacity="0.7"/>
-    <polygon points="30,70 170,70 170,170 30,170" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <polygon points="70,30 210,30 210,130 70,130" fill="none" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="30" y1="70" x2="70" y2="30" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="170" y1="70" x2="210" y2="30" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="30" y1="170" x2="70" y2="130" stroke="#fff" strokeWidth="1.2"/>
-    <line x1="170" y1="170" x2="210" y2="130" stroke="#fff" strokeWidth="1.2"/>
-    <text x="70" y="125" fill="#fff" fontSize="8" fontFamily="monospace">p×t</text>
-    <text x="130" y="58" fill="#fff" fontSize="8" fontFamily="monospace">p×l</text>
-    <text x="10" y="195" fill="#22d3ee" fontSize="9" fontFamily="monospace" fontWeight="bold">L = 2(pl + pt + lt)</text>
-  </svg>
-);
+const LuasSVG = () => {
+  /* Net (jaring-jaring) dimensions in px */
+  const pp = 84, lp = 52, tp = 46;
+  const ox = 55, oy = 8; /* offset so net is centred */
+  /* Face rectangles [x, y, w, h, fill, label, cls] */
+  const faces = [
+    /* ATAS  p×l */ [ox + lp,      oy,               pp, lp, "#eab308", "ATAS\np×l",      "jn-c"],
+    /* KIRI  l×t */ [ox,           oy + lp,           lp, tp, "#22c55e", "KIRI\nl×t",      "jn-b"],
+    /* BELAKANG p×t (tumpuan) */ [ox + lp, oy + lp,  pp, tp, "#8b5cf6", "BELAKANG\np×t",  "jn-a"],
+    /* KANAN l×t */ [ox + lp + pp, oy + lp,           lp, tp, "#f97316", "KANAN\nl×t",     "jn-b"],
+    /* BAWAH p×l */ [ox + lp,      oy + lp + tp,      pp, lp, "#ef4444", "BAWAH\np×l",     "jn-c"],
+    /* DEPAN p×t */ [ox + lp,      oy + lp + tp + lp, pp, tp, "#3b82f6", "DEPAN\np×t",     "jn-a"],
+  ] as const;
+  return (
+    <svg viewBox="0 0 250 230" className="w-full max-w-sm mx-auto my-2" aria-label="Jaring-jaring balok — luas permukaan">
+      <defs>
+        <style>{`
+          @keyframes jnGlowA{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 10px #818cf8);}50%{fill-opacity:0.3;filter:none;}}
+          @keyframes jnGlowB{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.3;filter:none;}}
+          @keyframes jnGlowC{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 10px #facc15);}50%{fill-opacity:0.3;filter:none;}}
+          .jn-a{animation:jnGlowA 2.2s ease-in-out infinite;}
+          .jn-b{animation:jnGlowB 2.2s ease-in-out infinite 0.55s;}
+          .jn-c{animation:jnGlowC 2.2s ease-in-out infinite 1.1s;}
+        `}</style>
+        <filter id="jnBloom">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
 
-const VolumeBalokSVG = () => (
-  <svg viewBox="0 0 300 230" className="w-full max-w-sm mx-auto my-2" aria-label="Volume balok — kubus utuh bersinar">
-    <defs>
-      <style>{`
-        @keyframes faceGlowTopB{0%,100%{fill-opacity:0.92;filter:drop-shadow(0 0 14px #a78bfa);}50%{fill-opacity:0.6;filter:drop-shadow(0 0 4px #7c3aed);}}
-        @keyframes faceGlowLeftB{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 12px #60a5fa);}50%{fill-opacity:0.5;filter:drop-shadow(0 0 3px #1d4ed8);}}
-        @keyframes faceGlowRightB{0%,100%{fill-opacity:0.85;filter:drop-shadow(0 0 12px #818cf8);}50%{fill-opacity:0.45;filter:drop-shadow(0 0 3px #4338ca);}}
-        @keyframes edgeGlowB{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #e0e7ff);}50%{stroke-opacity:0.35;filter:none;}}
-        @keyframes lblB{0%,100%{opacity:1;}50%{opacity:0.5;}}
-        .vb-top{animation:faceGlowTopB 2.6s ease-in-out infinite;}
-        .vb-left{animation:faceGlowLeftB 2.6s ease-in-out infinite 0.5s;}
-        .vb-right{animation:faceGlowRightB 2.6s ease-in-out infinite 1s;}
-        .vb-edge{animation:edgeGlowB 2.6s ease-in-out infinite;}
-        .vb-lbl{animation:lblB 2.6s ease-in-out infinite;}
-      `}</style>
-      <filter id="volBloomB">
-        <feGaussianBlur stdDeviation="3" result="b"/>
-        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-    {/* Isometric balok — wider than cube (panjang > lebar) */}
-    {/* Top face (p×l — wider) */}
-    <polygon points="150,22 62,70 150,106 238,70"
-      fill="#7c3aed" className="vb-top" stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
-    {/* Left face (l×t) */}
-    <polygon points="62,70 62,178 150,214 150,106"
-      fill="#1d4ed8" className="vb-left" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
-    {/* Right face (p×t) */}
-    <polygon points="238,70 238,178 150,214 150,106"
-      fill="#4338ca" className="vb-right" stroke="#a5b4fc" strokeWidth="2" strokeLinejoin="round"/>
-    {/* Edges */}
-    <polyline points="150,22 62,70 150,106 238,70 150,22"
-      fill="none" stroke="#e0e7ff" strokeWidth="2" className="vb-edge" strokeLinejoin="round"/>
-    <line x1="62" y1="70" x2="62" y2="178" stroke="#93c5fd" strokeWidth="2" className="vb-edge"/>
-    <line x1="238" y1="70" x2="238" y2="178" stroke="#a5b4fc" strokeWidth="2" className="vb-edge"/>
-    <line x1="150" y1="106" x2="150" y2="214" stroke="#c4b5fd" strokeWidth="2" className="vb-edge"/>
-    <polyline points="62,178 150,214 238,178"
-      fill="none" stroke="#e0e7ff" strokeWidth="2" className="vb-edge" strokeLinejoin="round"/>
-    {/* Labels */}
-    <text x="42" y="130" fill="#93c5fd" fontSize="10" fontFamily="monospace" fontWeight="bold" className="vb-lbl">t</text>
-    <text x="100" y="40" fill="#c4b5fd" fontSize="10" fontFamily="monospace" fontWeight="bold" className="vb-lbl">l</text>
-    <text x="200" y="40" fill="#a5b4fc" fontSize="10" fontFamily="monospace" fontWeight="bold" className="vb-lbl">p</text>
-    <text x="150" y="224" fill="#e0e7ff" fontSize="14" fontFamily="monospace" fontWeight="bold"
-      textAnchor="middle" filter="url(#volBloomB)" className="vb-lbl">V = p × l × t</text>
-  </svg>
-);
+      {/* Faces */}
+      {faces.map(([x, y, w, h, fill, label, cls], i) => (
+        <g key={i}>
+          <rect x={x} y={y} width={w} height={h}
+            fill={fill} className={cls}
+            rx={3} stroke="white" strokeWidth={1.5}/>
+          {label.split("\n").map((line, li) => (
+            <text key={li}
+              x={x + w / 2} y={y + h / 2 + (li - 0.4) * 9}
+              fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+              textAnchor="middle" dominantBaseline="middle">
+              {line}
+            </text>
+          ))}
+        </g>
+      ))}
+
+      {/* Fold lines (dashed) */}
+      <line x1={ox + lp} y1={oy} x2={ox + lp} y2={oy + lp}
+        stroke="#94a3b8" strokeWidth={1} strokeDasharray="3,3"/>
+      <line x1={ox + lp + pp} y1={oy} x2={ox + lp + pp} y2={oy + lp}
+        stroke="#94a3b8" strokeWidth={1} strokeDasharray="3,3"/>
+      <line x1={ox} y1={oy + lp + tp} x2={ox + lp} y2={oy + lp + tp}
+        stroke="#94a3b8" strokeWidth={1} strokeDasharray="3,3"/>
+      <line x1={ox + lp + pp} y1={oy + lp + tp} x2={ox + lp + pp + lp} y2={oy + lp + tp}
+        stroke="#94a3b8" strokeWidth={1} strokeDasharray="3,3"/>
+
+      {/* Dimension arrows & labels */}
+      {/* p (horizontal arrow above ATAS) */}
+      <line x1={ox + lp} y1={oy - 5} x2={ox + lp + pp} y2={oy - 5} stroke="#a5b4fc" strokeWidth={1}/>
+      <text x={ox + lp + pp / 2} y={oy - 8} fill="#a5b4fc" fontSize={8} fontFamily="monospace" textAnchor="middle">p</text>
+      {/* l (vertical arrow left of KIRI) */}
+      <line x1={ox - 5} y1={oy + lp} x2={ox - 5} y2={oy + lp + tp} stroke="#4ade80" strokeWidth={1}/>
+      <text x={ox - 10} y={oy + lp + tp / 2 + 3} fill="#4ade80" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
+      {/* l height (vertical left of ATAS) */}
+      <line x1={ox + lp - 5} y1={oy} x2={ox + lp - 5} y2={oy + lp} stroke="#facc15" strokeWidth={1}/>
+      <text x={ox + lp - 10} y={oy + lp / 2 + 3} fill="#facc15" fontSize={8} fontFamily="monospace" textAnchor="middle">l</text>
+
+      {/* Formula */}
+      <text x={125} y={218} fill="#e0e7ff" fontSize={13} fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#jnBloom)">
+        L = 2(pl + pt + lt)
+      </text>
+    </svg>
+  );
+};
+
+const VolumeBalokSVG = () => {
+  /*
+   * Oblique projection of a clearly elongated BALOK:
+   * panjang (p) = 150px wide  (front face width — obviously long)
+   * tinggi  (t) =  72px tall  (front face height)
+   * lebar   (l) =  52px deep  (side depth, drawn at ~30° angle)
+   * Oblique depth offset: dx = 44, dy = -26
+   */
+  const dx = 44, dy = -26;
+  /* Front face corners */
+  const fBL = [28, 162], fBR = [178, 162], fTR = [178, 90], fTL = [28, 90];
+  /* Back face corners = front + (dx, dy) */
+  const bBL = [fBL[0]+dx, fBL[1]+dy], bBR = [fBR[0]+dx, fBR[1]+dy];
+  const bTR = [fTR[0]+dx, fTR[1]+dy], bTL = [fTL[0]+dx, fTL[1]+dy];
+  const pt = (a: number[]) => `${a[0]},${a[1]}`;
+  return (
+    <svg viewBox="0 0 270 200" className="w-full max-w-sm mx-auto my-2" aria-label="Volume balok — balok utuh bersinar">
+      <defs>
+        <style>{`
+          @keyframes vbFront{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 12px #60a5fa);}50%{fill-opacity:0.5;filter:drop-shadow(0 0 3px #1d4ed8);}}
+          @keyframes vbTop{0%,100%{fill-opacity:0.92;filter:drop-shadow(0 0 14px #a78bfa);}50%{fill-opacity:0.55;filter:drop-shadow(0 0 4px #7c3aed);}}
+          @keyframes vbSide{0%,100%{fill-opacity:0.82;filter:drop-shadow(0 0 10px #818cf8);}50%{fill-opacity:0.4;filter:none;}}
+          @keyframes vbEdge{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #e0e7ff);}50%{stroke-opacity:0.3;filter:none;}}
+          @keyframes vbLbl{0%,100%{opacity:1;}50%{opacity:0.5;}}
+          .vb2-front{animation:vbFront 2.6s ease-in-out infinite;}
+          .vb2-top{animation:vbTop 2.6s ease-in-out infinite 0.55s;}
+          .vb2-side{animation:vbSide 2.6s ease-in-out infinite 1.1s;}
+          .vb2-edge{animation:vbEdge 2.6s ease-in-out infinite;}
+          .vb2-lbl{animation:vbLbl 2.6s ease-in-out infinite;}
+        `}</style>
+        <filter id="vb2Bloom">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      {/* Front face (p × t) — blue */}
+      <polygon points={`${pt(fBL)} ${pt(fBR)} ${pt(fTR)} ${pt(fTL)}`}
+        fill="#1d4ed8" className="vb2-front" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Top face (p × l) — violet */}
+      <polygon points={`${pt(fTL)} ${pt(fTR)} ${pt(bTR)} ${pt(bTL)}`}
+        fill="#7c3aed" className="vb2-top" stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Right side face (l × t) — indigo */}
+      <polygon points={`${pt(fTR)} ${pt(fBR)} ${pt(bBR)} ${pt(bTR)}`}
+        fill="#4338ca" className="vb2-side" stroke="#a5b4fc" strokeWidth="2" strokeLinejoin="round"/>
+
+      {/* Glowing edges */}
+      {/* Front face outline */}
+      <polyline points={`${pt(fBL)} ${pt(fBR)} ${pt(fTR)} ${pt(fTL)} ${pt(fBL)}`}
+        fill="none" stroke="#93c5fd" strokeWidth="2" className="vb2-edge" strokeLinejoin="round"/>
+      {/* Back visible edges */}
+      <line x1={bTL[0]} y1={bTL[1]} x2={bTR[0]} y2={bTR[1]} stroke="#c4b5fd" strokeWidth="2" className="vb2-edge"/>
+      <line x1={bTR[0]} y1={bTR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="2" className="vb2-edge"/>
+      {/* Depth edges */}
+      <line x1={fTL[0]} y1={fTL[1]} x2={bTL[0]} y2={bTL[1]} stroke="#c4b5fd" strokeWidth="2" className="vb2-edge"/>
+      <line x1={fTR[0]} y1={fTR[1]} x2={bTR[0]} y2={bTR[1]} stroke="#c4b5fd" strokeWidth="2" className="vb2-edge"/>
+      <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="2" className="vb2-edge"/>
+      {/* Hidden back edges (dashed) */}
+      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={bBL[0]} y1={bBL[1]} x2={bBR[0]} y2={bBR[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={bBL[0]} y1={bBL[1]} x2={bTL[0]} y2={bTL[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
+
+      {/* Dimension labels */}
+      {/* p — along bottom of front face */}
+      <line x1={fBL[0]} y1={fBL[1]+8} x2={fBR[0]} y2={fBR[1]+8} stroke="#93c5fd" strokeWidth="1"/>
+      <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+18} fill="#93c5fd" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle" className="vb2-lbl">p</text>
+      {/* t — along left side of front face */}
+      <line x1={fBL[0]-8} y1={fBL[1]} x2={fTL[0]-8} y2={fTL[1]} stroke="#facc15" strokeWidth="1"/>
+      <text x={fBL[0]-16} y={(fBL[1]+fTL[1])/2+4} fill="#facc15" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" className="vb2-lbl">t</text>
+      {/* l — along top-right depth edge */}
+      <text x={fTR[0]+dx/2+6} y={fTR[1]+dy/2-4} fill="#c4b5fd" fontSize="11"
+        fontFamily="monospace" fontWeight="bold" className="vb2-lbl">l</text>
+
+      {/* Formula */}
+      <text x="135" y="192" fill="#e0e7ff" fontSize="14" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#vb2Bloom)" className="vb2-lbl">V = p × l × t</text>
+    </svg>
+  );
+};
 
 /* ─────────────────────────────────────────────────────────────
    SECTIONS
