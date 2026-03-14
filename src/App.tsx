@@ -210,6 +210,7 @@ import LuasSegiempatPage from "./pages/materi-matematika/kelas7/segitiga-segiemp
 import KelilingLuasBangunTakBeraturanPage from "./pages/materi-matematika/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage";
 import KubusMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/KubusPage";
 import BalokMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage";
+import PrismaMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
 
 // Materi Matematika - Kelas 8 Topic Pages
@@ -462,6 +463,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaMMK8Page />} />
       
       {/* Materi Matematika - Kelas 9 Topic Routes */}
       <Route path="/materi-matematika/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMMK9Page />} />

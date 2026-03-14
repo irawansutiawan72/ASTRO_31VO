@@ -1,0 +1,963 @@
+import { useState, useRef, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
+import { BookOpen, ChevronDown, ChevronUp, Triangle } from "lucide-react";
+import { BlockMath, InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
+import { playPopSound } from "@/hooks/useAudio";
+
+/* ─────────────────────────────────────────────────────────────
+   SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
+───────────────────────────────────────────────────────────── */
+type V3 = [number, number, number];
+type V2 = [number, number];
+
+const rotXv = (v: V3, a: number): V3 => [
+  v[0],
+  v[1] * Math.cos(a) - v[2] * Math.sin(a),
+  v[1] * Math.sin(a) + v[2] * Math.cos(a),
+];
+const rotYv = (v: V3, a: number): V3 => [
+  v[0] * Math.cos(a) + v[2] * Math.sin(a),
+  v[1],
+  -v[0] * Math.sin(a) + v[2] * Math.cos(a),
+];
+const project = (v: V3, fov = 480, scale = 1.6): V2 => {
+  const tz = v[2] + fov;
+  return [(v[0] * fov * scale) / tz, (v[1] * fov * scale) / tz];
+};
+const cross2d = (ax: number, ay: number, bx: number, by: number) => ax * by - ay * bx;
+
+const FACE_COLORS = ["#ef4444", "#eab308", "#3b82f6", "#22c55e", "#f97316"];
+const FACE_LABELS = ["ALAS", "TUTUP", "SISI 1", "SISI 2", "SISI 3"];
+
+const InteractivePrisma3D = () => {
+  const [rotX, setRotX] = useState(-28);
+  const [rotY, setRotY] = useState(30);
+  const [isDragging, setIsDragging] = useState(false);
+  const [showNet, setShowNet] = useState(false);
+  const dragRef = useRef({ sx: 0, sy: 0, bx: -28, by: 30 });
+
+  // Equilateral triangle prism: side a, height h_prism
+  const a = 90, hp = 85;
+  const rc = a / Math.sqrt(3); // circumradius of equilateral triangle
+  const ri = a / (2 * Math.sqrt(3)); // inradius
+
+  // Vertices: V0-V2 = bottom, V3-V5 = top
+  const rawVerts: V3[] = [
+    [0, hp / 2, -rc],       // V0 bottom-front
+    [-a / 2, hp / 2, ri],   // V1 bottom-left
+    [a / 2, hp / 2, ri],    // V2 bottom-right
+    [0, -hp / 2, -rc],      // V3 top-front
+    [-a / 2, -hp / 2, ri],  // V4 top-left
+    [a / 2, -hp / 2, ri],   // V5 top-right
+  ];
+
+  // Faces: indices into vertices + color + label
+  const faceDefs = [
+    { idx: [0, 2, 1],       color: FACE_COLORS[0], label: FACE_LABELS[0] }, // bottom △
+    { idx: [3, 4, 5],       color: FACE_COLORS[1], label: FACE_LABELS[1] }, // top △
+    { idx: [0, 1, 4, 3],   color: FACE_COLORS[2], label: FACE_LABELS[2] }, // left rect
+    { idx: [1, 2, 5, 4],   color: FACE_COLORS[3], label: FACE_LABELS[3] }, // back rect
+    { idx: [2, 0, 3, 5],   color: FACE_COLORS[4], label: FACE_LABELS[4] }, // right rect
+  ];
+
+  const rx = (rotX * Math.PI) / 180;
+  const ry = (rotY * Math.PI) / 180;
+
+  const tfVerts = rawVerts.map(v => rotXv(rotYv(v, ry), rx));
+  const pverts: V2[] = tfVerts.map(v => project(v));
+
+  // Render faces sorted back-to-front (painter's algorithm)
+  const facesWithDepth = faceDefs.map(f => {
+    const avgZ = f.idx.reduce((s, i) => s + tfVerts[i][2], 0) / f.idx.length;
+    const pts2d = f.idx.map(i => pverts[i]);
+    // Back-face culling via signed area
+    const area = cross2d(
+      pts2d[1][0] - pts2d[0][0], pts2d[1][1] - pts2d[0][1],
+      pts2d[pts2d.length - 1][0] - pts2d[0][0], pts2d[pts2d.length - 1][1] - pts2d[0][1]
+    );
+    return { ...f, avgZ, pts2d, visible: area < 0 };
+  }).sort((a, b) => b.avgZ - a.avgZ);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55);
+  }, [isDragging]);
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55);
+  }, [isDragging]);
+  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const cx = 150, cy = 128;
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
+      <p className="text-white/60 text-xs text-center font-body">
+        {showNet
+          ? "Jaring-jaring prisma segitiga — 2 segitiga alas + 3 sisi persegi panjang"
+          : "Drag untuk memutar · Klik tombol di bawah untuk melihat jaring-jaring"}
+      </p>
+
+      <div className="relative mx-auto select-none overflow-visible"
+        style={{ width: "100%", height: 300, cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={!showNet ? onMouseDown : undefined}
+        onTouchStart={!showNet ? onTouchStart : undefined}
+      >
+        {!showNet ? (
+          /* ── 3D Rotatable Prism ── */
+          <svg viewBox="0 0 300 260" className="w-full h-full" style={{ overflow: "visible" }}>
+            {facesWithDepth.map((f, i) => {
+              if (!f.visible) return null;
+              const pts = f.pts2d.map(([x, y]) => `${cx + x},${cy + y}`).join(" ");
+              const mx = f.pts2d.reduce((s, p) => s + p[0], 0) / f.pts2d.length;
+              const my = f.pts2d.reduce((s, p) => s + p[1], 0) / f.pts2d.length;
+              return (
+                <g key={i}>
+                  <polygon points={pts} fill={f.color} fillOpacity={0.85}
+                    stroke="white" strokeWidth={1.5} strokeLinejoin="round" />
+                  <text x={cx + mx} y={cy + my + 3}
+                    fill="white" fontSize={9} fontFamily="monospace" fontWeight="bold"
+                    textAnchor="middle" dominantBaseline="middle" style={{ pointerEvents: "none" }}>
+                    {f.label}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        ) : (
+          /* ── Flat Net View ── */
+          <svg viewBox="0 0 300 260" className="w-full h-full">
+            <JaringPrismaSVGInner cx={150} cy={130} animated={false} />
+          </svg>
+        )}
+      </div>
+
+      <div className="flex flex-wrap gap-2 justify-center">
+        <button onClick={() => { playPopSound(); setShowNet(v => !v); setRotX(-28); setRotY(30); }}
+          className="px-3 py-1.5 text-xs font-bold bg-cyan-900/60 border border-cyan-600 text-cyan-300 rounded-lg hover:bg-cyan-800/60 transition-colors cursor-pointer font-body">
+          {showNet ? "◆ Lihat 3D" : "⊞ Lihat Jaring-jaring"}
+        </button>
+        {!showNet && (
+          <button onClick={() => { setRotX(-28); setRotY(30); }}
+            className="px-3 py-1.5 text-xs font-bold bg-slate-700/60 border border-slate-500 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors cursor-pointer font-body">
+            ↺ Reset Tampilan
+          </button>
+        )}
+      </div>
+
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {FACE_COLORS.map((c, i) => (
+          <div key={i} className="flex items-center gap-1">
+            <div className="w-3 h-3 rounded-sm" style={{ background: c }} />
+            <span className="text-white/50 text-[10px] font-body">{FACE_LABELS[i]}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   JARING-JARING PRISMA SVG
+───────────────────────────────────────────────────────────── */
+// Shared inner component for both interactive and static use
+const JaringPrismaSVGInner = ({
+  cx, cy, animated,
+}: { cx: number; cy: number; animated: boolean }) => {
+  const sp = 70, hp = 50, th = 35; // rect width, rect height, triangle height
+  // Net: 3 rectangles side by side, triangles top and bottom of middle rect
+  const ox = cx - (3 * sp) / 2;
+  const oy = cy - (th + hp + th) / 2;
+
+  const r1 = { x: ox,         y: oy + th, w: sp, h: hp, fill: "#3b82f6", label: "SISI 1\na×t" };
+  const r2 = { x: ox + sp,    y: oy + th, w: sp, h: hp, fill: "#8b5cf6", label: "SISI 2\na×t" };
+  const r3 = { x: ox + 2*sp,  y: oy + th, w: sp, h: hp, fill: "#22c55e", label: "SISI 3\na×t" };
+  // Alas triangle (below rect 2)
+  const alasPts = `${ox+sp},${oy+th+hp} ${ox+2*sp},${oy+th+hp} ${ox+1.5*sp},${oy+th+hp+th}`;
+  // Tutup triangle (above rect 2)
+  const tutupPts = `${ox+sp},${oy+th} ${ox+2*sp},${oy+th} ${ox+1.5*sp},${oy}`;
+
+  const animA = animated ? "jnp-a" : "";
+  const animB = animated ? "jnp-b" : "";
+  const animC = animated ? "jnp-c" : "";
+
+  return (
+    <g>
+      {animated && (
+        <defs>
+          <style>{`
+            @keyframes jnpA{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 9px #818cf8);}50%{fill-opacity:0.35;filter:none;}}
+            @keyframes jnpB{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 9px #4ade80);}50%{fill-opacity:0.35;filter:none;}}
+            @keyframes jnpC{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 9px #facc15);}50%{fill-opacity:0.35;filter:none;}}
+            .jnp-a{animation:jnpA 2.2s ease-in-out infinite;}
+            .jnp-b{animation:jnpB 2.2s ease-in-out infinite 0.55s;}
+            .jnp-c{animation:jnpC 2.2s ease-in-out infinite 1.1s;}
+          `}</style>
+        </defs>
+      )}
+      {/* 3 rectangular side faces */}
+      {[r1, r2, r3].map((r, i) => (
+        <g key={i}>
+          <rect x={r.x} y={r.y} width={r.w} height={r.h}
+            fill={r.fill} fillOpacity={0.88} rx={3}
+            stroke="white" strokeWidth={1.5}
+            className={i === 0 ? animA : i === 1 ? animA : animA} />
+          {r.label.split("\n").map((line, li) => (
+            <text key={li} x={r.x + r.w / 2} y={r.y + r.h / 2 + (li - 0.4) * 10}
+              fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+              textAnchor="middle" dominantBaseline="middle">{line}</text>
+          ))}
+        </g>
+      ))}
+      {/* Alas triangle */}
+      <polygon points={alasPts} fill="#ef4444" fillOpacity={0.88} rx={3}
+        stroke="white" strokeWidth={1.5} className={animB} />
+      <text x={ox + 1.5*sp} y={oy + th + hp + th*0.55}
+        fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle">ALAS</text>
+      <text x={ox + 1.5*sp} y={oy + th + hp + th*0.55 + 10}
+        fill="white" fontSize={7} fontFamily="monospace"
+        textAnchor="middle">½×a×t△</text>
+      {/* Tutup triangle */}
+      <polygon points={tutupPts} fill="#eab308" fillOpacity={0.88}
+        stroke="white" strokeWidth={1.5} className={animC} />
+      <text x={ox + 1.5*sp} y={oy + th*0.45}
+        fill="white" fontSize={8} fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle">TUTUP</text>
+      <text x={ox + 1.5*sp} y={oy + th*0.45 + 10}
+        fill="white" fontSize={7} fontFamily="monospace"
+        textAnchor="middle">½×a×t△</text>
+      {/* Dimension labels */}
+      <text x={ox + sp/2} y={oy + th - 5}
+        fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">a</text>
+      <text x={ox - 8} y={oy + th + hp/2 + 4}
+        fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
+    </g>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   ANIMATED SVGs — Unsur-unsur Prisma
+───────────────────────────────────────────────────────────── */
+const RusukPrismaSVG = () => (
+  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2">
+    <defs>
+      <style>{`
+        @keyframes rusukP1{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #22d3ee);}50%{stroke-opacity:0.2;}}
+        @keyframes rusukP2{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #facc15);}50%{stroke-opacity:0.2;}}
+        @keyframes rusukP3{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #f97316);}50%{stroke-opacity:0.2;}}
+        .rp1{animation:rusukP1 1.6s ease-in-out infinite;stroke:#22d3ee;}
+        .rp2{animation:rusukP2 1.6s ease-in-out infinite 0.5s;stroke:#facc15;}
+        .rp3{animation:rusukP3 1.6s ease-in-out infinite 1s;stroke:#f97316;}
+      `}</style>
+    </defs>
+    {/* Base: triangle at bottom front */}
+    <polygon points="60,170 180,170 120,110" fill="rgba(30,41,59,0.8)" stroke="#334155" strokeWidth="1.2"/>
+    {/* Top: triangle at top back */}
+    <polygon points="90,130 210,130 150,70" fill="rgba(30,41,59,0.5)" stroke="#334155" strokeWidth="1.2"/>
+    {/* Connecting verticals */}
+    <line x1="60" y1="170" x2="90" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="180" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="120" y1="110" x2="150" y2="70" stroke="#334155" strokeWidth="1.2"/>
+    {/* 3 rusuk alas (bottom triangle) */}
+    <line x1="60" y1="170" x2="180" y2="170" strokeWidth="3.5" className="rp1"/>
+    <line x1="180" y1="170" x2="120" y2="110" strokeWidth="3.5" className="rp1"/>
+    <line x1="120" y1="110" x2="60" y2="170" strokeWidth="3.5" className="rp1"/>
+    {/* 3 rusuk atas (top triangle) */}
+    <line x1="90" y1="130" x2="210" y2="130" strokeWidth="3.5" className="rp2"/>
+    <line x1="210" y1="130" x2="150" y2="70" strokeWidth="3.5" className="rp2"/>
+    <line x1="150" y1="70" x2="90" y2="130" strokeWidth="3.5" className="rp2"/>
+    {/* 3 rusuk tegak */}
+    <line x1="60" y1="170" x2="90" y2="130" strokeWidth="3.5" className="rp3"/>
+    <line x1="180" y1="170" x2="210" y2="130" strokeWidth="3.5" className="rp3"/>
+    <line x1="120" y1="110" x2="150" y2="70" strokeWidth="3.5" className="rp3"/>
+    {/* Legend */}
+    <rect x="218" y="125" width="8" height="4" fill="#22d3ee"/>
+    <text x="230" y="130" fill="#22d3ee" fontSize="8" fontFamily="monospace">3 rusuk alas</text>
+    <rect x="218" y="137" width="8" height="4" fill="#facc15"/>
+    <text x="230" y="142" fill="#facc15" fontSize="8" fontFamily="monospace">3 rusuk atas</text>
+    <rect x="218" y="149" width="8" height="4" fill="#f97316"/>
+    <text x="230" y="154" fill="#f97316" fontSize="8" fontFamily="monospace">3 rusuk tegak</text>
+    <text x="218" y="170" fill="#fff" fontSize="8" fontFamily="monospace">= 9 rusuk</text>
+    <text x="218" y="180" fill="#fff" fontSize="8" fontFamily="monospace">(3n, n=3)</text>
+  </svg>
+);
+
+const SisiPrismaSVG = () => (
+  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2">
+    <defs>
+      <style>{`
+        @keyframes sisiP{0%,100%{fill-opacity:0.75;}50%{fill-opacity:0.1;}}
+        .sp-a{animation:sisiP 2s ease-in-out infinite;}
+        .sp-b{animation:sisiP 2s ease-in-out infinite 0.5s;}
+        .sp-c{animation:sisiP 2s ease-in-out infinite 1s;}
+      `}</style>
+    </defs>
+    {/* Front face (rect) */}
+    <polygon points="60,170 180,170 210,130 90,130" fill="#3b82f6" className="sp-a"/>
+    {/* Left face (rect) */}
+    <polygon points="60,170 90,130 150,70 120,110" fill="#22c55e" className="sp-b"/>
+    {/* Top (triangle) */}
+    <polygon points="90,130 210,130 150,70" fill="#eab308" className="sp-c"/>
+    {/* Bottom (triangle) */}
+    <polygon points="60,170 180,170 120,110" fill="#ef4444" className="sp-a" fillOpacity="0.6"/>
+    {/* Right face (rect) */}
+    <polygon points="180,170 210,130 150,70 120,110" fill="#f97316" className="sp-b" fillOpacity="0.6"/>
+    {/* Outlines */}
+    <polygon points="60,170 180,170 120,110" fill="none" stroke="#fff" strokeWidth="1.2"/>
+    <polygon points="90,130 210,130 150,70" fill="none" stroke="#fff" strokeWidth="1.2"/>
+    <line x1="60" y1="170" x2="90" y2="130" stroke="#fff" strokeWidth="1.2"/>
+    <line x1="180" y1="170" x2="210" y2="130" stroke="#fff" strokeWidth="1.2"/>
+    <line x1="120" y1="110" x2="150" y2="70" stroke="#fff" strokeWidth="1.2"/>
+    <text x="220" y="170" fill="#fff" fontSize="8" fontFamily="monospace">5 sisi</text>
+    <text x="220" y="181" fill="#facc15" fontSize="8" fontFamily="monospace">n+2=5</text>
+    <text x="220" y="192" fill="#fff" fontSize="7" fontFamily="monospace">(2 △ + 3 □)</text>
+  </svg>
+);
+
+const TitikSudutPrismaSVG = () => (
+  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-2">
+    <defs>
+      <style>{`
+        @keyframes dotP{0%,100%{r:6;filter:drop-shadow(0 0 6px #facc15);}50%{r:3;filter:none;}}
+        .dp-a{animation:dotP 1.4s ease-in-out infinite;}
+      `}</style>
+    </defs>
+    <polygon points="60,170 180,170 120,110" fill="none" stroke="#334155" strokeWidth="1.2"/>
+    <polygon points="90,130 210,130 150,70" fill="none" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="60" y1="170" x2="90" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="180" y1="170" x2="210" y2="130" stroke="#334155" strokeWidth="1.2"/>
+    <line x1="120" y1="110" x2="150" y2="70" stroke="#334155" strokeWidth="1.2"/>
+    {/* 6 vertices */}
+    {[
+      [60,170],[180,170],[120,110],
+      [90,130],[210,130],[150,70]
+    ].map(([x,y],i) => (
+      <circle key={i} cx={x} cy={y} r={6} fill="#facc15" className="dp-a"
+        style={{ animationDelay: `${i*0.2}s` }}/>
+    ))}
+    <text x="220" y="170" fill="#facc15" fontSize="9" fontFamily="monospace">6 titik</text>
+    <text x="220" y="182" fill="#fff" fontSize="8" fontFamily="monospace">sudut</text>
+    <text x="220" y="194" fill="#fff" fontSize="8" fontFamily="monospace">(2n = 6)</text>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────────────────────
+   LUAS PERMUKAAN — animated jaring-jaring net
+───────────────────────────────────────────────────────────── */
+const LuasPrismaSVG = () => (
+  <svg viewBox="0 0 300 220" className="w-full max-w-sm mx-auto my-2"
+    aria-label="Jaring-jaring prisma — luas permukaan">
+    <defs>
+      <style>{`
+        @keyframes jnpA2{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #818cf8);}50%{fill-opacity:0.3;filter:none;}}
+        @keyframes jnpB2{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.3;filter:none;}}
+        @keyframes jnpC2{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #facc15);}50%{fill-opacity:0.3;filter:none;}}
+        .jnp2-a{animation:jnpA2 2.2s ease-in-out infinite;}
+        .jnp2-b{animation:jnpB2 2.2s ease-in-out infinite 0.6s;}
+        .jnp2-c{animation:jnpC2 2.2s ease-in-out infinite 1.2s;}
+      `}</style>
+      <filter id="lpBloom">
+        <feGaussianBlur stdDeviation="2.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <JaringPrismaSVGInner cx={150} cy={105} animated />
+    {/* Formula */}
+    <text x="150" y="205" fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" filter="url(#lpBloom)">L = 2×L△ + (a+b+c)×t</text>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────────────────────
+   VOLUME PRISMA — oblique 3D triangular prism
+───────────────────────────────────────────────────────────── */
+const VolumePrismaSVG = () => {
+  /*
+   * Oblique projection of a triangular prism (clearly elongated/deep):
+   * Front triangular face on the LEFT, prism extends to the right-back
+   * Triangle: equilateral-like, points up
+   * Prism depth (panjang): extends to the right
+   */
+  const dx = 120, dy = -40; // depth direction vector (right-back)
+  // Front triangle vertices
+  const fBL: V2 = [28, 170];  // front bottom-left
+  const fBR: V2 = [108, 170]; // front bottom-right
+  const fAP: V2 = [68, 100];  // front apex (top)
+  // Back triangle vertices = front + (dx, dy)
+  const bBL: V2 = [fBL[0]+dx, fBL[1]+dy];
+  const bBR: V2 = [fBR[0]+dx, fBR[1]+dy];
+  const bAP: V2 = [fAP[0]+dx, fAP[1]+dy];
+  const pt = (a: V2) => `${a[0]},${a[1]}`;
+  return (
+    <svg viewBox="0 0 280 210" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Volume prisma segitiga — bersinar">
+      <defs>
+        <style>{`
+          @keyframes vpFront{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 12px #60a5fa);}50%{fill-opacity:0.5;filter:drop-shadow(0 0 3px #1d4ed8);}}
+          @keyframes vpTop{0%,100%{fill-opacity:0.92;filter:drop-shadow(0 0 14px #a78bfa);}50%{fill-opacity:0.55;filter:drop-shadow(0 0 4px #7c3aed);}}
+          @keyframes vpBottom{0%,100%{fill-opacity:0.82;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.4;filter:none;}}
+          @keyframes vpEdge{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #e0e7ff);}50%{stroke-opacity:0.3;filter:none;}}
+          @keyframes vpLbl{0%,100%{opacity:1;}50%{opacity:0.5;}}
+          .vp-front{animation:vpFront 2.6s ease-in-out infinite;}
+          .vp-top{animation:vpTop 2.6s ease-in-out infinite 0.55s;}
+          .vp-bottom{animation:vpBottom 2.6s ease-in-out infinite 1.1s;}
+          .vp-edge{animation:vpEdge 2.6s ease-in-out infinite;}
+          .vp-lbl{animation:vpLbl 2.6s ease-in-out infinite;}
+        `}</style>
+        <filter id="vpBloom">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      {/* Front triangular face */}
+      <polygon points={`${pt(fBL)} ${pt(fBR)} ${pt(fAP)}`}
+        fill="#1d4ed8" className="vp-front" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Top rectangular face (apex edge) */}
+      <polygon points={`${pt(fAP)} ${pt(bAP)} ${pt(bBR)} ${pt(fBR)}`}
+        fill="#7c3aed" className="vp-top" stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Bottom rectangular face */}
+      <polygon points={`${pt(fBL)} ${pt(fBR)} ${pt(bBR)} ${pt(bBL)}`}
+        fill="#15803d" className="vp-bottom" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Visible edges */}
+      <polyline points={`${pt(fBL)} ${pt(fBR)} ${pt(fAP)} ${pt(fBL)}`}
+        fill="none" stroke="#93c5fd" strokeWidth="2" className="vp-edge" strokeLinejoin="round"/>
+      <line x1={fAP[0]} y1={fAP[1]} x2={bAP[0]} y2={bAP[1]} stroke="#c4b5fd" strokeWidth="2" className="vp-edge"/>
+      <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="2" className="vp-edge"/>
+      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#4ade80" strokeWidth="2" className="vp-edge"/>
+      <polyline points={`${pt(bBL)} ${pt(bBR)} ${pt(bAP)}`}
+        fill="none" stroke="#e0e7ff" strokeWidth="2" className="vp-edge" strokeLinejoin="round"/>
+      {/* Hidden edges (dashed) */}
+      <line x1={bBL[0]} y1={bBL[1]} x2={bAP[0]} y2={bAP[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
+      {/* Labels */}
+      <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+14} fill="#4ade80" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle" className="vp-lbl">a (alas △)</text>
+      <text x={fBL[0]-12} y={(fBL[1]+fAP[1])/2+4} fill="#93c5fd" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" className="vp-lbl">t△</text>
+      <text x={fBR[0]+dx/2+8} y={fBR[1]+dy/2+2} fill="#c4b5fd" fontSize="10"
+        fontFamily="monospace" fontWeight="bold" className="vp-lbl">t</text>
+      {/* Formula */}
+      <text x="140" y="202" fill="#e0e7ff" fontSize="13" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#vpBloom)" className="vp-lbl">V = L△ × t</text>
+    </svg>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   SECTIONS
+───────────────────────────────────────────────────────────── */
+type Sec = { title: string; icon: string; content: React.ReactNode };
+
+const sections: Sec[] = [
+  {
+    title: "Definisi Prisma",
+    icon: "🔷",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body leading-relaxed">
+        <p>
+          Prisma adalah <strong className="text-cyan-300">bangun ruang sisi datar</strong> yang memiliki
+          dua alas berbentuk segi-<InlineMath math="n" /> yang kongruen dan sejajar, dihubungkan oleh
+          <strong className="text-yellow-300"> sisi tegak berbentuk persegi panjang</strong>.
+        </p>
+        <div className="bg-cyan-950/60 border border-cyan-700/50 rounded-lg p-4 space-y-2">
+          <p className="text-cyan-300 font-semibold">📌 Sifat-sifat Prisma:</p>
+          <ul className="space-y-1 text-xs text-white/75">
+            <li>• Dua alas berbentuk segi-<InlineMath math="n" /> yang <strong className="text-yellow-300">kongruen dan sejajar</strong></li>
+            <li>• Sisi tegak berbentuk <strong className="text-yellow-300">persegi panjang</strong></li>
+            <li>• Tinggi (t) = jarak antara dua bidang alas</li>
+            <li>• Nama prisma ditentukan oleh <strong className="text-yellow-300">bentuk alasnya</strong></li>
+          </ul>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p className="text-cyan-300 font-semibold mb-1">Jenis-jenis Prisma:</p>
+          {[
+            ["Prisma Segitiga", "alas segitiga", "5 sisi, 9 rusuk, 6 titik sudut"],
+            ["Prisma Segiempat", "alas segiempat (= balok)", "6 sisi, 12 rusuk, 8 titik sudut"],
+            ["Prisma Segilima", "alas segilima", "7 sisi, 15 rusuk, 10 titik sudut"],
+            ["Prisma Segienam", "alas segienam", "8 sisi, 18 rusuk, 12 titik sudut"],
+          ].map(([nama, alas, detail], i) => (
+            <p key={i}>• <strong className="text-white">{nama}</strong> ({alas}): {detail}</p>
+          ))}
+        </div>
+        <blockquote className="border-l-4 border-cyan-500 pl-3 text-cyan-200 text-xs italic">
+          💡 <strong>Pola umum:</strong> Untuk prisma segi-n: sisi = n+2, rusuk = 3n, titik sudut = 2n
+        </blockquote>
+      </div>
+    ),
+  },
+  {
+    title: "Unsur-unsur Prisma Segitiga (Interaktif)",
+    icon: "🔍",
+    content: (
+      <div className="space-y-5 text-sm text-white/85 font-body leading-relaxed">
+        <p className="text-xs text-white/60">Contoh: prisma segitiga (n = 3)</p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Prisma Segitiga (9 rusuk)</p>
+          <RusukPrismaSVG />
+          <div className="text-xs text-white/70 space-y-1 mt-2">
+            <p>• <strong className="text-cyan-300">3 rusuk alas:</strong> membentuk segitiga alas bawah</p>
+            <p>• <strong className="text-yellow-300">3 rusuk atas:</strong> membentuk segitiga alas atas</p>
+            <p>• <strong className="text-orange-300">3 rusuk tegak:</strong> menghubungkan alas atas dan bawah</p>
+            <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <BlockMath math="\text{Jumlah rusuk} = 3n = 3 \times 3 = 9" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-green-300 font-semibold mb-2">⬜ Sisi Prisma Segitiga (5 sisi)</p>
+          <SisiPrismaSVG />
+          <div className="text-xs text-white/70 space-y-1 mt-2">
+            <p>• 2 sisi <strong className="text-yellow-300">ALAS & TUTUP</strong>: berbentuk segitiga</p>
+            <p>• 3 sisi <strong className="text-blue-300">TEGAK</strong>: berbentuk persegi panjang (a × t)</p>
+            <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <BlockMath math="\text{Jumlah sisi} = n + 2 = 3 + 2 = 5" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-yellow-300 font-semibold mb-2">● Titik Sudut (6 titik)</p>
+          <TitikSudutPrismaSVG />
+          <div className="bg-slate-700/60 rounded p-2 mt-2 text-xs text-white/70">
+            <BlockMath math="\text{Titik sudut} = 2n = 2 \times 3 = 6" />
+          </div>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p className="text-cyan-300 font-semibold">📋 Tabel Unsur Prisma Segi-n:</p>
+          <div className="overflow-x-auto mt-2">
+            <table className="w-full text-xs text-center">
+              <thead><tr className="border-b border-cyan-800">
+                <th className="px-2 py-1 text-left">Jenis</th>
+                <th className="px-2 py-1">Sisi</th>
+                <th className="px-2 py-1">Rusuk</th>
+                <th className="px-2 py-1">T. Sudut</th>
+              </tr></thead>
+              <tbody>
+                {[["Segitiga (n=3)", 5, 9, 6], ["Segiempat (n=4)", 6, 12, 8],
+                  ["Segilima (n=5)", 7, 15, 10], ["Segienam (n=6)", 8, 18, 12]].map(([n, s, r, ts], i) => (
+                  <tr key={i} className={`border-t border-cyan-900 ${i%2===0?"bg-cyan-950/30":""}`}>
+                    <td className="px-2 py-1 text-left">{n}</td>
+                    <td className="px-2 py-1 text-yellow-300">{s}</td>
+                    <td className="px-2 py-1 text-yellow-300">{r}</td>
+                    <td className="px-2 py-1 text-yellow-300">{ts}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Jaring-jaring Prisma Segitiga Interaktif 3D",
+    icon: "🔲",
+    content: (
+      <div className="space-y-5 text-sm text-white/85 font-body">
+        <p>
+          Jaring-jaring prisma segitiga adalah <strong className="text-cyan-300">bentuk 2D yang jika dilipat akan membentuk prisma</strong>.
+          Terdiri dari <strong className="text-yellow-300">2 segitiga</strong> (alas dan tutup) serta
+          <strong className="text-blue-300"> 3 persegi panjang</strong> (sisi tegak).
+        </p>
+        <InteractivePrisma3D />
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p className="text-cyan-300 font-semibold mb-2">📐 Susunan Jaring-jaring Prisma Segitiga:</p>
+          <p>• 3 persegi panjang berjajar (sisi tegak, masing-masing = a × t)</p>
+          <p>• 2 segitiga (alas dan tutup) menempel pada sisi tegak</p>
+          <p>• Ada 3 pola jaring-jaring yang umum digunakan</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Luas Permukaan Prisma",
+    icon: "🎨",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <p>
+          <strong className="text-blue-300">Luas permukaan prisma</strong> adalah jumlah luas seluruh sisi yang membungkus prisma
+          — dua sisi alas/tutup ditambah seluruh sisi tegak (selimut).
+        </p>
+        <LuasPrismaSVG />
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+          <div className="bg-slate-900/60 rounded p-3 space-y-2">
+            <BlockMath math="L = 2 \times L_{\text{alas}} + L_{\text{selimut}}" />
+            <BlockMath math="L_{\text{selimut}} = \text{Keliling alas} \times t = (a + b + c) \times t" />
+            <BlockMath math="L = 2 \times L_{\triangle} + (a + b + c) \times t" />
+          </div>
+          <p className="text-xs text-white/70">Untuk prisma dengan alas <strong className="text-cyan-300">segitiga sama sisi</strong> (sisi = a):</p>
+          <div className="bg-slate-900/60 rounded p-2 text-xs">
+            <BlockMath math="L = 2 \times \frac{1}{2}at_{\triangle} + 3a \times t = at_{\triangle} + 3at" />
+          </div>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p>🚀 <strong>Kunci:</strong> Luas selimut = Luas jaring-jaring persegi panjangnya = Keliling alas × tinggi prism</p>
+          <p>• Untuk prisma segiempat: L = 2(pl) + (2p+2l)×t</p>
+          <p>• Untuk prisma segitiga siku-siku dengan sisi a, b, c: L = 2(½ab) + (a+b+c)×t</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Volume Prisma",
+    icon: "📐",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <p>
+          <strong className="text-green-300">Volume prisma</strong> menyatakan seberapa besar "isi" ruang yang ditempati prisma.
+          Rumusnya sangat sederhana: luas alas dikalikan tinggi.
+        </p>
+        <VolumePrismaSVG />
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
+          <div className="bg-slate-900/60 rounded p-3">
+            <BlockMath math="V = L_{\text{alas}} \times t" />
+          </div>
+          <p className="text-xs text-white/70">Untuk berbagai jenis alas:</p>
+          <div className="space-y-1 text-xs text-white/70">
+            <p>• Alas segitiga: <InlineMath math="V = \frac{1}{2} \times a \times t_{\triangle} \times t" /></p>
+            <p>• Alas persegi panjang: <InlineMath math="V = p \times l \times t" /> (= Volume Balok)</p>
+            <p>• Alas trapesium: <InlineMath math="V = \frac{1}{2}(a+b) \times t_{\text{trap}} \times t" /></p>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+          <p>🎯 <strong className="text-white">Satuan volume:</strong></p>
+          <p>• Jika dimensi dalam cm → Volume dalam <InlineMath math="\text{cm}^3" /></p>
+          <p>• Jika dimensi dalam m → Volume dalam <InlineMath math="\text{m}^3" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    title: "Kesimpulan — Rumus Lengkap Prisma",
+    icon: "📊",
+    content: (
+      <div className="space-y-3 font-body">
+        <div className="overflow-x-auto rounded-lg border border-slate-700">
+          <table className="w-full text-xs text-center">
+            <thead>
+              <tr className="bg-slate-800">
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700 text-left">Besaran</th>
+                <th className="px-3 py-2 text-cyan-300 border-r border-slate-700">Rumus</th>
+                <th className="px-3 py-2 text-cyan-300">Keterangan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Jumlah sisi", "n + 2", "n = sisi alas"],
+                ["Jumlah rusuk", "3n", "3 kelompok"],
+                ["Titik sudut", "2n", "2 bidang alas"],
+                ["Luas alas (△ sama sisi)", "L△ = ½ × a × t△", "t△ = tinggi segitiga"],
+                ["Luas selimut", "K × t", "K = keliling alas"],
+                ["Luas permukaan", "L = 2L△ + K × t", "total semua sisi"],
+                ["Volume", "V = L△ × t", "luas alas × tinggi"],
+              ].map(([b, r, c], i) => (
+                <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
+                  <td className="px-3 py-2 text-white/90 font-semibold border-r border-slate-700 text-left">{b}</td>
+                  <td className="px-3 py-2 text-yellow-300 font-mono border-r border-slate-700">{r}</td>
+                  <td className="px-3 py-2 text-white/55 text-left">{c}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p>🚀 <strong>Kunci prisma:</strong> Identifikasi dulu <strong className="text-yellow-300">bentuk dan luas alas</strong>, lalu kalikan dengan <strong className="text-yellow-300">tinggi prisma (t)</strong> untuk volume!</p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
+   EXAMPLE PROBLEMS
+───────────────────────────────────────────────────────────── */
+type Ex = { level: string; color: string; bg: string; border: string; badgeBg: string; question: React.ReactNode; answer: React.ReactNode };
+
+const luasExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah prisma segitiga siku-siku memiliki alas segitiga dengan sisi siku-siku <InlineMath math="6\text{ cm}" /> dan <InlineMath math="8\text{ cm}" />, serta tinggi prisma <InlineMath math="10\text{ cm}" />.</p>
+        <p>Hitunglah luas permukaan prisma tersebut!</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-green-400 font-semibold text-xs">Langkah 1 — Identifikasi alas segitiga:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-1">
+          <p className="text-white/70">Sisi: a = 6, b = 8, c = √(6²+8²) = √100 = 10 cm</p>
+          <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 6 \times 8 = 24\text{ cm}^2" />
+          <BlockMath math="K = 6 + 8 + 10 = 24\text{ cm}" />
+        </div>
+        <p className="text-green-400 font-semibold text-xs">Langkah 2 — Luas permukaan:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="L = 2 \times 24 + 24 \times 10 = 48 + 240 = 288\text{ cm}^2" />
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-3">
+          <p className="text-green-300 font-semibold">✅ Luas permukaan = <InlineMath math="288\text{ cm}^2" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah tenda berkemah berbentuk prisma segitiga sama sisi dengan panjang sisi alas <InlineMath math="4\text{ m}" /> dan tinggi segitiga <InlineMath math="3{,}46\text{ m}" />, serta panjang tenda <InlineMath math="6\text{ m}" />.</p>
+        <p>Berapa luas kain yang diperlukan untuk menutupi seluruh tenda (termasuk kedua ujungnya)?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 4 \times 3{,}46 = 6{,}92\text{ m}^2" />
+          <BlockMath math="K = 3 \times 4 = 12\text{ m}" />
+          <BlockMath math="L = 2 \times 6{,}92 + 12 \times 6 = 13{,}84 + 72 = 85{,}84\text{ m}^2" />
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-3">
+          <p className="text-yellow-300 font-semibold">✅ Luas kain = <InlineMath math="85{,}84\text{ m}^2" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah atap rumah berbentuk prisma segitiga dengan alas berupa segitiga sama kaki: sisi alas <InlineMath math="8\text{ m}" />, sisi miring <InlineMath math="5\text{ m}" />, tinggi prisma (panjang rumah) <InlineMath math="12\text{ m}" />.</p>
+        <p>Jika 1 m² genteng seharga <InlineMath math="Rp\,180.000" />, berapa biaya genteng untuk <strong>kedua sisi miring atap saja</strong>?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-red-400 font-semibold text-xs">Langkah 1 — Tinggi segitiga alas:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="t_{\triangle} = \sqrt{5^2 - 4^2} = \sqrt{25-16} = 3\text{ m}" />
+        </div>
+        <p className="text-red-400 font-semibold text-xs">Langkah 2 — Luas 2 sisi miring atap:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="L_{\text{miring}} = 2 \times (5 \times 12) = 2 \times 60 = 120\text{ m}^2" />
+        </div>
+        <p className="text-red-400 font-semibold text-xs">Langkah 3 — Biaya genteng:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="\text{Biaya} = 120 \times 180.000 = Rp\,21.600.000" />
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• Luas kedua sisi miring = 120 m²</p>
+          <p className="text-white/80">• Biaya genteng = <strong className="text-yellow-300">Rp 21.600.000</strong></p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+const volExamples: Ex[] = [
+  {
+    level: "MUDAH", color: "text-green-400", bg: "bg-green-950/30", border: "border-green-700/50", badgeBg: "bg-green-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah cokelat batang berbentuk prisma segitiga sama sisi dengan sisi alas <InlineMath math="3\text{ cm}" />, tinggi segitiga <InlineMath math="2{,}6\text{ cm}" />, dan panjang <InlineMath math="15\text{ cm}" />.</p>
+        <p>Berapa volume cokelat tersebut?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-2 text-sm font-body">
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 3 \times 2{,}6 = 3{,}9\text{ cm}^2" />
+          <BlockMath math="V = L_{\triangle} \times t = 3{,}9 \times 15 = 58{,}5\text{ cm}^3" />
+        </div>
+        <div className="bg-green-950/60 border border-green-700/40 rounded p-2">
+          <p className="text-green-300 font-semibold text-xs">✅ Volume = <InlineMath math="58{,}5\text{ cm}^3" /></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SEDANG", color: "text-yellow-400", bg: "bg-yellow-950/30", border: "border-yellow-700/50", badgeBg: "bg-yellow-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah saluran air berbentuk prisma dengan alas trapesium: sisi sejajar <InlineMath math="40\text{ cm}" /> dan <InlineMath math="20\text{ cm}" />, tinggi trapesium <InlineMath math="15\text{ cm}" />, panjang saluran <InlineMath math="200\text{ cm}" />.</p>
+        <p>Berapa liter air yang dapat ditampung saluran tersebut jika penuh?</p>
+        <p className="text-xs text-white/60">(1 liter = 1.000 cm³)</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-2 text-sm font-body">
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs space-y-2">
+          <BlockMath math="L_{\text{trap}} = \tfrac{1}{2}(40+20) \times 15 = \tfrac{1}{2} \times 60 \times 15 = 450\text{ cm}^2" />
+          <BlockMath math="V = 450 \times 200 = 90.000\text{ cm}^3 = 90\text{ liter}" />
+        </div>
+        <div className="bg-yellow-950/60 border border-yellow-700/40 rounded p-2">
+          <p className="text-yellow-300 font-semibold text-xs">✅ Volume air = 90 liter</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    level: "SULIT", color: "text-red-400", bg: "bg-red-950/30", border: "border-red-700/50", badgeBg: "bg-red-900/60",
+    question: (
+      <div className="text-sm text-white/85 font-body space-y-1">
+        <p>Sebuah kolam ikan berbentuk prisma segitiga siku-siku dengan alas segitiga bersisi siku-siku <InlineMath math="1{,}5\text{ m}" /> dan <InlineMath math="2\text{ m}" />, serta panjang kolam <InlineMath math="4\text{ m}" />.</p>
+        <p>Kolam diisi air hingga <InlineMath math="\frac{3}{4}" /> penuh. Jika massa jenis air <InlineMath math="1.000\text{ kg/m}^3" />, berapa ton berat air di dalam kolam?</p>
+      </div>
+    ),
+    answer: (
+      <div className="space-y-3 text-sm font-body">
+        <p className="text-red-400 font-semibold text-xs">Langkah 1 — Volume total:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="L_{\triangle} = \tfrac{1}{2} \times 1{,}5 \times 2 = 1{,}5\text{ m}^2" />
+          <BlockMath math="V_{\text{total}} = 1{,}5 \times 4 = 6\text{ m}^3" />
+        </div>
+        <p className="text-red-400 font-semibold text-xs">Langkah 2 — Volume air (¾ penuh):</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="V_{\text{air}} = \tfrac{3}{4} \times 6 = 4{,}5\text{ m}^3" />
+        </div>
+        <p className="text-red-400 font-semibold text-xs">Langkah 3 — Berat air:</p>
+        <div className="bg-slate-800/60 border border-slate-600 rounded p-3 text-xs">
+          <BlockMath math="m = \rho \times V = 1.000 \times 4{,}5 = 4.500\text{ kg} = 4{,}5\text{ ton}" />
+        </div>
+        <div className="bg-red-950/60 border border-red-700/40 rounded p-3 text-xs space-y-0.5">
+          <p className="text-red-300 font-semibold">✅ Jawaban:</p>
+          <p className="text-white/80">• Volume air = 4,5 m³</p>
+          <p className="text-white/80">• Berat air = <strong className="text-yellow-300">4,5 ton</strong></p>
+        </div>
+      </div>
+    ),
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
+   ACCORDION + EXAMPLE CARD
+───────────────────────────────────────────────────────────── */
+const AccordionSection = ({ sec, idx }: { sec: Sec; idx: number }) => {
+  const [open, setOpen] = useState(idx === 0);
+  return (
+    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+      <button onClick={() => { playPopSound(); setOpen(v => !v); }}
+        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/5 transition-colors cursor-pointer">
+        <span className="flex items-center gap-3">
+          <span className="text-xl">{sec.icon}</span>
+          <span className="font-display text-sm font-semibold text-white">{sec.title}</span>
+        </span>
+        {open ? <ChevronUp className="w-4 h-4 text-primary shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />}
+      </button>
+      {open && <div className="px-5 pb-5 border-t border-border/50"><div className="pt-4">{sec.content}</div></div>}
+    </div>
+  );
+};
+
+const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <div className={`border ${ex.border} rounded-xl overflow-hidden`}>
+      <div className={`${ex.bg} px-5 py-4`}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className={`text-xs font-bold font-display px-2 py-0.5 rounded ${ex.badgeBg} ${ex.color} border ${ex.border}`}>
+            {prefix} {idx + 1} — {ex.level}
+          </span>
+        </div>
+        {ex.question}
+      </div>
+      <button onClick={() => { playPopSound(); setShow(v => !v); }}
+        className="w-full flex items-center justify-between px-5 py-3 bg-slate-800/60 hover:bg-slate-800/90 transition-colors cursor-pointer border-t border-slate-700/50">
+        <span className={`text-xs font-semibold font-body ${ex.color}`}>{show ? "Sembunyikan" : "Lihat Pembahasan"}</span>
+        {show ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+      </button>
+      {show && <div className="px-5 py-4 bg-slate-900/60 border-t border-slate-700/30">{ex.answer}</div>}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   MAIN PAGE
+───────────────────────────────────────────────────────────── */
+const PrismaPage = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+      <Starfield />
+      <PageNavigation />
+      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+        <Triangle className="w-10 h-10 text-primary mx-auto mb-3" />
+        <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
+          PRISMA
+        </h1>
+        <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
+
+        <div className="bg-card/60 border border-border rounded-xl p-4 mb-6 text-sm font-body text-white/75 leading-relaxed">
+          <p>
+            Dari kemasan cokelat batang hingga atap rumah berbentuk segitiga — prisma ada di mana-mana!
+            Pelajari semua tentang <strong className="text-cyan-300">prisma</strong> — mulai dari unsur-unsurnya,
+            jaring-jaring interaktif 3D, hingga cara menghitung
+            <strong className="text-yellow-300"> luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3 mb-8">
+          {sections.map((sec, i) => <AccordionSection key={sec.title} sec={sec} idx={i} />)}
+        </div>
+
+        <div className="mb-6">
+          <h2 className="font-display text-base font-bold text-white mb-4 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-primary" />
+            Contoh Soal — Luas Permukaan Prisma
+          </h2>
+          <div className="flex flex-col gap-3">
+            {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal LP" />)}
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="font-display text-base font-bold text-white mb-4 flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-primary" />
+            Contoh Soal — Volume Prisma
+          </h2>
+          <div className="flex flex-col gap-3">
+            {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal Vol" />)}
+          </div>
+        </div>
+
+        <div className="mt-4 text-center">
+          <button
+            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/bangun-ruang-sisi-datar"); }}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+          >
+            ← Kembali ke Bangun Ruang Sisi Datar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PrismaPage;
