@@ -5,13 +5,13 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "UNSUR-UNSUR BANGUN RUANG",
-  "KUBUS",
-  "BALOK",
-  "PRISMA",
-  "LIMAS",
-  "BANGUN RUANG SISI DATAR GABUNGAN",
-  "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR",
+  { name: "UNSUR-UNSUR BANGUN RUANG", path: "/coming-soon" },
+  { name: "KUBUS", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" },
+  { name: "BALOK", path: "/coming-soon" },
+  { name: "PRISMA", path: "/coming-soon" },
+  { name: "LIMAS", path: "/coming-soon" },
+  { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/coming-soon" },
+  { name: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/coming-soon" },
 ];
 
 const BangunRuangSisiDatarPage = () => {
@@ -31,15 +31,15 @@ const BangunRuangSisiDatarPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
             </button>
           ))}
         </div>
