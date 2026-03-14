@@ -7,7 +7,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-// Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
@@ -19,134 +18,654 @@ const renderWithLatex = (text: string) => {
   });
 };
 
-const materiSection = {
-  title: "MATERI - KAIDAH PENCACAHAN DAN PELUANG",
-  sections: [
-    {
-      heading: "A. Notasi Faktorial",
-      content: `Dalam matematika perkalian $3 \\times 2 \\times 1$ dinotasikan dengan $3!$ dibaca 3 faktorial.
-Demikian juga dengan:
-- $5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$
-- $10! = 10 \\times 9 \\times 8 \\times ... \\times 3 \\times 2 \\times 1$
+// ─────────────────────────────────────────────────────────────────────────────
+// SVG DIAGRAMS
+// ─────────────────────────────────────────────────────────────────────────────
 
-Jadi, untuk n bilangan bulat positif, maka:
-$n! = n(n-1)(n-2) \\times ... \\times 3 \\times 2 \\times 1$
-Dengan $1! = 1$ dan $0! = 1$`
-    },
-    {
-      heading: "B. Kaidah Pencacahan",
-      content: `1. Aturan Perkalian
-Jika peristiwa pertama dapat dilakukan dengan r cara yang berbeda dan setiap cara ini dilanjutkan dengan peristiwa kedua yang dapat dilakukan dengan s cara berbeda, maka kedua peristiwa tersebut dapat dilakukan secara bersama-sama dengan $r \\times s$ cara yang berbeda.
+const DiagramPerkalian = () => (
+  <svg viewBox="0 0 360 90" className="w-full max-w-sm mx-auto my-2" aria-label="Diagram Aturan Perkalian">
+    <rect x="0" y="30" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="30" y="50" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">A</text>
+    <rect x="150" y="30" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="180" y="50" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">P</text>
+    <rect x="300" y="30" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="330" y="50" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">B</text>
+    <line x1="60" y1="45" x2="148" y2="45" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrow1)"/>
+    <text x="104" y="38" textAnchor="middle" fill="#fbbf24" fontSize="11">r cara</text>
+    <line x1="210" y1="45" x2="298" y2="45" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrow1)"/>
+    <text x="254" y="38" textAnchor="middle" fill="#fbbf24" fontSize="11">s cara</text>
+    <text x="180" y="82" textAnchor="middle" fill="#86efac" fontSize="11">Total A→B = r × s cara</text>
+    <defs>
+      <marker id="arrow1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#60a5fa"/>
+      </marker>
+    </defs>
+  </svg>
+);
 
-Apabila suatu peristiwa terdiri dari n tahap yang berurutan di mana peristiwa pertama dapat dilakukan dengan $r_1$ cara, peristiwa kedua dengan $r_2$ cara, dan seterusnya hingga peristiwa ke-n dengan $r_n$ cara, maka peristiwa tersebut dapat dilakukan secara bersama-sama dengan $r_1 \\times r_2 \\times ... \\times r_n$ cara.
+const DiagramPenjumlahan = () => (
+  <svg viewBox="0 0 320 110" className="w-full max-w-sm mx-auto my-2" aria-label="Diagram Aturan Penjumlahan">
+    <rect x="10" y="15" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="40" y="35" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">A</text>
+    <rect x="10" y="65" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="40" y="85" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">B</text>
+    <rect x="240" y="40" width="60" height="30" rx="8" fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1.5"/>
+    <text x="270" y="60" textAnchor="middle" fill="#93c5fd" fontSize="14" fontWeight="bold">C</text>
+    <line x1="70" y1="30" x2="238" y2="50" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrow2)"/>
+    <text x="155" y="28" textAnchor="middle" fill="#fbbf24" fontSize="11">r cara</text>
+    <line x1="70" y1="80" x2="238" y2="60" stroke="#60a5fa" strokeWidth="1.5" markerEnd="url(#arrow2)"/>
+    <text x="155" y="90" textAnchor="middle" fill="#fbbf24" fontSize="11">s cara</text>
+    <text x="160" y="108" textAnchor="middle" fill="#86efac" fontSize="11">Total ke C = r + s cara</text>
+    <defs>
+      <marker id="arrow2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#60a5fa"/>
+      </marker>
+    </defs>
+  </svg>
+);
 
-2. Aturan Penjumlahan
-Apabila suatu peristiwa terdiri dari n tahap yang saling lepas di mana peristiwa pertama dapat dilakukan dengan $r_1$ cara, peristiwa kedua dengan $r_2$ cara, dan seterusnya hingga peristiwa ke-n dengan $r_n$ cara, maka total peristiwa tersebut adalah $r_1 + r_2 + ... + r_n$ cara.`
-    },
-    {
-      heading: "C. Permutasi",
-      content: `1. Permutasi dengan Semua Unsur Berbeda
-Permutasi adalah susunan yang berbeda yang dapat dibentuk dari n unsur, yang diambil dari n unsur atau sebagian unsur.
+const DiagramSiklis = () => (
+  <svg viewBox="0 0 180 180" className="w-36 h-36 mx-auto my-2" aria-label="Diagram Permutasi Siklis">
+    <circle cx="90" cy="90" r="60" fill="none" stroke="#60a5fa" strokeWidth="1.5" strokeDasharray="5,3"/>
+    {[["A",90,20],["B",160,90],["C",90,160],["D",20,90]].map(([lbl,cx,cy])=>(
+      <g key={String(lbl)}>
+        <circle cx={Number(cx)} cy={Number(cy)} r="14" fill="#1e3a5f" stroke="#a78bfa" strokeWidth="1.5"/>
+        <text x={Number(cx)} y={Number(cy)+5} textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">{lbl}</text>
+      </g>
+    ))}
+    <text x="90" y="95" textAnchor="middle" fill="#fbbf24" fontSize="11">(n−1)!</text>
+  </svg>
+);
 
-Jika ada n unsur yang berbeda diambil n unsur, maka banyak susunan (permutasi) yang berbeda dari n unsur tersebut adalah:
-$P(n, n) = n!$
+const DiagramVenn = () => (
+  <svg viewBox="0 0 260 130" className="w-full max-w-xs mx-auto my-2" aria-label="Diagram Venn Kejadian Majemuk">
+    <rect x="5" y="5" width="250" height="120" rx="10" fill="none" stroke="#60a5fa" strokeWidth="1.2" strokeDasharray="5,3"/>
+    <circle cx="95" cy="65" r="48" fill="#3b82f620" stroke="#60a5fa" strokeWidth="1.5"/>
+    <circle cx="165" cy="65" r="48" fill="#a78bfa20" stroke="#a78bfa" strokeWidth="1.5"/>
+    <text x="68" y="68" textAnchor="middle" fill="#93c5fd" fontSize="13" fontWeight="bold">A</text>
+    <text x="192" y="68" textAnchor="middle" fill="#c4b5fd" fontSize="13" fontWeight="bold">B</text>
+    <text x="130" y="68" textAnchor="middle" fill="#fbbf24" fontSize="11">A∩B</text>
+    <text x="130" y="120" textAnchor="middle" fill="#86efac" fontSize="10">S (Ruang Sampel)</text>
+  </svg>
+);
 
-2. Permutasi dengan Sebagian Unsur yang Berbeda
-Banyak permutasi r unsur yang diambil dari n buah unsur yang berbeda adalah:
-$P(n, r) = \\frac{n!}{(n-r)!}$ untuk $r < n$
+// ─────────────────────────────────────────────────────────────────────────────
+// MATERI SECTIONS
+// ─────────────────────────────────────────────────────────────────────────────
 
-3. Permutasi dengan Beberapa Unsur yang Sama
-Banyaknya cara membagi n buah unsur ke dalam k sel yang masing-masing berisi $n_1, n_2, ..., n_k$ unsur adalah:
-$P(n_1, n_2, ..., n_k) = \\frac{n!}{n_1! \\cdot n_2! \\cdot ... \\cdot n_k!}$
-
-4. Permutasi Siklis (Permutasi Melingkar)
-Secara umum banyaknya permutasi siklis dari n obyek adalah $(n - 1)!$`
-    },
-    {
-      heading: "D. Kombinasi",
-      content: `Kombinasi adalah permutasi "tanpa memperhatikan urutan unsur yang terpilih".
-
-Secara umum kombinasi r unsur dari n unsur yang diketahui di mana $r \\leq n$ adalah:
-$C(n, r) = \\frac{P(n, r)}{r!} = \\frac{n!}{(n-r)! \\cdot r!}$
-
-Atau dapat ditulis sebagai:
-$\\binom{n}{r} = \\frac{n!}{(n-r)! \\cdot r!}$
-
-Contoh: Dalam suatu ulangan Matematika, setiap siswa diwajibkan menjawab 5 soal dari 8 soal yang diajukan. Berapa banyak pilihan untuk menjawab soal tersebut?
-$C(8, 5) = \\frac{8!}{(8-5)! \\cdot 5!} = \\frac{8!}{3! \\cdot 5!} = 56$`
-    },
-    {
-      heading: "E. Ruang Sampel",
-      content: `Ruang sampel adalah himpunan semua kemungkinan hasil dari suatu percobaan, dilambangkan dengan S.
-
-Contoh:
-1. Mengambil satu bola secara acak dari dalam suatu kantong yang berisi tiga bola berwarna kuning (K), merah (M), dan hijau (H).
-   Ruang sampel: S = {K, M, H}
-
-2. Melemparkan satu mata uang logam: S = {A, G} (ada 2)
-
-3. Melemparkan dua mata uang logam: S = {AA, AG, GA, GG} (ada 4)
-
-4. Melemparkan tiga mata uang logam: S = {AAA, AAG, AGA, AGG, GAA, GAG, GGA, GGG} (ada 8)
-
-Rumus jumlah ruang sampel adalah "jumlah kemungkinan hasil" dipangkatkan dengan "jumlah objek":
-$n(S) = k^n$ dimana k adalah kemungkinan untuk setiap objek dan n adalah jumlah objek.`
-    },
-    {
-      heading: "F. Peluang",
-      content: `Jika suatu percobaan menghasilkan n titik contoh yang masing-masing berpeluang sama dan kejadian A terjadi dengan tepat k cara di mana k merupakan anggota dari titik contoh, maka:
-$P(A) = \\frac{k}{n} = \\frac{n(A)}{n(S)}$ untuk $k \\leq n$
-
-Kisaran Nilai Peluang:
-- $0 \\leq P(E) \\leq 1$, untuk setiap E
-- $P(S) = 1$
-- $P(E_1 \\cup E_2) = P(E_1) + P(E_2)$, untuk $E_1$ dan $E_2$ kejadian yang saling lepas`
-    },
-    {
-      heading: "G. Frekuensi Harapan",
-      content: `$F_h = n \\times P(A)$
-
-Dengan:
-- $F_h$ = frekuensi harapan suatu kejadian A
-- n = banyaknya percobaan
-- P(A) = peluang kejadian A
-
-Contoh: Diketahui peluang seorang menembak tepat sasaran adalah $\\frac{1}{5}$. Jika penembak itu menembak 150 kali tembakan, berapakah banyaknya tembakan yang diharapkan mengenai sasaran?
-
-$F_h = \\frac{1}{5} \\times 150 = 30$ kali`
-    },
-    {
-      heading: "H. Komplemen Suatu Kejadian",
-      content: `Kejadian bukan A dari himpunan S ditulis dengan simbol A' atau $A^c$ dan disebut komplemen dari A.
-
-Jika A mempunyai a elemen, dan S mempunyai n elemen, maka A' mempunyai n - a elemen.
-Maka P(A') adalah peluang tidak terjadinya A, dan:
-$P(A') = 1 - P(A)$
-
-Contoh: Jika peluang hari esok akan turun hujan adalah 0,45; berapa peluang bahwa cuaca akan cerah esok hari?
-$P(H^c) = 1 - P(H) = 1 - 0,45 = 0,55$`
-    },
-    {
-      heading: "I. Kejadian Majemuk",
-      content: `1. Dua Kejadian Saling Lepas
-Jika A dan B dua kejadian yang saling lepas (saling asing/saling eksklusif), maka:
-$P(A \\cup B) = P(A) + P(B)$
-
-Untuk kejadian yang tidak saling lepas:
-$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$
-
-2. Dua Kejadian Saling Bebas
-Jika $E_1$ dan $E_2$ adalah dua kejadian dengan syarat bahwa peluang kejadian $E_1$ tidak mempengaruhi kejadian $E_2$, maka $E_1$ dan $E_2$ disebut sebagai kejadian saling bebas:
-$P(E_1 \\cap E_2) = P(E_1) \\cdot P(E_2)$
-
-3. Kejadian Bersyarat
-Jika kejadian $E_1$ mempengaruhi kejadian $E_2$:
-$P(E_1 \\cap E_2) = P(E_1) \\cdot P(E_2 | E_1)$
-$P(E_2 | E_1)$ dibaca: peluang kejadian $E_2$ dengan syarat $E_1$ telah terjadi.`
-    },
-  ]
+const Kotak = ({ children, warna = "biru" }: { children: React.ReactNode; warna?: string }) => {
+  const cls = warna === "ungu"
+    ? "bg-purple-900/20 border border-purple-400/30"
+    : warna === "kuning"
+    ? "bg-yellow-900/20 border border-yellow-400/30"
+    : warna === "hijau"
+    ? "bg-green-900/20 border border-green-400/30"
+    : "bg-blue-900/20 border border-blue-400/30";
+  return <div className={`${cls} rounded-lg px-3 py-2 text-xs my-1`}>{children}</div>;
 };
 
+const Tip = ({ children }: { children: React.ReactNode }) => (
+  <div className="border-l-2 border-yellow-400 bg-yellow-900/10 pl-3 py-1 text-xs text-yellow-200 my-1 rounded-r">
+    💡 {children}
+  </div>
+);
+
+const ContohLabel = ({ no, level }: { no: number; level: string }) => {
+  const color = level === "Mudah" ? "text-green-400" : level === "Sedang" ? "text-yellow-400" : "text-red-400";
+  return (
+    <div className={`font-bold text-xs mt-3 mb-1 ${color}`}>
+      Contoh {no} <span className="text-muted-foreground font-normal">({level})</span>
+    </div>
+  );
+};
+
+const Pembahasan = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-muted/20 rounded px-3 py-2 text-xs mt-1 space-y-1 border-l-2 border-accent/40">
+    <div className="text-accent font-semibold text-[10px] uppercase tracking-wide mb-1">Pembahasan</div>
+    {children}
+  </div>
+);
+
+const materiSections = [
+  {
+    heading: "A. Notasi Faktorial",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Faktorial</strong> adalah cara singkat menuliskan perkalian bilangan bulat positif berurutan dari 1 hingga n, dinotasikan <strong>n!</strong> (dibaca "n faktorial").</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus Utama</div>
+          <div>{renderWithLatex('$n! = n \\times (n-1) \\times (n-2) \\times \\cdots \\times 2 \\times 1$')}</div>
+          <div className="mt-1">{renderWithLatex('Dengan kesepakatan: $0! = 1$ dan $1! = 1$')}</div>
+        </Kotak>
+        <Tip>Faktorial tumbuh sangat cepat. 10! = 3.628.800 — bayangkan betapa banyaknya susunan yang bisa dibuat!</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Hitung nilai dari {renderWithLatex('$4!$')}</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$4! = 4 \\times 3 \\times 2 \\times 1 = \\mathbf{24}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Hitung {renderWithLatex('$0! + 1! + 2! + 3!$')}</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$0! = 1,\\quad 1! = 1,\\quad 2! = 2,\\quad 3! = 6$')}</div>
+          <div>{renderWithLatex('Jumlah $= 1 + 1 + 2 + 6 = \\mathbf{10}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Sederhanakan {renderWithLatex('$\\dfrac{8!}{6!}$')}</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$\\dfrac{8!}{6!} = \\dfrac{8 \\times 7 \\times \\cancel{6!}}{\\cancel{6!}} = 8 \\times 7 = \\mathbf{56}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Tentukan nilai {renderWithLatex('$n$')} jika {renderWithLatex('$\\dfrac{n!}{(n-2)!} = 30$')}</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$\\dfrac{n!}{(n-2)!} = n(n-1) = 30$')}</div>
+          <div>{renderWithLatex('$n^2 - n - 30 = 0 \\Rightarrow (n-6)(n+5) = 0$')}</div>
+          <div>{renderWithLatex('Karena $n > 0$, maka $n = \\mathbf{6}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Hitung nilai dari {renderWithLatex('$\\dfrac{(n+2)!}{n! \\cdot 2}$')} untuk {renderWithLatex('$n = 5$')}</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$\\dfrac{(5+2)!}{5! \\cdot 2} = \\dfrac{7!}{5! \\cdot 2} = \\dfrac{7 \\times 6 \\times \\cancel{5!}}{\\cancel{5!} \\times 2} = \\dfrac{42}{2} = \\mathbf{21}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "B. Kaidah Pencacahan",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Kaidah Pencacahan</strong> adalah teknik menghitung banyak cara suatu kejadian dapat terjadi tanpa harus mendaftar semua kemungkinan satu per satu. Ada dua aturan utama: <strong>Aturan Perkalian</strong> dan <strong>Aturan Penjumlahan</strong>.</p>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-2">① Aturan Perkalian</div>
+        <p>Digunakan saat peristiwa dilakukan <strong>secara berurutan (berpasangan)</strong>. Jika tahap 1 ada {renderWithLatex('$r_1$')} cara, tahap 2 ada {renderWithLatex('$r_2$')} cara, ..., maka total:</p>
+        <Kotak warna="ungu">
+          <div className="text-center">{renderWithLatex('$\\text{Total} = r_1 \\times r_2 \\times \\cdots \\times r_n$')}</div>
+        </Kotak>
+        <DiagramPerkalian/>
+
+        <div className="font-bold text-accent text-xs mt-2">② Aturan Penjumlahan</div>
+        <p>Digunakan saat peristiwa bersifat <strong>saling lepas (pilih salah satu)</strong>. Jika ada {renderWithLatex('$r_1$')} cara untuk kejadian 1, {renderWithLatex('$r_2$')} cara untuk kejadian 2, ..., maka total:</p>
+        <Kotak warna="ungu">
+          <div className="text-center">{renderWithLatex('$\\text{Total} = r_1 + r_2 + \\cdots + r_n$')}</div>
+        </Kotak>
+        <DiagramPenjumlahan/>
+
+        <Tip>Kunci membedakan: jika kamu melakukan kejadian A <em>lalu</em> B → pakai perkalian. Jika kamu memilih A <em>atau</em> B → pakai penjumlahan.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Ada 4 jalan dari kota A ke kota P dan 3 jalan dari P ke B. Berapa banyak rute dari A ke B melalui P?</p>
+        <Pembahasan>
+          <div>Kejadian berurutan → gunakan aturan perkalian.</div>
+          <div>{renderWithLatex('$\\text{Total} = 4 \\times 3 = \\mathbf{12 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Dari kota X ke kota Y tersedia 3 bus, 2 kapal laut, dan 1 pesawat. Berapa banyak cara memilih kendaraan?</p>
+        <Pembahasan>
+          <div>Pilih salah satu kendaraan → gunakan aturan penjumlahan.</div>
+          <div>{renderWithLatex('$\\text{Total} = 3 + 2 + 1 = \\mathbf{6 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Pengurus kelas (1 ketua pria + 1 sekretaris wanita) akan dipilih dari 8 siswa pria dan 10 siswi. Berapa banyak cara pemilihan?</p>
+        <Pembahasan>
+          <div>Pilih pria (8 cara) <em>lalu</em> pilih wanita (10 cara) → perkalian.</div>
+          <div>{renderWithLatex('$\\text{Total} = 8 \\times 10 = \\mathbf{80 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Berapa banyak bilangan <strong>ganjil</strong> 5 digit berbeda yang dapat disusun dari angka {renderWithLatex('$\\{1, 2, 3, 4, 5, 6, 7, 8\\}$')}?</p>
+        <Pembahasan>
+          <div>Digit terakhir harus ganjil: {renderWithLatex('$\\{1,3,5,7\\}$')} → 4 pilihan.</div>
+          <div>Digit 1 s.d. 4 dari sisa 7 angka: {renderWithLatex('$7 \\times 6 \\times 5 \\times 4$')}</div>
+          <div>{renderWithLatex('$\\text{Total} = 7 \\times 6 \\times 5 \\times 4 \\times 4 = \\mathbf{3.360 \\text{ bilangan}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Berapa banyak bilangan ribuan yang <strong>lebih dari 3.000</strong> dengan angka berbeda yang dapat dibentuk dari {renderWithLatex('$\\{0,1,2,3,5,6,9\\}$')}?</p>
+        <Pembahasan>
+          <div>Bilangan ribuan → 4 digit. Digit pertama ≥ 3 dan bukan 0: {renderWithLatex('$\\{3,5,6,9\\}$')} → 4 pilihan.</div>
+          <div>Digit 2, 3, 4 dari sisa 6 angka (termasuk 0): {renderWithLatex('$6 \\times 5 \\times 4$')}</div>
+          <div>{renderWithLatex('$\\text{Total} = 4 \\times 6 \\times 5 \\times 4 = \\mathbf{480 \\text{ bilangan}}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "C. Permutasi",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Permutasi</strong> adalah susunan yang <strong>memperhatikan urutan</strong>. Jika kamu menyusun A-B-C berbeda dari C-B-A, itu permutasi. Ada 4 jenis permutasi yang perlu kamu kuasai.</p>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-2">① Permutasi Semua Unsur Berbeda (ambil semua)</div>
+        <Kotak warna="ungu">
+          <div>{renderWithLatex('$P(n,n) = n!$')}</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">② Permutasi Sebagian Unsur (ambil r dari n)</div>
+        <Kotak warna="ungu">
+          <div>{renderWithLatex('$P(n,r) = \\dfrac{n!}{(n-r)!}$')}</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">③ Permutasi dengan Unsur Sama</div>
+        <Kotak warna="ungu">
+          <div>{renderWithLatex('$P = \\dfrac{n!}{k_1! \\cdot k_2! \\cdots k_m!}$')}</div>
+          <div className="text-muted-foreground mt-1">di mana {renderWithLatex('$k_i$')} adalah banyak unsur yang identik.</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">④ Permutasi Siklis (Melingkar)</div>
+        <div className="flex items-center gap-4">
+          <DiagramSiklis/>
+          <Kotak warna="ungu">
+            <div>{renderWithLatex('$P_{siklis} = (n-1)!$')}</div>
+            <div className="text-muted-foreground mt-1">Satu elemen dianggap tetap sebagai patokan lingkaran.</div>
+          </Kotak>
+        </div>
+
+        <Tip>Permutasi vs Kombinasi: jika urutan penting (jabatan, posisi, nomor) → Permutasi. Jika tidak penting (tim, kelompok) → Kombinasi.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Berapa banyak cara menyusun 5 buku berbeda di rak?</p>
+        <Pembahasan>
+          <div>Semua 5 buku disusun → {renderWithLatex('$P(5,5) = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1 = \\mathbf{120 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Seorang programmer membuat password 4 huruf dari {renderWithLatex('$\\{A,B,C,D,E,F,G,H\\}$')} tanpa pengulangan. Berapa banyak password yang mungkin?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$P(8,4) = \\dfrac{8!}{(8-4)!} = \\dfrac{8!}{4!} = 8 \\times 7 \\times 6 \\times 5 = \\mathbf{1.680 \\text{ password}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Berapa banyak susunan huruf berbeda dari kata <strong>STATISTIKA</strong>?</p>
+        <Pembahasan>
+          <div>Huruf: S(2×), T(3×), A(2×), I(1×), K(1×) → total 10 huruf.</div>
+          <div>{renderWithLatex('$P = \\dfrac{10!}{2! \\cdot 3! \\cdot 2! \\cdot 1! \\cdot 1!} = \\dfrac{3.628.800}{2 \\times 6 \\times 2} = \\mathbf{151.200 \\text{ susunan}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Berapa banyak cara 6 orang dapat duduk mengelilingi meja bundar?</p>
+        <Pembahasan>
+          <div>Permutasi siklis 6 orang:</div>
+          <div>{renderWithLatex('$P_{siklis} = (6-1)! = 5! = \\mathbf{120 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Tujuh orang akan duduk melingkari meja. Dua orang istimewa (X dan Y) harus selalu berdampingan. Berapa banyak cara?</p>
+        <Pembahasan>
+          <div>X dan Y diikat jadi satu "blok" → sekarang ada 6 "orang".</div>
+          <div>Permutasi siklis 6: {renderWithLatex('$(6-1)! = 5! = 120$')}</div>
+          <div>X dan Y dalam blok bisa bertukar: {renderWithLatex('$2! = 2$')}</div>
+          <div>{renderWithLatex('$\\text{Total} = 120 \\times 2 = \\mathbf{240 \\text{ cara}}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "D. Kombinasi",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Kombinasi</strong> adalah pemilihan yang <strong>tidak memperhatikan urutan</strong>. Tim {"{A,B,C}"} sama saja dengan {"{C,A,B}"}. Kombinasi dipakai saat kamu memilih anggota kelompok, soal, atau objek tanpa peduli urutannya.</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus Kombinasi</div>
+          <div>{renderWithLatex('$C(n,r) = \\binom{n}{r} = \\dfrac{n!}{r!(n-r)!}$')}</div>
+          <div className="text-muted-foreground mt-1">Membaca: "pilih r dari n tanpa memperhatikan urutan"</div>
+        </Kotak>
+        <Tip>Hubungan Permutasi & Kombinasi: {renderWithLatex('$P(n,r) = C(n,r) \\times r!$')} — Permutasi "lebih banyak" karena memperhitungkan urutan.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Berapa banyak cara memilih 2 perwakilan dari 6 orang?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$C(6,2) = \\dfrac{6!}{2! \\cdot 4!} = \\dfrac{6 \\times 5}{2} = \\mathbf{15 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Dalam ulangan, siswa wajib menjawab 5 dari 8 soal. Berapa banyak pilihan soal yang dapat dibuat?</p>
+        <Pembahasan>
+          <div>Urutan soal tidak penting → kombinasi.</div>
+          <div>{renderWithLatex('$C(8,5) = \\dfrac{8!}{5! \\cdot 3!} = \\dfrac{8 \\times 7 \\times 6}{6} = \\mathbf{56 \\text{ pilihan}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Siswa harus mengerjakan 8 dari 10 soal ujian. Soal nomor 1, 2, dan 3 wajib dikerjakan. Berapa banyak cara memilih?</p>
+        <Pembahasan>
+          <div>3 soal wajib sudah pasti dipilih → sisa harus memilih {renderWithLatex('$8-3=5$')} soal dari {renderWithLatex('$10-3=7$')} soal bebas.</div>
+          <div>{renderWithLatex('$C(7,5) = \\dfrac{7!}{5! \\cdot 2!} = \\dfrac{7 \\times 6}{2} = \\mathbf{21 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Delegasi 5 orang dipilih dari 6 pria dan 4 wanita. Hitung banyak cara jika <strong>minimal 2 wanita</strong> harus ada.</p>
+        <Pembahasan>
+          <div>Kasus yang memenuhi: tepat 2W, tepat 3W, tepat 4W.</div>
+          <div>{renderWithLatex('$C(4,2)\\cdot C(6,3) + C(4,3)\\cdot C(6,2) + C(4,4)\\cdot C(6,1)$')}</div>
+          <div>{renderWithLatex('$= 6 \\times 20 + 4 \\times 15 + 1 \\times 6 = 120 + 60 + 6 = \\mathbf{186 \\text{ cara}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Pada bidang terdapat 10 titik, tidak ada 3 yang segaris. Berapa banyak segitiga yang dapat dibentuk?</p>
+        <Pembahasan>
+          <div>Setiap segitiga membutuhkan tepat 3 titik. Urutan tidak penting.</div>
+          <div>{renderWithLatex('$C(10,3) = \\dfrac{10!}{3! \\cdot 7!} = \\dfrac{10 \\times 9 \\times 8}{6} = \\mathbf{120 \\text{ segitiga}}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "E. Ruang Sampel",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Ruang Sampel (S)</strong> adalah himpunan semua hasil yang mungkin muncul dari sebuah percobaan. Setiap anggota ruang sampel disebut <strong>titik sampel</strong>, dan banyaknya titik sampel dilambangkan {renderWithLatex('$n(S)$')}.</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus Praktis</div>
+          <div>Jika tiap objek punya {renderWithLatex('$k$')} kemungkinan hasil dan ada {renderWithLatex('$n$')} objek:</div>
+          <div className="mt-1">{renderWithLatex('$n(S) = k^n$')}</div>
+        </Kotak>
+        <Tip>Visualisasikan dengan tabel atau diagram pohon untuk menemukan seluruh anggota ruang sampel secara sistematis.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Sebuah koin dilempar sekali. Tuliskan ruang sampelnya.</p>
+        <Pembahasan>
+          <div>Sisi koin: Angka (A) dan Gambar (G).</div>
+          <div>{renderWithLatex('$S = \\{A, G\\}$')}, {renderWithLatex('$n(S) = 2$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Dua koin dilempar bersamaan. Tuliskan ruang sampelnya.</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$S = \\{AA, AG, GA, GG\\}$')}, {renderWithLatex('$n(S) = 2^2 = 4$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Tiga koin dilempar bersamaan. Berapa banyak anggota ruang sampelnya? Tuliskan semua kejadian "tepat 2 Angka".</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = 2^3 = 8$')}</div>
+          <div>Ruang sampel: {renderWithLatex('$\\{AAA, AAG, AGA, AGG, GAA, GAG, GGA, GGG\\}$')}</div>
+          <div>Kejadian tepat 2A: {renderWithLatex('$\\{AAG, AGA, GAA\\}$')} → 3 titik sampel.</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Dua dadu dilempar bersamaan. Berapa banyak anggota ruang sampelnya? Tentukan kejadian munculnya jumlah mata dadu = 7.</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = 6^2 = 36$')}</div>
+          <div>Jumlah = 7: {renderWithLatex('$\\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\\}$')}</div>
+          <div>{renderWithLatex('$n(E) = 6$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Sebuah dadu dan sebuah koin dilempar bersamaan. Tentukan ruang sampel dan banyak titik sampel kejadian "angka pada koin dan bilangan genap pada dadu".</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = 2 \\times 6 = 12$')}</div>
+          <div>Kejadian A = koin Angka ∩ dadu genap {renderWithLatex('$\\{2,4,6\\}$')}:</div>
+          <div>{renderWithLatex('$A = \\{(A,2),(A,4),(A,6)\\}$')}, {renderWithLatex('$n(A) = 3$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "F. Peluang",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Peluang (Probabilitas)</strong> mengukur seberapa besar kemungkinan suatu kejadian terjadi. Nilainya selalu berada di antara 0 (mustahil) sampai 1 (pasti terjadi).</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus Peluang</div>
+          <div>{renderWithLatex('$P(A) = \\dfrac{n(A)}{n(S)}$')}</div>
+          <div className="mt-1 space-y-1">
+            <div>{renderWithLatex('$0 \\leq P(A) \\leq 1$')}</div>
+            <div>{renderWithLatex('$P(S) = 1$ (kejadian pasti)')}</div>
+            <div>{renderWithLatex('$P(\\emptyset) = 0$ (kejadian mustahil)')}</div>
+          </div>
+        </Kotak>
+        <Tip>Peluang bisa dinyatakan sebagai pecahan, desimal, atau persentase. {renderWithLatex('$P = \\frac{1}{4} = 0{,}25 = 25\\%$')}</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Sebuah dadu dilempar sekali. Berapa peluang muncul bilangan prima?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$S = \\{1,2,3,4,5,6\\}$')}, {renderWithLatex('$n(S) = 6$')}</div>
+          <div>Prima: {renderWithLatex('$\\{2,3,5\\}$')}, {renderWithLatex('$n(A) = 3$')}</div>
+          <div>{renderWithLatex('$P(A) = \\dfrac{3}{6} = \\mathbf{\\dfrac{1}{2}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Dari kata MATEMATIKA, dipilih satu huruf secara acak. Berapa peluang terpilih huruf A?</p>
+        <Pembahasan>
+          <div>Huruf: M-A-T-E-M-A-T-I-K-A → 10 huruf, huruf A ada 3.</div>
+          <div>{renderWithLatex('$P(A) = \\dfrac{3}{10}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Dua dadu dilempar. Berapa peluang jumlah mata dadu = 9?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = 36$')}</div>
+          <div>Jumlah 9: {renderWithLatex('$\\{(3,6),(4,5),(5,4),(6,3)\\}$')}, {renderWithLatex('$n(E) = 4$')}</div>
+          <div>{renderWithLatex('$P(E) = \\dfrac{4}{36} = \\mathbf{\\dfrac{1}{9}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Kotak berisi 5 bola merah dan 4 bola biru. Diambil 2 bola sekaligus. Berapa peluang keduanya berwarna biru?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = C(9,2) = \\dfrac{9 \\times 8}{2} = 36$')}</div>
+          <div>{renderWithLatex('$n(E) = C(4,2) = 6$')}</div>
+          <div>{renderWithLatex('$P(E) = \\dfrac{6}{36} = \\mathbf{\\dfrac{1}{6}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Dalam kotak ada 10 jeruk manis dan 5 jeruk masam, tampak sama. Ana mengambil 2 jeruk sekaligus. Berapa peluang dua jeruk yang diambil memiliki rasa yang sama?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$n(S) = C(15,2) = 105$')}</div>
+          <div>Dua manis: {renderWithLatex('$C(10,2) = 45$')}. Dua masam: {renderWithLatex('$C(5,2) = 10$')}</div>
+          <div>{renderWithLatex('$P(\\text{sama}) = \\dfrac{45+10}{105} = \\dfrac{55}{105} = \\mathbf{\\dfrac{11}{21}}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "G. Frekuensi Harapan",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Frekuensi Harapan</strong> adalah perkiraan berapa kali suatu kejadian akan muncul jika percobaan dilakukan sebanyak {renderWithLatex('$n$')} kali. Ini bukan jaminan, melainkan prediksi berdasarkan peluang teoritis.</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus</div>
+          <div>{renderWithLatex('$F_h = n \\times P(A)$')}</div>
+          <div className="mt-1 text-muted-foreground">
+            <div>{renderWithLatex('$F_h$')} = frekuensi harapan</div>
+            <div>{renderWithLatex('$n$')} = banyak percobaan</div>
+            <div>{renderWithLatex('$P(A)$')} = peluang kejadian A</div>
+          </div>
+        </Kotak>
+        <Tip>Frekuensi harapan bisa berupa bilangan desimal. Misalnya, {renderWithLatex('$F_h = 13{,}3$')} berarti "sekitar 13 kali" — tidak harus bilangan bulat.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Peluang seorang penembak mengenai sasaran adalah {renderWithLatex('$\\dfrac{1}{5}$')}. Jika dia menembak 150 kali, berapa kali diharapkan mengenai sasaran?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$F_h = 150 \\times \\dfrac{1}{5} = \\mathbf{30 \\text{ kali}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Sebuah dadu dilempar 300 kali. Berapa kali diharapkan muncul angka 6?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$P(6) = \\dfrac{1}{6}$')}</div>
+          <div>{renderWithLatex('$F_h = 300 \\times \\dfrac{1}{6} = \\mathbf{50 \\text{ kali}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Dua koin dilempar 200 kali. Berapa kali diharapkan muncul tepat satu gambar?</p>
+        <Pembahasan>
+          <div>{renderWithLatex('$S = \\{AA,AG,GA,GG\\}$')}, {renderWithLatex('$n(S)=4$')}</div>
+          <div>Tepat 1G: {renderWithLatex('$\\{AG,GA\\}$')}, {renderWithLatex('$P = \\dfrac{2}{4} = \\dfrac{1}{2}$')}</div>
+          <div>{renderWithLatex('$F_h = 200 \\times \\dfrac{1}{2} = \\mathbf{100 \\text{ kali}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Dari seperangkat kartu bridge (52 kartu), diambil satu kartu kemudian dikembalikan, sebanyak 260 kali. Berapa kali diharapkan terambil kartu As?</p>
+        <Pembahasan>
+          <div>Ada 4 kartu As dari 52 kartu: {renderWithLatex('$P(As) = \\dfrac{4}{52} = \\dfrac{1}{13}$')}</div>
+          <div>{renderWithLatex('$F_h = 260 \\times \\dfrac{1}{13} = \\mathbf{20 \\text{ kali}}$')}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Peluang sebuah mesin gagal produksi adalah 0,03. Jika mesin beroperasi 5.000 siklus, berapa kali diharapkan terjadi kegagalan? Juga, berapa kali mesin diharapkan berhasil?</p>
+        <Pembahasan>
+          <div>Frekuensi harapan gagal: {renderWithLatex('$F_h = 5.000 \\times 0{,}03 = \\mathbf{150 \\text{ kali}}$')}</div>
+          <div>Peluang berhasil: {renderWithLatex('$P(\\text{berhasil}) = 1 - 0{,}03 = 0{,}97$')}</div>
+          <div>Frekuensi harapan berhasil: {renderWithLatex('$F_h = 5.000 \\times 0{,}97 = \\mathbf{4.850 \\text{ kali}}$')}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "H. Komplemen Suatu Kejadian",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Komplemen kejadian A</strong>, ditulis {renderWithLatex("$A'$")} atau {renderWithLatex("$A^c$")}, adalah himpunan semua kejadian di ruang sampel yang <strong>bukan</strong> merupakan anggota A. Trik komplemen sangat berguna saat menghitung "minimal satu" atau "sekurang-kurangnya".</p>
+        </Kotak>
+        <Kotak warna="ungu">
+          <div className="font-bold text-purple-300 mb-1">Rumus Komplemen</div>
+          <div>{renderWithLatex("$P(A') = 1 - P(A)$")}</div>
+          <div className="mt-1">{renderWithLatex("$P(A) + P(A') = 1$")}</div>
+        </Kotak>
+        <Tip>Jika soal menyebutkan "minimal", "sekurang-kurangnya", atau "paling sedikit" → pikirkan komplemen. Biasanya lebih mudah menghitung yang "tidak memenuhi" lalu dikurangi dari 1.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Peluang hari esok hujan adalah 0,45. Berapa peluang hari esok tidak hujan?</p>
+        <Pembahasan>
+          <div>{renderWithLatex("$P(\\text{tidak hujan}) = 1 - 0{,}45 = \\mathbf{0{,}55}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Sebuah dadu dilempar sekali. Berapa peluang muncul angka yang <strong>bukan</strong> bilangan prima?</p>
+        <Pembahasan>
+          <div>{renderWithLatex("$P(\\text{prima}) = \\dfrac{3}{6} = \\dfrac{1}{2}$")}</div>
+          <div>{renderWithLatex("$P(\\text{bukan prima}) = 1 - \\dfrac{1}{2} = \\mathbf{\\dfrac{1}{2}}$")}</div>
+          <div className="text-muted-foreground">Bukan prima: {renderWithLatex("$\\{1,4,6\\}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Tiga koin dilempar bersamaan. Berapa peluang muncul <strong>sekurang-kurangnya satu gambar</strong>?</p>
+        <Pembahasan>
+          <div>Komplemen = tidak ada gambar (semua angka) = {renderWithLatex("$\\{AAA\\}$")}</div>
+          <div>{renderWithLatex("$P(\\text{semua angka}) = \\dfrac{1}{8}$")}</div>
+          <div>{renderWithLatex("$P(\\text{min. 1 gambar}) = 1 - \\dfrac{1}{8} = \\mathbf{\\dfrac{7}{8}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Kotak berisi 5 bola merah, 3 bola biru, 2 bola hijau. Diambil 1 bola secara acak. Berapa peluang yang terambil <strong>bukan bola merah</strong>?</p>
+        <Pembahasan>
+          <div>{renderWithLatex("$P(\\text{merah}) = \\dfrac{5}{10} = \\dfrac{1}{2}$")}</div>
+          <div>{renderWithLatex("$P(\\text{bukan merah}) = 1 - \\dfrac{1}{2} = \\mathbf{\\dfrac{1}{2}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Dua dadu dilempar bersamaan. Berapa peluang muncul jumlah mata dadu <strong>kurang dari atau sama dengan 10</strong>?</p>
+        <Pembahasan>
+          <div>Komplemen = jumlah {renderWithLatex("$> 10$")}: {renderWithLatex("$\\{(5,6),(6,5),(6,6)\\}$")}, ada 3 cara.</div>
+          <div>{renderWithLatex("$P(\\text{jumlah}>10) = \\dfrac{3}{36} = \\dfrac{1}{12}$")}</div>
+          <div>{renderWithLatex("$P(\\text{jumlah} \\leq 10) = 1 - \\dfrac{1}{12} = \\mathbf{\\dfrac{11}{12}}$")}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+  {
+    heading: "I. Kejadian Majemuk",
+    renderContent: () => (
+      <div className="space-y-2 text-xs">
+        <Kotak warna="biru">
+          <p><strong>Kejadian Majemuk</strong> terjadi saat dua atau lebih kejadian digabungkan dengan operasi "atau" (∪) maupun "dan" (∩). Ada tiga jenis hubungan penting antar kejadian.</p>
+        </Kotak>
+        <DiagramVenn/>
+
+        <div className="font-bold text-accent text-xs mt-1">① Saling Lepas (Mutually Exclusive)</div>
+        <Kotak warna="ungu">
+          <div>Tidak ada irisan: {renderWithLatex("$P(A \\cap B) = 0$")}</div>
+          <div className="mt-1">{renderWithLatex("$P(A \\cup B) = P(A) + P(B)$")}</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">② Tidak Saling Lepas</div>
+        <Kotak warna="ungu">
+          <div>Ada irisan, jadi harus dikurangi agar tidak dihitung dua kali:</div>
+          <div className="mt-1">{renderWithLatex("$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$")}</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">③ Saling Bebas (Independent)</div>
+        <Kotak warna="ungu">
+          <div>Kejadian A tidak mempengaruhi B:</div>
+          <div className="mt-1">{renderWithLatex("$P(A \\cap B) = P(A) \\times P(B)$")}</div>
+        </Kotak>
+
+        <div className="font-bold text-accent text-xs mt-1">④ Bersyarat (Conditional)</div>
+        <Kotak warna="ungu">
+          <div>Kejadian A mempengaruhi peluang B:</div>
+          <div className="mt-1">{renderWithLatex("$P(A \\cap B) = P(A) \\times P(B|A)$")}</div>
+          <div className="text-muted-foreground">{renderWithLatex("$P(B|A)$")} = peluang B terjadi dengan syarat A telah terjadi</div>
+        </Kotak>
+
+        <Tip>Pengambilan <em>dengan pengembalian</em> → kejadian saling bebas. Pengambilan <em>tanpa pengembalian</em> → kejadian bersyarat.</Tip>
+
+        <ContohLabel no={1} level="Mudah"/>
+        <p>Sebuah dadu dilempar. A = muncul angka 2, B = muncul angka 5. Hitung {renderWithLatex("$P(A \\cup B)$")}.</p>
+        <Pembahasan>
+          <div>A dan B saling lepas (tidak bisa dua angka sekaligus).</div>
+          <div>{renderWithLatex("$P(A \\cup B) = \\dfrac{1}{6} + \\dfrac{1}{6} = \\mathbf{\\dfrac{2}{6} = \\dfrac{1}{3}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={2} level="Mudah"/>
+        <p>Dari {renderWithLatex("$S = \\{1,2,...,12\\}$")}, A = bilangan prima, B = bilangan ≥ 5. Hitung {renderWithLatex("$P(A \\cup B)$")}.</p>
+        <Pembahasan>
+          <div>{renderWithLatex("$A = \\{2,3,5,7,11\\}$")}, {renderWithLatex("$P(A)=\\dfrac{5}{12}$")}</div>
+          <div>{renderWithLatex("$B = \\{5,6,7,8,9,10,11,12\\}$")}, {renderWithLatex("$P(B)=\\dfrac{8}{12}$")}</div>
+          <div>{renderWithLatex("$A \\cap B = \\{5,7,11\\}$")}, {renderWithLatex("$P(A \\cap B)=\\dfrac{3}{12}$")}</div>
+          <div>{renderWithLatex("$P(A \\cup B) = \\dfrac{5}{12}+\\dfrac{8}{12}-\\dfrac{3}{12} = \\mathbf{\\dfrac{10}{12}=\\dfrac{5}{6}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={3} level="Sedang"/>
+        <p>Kantong berisi 2 bola hijau (H) dan 3 bola merah (M). Diambil 2 kali <strong>dengan pengembalian</strong>. Berapa peluang keduanya berwarna hijau?</p>
+        <Pembahasan>
+          <div>Dengan pengembalian → saling bebas.</div>
+          <div>{renderWithLatex("$P(H_1 \\cap H_2) = P(H_1) \\times P(H_2) = \\dfrac{2}{5} \\times \\dfrac{2}{5} = \\mathbf{\\dfrac{4}{25}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={4} level="Sedang"/>
+        <p>Kantong berisi 2 bola hijau dan 3 bola merah. Diambil 2 kali <strong>tanpa pengembalian</strong>. Berapa peluang keduanya berwarna hijau?</p>
+        <Pembahasan>
+          <div>Tanpa pengembalian → bersyarat.</div>
+          <div>{renderWithLatex("$P(H_1) = \\dfrac{2}{5}$")}, setelah diambil hijau pertama: {renderWithLatex("$P(H_2|H_1) = \\dfrac{1}{4}$")}</div>
+          <div>{renderWithLatex("$P(H_1 \\cap H_2) = \\dfrac{2}{5} \\times \\dfrac{1}{4} = \\mathbf{\\dfrac{2}{20}=\\dfrac{1}{10}}$")}</div>
+        </Pembahasan>
+
+        <ContohLabel no={5} level="Sulit"/>
+        <p>Kotak berisi 5 bola merah dan 4 bola biru. Diambil 2 bola sekaligus secara acak. Berapa peluang terambilnya <strong>sekurang-kurangnya satu bola biru</strong>?</p>
+        <Pembahasan>
+          <div>Gunakan komplemen: P(minimal 1 biru) = 1 − P(keduanya merah)</div>
+          <div>{renderWithLatex("$n(S) = C(9,2) = 36$")}</div>
+          <div>{renderWithLatex("$P(\\text{keduanya merah}) = \\dfrac{C(5,2)}{C(9,2)} = \\dfrac{10}{36} = \\dfrac{5}{18}$")}</div>
+          <div>{renderWithLatex("$P(\\text{min. 1 biru}) = 1 - \\dfrac{5}{18} = \\mathbf{\\dfrac{13}{18}}$")}</div>
+        </Pembahasan>
+      </div>
+    )
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LATIHAN DASAR (20 soal)
+// ─────────────────────────────────────────────────────────────────────────────
 const latihanDasar = [
   { no: 1, soal: "Dari angka 0, 1, 2, 3, 4, 5, 6, akan dibentuk bilangan 3 angka berbeda yang habis dibagi 5. Berapa banyak bilangan yang dapat terbentuk?", options: ["A. 49", "B. 30", "C. 55", "D. 60"] },
   { no: 2, soal: "Berapa banyak susunan huruf dari kata 'MATEMATIKA' jika kedua huruf 'M' tidak boleh bersebelahan?", options: ["A. 120960", "B. 30240", "C. 60480", "D. 151200"] },
@@ -170,6 +689,9 @@ const latihanDasar = [
   { no: 20, soal: "Dalam percobaan melempar 3 uang logam secara bersamaan, peluang muncul minimal 2 angka adalah...", options: ["A. 0,375", "B. 0,500", "C. 0,667", "D. 0,875"] },
 ];
 
+// ─────────────────────────────────────────────────────────────────────────────
+// LATIHAN OLIMPIADE (39 soal)
+// ─────────────────────────────────────────────────────────────────────────────
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2004 Tingkat Kota\nDengan menggunakan uang koin Rp50,00 ; Rp100,00 dan Rp200,00 ; ada berapa carakah kita menyatakan uang sebesar Rp2000,00.", options: ["A. 20", "B. 65", "C. 95", "D. 106", "E. 121"] },
   { no: 2, soal: "OSN Matematika 2004 Tingkat Kota\nAlex selalu berbohong pada hari kamis, jumat dan sabtu. Pada hari lain Alex selalu jujur. Di lain pihak Frans selalu berbohong pada hari-hari minggu, senin dan selasa dan selalu jujur pada hari-hari lain. Pada suatu hari keduanya berkata: 'kemarin saya berbohong'. Hari mereka mengucapkan perkataan tersebut adalah hari ...", options: [] },
@@ -210,145 +732,138 @@ const latihanOlimpiade = [
   { no: 37, soal: "OSN Matematika 2021 Tingkat Kota\nDi suatu fasilitas kesehatan, empat pasang suami istri sedang mengantri untuk disuntuk vaksin satu per satu. Jika setiap suami menghendaki istrinya untuk disuntuk terlebih dahulu daripada dirinya dan setiap pasang suami istri tidak harus disuntuk berurutan, banyak urutan penyuntukan vaksin berbeda yang mungkin adalah ...", options: ["A. 24", "B. 576", "C. 2520", "D. 40260"] },
   { no: 38, soal: "OSN Matematika 2021 Tingkat Kota\nBintang menuliskan angka 1, 2, 3, 4, 5, 6, 7 dan 8 di baris pertama tabel. Bintang ingin melakukan hal yang serupa pada baris kedua dengan suatu urutan tertentu. Setiap bilangan pada baris ketiga adalah jumlah dua bilangan di atasnya. Banyaknya cara Bintang mengisi baris kedua sehingga semua bilangan pada baris ketiga merupakan bilangan genap adalah ...", options: ["A. 8", "B. 16", "C. 48", "D. 576"] },
   { no: 39, soal: "OSN Matematika 2022 Tingkat Kota\nDalam suatu kotak tertutup, terdapat dua buah dadu. Dadu pertama memiliki satu sisi bermata 1, satu sisi bermata 2, dua sisi bermata 3, dan dua sisi bermata 5. Dadu kedua memiliki satu sisi bermata 1, satu sisi bermata 2, satu sisi bermata 3, dan tiga sisi bermata 5. Andi main dua kali: mendapatkan mata 1 pada permainan pertama dan mata 5 pada permainan kedua. Peluang bahwa hanya dadu kedua yang terambil pada kedua permainan yang dilakukan Andi adalah ...", options: ["A. 0,4", "B. 0,3", "C. 0,2", "D. 0,1"] },
-  { no: 40, soal: "OSN Matematika 2022 Tingkat Kota\nRio ingin bermain Sudoki pada kotak berukuran 4 × 4. Peraturan: setiap sel harus diisi dengan salah satu dari angka 1, 2, 3 atau 4 dengan syarat tidak boleh ada angka yang sama dalam setiap baris maupun kolom. Banyak tampilan Sudoki yang mungkin adalah ...", options: ["A. 50", "B. 576", "C. 432", "D. 676"] },
-  { no: 41, soal: "OSN Matematika 2025 Tingkat Kota\nAna memiliki 9 stiker. Delapan stiker ditempel berjejer dari kiri ke kanan di sampul buku tulisannya. Banyak cara ia menempel kedelapan stiker tersebut, sehingga stiker yang sama tidak bersebelahan dan stiker bergambar hati terletak di paling kanan adalah ...", options: ["A. 26", "B. 32", "C. 35", "D. 36"] },
-  { no: 42, soal: "OSN Matematika 2025 Tingkat Kota\nSuatu objek di titik (x, y) hanya dapat bergerak ke titik (x+1, y), (x, y+1) atau (x+1, y+1). Banyak jalur berbeda yang dapat dilalui objek yang bergerak dari (0, 0) ke titik (5, 5) adalah ...", options: ["A. 25", "B. 252", "C. 1683", "D. 3125"] },
 ];
 
-const OlimpiadePeluangPage = () => {
+// ─────────────────────────────────────────────────────────────────────────────
+// MAIN COMPONENT
+// ─────────────────────────────────────────────────────────────────────────────
+export default function OlimpiadePeluangPage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
-  const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [activeTab, setActiveTab] = useState<"materi" | "latihan" | "olimpiade">("materi");
+  const [openSection, setOpenSection] = useState<number | null>(0);
 
-  const toggleSection = (idx: number) => {
+  const toggleSection = (i: number) => {
     playPopSound();
-    setExpandedSections(prev =>
-      prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
-    );
+    setOpenSection(openSection === i ? null : i);
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
       <Starfield />
-      <PageNavigation />
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          OLIMPIADE - KAIDAH PENCACAHAN DAN PELUANG
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Irawan Sutiawan, M.Pd</p>
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <PageNavigation />
+
+        {/* Header */}
+        <div className="flex flex-col items-center pt-6 pb-2 px-4">
+          <Trophy className="w-10 h-10 text-yellow-400 mb-2" />
+          <h1 className="text-2xl font-bold text-accent tracking-widest text-center">
+            OLIMPIADE - PELUANG
+          </h1>
+          <p className="text-muted-foreground text-sm mt-1">Irawan Sutiawan, M.Pd</p>
+        </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 justify-center mb-6">
-          {[
-            { key: "materi" as const, label: "Materi" },
-            { key: "dasar" as const, label: "Latihan Dasar" },
-            { key: "olimpiade" as const, label: "Latihan Olimpiade" },
-          ].map(tab => (
+        <div className="flex justify-center gap-2 px-4 mb-4">
+          {(["materi", "latihan", "olimpiade"] as const).map((tab) => (
             <button
-              key={tab.key}
-              onClick={() => { playPopSound(); setActiveTab(tab.key); }}
-              className={`font-display text-xs px-4 py-2 rounded-lg border cursor-pointer transition-all ${
-                activeTab === tab.key
-                  ? "bg-accent text-accent-foreground border-accent"
-                  : "bg-card/80 text-white/70 border-border hover:border-accent/40"
+              key={tab}
+              onClick={() => { playPopSound(); setActiveTab(tab); }}
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-all ${
+                activeTab === tab
+                  ? "bg-accent text-accent-foreground shadow-lg"
+                  : "bg-muted/30 text-muted-foreground hover:bg-muted/50"
               }`}
             >
-              {tab.label}
+              {tab === "materi" ? "Materi" : tab === "latihan" ? "Latihan Dasar" : "Latihan Olimpiade"}
             </button>
           ))}
         </div>
 
-        {/* Materi Tab */}
-        {activeTab === "materi" && (
-          <div className="space-y-3 animate-slide-up">
-            {materiSection.sections.map((section, idx) => (
-              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-                <button
-                  onClick={() => toggleSection(idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
-                >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
-                  {expandedSections.includes(idx) ? (
-                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
+        <div className="flex-1 overflow-y-auto px-4 pb-20 space-y-3 max-w-2xl mx-auto w-full">
+
+          {/* ── MATERI TAB ── */}
+          {activeTab === "materi" && (
+            <div className="space-y-2">
+              {materiSections.map((sec, i) => (
+                <div key={i} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl overflow-hidden">
+                  <button
+                    className="w-full flex items-center justify-between px-4 py-3 text-left"
+                    onClick={() => toggleSection(i)}
+                  >
+                    <span className="font-semibold text-accent text-sm">{sec.heading}</span>
+                    {openSection === i
+                      ? <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                      : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
+                  </button>
+                  {openSection === i && (
+                    <div className="px-4 pb-4">
+                      {sec.renderContent()}
+                    </div>
                   )}
-                </button>
-                {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── LATIHAN DASAR TAB ── */}
+          {activeTab === "latihan" && (
+            <div className="space-y-3">
+              {latihanDasar.map((q) => (
+                <div key={q.no} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="bg-accent/20 text-accent rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold shrink-0">
+                      {q.no}
+                    </span>
+                    <div className="flex-1 space-y-2">
+                      <p className="text-sm leading-relaxed whitespace-pre-line">
+                        {renderWithLatex(q.soal)}
+                      </p>
+                      {q.options.length > 0 && (
+                        <div className="grid grid-cols-2 gap-1">
+                          {q.options.map((opt, j) => (
+                            <div key={j} className="bg-muted/20 rounded px-2 py-1 text-xs">
+                              {renderWithLatex(opt)}
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Latihan Dasar Tab */}
-        {activeTab === "dasar" && (
-          <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                 </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
-        {/* Latihan Olimpiade Tab */}
-        {activeTab === "olimpiade" && (
-          <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
+          {/* ── LATIHAN OLIMPIADE TAB ── */}
+          {activeTab === "olimpiade" && (
+            <div className="space-y-3">
+              {latihanOlimpiade.map((q) => (
+                <div key={q.no} className="bg-card/50 backdrop-blur border border-border/50 rounded-xl p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="bg-yellow-400/20 text-yellow-400 rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold shrink-0">
+                      {q.no}
                     </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
-                    ))}
+                    <div className="flex-1 space-y-2">
+                      <p className="text-sm leading-relaxed whitespace-pre-line">
+                        {renderWithLatex(q.soal)}
+                      </p>
+                      {q.options.length > 0 && (
+                        <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
+                          {q.options.map((opt, j) => (
+                            <div key={j} className="bg-muted/20 rounded px-2 py-1 text-xs">
+                              {renderWithLatex(opt)}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/olimpiade"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
-          >
-            &larr; Kembali ke Olimpiade
-          </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
-};
-
-export default OlimpiadePeluangPage;
+}
