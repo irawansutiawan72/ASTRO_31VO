@@ -8,12 +8,13 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D CUBE — full drag + click-to-open/close faces
+   INTERACTIVE 3D CUBE — pivot/hinge-based folding, back = tumpuan
 ───────────────────────────────────────────────────────────── */
 type FName = "front" | "back" | "left" | "right" | "top" | "bottom";
 const ALL_FACES: FName[] = ["front", "back", "left", "right", "top", "bottom"];
-const OPEN_ORDER: FName[] = ["front", "right", "left", "top", "bottom", "back"];
-const S = 94; // cube side length in px
+// Sequential open order: establish tumpuan first, then unfold outward
+const OPEN_ORDER: FName[] = ["back", "top", "left", "right", "bottom", "front"];
+const S = 80;  // cube side length in px
 const H = S / 2;
 
 const FACE_COLORS: Record<FName, string> = {
@@ -29,25 +30,74 @@ const FACE_LABELS: Record<FName, string> = {
   right: "KANAN", top: "ATAS", bottom: "BAWAH",
 };
 
-// 3D closed-cube transforms
-const CLOSED_T: Record<FName, string> = {
-  front:  `translateZ(${H}px)`,
-  back:   `rotateY(180deg) translateZ(${H}px)`,
-  left:   `rotateY(-90deg) translateZ(${H}px)`,
-  right:  `rotateY(90deg) translateZ(${H}px)`,
-  top:    `rotateX(90deg) translateZ(${H}px)`,
-  bottom: `rotateX(-90deg) translateZ(${H}px)`,
+/* ── FacePanel: the coloured square rendered inside a hinge ── */
+const FacePanel = ({
+  face, isNext, isOpen, onClickFace, onClickNext, style,
+}: {
+  face: FName; isNext: boolean; isOpen: boolean;
+  onClickFace: () => void; onClickNext: () => void;
+  style?: React.CSSProperties;
+}) => {
+  const color = FACE_COLORS[face];
+  return (
+    <div
+      onClick={onClickFace}
+      style={{
+        position: "absolute",
+        width: S, height: S,
+        cursor: "pointer",
+        transformStyle: "preserve-3d",
+        ...style,
+      }}
+    >
+      {/* Outer face (visible side) */}
+      <div
+        style={{
+          position: "absolute", inset: 0,
+          background: color,
+          opacity: isNext ? 1 : 0.9,
+          border: isNext ? "3px solid #ffffff" : `2px solid ${color}cc`,
+          borderRadius: 6,
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center",
+          userSelect: "none",
+          boxShadow: isNext ? `0 0 20px ${color}` : `0 0 8px ${color}66`,
+        }}
+      >
+        <span style={{ color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+          {FACE_LABELS[face]}
+        </span>
+        {isNext ? (
+          <button
+            onClick={e => { e.stopPropagation(); onClickNext(); }}
+            style={{
+              marginTop: 5, background: "rgba(255,255,255,0.25)",
+              border: "1.5px solid white", borderRadius: 10, color: "#fff",
+              fontSize: 7, fontWeight: 700, padding: "2px 7px",
+              cursor: "pointer", letterSpacing: 0.5,
+            }}
+          >KLIK</button>
+        ) : (
+          <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 6, marginTop: 3, fontFamily: "monospace" }}>
+            {isOpen ? "▣" : "□ klik"}
+          </span>
+        )}
+      </div>
+      {/* Inner face (backface) */}
+      <div
+        style={{
+          position: "absolute", inset: 0,
+          background: color, opacity: 0.4,
+          border: `2px solid ${color}66`, borderRadius: 6,
+          transform: "rotateY(180deg)",
+          backfaceVisibility: "hidden",
+        }}
+      />
+    </div>
+  );
 };
 
-// Flat cross-net transforms (top-front-bottom vertically, left-right-back horizontally)
-const OPEN_T: Record<FName, string> = {
-  front:  `translate3d(0px, 0px, 0px)`,
-  top:    `translate3d(0px, ${-S}px, 0px)`,
-  bottom: `translate3d(0px, ${S}px, 0px)`,
-  back:   `translate3d(0px, ${S * 2}px, 0px)`,
-  left:   `translate3d(${-S}px, 0px, 0px)`,
-  right:  `translate3d(${S}px, 0px, 0px)`,
-};
+const TRANS = "transform 1.6s cubic-bezier(0.4, 0, 0.2, 1)";
 
 const InteractiveCube3D = () => {
   const [openFaces, setOpenFaces] = useState<Set<FName>>(new Set());
@@ -57,10 +107,11 @@ const InteractiveCube3D = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -22, baseRotY: 32 });
-  const sceneRef = useRef<HTMLDivElement>(null);
 
-  const allOpen = openFaces.size === 6;
+  const allOpen  = openFaces.size === 6;
   const allClosed = openFaces.size === 0;
+
+  const isOpen = (f: FName) => openFaces.has(f);
 
   const toggleFace = useCallback((face: FName) => {
     if (isDragging || isTransitioning) return;
@@ -76,11 +127,8 @@ const InteractiveCube3D = () => {
     if (isTransitioning) return;
     playPopSound();
     setIsTransitioning(true);
-    setRotX(-30); setRotY(0);
-    setTimeout(() => {
-      setOpenFaces(new Set(ALL_FACES));
-      setSeqStep(-1);
-    }, 350);
+    setRotX(-52); setRotY(0);
+    setTimeout(() => { setOpenFaces(new Set(ALL_FACES)); setSeqStep(-1); }, 300);
     setTimeout(() => setIsTransitioning(false), 2200);
   };
 
@@ -90,9 +138,7 @@ const InteractiveCube3D = () => {
     setIsTransitioning(true);
     setOpenFaces(new Set());
     setSeqStep(-1);
-    setTimeout(() => {
-      setRotX(-22); setRotY(32);
-    }, 300);
+    setTimeout(() => { setRotX(-22); setRotY(32); }, 400);
     setTimeout(() => setIsTransitioning(false), 2200);
   };
 
@@ -110,9 +156,10 @@ const InteractiveCube3D = () => {
     setIsTransitioning(true);
     const face = OPEN_ORDER[seqStep];
     setOpenFaces(prev => { const n = new Set(prev); n.add(face); return n; });
-    if (seqStep === OPEN_ORDER.length - 1) {
+    const isLast = seqStep === OPEN_ORDER.length - 1;
+    if (isLast) {
       setSeqStep(-1);
-      setTimeout(() => { setRotX(-30); setRotY(0); }, 400);
+      setTimeout(() => { setRotX(-52); setRotY(0); }, 400);
     } else {
       setSeqStep(seqStep + 1);
     }
@@ -126,13 +173,10 @@ const InteractiveCube3D = () => {
   };
   const onMouseMove = useCallback((e: MouseEvent) => {
     if (!isDragging) return;
-    const dx = e.clientX - dragRef.current.startX;
-    const dy = e.clientY - dragRef.current.startY;
-    setRotY(dragRef.current.baseRotY + dx * 0.5);
-    setRotX(dragRef.current.baseRotX - dy * 0.5);
+    setRotY(dragRef.current.baseRotY + (e.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (e.clientY - dragRef.current.startY) * 0.5);
   }, [isDragging]);
   const onMouseUp = useCallback(() => setIsDragging(false), []);
-
   const onTouchStart = (e: React.TouchEvent) => {
     const t = e.touches[0];
     setIsDragging(true);
@@ -141,10 +185,8 @@ const InteractiveCube3D = () => {
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (!isDragging) return;
     const t = e.touches[0];
-    const dx = t.clientX - dragRef.current.startX;
-    const dy = t.clientY - dragRef.current.startY;
-    setRotY(dragRef.current.baseRotY + dx * 0.5);
-    setRotX(dragRef.current.baseRotX - dy * 0.5);
+    setRotY(dragRef.current.baseRotY + (t.clientX - dragRef.current.startX) * 0.5);
+    setRotX(dragRef.current.baseRotX - (t.clientY - dragRef.current.startY) * 0.5);
   }, [isDragging]);
   const onTouchEnd = useCallback(() => setIsDragging(false), []);
 
@@ -163,110 +205,159 @@ const InteractiveCube3D = () => {
 
   const nextFace = seqStep >= 0 ? OPEN_ORDER[seqStep] : null;
 
+  const commonFaceProps = (face: FName) => ({
+    face,
+    isNext: nextFace === face,
+    isOpen: isOpen(face),
+    onClickFace: () => { if (!isDragging) toggleFace(face); },
+    onClickNext: openNextSeq,
+  });
+
+  /*
+   * NET LAYOUT (back = tumpuan at centre):
+   *
+   *          [top]           y: -S to 0
+   *   [left] [back] [right]  y: 0 to S
+   *          [bottom]        y: S to 2S
+   *          [front]         y: 2S to 3S
+   *
+   * Each non-back face lives inside a zero-height/zero-width HINGE div.
+   * The hinge is positioned at the shared edge with its parent face.
+   * Rotating the hinge around its own X or Y axis creates the paper-fold arc.
+   *
+   * Hinge closed transforms (RTL):
+   *   top    : translateZ(-H) rotateX(-90deg)
+   *   bottom : translateZ(-H) rotateX( 90deg)
+   *   left   : translateZ(-H) rotateY( 90deg)
+   *   right  : translateZ(-H) rotateY(-90deg)
+   *   front  : rotateX(90deg)   ← nested inside bottom hinge, additional 90° folds it vertical
+   */
+
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar · Klik sisi untuk membongkar/melipat · Gunakan tombol untuk kontrol cepat
+        Drag untuk memutar · Klik sisi untuk membongkar/melipat · Sisi BELAKANG (ungu) = tumpuan jaring-jaring
       </p>
 
       {/* Scene */}
       <div
-        ref={sceneRef}
-        className="relative mx-auto flex items-center justify-center select-none"
-        style={{ width: "100%", height: 340, cursor: isDragging ? "grabbing" : "grab" }}
+        className="relative mx-auto flex items-center justify-center select-none overflow-visible"
+        style={{ width: "100%", height: 360, cursor: isDragging ? "grabbing" : "grab" }}
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
       >
-        {/* Cube container */}
+        {/* Cube container — S×S box, cube centred inside, all hinges are children */}
         <div
           style={{
             width: S, height: S,
             position: "relative",
             transformStyle: "preserve-3d",
-            transform: `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+            transform: `perspective(860px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
             transition: isDragging ? "none" : "transform 0.6s ease",
           }}
         >
-          {ALL_FACES.map(face => {
-            const isOpen = openFaces.has(face);
-            const isNext = nextFace === face;
-            const color = FACE_COLORS[face];
+          {/* ── BACK FACE (tumpuan) ── always at centre in the flat net */}
+          <div
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: S, height: S,
+              transformStyle: "preserve-3d",
+              transform: isOpen("back")
+                ? "translate3d(0,0,0)"
+                : `rotateY(180deg) translateZ(${H}px)`,
+              transition: TRANS,
+            }}
+          >
+            <FacePanel {...commonFaceProps("back")} style={{ top: 0, left: 0 }} />
+          </div>
 
-            return (
-              <div
-                key={face}
-                onClick={() => { if (!isDragging) toggleFace(face); }}
-                style={{
-                  position: "absolute",
-                  width: S, height: S,
-                  top: 0, left: 0,
-                  transform: isOpen ? OPEN_T[face] : CLOSED_T[face],
-                  transition: "transform 1.6s cubic-bezier(0.4, 0, 0.2, 1)",
-                  transformStyle: "preserve-3d",
-                  cursor: "pointer",
-                }}
-              >
-                {/* Face front */}
-                <div
-                  style={{
-                    position: "absolute", inset: 0,
-                    background: color,
-                    opacity: isNext ? 1 : 0.88,
-                    border: isNext
-                      ? "3px solid #ffffff"
-                      : `2px solid ${color}cc`,
-                    borderRadius: 6,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    userSelect: "none",
-                    boxShadow: isNext ? `0 0 18px ${color}` : `0 0 8px ${color}66`,
-                  }}
-                >
-                  <span style={{ color: "#fff", fontSize: 10, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
-                    {FACE_LABELS[face]}
-                  </span>
-                  {isNext && (
-                    <button
-                      onClick={e => { e.stopPropagation(); openNextSeq(); }}
-                      style={{
-                        marginTop: 6,
-                        background: "rgba(255,255,255,0.25)",
-                        border: "1.5px solid white",
-                        borderRadius: 10,
-                        color: "#fff",
-                        fontSize: 8,
-                        fontWeight: 700,
-                        padding: "2px 8px",
-                        cursor: "pointer",
-                        letterSpacing: 0.5,
-                      }}
-                    >
-                      KLIK DI SINI
-                    </button>
-                  )}
-                  {!isNext && (
-                    <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 7, marginTop: 4, fontFamily: "monospace" }}>
-                      {isOpen ? "▣ terbuka" : "□ klik"}
-                    </span>
-                  )}
-                </div>
-                {/* Face back (visible when flipped) */}
-                <div
-                  style={{
-                    position: "absolute", inset: 0,
-                    background: color,
-                    opacity: 0.5,
-                    border: `2px solid ${color}88`,
-                    borderRadius: 6,
-                    transform: "rotateY(180deg)",
-                    backfaceVisibility: "hidden",
-                  }}
-                />
-              </div>
-            );
-          })}
+          {/* ── TOP HINGE (pivot at top edge of back, y=0 in container) ── */}
+          <div
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: S, height: 0,
+              transformStyle: "preserve-3d",
+              transformOrigin: "50% 0% 0",
+              transform: isOpen("top")
+                ? "rotateX(0deg)"
+                : `translateZ(-${H}px) rotateX(-90deg)`,
+              transition: TRANS,
+            }}
+          >
+            {/* Top face extends ABOVE hinge (top = -S) */}
+            <FacePanel {...commonFaceProps("top")} style={{ top: -S, left: 0 }} />
+          </div>
+
+          {/* ── BOTTOM HINGE (pivot at bottom edge of back, y=S in container) ── */}
+          <div
+            style={{
+              position: "absolute", top: S, left: 0,
+              width: S, height: 0,
+              transformStyle: "preserve-3d",
+              transformOrigin: "50% 0% 0",
+              transform: isOpen("bottom")
+                ? "rotateX(0deg)"
+                : `translateZ(-${H}px) rotateX(90deg)`,
+              transition: TRANS,
+            }}
+          >
+            {/* Bottom face extends BELOW hinge (top = 0) */}
+            <FacePanel {...commonFaceProps("bottom")} style={{ top: 0, left: 0 }} />
+
+            {/* ── FRONT HINGE — nested inside bottom hinge ──
+                Positioned at trailing edge of bottom face (top = S within bottom hinge).
+                closed: additional rotateX(90deg) in bottom's local space folds it vertical.
+                open:   rotateX(0deg) — face hangs flat below bottom face. */}
+            <div
+              style={{
+                position: "absolute", top: S, left: 0,
+                width: S, height: 0,
+                transformStyle: "preserve-3d",
+                transformOrigin: "50% 0% 0",
+                transform: isOpen("front")
+                  ? "rotateX(0deg)"
+                  : "rotateX(90deg)",
+                transition: TRANS,
+              }}
+            >
+              {/* Front face extends BELOW front hinge (top = 0) */}
+              <FacePanel {...commonFaceProps("front")} style={{ top: 0, left: 0 }} />
+            </div>
+          </div>
+
+          {/* ── LEFT HINGE (pivot at left edge of back, x=0 in container) ── */}
+          <div
+            style={{
+              position: "absolute", top: 0, left: 0,
+              width: 0, height: S,
+              transformStyle: "preserve-3d",
+              transformOrigin: "0% 50% 0",
+              transform: isOpen("left")
+                ? "rotateY(0deg)"
+                : `translateZ(-${H}px) rotateY(90deg)`,
+              transition: TRANS,
+            }}
+          >
+            {/* Left face extends to the LEFT of hinge (left = -S) */}
+            <FacePanel {...commonFaceProps("left")} style={{ top: 0, left: -S }} />
+          </div>
+
+          {/* ── RIGHT HINGE (pivot at right edge of back, x=S in container) ── */}
+          <div
+            style={{
+              position: "absolute", top: 0, left: S,
+              width: 0, height: S,
+              transformStyle: "preserve-3d",
+              transformOrigin: "0% 50% 0",
+              transform: isOpen("right")
+                ? "rotateY(0deg)"
+                : `translateZ(-${H}px) rotateY(-90deg)`,
+              transition: TRANS,
+            }}
+          >
+            {/* Right face extends to the RIGHT of hinge (left = 0) */}
+            <FacePanel {...commonFaceProps("right")} style={{ top: 0, left: 0 }} />
+          </div>
         </div>
       </div>
 
@@ -294,15 +385,18 @@ const InteractiveCube3D = () => {
         </button>
       </div>
 
-      {/* Face color legend */}
+      {/* Face colour legend */}
       <div className="flex flex-wrap gap-1.5 justify-center">
         {ALL_FACES.map(f => (
           <div key={f} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-sm" style={{ background: FACE_COLORS[f] }} />
-            <span className="text-white/50 text-[10px] font-body">{FACE_LABELS[f]}</span>
+            <span className="text-white/50 text-[10px] font-body">
+              {FACE_LABELS[f]}{f === "back" ? " ★" : ""}
+            </span>
           </div>
         ))}
       </div>
+      <p className="text-white/30 text-[9px] text-center font-body">★ = tumpuan jaring-jaring</p>
     </div>
   );
 };
