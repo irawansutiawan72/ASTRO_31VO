@@ -30,7 +30,14 @@ const SegitigaSegiempatPage = () => {
           {subtopics.map((subtopic, i) => (
             <button
               key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              onClick={() => {
+                playPopSound();
+                if (subtopic === "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA") {
+                  navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi");
+                } else {
+                  navigate("/coming-soon");
+                }
+              }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
