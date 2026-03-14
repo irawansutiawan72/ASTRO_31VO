@@ -63,7 +63,7 @@ const TentangAplikasiPage = () => {
             <img
               src="/logo-numatik.png"
               alt="NUMATIK Logo"
-              className="relative w-32 h-32 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity animate-float-slow drop-shadow-[0_0_20px_rgba(234,179,8,0.5)]"
+              className="relative w-32 h-32 mx-auto object-contain opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_0_20px_rgba(234,179,8,0.5)]"
             />
           </div>
           <h1 className="font-display text-3xl md:text-4xl font-black text-primary text-glow-cyan mb-2">
