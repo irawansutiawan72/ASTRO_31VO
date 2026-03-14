@@ -215,7 +215,7 @@ const TabelFrekuensiMean = () => (
         <tr className="bg-accent/10 font-bold">
           <td className="border border-border/50 px-3 py-2 text-accent text-center">Jumlah</td>
           <td className="border border-border/50 px-3 py-2 text-accent text-center">∑f = 20</td>
-          <td className="border border-border/50 px-3 py-2 text-accent text-center">∑fx = 147</td>
+          <td className="border border-border/50 px-3 py-2 text-accent text-center">∑fx = 150</td>
         </tr>
       </tbody>
     </table>
@@ -457,13 +457,19 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
 
         <div>
           <div className="text-accent font-bold text-xs mb-1">Contoh 3:</div>
-          <p className="text-xs">Rata-rata nilai ulangan matematika di suatu kelas adalah 7,5. Jika rata-rata nilai siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 7,8, maka berapakah perbandingan jumlah siswa laki-laki dan perempuan?</p>
-          <div className="bg-muted/20 rounded px-3 py-2 text-xs mt-1">
-            {renderLines('$\\bar{x}_{gab} = \\frac{n_L \\cdot 7{,}2 + n_P \\cdot 7{,}8}{n_L + n_P} = 7{,}5$')}
-            {renderLines('$7{,}2 n_L + 7{,}8 n_P = 7{,}5 n_L + 7{,}5 n_P$')}
-            {renderLines('$0{,}3 n_P = 0{,}3 n_L \\Rightarrow n_L : n_P = 1 : 1$')}
-            <div className="text-white/50 mt-1">Catatan: Jika rata-rata gabungan = 7,5, laki-laki 7,2 (selisih 0,3 di bawah), perempuan 7,8 (selisih 0,3 di atas) → perbandingan n_L : n_P = 0,3 : 0,3 = 1 : 1.</div>
-            <div className="text-accent mt-1">Sesuai dokumen: Jika rata-rata siswa laki-laki adalah 7,2 dan perempuan 7,8 maka hasilnya n_L : n_P = 1 : 1.</div>
+          <p className="text-xs">Rata-rata nilai ulangan matematika di suatu kelas adalah 7,5. Jika rata-rata nilai siswa laki-laki adalah 7,2 dan rata-rata nilai siswa perempuan adalah 7,8, maka berapakah perbandingan jumlah siswa laki-laki dan perempuan pada kelas tersebut?</p>
+          <div className="bg-muted/20 rounded px-3 py-2 text-xs mt-1 space-y-1">
+            <div className="text-white/60">Diketahui:</div>
+            <div>Rata-rata gabungan kelas {renderWithLatex('$(\\bar{x}_{gab})$')} = 7,5</div>
+            <div>Siswa Laki-laki: {renderWithLatex('$\\bar{x}_L = 7{,}3$')}</div>
+            <div>Siswa Perempuan: {renderWithLatex('$\\bar{x}_P = 7{,}8$')}</div>
+            <div className="text-white/60 mt-1">Penyelesaian:</div>
+            {renderLines('$\\bar{x}_{gab} = \\frac{n_L \\cdot \\bar{x}_L + n_P \\cdot \\bar{x}_P}{n_L + n_P}$')}
+            {renderLines('$7{,}5 = \\frac{7{,}3 \\cdot n_L + 7{,}8 \\cdot n_P}{n_L + n_P}$')}
+            {renderLines('$7{,}5 n_L + 7{,}5 n_P = 7{,}3 n_L + 7{,}8 n_P$')}
+            {renderLines('$0{,}2 n_L = 0{,}3 n_P$')}
+            {renderLines('$\\frac{n_L}{n_P} = \\frac{0{,}3}{0{,}2} = \\frac{3}{2}$')}
+            <div className="text-accent font-bold mt-1">Jadi, perbandingan jumlah siswa laki-laki dan perempuan di kelas tersebut adalah 3 : 2.</div>
           </div>
         </div>
       </div>
@@ -575,8 +581,8 @@ Sampel: Sebagian dari populasi yang diambil untuk diteliti. Sampel harus represe
           <div className="bg-muted/20 rounded px-3 py-2 text-xs mt-1 space-y-1">
             <div>Diurutkan: 45, 52, 53, 54, 56, 60, 68, 72, 78, 80</div>
             <div>Q₂ = {renderWithLatex('$\\frac{56+60}{2} = 58$')}</div>
-            <div>Q₁ = median dari 45, 52, 53, 54 = {renderWithLatex('$\\frac{52+53}{2} = 53$')}</div>
-            <div>Q₃ = median dari 68, 72, 78, 80 = {renderWithLatex('$\\frac{72+78}{2} = 75$')}</div>
+            <div>Q₁ = median dari 45, 52, <span className="text-cyan-400 font-bold">53</span>, 54, 56 = <span className="text-accent font-bold">53</span></div>
+            <div>Q₃ = median dari 60, 68, <span className="text-cyan-400 font-bold">72</span>, 78, 80 = <span className="text-accent font-bold">72</span></div>
           </div>
         </div>
 
