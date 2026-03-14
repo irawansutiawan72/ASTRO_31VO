@@ -5,13 +5,13 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "KALIMAT TERBUKA DAN TERTUTUP (PERNYATAAN)",
-  "PENGERTIAN PLSV, KESAMAAN, DAN PERNYATAAAN EKUIVALEN",
-  "PENYELESAIAN PERSAMAAN LINEAR SATU VARIABEL",
-  "MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA",
-  "PENGERTIAN KETIDAKSAMAAN, PERTIDAKSAMAAN DAN PtLSV",
-  "PENYELESAIAN PERTIDAKSAMAAN LINEAR SATU VARIABEL",
-  "MODEL MATEMATIKA DAN PENERAPAN PERTIDAKSAMAAN PADA SOAL CERITA",
+  { label: "KALIMAT TERBUKA DAN TERTUTUP (PERNYATAAN)", path: "/materi-matematika/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" },
+  { label: "PENGERTIAN PLSV, KESAMAAN, DAN PERNYATAAN EKUIVALEN", path: "/materi-matematika/kelas-7/plsv-ptlsv/pengertian-plsv" },
+  { label: "PENYELESAIAN PERSAMAAN LINEAR SATU VARIABEL", path: "/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-plsv" },
+  { label: "MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA", path: "/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-plsv" },
+  { label: "PENGERTIAN KETIDAKSAMAAN, PERTIDAKSAMAAN DAN PtLSV", path: "/materi-matematika/kelas-7/plsv-ptlsv/pengertian-ptlsv" },
+  { label: "PENYELESAIAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", path: "/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" },
+  { label: "MODEL MATEMATIKA DAN PENERAPAN PERTIDAKSAMAAN PADA SOAL CERITA", path: "/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-ptlsv" },
 ];
 
 const PLSVPtLSVPage = () => {
@@ -29,17 +29,17 @@ const PLSVPtLSVPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Materi Matematika</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
+          {subtopics.map(({ label, path }, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={label}
+              onClick={() => { playPopSound(); navigate(path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{label}</span>
             </button>
           ))}
         </div>

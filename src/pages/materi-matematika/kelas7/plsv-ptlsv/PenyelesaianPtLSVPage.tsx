@@ -124,7 +124,9 @@ const PenyelesaianPtLSVPage = () => {
                 </div>
               </div>
             )}
-          </div>ali Bagi Negatif */}
+          </div>
+
+          {/* Kali Bagi Negatif */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button onClick={() => toggleSection("kalibagi_neg")} className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer">
               <div className="flex items-center gap-3">

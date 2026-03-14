@@ -185,6 +185,13 @@ import SubstitusiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/
 import FaktorisasiAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/FaktorisasiPage";
 import OperasiPecahanAljabarMMK7Page from "./pages/materi-matematika/kelas7/aljabar/OperasiPecahanPage";
 import PLSVPtLSVMMK7Page from "./pages/materi-matematika/kelas7/PLSVPtLSVPage";
+import KalimatTerbukaTertutupPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/KalimatTerbukaTertutupPage";
+import PengertianPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPLSVPage";
+import PenyelesaianPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPLSVPage";
+import ModelMatematikaPLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPLSVPage";
+import PengertianPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PengertianPtLSVPage";
+import PenyelesaianPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/PenyelesaianPtLSVPage";
+import ModelMatematikaPtLSVPage from "./pages/materi-matematika/kelas7/plsv-ptlsv/ModelMatematikaPtLSVPage";
 import PerbandinganMMK7Page from "./pages/materi-matematika/kelas7/PerbandinganPage";
 import PerbandinganUmumMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganUmumPage";
 import PerbandinganSenilaiMMK7Page from "./pages/materi-matematika/kelas7/perbandingan/PerbandinganSenilaiPage";
@@ -426,6 +433,13 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/aljabar/faktorisasi" element={<FaktorisasiAljabarMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/aljabar/operasi-pecahan" element={<OperasiPecahanAljabarMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/kalimat-terbuka-tertutup" element={<KalimatTerbukaTertutupPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-plsv" element={<PengertianPLSVPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-plsv" element={<PenyelesaianPLSVPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-plsv" element={<ModelMatematikaPLSVPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/pengertian-ptlsv" element={<PengertianPtLSVPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" element={<PenyelesaianPtLSVPage />} />
+      <Route path="/materi-matematika/kelas-7/plsv-ptlsv/model-matematika-ptlsv" element={<ModelMatematikaPtLSVPage />} />
       <Route path="/materi-matematika/kelas-7/perbandingan" element={<PerbandinganMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan/umum" element={<PerbandinganUmumMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/perbandingan/senilai" element={<PerbandinganSenilaiMMK7Page />} />
