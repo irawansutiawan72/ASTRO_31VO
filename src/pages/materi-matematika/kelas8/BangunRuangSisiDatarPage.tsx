@@ -7,7 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 const subtopics = [
   { name: "UNSUR-UNSUR BANGUN RUANG", path: "/coming-soon" },
   { name: "KUBUS", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" },
-  { name: "BALOK", path: "/coming-soon" },
+  { name: "BALOK", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" },
   { name: "PRISMA", path: "/coming-soon" },
   { name: "LIMAS", path: "/coming-soon" },
   { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/coming-soon" },
