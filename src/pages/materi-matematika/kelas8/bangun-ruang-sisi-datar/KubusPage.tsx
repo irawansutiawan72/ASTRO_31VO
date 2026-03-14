@@ -12,8 +12,8 @@ import { playPopSound } from "@/hooks/useAudio";
 ───────────────────────────────────────────────────────────── */
 type FName = "front" | "back" | "left" | "right" | "top" | "bottom";
 const ALL_FACES: FName[] = ["front", "back", "left", "right", "top", "bottom"];
-// Sequential open order: establish tumpuan first, then unfold outward
-const OPEN_ORDER: FName[] = ["back", "top", "left", "right", "bottom", "front"];
+// Sequential open order: back is always the tumpuan, unfold the rest outward
+const OPEN_ORDER: FName[] = ["top", "left", "right", "bottom", "front"];
 const S = 80;  // cube side length in px
 const H = S / 2;
 
@@ -108,13 +108,13 @@ const InteractiveCube3D = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const dragRef = useRef({ startX: 0, startY: 0, baseRotX: -22, baseRotY: 32 });
 
-  const allOpen  = openFaces.size === 6;
+  const allOpen  = OPEN_ORDER.every(f => openFaces.has(f));
   const allClosed = openFaces.size === 0;
 
   const isOpen = (f: FName) => openFaces.has(f);
 
   const toggleFace = useCallback((face: FName) => {
-    if (isDragging || isTransitioning) return;
+    if (face === "back" || isDragging || isTransitioning) return;
     playPopSound();
     setOpenFaces(prev => {
       const next = new Set(prev);
@@ -128,7 +128,7 @@ const InteractiveCube3D = () => {
     playPopSound();
     setIsTransitioning(true);
     setRotX(-52); setRotY(0);
-    setTimeout(() => { setOpenFaces(new Set(ALL_FACES)); setSeqStep(-1); }, 300);
+    setTimeout(() => { setOpenFaces(new Set(OPEN_ORDER)); setSeqStep(-1); }, 300);
     setTimeout(() => setIsTransitioning(false), 2200);
   };
 
@@ -236,7 +236,7 @@ const InteractiveCube3D = () => {
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Drag untuk memutar · Klik sisi untuk membongkar/melipat · Sisi BELAKANG (ungu) = tumpuan jaring-jaring
+        Drag untuk memutar · Klik sisi untuk membongkar/melipat · Sisi BELAKANG (ungu) = tumpuan tetap jaring-jaring
       </p>
 
       {/* Scene */}
@@ -256,19 +256,47 @@ const InteractiveCube3D = () => {
             transition: isDragging ? "none" : "transform 0.6s ease",
           }}
         >
-          {/* ── BACK FACE (tumpuan) ── always at centre in the flat net */}
+          {/* ── BACK FACE (tumpuan) ── fixed at centre, never moves, never clickable */}
           <div
             style={{
               position: "absolute", top: 0, left: 0,
               width: S, height: S,
               transformStyle: "preserve-3d",
-              transform: isOpen("back")
-                ? "translate3d(0,0,0)"
-                : `rotateY(180deg) translateZ(${H}px)`,
+              transform: "translate3d(0,0,0)",
               transition: TRANS,
             }}
           >
-            <FacePanel {...commonFaceProps("back")} style={{ top: 0, left: 0 }} />
+            <div
+              style={{
+                position: "absolute",
+                width: S, height: S,
+                transformStyle: "preserve-3d",
+                top: 0, left: 0,
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute", inset: 0,
+                  background: FACE_COLORS["back"],
+                  opacity: 0.9,
+                  border: `2px solid ${FACE_COLORS["back"]}cc`,
+                  borderRadius: 6,
+                  display: "flex", flexDirection: "column",
+                  alignItems: "center", justifyContent: "center",
+                  userSelect: "none",
+                  boxShadow: `0 0 8px ${FACE_COLORS["back"]}66`,
+                  cursor: "default",
+                  pointerEvents: "none",
+                }}
+              >
+                <span style={{ color: "#fff", fontSize: 9, fontWeight: 700, letterSpacing: 1, fontFamily: "monospace" }}>
+                  {FACE_LABELS["back"]}
+                </span>
+                <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 7, marginTop: 3, fontFamily: "monospace" }}>
+                  ★ tumpuan
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* ── TOP HINGE (pivot at top edge of back, y=0 in container) ── */}
