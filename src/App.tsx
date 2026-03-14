@@ -17,6 +17,7 @@ import OlimpiadePage from "./pages/OlimpiadePage";
 import OlimpiadeBilanganBulatPage from "./pages/OlimpiadeBilanganBulatPage";
 import OlimpiadeBilanganRasionalPage from "./pages/OlimpiadeBilanganRasionalPage";
 import OlimpiadeBilanganBerpangkatPage from "./pages/OlimpiadeBilanganBerpangkatPage";
+import OlimpiadeStatistikaPage from "./pages/OlimpiadeStatistikaPage";
 import OlimpiadeBilanganIrasionalPage from "./pages/OlimpiadeBilanganIrasionalPage";
 import OlimpiadeKPKFPBPage from "./pages/OlimpiadeKPKFPBPage";
 import OlimpiadeModuloPage from "./pages/OlimpiadeModuloPage";
@@ -270,6 +271,7 @@ const AppInner = () => {
       <Route path="/olimpiade/bilangan-bulat" element={<OlimpiadeBilanganBulatPage />} />
       <Route path="/olimpiade/bilangan-rasional" element={<OlimpiadeBilanganRasionalPage />} />
       <Route path="/olimpiade/bilangan-berpangkat" element={<OlimpiadeBilanganBerpangkatPage />} />
+      <Route path="/olimpiade/statistika" element={<OlimpiadeStatistikaPage />} />
       <Route path="/olimpiade/bilangan-irasional" element={<OlimpiadeBilanganIrasionalPage />} />
       <Route path="/olimpiade/kpk-fpb" element={<OlimpiadeKPKFPBPage />} />
       <Route path="/olimpiade/modulo" element={<OlimpiadeModuloPage />} />
