@@ -704,44 +704,77 @@ const LuasPermukaanSVG = () => (
    VOLUME ANIMATION
 ───────────────────────────────────────────────────────────── */
 const VolumeSVG = () => (
-  <svg viewBox="0 0 300 220" className="w-full max-w-sm mx-auto my-2" aria-label="Animasi volume kubus — isi yang bersinar">
+  <svg viewBox="0 0 300 230" className="w-full max-w-sm mx-auto my-2" aria-label="Animasi volume kubus — kubus utuh bersinar">
     <defs>
       <style>{`
-        @keyframes volGlow{0%,100%{opacity:0.75;filter:drop-shadow(0 0 8px #22d3ee);}50%{opacity:0.15;filter:drop-shadow(0 0 0 #22d3ee);}}
-        .vol-a{animation:volGlow 2s ease-in-out infinite;}
-        @keyframes layerFill{0%,100%{fill-opacity:0.65;}50%{fill-opacity:0.12;}}
-        .l1{animation:layerFill 2s ease-in-out infinite;}
-        .l2{animation:layerFill 2s ease-in-out infinite 0.5s;}
-        .l3{animation:layerFill 2s ease-in-out infinite 1s;}
+        @keyframes faceGlowTop{0%,100%{fill-opacity:0.92;filter:drop-shadow(0 0 14px #a78bfa);}50%{fill-opacity:0.65;filter:drop-shadow(0 0 4px #7c3aed);}}
+        @keyframes faceGlowLeft{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 12px #60a5fa);}50%{fill-opacity:0.55;filter:drop-shadow(0 0 3px #1d4ed8);}}
+        @keyframes faceGlowRight{0%,100%{fill-opacity:0.85;filter:drop-shadow(0 0 12px #818cf8);}50%{fill-opacity:0.50;filter:drop-shadow(0 0 3px #4338ca);}}
+        @keyframes edgeGlow{0%,100%{stroke-opacity:1;stroke-width:2.5;filter:drop-shadow(0 0 6px #e0e7ff);}50%{stroke-opacity:0.4;stroke-width:1.5;filter:drop-shadow(0 0 1px #e0e7ff);}}
+        @keyframes labelPulse{0%,100%{opacity:1;}50%{opacity:0.55;}}
+        .vol-top{animation:faceGlowTop 2.4s ease-in-out infinite;}
+        .vol-left{animation:faceGlowLeft 2.4s ease-in-out infinite 0.4s;}
+        .vol-right{animation:faceGlowRight 2.4s ease-in-out infinite 0.8s;}
+        .vol-edge{animation:edgeGlow 2.4s ease-in-out infinite;}
+        .vol-lbl{animation:labelPulse 2.4s ease-in-out infinite;}
       `}</style>
+      <filter id="volBloom">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
     </defs>
-    {/* 3 layer visualization */}
-    {/* Bottom layer */}
-    <polygon points="30,160 120,120 220,120 130,160" fill="#3b82f6" className="l1" stroke="#60a5fa" strokeWidth="1"/>
-    <rect x="30" y="160" width="100" height="30" fill="#1d4ed8" className="l1" stroke="#60a5fa" strokeWidth="1"/>
-    <rect x="130" y="160" width="90" height="30" fill="#2563eb" className="l1" stroke="#60a5fa" strokeWidth="1"/>
-    {/* Middle layer */}
-    <polygon points="30,130 120,90 220,90 130,130" fill="#22c55e" className="l2" stroke="#4ade80" strokeWidth="1"/>
-    <rect x="30" y="130" width="100" height="30" fill="#15803d" className="l2" stroke="#4ade80" strokeWidth="1"/>
-    <rect x="130" y="130" width="90" height="30" fill="#16a34a" className="l2" stroke="#4ade80" strokeWidth="1"/>
-    {/* Top layer */}
-    <polygon points="30,100 120,60 220,60 130,100" fill="#eab308" className="l3" stroke="#facc15" strokeWidth="1"/>
-    <rect x="30" y="100" width="100" height="30" fill="#a16207" className="l3" stroke="#facc15" strokeWidth="1"/>
-    <rect x="130" y="100" width="90" height="30" fill="#ca8a04" className="l3" stroke="#facc15" strokeWidth="1"/>
-    {/* Cube outline */}
-    <polygon points="30,100 120,60 220,60 130,100" fill="none" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.5"/>
-    <polygon points="30,190 120,150 220,150 130,190" fill="none" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.5"/>
-    <line x1="30" y1="100" x2="30" y2="190" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.5"/>
-    <line x1="130" y1="100" x2="130" y2="190" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.5"/>
-    <line x1="220" y1="60" x2="220" y2="150" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.5"/>
-    {/* Labels */}
-    <text x="15" y="148" fill="#3b82f6" fontSize="9" fontFamily="monospace">s</text>
-    <text x="15" y="118" fill="#22c55e" fontSize="9" fontFamily="monospace">s</text>
-    <text x="15" y="88" fill="#eab308" fontSize="9" fontFamily="monospace">s</text>
-    <text x="215" y="58" fill="#facc15" fontSize="9" fontFamily="monospace">s</text>
-    <text x="110" y="210" fill="#e2e8f0" fontSize="9" fontFamily="monospace" textAnchor="middle">s (alas)</text>
-    {/* V arrow */}
-    <text x="150" y="210" fill="#22d3ee" fontSize="12" fontFamily="monospace" fontWeight="bold" textAnchor="middle">V = s³</text>
+
+    {/* ── Isometric solid cube ── */}
+    {/* Top face */}
+    <polygon
+      points="150,28 74,72 150,116 226,72"
+      fill="#7c3aed" className="vol-top"
+      stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"
+    />
+    {/* Left face */}
+    <polygon
+      points="74,72 74,162 150,206 150,116"
+      fill="#1d4ed8" className="vol-left"
+      stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"
+    />
+    {/* Right face */}
+    <polygon
+      points="226,72 226,162 150,206 150,116"
+      fill="#4338ca" className="vol-right"
+      stroke="#a5b4fc" strokeWidth="2" strokeLinejoin="round"
+    />
+
+    {/* Glowing edges */}
+    {/* Top face edges */}
+    <polyline points="150,28 74,72 150,116 226,72 150,28"
+      fill="none" stroke="#e0e7ff" strokeWidth="2" className="vol-edge" strokeLinejoin="round"/>
+    {/* Vertical edges */}
+    <line x1="74" y1="72" x2="74" y2="162" stroke="#93c5fd" strokeWidth="2" className="vol-edge"/>
+    <line x1="226" y1="72" x2="226" y2="162" stroke="#a5b4fc" strokeWidth="2" className="vol-edge"/>
+    <line x1="150" y1="116" x2="150" y2="206" stroke="#c4b5fd" strokeWidth="2" className="vol-edge"/>
+    {/* Bottom face edges */}
+    <polyline points="74,162 150,206 226,162"
+      fill="none" stroke="#e0e7ff" strokeWidth="2" className="vol-edge" strokeLinejoin="round"/>
+
+    {/* Dimension labels */}
+    {/* s on left vertical edge */}
+    <text x="52" y="122" fill="#93c5fd" fontSize="11" fontFamily="monospace" fontWeight="bold" className="vol-lbl">s</text>
+    <line x1="66" y1="72" x2="66" y2="162" stroke="#93c5fd" strokeWidth="1" strokeDasharray="3,3" opacity="0.6"/>
+    <line x1="62" y1="72" x2="70" y2="72" stroke="#93c5fd" strokeWidth="1" opacity="0.6"/>
+    <line x1="62" y1="162" x2="70" y2="162" stroke="#93c5fd" strokeWidth="1" opacity="0.6"/>
+
+    {/* s on top-right edge */}
+    <text x="196" y="48" fill="#c4b5fd" fontSize="11" fontFamily="monospace" fontWeight="bold" className="vol-lbl">s</text>
+    <line x1="152" y1="22" x2="228" y2="66" stroke="#c4b5fd" strokeWidth="1" strokeDasharray="3,3" opacity="0.5"/>
+
+    {/* s on top-left edge */}
+    <text x="94" y="46" fill="#a5b4fc" fontSize="11" fontFamily="monospace" fontWeight="bold" className="vol-lbl">s</text>
+
+    {/* Formula */}
+    <text x="150" y="224" fill="#e0e7ff" fontSize="14" fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" filter="url(#volBloom)" className="vol-lbl">
+      V = s³
+    </text>
   </svg>
 );
 
