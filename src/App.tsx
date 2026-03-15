@@ -223,6 +223,7 @@ import KubusMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-da
 import BalokMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage";
 import PrismaMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
+import PengertianKeanggotaanHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage";
 
 // Materi Matematika - Kelas 8 Topic Pages
 import PolaBilanganMMK8Page from "./pages/materi-matematika/kelas8/PolaBilanganPage";
@@ -473,6 +474,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatPage />} />
       <Route path="/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanPage />} />
       <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
+      <Route path="/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanPage />} />
       
       {/* Materi Matematika - Kelas 8 Topic Routes */}
       <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />

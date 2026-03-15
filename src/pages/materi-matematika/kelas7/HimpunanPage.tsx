@@ -5,11 +5,11 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "PENGERTIAN DAN KEANGGOTAAAN SUATU HIMPUNAN",
-  "MENYATAKAN SUATU HIMPUNAN, HIMPUNAN KOSONG DAN HIMPUNAN SEMESTA",
-  "DIAGRAM VENN",
-  "HIMPUNAN BAGIAN",
-  "OPERASI HIMPUNAN",
+  { label: "PENGERTIAN DAN KEANGGOTAAAN SUATU HIMPUNAN", path: "/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" },
+  { label: "MENYATAKAN SUATU HIMPUNAN, HIMPUNAN KOSONG DAN HIMPUNAN SEMESTA", path: "/coming-soon" },
+  { label: "DIAGRAM VENN", path: "/coming-soon" },
+  { label: "HIMPUNAN BAGIAN", path: "/coming-soon" },
+  { label: "OPERASI HIMPUNAN", path: "/coming-soon" },
 ];
 
 const HimpunanPage = () => {
@@ -29,15 +29,15 @@ const HimpunanPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.label}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.label}</span>
             </button>
           ))}
         </div>
