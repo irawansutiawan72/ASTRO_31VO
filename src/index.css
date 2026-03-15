@@ -510,6 +510,46 @@
 .light-mode .bg-background\/60 { background-color: rgba(240,249,255,0.75) !important; }
 .light-mode .bg-background\/40 { background-color: rgba(240,249,255,0.55) !important; }
 
+/* ── Very light shades (100–200) → deep readable colors ── */
+.light-mode .text-cyan-100        { color: #0369a1 !important; }
+.light-mode .text-cyan-200        { color: #0284c7 !important; }
+.light-mode .text-blue-100        { color: #1e40af !important; }
+.light-mode .text-blue-200        { color: #1d4ed8 !important; }
+.light-mode .text-sky-100         { color: #0369a1 !important; }
+.light-mode .text-sky-200         { color: #0284c7 !important; }
+.light-mode .text-violet-100      { color: #5b21b6 !important; }
+.light-mode .text-violet-200      { color: #6d28d9 !important; }
+.light-mode .text-purple-100      { color: #6b21a8 !important; }
+.light-mode .text-purple-200      { color: #7c3aed !important; }
+.light-mode .text-indigo-100      { color: #312e81 !important; }
+.light-mode .text-indigo-200      { color: #3730a3 !important; }
+.light-mode .text-orange-100      { color: #9a3412 !important; }
+.light-mode .text-orange-200      { color: #c2410c !important; }
+.light-mode .text-amber-100       { color: #92400e !important; }
+.light-mode .text-amber-200       { color: #b45309 !important; }
+.light-mode .text-yellow-100      { color: #92400e !important; }
+.light-mode .text-yellow-200      { color: #b45309 !important; }
+.light-mode .text-green-100       { color: #14532d !important; }
+.light-mode .text-green-200       { color: #15803d !important; }
+.light-mode .text-emerald-100     { color: #064e3b !important; }
+.light-mode .text-emerald-200     { color: #047857 !important; }
+.light-mode .text-teal-100        { color: #134e4a !important; }
+.light-mode .text-teal-200        { color: #0f766e !important; }
+.light-mode .text-red-100         { color: #991b1b !important; }
+.light-mode .text-red-200         { color: #b91c1c !important; }
+.light-mode .text-rose-100        { color: #9f1239 !important; }
+.light-mode .text-rose-200        { color: #be123c !important; }
+.light-mode .text-pink-100        { color: #9d174d !important; }
+.light-mode .text-pink-200        { color: #be185d !important; }
+.light-mode .text-fuchsia-100     { color: #701a75 !important; }
+.light-mode .text-fuchsia-200     { color: #86198f !important; }
+.light-mode .text-lime-100        { color: #3f6212 !important; }
+.light-mode .text-lime-200        { color: #4d7c0f !important; }
+.light-mode .text-slate-100       { color: #334155 !important; }
+.light-mode .text-slate-200       { color: #475569 !important; }
+.light-mode .text-gray-100        { color: #374151 !important; }
+.light-mode .text-gray-200        { color: #4b5563 !important; }
+
 /* ── Icon colors on dark → vivid on light ── */
 .light-mode .text-primary    { color: #1d4ed8 !important; }
 .light-mode .text-accent     { color: #ea580c !important; }
