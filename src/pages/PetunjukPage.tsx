@@ -539,7 +539,7 @@ const slides: Slide[] = [
     bgGradient: "from-purple-900/20 to-indigo-900/20",
     description: "NUMATIK AI adalah asisten matematika cerdas berbasis kecerdasan buatan (AI). Tanyakan soal matematika apapun dan dapatkan penjelasan langkah demi langkah!",
     steps: [
-      "Pilih 'CHAT DENGAN AI' dari Menu Utama",
+      "Pilih 'NUMATIK ARTIFICIAL INTELLIGENCE (AI)' dari Menu Utama",
       "Ketik pertanyaan matematikamu di kolom chat",
       "Klik tombol kirim atau tekan Enter",
       "NUMATIK AI akan menjawab dengan penjelasan detail step-by-step",

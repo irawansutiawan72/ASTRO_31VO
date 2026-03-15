@@ -32,7 +32,7 @@ const menuItems = [
   { label: "VIDEO PEMBELAJARAN", icon: PlayCircle, path: "/video-pembelajaran", desc: "Belajar melalui video interaktif" },
   { label: "PAPAN PERINGKAT", icon: Award, path: "/papan-peringkat", desc: "Lihat peringkat siswa terbaik" },
   { label: "BANK SOAL", icon: FileText, path: "/bank-soal", desc: "Koleksi lengkap soal matematika" },
-  { label: "CHAT DENGAN AI", icon: MessageCircle, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
+  { label: "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", icon: MessageCircle, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
   { label: "TES KEMAMPUAN AKADEMIK", icon: Brain, path: "/tka", desc: "Uji kemampuan akademikmu" },
   { label: "PENGATURAN", icon: Settings, path: "/pengaturan", desc: "Atur mode gelap/terang" },
   { label: "DONASI", icon: Heart, path: "/donasi", desc: "Ayo dukung agar aplikasinya lebih berkembang" },
