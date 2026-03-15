@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { streamText } from 'ai'
-import { createGoogleGenerativeAI } from '@ai-sdk/google'
+import { GoogleGenAI } from '@google/genai'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -56,6 +55,14 @@ function extractText(msg: any): string {
   return ''
 }
 
+const ai = new GoogleGenAI({
+  apiKey: process.env.AI_INTEGRATIONS_GEMINI_API_KEY,
+  httpOptions: {
+    apiVersion: '',
+    baseUrl: process.env.AI_INTEGRATIONS_GEMINI_BASE_URL,
+  },
+})
+
 app.post('/api/chat', async (req, res) => {
   try {
     const { messages } = req.body
@@ -64,29 +71,25 @@ app.post('/api/chat', async (req, res) => {
       return res.status(400).json({ error: 'Invalid request: messages array required' })
     }
 
-    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY
-    if (!apiKey) {
-      return res.status(500).json({ error: 'API key not configured' })
-    }
-
-    const google = createGoogleGenerativeAI({ apiKey })
-
     const coreMessages = messages
       .filter((m: any) => m.role === 'user' || m.role === 'assistant')
       .map((m: any) => ({
-        role: m.role as 'user' | 'assistant',
-        content: extractText(m),
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: extractText(m) }],
       }))
-      .filter((m: any) => m.content.length > 0)
+      .filter((m: any) => m.parts[0].text.length > 0)
 
     if (coreMessages.length === 0) {
       return res.status(400).json({ error: 'No valid messages found' })
     }
 
-    const result = streamText({
-      model: google('gemini-2.0-flash-lite'),
-      system: NUMATIK_SYSTEM_PROMPT,
-      messages: coreMessages,
+    const stream = await ai.models.generateContentStream({
+      model: 'gemini-2.5-flash',
+      contents: coreMessages,
+      config: {
+        systemInstruction: NUMATIK_SYSTEM_PROMPT,
+        maxOutputTokens: 8192,
+      },
     })
 
     res.setHeader('Content-Type', 'text/plain; charset=utf-8')
@@ -94,8 +97,9 @@ app.post('/api/chat', async (req, res) => {
     res.setHeader('Cache-Control', 'no-cache')
     res.setHeader('X-Accel-Buffering', 'no')
 
-    for await (const chunk of result.textStream) {
-      res.write(chunk)
+    for await (const chunk of stream) {
+      const text = chunk.text
+      if (text) res.write(text)
     }
 
     res.end()
