@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { convertToModelMessages, streamText, UIMessage } from 'ai'
+import { streamText } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -39,44 +39,72 @@ Jika siswa salah menjawab, jangan katakan "Salah", tapi katakan "Hampir tepat! A
 [GREETING]
 Sapa pengguna dengan ramah dan perkenalkan diri sebagai NUMATIK AI, asisten matematika mereka di Math Space.`
 
+function extractText(msg: any): string {
+  if (typeof msg.content === 'string') return msg.content
+  if (Array.isArray(msg.parts)) {
+    return msg.parts
+      .filter((p: any) => p.type === 'text')
+      .map((p: any) => p.text as string)
+      .join('')
+  }
+  if (Array.isArray(msg.content)) {
+    return msg.content
+      .filter((p: any) => p.type === 'text')
+      .map((p: any) => p.text as string)
+      .join('')
+  }
+  return ''
+}
+
 app.post('/api/chat', async (req, res) => {
   try {
-    const { messages }: { messages: UIMessage[] } = req.body
+    const { messages } = req.body
 
     if (!messages || !Array.isArray(messages)) {
       return res.status(400).json({ error: 'Invalid request: messages array required' })
     }
 
-    const google = createGoogleGenerativeAI({
-      apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-    })
+    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY
+    if (!apiKey) {
+      return res.status(500).json({ error: 'API key not configured' })
+    }
+
+    const google = createGoogleGenerativeAI({ apiKey })
+
+    const coreMessages = messages
+      .filter((m: any) => m.role === 'user' || m.role === 'assistant')
+      .map((m: any) => ({
+        role: m.role as 'user' | 'assistant',
+        content: extractText(m),
+      }))
+      .filter((m: any) => m.content.length > 0)
+
+    if (coreMessages.length === 0) {
+      return res.status(400).json({ error: 'No valid messages found' })
+    }
 
     const result = streamText({
       model: google('gemini-2.0-flash-lite'),
       system: NUMATIK_SYSTEM_PROMPT,
-      messages: await convertToModelMessages(messages),
+      messages: coreMessages,
     })
 
-    const response = result.toUIMessageStreamResponse()
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+    res.setHeader('Transfer-Encoding', 'chunked')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('X-Accel-Buffering', 'no')
 
-    res.setHeader('Content-Type', response.headers.get('content-type') || 'text/plain')
-    response.headers.forEach((value, key) => {
-      res.setHeader(key, value)
-    })
-
-    if (response.body) {
-      const reader = response.body.getReader()
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        res.write(value)
-      }
+    for await (const chunk of result.textStream) {
+      res.write(chunk)
     }
 
     res.end()
-  } catch (error) {
-    console.error('Chat API error:', error)
-    return res.status(500).json({ error: 'Internal server error' })
+  } catch (error: any) {
+    console.error('Chat API error:', error?.message || error)
+    if (!res.headersSent) {
+      return res.status(500).json({ error: 'Internal server error' })
+    }
+    res.end()
   }
 })
 
