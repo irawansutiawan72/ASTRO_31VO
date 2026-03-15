@@ -142,11 +142,6 @@ const ChatAIPage = () => {
       <div className="relative z-10 pt-20 pb-4 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <div className="flex flex-col items-center mb-2">
-            <img
-              src="/logo-numatik.png"
-              alt="NUMATIK Logo"
-              className="w-24 h-24 object-contain mb-2 drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
-            />
             <h1 className={`font-display text-2xl md:text-3xl font-bold text-glow-cyan ${isDark ? "text-primary" : "text-blue-800"}`}>
               NUMATIK AI
             </h1>
