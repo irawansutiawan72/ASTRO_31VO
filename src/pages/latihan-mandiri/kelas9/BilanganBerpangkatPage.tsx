@@ -7,7 +7,6 @@ import { playPopSound } from "@/hooks/useAudio";
 const subtopics = [
   "PENGERTIAN DAN NOTASI PANGKAT",
   "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT",
-  "PANGKAT NOL, PANGKAT NEGATIF DAN PANGKAT PECAHAN",
   "BENTUK AKAR",
   "NOTASI ILMIAH",
 ];
