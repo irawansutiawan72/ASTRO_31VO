@@ -6,7 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { name: "PENGERTIAN DAN NOTASI PANGKAT", path: "/materi-matematika/kelas-9/bilangan-berpangkat/pengertian-notasi" },
-  { name: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT", path: "/coming-soon" },
+  { name: "SIFAT-SIFAT OPERASI BILANGAN BERPANGKAT", path: "/materi-matematika/kelas-9/bilangan-berpangkat/sifat-sifat-operasi" },
   { name: "PANGKAT NOL, PANGKAT NEGATIF DAN PANGKAT PECAHAN", path: "/coming-soon" },
   { name: "BENTUK AKAR", path: "/coming-soon" },
   { name: "NOTASI ILMIAH", path: "/coming-soon" },
