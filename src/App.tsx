@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SoundProvider } from "@/contexts/SoundContext";
 import WelcomePage from "./pages/WelcomePage";
 import MenuPage from "./pages/MenuPage";
 import PetunjukPage from "./pages/PetunjukPage";
@@ -502,6 +503,7 @@ const AppInner = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <SoundProvider>
     <ThemeProvider>
       <TooltipProvider>
         <Toaster />
@@ -511,6 +513,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
+    </SoundProvider>
   </QueryClientProvider>
 );
 

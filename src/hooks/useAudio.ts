@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback } from "react";
 
 let audioCtx: AudioContext | null = null;
 const getAudioCtx = () => {
@@ -6,8 +6,12 @@ const getAudioCtx = () => {
   return audioCtx;
 };
 
+let _soundEnabled = true;
+export const setSoundEnabled = (val: boolean) => { _soundEnabled = val; };
+
 // Pop sound for button clicks
 export const playPopSound = () => {
+  if (!_soundEnabled) return;
   try {
     const ctx = getAudioCtx();
     const osc = ctx.createOscillator();
@@ -31,6 +35,7 @@ export const useAudio = () => {
 
   // Realistic laser sound - pew pew style
   const playLaser = useCallback(() => {
+    if (!_soundEnabled) return;
     try {
       const ctx = getAudioCtx();
       
@@ -85,6 +90,7 @@ export const useAudio = () => {
 
   // Realistic explosion sound - deep rumble with crackle
   const playExplosion = useCallback(() => {
+    if (!_soundEnabled) return;
     try {
       const ctx = getAudioCtx();
       
@@ -210,6 +216,7 @@ export const useAudio = () => {
   }, []);
 
   const playCorrect = useCallback(() => {
+    if (!_soundEnabled) return;
     try {
       const ctx = getAudioCtx();
       const osc = ctx.createOscillator();
@@ -228,6 +235,7 @@ export const useAudio = () => {
   }, []);
 
   const startBgMusic = useCallback(() => {
+    if (!_soundEnabled) return;
     try {
       const ctx = getAudioCtx();
       if (bgMusicRef.current) return;
@@ -288,7 +296,7 @@ export const useAudio = () => {
 let globalAudio: HTMLAudioElement | null = null;
 
 export const startGlobalAmbient = () => {
-  if (globalAudio) return;
+  if (!_soundEnabled || globalAudio) return;
   try {
     globalAudio = new Audio("/audio/dreams.mp3");
     globalAudio.loop = true;
