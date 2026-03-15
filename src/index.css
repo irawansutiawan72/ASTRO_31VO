@@ -54,37 +54,40 @@
   }
 
   .light-mode {
-    --background: 200 20% 95%;
-    --foreground: 210 40% 20%;
+    --background: 210 60% 96%;
+    --foreground: 220 60% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 40% 20%;
+    --card-foreground: 220 60% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 40% 20%;
+    --popover-foreground: 220 60% 10%;
 
-    --primary: 200 90% 50%;
+    --primary: 217 91% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 15% 90%;
-    --secondary-foreground: 210 40% 20%;
+    --secondary: 210 40% 90%;
+    --secondary-foreground: 220 60% 10%;
 
-    --muted: 200 15% 90%;
-    --muted-foreground: 210 20% 50%;
+    --muted: 210 30% 92%;
+    --muted-foreground: 215 25% 38%;
 
-    --accent: 200 90% 60%;
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 84% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 200 20% 85%;
-    --input: 200 20% 85%;
-    --ring: 200 90% 50%;
+    --border: 210 40% 80%;
+    --input: 210 40% 88%;
+    --ring: 217 91% 50%;
 
-    --neon-cyan: 200 90% 50%;
-    --neon-magenta: 280 80% 60%;
-    --neon-green: 140 80% 50%;
+    --neon-cyan: 199 89% 40%;
+    --neon-magenta: 280 80% 45%;
+    --neon-green: 140 80% 35%;
+
+    --space-deep: 210 60% 96%;
+    --space-mid: 210 50% 92%;
   }
 }
 
@@ -323,4 +326,211 @@
 
 .animate-snowfall {
   animation: snowfall linear infinite;
+}
+
+/* ════════════════════════════════════════════════
+   LIGHT MODE — SNOW THEME — GLOBAL OVERRIDES
+   ════════════════════════════════════════════════ */
+
+/* Background gradient override */
+.light-mode .gradient-space {
+  background: linear-gradient(180deg,
+    #bfdbfe 0%, #dbeafe 20%, #e0f2fe 50%, #f0f9ff 78%, #f8fafc 100%) !important;
+}
+
+/* Text glow: softer shadows on light bg */
+.light-mode .text-glow-cyan {
+  text-shadow: 0 0 10px rgba(14,165,233,0.35), 0 1px 3px rgba(14,165,233,0.2);
+}
+.light-mode .text-glow-magenta {
+  text-shadow: 0 0 10px rgba(124,58,237,0.3), 0 1px 3px rgba(124,58,237,0.15);
+}
+.light-mode .text-glow-accent {
+  text-shadow: 0 0 8px rgba(234,88,12,0.3);
+}
+
+/* ── White text → dark navy ── */
+.light-mode .text-white           { color: #0f172a !important; }
+.light-mode .text-white\/10       { color: rgba(15,23,42,0.10) !important; }
+.light-mode .text-white\/20       { color: rgba(15,23,42,0.20) !important; }
+.light-mode .text-white\/30       { color: rgba(15,23,42,0.30) !important; }
+.light-mode .text-white\/40       { color: rgba(15,23,42,0.40) !important; }
+.light-mode .text-white\/45       { color: rgba(15,23,42,0.45) !important; }
+.light-mode .text-white\/50       { color: rgba(15,23,42,0.50) !important; }
+.light-mode .text-white\/55       { color: rgba(15,23,42,0.55) !important; }
+.light-mode .text-white\/60       { color: rgba(15,23,42,0.60) !important; }
+.light-mode .text-white\/65       { color: rgba(15,23,42,0.65) !important; }
+.light-mode .text-white\/70       { color: rgba(15,23,42,0.70) !important; }
+.light-mode .text-white\/75       { color: rgba(15,23,42,0.75) !important; }
+.light-mode .text-white\/80       { color: rgba(15,23,42,0.80) !important; }
+.light-mode .text-white\/85       { color: rgba(15,23,42,0.85) !important; }
+.light-mode .text-white\/90       { color: rgba(15,23,42,0.90) !important; }
+.light-mode .text-white\/95       { color: rgba(15,23,42,0.95) !important; }
+
+/* ── Vivid accent text: deeper variants for white background ── */
+.light-mode .text-cyan-300   { color: #0284c7 !important; }
+.light-mode .text-cyan-400   { color: #0369a1 !important; }
+.light-mode .text-cyan-500   { color: #0369a1 !important; }
+.light-mode .text-sky-300    { color: #0284c7 !important; }
+.light-mode .text-sky-400    { color: #0284c7 !important; }
+.light-mode .text-blue-300   { color: #1d4ed8 !important; }
+.light-mode .text-blue-400   { color: #1d4ed8 !important; }
+.light-mode .text-violet-300 { color: #6d28d9 !important; }
+.light-mode .text-violet-400 { color: #5b21b6 !important; }
+.light-mode .text-purple-300 { color: #7c3aed !important; }
+.light-mode .text-purple-400 { color: #6d28d9 !important; }
+.light-mode .text-orange-300 { color: #c2410c !important; }
+.light-mode .text-orange-400 { color: #c2410c !important; }
+.light-mode .text-orange-500 { color: #c2410c !important; }
+.light-mode .text-amber-300  { color: #b45309 !important; }
+.light-mode .text-amber-400  { color: #92400e !important; }
+.light-mode .text-yellow-300 { color: #b45309 !important; }
+.light-mode .text-yellow-400 { color: #92400e !important; }
+.light-mode .text-green-300  { color: #15803d !important; }
+.light-mode .text-green-400  { color: #16a34a !important; }
+.light-mode .text-green-500  { color: #16a34a !important; }
+.light-mode .text-emerald-400{ color: #059669 !important; }
+.light-mode .text-red-300    { color: #b91c1c !important; }
+.light-mode .text-red-400    { color: #dc2626 !important; }
+.light-mode .text-red-500    { color: #dc2626 !important; }
+.light-mode .text-pink-300   { color: #be185d !important; }
+.light-mode .text-pink-400   { color: #9d174d !important; }
+.light-mode .text-rose-300   { color: #be123c !important; }
+.light-mode .text-rose-400   { color: #be123c !important; }
+.light-mode .text-indigo-300 { color: #3730a3 !important; }
+.light-mode .text-indigo-400 { color: #3730a3 !important; }
+.light-mode .text-teal-300   { color: #0f766e !important; }
+.light-mode .text-teal-400   { color: #0f766e !important; }
+.light-mode .text-lime-300   { color: #3f6212 !important; }
+.light-mode .text-fuchsia-300{ color: #86198f !important; }
+.light-mode .text-fuchsia-400{ color: #86198f !important; }
+.light-mode .text-slate-400  { color: #334155 !important; }
+.light-mode .text-slate-300  { color: #475569 !important; }
+.light-mode .text-gray-400   { color: #374151 !important; }
+.light-mode .text-gray-300   { color: #4b5563 !important; }
+.light-mode .text-muted-foreground { color: #4b6080 !important; }
+
+/* ── Card and container backgrounds: dark → light ── */
+.light-mode .bg-card\/80     { background-color: rgba(255,255,255,0.88) !important; }
+.light-mode .bg-card\/90     { background-color: rgba(255,255,255,0.93) !important; }
+.light-mode .bg-card\/100    { background-color: rgba(255,255,255,1.00) !important; }
+
+.light-mode .bg-slate-800\/10 { background-color: rgba(241,245,249,0.30) !important; }
+.light-mode .bg-slate-800\/30 { background-color: rgba(241,245,249,0.55) !important; }
+.light-mode .bg-slate-800\/40 { background-color: rgba(241,245,249,0.65) !important; }
+.light-mode .bg-slate-800\/50 { background-color: rgba(241,245,249,0.75) !important; }
+.light-mode .bg-slate-800\/60 { background-color: rgba(239,246,255,0.88) !important; }
+.light-mode .bg-slate-800\/70 { background-color: rgba(239,246,255,0.90) !important; }
+.light-mode .bg-slate-800    { background-color: #f1f5f9 !important; }
+.light-mode .bg-slate-900\/20 { background-color: rgba(248,250,252,0.40) !important; }
+.light-mode .bg-slate-900\/30 { background-color: rgba(248,250,252,0.55) !important; }
+.light-mode .bg-slate-900\/50 { background-color: rgba(248,250,252,0.75) !important; }
+.light-mode .bg-slate-900\/80 { background-color: rgba(248,250,252,0.90) !important; }
+.light-mode .bg-slate-900    { background-color: #f8fafc !important; }
+
+.light-mode .bg-cyan-950\/40  { background-color: rgba(219,234,254,0.65) !important; }
+.light-mode .bg-cyan-950\/50  { background-color: rgba(219,234,254,0.75) !important; }
+.light-mode .bg-cyan-950\/60  { background-color: rgba(219,234,254,0.88) !important; }
+.light-mode .bg-cyan-950\/70  { background-color: rgba(219,234,254,0.92) !important; }
+.light-mode .bg-cyan-950     { background-color: #dbeafe !important; }
+
+.light-mode .bg-violet-950\/40{ background-color: rgba(237,233,254,0.65) !important; }
+.light-mode .bg-violet-950\/50{ background-color: rgba(237,233,254,0.75) !important; }
+.light-mode .bg-violet-950\/60{ background-color: rgba(237,233,254,0.88) !important; }
+.light-mode .bg-violet-950\/70{ background-color: rgba(237,233,254,0.92) !important; }
+.light-mode .bg-violet-950   { background-color: #ede9fe !important; }
+
+.light-mode .bg-purple-950\/40{ background-color: rgba(243,232,255,0.65) !important; }
+.light-mode .bg-purple-950\/50{ background-color: rgba(243,232,255,0.75) !important; }
+.light-mode .bg-purple-950\/60{ background-color: rgba(243,232,255,0.88) !important; }
+
+.light-mode .bg-orange-950\/40{ background-color: rgba(255,237,213,0.65) !important; }
+.light-mode .bg-orange-950\/50{ background-color: rgba(255,237,213,0.75) !important; }
+.light-mode .bg-orange-950\/60{ background-color: rgba(255,237,213,0.88) !important; }
+.light-mode .bg-orange-950\/70{ background-color: rgba(255,237,213,0.92) !important; }
+.light-mode .bg-orange-950   { background-color: #ffedd5 !important; }
+
+.light-mode .bg-amber-950\/50 { background-color: rgba(254,243,199,0.75) !important; }
+.light-mode .bg-amber-950\/60 { background-color: rgba(254,243,199,0.88) !important; }
+
+.light-mode .bg-yellow-950\/50{ background-color: rgba(254,252,232,0.78) !important; }
+.light-mode .bg-yellow-950\/60{ background-color: rgba(254,252,232,0.88) !important; }
+
+.light-mode .bg-green-950\/40 { background-color: rgba(220,252,231,0.65) !important; }
+.light-mode .bg-green-950\/50 { background-color: rgba(220,252,231,0.75) !important; }
+.light-mode .bg-green-950\/60 { background-color: rgba(220,252,231,0.88) !important; }
+.light-mode .bg-green-950    { background-color: #dcfce7 !important; }
+
+.light-mode .bg-red-950\/50  { background-color: rgba(254,226,226,0.75) !important; }
+.light-mode .bg-red-950\/60  { background-color: rgba(254,226,226,0.88) !important; }
+
+.light-mode .bg-blue-950\/50 { background-color: rgba(219,234,254,0.75) !important; }
+.light-mode .bg-blue-950\/60 { background-color: rgba(219,234,254,0.88) !important; }
+
+.light-mode .bg-indigo-950\/50{ background-color: rgba(224,231,255,0.75) !important; }
+.light-mode .bg-indigo-950\/60{ background-color: rgba(224,231,255,0.88) !important; }
+
+.light-mode .bg-teal-950\/50  { background-color: rgba(204,251,241,0.75) !important; }
+.light-mode .bg-teal-950\/60  { background-color: rgba(204,251,241,0.88) !important; }
+
+/* ── Borders: dark → light ── */
+.light-mode .border-border          { border-color: #bfdbfe !important; }
+.light-mode .border-slate-700       { border-color: #cbd5e1 !important; }
+.light-mode .border-slate-600       { border-color: #cbd5e1 !important; }
+.light-mode .border-slate-600\/40   { border-color: rgba(148,163,184,0.40) !important; }
+.light-mode .border-slate-600\/30   { border-color: rgba(148,163,184,0.30) !important; }
+.light-mode .border-slate-500\/40   { border-color: rgba(148,163,184,0.40) !important; }
+.light-mode .border-cyan-700\/50    { border-color: rgba(2,132,199,0.40) !important; }
+.light-mode .border-cyan-600\/40    { border-color: rgba(8,145,178,0.35) !important; }
+.light-mode .border-cyan-500\/30    { border-color: rgba(6,182,212,0.30) !important; }
+.light-mode .border-violet-700\/50  { border-color: rgba(109,40,217,0.35) !important; }
+.light-mode .border-violet-600\/40  { border-color: rgba(124,58,237,0.30) !important; }
+.light-mode .border-violet-600\/30  { border-color: rgba(124,58,237,0.25) !important; }
+.light-mode .border-orange-700\/40  { border-color: rgba(194,65,12,0.35) !important; }
+.light-mode .border-orange-600\/40  { border-color: rgba(234,88,12,0.30) !important; }
+.light-mode .border-yellow-600\/40  { border-color: rgba(202,138,4,0.35) !important; }
+.light-mode .border-green-600\/40   { border-color: rgba(22,163,74,0.35) !important; }
+.light-mode .border-red-600\/40     { border-color: rgba(220,38,38,0.35) !important; }
+.light-mode .border-blue-600\/40    { border-color: rgba(37,99,235,0.35) !important; }
+.light-mode .border-indigo-600\/40  { border-color: rgba(79,70,229,0.35) !important; }
+.light-mode .border-accent\/60      { border-color: rgba(234,88,12,0.55) !important; }
+.light-mode .border-accent\/50      { border-color: rgba(234,88,12,0.45) !important; }
+.light-mode .border-primary\/60     { border-color: rgba(37,99,235,0.55) !important; }
+
+/* ── Table headers: dark → light ── */
+.light-mode thead tr   { background-color: #eff6ff !important; }
+.light-mode thead th   { color: #1d4ed8 !important; }
+.light-mode tbody tr:nth-child(even) { background-color: rgba(239,246,255,0.6) !important; }
+
+/* ── Custom dark bg colors (arbitrary values) ── */
+.light-mode .bg-\[#141d35\]  { background-color: #ffffff !important; }
+.light-mode .bg-\[#141d35\]\/90 { background-color: rgba(255,255,255,0.92) !important; }
+.light-mode .bg-\[#1a2040\]  { background-color: #f0f4ff !important; }
+.light-mode .bg-\[#252d50\]  { background-color: #e2eaf8 !important; }
+.light-mode .bg-background\/60 { background-color: rgba(240,249,255,0.75) !important; }
+.light-mode .bg-background\/40 { background-color: rgba(240,249,255,0.55) !important; }
+
+/* ── Icon colors on dark → vivid on light ── */
+.light-mode .text-primary    { color: #1d4ed8 !important; }
+.light-mode .text-accent     { color: #ea580c !important; }
+.light-mode .text-secondary  { color: #7c3aed !important; }
+
+/* ── Box glow: subtler for light bg ── */
+.light-mode .box-glow-cyan {
+  box-shadow: 0 0 12px rgba(14,165,233,0.25), 0 0 30px rgba(14,165,233,0.10) !important;
+}
+
+/* ── Overflow table border ── */
+.light-mode .overflow-x-auto { border-color: #bfdbfe !important; }
+
+/* ── Page navigation bar in light mode ── */
+.light-mode nav,
+.light-mode [class*="PageNavigation"] {
+  background-color: rgba(255,255,255,0.85) !important;
+  border-color: #bfdbfe !important;
+}
+
+/* ── Bottom marquee bar in WelcomePage ── */
+.light-mode .border-cyan-500\/30 {
+  border-color: rgba(14,165,233,0.25) !important;
 }

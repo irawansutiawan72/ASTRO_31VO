@@ -3,59 +3,90 @@ import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-      {/* Background */}
-      <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-background/40" />
+    <div
+      className={`relative min-h-screen flex flex-col items-center justify-center overflow-hidden ${
+        isLight ? "gradient-snow" : ""
+      }`}
+    >
+      {/* Background — space image only in dark mode */}
+      {!isLight && (
+        <>
+          <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-background/40" />
+        </>
+      )}
 
-      {/* Space objects and effects */}
-      <SpaceObjects />
+      {/* Space objects only in dark mode */}
+      {!isLight && <SpaceObjects />}
 
-      {/* Starfield */}
+      {/* Starfield (dark) or Snowfall (light) */}
       <Starfield />
 
       {/* Main content */}
       <div className="relative z-10 text-center w-full max-w-2xl flex flex-col items-center px-4 py-16 sm:px-6">
+
         {/* Welcome text */}
-        <p className="font-display text-2xl sm:text-3xl font-bold tracking-widest text-cyan-400 mb-6 animate-fade-in">
+        <p
+          className={`font-display text-2xl sm:text-3xl font-bold tracking-widest mb-6 animate-fade-in ${
+            isLight ? "text-blue-700" : "text-cyan-400"
+          }`}
+        >
           Selamat Datang di Aplikasi
         </p>
 
         {/* Main title */}
-        <h1 className="font-display text-5xl sm:text-7xl font-black text-yellow-400 mb-8 drop-shadow-lg" style={{
-          textShadow: '0 0 20px rgba(34, 211, 238, 0.6), 0 0 40px rgba(34, 211, 238, 0.3), 0 0 60px rgba(59, 130, 246, 0.2)'
-        }}>
+        <h1
+          className={`font-display text-5xl sm:text-7xl font-black mb-8 drop-shadow-lg ${
+            isLight ? "text-blue-800" : "text-yellow-400"
+          }`}
+          style={
+            isLight
+              ? { textShadow: "0 0 20px rgba(29,78,216,0.3), 0 2px 8px rgba(29,78,216,0.2)" }
+              : { textShadow: "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)" }
+          }
+        >
           NUMATIK
         </h1>
 
         {/* Subtitle */}
-        <p className="font-display text-sm sm:text-base font-semibold mb-12 leading-relaxed text-cyan-300">
+        <p
+          className={`font-display text-sm sm:text-base font-semibold mb-12 leading-relaxed ${
+            isLight ? "text-blue-600" : "text-cyan-300"
+          }`}
+        >
           Numerasi Aktif dengan Teknologi<br />Informasi dan Komunikasi
         </p>
 
-        {/* Main button with pulse animation */}
+        {/* Main button */}
         <div className="relative mb-16">
-          {/* Button background glow */}
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur-xl opacity-50 animate-button-pulse" />
-
-          {/* Actual button */}
+          <div
+            className={`absolute inset-0 rounded-2xl blur-xl opacity-50 animate-button-pulse ${
+              isLight
+                ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                : "bg-gradient-to-r from-cyan-500 to-blue-600"
+            }`}
+          />
           <button
-            onClick={() => {
-              playPopSound();
-              navigate("/menu");
-            }}
-            className="relative font-display text-xl sm:text-2xl px-12 py-6 rounded-2xl font-bold tracking-widest shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 cursor-pointer animate-button-pulse bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-2 border-cyan-300 hover:border-cyan-200 active:scale-95"
+            onClick={() => { playPopSound(); navigate("/menu"); }}
+            className={`relative font-display text-xl sm:text-2xl px-12 py-6 rounded-2xl font-bold tracking-widest shadow-2xl transition-all duration-300 cursor-pointer animate-button-pulse text-white border-2 active:scale-95 ${
+              isLight
+                ? "bg-gradient-to-r from-blue-600 to-cyan-500 border-blue-300 hover:border-blue-200 hover:shadow-blue-400/50"
+                : "bg-gradient-to-r from-cyan-500 to-blue-600 border-cyan-300 hover:border-cyan-200 hover:shadow-cyan-500/50"
+            }`}
           >
             🚀 MULAI
           </button>
         </div>
 
-        {/* Rotating Sun */}
+        {/* Sun (fits well as a "sunny winter day" too) */}
         <div className="mt-8 mb-12">
           <div className="relative w-28 h-28 mx-auto">
             <div className="absolute inset-0 rounded-full bg-orange-400 opacity-30 blur-2xl animate-pulse scale-125" />
@@ -63,28 +94,31 @@ const WelcomePage = () => {
               src="/sun.png"
               alt="Matahari"
               className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
-              style={{ filter: 'drop-shadow(0 0 16px rgba(251,146,60,0.8)) drop-shadow(0 0 32px rgba(234,88,12,0.4))' }}
+              style={{ filter: "drop-shadow(0 0 16px rgba(251,146,60,0.8)) drop-shadow(0 0 32px rgba(234,88,12,0.4))" }}
             />
           </div>
         </div>
-
       </div>
 
-      {/* Marquee text - full width, pinned to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden bg-background/60 border-t border-cyan-500/30 backdrop-blur-sm py-4">
+      {/* Marquee text */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-t backdrop-blur-sm py-4 ${
+          isLight
+            ? "bg-white/70 border-blue-300/50"
+            : "bg-background/60 border-cyan-500/30"
+        }`}
+      >
         <div className="animate-marquee whitespace-nowrap">
-          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
-            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-          </span>
-          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
-            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-          </span>
-          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
-            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-          </span>
-          <span className="font-body font-semibold text-cyan-300 inline-block px-8">
-            ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
-          </span>
+          {[...Array(4)].map((_, i) => (
+            <span
+              key={i}
+              className={`font-body font-semibold inline-block px-8 ${
+                isLight ? "text-blue-700" : "text-cyan-300"
+              }`}
+            >
+              ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
+            </span>
+          ))}
         </div>
       </div>
     </div>
