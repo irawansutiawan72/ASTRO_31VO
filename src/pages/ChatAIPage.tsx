@@ -3,7 +3,7 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import ChatMessage from "@/components/ChatMessage";
-import { Bot, Send, Loader2, Sparkles, Trash2, AlertCircle } from "lucide-react";
+import { Bot, Send, Loader2, Trash2, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -169,18 +169,18 @@ const ChatAIPage = () => {
           <ScrollArea className="flex-1 p-4">
             {messages.length === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className={`w-20 h-20 rounded-full flex items-center justify-center border mb-6 ${
-                  isDark
-                    ? "bg-gradient-to-br from-purple-600/20 to-blue-500/20 border-purple-500/30"
-                    : "bg-gradient-to-br from-blue-100 to-purple-100 border-blue-300/60"
-                }`}>
-                  <Sparkles className={`w-10 h-10 ${isDark ? "text-purple-400" : "text-blue-500"}`} />
+                <div className="mb-6">
+                  <img
+                    src="/logo-numatik.png"
+                    alt="NUMATIK Logo"
+                    className="w-24 h-24 object-contain drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
+                  />
                 </div>
                 <h2 className={`font-display text-xl font-bold mb-2 ${isDark ? "text-foreground" : "text-blue-900"}`}>
                   Halo, Sobat Numatik!
                 </h2>
                 <p className={`text-sm max-w-md mb-6 font-body ${isDark ? "text-muted-foreground" : "text-blue-700"}`}>
-                  Aku NUMATIK AI, asisten matematika kamu di Math Space. Tanyakan
+                  Aku NUMATIK AI, asisten matematika kamu di aplikasi Numatik. Tanyakan
                   apapun tentang matematika, dan aku akan bantu menjelaskan
                   langkah demi langkah!
                 </p>
