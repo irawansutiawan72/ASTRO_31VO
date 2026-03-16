@@ -38,7 +38,7 @@ const bankSoalTopics = [
   { label: "PERBANDINGAN", icon: Percent, path: "/coming-soon", ready: false },
   { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/coming-soon", ready: false },
   { label: "GARIS DAN SUDUT", icon: Ruler, path: "/coming-soon", ready: false },
-  { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/coming-soon", ready: false },
+  { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/bank-soal/segitiga-dan-segiempat", ready: true },
   { label: "HIMPUNAN", icon: CircleDot, path: "/coming-soon", ready: false },
   { label: "POLA BILANGAN", icon: Hash, path: "/coming-soon", ready: false },
   { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/coming-soon", ready: false },

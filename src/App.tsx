@@ -48,6 +48,7 @@ import TKALatihan1Page from "./pages/tka/TKALatihan1Page";
 import PapanPeringkatPage from "./pages/PapanPeringkatPage";
 import BankSoalPage from "./pages/BankSoalPage";
 import BankSoalBilanganBulatPage from "./pages/bank-soal/BilanganBulatPage";
+import BankSoalSegitigaSegiempatPage from "./pages/bank-soal/SegitigaSegiempatPage";
 import ChatAIPage from "./pages/ChatAIPage";
 import PengaturanPage from "./pages/PengaturanPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
@@ -313,6 +314,7 @@ const AppInner = () => {
       <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
       <Route path="/bank-soal" element={<BankSoalPage />} />
       <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />
+      <Route path="/bank-soal/segitiga-dan-segiempat" element={<BankSoalSegitigaSegiempatPage />} />
       <Route path="/chat-ai" element={<ChatAIPage />} />
       <Route path="/pengaturan" element={<PengaturanPage />} />
       <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
