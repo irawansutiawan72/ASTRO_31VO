@@ -8,7 +8,7 @@ const subtopics = [
   { label: "PENGERTIAN DAN KEANGGOTAAAN SUATU HIMPUNAN", path: "/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" },
   { label: "HIMPUNAN BERHINGGA, HIMPUNAN KOSONG, DAN HIMPUNAN TAK HINGGA, HIMPUNAN BAGIAN, HIMPUNAN SEMESTA DAN HIMPUNAN KUASA", path: "/materi-matematika/kelas-7/himpunan/jenis-himpunan" },
   { label: "DIAGRAM VENN", path: "/materi-matematika/kelas-7/himpunan/diagram-venn" },
-  { label: "OPERASI HIMPUNAN", path: "/coming-soon" },
+  { label: "PEMECAHAN MASALAH YANG BERKAITAN DENGAN HIMPUNAN", path: "/coming-soon" },
 ];
 
 const HimpunanPage = () => {
