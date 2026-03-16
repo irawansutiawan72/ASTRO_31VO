@@ -17,6 +17,7 @@ import {
   Gamepad2,
   BookOpen,
   ArrowLeftRight,
+  Sigma,
 } from "lucide-react";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -30,7 +31,7 @@ const menuItems = [
   { label: "OLIMPIADE MATEMATIKA", icon: Trophy, path: "/olimpiade", desc: "Untuk yang suka tantangan" },
   { label: "NUMATIK ARTIFICIAL INTELLIGENCE (AI)", icon: Bot, path: "/chat-ai", desc: "Tanya jawab dengan AI matematika" },
   { label: "KONVERSI SATUAN", icon: ArrowLeftRight, path: "/konversi-satuan", desc: "Konversi berbagai satuan pengukuran" },
-  { label: "KUMPULAN RUMUS", icon: BookMarked, path: "/kumpulan-rumus", desc: "Kumpulan rumus matematika SMP lengkap" },
+  { label: "KUMPULAN RUMUS", icon: Sigma, path: "/kumpulan-rumus", desc: "Kumpulan rumus matematika SMP lengkap" },
   { label: "VIDEO PEMBELAJARAN", icon: PlayCircle, path: "/video-pembelajaran", desc: "Belajar melalui video interaktif" },
   { label: "PAPAN PERINGKAT", icon: Award, path: "/papan-peringkat", desc: "Lihat peringkat siswa terbaik" },
   { label: "BANK SOAL", icon: FileText, path: "/bank-soal", desc: "Koleksi lengkap soal matematika" },
