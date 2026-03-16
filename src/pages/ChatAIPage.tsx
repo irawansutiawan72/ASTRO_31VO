@@ -3,7 +3,7 @@ import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import ChatMessage from "@/components/ChatMessage";
-import { Bot, Send, Loader2, Trash2, AlertCircle } from "lucide-react";
+import { Send, Loader2, Trash2, AlertCircle, Sparkles, Zap } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -16,13 +16,6 @@ interface Message {
   content: string;
 }
 
-const SUGGESTIONS = [
-  "Bagaimana cara menghitung luas lingkaran?",
-  "Jelaskan teorema Pythagoras",
-  "Apa itu persamaan kuadrat?",
-  "Bantu aku dengan soal pecahan",
-];
-
 const ChatAIPage = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
@@ -32,6 +25,7 @@ const ChatAIPage = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -141,58 +135,88 @@ const ChatAIPage = () => {
       {/* Header */}
       <div className="relative z-10 pt-20 pb-4 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex flex-col items-center mb-2">
-            <h1 className={`font-display text-2xl md:text-3xl font-bold text-glow-cyan ${isDark ? "text-primary" : "text-blue-800"}`}>
-              NUMATIK AI
-            </h1>
+          <div className="flex flex-col items-center gap-1 mb-1">
+            <div className="flex items-center gap-2">
+              <Sparkles className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-blue-500"}`} />
+              <h1 className={`font-display text-2xl md:text-3xl font-bold tracking-widest ${isDark ? "text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.6)]" : "text-blue-800"}`}>
+                NUMATIK AI
+              </h1>
+              <Sparkles className={`w-5 h-5 ${isDark ? "text-cyan-400" : "text-blue-500"}`} />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className={`inline-block w-2 h-2 rounded-full animate-pulse ${isDark ? "bg-green-400 shadow-[0_0_6px_#4ade80]" : "bg-green-500"}`} />
+              <p className={`text-xs font-mono tracking-wider uppercase ${isDark ? "text-green-400" : "text-green-600"}`}>
+                Online · Siap Membantu
+              </p>
+            </div>
           </div>
-          <p className={`text-sm font-body ${isDark ? "text-white/70" : "text-blue-700"}`}>
-            Asisten Matematika Cerdas untuk Sobat Numatik
-          </p>
         </div>
       </div>
 
       {/* Chat Container */}
       <div className="relative z-10 flex-1 flex flex-col max-w-3xl w-full mx-auto px-4 pb-4">
-        <div className={`flex-1 backdrop-blur-md border rounded-t-2xl overflow-hidden flex flex-col ${
+        <div className={`flex-1 flex flex-col rounded-t-2xl overflow-hidden ${
           isDark
-            ? "bg-card/40 border-border/50"
-            : "bg-white/70 border-blue-200/60"
+            ? "bg-[#0a0f1e]/70 backdrop-blur-xl border border-cyan-500/20 shadow-[0_0_40px_rgba(103,232,249,0.08),inset_0_1px_0_rgba(103,232,249,0.15)]"
+            : "bg-white/75 backdrop-blur-md border border-blue-200/60 shadow-xl"
         }`}>
+
+          {/* Decorative top bar */}
+          {isDark && (
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent" />
+          )}
 
           {/* Messages Area */}
           <ScrollArea className="flex-1 p-4">
             {messages.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12">
-                <div className="mb-6">
-                  <img
-                    src="/robot-numatik.jpeg"
-                    alt="NUMATIK Robot"
-                    className="w-24 h-24 object-cover rounded-full drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
-                  />
+              <div className="h-full flex flex-col items-center justify-center text-center py-10">
+                {/* Glow ring behind avatar */}
+                <div className="relative mb-6">
+                  <div className={`absolute inset-0 rounded-full blur-2xl scale-150 ${isDark ? "bg-cyan-500/20" : "bg-blue-300/30"}`} />
+                  <div className={`relative w-28 h-28 rounded-full overflow-hidden border-2 ${isDark ? "border-cyan-500/50 shadow-[0_0_24px_rgba(103,232,249,0.4)]" : "border-blue-300 shadow-lg"}`}>
+                    <img
+                      src="/robot-numatik.jpeg"
+                      alt="NUMATIK AI"
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Scan line animation */}
+                    {isDark && (
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/10 to-transparent animate-[scan_2s_linear_infinite]" />
+                    )}
+                  </div>
+                  {/* Orbit ring */}
+                  {isDark && (
+                    <div className="absolute inset-0 rounded-full border border-cyan-500/30 scale-[1.4] animate-[spin_8s_linear_infinite]"
+                      style={{ borderStyle: "dashed" }} />
+                  )}
                 </div>
-                <h2 className={`font-display text-xl font-bold mb-2 ${isDark ? "text-foreground" : "text-blue-900"}`}>
+
+                <h2 className={`font-display text-2xl font-bold mb-1 tracking-wide ${isDark ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" : "text-blue-900"}`}>
                   Halo, Sobat Numatik!
                 </h2>
-                <p className={`text-sm max-w-md mb-6 font-body ${isDark ? "text-muted-foreground" : "text-blue-700"}`}>
-                  Aku NUMATIK AI, asisten matematika kamu di aplikasi Numatik. Tanyakan
-                  apapun tentang matematika, dan aku akan bantu menjelaskan
-                  langkah demi langkah!
+                <p className={`text-sm max-w-sm mb-2 font-body leading-relaxed ${isDark ? "text-cyan-200/70" : "text-blue-700"}`}>
+                  Aku <span className={`font-bold ${isDark ? "text-cyan-300" : "text-blue-600"}`}>NUMATIK AI</span> — asisten matematika pintarmu. Tanyakan soal apapun dan aku akan jelaskan langkah demi langkah!
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg w-full">
-                  {SUGGESTIONS.map((s, i) => (
-                    <button
-                      key={i}
-                      onClick={() => { playPopSound(); setInput(s); inputRef.current?.focus(); }}
-                      className={`text-left text-sm p-3 rounded-xl border transition-all duration-200 font-body ${
-                        isDark
-                          ? "bg-muted/30 border-border/50 text-muted-foreground hover:bg-muted/50 hover:border-purple-500/30 hover:text-foreground"
-                          : "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100 hover:border-blue-400"
-                      }`}
-                    >
-                      {s}
-                    </button>
+
+                {/* Feature badges */}
+                <div className="flex flex-wrap justify-center gap-2 mt-4">
+                  {["Aljabar", "Geometri", "Statistika", "Olimpiade"].map((tag) => (
+                    <span key={tag} className={`text-xs px-3 py-1 rounded-full font-mono border ${
+                      isDark
+                        ? "bg-cyan-950/60 border-cyan-500/30 text-cyan-300"
+                        : "bg-blue-50 border-blue-200 text-blue-600"
+                    }`}>
+                      {tag}
+                    </span>
                   ))}
+                </div>
+
+                {/* Arrow hint */}
+                <div className={`mt-8 flex flex-col items-center gap-1 animate-bounce ${isDark ? "text-cyan-500/50" : "text-blue-300"}`}>
+                  <span className="text-xs font-mono">Mulai bertanya</span>
+                  <svg width="16" height="16" fill="none" viewBox="0 0 16 16">
+                    <path d="M8 3v10M8 13l-4-4M8 13l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </div>
               </div>
             ) : (
@@ -202,23 +226,32 @@ const ChatAIPage = () => {
                     key={message.id}
                     role={message.role}
                     content={message.content}
+                    isDark={isDark}
                   />
                 ))}
 
                 {/* Typing indicator */}
                 {isLoading && messages[messages.length - 1]?.role === "user" && (
                   <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center border border-purple-400/30 shadow-lg shadow-purple-500/20">
-                      <Bot className="w-4 h-4 text-white" />
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center border ${
+                      isDark
+                        ? "bg-gradient-to-br from-cyan-600 to-blue-700 border-cyan-400/30 shadow-[0_0_12px_rgba(103,232,249,0.3)]"
+                        : "bg-gradient-to-br from-blue-500 to-indigo-600 border-blue-300"
+                    }`}>
+                      <img src="/robot-numatik.jpeg" alt="AI" className="w-full h-full object-cover rounded-full" />
                     </div>
                     <div className={`backdrop-blur border rounded-2xl rounded-bl-sm px-4 py-3 ${
                       isDark
-                        ? "bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-purple-500/30"
+                        ? "bg-[#0d1a2e]/80 border-cyan-500/20 shadow-[0_0_16px_rgba(103,232,249,0.06)]"
                         : "bg-white/80 border-blue-200"
                     }`}>
-                      <div className="flex items-center gap-2">
-                        <Loader2 className={`w-4 h-4 animate-spin ${isDark ? "text-purple-400" : "text-blue-500"}`} />
-                        <span className={`text-sm font-body ${isDark ? "text-muted-foreground" : "text-blue-600"}`}>
+                      <div className="flex items-center gap-3">
+                        <div className="flex gap-1">
+                          <span className={`w-2 h-2 rounded-full animate-bounce [animation-delay:0ms] ${isDark ? "bg-cyan-400" : "bg-blue-400"}`} />
+                          <span className={`w-2 h-2 rounded-full animate-bounce [animation-delay:150ms] ${isDark ? "bg-cyan-400" : "bg-blue-400"}`} />
+                          <span className={`w-2 h-2 rounded-full animate-bounce [animation-delay:300ms] ${isDark ? "bg-cyan-400" : "bg-blue-400"}`} />
+                        </div>
+                        <span className={`text-xs font-mono ${isDark ? "text-cyan-400/70" : "text-blue-500"}`}>
                           NUMATIK sedang berpikir...
                         </span>
                       </div>
@@ -244,14 +277,18 @@ const ChatAIPage = () => {
           </ScrollArea>
 
           {/* Input Area */}
-          <div className={`p-4 border-t ${isDark ? "border-border/50 bg-card/60" : "border-blue-200/60 bg-white/60"}`}>
+          <div className={`p-4 border-t ${
+            isDark
+              ? "border-cyan-500/15 bg-[#080d1a]/60 backdrop-blur-xl"
+              : "border-blue-200/60 bg-white/60"
+          }`}>
             {messages.length > 0 && (
               <div className="flex justify-end mb-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={clearChat}
-                  className={`text-xs gap-1 ${isDark ? "text-muted-foreground hover:text-destructive" : "text-blue-400 hover:text-red-500"}`}
+                  className={`text-xs gap-1 ${isDark ? "text-cyan-500/50 hover:text-red-400 hover:bg-red-500/10" : "text-blue-400 hover:text-red-500"}`}
                 >
                   <Trash2 className="w-3 h-3" />
                   Hapus Chat
@@ -259,27 +296,46 @@ const ChatAIPage = () => {
               </div>
             )}
             <form onSubmit={handleSubmit} className="flex items-end gap-3">
-              <div className="flex-1 relative">
+              <div className={`flex-1 relative rounded-xl transition-all duration-300 ${
+                isDark
+                  ? isFocused
+                    ? "shadow-[0_0_0_1.5px_rgba(103,232,249,0.5),0_0_20px_rgba(103,232,249,0.1)]"
+                    : "shadow-[0_0_0_1px_rgba(103,232,249,0.15)]"
+                  : isFocused
+                    ? "shadow-[0_0_0_2px_rgba(59,130,246,0.4)]"
+                    : ""
+              }`}>
                 <textarea
                   ref={inputRef}
                   value={input}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
+                  onFocus={() => setIsFocused(true)}
+                  onBlur={() => setIsFocused(false)}
                   placeholder="Ketik pertanyaan matematika kamu..."
                   disabled={isLoading}
                   rows={1}
-                  className={`w-full px-4 py-3 pr-12 rounded-xl border text-sm resize-none disabled:opacity-50 transition-all font-body focus:outline-none focus:ring-2 ${
+                  className={`w-full px-4 py-3 rounded-xl border text-sm resize-none disabled:opacity-50 transition-all font-body focus:outline-none ${
                     isDark
-                      ? "bg-muted/50 border-border/50 text-foreground placeholder:text-muted-foreground focus:ring-purple-500/50 focus:border-purple-500/50"
-                      : "bg-white border-blue-200 text-gray-900 placeholder:text-gray-400 focus:ring-blue-400/50 focus:border-blue-400"
+                      ? "bg-[#0d1a2e]/80 border-cyan-500/20 text-white placeholder:text-cyan-500/30 focus:border-cyan-500/50"
+                      : "bg-white border-blue-200 text-gray-900 placeholder:text-gray-400 focus:border-blue-400"
                   }`}
                   style={{ minHeight: "48px", maxHeight: "120px" }}
                 />
+                {isDark && (
+                  <div className="absolute right-3 bottom-3 pointer-events-none">
+                    <Zap className={`w-3 h-3 transition-colors ${input.trim() ? "text-cyan-400" : "text-cyan-500/20"}`} />
+                  </div>
+                )}
               </div>
               <Button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="h-12 w-12 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 border-0 shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:shadow-none transition-all shrink-0"
+                className={`h-12 w-12 rounded-xl border-0 shadow-lg transition-all shrink-0 disabled:opacity-40 disabled:shadow-none ${
+                  isDark
+                    ? "bg-gradient-to-br from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-[0_0_20px_rgba(103,232,249,0.3)] hover:shadow-[0_0_28px_rgba(103,232,249,0.5)]"
+                    : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/30"
+                }`}
               >
                 {isLoading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
@@ -288,19 +344,34 @@ const ChatAIPage = () => {
                 )}
               </Button>
             </form>
+            <p className={`text-center text-[10px] mt-2 font-mono ${isDark ? "text-cyan-500/30" : "text-gray-400"}`}>
+              Enter untuk kirim · Shift+Enter untuk baris baru
+            </p>
           </div>
         </div>
+
+        {/* Decorative bottom glow */}
+        {isDark && (
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+        )}
 
         {/* Back Button */}
         <div className="mt-4 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/menu"); }}
-            className={`text-sm transition-colors cursor-pointer font-body ${isDark ? "text-muted-foreground hover:text-primary" : "text-blue-400 hover:text-blue-600"}`}
+            className={`text-sm transition-colors cursor-pointer font-mono tracking-wide ${isDark ? "text-cyan-500/50 hover:text-cyan-300" : "text-blue-400 hover:text-blue-600"}`}
           >
             ← Kembali ke Menu
           </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes scan {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(200%); }
+        }
+      `}</style>
     </div>
   );
 };

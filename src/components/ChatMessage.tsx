@@ -1,19 +1,18 @@
 import { memo, useMemo } from "react";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
-import { Bot, User } from "lucide-react";
+import { User } from "lucide-react";
 
 interface ChatMessageProps {
   role: "user" | "assistant";
   content: string;
+  isDark?: boolean;
 }
 
-// Parse markdown and LaTeX content
 const parseContent = (text: string) => {
   const elements: React.ReactNode[] = [];
   let key = 0;
 
-  // Split by block math first ($$...$$)
   const blockMathRegex = /\$\$([\s\S]*?)\$\$/g;
   let lastIndex = 0;
   let match;
@@ -43,9 +42,8 @@ const parseContent = (text: string) => {
         </div>
       );
     } else {
-      // Process inline math and markdown in text parts
       const processedText = processInlineContent(part.content, key);
-      key += 1000; // Increment key to avoid collisions
+      key += 1000;
       elements.push(...processedText);
     }
   });
@@ -57,7 +55,6 @@ const processInlineContent = (text: string, baseKey: number) => {
   const elements: React.ReactNode[] = [];
   let key = baseKey;
 
-  // Split by inline math ($...$) but not $$
   const lines = text.split("\n");
 
   lines.forEach((line, lineIndex) => {
@@ -65,10 +62,9 @@ const processInlineContent = (text: string, baseKey: number) => {
       elements.push(<br key={key++} />);
     }
 
-    // Check for headers
     if (line.startsWith("### ")) {
       elements.push(
-        <h3 key={key++} className="text-lg font-bold text-primary mt-4 mb-2">
+        <h3 key={key++} className="text-base font-bold text-cyan-300 mt-4 mb-2 font-display">
           {parseInlineMath(line.slice(4), key)}
         </h3>
       );
@@ -77,7 +73,7 @@ const processInlineContent = (text: string, baseKey: number) => {
     }
     if (line.startsWith("## ")) {
       elements.push(
-        <h2 key={key++} className="text-xl font-bold text-primary mt-4 mb-2">
+        <h2 key={key++} className="text-lg font-bold text-cyan-300 mt-4 mb-2 font-display">
           {parseInlineMath(line.slice(3), key)}
         </h2>
       );
@@ -86,7 +82,7 @@ const processInlineContent = (text: string, baseKey: number) => {
     }
     if (line.startsWith("# ")) {
       elements.push(
-        <h1 key={key++} className="text-2xl font-bold text-primary mt-4 mb-2">
+        <h1 key={key++} className="text-xl font-bold text-cyan-300 mt-4 mb-2 font-display">
           {parseInlineMath(line.slice(2), key)}
         </h1>
       );
@@ -94,11 +90,10 @@ const processInlineContent = (text: string, baseKey: number) => {
       return;
     }
 
-    // Check for list items
     if (line.match(/^[\-\*]\s/)) {
       elements.push(
-        <div key={key++} className="flex items-start gap-2 ml-2">
-          <span className="text-accent">•</span>
+        <div key={key++} className="flex items-start gap-2 ml-2 my-0.5">
+          <span className="text-cyan-400 mt-0.5">▸</span>
           <span>{parseInlineMath(line.slice(2), key)}</span>
         </div>
       );
@@ -106,12 +101,11 @@ const processInlineContent = (text: string, baseKey: number) => {
       return;
     }
 
-    // Check for numbered lists
     const numberedMatch = line.match(/^(\d+)\.\s/);
     if (numberedMatch) {
       elements.push(
-        <div key={key++} className="flex items-start gap-2 ml-2">
-          <span className="text-accent font-bold">{numberedMatch[1]}.</span>
+        <div key={key++} className="flex items-start gap-2 ml-2 my-0.5">
+          <span className="text-cyan-400 font-bold font-mono text-xs mt-0.5">{numberedMatch[1]}.</span>
           <span>{parseInlineMath(line.slice(numberedMatch[0].length), key)}</span>
         </div>
       );
@@ -119,7 +113,6 @@ const processInlineContent = (text: string, baseKey: number) => {
       return;
     }
 
-    // Regular text with inline math and bold
     elements.push(
       <span key={key++}>{parseInlineMath(line, key)}</span>
     );
@@ -133,11 +126,7 @@ const parseInlineMath = (text: string, baseKey: number) => {
   const elements: React.ReactNode[] = [];
   let key = baseKey;
 
-  // Process bold text and inline math
   const inlineMathRegex = /\$([^\$]+)\$/g;
-  const boldRegex = /\*\*([^\*]+)\*\*/g;
-
-  // First, replace inline math with placeholders
   const mathPlaceholders: { placeholder: string; math: string }[] = [];
   let processedText = text.replace(inlineMathRegex, (match, math) => {
     const placeholder = `__MATH_${mathPlaceholders.length}__`;
@@ -145,23 +134,20 @@ const parseInlineMath = (text: string, baseKey: number) => {
     return placeholder;
   });
 
-  // Then handle bold text
-  const boldParts = processedText.split(boldRegex);
+  const boldParts = processedText.split(/\*\*([^\*]+)\*\*/g);
   boldParts.forEach((part, index) => {
-    // Odd indices are bold text
     const isBold = index % 2 === 1;
-    
-    // Check for math placeholders in this part
+
     let currentPart = part;
     const mathMatches = currentPart.match(/__MATH_(\d+)__/g);
-    
+
     if (mathMatches) {
       const subParts = currentPart.split(/__MATH_\d+__/);
       subParts.forEach((subPart, subIndex) => {
         if (subPart) {
           if (isBold) {
             elements.push(
-              <strong key={key++} className="text-accent font-bold">
+              <strong key={key++} className="text-yellow-300 font-bold">
                 {subPart}
               </strong>
             );
@@ -183,7 +169,7 @@ const parseInlineMath = (text: string, baseKey: number) => {
       if (part) {
         if (isBold) {
           elements.push(
-            <strong key={key++} className="text-accent font-bold">
+            <strong key={key++} className="text-yellow-300 font-bold">
               {part}
             </strong>
           );
@@ -197,33 +183,61 @@ const parseInlineMath = (text: string, baseKey: number) => {
   return elements;
 };
 
-const ChatMessage = memo(({ role, content }: ChatMessageProps) => {
+const ChatMessage = memo(({ role, content, isDark = true }: ChatMessageProps) => {
   const parsedContent = useMemo(() => parseContent(content), [content]);
 
   if (role === "user") {
     return (
-      <div className="flex items-start gap-3 justify-end">
-        <div className="bg-muted/60 backdrop-blur border border-border/50 rounded-2xl rounded-br-sm px-4 py-3 max-w-[85%]">
-          <p className="text-foreground text-sm font-body whitespace-pre-wrap">
-            {content}
-          </p>
+      <div className="flex items-end gap-2 justify-end">
+        <div className={`px-4 py-3 rounded-2xl rounded-br-sm max-w-[80%] text-sm font-body whitespace-pre-wrap leading-relaxed ${
+          isDark
+            ? "bg-gradient-to-br from-indigo-600/80 to-blue-700/80 border border-indigo-400/30 text-white shadow-lg shadow-indigo-500/20 backdrop-blur"
+            : "bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-md"
+        }`}>
+          {content}
         </div>
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted/80 flex items-center justify-center border border-border/50">
-          <User className="w-4 h-4 text-muted-foreground" />
+        <div className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center border mb-0.5 ${
+          isDark
+            ? "bg-indigo-700/60 border-indigo-400/30"
+            : "bg-blue-100 border-blue-300"
+        }`}>
+          <User className={`w-3.5 h-3.5 ${isDark ? "text-indigo-300" : "text-blue-500"}`} />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex items-start gap-3">
-      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center border border-purple-400/30 shadow-lg shadow-purple-500/20">
-        <Bot className="w-4 h-4 text-white" />
+    <div className="flex items-end gap-2">
+      {/* AI Avatar */}
+      <div className={`flex-shrink-0 w-7 h-7 rounded-full overflow-hidden border mb-0.5 ${
+        isDark
+          ? "border-cyan-400/40 shadow-[0_0_10px_rgba(103,232,249,0.25)]"
+          : "border-blue-300 shadow-md"
+      }`}>
+        <img src="/robot-numatik.jpeg" alt="AI" className="w-full h-full object-cover" />
       </div>
-      <div className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 backdrop-blur border border-purple-500/30 rounded-2xl rounded-bl-sm px-4 py-3 max-w-[85%] shadow-lg shadow-purple-500/10">
-        <div className="text-foreground text-sm font-body leading-relaxed">
+
+      {/* AI Bubble */}
+      <div className={`relative px-4 py-3 rounded-2xl rounded-bl-sm max-w-[82%] text-sm font-body leading-relaxed ${
+        isDark
+          ? "bg-[#0d1a2e]/90 border border-cyan-500/20 text-slate-100 shadow-[0_2px_20px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(103,232,249,0.1)] backdrop-blur"
+          : "bg-white border border-blue-100 text-gray-800 shadow-md"
+      }`}>
+        {/* Top accent line */}
+        {isDark && (
+          <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent rounded-full" />
+        )}
+        <div className={`leading-relaxed ${isDark ? "text-slate-200" : "text-gray-800"}`}>
           {parsedContent}
         </div>
+        {/* Label tag */}
+        {isDark && (
+          <div className="mt-2 pt-2 border-t border-cyan-500/10 flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[10px] font-mono text-cyan-500/50 tracking-widest uppercase">NUMATIK AI</span>
+          </div>
+        )}
       </div>
     </div>
   );
