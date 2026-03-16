@@ -249,6 +249,7 @@ import BentukAkarMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpan
 import NotasiIlmiahMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
 import KesebangunanKekongruenMMK9Page from "./pages/materi-matematika/kelas9/KesebangunanKekongruenPage";
 import TransformasiGeometriMMK9Page from "./pages/materi-matematika/kelas9/TransformasiGeometriPage";
+import DilatasisMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/DilatasisPage";
 import BangunRuangSisiLengkungMMK9Page from "./pages/materi-matematika/kelas9/BangunRuangSisiLengkungPage";
 import StatistikaMMK9Page from "./pages/materi-matematika/kelas9/StatistikaPage";
 import PeluangMMK9Page from "./pages/materi-matematika/kelas9/PeluangPage";
@@ -510,6 +511,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/transformasi-geometri" element={<TransformasiGeometriMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/transformasi-geometri/dilatasi" element={<DilatasisMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/statistika" element={<StatistikaMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
