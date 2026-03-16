@@ -18,6 +18,7 @@ import {
   BookOpen,
   ArrowLeftRight,
   Sigma,
+  Rocket,
 } from "lucide-react";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
@@ -40,7 +41,7 @@ const menuItems = [
   { label: "DONASI", icon: Heart, path: "/donasi", desc: "Ayo dukung agar aplikasinya lebih berkembang" },
   { label: "BIOGRAFI", icon: User, path: "/biografi", desc: "Data pembuat aplikasi" },
   { label: "REFERENSI", icon: BookMarked, path: "/referensi", desc: "Sumber belajar" },
-  { label: "TENTANG APLIKASI", icon: Info, path: "/tentang-aplikasi", desc: "Informasi tentang aplikasi" },
+  { label: "TENTANG APLIKASI", icon: Rocket, path: "/tentang-aplikasi", desc: "Informasi tentang aplikasi" },
 ];
 
 const MenuPage = () => {
