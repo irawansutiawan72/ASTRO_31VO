@@ -34,6 +34,8 @@ const SegitigaSegiempatPage = () => {
                 playPopSound();
                 if (subtopic === "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA") {
                   navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi");
+                } else if (subtopic === "KELILING SEGITIGA DAN SEGIEMPAT") {
+                  navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-segitiga-dan-segiempat");
                 } else {
                   navigate("/coming-soon");
                 }

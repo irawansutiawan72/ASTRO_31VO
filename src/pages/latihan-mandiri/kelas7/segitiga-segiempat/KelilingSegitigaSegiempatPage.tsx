@@ -11,113 +11,129 @@ import "katex/dist/katex.min.css";
    SVG DIAGRAMS
 ───────────────────────────────────────────── */
 
-/* Q1: Scalene triangle with labeled side lengths */
+/* Q1: Right triangle ABC — sisi 12 cm, 5 cm, 13 cm */
 const DiagramQ1 = () => (
-  <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto my-3" aria-label="Segitiga dengan sisi 13 cm, 5 cm, 12 cm">
-    <polygon points="60,170 60,50 210,170" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-    {/* Right angle mark at A */}
-    <rect x="60" y="150" width="15" height="15" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
+  <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-4" aria-label="Segitiga siku-siku ABC">
+    {/* Triangle: A(50,20) B(50,180) C(220,180) */}
+    <polygon points="50,20 50,180 220,180" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="2" />
+    {/* Right angle mark at B */}
+    <polyline points="50,162 68,162 68,180" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
     {/* Vertex labels */}
-    <text x="38" y="46" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="38" y="185" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="214" y="185" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="32" y="18" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="30" y="196" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="225" y="196" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">C</text>
     {/* Side labels */}
-    <text x="22" y="115" fill="#facc15" fontSize="12" fontFamily="monospace">12 cm</text>
-    <text x="108" y="188" fill="#facc15" fontSize="12" fontFamily="monospace">5 cm</text>
-    <text x="118" y="103" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(33,140,110)">13 cm</text>
+    <text x="55" y="105" fill="#facc15" fontSize="13" fontFamily="monospace">12 cm</text>
+    <text x="115" y="198" fill="#facc15" fontSize="13" fontFamily="monospace">5 cm</text>
+    {/* Hypotenuse label rotated */}
+    <text
+      x="135" y="95"
+      fill="#facc15" fontSize="13" fontFamily="monospace"
+      transform="rotate(-35 135 95)"
+    >13 cm</text>
   </svg>
 );
 
 /* Q2: Isosceles triangle KLM */
 const DiagramQ2 = () => (
-  <svg viewBox="0 0 300 200" className="w-full max-w-xs mx-auto my-3" aria-label="Segitiga sama kaki KLM">
-    <polygon points="150,20 30,175 270,175" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" strokeWidth="2" />
-    {/* Equal side marks */}
-    <line x1="78" y1="104" x2="88" y2="92" stroke="#a78bfa" strokeWidth="2" />
-    <line x1="83" y1="109" x2="93" y2="97" stroke="#a78bfa" strokeWidth="2" />
-    <line x1="212" y1="92" x2="222" y2="104" stroke="#a78bfa" strokeWidth="2" />
-    <line x1="207" y1="97" x2="217" y2="109" stroke="#a78bfa" strokeWidth="2" />
+  <svg viewBox="0 0 300 210" className="w-full max-w-xs mx-auto my-4" aria-label="Segitiga sama kaki KLM">
+    {/* Triangle: K(150,20) L(30,185) M(270,185) */}
+    <polygon points="150,20 30,185 270,185" fill="rgba(167,139,250,0.10)" stroke="#a78bfa" strokeWidth="2" />
+    {/* Equal side tick marks on KL */}
+    <line x1="84"  y1="110" x2="94"  y2="98"  stroke="#a78bfa" strokeWidth="2" />
+    <line x1="90"  y1="116" x2="100" y2="104" stroke="#a78bfa" strokeWidth="2" />
+    {/* Equal side tick marks on KM */}
+    <line x1="206" y1="98"  x2="216" y2="110" stroke="#a78bfa" strokeWidth="2" />
+    <line x1="200" y1="104" x2="210" y2="116" stroke="#a78bfa" strokeWidth="2" />
     {/* Vertex labels */}
-    <text x="143" y="14" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">K</text>
-    <text x="14" y="188" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">L</text>
-    <text x="274" y="188" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">M</text>
+    <text x="141" y="14"  fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">K</text>
+    <text x="12"  y="200" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">L</text>
+    <text x="276" y="200" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">M</text>
     {/* Side labels */}
-    <text x="64" y="96" fill="#facc15" fontSize="11" fontFamily="monospace" transform="rotate(-55,90,105)">27 cm</text>
-    <text x="210" y="96" fill="#facc15" fontSize="11" fontFamily="monospace" transform="rotate(55,218,105)">27 cm</text>
-    <text x="125" y="192" fill="#22d3ee" fontSize="12" fontFamily="monospace">LM = ?</text>
+    <text x="60"  y="90" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(-57 90 105)">27 cm</text>
+    <text x="198" y="90" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(57 210 105)">27 cm</text>
+    {/* Unknown base */}
+    <text x="118" y="202" fill="#22d3ee" fontSize="13" fontFamily="monospace">LM = ?</text>
   </svg>
 );
 
 /* Q3: Equilateral triangle ABC */
 const DiagramQ3 = () => (
-  <svg viewBox="0 0 260 210" className="w-full max-w-xs mx-auto my-3" aria-label="Segitiga sama sisi ABC">
-    <polygon points="130,20 20,190 240,190" fill="rgba(74,222,128,0.08)" stroke="#4ade80" strokeWidth="2" />
-    {/* Equal side marks - one on each side */}
-    <line x1="68" y1="112" x2="80" y2="100" stroke="#4ade80" strokeWidth="2" />
-    <line x1="180" y1="100" x2="192" y2="112" stroke="#4ade80" strokeWidth="2" />
-    <line x1="123" y1="192" x2="137" y2="192" stroke="#4ade80" strokeWidth="2" />
+  <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-4" aria-label="Segitiga sama sisi ABC">
+    {/* Triangle: A(140,20) B(20,200) C(260,200) */}
+    <polygon points="140,20 20,200 260,200" fill="rgba(74,222,128,0.10)" stroke="#4ade80" strokeWidth="2" />
+    {/* Equal tick marks */}
+    <line x1="74"  y1="115" x2="86"  y2="103" stroke="#4ade80" strokeWidth="2" />
+    <line x1="194" y1="103" x2="206" y2="115" stroke="#4ade80" strokeWidth="2" />
+    <line x1="133" y1="202" x2="147" y2="202" stroke="#4ade80" strokeWidth="2" />
     {/* Vertex labels */}
-    <text x="122" y="14" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="4" y="205" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="243" y="205" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-    {/* K label */}
-    <text x="85" y="80" fill="#facc15" fontSize="11" fontFamily="monospace">K = 18 cm</text>
+    <text x="131" y="14"  fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="4"   y="214" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="263" y="214" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">C</text>
+    {/* Keliling info */}
+    <text x="92" y="82" fill="#facc15" fontSize="12" fontFamily="monospace">K = 18 cm</text>
   </svg>
 );
 
-/* Q4: Rectangle with labeled dimensions */
+/* Q4: Rectangle ABCD — panjang 14 cm, lebar 8 cm */
 const DiagramQ4 = () => (
-  <svg viewBox="0 0 300 190" className="w-full max-w-xs mx-auto my-3" aria-label="Persegi panjang dengan panjang 14 cm dan lebar 8 cm">
-    <rect x="30" y="40" width="240" height="120" fill="rgba(251,146,60,0.08)" stroke="#fb923c" strokeWidth="2" />
+  <svg viewBox="0 0 340 200" className="w-full max-w-sm mx-auto my-4" aria-label="Persegi panjang ABCD">
+    {/* Rectangle: D(30,30) C(300,30) B(300,160) A(30,160) */}
+    <rect x="30" y="30" width="270" height="120" fill="rgba(251,146,60,0.10)" stroke="#fb923c" strokeWidth="2" />
     {/* Right angle marks */}
-    <rect x="30" y="148" width="12" height="12" fill="none" stroke="#fb923c" strokeWidth="1.5" />
-    <rect x="258" y="148" width="12" height="12" fill="none" stroke="#fb923c" strokeWidth="1.5" />
+    <polyline points="30,148 44,148 44,160"   fill="none" stroke="#fb923c" strokeWidth="1.5" />
+    <polyline points="286,148 286,160 300,160" fill="none" stroke="#fb923c" strokeWidth="1.5" />
+    <polyline points="30,42 44,42 44,30"       fill="none" stroke="#fb923c" strokeWidth="1.5" />
+    <polyline points="286,42 286,30 300,30"    fill="none" stroke="#fb923c" strokeWidth="1.5" />
     {/* Vertex labels */}
-    <text x="14" y="36" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="275" y="36" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="14" y="178" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="275" y="178" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="12"  y="26"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="306" y="26"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="306" y="175" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="12"  y="175" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
     {/* Side labels */}
-    <text x="120" y="32" fill="#facc15" fontSize="12" fontFamily="monospace">14 cm</text>
-    <text x="120" y="178" fill="#facc15" fontSize="12" fontFamily="monospace">14 cm</text>
-    <text x="2" y="108" fill="#facc15" fontSize="11" fontFamily="monospace">8 cm</text>
-    <text x="283" y="108" fill="#facc15" fontSize="11" fontFamily="monospace">8 cm</text>
+    <text x="142" y="22"  fill="#facc15" fontSize="13" fontFamily="monospace">14 cm</text>
+    <text x="142" y="190" fill="#facc15" fontSize="13" fontFamily="monospace">14 cm</text>
+    <text x="-8"  y="100" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(-90 2 100)">8 cm</text>
+    <text x="330" y="100" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(90 322 100)">8 cm</text>
   </svg>
 );
 
-/* Q5: Rhombus ABCD with AB = 8 cm */
+/* Q5: Rhombus ABCD */
 const DiagramQ5 = () => (
-  <svg viewBox="0 0 240 220" className="w-full max-w-xs mx-auto my-3" aria-label="Belah ketupat ABCD dengan AB = 8 cm">
-    <polygon points="120,20 210,110 120,200 30,110" fill="rgba(34,211,238,0.08)" stroke="#22d3ee" strokeWidth="2" />
-    {/* Equal side marks */}
-    <line x1="156" y1="57" x2="168" y2="70" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="163" y1="152" x2="151" y2="165" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="72" y1="152" x2="84" y2="165" stroke="#22d3ee" strokeWidth="2" />
-    <line x1="77" y1="57" x2="65" y2="70" stroke="#22d3ee" strokeWidth="2" />
+  <svg viewBox="0 0 260 240" className="w-full max-w-xs mx-auto my-4" aria-label="Belah ketupat ABCD dengan AB = 8 cm">
+    {/* Diamond: A(130,20) B(220,120) C(130,220) D(40,120) */}
+    <polygon points="130,20 220,120 130,220 40,120" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="2" />
+    {/* Equal tick marks on all sides */}
+    <line x1="170" y1="63"  x2="182" y2="75"  stroke="#22d3ee" strokeWidth="2" />
+    <line x1="175" y1="163" x2="163" y2="175" stroke="#22d3ee" strokeWidth="2" />
+    <line x1="90"  y1="163" x2="78"  y2="175" stroke="#22d3ee" strokeWidth="2" />
+    <line x1="78"  y1="63"  x2="90"  y2="75"  stroke="#22d3ee" strokeWidth="2" />
     {/* Vertex labels */}
-    <text x="112" y="14" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="214" y="115" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="112" y="215" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="10" y="115" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
-    {/* Side label */}
-    <text x="155" y="68" fill="#facc15" fontSize="11" fontFamily="monospace">8 cm</text>
+    <text x="122" y="14"  fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="226" y="125" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="122" y="238" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="18"  y="125" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">D</text>
+    {/* AB label */}
+    <text x="172" y="62" fill="#facc15" fontSize="12" fontFamily="monospace">8 cm</text>
   </svg>
 );
 
-/* Q6: Trapezoid with labeled sides */
+/* Q6: Trapezoid ABCD — DC=10 cm (top), AB=16 cm (bottom), AD=8 cm, BC=6 cm */
 const DiagramQ6 = () => (
-  <svg viewBox="0 0 320 200" className="w-full max-w-sm mx-auto my-3" aria-label="Trapesium dengan sisi-sisi berlabel">
-    <polygon points="80,30 220,30 280,160 20,160" fill="rgba(248,113,113,0.08)" stroke="#f87171" strokeWidth="2" />
+  <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto my-4" aria-label="Trapesium ABCD">
+    {/* A(20,175) B(300,175) C(250,35) D(90,35) */}
+    <polygon points="20,175 300,175 250,35 90,35" fill="rgba(248,113,113,0.10)" stroke="#f87171" strokeWidth="2" />
+    {/* Right angle mark at A (if needed — not assumed, just draw plain trapezoid) */}
     {/* Vertex labels */}
-    <text x="66" y="24" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="222" y="24" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="4" y="175" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="284" y="175" fill="#e2e8f0" fontSize="12" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="4"   y="192" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="304" y="192" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="255" y="28"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="72"  y="28"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
     {/* Side labels */}
-    <text x="128" y="22" fill="#facc15" fontSize="12" fontFamily="monospace">10 cm</text>
-    <text x="110" y="175" fill="#facc15" fontSize="12" fontFamily="monospace">16 cm</text>
-    <text x="22" y="103" fill="#22d3ee" fontSize="11" fontFamily="monospace" transform="rotate(-75,38,103)">8 cm</text>
-    <text x="264" y="103" fill="#22d3ee" fontSize="11" fontFamily="monospace" transform="rotate(65,272,103)">6 cm</text>
+    <text x="150" y="28"  fill="#facc15" fontSize="13" fontFamily="monospace">10 cm</text>
+    <text x="145" y="195" fill="#facc15" fontSize="13" fontFamily="monospace">16 cm</text>
+    <text x="18"  y="115" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(-75 35 115)">8 cm</text>
+    <text x="292" y="115" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(65 292 115)">6 cm</text>
   </svg>
 );
 
@@ -185,7 +201,9 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
             <QuestionCard
               no={1}
               diagram={<DiagramQ1 />}
-              question={<p>Tentukan keliling bangun segitiga berikut.</p>}
+              question={
+                <p>Tentukan keliling bangun segitiga berikut.</p>
+              }
               answer={
                 <div className="space-y-2">
                   <p className="text-white/80">Diketahui: <InlineMath math="AB = 12 \text{ cm},\ BC = 5 \text{ cm},\ AC = 13 \text{ cm}" /></p>
@@ -202,7 +220,8 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               diagram={<DiagramQ2 />}
               question={
                 <p>
-                  Jika diketahui keliling segitiga sama kaki berikut masing-masing adalah <InlineMath math="70 \text{ cm}" />, berapakah panjang sisi <InlineMath math="LM" />?
+                  Jika diketahui keliling segitiga sama kaki berikut masing-masing adalah{" "}
+                  <InlineMath math="70 \text{ cm}" />, berapakah panjang sisi <InlineMath math="LM" />?
                 </p>
               }
               answer={
@@ -227,7 +246,9 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               diagram={<DiagramQ3 />}
               question={
                 <p>
-                  Jika diketahui keliling segitiga sama sisi berikut adalah <InlineMath math="18 \text{ cm}" />, tentukan panjang sisi <InlineMath math="AB" />, <InlineMath math="AC" />, dan <InlineMath math="BC" />.
+                  Jika diketahui keliling segitiga sama sisi berikut adalah{" "}
+                  <InlineMath math="18 \text{ cm}" />, tentukan panjang sisi{" "}
+                  <InlineMath math="AB" />, <InlineMath math="AC" />, dan <InlineMath math="BC" />.
                 </p>
               }
               answer={
@@ -263,7 +284,8 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               diagram={<DiagramQ5 />}
               question={
                 <p>
-                  Tentukan keliling bangun belah ketupat berikut jika diketahui panjang <InlineMath math="AB = 8 \text{ cm}" />.
+                  Tentukan keliling bangun belah ketupat berikut jika diketahui panjang{" "}
+                  <InlineMath math="AB = 8 \text{ cm}" />.
                 </p>
               }
               answer={
@@ -296,7 +318,8 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               no={7}
               question={
                 <p>
-                  Sebuah taman rekreasi berbentuk persegi. Jika kelilingnya <InlineMath math="100" /> meter, berapakah ukuran sisi taman tersebut?
+                  Sebuah taman rekreasi berbentuk persegi. Jika kelilingnya <InlineMath math="100" /> meter,
+                  berapakah ukuran sisinya taman tersebut?
                 </p>
               }
               answer={
@@ -315,7 +338,9 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               no={8}
               question={
                 <p>
-                  Sepetak sawah berbentuk persegi panjang. Perbandingan ukuran panjang dan lebarnya adalah <InlineMath math="2 : 1" />. Jika lebarnya <InlineMath math="15" /> meter, berapakah kelilingnya?
+                  Sepetak sawah berbentuk persegi panjang. Perbandingan ukuran panjang dan lebarnya
+                  adalah <InlineMath math="2 : 1" />. Jika lebarnya <InlineMath math="15" /> meter,
+                  berapakah kelilingnya?
                 </p>
               }
               answer={
@@ -326,7 +351,7 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
                     <li>• Lebar <InlineMath math="l = 15 \text{ m}" /></li>
                   </ul>
                   <p className="text-white/80">Mencari panjang:</p>
-                  <BlockMath math="\frac{p}{l} = \frac{2}{1} \Rightarrow p = 2 \times l = 2 \times 15 = 30 \text{ m}" />
+                  <BlockMath math="\frac{p}{l} = \frac{2}{1} \Rightarrow p = 2 \times 15 = 30 \text{ m}" />
                   <p className="text-white/80">Mencari keliling:</p>
                   <BlockMath math="K = 2 \times (p + l) = 2 \times (30 + 15) = 2 \times 45 = 90 \text{ m}" />
                   <p className="text-green-300 font-semibold">Keliling sawah = <InlineMath math="90 \text{ m}" /></p>
@@ -339,7 +364,10 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               no={9}
               question={
                 <p>
-                  Sebuah layang-layang memiliki perbandingan ukuran antara sisi yang panjang dengan sisi yang pendek sebesar <InlineMath math="3 : 2" />. Jika ukuran sisi yang pendek <InlineMath math="24 \text{ cm}" />, tentukan ukuran sisi yang panjang dan keliling layang-layang itu.
+                  Sebuah layang-layang memiliki perbandingan ukuran antara sisi yang panjang dengan
+                  sisi yang pendek sebesar <InlineMath math="3 : 2" />. Jika ukuran sisi yang pendek{" "}
+                  <InlineMath math="24 \text{ cm}" />, tentukan ukuran sisi yang panjang dan keliling
+                  layang-layang itu.
                 </p>
               }
               answer={
@@ -355,7 +383,9 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
                   <p className="text-white/80">Mencari keliling (layang-layang punya 2 pasang sisi):</p>
                   <BlockMath math="K = 2 \times (\text{sisi panjang} + \text{sisi pendek})" />
                   <BlockMath math="K = 2 \times (36 + 24) = 2 \times 60 = 120 \text{ cm}" />
-                  <p className="text-green-300 font-semibold">Sisi panjang = <InlineMath math="36 \text{ cm}" />, Keliling = <InlineMath math="120 \text{ cm}" /></p>
+                  <p className="text-green-300 font-semibold">
+                    Sisi panjang = <InlineMath math="36 \text{ cm}" />, Keliling = <InlineMath math="120 \text{ cm}" />
+                  </p>
                 </div>
               }
             />
@@ -364,11 +394,13 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
             <QuestionCard
               no={10}
               question={
-                <div className="space-y-2">
-                  <p>
-                    Sebuah trapesium siku-siku perbandingan panjang dari sisi-sisi sejajarnya <InlineMath math="2 : 1" />, sedangkan perbandingan panjang sisi tegak dan sisi miringnya <InlineMath math="2 : 3" />. Jika panjang sisi sejajarnya yang pendek sama panjang dengan panjang sisi tegaknya dan kelilingnya <InlineMath math="55 \text{ cm}" />, tentukan panjang masing-masing dari keempat sisinya.
-                  </p>
-                </div>
+                <p>
+                  Sebuah trapesium siku-siku perbandingan panjang dari sisi-sisi sejajarnya{" "}
+                  <InlineMath math="2 : 1" />, sedangkan perbandingan panjang sisi tegak dan sisi
+                  miringnya <InlineMath math="2 : 3" />. Jika panjang sisi sejajarnya yang pendek sama
+                  panjang dengan panjang sisi tegaknya dan kelilingnya <InlineMath math="55 \text{ cm}" />,
+                  tentukan panjang masing-masing dari keempat sisinya.
+                </p>
               }
               answer={
                 <div className="space-y-2">
