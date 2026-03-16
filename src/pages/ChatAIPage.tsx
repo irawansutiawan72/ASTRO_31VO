@@ -166,9 +166,9 @@ const ChatAIPage = () => {
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
                 <div className="mb-6">
                   <img
-                    src="/logo-numatik.png"
-                    alt="NUMATIK Logo"
-                    className="w-24 h-24 object-contain drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
+                    src="/robot-numatik.jpeg"
+                    alt="NUMATIK Robot"
+                    className="w-24 h-24 object-cover rounded-full drop-shadow-[0_0_16px_rgba(234,179,8,0.4)]"
                   />
                 </div>
                 <h2 className={`font-display text-xl font-bold mb-2 ${isDark ? "text-foreground" : "text-blue-900"}`}>

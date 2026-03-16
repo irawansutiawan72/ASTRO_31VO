@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Calculator, ChevronDown, ChevronUp, Sparkles, Bot } from "lucide-react";
+import { Calculator, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
@@ -598,8 +598,8 @@ const SoalCard = ({ soal }: { soal: Question }) => {
             {/* NUMATIK AI Icon */}
             <div className="absolute -top-3 -right-3 w-12 h-12 md:w-14 md:h-14 rounded-full 
               bg-gradient-to-br from-primary to-secondary p-0.5 shadow-lg animate-pulse-glow">
-              <div className="w-full h-full rounded-full bg-card flex items-center justify-center">
-                <Bot className="w-6 h-6 md:w-7 md:h-7 text-primary" />
+              <div className="w-full h-full rounded-full bg-card overflow-hidden">
+                <img src="/robot-numatik.jpeg" alt="NUMATIK Robot" className="w-full h-full object-cover rounded-full" />
               </div>
             </div>
             

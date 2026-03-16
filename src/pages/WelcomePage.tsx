@@ -102,7 +102,7 @@ const WelcomePage = () => {
 
       {/* Marquee text */}
       <div
-        className={`absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-t backdrop-blur-sm py-4 ${
+        className={`absolute bottom-8 left-0 right-0 z-20 overflow-hidden border-t backdrop-blur-sm py-4 ${
           isLight
             ? "bg-white/70 border-blue-300/50"
             : "bg-background/60 border-cyan-500/30"
