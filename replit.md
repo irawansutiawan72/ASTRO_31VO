@@ -36,8 +36,21 @@ src/               # React frontend
 vite.config.ts     # Vite config (proxy /api → localhost:3001)
 ```
 
+## Completed Content Pages
+
+### Kelas 9 - Kesebangunan dan Kekongruenan (all 5 sub-bab)
+- `/materi-matematika/kelas-9/kesebangunan-kekongruenan/definisi` — Definisi Kesebangunan dan Kekongruenan
+- `/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-panjang-rusuk` — Menghitung Panjang Rusuk Bangun Datar yang Sebangun
+- `/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun` — Segitiga – Segitiga yang Sebangun
+- `/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku` — Perbandingan Rusuk Segitiga Siku-siku
+- `/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar` — Kekongruenan pada Bangun Datar
+
+### Kelas 9 - Transformasi Geometri
+- `/materi-matematika/kelas-9/transformasi-geometri/dilatasi` — Dilatasi (full content with SVG diagrams, 9 examples)
+
 ## Notes
 
 - Merge conflicts from Vercel migration were resolved on 2026-03-12
 - Server binds to `0.0.0.0` for Replit compatibility
 - In production, Express serves the built frontend (`dist/`) and handles all routes
+- Content pages use accordion sections, react-katex for LaTeX, SVG diagrams, color-coded difficulty badges

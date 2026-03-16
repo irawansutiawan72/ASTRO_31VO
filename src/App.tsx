@@ -248,6 +248,11 @@ import SifatSifatOperasiMMK9Page from "./pages/materi-matematika/kelas9/bilangan
 import BentukAkarMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/BentukAkarPage";
 import NotasiIlmiahMMK9Page from "./pages/materi-matematika/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
 import KesebangunanKekongruenMMK9Page from "./pages/materi-matematika/kelas9/KesebangunanKekongruenPage";
+import DefinisiKesebangunanMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/DefinisiPage";
+import MenghitungRusukMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage";
+import SegitigaSebangunMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage";
+import PerbandinganRusukSikuSikuMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/PerbandinganRusukSikuSikuPage";
+import KekongruenBangunDatarMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
 import TransformasiGeometriMMK9Page from "./pages/materi-matematika/kelas9/TransformasiGeometriPage";
 import DilatasisMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/DilatasisPage";
 import BangunRuangSisiLengkungMMK9Page from "./pages/materi-matematika/kelas9/BangunRuangSisiLengkungPage";
@@ -510,6 +515,11 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-panjang-rusuk" element={<MenghitungRusukMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku" element={<PerbandinganRusukSikuSikuMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar" element={<KekongruenBangunDatarMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/transformasi-geometri" element={<TransformasiGeometriMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/transformasi-geometri/dilatasi" element={<DilatasisMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMMK9Page />} />
