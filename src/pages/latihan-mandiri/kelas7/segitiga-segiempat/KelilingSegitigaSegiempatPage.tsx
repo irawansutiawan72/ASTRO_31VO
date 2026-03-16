@@ -10,17 +10,34 @@ import "katex/dist/katex.min.css";
    SVG DIAGRAMS
 ───────────────────────────────────────────── */
 
-/* Q1: Right triangle ABC — sisi 12 cm, 5 cm, 13 cm */
+/* Q1: Two triangles — a. scalene (5,7,10) and b. right triangle (10,8,4) */
 const DiagramQ1 = () => (
-  <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-4" aria-label="Segitiga siku-siku ABC">
-    <polygon points="50,20 50,180 220,180" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="2" />
-    <polyline points="50,162 68,162 68,180" fill="none" stroke="#22d3ee" strokeWidth="1.5" />
-    <text x="32" y="18" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="30" y="196" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="225" y="196" fill="#e2e8f0" fontSize="14" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="55" y="105" fill="#facc15" fontSize="13" fontFamily="monospace">12 cm</text>
-    <text x="115" y="198" fill="#facc15" fontSize="13" fontFamily="monospace">5 cm</text>
-    <text x="135" y="95" fill="#facc15" fontSize="13" fontFamily="monospace" transform="rotate(-35 135 95)">13 cm</text>
+  <svg viewBox="0 0 480 200" className="w-full max-w-lg mx-auto my-4" aria-label="Dua segitiga soal 1">
+    {/* === Triangle a === */}
+    {/* Vertices: BL(20,160) top(110,50) BR(230,160) */}
+    <polygon points="20,160 110,50 230,160" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
+    {/* Side label: left side = 5 */}
+    <text x="42" y="112" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">5</text>
+    {/* Side label: right side = 7 */}
+    <text x="168" y="105" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">7</text>
+    {/* Side label: bottom = 10 */}
+    <text x="110" y="182" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
+    {/* Label a. */}
+    <text x="18" y="195" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">a.</text>
+
+    {/* === Triangle b === */}
+    {/* Right angle at BL. Vertices: BL(300,160) top(310,30) BR(410,160) */}
+    <polygon points="300,160 310,30 410,160" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
+    {/* Right angle mark at BL (300,160) */}
+    <polyline points="300,143 317,143 317,160" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
+    {/* Side label: left (long) = 10 */}
+    <text x="270" y="100" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
+    {/* Side label: right = 8 */}
+    <text x="372" y="100" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">8</text>
+    {/* Side label: bottom = 4 */}
+    <text x="346" y="182" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">4</text>
+    {/* Label b. */}
+    <text x="298" y="195" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">b.</text>
   </svg>
 );
 
