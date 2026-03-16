@@ -225,6 +225,7 @@ import PrismaMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-d
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
 import PengertianKeanggotaanHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage";
 import JenisHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/JenisHimpunanPage";
+import DiagramVennPage from "./pages/materi-matematika/kelas7/himpunan/DiagramVennPage";
 
 // Materi Matematika - Kelas 8 Topic Pages
 import PolaBilanganMMK8Page from "./pages/materi-matematika/kelas8/PolaBilanganPage";
@@ -477,6 +478,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-7/himpunan" element={<HimpunanMMK7Page />} />
       <Route path="/materi-matematika/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanPage />} />
       <Route path="/materi-matematika/kelas-7/himpunan/jenis-himpunan" element={<JenisHimpunanPage />} />
+      <Route path="/materi-matematika/kelas-7/himpunan/diagram-venn" element={<DiagramVennPage />} />
       
       {/* Materi Matematika - Kelas 8 Topic Routes */}
       <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
