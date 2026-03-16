@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Calculator, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
@@ -573,7 +573,6 @@ const SoalCard = ({ soal }: { soal: Question }) => {
             hover:from-primary/30 hover:to-secondary/30 hover:border-primary/50
             transition-all duration-300 cursor-pointer group/btn"
         >
-          <Sparkles className="w-4 h-4 text-primary group-hover/btn:scale-110 transition-transform" />
           <span className="text-sm font-semibold text-primary">
             {isOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}
           </span>
@@ -595,20 +594,9 @@ const SoalCard = ({ soal }: { soal: Question }) => {
               background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)"
             }}
           >
-            {/* NUMATIK AI Icon */}
-            <div className="absolute -top-3 -right-3 w-12 h-12 md:w-14 md:h-14 rounded-full 
-              bg-gradient-to-br from-primary to-secondary p-0.5 shadow-lg animate-pulse-glow">
-              <div className="w-full h-full rounded-full bg-card overflow-hidden">
-                <img src="/robot-numatik.jpeg" alt="NUMATIK Robot" className="w-full h-full object-cover rounded-full" />
-              </div>
-            </div>
-            
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
               <h4 className="font-display text-sm md:text-base font-bold text-primary">
-                Pembahasan NUMATIK AI
+                Pembahasan
               </h4>
             </div>
 

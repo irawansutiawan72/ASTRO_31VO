@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp, Bot, Sparkles } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
@@ -776,7 +776,6 @@ const OlimpiadeBilanganBulatPage = () => {
                     className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 
                       transition-colors cursor-pointer mt-3"
                   >
-                    <Sparkles className="w-4 h-4" />
                     {expandedPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
                     {expandedPembahasan.includes(soal.no) ? (
                       <ChevronUp className="w-4 h-4" />
@@ -794,13 +793,6 @@ const OlimpiadeBilanganBulatPage = () => {
                           background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)",
                         }}
                       >
-                        {/* NUMATIK AI Badge */}
-                        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full 
-                          bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30">
-                          <Bot className="w-3.5 h-3.5 text-primary" />
-                          <span className="text-[10px] font-bold text-primary">NUMATIK AI</span>
-                        </div>
-
                         {/* Jawaban */}
                         <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
                           <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
@@ -898,7 +890,6 @@ const OlimpiadeBilanganBulatPage = () => {
                     className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80
                       transition-colors cursor-pointer mt-3"
                   >
-                    <Sparkles className="w-4 h-4" />
                     {expandedOlimpiadePembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
                     {expandedOlimpiadePembahasan.includes(soal.no) ? (
                       <ChevronUp className="w-4 h-4" />
@@ -916,13 +907,6 @@ const OlimpiadeBilanganBulatPage = () => {
                           background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)",
                         }}
                       >
-                        {/* NUMATIK AI Badge */}
-                        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 rounded-full
-                          bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30">
-                          <Bot className="w-3.5 h-3.5 text-primary" />
-                          <span className="text-[10px] font-bold text-primary">NUMATIK AI</span>
-                        </div>
-
                         {/* Jawaban */}
                         <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
                           <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
