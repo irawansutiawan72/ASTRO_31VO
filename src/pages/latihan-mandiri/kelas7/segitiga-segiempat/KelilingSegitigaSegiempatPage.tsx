@@ -10,34 +10,30 @@ import "katex/dist/katex.min.css";
    SVG DIAGRAMS
 ───────────────────────────────────────────── */
 
-/* Q1: Two triangles — a. scalene (5,7,10) and b. right triangle (10,8,4) */
+/* Q1: Two triangles — a. scalene (5,7,10) and b. right-angle triangle (10,8,4) */
 const DiagramQ1 = () => (
-  <svg viewBox="0 0 480 200" className="w-full max-w-lg mx-auto my-4" aria-label="Dua segitiga soal 1">
-    {/* === Triangle a === */}
-    {/* Vertices: BL(20,160) top(110,50) BR(230,160) */}
-    <polygon points="20,160 110,50 230,160" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
-    {/* Side label: left side = 5 */}
-    <text x="42" y="112" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">5</text>
-    {/* Side label: right side = 7 */}
-    <text x="168" y="105" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">7</text>
-    {/* Side label: bottom = 10 */}
-    <text x="110" y="182" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
-    {/* Label a. */}
-    <text x="18" y="195" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">a.</text>
+  <svg viewBox="0 0 480 210" className="w-full max-w-lg mx-auto my-4" aria-label="Dua segitiga soal 1">
+    {/* === Triangle a: scalene, flat — BL(20,165) top(100,55) BR(230,165) === */}
+    <polygon points="20,165 100,55 230,165" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
+    <text x="40"  y="115" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">5</text>
+    <text x="162" y="110" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">7</text>
+    <text x="112" y="185" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
+    <text x="16"  y="198" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">a.</text>
 
-    {/* === Triangle b === */}
-    {/* Right angle at BL. Vertices: BL(300,160) top(310,30) BR(410,160) */}
-    <polygon points="300,160 310,30 410,160" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
-    {/* Right angle mark at BL (300,160) */}
-    <polyline points="300,143 317,143 317,160" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
-    {/* Side label: left (long) = 10 */}
-    <text x="270" y="100" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
-    {/* Side label: right = 8 */}
-    <text x="372" y="100" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">8</text>
-    {/* Side label: bottom = 4 */}
-    <text x="346" y="182" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">4</text>
-    {/* Label b. */}
-    <text x="298" y="195" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">b.</text>
+    {/* === Triangle b: tall narrow, right angle at BL ===
+        BL(330,165) — right angle (vertical left meets horizontal bottom)
+        T (345,20)  — apex, slightly right of BL so left side is steep
+        BR(400,165) — bottom-right, short base                         */}
+    <polygon points="330,165 345,20 400,165" fill="rgba(59,130,246,0.10)" stroke="#60a5fa" strokeWidth="2" />
+    {/* Right-angle mark at BL: square between bottom (→) and left side (↑) */}
+    <polyline points="330,148 347,148 347,165" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
+    {/* "10" to the left of the steep left side */}
+    <text x="295" y="98"  fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">10</text>
+    {/* "8"  to the right of the hypotenuse */}
+    <text x="378" y="98"  fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">8</text>
+    {/* "4" below the short base */}
+    <text x="354" y="185" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">4</text>
+    <text x="326" y="198" fill="#e2e8f0" fontSize="13" fontFamily="sans-serif">b.</text>
   </svg>
 );
 
