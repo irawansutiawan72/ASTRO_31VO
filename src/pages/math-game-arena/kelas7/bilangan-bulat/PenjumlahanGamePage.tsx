@@ -454,13 +454,13 @@ const PenjumlahanGamePage = () => {
   const q = quizQuestions[currentQ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden select-none flex flex-col">
+    <div className="relative h-[100dvh] overflow-hidden select-none flex flex-col">
       <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <Starfield />
       <QuizNavigation />
 
       {/* HUD — always at top, fixed height */}
-      <div className="relative z-20 shrink-0 flex flex-col items-center px-4 pt-14 pb-2">
+      <div className="relative z-20 shrink-0 flex flex-col items-center px-4 pt-10 md:pt-14 pb-1">
         <div className="font-display text-xs text-muted-foreground mb-0.5">
           SOAL {currentQ + 1}/{quizQuestions.length}
         </div>
@@ -473,7 +473,7 @@ const PenjumlahanGamePage = () => {
       <div className="relative flex-1 min-h-0">
 
         {/* Meteors — upper 45% of game canvas */}
-        <div className="absolute top-[5%] left-0 right-0 h-[45%] z-10">
+        <div className="absolute top-[3%] left-0 right-0 h-[45%] z-10">
           {meteors.map((m) => (
             <button key={m.id} onClick={() => handleMeteorClick(m)} disabled={m.hit || locked}
               className="absolute transition-all duration-500 cursor-pointer disabled:cursor-default"
@@ -499,7 +499,7 @@ const PenjumlahanGamePage = () => {
         {/* Laser — originates from spaceship, travels up through game canvas */}
         {laser && laser.active && (
           <div className="absolute z-10 pointer-events-none" style={{
-            left: `${laser.fromX}%`, bottom: "10%", transform: "translateX(-50%)",
+            left: `${laser.fromX}%`, bottom: "20%", transform: "translateX(-50%)",
             height: `${laser.progress * 80}%`, width: 12,
             background: "linear-gradient(to top, hsl(50, 100%, 60%), hsl(50, 100%, 85%), hsl(50, 100%, 90%, 0.4))",
             boxShadow: "0 0 20px hsl(50, 100%, 60%), 0 0 40px hsl(50, 100%, 55%), 0 0 60px hsl(50, 100%, 50%, 0.4)",
@@ -508,7 +508,7 @@ const PenjumlahanGamePage = () => {
         )}
 
         {/* Spaceship — lower section of game canvas, always above question bar */}
-        <div className="absolute bottom-[8%] z-20 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
+        <div className="absolute bottom-[18%] z-20 transition-all duration-500 ease-out" style={{ left: `${shipX}%`, transform: "translateX(-50%)" }}>
           <div className="relative flex flex-col items-center">
             <img src={spaceshipImg} alt="spaceship" className="w-16 h-20 md:w-20 md:h-24 drop-shadow-[0_0_20px_rgba(0,180,255,0.4)]" style={{ mixBlendMode: "screen", background: "transparent" }} />
             <div className="absolute -bottom-2 w-4 h-6 md:w-5 md:h-7 animate-flame" style={{ left: "40%", transform: "translateX(-50%)" }}>
@@ -548,7 +548,7 @@ const PenjumlahanGamePage = () => {
       </div>
 
       {/* Question bar — always at bottom, never overlaps spaceship */}
-      <div className="relative z-20 shrink-0 px-4 pt-2 pb-3">
+      <div className="relative z-20 shrink-0 px-4 pt-2 pb-4 md:pb-3">
         <div className="bg-card/90 backdrop-blur border border-primary/30 rounded-xl px-4 py-2 max-w-2xl mx-auto box-glow-cyan text-center">
           <p className="font-body text-xs md:text-sm text-foreground leading-snug">{q.question}</p>
         </div>
