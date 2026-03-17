@@ -152,19 +152,11 @@ const TKALatihan1Page = () => {
             </div>
             {/* Wall diagram */}
             <div className="flex justify-center mb-3">
-              <svg width="280" height="160" className="bg-white/5 rounded-lg">
-                {/* Outer wall shape */}
-                <polygon points="20,140 20,60 80,10 180,10 240,60 240,140" fill="none" stroke="#22d3ee" strokeWidth="1.5"/>
-                {/* Door opening */}
-                <rect x="110" y="90" width="40" height="50" fill="#0f172a" stroke="#22d3ee" strokeWidth="1"/>
-                {/* Window */}
-                <rect x="50" y="70" width="35" height="30" fill="#0f172a" stroke="#22d3ee" strokeWidth="1"/>
-                <rect x="175" y="70" width="35" height="30" fill="#0f172a" stroke="#22d3ee" strokeWidth="1"/>
-                {/* Dimensions */}
-                <text x="130" y="155" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="sans-serif">10 m</text>
-                <text x="5" y="100" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="sans-serif" transform="rotate(-90,5,100)">7 m</text>
-                <text x="130" y="8" textAnchor="middle" fill="#94a3b8" fontSize="9" fontFamily="sans-serif">Total luas ± 60 m²</text>
-              </svg>
+              <img
+                src="/q4-wall-shape.png"
+                alt="Gambar sisi dinding rumah dengan dimensi: lebar 12m, tinggi kiri 8m, tinggi kanan 5m, dan 4m"
+                className="max-w-full w-72 md:w-80 rounded-lg bg-white p-2"
+              />
             </div>
             <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
               Ayah akan mengecat dinding tersebut. Di toko tersedia dua kemasan cat dengan merek yang sama seperti pada tabel.
