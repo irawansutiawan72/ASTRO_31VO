@@ -269,6 +269,8 @@ import BangunRuangSisiLengkungMMK9Page from "./pages/materi-matematika/kelas9/Ba
 import TabungMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/TabungPage";
 import KerucutMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/KerucutPage";
 import BolaMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/BolaPage";
+import PerubahanVolumeMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage";
+import GabunganMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/GabunganPage";
 import StatistikaMMK9Page from "./pages/materi-matematika/kelas9/StatistikaPage";
 import PeluangMMK9Page from "./pages/materi-matematika/kelas9/PeluangPage";
 import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
@@ -549,6 +551,8 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut" element={<KerucutMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola" element={<BolaMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/statistika" element={<StatistikaMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
