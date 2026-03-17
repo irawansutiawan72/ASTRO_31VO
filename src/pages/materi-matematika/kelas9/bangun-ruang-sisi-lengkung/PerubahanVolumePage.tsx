@@ -557,7 +557,7 @@ const PerubahanVolumePage = () => {
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <TrendingUp className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          PERUBAHAN VOLUME BANGUN RUANG SISI LENGKUNG
+          PERUBAHAN LUAS DAN VOLUME BANGUN RUANG SISI LENGKUNG
         </h1>
         <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
 
