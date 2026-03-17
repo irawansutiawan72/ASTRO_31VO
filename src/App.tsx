@@ -128,6 +128,11 @@ import BilanganRasionalMGAK7Page from "./pages/math-game-arena/kelas7/BilanganRa
 import AljabarMGAK7Page from "./pages/math-game-arena/kelas7/AljabarPage";
 import PLSVPtLSVMGAK7Page from "./pages/math-game-arena/kelas7/PLSVPtLSVPage";
 import PerbandinganMGAK7Page from "./pages/math-game-arena/kelas7/PerbandinganPage";
+import PenguranganBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PenguranganGamePage";
+import PerkalianBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PerkalianGamePage";
+import PembagianBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/PembagianGamePage";
+import OperasiCampuranBilanganBulatGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/OperasiCampuranGamePage";
+import KPKFPBGameMGAK7Page from "./pages/math-game-arena/kelas7/bilangan-bulat/KPKFPBGamePage";
 import AritmetikaSosialMGAK7Page from "./pages/math-game-arena/kelas7/AritmetikaSosialPage";
 import JualBeliUntungRugiGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/JualBeliUntungRugiGamePage";
 import DiskonGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/DiskonGamePage";
@@ -400,6 +405,11 @@ const AppInner = () => {
       {/* Math Game Arena - Kelas 7 Topic Routes */}
       <Route path="/math-game-arena/kelas-7/bilangan-bulat" element={<BilanganBulatMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-bulat/penjumlahan" element={<PenjumlahanBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pengurangan" element={<PenguranganBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/perkalian" element={<PerkalianBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/pembagian" element={<PembagianBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran" element={<OperasiCampuranBilanganBulatGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb" element={<KPKFPBGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/bilangan-rasional" element={<BilanganRasionalMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/aljabar" element={<AljabarMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />

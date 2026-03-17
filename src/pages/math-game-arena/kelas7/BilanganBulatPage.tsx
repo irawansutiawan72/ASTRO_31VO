@@ -6,21 +6,19 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { name: "PENJUMLAHAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/penjumlahan" },
-  { name: "PENGURANGAN BILANGAN BULAT", path: "/coming-soon" },
-  { name: "PERKALIAN BILANGAN BULAT", path: "/coming-soon" },
-  { name: "PEMBAGIAN BILANGAN BULAT", path: "/coming-soon" },
-  { name: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: "/coming-soon" },
-  { name: "KPK DAN FPB", path: "/coming-soon" },
+  { name: "PENGURANGAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/pengurangan" },
+  { name: "PERKALIAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/perkalian" },
+  { name: "PEMBAGIAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/pembagian" },
+  { name: "OPERASI HITUNG CAMPURAN BILANGAN BULAT", path: "/math-game-arena/kelas-7/bilangan-bulat/operasi-campuran" },
+  { name: "KPK DAN FPB", path: "/math-game-arena/kelas-7/bilangan-bulat/kpk-fpb" },
 ];
 
 const BilanganBulatPage = () => {
   const navigate = useNavigate();
 
-  const handleClick = (path: string | null) => {
+  const handleClick = (path: string) => {
     playPopSound();
-    if (path) {
-      navigate(path);
-    }
+    navigate(path);
   };
 
   return (

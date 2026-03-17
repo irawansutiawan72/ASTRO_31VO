@@ -33,6 +33,7 @@ const JualBeliUntungRugiGamePage = () => (
     questions={questions}
     topicLabel="JUAL BELI, UNTUNG DAN RUGI"
     backPath="/math-game-arena/kelas-7/aritmetika-sosial"
+    backLabel="Kembali ke Aritmetika Sosial"
   />
 );
 

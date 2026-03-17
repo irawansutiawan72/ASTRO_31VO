@@ -33,6 +33,7 @@ const BrutoNettoTaraGamePage = () => (
     questions={questions}
     topicLabel="BRUTO, NETTO DAN TARA"
     backPath="/math-game-arena/kelas-7/aritmetika-sosial"
+    backLabel="Kembali ke Aritmetika Sosial"
   />
 );
 

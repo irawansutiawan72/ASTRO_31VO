@@ -18,6 +18,7 @@ interface MeteorShootingGameProps {
   questions: QuizQuestion[];
   topicLabel: string;
   backPath: string;
+  backLabel?: string;
 }
 
 interface MeteorState {
@@ -35,7 +36,7 @@ interface LaserState {
   progress: number;
 }
 
-const MeteorShootingGame = ({ questions, topicLabel, backPath }: MeteorShootingGameProps) => {
+const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kembali" }: MeteorShootingGameProps) => {
   const navigate = useNavigate();
   const { playLaser, playExplosion, playCorrect, startBgMusic, stopBgMusic } = useAudio();
 
@@ -247,7 +248,7 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath }: MeteorShootingG
 
           <div className="mt-8">
             <button onClick={() => navigate(backPath)} className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors cursor-pointer font-body">
-              &larr; Kembali ke Aritmetika Sosial
+              &larr; {backLabel}
             </button>
           </div>
         </div>

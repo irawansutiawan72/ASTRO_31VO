@@ -33,6 +33,7 @@ const DiskonGamePage = () => (
     questions={questions}
     topicLabel="DISKON"
     backPath="/math-game-arena/kelas-7/aritmetika-sosial"
+    backLabel="Kembali ke Aritmetika Sosial"
   />
 );
 

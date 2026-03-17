@@ -33,6 +33,7 @@ const PPNGamePage = () => (
     questions={questions}
     topicLabel="PAJAK PERTAMBAHAN NILAI (PPN)"
     backPath="/math-game-arena/kelas-7/aritmetika-sosial"
+    backLabel="Kembali ke Aritmetika Sosial"
   />
 );
 
