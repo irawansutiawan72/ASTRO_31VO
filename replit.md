@@ -48,6 +48,14 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 ### Kelas 9 - Transformasi Geometri
 - `/materi-matematika/kelas-9/transformasi-geometri/dilatasi` — Dilatasi (full content with SVG diagrams, 9 examples)
 
+### Math Game Arena - Kelas 7 - Aritmetika Sosial (5 games, meteor shooting)
+- `/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi` — Jual Beli, Untung dan Rugi
+- `/math-game-arena/kelas-7/aritmetika-sosial/diskon` — Diskon
+- `/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara` — Bruto, Netto dan Tara
+- `/math-game-arena/kelas-7/aritmetika-sosial/ppn` — Pajak Pertambahan Nilai (PPN)
+- `/math-game-arena/kelas-7/aritmetika-sosial/pph` — Pajak Penghasilan (PPh)
+- Shared reusable game component: `src/components/MeteorShootingGame.tsx`
+
 ## Notes
 
 - Merge conflicts from Vercel migration were resolved on 2026-03-12

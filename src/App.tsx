@@ -129,6 +129,11 @@ import AljabarMGAK7Page from "./pages/math-game-arena/kelas7/AljabarPage";
 import PLSVPtLSVMGAK7Page from "./pages/math-game-arena/kelas7/PLSVPtLSVPage";
 import PerbandinganMGAK7Page from "./pages/math-game-arena/kelas7/PerbandinganPage";
 import AritmetikaSosialMGAK7Page from "./pages/math-game-arena/kelas7/AritmetikaSosialPage";
+import JualBeliUntungRugiGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/JualBeliUntungRugiGamePage";
+import DiskonGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/DiskonGamePage";
+import BrutoNettoTaraGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/BrutoNettoTaraGamePage";
+import PPNGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/PPNGamePage";
+import PPhGameMGAK7Page from "./pages/math-game-arena/kelas7/aritmetika-sosial/PPhGamePage";
 import GarisDanSudutMGAK7Page from "./pages/math-game-arena/kelas7/GarisDanSudutPage";
 import SegitigaSegiempatMGAK7Page from "./pages/math-game-arena/kelas7/SegitigaSegiempatPage";
 import HimpunanMGAK7Page from "./pages/math-game-arena/kelas7/HimpunanPage";
@@ -400,6 +405,11 @@ const AppInner = () => {
       <Route path="/math-game-arena/kelas-7/plsv-ptlsv" element={<PLSVPtLSVMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/perbandingan" element={<PerbandinganMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/aritmetika-sosial" element={<AritmetikaSosialMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" element={<JualBeliUntungRugiGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/aritmetika-sosial/diskon" element={<DiskonGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara" element={<BrutoNettoTaraGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/aritmetika-sosial/ppn" element={<PPNGameMGAK7Page />} />
+      <Route path="/math-game-arena/kelas-7/aritmetika-sosial/pph" element={<PPhGameMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/garis-dan-sudut" element={<GarisDanSudutMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatMGAK7Page />} />
       <Route path="/math-game-arena/kelas-7/himpunan" element={<HimpunanMGAK7Page />} />
