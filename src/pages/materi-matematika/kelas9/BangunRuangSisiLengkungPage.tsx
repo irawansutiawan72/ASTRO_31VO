@@ -6,8 +6,8 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { label: "TABUNG", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" },
-  { label: "KERUCUT", path: "/coming-soon" },
-  { label: "BOLA", path: "/coming-soon" },
+  { label: "KERUCUT", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut" },
+  { label: "BOLA", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola" },
   { label: "PERUBAHAN VOLUME BANGUN RUANG SISI LENGKUNG", path: "/coming-soon" },
   { label: "BANGUN RUANG SISI LENGKUNG GABUNGAN", path: "/coming-soon" },
 ];
