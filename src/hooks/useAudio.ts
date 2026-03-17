@@ -235,45 +235,7 @@ export const useAudio = () => {
   }, []);
 
   const startBgMusic = useCallback(() => {
-    if (!_soundEnabled) return;
-    try {
-      const ctx = getAudioCtx();
-      if (bgMusicRef.current) return;
-      const gain = ctx.createGain();
-      gain.gain.value = 0.06;
-      gain.connect(ctx.destination);
-      const filter = ctx.createBiquadFilter();
-      filter.type = "lowpass";
-      filter.frequency.value = 400;
-      filter.Q.value = 1;
-      const osc1 = ctx.createOscillator();
-      osc1.type = "sine";
-      osc1.frequency.value = 65.41;
-      const osc2 = ctx.createOscillator();
-      osc2.type = "triangle";
-      osc2.frequency.value = 98;
-      const osc3 = ctx.createOscillator();
-      osc3.type = "sine";
-      osc3.frequency.value = 329.63;
-      const shimmerGain = ctx.createGain();
-      shimmerGain.gain.value = 0.15;
-      const lfo = ctx.createOscillator();
-      lfo.frequency.value = 0.15;
-      const lfoGain = ctx.createGain();
-      lfoGain.gain.value = 8;
-      lfo.connect(lfoGain);
-      lfoGain.connect(osc1.frequency);
-      osc1.connect(filter);
-      osc2.connect(filter);
-      filter.connect(gain);
-      osc3.connect(shimmerGain);
-      shimmerGain.connect(gain);
-      osc1.start();
-      osc2.start();
-      osc3.start();
-      lfo.start();
-      bgMusicRef.current = { osc1, osc2, osc3, gain, lfo };
-    } catch {}
+    // Background music disabled
   }, []);
 
   const stopBgMusic = useCallback(() => {
@@ -292,22 +254,6 @@ export const useAudio = () => {
   return { playLaser, playExplosion, playCorrect, startBgMusic, stopBgMusic, startEngineSound, stopEngineSound };
 };
 
-// Global background music using dreams.mp3
-let globalAudio: HTMLAudioElement | null = null;
-
-export const startGlobalAmbient = () => {
-  if (!_soundEnabled || globalAudio) return;
-  try {
-    globalAudio = new Audio("/audio/dreams.mp3");
-    globalAudio.loop = true;
-    globalAudio.volume = 0.3;
-    globalAudio.play().catch(() => {});
-  } catch {}
-};
-
-export const stopGlobalAmbient = () => {
-  if (globalAudio) {
-    globalAudio.pause();
-    globalAudio = null;
-  }
-};
+// Global background music disabled
+export const startGlobalAmbient = () => {};
+export const stopGlobalAmbient = () => {};
