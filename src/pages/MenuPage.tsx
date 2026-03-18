@@ -40,7 +40,7 @@ const menuItems = [
   { label: "PENGATURAN", icon: Settings, path: "/pengaturan", desc: "Atur mode gelap/terang" },
   { label: "DONASI", icon: Heart, path: "/donasi", desc: "Ayo dukung agar aplikasinya lebih berkembang" },
   { label: "BIOGRAFI", icon: User, path: "/biografi", desc: "Data pembuat aplikasi" },
-  { label: "SUMBER REFERENSI", icon: BookMarked, path: "/referensi", desc: "Sumber belajar" },
+  { label: "SUMBER REFERENSI", icon: BookMarked, path: "/referensi", desc: "Daftar pustaka" },
   { label: "TENTANG APLIKASI", icon: Rocket, path: "/tentang-aplikasi", desc: "Informasi tentang aplikasi" },
 ];
 

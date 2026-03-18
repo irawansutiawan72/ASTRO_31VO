@@ -585,11 +585,11 @@ const slides: Slide[] = [
     icon: <Heart className="w-8 h-8" />,
     color: "text-red-400",
     bgGradient: "from-red-900/20 to-pink-900/20",
-    description: "Informasi pendukung tentang aplikasi NUMATIK, termasuk cara mendukung pengembangan app, profil pembuat, dan sumber belajar yang digunakan.",
+    description: "Informasi pendukung tentang aplikasi NUMATIK, termasuk cara mendukung pengembangan app, profil pembuat, dan daftar pustaka yang digunakan.",
     steps: [
       "Menu DONASI — dukung pengembangan NUMATIK agar terus berkembang",
       "Menu BIOGRAFI — kenali profil dan latar belakang pembuat aplikasi",
-      "Menu SUMBER REFERENSI — lihat sumber belajar dan daftar pustaka yang digunakan",
+      "Menu SUMBER REFERENSI — lihat daftar pustaka yang digunakan",
       "Menu TENTANG APLIKASI — informasi versi dan deskripsi aplikasi",
     ],
     mockup: (
