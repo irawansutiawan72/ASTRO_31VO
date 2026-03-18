@@ -737,21 +737,9 @@ const PetunjukPage = () => {
         </div>
 
         {/* Navigation Controls */}
-        <div className="flex items-center gap-4 mt-4">
-          <button
-            onClick={prev}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-body font-medium transition-all ${
-              isDark
-                ? "bg-card/60 border-border/40 text-white/70 hover:border-primary/50 hover:text-primary"
-                : "bg-white/80 border-blue-200 text-blue-600 hover:border-blue-400"
-            }`}
-          >
-            <ChevronLeft className="w-4 h-4" />
-            Sebelumnya
-          </button>
-
+        <div className="flex flex-col items-center gap-3 mt-4 w-full">
           {/* Dot indicators */}
-          <div className="flex gap-1.5">
+          <div className="flex flex-wrap justify-center gap-1.5">
             {slides.map((_, i) => (
               <button
                 key={i}
@@ -765,17 +753,32 @@ const PetunjukPage = () => {
             ))}
           </div>
 
-          <button
-            onClick={next}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-body font-medium transition-all ${
-              isDark
-                ? "bg-card/60 border-border/40 text-white/70 hover:border-primary/50 hover:text-primary"
-                : "bg-white/80 border-blue-200 text-blue-600 hover:border-blue-400"
-            }`}
-          >
-            Selanjutnya
-            <ChevronRight className="w-4 h-4" />
-          </button>
+          {/* Prev / Next buttons */}
+          <div className="flex items-center justify-between w-full gap-3">
+            <button
+              onClick={prev}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-body font-medium transition-all whitespace-nowrap ${
+                isDark
+                  ? "bg-card/60 border-border/40 text-white/70 hover:border-primary/50 hover:text-primary"
+                  : "bg-white/80 border-blue-200 text-blue-600 hover:border-blue-400"
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4 shrink-0" />
+              Sebelumnya
+            </button>
+
+            <button
+              onClick={next}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-body font-medium transition-all whitespace-nowrap ${
+                isDark
+                  ? "bg-card/60 border-border/40 text-white/70 hover:border-primary/50 hover:text-primary"
+                  : "bg-white/80 border-blue-200 text-blue-600 hover:border-blue-400"
+              }`}
+            >
+              Selanjutnya
+              <ChevronRight className="w-4 h-4 shrink-0" />
+            </button>
+          </div>
         </div>
 
         <button
