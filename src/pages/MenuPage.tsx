@@ -53,10 +53,10 @@ const MenuPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center gradient-space overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-x-hidden overflow-y-auto">
       <Starfield />
       <PageNavigation />
-      <div className="relative z-10 text-center px-4 max-w-3xl w-full">
+      <div className="relative z-10 text-center px-4 max-w-3xl w-full pt-20 pb-12 md:pt-24 md:pb-16">
         <h1 className="font-display text-3xl md:text-4xl font-bold text-primary text-glow-cyan mb-2">
           MENU UTAMA
         </h1>
