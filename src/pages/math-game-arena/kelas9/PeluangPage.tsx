@@ -6,9 +6,10 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   "RUANG SAMPEL DAN TITIK SAMPEL",
+  "PELUANG EMPIRIK DAN FREKUENSI RELATIF",
   "PELUANG TEORETIK",
-  "PELUANG EMPIRIK",
   "FREKUENSI HARAPAN",
+  "KOMPLEMEN SUATU KEJADIAN",
 ];
 
 const PeluangPage = () => {
