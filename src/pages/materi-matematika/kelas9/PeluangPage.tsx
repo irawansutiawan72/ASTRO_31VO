@@ -6,10 +6,10 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
   { label: "RUANG SAMPEL DAN TITIK SAMPEL", route: "/materi-matematika/kelas-9/peluang/ruang-sampel" },
-  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", route: "/coming-soon" },
-  { label: "PELUANG TEORETIK", route: "/coming-soon" },
-  { label: "FREKUENSI HARAPAN", route: "/coming-soon" },
-  { label: "KOMPLEMEN SUATU KEJADIAN", route: "/coming-soon" },
+  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", route: "/materi-matematika/kelas-9/peluang/peluang-empirik" },
+  { label: "PELUANG TEORETIK", route: "/materi-matematika/kelas-9/peluang/peluang-teoretik" },
+  { label: "FREKUENSI HARAPAN", route: "/materi-matematika/kelas-9/peluang/frekuensi-harapan" },
+  { label: "KOMPLEMEN SUATU KEJADIAN", route: "/materi-matematika/kelas-9/peluang/komplemen" },
 ];
 
 const PeluangPage = () => {
