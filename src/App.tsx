@@ -279,6 +279,7 @@ import MedianModusMMK9Page from "./pages/materi-matematika/kelas9/statistika/Med
 import KuartilMMK9Page from "./pages/materi-matematika/kelas9/statistika/KuartilPage";
 import PenyebaranDataMMK9Page from "./pages/materi-matematika/kelas9/statistika/PenyebaranDataPage";
 import PeluangMMK9Page from "./pages/materi-matematika/kelas9/PeluangPage";
+import RuangSampelMMK9Page from "./pages/materi-matematika/kelas9/peluang/RuangSampelPage";
 import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
 import FungsiKuadratMMK9Page from "./pages/materi-matematika/kelas9/FungsiKuadratPage";
 
@@ -567,6 +568,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/statistika/kuartil" element={<KuartilMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/peluang/ruang-sampel" element={<RuangSampelMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />
       
