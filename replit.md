@@ -45,6 +45,10 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku` — Perbandingan Rusuk Segitiga Siku-siku
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar` — Kekongruenan pada Bangun Datar
 
+### Kelas 9 - Statistika (2 of 6 sub-bab completed)
+- `/materi-matematika/kelas-9/statistika/pengantar` — Pengantar Statistika & Pengumpulan Data (definisi, jenis data, metode pengumpulan, jenis penyajian, 9 contoh soal)
+- `/materi-matematika/kelas-9/statistika/penyajian-data` — Penyajian Data (batang daun, diagram batang, garis, lingkaran, tabel distribusi frekuensi, 15 contoh soal)
+
 ### Kelas 9 - Transformasi Geometri
 - `/materi-matematika/kelas-9/transformasi-geometri/dilatasi` — Dilatasi (full content with SVG diagrams, 9 examples)
 

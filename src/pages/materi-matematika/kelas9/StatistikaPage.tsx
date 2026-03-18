@@ -5,12 +5,12 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA",
-  "PENYAJIAN DATA",
-  "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)",
-  "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)",
-  "UKURAN LETAK DATA (KUARTIL)",
-  "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)",
+  { label: "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA", path: "/materi-matematika/kelas-9/statistika/pengantar" },
+  { label: "PENYAJIAN DATA", path: "/materi-matematika/kelas-9/statistika/penyajian-data" },
+  { label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)", path: "/coming-soon" },
+  { label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)", path: "/coming-soon" },
+  { label: "UKURAN LETAK DATA (KUARTIL)", path: "/coming-soon" },
+  { label: "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)", path: "/coming-soon" },
 ];
 
 const StatistikaPage = () => {
@@ -30,15 +30,15 @@ const StatistikaPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.label}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.label}</span>
             </button>
           ))}
         </div>
