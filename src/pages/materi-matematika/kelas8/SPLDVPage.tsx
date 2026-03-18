@@ -9,9 +9,9 @@ const subtopics = [
   { label: "PENYELESAIAN SPLDV DENGAN METODE GRAFIK", route: "/materi-matematika/kelas-8/spldv/metode-grafik" },
   { label: "PENYELESAIAN SPLDV DENGAN METODE SUBSTITUSI", route: "/materi-matematika/kelas-8/spldv/metode-substitusi" },
   { label: "PENYELESAIAN SPLDV DENGAN METODE ELIMINASI", route: "/materi-matematika/kelas-8/spldv/metode-eliminasi" },
-  { label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN", route: "/coming-soon" },
-  { label: "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV", route: "/coming-soon" },
-  { label: "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV", route: "/coming-soon" },
+  { label: "PENYELESAIAN SPLDV DENGAN METODE CAMPURAN", route: "/materi-matematika/kelas-8/spldv/metode-campuran" },
+  { label: "MEMBUAT MODEL DARI PERMASALAHAN YANG BERKAITAN DENGAN SPLDV", route: "/materi-matematika/kelas-8/spldv/model-spldv" },
+  { label: "PENYELESAIAN MASALAH YANG BERKAITAN DENGAN SPLDV", route: "/materi-matematika/kelas-8/spldv/penyelesaian-masalah" },
 ];
 
 const SPLDVPage = () => {

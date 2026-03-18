@@ -249,6 +249,9 @@ import DefinisiSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/Defini
 import MetodeGrafikMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeGrafikPage";
 import MetodeSubstitusiMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeSubstitusiPage";
 import MetodeEliminasiMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeEliminasiPage";
+import MetodeCampuranMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeCampuranPage";
+import ModelSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/ModelSPLDVPage";
+import PenyelesaianMasalahSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/PenyelesaianMasalahSPLDVPage";
 import PersamaanGarisLurusMMK8Page from "./pages/materi-matematika/kelas8/PersamaanGarisLurusPage";
 import TeoremaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/TeoremaPythagorasPage";
 import LingkaranMMK8Page from "./pages/materi-matematika/kelas8/LingkaranPage";
@@ -543,6 +546,9 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/spldv/metode-grafik" element={<MetodeGrafikMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/spldv/metode-campuran" element={<MetodeCampuranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/spldv/model-spldv" element={<ModelSPLDVMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
