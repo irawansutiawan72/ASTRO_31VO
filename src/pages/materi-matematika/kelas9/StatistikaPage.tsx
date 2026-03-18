@@ -9,8 +9,8 @@ const subtopics = [
   { label: "PENYAJIAN DATA", path: "/materi-matematika/kelas-9/statistika/penyajian-data" },
   { label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)", path: "/materi-matematika/kelas-9/statistika/rata-rata" },
   { label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)", path: "/materi-matematika/kelas-9/statistika/median-modus" },
-  { label: "UKURAN LETAK DATA (KUARTIL)", path: "/coming-soon" },
-  { label: "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)", path: "/coming-soon" },
+  { label: "UKURAN LETAK DATA (KUARTIL)", path: "/materi-matematika/kelas-9/statistika/kuartil" },
+  { label: "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)", path: "/materi-matematika/kelas-9/statistika/penyebaran-data" },
 ];
 
 const StatistikaPage = () => {

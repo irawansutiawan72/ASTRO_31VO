@@ -45,11 +45,13 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku` — Perbandingan Rusuk Segitiga Siku-siku
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar` — Kekongruenan pada Bangun Datar
 
-### Kelas 9 - Statistika (4 of 6 sub-bab completed)
+### Kelas 9 - Statistika (6 of 6 sub-bab completed)
 - `/materi-matematika/kelas-9/statistika/pengantar` — Pengantar Statistika & Pengumpulan Data (definisi, jenis data, metode pengumpulan, jenis penyajian, 9 contoh soal)
 - `/materi-matematika/kelas-9/statistika/penyajian-data` — Penyajian Data (batang daun, diagram batang, garis, lingkaran, tabel distribusi frekuensi, 15 contoh soal)
 - `/materi-matematika/kelas-9/statistika/rata-rata` — Ukuran Pemusatan: Rata-rata & Rata-rata Gabungan (data tunggal, tabel distribusi, diagram batang, gabungan masuk, gabungan keluar, 15 contoh soal)
 - `/materi-matematika/kelas-9/statistika/median-modus` — Ukuran Pemusatan: Median & Modus (data ganjil, data genap, tabel distribusi frekuensi, modus tunggal, modus berkelompok, 15 contoh soal)
+- `/materi-matematika/kelas-9/statistika/kuartil` — Ukuran Letak Data: Kuartil (Q1/Q2/Q3, data tunggal dengan interpolasi, tabel distribusi frekuensi tunggal via FK, 6 contoh soal bertahap)
+- `/materi-matematika/kelas-9/statistika/penyebaran-data` — Ukuran Penyebaran Data: Jangkauan, JIK, Simpangan Kuartil (data tunggal & tabel distribusi frekuensi tunggal, 6 contoh soal bertahap)
 
 ### Kelas 9 - Transformasi Geometri
 - `/materi-matematika/kelas-9/transformasi-geometri/dilatasi` — Dilatasi (full content with SVG diagrams, 9 examples)
