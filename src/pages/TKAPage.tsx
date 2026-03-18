@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { Brain, ChevronRight, FileText } from "lucide-react";
@@ -15,6 +16,10 @@ const packages = [
 
 const TKAPage = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
