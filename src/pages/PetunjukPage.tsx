@@ -61,7 +61,7 @@ const MockupFrame = ({ children, title, accentColor = "text-cyan-400" }: { child
 const MenuMockup = () => (
   <MockupFrame title="MENU UTAMA">
     <div className="p-2 grid grid-cols-3 gap-1">
-      {["PETUNJUK","MATERI","LATIHAN","GAME","KALKULATOR","OLIMPIADE","RUMUS","KONVERSI","VIDEO","PERINGKAT","BANK SOAL","AI CHAT"].map((m) => (
+      {["PETUNJUK PENGGUNAAN","MATERI","LATIHAN","GAME","KALKULATOR","OLIMPIADE","RUMUS","KONVERSI","VIDEO","PERINGKAT","BANK SOAL","AI CHAT"].map((m) => (
         <div key={m} className="bg-white/5 border border-white/10 rounded p-1 text-center">
           <div className="w-3 h-3 rounded-sm bg-cyan-400/40 mx-auto mb-1" />
           <p className="text-[5px] text-white/60 leading-tight">{m}</p>
