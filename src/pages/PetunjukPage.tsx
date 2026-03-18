@@ -589,7 +589,7 @@ const slides: Slide[] = [
     steps: [
       "Menu DONASI — dukung pengembangan NUMATIK agar terus berkembang",
       "Menu BIOGRAFI — kenali profil dan latar belakang pembuat aplikasi",
-      "Menu REFERENSI — lihat sumber belajar dan referensi yang digunakan",
+      "Menu SUMBER REFERENSI — lihat sumber belajar dan daftar pustaka yang digunakan",
       "Menu TENTANG APLIKASI — informasi versi dan deskripsi aplikasi",
     ],
     mockup: (
@@ -598,7 +598,7 @@ const slides: Slide[] = [
           {[
             { icon: "❤️", label: "DONASI", desc: "Dukung pengembangan", color: "text-red-400" },
             { icon: "👤", label: "BIOGRAFI", desc: "Profil pembuat", color: "text-blue-400" },
-            { icon: "📚", label: "REFERENSI", desc: "Sumber belajar", color: "text-green-400" },
+            { icon: "📚", label: "SUMBER REFERENSI", desc: "Daftar pustaka", color: "text-green-400" },
             { icon: "ℹ️", label: "TENTANG", desc: "Info aplikasi", color: "text-cyan-400" },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-2 bg-white/5 border border-white/10 rounded px-2 py-1.5">
