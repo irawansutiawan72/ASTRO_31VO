@@ -274,6 +274,8 @@ import GabunganMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi
 import StatistikaMMK9Page from "./pages/materi-matematika/kelas9/StatistikaPage";
 import PengantarStatistikaMMK9Page from "./pages/materi-matematika/kelas9/statistika/PengantarStatistikaPage";
 import PenyajianDataMMK9Page from "./pages/materi-matematika/kelas9/statistika/PenyajianDataPage";
+import RataRataMMK9Page from "./pages/materi-matematika/kelas9/statistika/RataRataPage";
+import MedianModusMMK9Page from "./pages/materi-matematika/kelas9/statistika/MedianModusPage";
 import PeluangMMK9Page from "./pages/materi-matematika/kelas9/PeluangPage";
 import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
 import FungsiKuadratMMK9Page from "./pages/materi-matematika/kelas9/FungsiKuadratPage";
@@ -558,6 +560,8 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/statistika" element={<StatistikaMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/statistika/pengantar" element={<PengantarStatistikaMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/statistika/penyajian-data" element={<PenyajianDataMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/statistika/rata-rata" element={<RataRataMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/statistika/median-modus" element={<MedianModusMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang" element={<PeluangMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />

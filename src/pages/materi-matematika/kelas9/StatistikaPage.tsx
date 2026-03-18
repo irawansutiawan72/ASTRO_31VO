@@ -7,8 +7,8 @@ import { playPopSound } from "@/hooks/useAudio";
 const subtopics = [
   { label: "PENGANTAR STATISTIKA DAN PENGUMPULAN DATA", path: "/materi-matematika/kelas-9/statistika/pengantar" },
   { label: "PENYAJIAN DATA", path: "/materi-matematika/kelas-9/statistika/penyajian-data" },
-  { label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)", path: "/coming-soon" },
-  { label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)", path: "/coming-soon" },
+  { label: "UKURAN PEMUSATAN DATA (RATA-RATA DAN RATA-RATA GABUNGAN)", path: "/materi-matematika/kelas-9/statistika/rata-rata" },
+  { label: "UKURAN PEMUSATAN DATA (MEDIAN DAN MODUS)", path: "/materi-matematika/kelas-9/statistika/median-modus" },
   { label: "UKURAN LETAK DATA (KUARTIL)", path: "/coming-soon" },
   { label: "UKURAN PENYEBARAN DATA (JANGKAUAN, JANGKAUAN INTERKUARTIL, SIMPANGAN KUARTIL)", path: "/coming-soon" },
 ];
