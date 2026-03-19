@@ -105,6 +105,10 @@ import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
 
 // Kelas 8 Topic Pages
 import PolaBilanganK8Page from "./pages/latihan-mandiri/kelas8/PolaBilanganPage";
+import PengertianPolaK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PengertianPolaPage";
+import PolaKhususK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaKhususPage";
+import PolaAritmetikaK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage";
+import PolaGeometriK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage";
 import KoordinatCartesiusK8Page from "./pages/latihan-mandiri/kelas8/KoordinatCartesiusPage";
 import RelasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/RelasiFungsiPage";
 import SPLDVK8Page from "./pages/latihan-mandiri/kelas8/SPLDVPage";
@@ -448,6 +452,10 @@ const AppInner = () => {
       
       {/* Kelas 8 Topic Routes */}
       <Route path="/latihan-mandiri/kelas-8/pola-bilangan" element={<PolaBilanganK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pengertian-pola" element={<PengertianPolaK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
