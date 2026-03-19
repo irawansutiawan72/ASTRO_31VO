@@ -115,6 +115,11 @@ import PosisiRelatifTitikAcuanK8Page from "./pages/latihan-mandiri/kelas8/koordi
 import JarakTitikGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/JarakTitikGarisPage";
 import PosisiRelatifGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifPage";
 import RelasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/RelasiFungsiPage";
+import PengertianRelasiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianRelasiPage";
+import PengertianFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/PengertianFungsiPage";
+import BanyakFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/BanyakFungsiPage";
+import NotasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/NotasiFungsiPage";
+import GrafikFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/GrafikFungsiPage";
 import SPLDVK8Page from "./pages/latihan-mandiri/kelas8/SPLDVPage";
 import PersamaanGarisLurusK8Page from "./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage";
 import TeoremaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage";
@@ -466,6 +471,11 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifGarisK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
