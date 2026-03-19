@@ -247,6 +247,10 @@ import PolaKhususMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/P
 import PolaAritmetikaMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaAritmetikaPage";
 import PolaGeometriMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage";
 import KoordinatCartesiusMMK8Page from "./pages/materi-matematika/kelas8/KoordinatCartesiusPage";
+import UnsurUnsurCartesiusMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/UnsurUnsurCartesiusPage";
+import PosisiRelatifTitikAcuanMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage";
+import JarakTitikGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage";
+import PosisiRelatifGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage";
 import RelasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/RelasiFungsiPage";
 import SPLDVMMK8Page from "./pages/materi-matematika/kelas8/SPLDVPage";
 import DefinisiSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/DefinisiSPLDVPage";
@@ -548,6 +552,10 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" element={<PosisiRelatifGarisMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv/definisi" element={<DefinisiSPLDVMMK8Page />} />

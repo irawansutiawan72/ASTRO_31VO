@@ -5,10 +5,10 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "UNSUR-UNSUR PADA DIAGRAM CARTESIUS",
-  "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN",
-  "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS",
-  "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS",
+  { label: "UNSUR-UNSUR PADA DIAGRAM CARTESIUS", route: "/materi-matematika/kelas-8/koordinat-cartesius/unsur-unsur" },
+  { label: "POSISI RELATIF SETIAP TITIK TERHADAP SEMBARANG TITIK ACUAN", route: "/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" },
+  { label: "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS", route: "/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" },
+  { label: "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS", route: "/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" },
 ];
 
 const KoordinatCartesiusPage = () => {
@@ -26,17 +26,17 @@ const KoordinatCartesiusPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 - Materi Matematika</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
+          {subtopics.map(({ label, route }, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={label}
+              onClick={() => { playPopSound(); navigate(route); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{label}</span>
             </button>
           ))}
         </div>
