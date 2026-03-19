@@ -129,6 +129,11 @@ import MetodeCampuranSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/Meto
 import ModelSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/ModelSPLDVPage";
 import PenyelesaianMasalahSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/PenyelesaianMasalahPage";
 import PersamaanGarisLurusK8Page from "./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage";
+import GrafikPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GrafikPGLPage";
+import GradienK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/GradienPage";
+import MenentukanPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/MenentukanPGLPage";
+import Hubungan2GarisK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/Hubungan2GarisPage";
+import AplikasiKontekstualPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage";
 import TeoremaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage";
 import LingkaranK8Page from "./pages/latihan-mandiri/kelas8/LingkaranPage";
 import GarisSinggungLingkaranK8Page from "./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage";
@@ -492,6 +497,11 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/spldv/model-spldv" element={<ModelSPLDVK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/grafik" element={<GrafikPGLK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/gradien" element={<GradienK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/menentukan-pgl" element={<MenentukanPGLK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
