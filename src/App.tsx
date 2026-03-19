@@ -242,6 +242,10 @@ import PemecahanMasalahHimpunanPage from "./pages/materi-matematika/kelas7/himpu
 
 // Materi Matematika - Kelas 8 Topic Pages
 import PolaBilanganMMK8Page from "./pages/materi-matematika/kelas8/PolaBilanganPage";
+import PengertianPolaMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PengertianPolaPage";
+import PolaKhususMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaKhususPage";
+import PolaAritmetikaMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaAritmetikaPage";
+import PolaGeometriMMK8Page from "./pages/materi-matematika/kelas8/pola-bilangan/PolaGeometriPage";
 import KoordinatCartesiusMMK8Page from "./pages/materi-matematika/kelas8/KoordinatCartesiusPage";
 import RelasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/RelasiFungsiPage";
 import SPLDVMMK8Page from "./pages/materi-matematika/kelas8/SPLDVPage";
@@ -539,6 +543,10 @@ const AppInner = () => {
       
       {/* Materi Matematika - Kelas 8 Topic Routes */}
       <Route path="/materi-matematika/kelas-8/pola-bilangan" element={<PolaBilanganMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/pola-bilangan/pengertian" element={<PengertianPolaMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-khusus" element={<PolaKhususMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
