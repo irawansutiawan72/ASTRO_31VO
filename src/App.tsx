@@ -96,6 +96,11 @@ import KelilingSegitigaSegiempatLatihanK7Page from "./pages/latihan-mandiri/kela
 import LuasSegitigaLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegitigaPage";
 import LuasSegiempatLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegiempatPage";
 import KelilingLuasBangunTakBeraturanLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage";
+import PengertianKeanggotaanHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/PengertianKeanggotaanPage";
+import MenyatakanHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/MenyatakanHimpunanPage";
+import DiagramVennLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/DiagramVennPage";
+import HimpunanBagianLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/HimpunanBagianPage";
+import OperasiHimpunanLatihanK7Page from "./pages/latihan-mandiri/kelas7/himpunan/OperasiHimpunanPage";
 import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
 
 // Kelas 8 Topic Pages
@@ -435,6 +440,11 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatLatihanK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanLatihanK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/himpunan/pengertian-keanggotaan" element={<PengertianKeanggotaanHimpunanLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/himpunan/menyatakan-himpunan" element={<MenyatakanHimpunanLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/himpunan/diagram-venn" element={<DiagramVennLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/himpunan/himpunan-bagian" element={<HimpunanBagianLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/himpunan/operasi-himpunan" element={<OperasiHimpunanLatihanK7Page />} />
       
       {/* Kelas 8 Topic Routes */}
       <Route path="/latihan-mandiri/kelas-8/pola-bilangan" element={<PolaBilanganK8Page />} />
