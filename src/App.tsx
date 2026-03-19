@@ -252,6 +252,11 @@ import PosisiRelatifTitikAcuanMMK8Page from "./pages/materi-matematika/kelas8/ko
 import JarakTitikGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/JarakTitikGarisPage";
 import PosisiRelatifGarisMMK8Page from "./pages/materi-matematika/kelas8/koordinat-cartesius/PosisiRelatifGarisPage";
 import RelasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/RelasiFungsiPage";
+import PengertianRelasiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/PengertianRelasiPage";
+import PengertianFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/PengertianFungsiPage";
+import BanyakFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/BanyakFungsiPage";
+import NotasiFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/NotasiFungsiPage";
+import GrafikFungsiMMK8Page from "./pages/materi-matematika/kelas8/relasi-fungsi/GrafikFungsiPage";
 import SPLDVMMK8Page from "./pages/materi-matematika/kelas8/SPLDVPage";
 import DefinisiSPLDVMMK8Page from "./pages/materi-matematika/kelas8/spldv/DefinisiSPLDVPage";
 import MetodeGrafikMMK8Page from "./pages/materi-matematika/kelas8/spldv/MetodeGrafikPage";
@@ -557,6 +562,11 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/koordinat-cartesius/posisi-relatif-garis" element={<PosisiRelatifGarisMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-relasi" element={<PengertianRelasiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/pengertian-fungsi" element={<PengertianFungsiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/banyak-fungsi" element={<BanyakFungsiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/notasi-rumus-fungsi" element={<NotasiFungsiMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv" element={<SPLDVMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv/definisi" element={<DefinisiSPLDVMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/spldv/metode-grafik" element={<MetodeGrafikMMK8Page />} />

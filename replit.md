@@ -21,6 +21,15 @@ npm start        # Run production server (Express serves built frontend on port 
 
 - `GOOGLE_GENERATIVE_AI_API_KEY` — Google AI Studio API key for Gemini access
 
+## Content Status
+
+- **Kelas 8 — Relasi dan Fungsi**: All 5 sub-topics fully implemented with rich content, LaTeX formulas, interactive collapsible sections, color-coded visual blocks, SVG charts, 3-level example problems (Easy/Medium/Hard) with full solutions, and summary sections.
+  - Pengertian Relasi dan Penyajiannya
+  - Pengertian Fungsi dan Penyajiannya
+  - Menentukan Banyak Fungsi dan Korespondensi Satu-Satu
+  - Notasi dan Rumus Fungsi
+  - Grafik Fungsi
+
 ## Project Structure
 
 ```
