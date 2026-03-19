@@ -272,6 +272,12 @@ import MenentukanPGLMMK8Page from "./pages/materi-matematika/kelas8/persamaan-ga
 import Hubungan2GarisMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/Hubungan2GarisPage";
 import AplikasiKontekstualMMK8Page from "./pages/materi-matematika/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage";
 import TeoremaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/TeoremaPythagorasPage";
+import PembuktianPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/PembuktianPage";
+import MenghitungPanjangPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MenghitungPanjangPage";
+import TriplePythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/TriplePythagorasPage";
+import JenisSegitigaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/JenisSegitigaPage";
+import SudutKhususPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/SudutKhususPage";
+import MasalahKontekstualPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MasalahKontekstualPage";
 import LingkaranMMK8Page from "./pages/materi-matematika/kelas8/LingkaranPage";
 import GarisSinggungLingkaranMMK8Page from "./pages/materi-matematika/kelas8/GarisSinggungLingkaranPage";
 import BangunRuangSisiDatarMMK8Page from "./pages/materi-matematika/kelas8/BangunRuangSisiDatarPage";
@@ -587,6 +593,12 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMMK8Page />} />

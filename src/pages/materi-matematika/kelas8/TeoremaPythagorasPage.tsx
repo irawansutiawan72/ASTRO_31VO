@@ -5,12 +5,12 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "PEMBUKTIAN TEOREMA PYTHAGORAS",
-  "MENGHITUNG PANJANG SEGITIGA SIKU-SIKU",
-  "TRIPLE PYTHAGORAS",
-  "PYTHAGORAS DAN JENIS-JENIS SEGITIGA",
-  "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS",
-  "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL",
+  { label: "PEMBUKTIAN TEOREMA PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" },
+  { label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU", path: "/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" },
+  { label: "TRIPLE PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" },
+  { label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA", path: "/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" },
+  { label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS", path: "/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" },
+  { label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL", path: "/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" },
 ];
 
 const TeoremaPythagorasPage = () => {
@@ -30,15 +30,15 @@ const TeoremaPythagorasPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.label}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.label}</span>
             </button>
           ))}
         </div>

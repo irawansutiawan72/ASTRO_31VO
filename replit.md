@@ -23,6 +23,13 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Content Status
 
+- **Kelas 8 — Teorema Pythagoras**: All 6 sub-topics fully implemented with animated SVGs, interactive tools, LaTeX formulas, color-coded blocks, 3-level examples (Mudah/Sedang/Sulit), and summaries.
+  - Pembuktian Teorema Pythagoras (visual square-arrangement proof with animated SVG)
+  - Menghitung Panjang Sisi Segitiga Siku-siku (three formula variations, bar chart visual)
+  - Triple Pythagoras (full table of triples, interactive triple checker, kelipatan pattern)
+  - Pythagoras dan Jenis-jenis Segitiga (three triangle types, interactive type classifier)
+  - Perbandingan Sisi Segitiga Siku-siku Sudut Khusus (45-45-90 and 30-60-90 with animated SVGs)
+  - Penerapan Teorema Pythagoras pada Masalah Kontekstual (real-world problems with sketches)
 - **Kelas 8 — Persamaan Garis Lurus**: All 5 sub-topics fully implemented with rich content, extensive SVG coordinate-system diagrams (6-panel galleries, slope triangles, BEP charts, growth graphs), LaTeX formulas, collapsible sections, color-coded blocks, 3-level examples, and summary sections.
   - Grafik Persamaan Garis Lurus
   - Gradien (Kemiringan Garis)
