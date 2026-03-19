@@ -110,7 +110,10 @@ import PolaKhususK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaK
 import PolaAritmetikaK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaAritmetikaPage";
 import PolaGeometriK8Page from "./pages/latihan-mandiri/kelas8/pola-bilangan/PolaGeometriPage";
 import KoordinatCartesiusK8Page from "./pages/latihan-mandiri/kelas8/KoordinatCartesiusPage";
+import UnsurUnsurCartesiusK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/UnsurUnsurPage";
 import PosisiRelatifTitikAcuanK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifTitikAcuanPage";
+import JarakTitikGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/JarakTitikGarisPage";
+import PosisiRelatifGarisK8Page from "./pages/latihan-mandiri/kelas8/koordinat-cartesius/PosisiRelatifPage";
 import RelasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/RelasiFungsiPage";
 import SPLDVK8Page from "./pages/latihan-mandiri/kelas8/SPLDVPage";
 import PersamaanGarisLurusK8Page from "./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage";
@@ -458,7 +461,10 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-aritmetika" element={<PolaAritmetikaK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/pola-bilangan/pola-geometri" element={<PolaGeometriK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius" element={<KoordinatCartesiusK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/unsur-unsur" element={<UnsurUnsurCartesiusK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif-titik-acuan" element={<PosisiRelatifTitikAcuanK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/jarak-titik-garis" element={<JarakTitikGarisK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/koordinat-cartesius/posisi-relatif" element={<PosisiRelatifGarisK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi" element={<RelasiFungsiK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
