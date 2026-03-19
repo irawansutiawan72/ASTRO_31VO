@@ -36,6 +36,12 @@ const SegitigaSegiempatPage = () => {
                   navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi");
                 } else if (subtopic === "KELILING SEGITIGA DAN SEGIEMPAT") {
                   navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-segitiga-dan-segiempat");
+                } else if (subtopic === "LUAS SEGITIGA") {
+                  navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segitiga");
+                } else if (subtopic === "LUAS SEGIEMPAT") {
+                  navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segiempat");
+                } else if (subtopic === "KELILING DAN LUAS BANGUN TAK BERATURAN") {
+                  navigate("/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan");
                 } else {
                   navigate("/coming-soon");
                 }

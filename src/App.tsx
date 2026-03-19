@@ -93,6 +93,9 @@ import HubunganDuaGarisK7Page from "./pages/latihan-mandiri/kelas7/garis-dan-sud
 import SegitigaSegiempatK7Page from "./pages/latihan-mandiri/kelas7/SegitigaSegiempatPage";
 import GarisBeratBagiTinggiLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/GarisBeratBagiTinggiPage";
 import KelilingSegitigaSegiempatLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingSegitigaSegiempatPage";
+import LuasSegitigaLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegitigaPage";
+import LuasSegiempatLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/LuasSegiempatPage";
+import KelilingLuasBangunTakBeraturanLatihanK7Page from "./pages/latihan-mandiri/kelas7/segitiga-segiempat/KelilingLuasBangunTakBeraturanPage";
 import HimpunanK7Page from "./pages/latihan-mandiri/kelas7/HimpunanPage";
 
 // Kelas 8 Topic Pages
@@ -428,6 +431,9 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat" element={<SegitigaSegiempatK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" element={<GarisBeratBagiTinggiLatihanK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-segitiga-dan-segiempat" element={<KelilingSegitigaSegiempatLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segitiga" element={<LuasSegitigaLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/luas-segiempat" element={<LuasSegiempatLatihanK7Page />} />
+      <Route path="/latihan-mandiri/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" element={<KelilingLuasBangunTakBeraturanLatihanK7Page />} />
       <Route path="/latihan-mandiri/kelas-7/himpunan" element={<HimpunanK7Page />} />
       
       {/* Kelas 8 Topic Routes */}
