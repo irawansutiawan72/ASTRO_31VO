@@ -121,6 +121,13 @@ import BanyakFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/Ban
 import NotasiFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/NotasiFungsiPage";
 import GrafikFungsiK8Page from "./pages/latihan-mandiri/kelas8/relasi-fungsi/GrafikFungsiPage";
 import SPLDVK8Page from "./pages/latihan-mandiri/kelas8/SPLDVPage";
+import DefinisiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/DefinisiSPLDVPage";
+import MetodeGrafikSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeGrafikPage";
+import MetodeSubstitusiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeSubstitusiPage";
+import MetodeEliminasiSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeEliminasiPage";
+import MetodeCampuranSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/MetodeCampuranPage";
+import ModelSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/ModelSPLDVPage";
+import PenyelesaianMasalahSPLDVK8Page from "./pages/latihan-mandiri/kelas8/spldv/PenyelesaianMasalahPage";
 import PersamaanGarisLurusK8Page from "./pages/latihan-mandiri/kelas8/PersamaanGarisLurusPage";
 import TeoremaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage";
 import LingkaranK8Page from "./pages/latihan-mandiri/kelas8/LingkaranPage";
@@ -477,6 +484,13 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/notasi-fungsi" element={<NotasiFungsiK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/relasi-dan-fungsi/grafik-fungsi" element={<GrafikFungsiK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/spldv" element={<SPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/definisi" element={<DefinisiSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/metode-grafik" element={<MetodeGrafikSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/metode-substitusi" element={<MetodeSubstitusiSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/metode-eliminasi" element={<MetodeEliminasiSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/metode-campuran" element={<MetodeCampuranSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/model-spldv" element={<ModelSPLDVK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/spldv/penyelesaian-masalah" element={<PenyelesaianMasalahSPLDVK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus" element={<PersamaanGarisLurusK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
