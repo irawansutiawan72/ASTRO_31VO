@@ -280,6 +280,11 @@ import SudutKhususPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teor
 import MasalahKontekstualPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MasalahKontekstualPage";
 import LingkaranMMK8Page from "./pages/materi-matematika/kelas8/LingkaranPage";
 import GarisSinggungLingkaranMMK8Page from "./pages/materi-matematika/kelas8/GarisSinggungLingkaranPage";
+import PengertianGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/PengertianPage";
+import MenghitungPanjangGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage";
+import GSPLMMk8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPLPage";
+import GSPDMMk8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/GSPDPage";
+import SabukLilitanMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/SabukLilitanPage";
 import BangunRuangSisiDatarMMK8Page from "./pages/materi-matematika/kelas8/BangunRuangSisiDatarPage";
 
 // Materi Matematika - Kelas 9 Topic Pages
@@ -601,6 +606,11 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLMMk8Page />} />
+      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDMMk8Page />} />
+      <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokMMK8Page />} />

@@ -23,6 +23,12 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Content Status
 
+- **Kelas 8 — Garis Singgung Lingkaran**: All 5 sub-topics fully implemented with animated SVGs, LaTeX formulas, color-coded sections, 3-level examples, interactive tools.
+  - Pengertian dan Sifat (3-case comparison SVG, tangent properties, inscribed circle problem)
+  - Menghitung Panjang Garis Singgung (Pythagoras triangle SVG, 3 formula variations, two-tangent SVG)
+  - GSPL (dual-circle external tangent SVG, animated glowing lines, proof construction)
+  - GSPD (crossing X-pattern SVG, GSPL vs GSPD comparison table, combined problem)
+  - Sabuk Lilitan Minimal (belt-around-circles SVG, interactive belt calculator, 3 applied problems)
 - **Kelas 8 — Teorema Pythagoras**: All 6 sub-topics fully implemented with animated SVGs, interactive tools, LaTeX formulas, color-coded blocks, 3-level examples (Mudah/Sedang/Sulit), and summaries.
   - Pembuktian Teorema Pythagoras (visual square-arrangement proof with animated SVG)
   - Menghitung Panjang Sisi Segitiga Siku-siku (three formula variations, bar chart visual)

@@ -5,11 +5,11 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "PENGERTIAN DAN SIFAT GARIS SINGGUNG LINGKARAN",
-  "MENGHITUNG PANJANG GARIS SINGGUNG DARI TITIK DI LUAR LINGKARAN",
-  "GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)",
-  "GARIS SINGGUNG PERSEKUTUAN DALAM (GSPD)",
-  "SABUK LILITAN MINIMAL (PENERAPAN)",
+  { label: "PENGERTIAN DAN SIFAT GARIS SINGGUNG LINGKARAN", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran/pengertian" },
+  { label: "MENGHITUNG PANJANG GARIS SINGGUNG DARI TITIK DI LUAR LINGKARAN", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran/menghitung-panjang" },
+  { label: "GARIS SINGGUNG PERSEKUTUAN LUAR (GSPL)", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran/gspl" },
+  { label: "GARIS SINGGUNG PERSEKUTUAN DALAM (GSPD)", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran/gspd" },
+  { label: "SABUK LILITAN MINIMAL (PENERAPAN)", path: "/materi-matematika/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" },
 ];
 
 const GarisSinggungLingkaranPage = () => {
@@ -27,17 +27,17 @@ const GarisSinggungLingkaranPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 - Materi Matematika</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
+          {subtopics.map(({ label, path }, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={label}
+              onClick={() => { playPopSound(); navigate(path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{label}</span>
             </button>
           ))}
         </div>
