@@ -5,12 +5,12 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "UNSUR-UNSUR LINGKARAN",
-  "KELILING DAN LUAS LINGKARAN",
-  "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA",
-  "PANJANG BUSUR DAN LUAS JURING",
-  "SUDUT PUSAT DAN SUDUT KELILING",
-  "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
+  { label: "UNSUR-UNSUR LINGKARAN", path: "/materi-matematika/kelas-8/lingkaran/unsur-unsur" },
+  { label: "KELILING DAN LUAS LINGKARAN", path: "/materi-matematika/kelas-8/lingkaran/keliling-luas" },
+  { label: "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA", path: "/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar" },
+  { label: "PANJANG BUSUR DAN LUAS JURING", path: "/materi-matematika/kelas-8/lingkaran/busur-juring" },
+  { label: "SUDUT PUSAT DAN SUDUT KELILING", path: "/materi-matematika/kelas-8/lingkaran/sudut-pusat-keliling" },
+  { label: "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL", path: "/materi-matematika/kelas-8/lingkaran/penerapan-kontekstual" },
 ];
 
 const LingkaranPage = () => {
@@ -28,17 +28,17 @@ const LingkaranPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 - Materi Matematika</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
+          {subtopics.map(({ label, path }, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={label}
+              onClick={() => { playPopSound(); navigate(path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-primary/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{label}</span>
             </button>
           ))}
         </div>

@@ -279,6 +279,12 @@ import JenisSegitigaPythagorasMMK8Page from "./pages/materi-matematika/kelas8/te
 import SudutKhususPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/SudutKhususPage";
 import MasalahKontekstualPythagorasMMK8Page from "./pages/materi-matematika/kelas8/teorema-pythagoras/MasalahKontekstualPage";
 import LingkaranMMK8Page from "./pages/materi-matematika/kelas8/LingkaranPage";
+import UnsurUnsurLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/UnsurUnsurPage";
+import KelilingLuasLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/KelilingLuasPage";
+import KaitanBangunDatarLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/KaitanBangunDatarPage";
+import BusurJuringLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/BusurJuringPage";
+import SudutPusatKelilingLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/SudutPusatKelilingPage";
+import PenerapanKontekstualLingkaranMMK8Page from "./pages/materi-matematika/kelas8/lingkaran/PenerapanKontekstualPage";
 import GarisSinggungLingkaranMMK8Page from "./pages/materi-matematika/kelas8/GarisSinggungLingkaranPage";
 import PengertianGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/PengertianPage";
 import MenghitungPanjangGSLMMK8Page from "./pages/materi-matematika/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage";
@@ -605,6 +611,12 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/lingkaran" element={<LingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLMMK8Page />} />
