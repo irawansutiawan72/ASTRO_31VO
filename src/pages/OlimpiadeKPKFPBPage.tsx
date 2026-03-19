@@ -7,7 +7,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-// Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
@@ -226,27 +225,388 @@ Jadi, tiap parsel memuat 5 buah apel, 7 buah jeruk dan 4 buah manggis`
   ]
 };
 
-const latihanDasar = [
-  { no: 1, soal: "a) Tulislah bilangan-bilangan kelipatan 5 dan kelipatan 7 yang kurang dari 75.\nb) Tentukan kelipatan Persekutuan dari 5 dan 7 yang kurang dari 75.\nc) Berapakah KPK dari 5 dan 7.", options: [] },
-  { no: 2, soal: "a) Tulislah bilangan-bilangan kelipatan 4, 8 dan 12.\nb) Tentukan kelipatan Persekutuan dari 4, 8 dan 12.\nc) Berapakah KPK dari 4, 8 dan 12.", options: [] },
-  { no: 3, soal: "a) Tulislah faktor-faktor dari 36 dan 48.\nb) Tentukan faktor-faktor Persekutuan dari 36 dan 48.\nc) Berapakah FPB dari 36 dan 48.", options: [] },
-  { no: 4, soal: "a) Tulislah faktor-faktor dari 30, 75 dan 105.\nb) Tentukan faktor Persekutuan dari 30, 75 dan 105.\nc) Berapakah FPB dari 30, 75 dan 105.", options: [] },
-  { no: 5, soal: "Tentukan KPK dari pasangan bilangan berikut dengan cara memfaktorkan.\na) 24 dan 60\nb) 36 dan 81\nc) 42 dan 18\nd) 68 dan 85\ne) 105 dan 120\nf) 42, 63 dan 84\ng) 45, 75 dan 120\nh) 98, 126 dan 196", options: [] },
-  { no: 6, soal: "Tentukan FPB dari pasangan bilangan berikut dengan cara memfaktorkan.\na) 36 dan 48\nb) 56 dan 84\nc) 45 dan 75\nd) 81 dan 36\ne) 120 dan 168\nf) 14, 42 dan 70\ng) 30, 75 dan 105\nh) 84, 126 dan 168", options: [] },
-  { no: 7, soal: "Sebuah terminal bus melayani tiga jurusan. Bus-bus yang menuju ke jurusan pertama berangkat setiap 45 menit ke jurusan kedua berangkat setiap 60 menit dan ke jurusan ketiga berangkat setiap 75 menit. Jika pada pukul 06.00 ada tiga bus yang berangkat menuju ketiga jurusan tersebut secara bersamaan, pada pukul berapakah bus-bus berikutnya akan berangkat secara bersamaan menuju jurusan tersebut.", options: [] },
-  { no: 8, soal: "Aldi mengunjungi sebuah perpustakaan setiap 6 hari sekali. Shifa dan Dinda mengunjungi perpustakaan tersebut masing-masing setiap 10 hari dan 12 hari sekali. Jika pada tanggal 28 agustus mereka mengunjungi perpustakaan itu bersama-sama, pada tanggal berapa mereka akan mengunjungi perpustakaan tersebut bersama-sama lagi berikutnya.", options: [] },
-  { no: 9, soal: "Jadwal Latihan tim voli A di lapangan yang sama adalah 4 hari sekali, tim bola voli B 5 hari sekali dan tim bola voli C 6 hari sekali. Jika tanggal 10 desember ketiga tim tersebut mengadakan Latihan bersama, kapan mereka akan Latihan bersama lagi berikutnya?", options: [] },
-  { no: 10, soal: "Tersedia 84 anggur, 56 buah stroberi dan 140 buah jambu yang akan dibagikan kepada sejumlah anak. Jika buah-buahan tersebut dibagi sama rata, berapa anak sebanyak-banyaknya yang dapat menerima pembagian buah-buahan tersebut?", options: [] },
-  { no: 11, soal: "Tersedia 175 kantong gula pasir dan 105 botol minyak goreng. Jika gula pasir dan minyak goreng tersebut akan dibagi rata, berapa orang terbanyak yang dapat menerima gula pasir dan minyak goreng tersebut?", options: [] },
-  { no: 12, soal: "Bu Sinta akan membuat parsel yang berisi sirop, mi instan dan beras. Bu Sinta mempunyai 24 botol sirop, 90 bungkus mi instan dan 42 kg beras. Jika Bu Sinta ingin membuat parsel sebanyak-banyaknya dengan jenis dan banyak isi yang sama, berapa banyak keranjang yang diperlukan?", options: [] },
-  { no: 13, soal: "Lampu merah menyala setiap 6 menit, kemudian padam. Lampu kuning menyala setiap 9 menit, kemudian padam. Kedua lampu menyala bersama-sama pada pukul 07.15. Pukul berapa kedua lampu akan menyala bersama-sama lagi?", options: [] },
-  { no: 14, soal: "Arkan mengunjungi perpustakaan setiap 6 hari sekali, Dimas setiap 4 hari sekali sedangkan Sukma setiap 8 hari sekali. Jika pada tanggal 28 januari mereka mengunjungi perpustakaan bersama-sama, pada tanggal berapa mereka akan mengunjungi perpustakaan bersama-sama lagi berikutnya?", options: [] },
-  { no: 15, soal: "Tersedia 84 buku, 56 pensil dan 140 krayon. Jika buku, pensil dan krayon tersebut akan dibagi rata kepada sejumlah anak, berapa anak sebanyak-banyaknya yang dapat menerima pembagian tersebut?", options: [] },
-  { no: 16, soal: "Pada tahun 2024, tiga acara diadakan secara periodik:\nAcara A setiap 15 hari\nAcara B setiap 20 hari\nAcara C setiap 30 hari\nJika semua acara diadakan pada tanggal 1 Januari 2024, maka berapa kali semua acara diadakan bersama-sama selama tahun 2024?", options: [] },
-  { no: 17, soal: "Jika FPB(x, y) = 12 dan KPK(x, y) = 210, maka $xy$ = ...", options: ["A. 2010", "B. 2520", "C. 2250", "D. 2100"] },
-  { no: 18, soal: "Misalkan a dan b adalah bilangan asli yang memenuhi:\n- FPB(a, b) = 12\n- KPK(a, b) = 180\nJika a < b, maka berapakah banyak pasangan bilangan (a,b) yang memenuhi syarat tersebut?", options: [] },
-  { no: 19, soal: "Dua bilangan memiliki FPB = 6 dan KPK = 180. Jika salah satu bilangan adalah 30, maka bilangan lainnya adalah ...", options: [] },
-  { no: 20, soal: "Jika a dan b adalah bilangan bulat positif sehingga gcd(a, b) = 12, $a \\cdot b = 2016$, maka nilai terkecil yang mungkin untuk a + b adalah .... (Catatan: gcd adalah greatest common divisor atau FPB)", options: [] },
+interface LatihanSoal {
+  no: number;
+  soal: string;
+  options: string[];
+  jawaban: string;
+  pembahasan: {
+    konsep: string;
+    langkah: string[];
+    rumus?: string;
+  };
+}
+
+const latihanDasar: LatihanSoal[] = [
+  {
+    no: 1,
+    soal: "a) Tulislah bilangan-bilangan kelipatan 5 dan kelipatan 7 yang kurang dari 75.\nb) Tentukan kelipatan Persekutuan dari 5 dan 7 yang kurang dari 75.\nc) Berapakah KPK dari 5 dan 7.",
+    options: [],
+    jawaban: "a) Kelipatan 5: 5,10,15,20,25,30,35,40,45,50,55,60,65,70 | Kelipatan 7: 7,14,21,28,35,42,49,56,63,70\nb) KP(5,7) < 75: 35 dan 70\nc) KPK(5,7) = 35",
+    pembahasan: {
+      konsep: "KPK dari dua bilangan prima adalah hasil kalinya. Kelipatan persekutuan terkecil adalah kelipatan bersama yang paling kecil.",
+      langkah: [
+        "Kelipatan 5 < 75: 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70",
+        "Kelipatan 7 < 75: 7, 14, 21, 28, 35, 42, 49, 56, 63, 70",
+        "Kelipatan persekutuan (yang muncul di keduanya) < 75: 35 dan 70",
+        "KPK(5, 7) = bilangan terkecil dari kelipatan persekutuan = 35",
+        "Atau: $5 = 5$ dan $7 = 7$ (keduanya prima, tidak ada faktor sama) → KPK $= 5 \\times 7 = 35$"
+      ],
+      rumus: "Untuk dua bilangan prima $p$ dan $q$: $\\text{KPK}(p,q) = p \\times q$"
+    }
+  },
+  {
+    no: 2,
+    soal: "a) Tulislah bilangan-bilangan kelipatan 4, 8 dan 12.\nb) Tentukan kelipatan Persekutuan dari 4, 8 dan 12.\nc) Berapakah KPK dari 4, 8 dan 12.",
+    options: [],
+    jawaban: "a) Kelipatan 4: 4,8,12,16,20,24,28,32,... | Kelipatan 8: 8,16,24,32,... | Kelipatan 12: 12,24,36,...\nb) KP(4,8,12): 24, 48, 72, ...\nc) KPK(4,8,12) = 24",
+    pembahasan: {
+      konsep: "KPK dari tiga bilangan diperoleh dari faktorisasi prima dengan mengambil pangkat tertinggi dari setiap faktor prima.",
+      langkah: [
+        "Kelipatan 4: 4, 8, 12, 16, 20, 24, ...",
+        "Kelipatan 8: 8, 16, 24, 32, ...",
+        "Kelipatan 12: 12, 24, 36, ...",
+        "Kelipatan persekutuan: 24, 48, 72, ... → KPK = 24",
+        "Verifikasi via faktorisasi: $4 = 2^2$, $8 = 2^3$, $12 = 2^2 \\times 3$",
+        "KPK $= 2^3 \\times 3 = 8 \\times 3 = 24$ ✓"
+      ],
+      rumus: "$\\text{KPK} = $ hasil kali faktor prima dengan pangkat tertinggi"
+    }
+  },
+  {
+    no: 3,
+    soal: "a) Tulislah faktor-faktor dari 36 dan 48.\nb) Tentukan faktor-faktor Persekutuan dari 36 dan 48.\nc) Berapakah FPB dari 36 dan 48.",
+    options: [],
+    jawaban: "a) Faktor 36: 1,2,3,4,6,9,12,18,36 | Faktor 48: 1,2,3,4,6,8,12,16,24,48\nb) Faktor persekutuan: 1,2,3,4,6,12\nc) FPB(36,48) = 12",
+    pembahasan: {
+      konsep: "FPB adalah faktor persekutuan terbesar, yaitu bilangan terbesar yang membagi habis semua bilangan yang ditinjau.",
+      langkah: [
+        "Faktor dari 36: 1, 2, 3, 4, 6, 9, 12, 18, 36",
+        "Faktor dari 48: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48",
+        "Faktor persekutuan (muncul di keduanya): 1, 2, 3, 4, 6, 12",
+        "FPB = faktor persekutuan terbesar = 12",
+        "Verifikasi: $36 = 2^2 \\times 3^2$, $48 = 2^4 \\times 3$",
+        "FPB $= 2^2 \\times 3 = 4 \\times 3 = 12$ ✓"
+      ],
+      rumus: "$\\text{FPB} = $ hasil kali faktor prima yang sama dengan pangkat terkecil"
+    }
+  },
+  {
+    no: 4,
+    soal: "a) Tulislah faktor-faktor dari 30, 75 dan 105.\nb) Tentukan faktor Persekutuan dari 30, 75 dan 105.\nc) Berapakah FPB dari 30, 75 dan 105.",
+    options: [],
+    jawaban: "a) Faktor 30: 1,2,3,5,6,10,15,30 | Faktor 75: 1,3,5,15,25,75 | Faktor 105: 1,3,5,7,15,21,35,105\nb) Faktor persekutuan: 1, 3, 5, 15\nc) FPB(30,75,105) = 15",
+    pembahasan: {
+      konsep: "FPB tiga bilangan diperoleh dari faktor prima yang sama dengan pangkat terkecil yang muncul di semua bilangan.",
+      langkah: [
+        "Faktorisasi prima: $30 = 2 \\times 3 \\times 5$",
+        "$75 = 3 \\times 5^2$",
+        "$105 = 3 \\times 5 \\times 7$",
+        "Faktor prima yang muncul di ketiga bilangan: 3 dan 5",
+        "Pangkat terkecil masing-masing: $3^1$ dan $5^1$",
+        "FPB $= 3 \\times 5 = 15$"
+      ],
+      rumus: "$\\text{FPB} = $ faktor prima bersama dengan pangkat terkecil"
+    }
+  },
+  {
+    no: 5,
+    soal: "Tentukan KPK dari pasangan bilangan berikut dengan cara memfaktorkan.\na) 24 dan 60\nb) 36 dan 81\nc) 42 dan 18\nd) 68 dan 85\ne) 105 dan 120\nf) 42, 63 dan 84\ng) 45, 75 dan 120\nh) 98, 126 dan 196",
+    options: [],
+    jawaban: "a) 120 | b) 324 | c) 126 | d) 340 | e) 840 | f) 252 | g) 1800 | h) 1764",
+    pembahasan: {
+      konsep: "KPK diperoleh dari faktorisasi prima setiap bilangan, lalu mengambil pangkat tertinggi dari setiap faktor prima yang muncul.",
+      langkah: [
+        "a) $24 = 2^3 \\times 3$, $60 = 2^2 \\times 3 \\times 5$ → KPK $= 2^3 \\times 3 \\times 5 = 120$",
+        "b) $36 = 2^2 \\times 3^2$, $81 = 3^4$ → KPK $= 2^2 \\times 3^4 = 4 \\times 81 = 324$",
+        "c) $42 = 2 \\times 3 \\times 7$, $18 = 2 \\times 3^2$ → KPK $= 2 \\times 3^2 \\times 7 = 126$",
+        "d) $68 = 2^2 \\times 17$, $85 = 5 \\times 17$ → KPK $= 2^2 \\times 5 \\times 17 = 340$",
+        "e) $105 = 3 \\times 5 \\times 7$, $120 = 2^3 \\times 3 \\times 5$ → KPK $= 2^3 \\times 3 \\times 5 \\times 7 = 840$",
+        "f) $42 = 2 \\times 3 \\times 7$, $63 = 3^2 \\times 7$, $84 = 2^2 \\times 3 \\times 7$ → KPK $= 2^2 \\times 3^2 \\times 7 = 252$",
+        "g) $45 = 3^2 \\times 5$, $75 = 3 \\times 5^2$, $120 = 2^3 \\times 3 \\times 5$ → KPK $= 2^3 \\times 3^2 \\times 5^2 = 1800$",
+        "h) $98 = 2 \\times 7^2$, $126 = 2 \\times 3^2 \\times 7$, $196 = 2^2 \\times 7^2$ → KPK $= 2^2 \\times 3^2 \\times 7^2 = 1764$"
+      ],
+      rumus: "$\\text{KPK} = $ pangkat tertinggi setiap faktor prima"
+    }
+  },
+  {
+    no: 6,
+    soal: "Tentukan FPB dari pasangan bilangan berikut dengan cara memfaktorkan.\na) 36 dan 48\nb) 56 dan 84\nc) 45 dan 75\nd) 81 dan 36\ne) 120 dan 168\nf) 14, 42 dan 70\ng) 30, 75 dan 105\nh) 84, 126 dan 168",
+    options: [],
+    jawaban: "a) 12 | b) 28 | c) 15 | d) 9 | e) 24 | f) 14 | g) 15 | h) 42",
+    pembahasan: {
+      konsep: "FPB diperoleh dari faktor prima yang sama di semua bilangan, diambil dengan pangkat terkecil.",
+      langkah: [
+        "a) $36 = 2^2 \\times 3^2$, $48 = 2^4 \\times 3$ → FPB $= 2^2 \\times 3 = 12$",
+        "b) $56 = 2^3 \\times 7$, $84 = 2^2 \\times 3 \\times 7$ → FPB $= 2^2 \\times 7 = 28$",
+        "c) $45 = 3^2 \\times 5$, $75 = 3 \\times 5^2$ → FPB $= 3 \\times 5 = 15$",
+        "d) $81 = 3^4$, $36 = 2^2 \\times 3^2$ → FPB $= 3^2 = 9$",
+        "e) $120 = 2^3 \\times 3 \\times 5$, $168 = 2^3 \\times 3 \\times 7$ → FPB $= 2^3 \\times 3 = 24$",
+        "f) $14 = 2 \\times 7$, $42 = 2 \\times 3 \\times 7$, $70 = 2 \\times 5 \\times 7$ → FPB $= 2 \\times 7 = 14$",
+        "g) $30 = 2 \\times 3 \\times 5$, $75 = 3 \\times 5^2$, $105 = 3 \\times 5 \\times 7$ → FPB $= 3 \\times 5 = 15$",
+        "h) $84 = 2^2 \\times 3 \\times 7$, $126 = 2 \\times 3^2 \\times 7$, $168 = 2^3 \\times 3 \\times 7$ → FPB $= 2 \\times 3 \\times 7 = 42$"
+      ],
+      rumus: "$\\text{FPB} = $ pangkat terkecil faktor prima yang sama"
+    }
+  },
+  {
+    no: 7,
+    soal: "Sebuah terminal bus melayani tiga jurusan. Bus-bus yang menuju ke jurusan pertama berangkat setiap 45 menit ke jurusan kedua berangkat setiap 60 menit dan ke jurusan ketiga berangkat setiap 75 menit. Jika pada pukul 06.00 ada tiga bus yang berangkat menuju ketiga jurusan tersebut secara bersamaan, pada pukul berapakah bus-bus berikutnya akan berangkat secara bersamaan menuju jurusan tersebut.",
+    options: [],
+    jawaban: "Pukul 21.00",
+    pembahasan: {
+      konsep: "Soal ini meminta waktu mereka berangkat bersamaan lagi, sehingga digunakan KPK dari interval waktu keberangkatan.",
+      langkah: [
+        "Faktorisasi prima: $45 = 3^2 \\times 5$, $60 = 2^2 \\times 3 \\times 5$, $75 = 3 \\times 5^2$",
+        "KPK $= 2^2 \\times 3^2 \\times 5^2 = 4 \\times 9 \\times 25 = 900$ menit",
+        "Konversi: $900 \\div 60 = 15$ jam",
+        "Pukul 06.00 + 15 jam = pukul 21.00",
+        "Jadi, bus-bus berikutnya akan berangkat bersamaan pada pukul 21.00"
+      ],
+      rumus: "Soal berangkat/bertemu bersamaan → gunakan KPK"
+    }
+  },
+  {
+    no: 8,
+    soal: "Aldi mengunjungi sebuah perpustakaan setiap 6 hari sekali. Shifa dan Dinda mengunjungi perpustakaan tersebut masing-masing setiap 10 hari dan 12 hari sekali. Jika pada tanggal 28 agustus mereka mengunjungi perpustakaan itu bersama-sama, pada tanggal berapa mereka akan mengunjungi perpustakaan tersebut bersama-sama lagi berikutnya.",
+    options: [],
+    jawaban: "27 Oktober",
+    pembahasan: {
+      konsep: "Waktu mereka bertemu lagi ditentukan oleh KPK dari interval kunjungan masing-masing.",
+      langkah: [
+        "Faktorisasi prima: $6 = 2 \\times 3$, $10 = 2 \\times 5$, $12 = 2^2 \\times 3$",
+        "KPK $= 2^2 \\times 3 \\times 5 = 60$ hari",
+        "28 Agustus + 60 hari:",
+        "Agustus memiliki 31 hari → sisa Agustus dari tgl 28: $31 - 28 = 3$ hari",
+        "60 - 3 = 57 hari lagi setelah 31 Agustus",
+        "September: 30 hari → 57 - 30 = 27 hari lagi",
+        "27 hari di bulan Oktober → tanggal 27 Oktober",
+        "Jadi mereka bertemu lagi pada tanggal 27 Oktober"
+      ],
+      rumus: "Soal bertemu kembali → KPK dari interval waktu"
+    }
+  },
+  {
+    no: 9,
+    soal: "Jadwal Latihan tim voli A di lapangan yang sama adalah 4 hari sekali, tim bola voli B 5 hari sekali dan tim bola voli C 6 hari sekali. Jika tanggal 10 desember ketiga tim tersebut mengadakan Latihan bersama, kapan mereka akan Latihan bersama lagi berikutnya?",
+    options: [],
+    jawaban: "8 Februari (tahun berikutnya)",
+    pembahasan: {
+      konsep: "KPK menentukan kapan ketiga tim berlatih bersama kembali setelah siklus terpendek.",
+      langkah: [
+        "Faktorisasi prima: $4 = 2^2$, $5 = 5$, $6 = 2 \\times 3$",
+        "KPK $= 2^2 \\times 3 \\times 5 = 60$ hari",
+        "10 Desember + 60 hari:",
+        "Sisa Desember dari tgl 10: $31 - 10 = 21$ hari",
+        "60 - 21 = 39 hari setelah 31 Desember (masuk Januari tahun berikutnya)",
+        "Januari: 31 hari → 39 - 31 = 8 hari",
+        "8 hari di Februari → tanggal 8 Februari",
+        "Jadi ketiga tim berlatih bersama lagi pada 8 Februari"
+      ],
+      rumus: "$\\text{KPK}(4,5,6) = 60$ hari"
+    }
+  },
+  {
+    no: 10,
+    soal: "Tersedia 84 anggur, 56 buah stroberi dan 140 buah jambu yang akan dibagikan kepada sejumlah anak. Jika buah-buahan tersebut dibagi sama rata, berapa anak sebanyak-banyaknya yang dapat menerima pembagian buah-buahan tersebut?",
+    options: [],
+    jawaban: "28 anak",
+    pembahasan: {
+      konsep: "Soal 'dibagi sama rata sebanyak-banyaknya' berarti mencari FPB dari jumlah masing-masing buah.",
+      langkah: [
+        "Faktorisasi prima: $84 = 2^2 \\times 3 \\times 7$",
+        "$56 = 2^3 \\times 7$",
+        "$140 = 2^2 \\times 5 \\times 7$",
+        "Faktor prima bersama dengan pangkat terkecil: $2^2$ dan $7$",
+        "FPB $= 2^2 \\times 7 = 4 \\times 7 = 28$",
+        "Jadi, sebanyak-banyaknya 28 anak yang dapat menerima",
+        "Masing-masing mendapat: $84/28 = 3$ anggur, $56/28 = 2$ stroberi, $140/28 = 5$ jambu"
+      ],
+      rumus: "Soal 'dibagi sama rata maksimal' → FPB"
+    }
+  },
+  {
+    no: 11,
+    soal: "Tersedia 175 kantong gula pasir dan 105 botol minyak goreng. Jika gula pasir dan minyak goreng tersebut akan dibagi rata, berapa orang terbanyak yang dapat menerima gula pasir dan minyak goreng tersebut?",
+    options: [],
+    jawaban: "35 orang",
+    pembahasan: {
+      konsep: "Mencari jumlah orang terbanyak yang mendapat bagian sama berarti mencari FPB.",
+      langkah: [
+        "Faktorisasi prima: $175 = 5^2 \\times 7$",
+        "$105 = 3 \\times 5 \\times 7$",
+        "Faktor prima bersama dengan pangkat terkecil: $5^1$ dan $7^1$",
+        "FPB $= 5 \\times 7 = 35$",
+        "Jadi, sebanyak-banyaknya 35 orang yang dapat menerima",
+        "Masing-masing mendapat: $175/35 = 5$ kantong gula, $105/35 = 3$ botol minyak"
+      ],
+      rumus: "Soal distribusi maksimal → FPB"
+    }
+  },
+  {
+    no: 12,
+    soal: "Bu Sinta akan membuat parsel yang berisi sirop, mi instan dan beras. Bu Sinta mempunyai 24 botol sirop, 90 bungkus mi instan dan 42 kg beras. Jika Bu Sinta ingin membuat parsel sebanyak-banyaknya dengan jenis dan banyak isi yang sama, berapa banyak keranjang yang diperlukan?",
+    options: [],
+    jawaban: "6 keranjang",
+    pembahasan: {
+      konsep: "Parsel sebanyak-banyaknya dengan isi sama berarti mencari FPB dari jumlah tiap jenis barang.",
+      langkah: [
+        "Faktorisasi prima: $24 = 2^3 \\times 3$",
+        "$90 = 2 \\times 3^2 \\times 5$",
+        "$42 = 2 \\times 3 \\times 7$",
+        "Faktor prima bersama dengan pangkat terkecil: $2^1$ dan $3^1$",
+        "FPB $= 2 \\times 3 = 6$",
+        "Jadi, Bu Sinta memerlukan 6 keranjang",
+        "Isi tiap keranjang: $24/6 = 4$ sirop, $90/6 = 15$ mi, $42/6 = 7$ kg beras"
+      ],
+      rumus: "Parsel maksimal dengan isi sama → FPB"
+    }
+  },
+  {
+    no: 13,
+    soal: "Lampu merah menyala setiap 6 menit, kemudian padam. Lampu kuning menyala setiap 9 menit, kemudian padam. Kedua lampu menyala bersama-sama pada pukul 07.15. Pukul berapa kedua lampu akan menyala bersama-sama lagi?",
+    options: [],
+    jawaban: "Pukul 07.33",
+    pembahasan: {
+      konsep: "Lampu menyala bersama lagi setelah selang waktu sebesar KPK dari masing-masing interval.",
+      langkah: [
+        "Faktorisasi prima: $6 = 2 \\times 3$, $9 = 3^2$",
+        "KPK $= 2 \\times 3^2 = 2 \\times 9 = 18$ menit",
+        "Pukul 07.15 + 18 menit = pukul 07.33",
+        "Jadi, kedua lampu menyala bersama lagi pada pukul 07.33"
+      ],
+      rumus: "$\\text{KPK}(6,9) = 18$ menit"
+    }
+  },
+  {
+    no: 14,
+    soal: "Arkan mengunjungi perpustakaan setiap 6 hari sekali, Dimas setiap 4 hari sekali sedangkan Sukma setiap 8 hari sekali. Jika pada tanggal 28 januari mereka mengunjungi perpustakaan bersama-sama, pada tanggal berapa mereka akan mengunjungi perpustakaan bersama-sama lagi berikutnya.",
+    options: [],
+    jawaban: "21 Februari",
+    pembahasan: {
+      konsep: "Waktu bertemu kembali ditentukan oleh KPK dari interval kunjungan masing-masing orang.",
+      langkah: [
+        "Faktorisasi prima: $6 = 2 \\times 3$, $4 = 2^2$, $8 = 2^3$",
+        "KPK $= 2^3 \\times 3 = 8 \\times 3 = 24$ hari",
+        "28 Januari + 24 hari:",
+        "Sisa Januari dari tgl 28: $31 - 28 = 3$ hari",
+        "24 - 3 = 21 hari masuk Februari",
+        "Tanggal 21 Februari",
+        "Jadi mereka bertemu lagi pada tanggal 21 Februari"
+      ],
+      rumus: "$\\text{KPK}(6,4,8) = 24$ hari"
+    }
+  },
+  {
+    no: 15,
+    soal: "Tersedia 84 buku, 56 pensil dan 140 krayon. Jika buku, pensil dan krayon tersebut akan dibagi rata kepada sejumlah anak, berapa anak sebanyak-banyaknya yang dapat menerima pembagian tersebut?",
+    options: [],
+    jawaban: "28 anak",
+    pembahasan: {
+      konsep: "Pembagian rata sebanyak-banyaknya orang → gunakan FPB dari jumlah semua barang.",
+      langkah: [
+        "Faktorisasi prima: $84 = 2^2 \\times 3 \\times 7$",
+        "$56 = 2^3 \\times 7$",
+        "$140 = 2^2 \\times 5 \\times 7$",
+        "Faktor prima bersama dengan pangkat terkecil: $2^2$ dan $7$",
+        "FPB $= 2^2 \\times 7 = 28$",
+        "Jadi, sebanyak-banyaknya 28 anak",
+        "Masing-masing mendapat: $84/28 = 3$ buku, $56/28 = 2$ pensil, $140/28 = 5$ krayon"
+      ],
+      rumus: "Distribusi rata maksimal → FPB"
+    }
+  },
+  {
+    no: 16,
+    soal: "Pada tahun 2024, tiga acara diadakan secara periodik:\nAcara A setiap 15 hari\nAcara B setiap 20 hari\nAcara C setiap 30 hari\nJika semua acara diadakan pada tanggal 1 Januari 2024, maka berapa kali semua acara diadakan bersama-sama selama tahun 2024?",
+    options: [],
+    jawaban: "7 kali (termasuk 1 Januari)",
+    pembahasan: {
+      konsep: "Cari KPK untuk menentukan siklus pertemuan, lalu hitung berapa kali terjadi dalam 366 hari (2024 kabisat).",
+      langkah: [
+        "Faktorisasi prima: $15 = 3 \\times 5$, $20 = 2^2 \\times 5$, $30 = 2 \\times 3 \\times 5$",
+        "KPK $= 2^2 \\times 3 \\times 5 = 60$ hari",
+        "2024 adalah tahun kabisat → 366 hari",
+        "Hari ke-1 (1 Jan), 61, 121, 181, 241, 301, 361 → semua ≤ 366",
+        "Hari ke-421 > 366 (tidak termasuk)",
+        "Jumlah: $\\lfloor 366/60 \\rfloor + 1 = 6 + 1 = 7$ kali (termasuk hari pertama)",
+        "Jadi semua acara diadakan bersama-sama sebanyak 7 kali"
+      ],
+      rumus: "$\\text{KPK}(15,20,30) = 60$ hari; banyak pertemuan $= \\lfloor 366/60 \\rfloor + 1$"
+    }
+  },
+  {
+    no: 17,
+    soal: "Jika FPB(x, y) = 12 dan KPK(x, y) = 210, maka $xy$ = ...",
+    options: ["A. 2010", "B. 2520", "C. 2250", "D. 2100"],
+    jawaban: "B. 2520",
+    pembahasan: {
+      konsep: "Terdapat hubungan penting: untuk dua bilangan bulat positif, $\\text{FPB}(x,y) \\times \\text{KPK}(x,y) = x \\times y$.",
+      langkah: [
+        "Menggunakan sifat: $\\text{FPB}(x,y) \\times \\text{KPK}(x,y) = x \\times y$",
+        "$xy = 12 \\times 210$",
+        "$xy = 2520$",
+        "Jawaban: B. 2520"
+      ],
+      rumus: "$\\text{FPB}(x,y) \\times \\text{KPK}(x,y) = x \\times y$"
+    }
+  },
+  {
+    no: 18,
+    soal: "Misalkan a dan b adalah bilangan asli yang memenuhi:\n- FPB(a, b) = 12\n- KPK(a, b) = 180\nJika a < b, maka berapakah banyak pasangan bilangan (a,b) yang memenuhi syarat tersebut?",
+    options: [],
+    jawaban: "2 pasangan: (12, 180) dan (36, 60)",
+    pembahasan: {
+      konsep: "Tulis $a = 12p$ dan $b = 12q$ dengan $\\gcd(p,q) = 1$ dan $pq = \\text{KPK}/\\text{FPB} = 180/12 = 15$.",
+      langkah: [
+        "Karena FPB$(a,b) = 12$, tulis $a = 12p$ dan $b = 12q$ dengan $\\gcd(p,q) = 1$",
+        "KPK$(a,b) = 12pq = 180$ → $pq = 15$",
+        "Cari semua pasangan $(p,q)$ dengan $p < q$, $pq = 15$, dan $\\gcd(p,q) = 1$:",
+        "$(p,q) = (1, 15)$: $\\gcd(1,15) = 1$ ✓ → $(a,b) = (12, 180)$",
+        "$(p,q) = (3, 5)$: $\\gcd(3,5) = 1$ ✓ → $(a,b) = (36, 60)$",
+        "$(p,q) = (5, 3)$: tidak karena $p < q$ sudah diharuskan",
+        "Jadi ada 2 pasangan: $(12, 180)$ dan $(36, 60)$"
+      ],
+      rumus: "$a = \\text{FPB} \\cdot p$, $b = \\text{FPB} \\cdot q$, $\\gcd(p,q)=1$, $pq = \\text{KPK}/\\text{FPB}$"
+    }
+  },
+  {
+    no: 19,
+    soal: "Dua bilangan memiliki FPB = 6 dan KPK = 180. Jika salah satu bilangan adalah 30, maka bilangan lainnya adalah ...",
+    options: [],
+    jawaban: "36",
+    pembahasan: {
+      konsep: "Gunakan hubungan $\\text{FPB} \\times \\text{KPK} = x \\times y$ untuk mencari bilangan yang belum diketahui.",
+      langkah: [
+        "Diketahui: FPB $= 6$, KPK $= 180$, salah satu bilangan $x = 30$",
+        "Gunakan: $x \\times y = \\text{FPB} \\times \\text{KPK}$",
+        "$30 \\times y = 6 \\times 180 = 1080$",
+        "$y = \\frac{1080}{30} = 36$",
+        "Verifikasi: $\\text{FPB}(30, 36) = 6$ ✓ dan $\\text{KPK}(30, 36) = 180$ ✓",
+        "Jadi bilangan lainnya adalah 36"
+      ],
+      rumus: "$y = \\frac{\\text{FPB} \\times \\text{KPK}}{x}$"
+    }
+  },
+  {
+    no: 20,
+    soal: "Jika a dan b adalah bilangan bulat positif sehingga gcd(a, b) = 12, $a \\cdot b = 2016$, maka nilai terkecil yang mungkin untuk a + b adalah .... (Catatan: gcd adalah greatest common divisor atau FPB)",
+    options: [],
+    jawaban: "108",
+    pembahasan: {
+      konsep: "Tulis $a = 12m$ dan $b = 12n$ dengan $\\gcd(m,n)=1$, lalu cari pasangan yang meminimalkan $a+b$.",
+      langkah: [
+        "Karena $\\gcd(a,b) = 12$, tulis $a = 12m$, $b = 12n$ dengan $\\gcd(m,n) = 1$",
+        "$a \\cdot b = 144mn = 2016$ → $mn = \\frac{2016}{144} = 14$",
+        "Cari semua pasangan $(m,n)$ dengan $\\gcd(m,n)=1$ dan $mn = 14$:",
+        "$(m,n) = (1, 14)$: $\\gcd(1,14) = 1$ ✓ → $(a,b) = (12, 168)$ → $a+b = 180$",
+        "$(m,n) = (2, 7)$: $\\gcd(2,7) = 1$ ✓ → $(a,b) = (24, 84)$ → $a+b = 108$",
+        "Bandingkan: $108 < 180$",
+        "Nilai terkecil $a + b = 108$"
+      ],
+      rumus: "$a = 12m$, $b = 12n$, $\\gcd(m,n)=1$, $mn = 14$; minimumkan $12(m+n)$"
+    }
+  },
 ];
 
 const latihanOlimpiade = [
@@ -274,11 +634,19 @@ const OlimpiadeKPKFPBPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [expandedDasarPembahasan, setExpandedDasarPembahasan] = useState<number[]>([]);
 
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleDasarPembahasan = (no: number) => {
+    playPopSound();
+    setExpandedDasarPembahasan(prev =>
+      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
     );
   };
 
@@ -348,24 +716,94 @@ const OlimpiadeKPKFPBPage = () => {
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
+              <div
+                key={soal.no}
+                className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+                }}
+              >
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
+                />
+                <div className="relative p-5">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2 shrink-0">
+                      {soal.no}
                     </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
+                    {soal.soal.split('\n').map((line, lineIdx) => (
+                      <span key={lineIdx}>
+                        {lineIdx > 0 && <br />}
+                        {renderWithLatex(line)}
+                      </span>
                     ))}
                   </div>
-                )}
+                  {soal.options.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                      {soal.options.map((opt, j) => (
+                        <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                          {renderWithLatex(opt)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    onClick={() => toggleDasarPembahasan(soal.no)}
+                    className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
+                  >
+                    {expandedDasarPembahasan.includes(soal.no) ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                    {expandedDasarPembahasan.includes(soal.no) ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
+                  </button>
+                  {expandedDasarPembahasan.includes(soal.no) && (
+                    <div className="mt-4 relative overflow-hidden animate-slide-up">
+                      <div
+                        className="p-4 rounded-xl border border-primary/30"
+                        style={{ background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}
+                      >
+                        <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                          <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
+                          <span className="text-sm text-emerald-300 font-body">
+                            {renderWithLatex(soal.jawaban)}
+                          </span>
+                        </div>
+                        <div className="mb-4">
+                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Konsep</h5>
+                          <p className="text-sm text-foreground/80 font-body leading-relaxed">
+                            {renderWithLatex(soal.pembahasan.konsep)}
+                          </p>
+                        </div>
+                        <div className="mb-4">
+                          <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Langkah Penyelesaian</h5>
+                          <div className="space-y-2">
+                            {soal.pembahasan.langkah.map((step, idx) => (
+                              <div key={idx} className="flex gap-3 items-start">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 text-primary text-xs font-bold flex items-center justify-center mt-0.5">
+                                  {idx + 1}
+                                </span>
+                                <p className="text-sm text-foreground/80 font-body leading-relaxed">
+                                  {renderWithLatex(step)}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        {soal.pembahasan.rumus && (
+                          <div className="p-4 rounded-lg bg-muted/40 border border-border/50">
+                            <h5 className="text-xs font-semibold text-accent mb-2 uppercase tracking-wide">Rumus</h5>
+                            <p className="text-sm text-foreground font-body">
+                              {renderWithLatex(soal.pembahasan.rumus)}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
