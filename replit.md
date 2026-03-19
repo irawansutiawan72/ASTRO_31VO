@@ -23,6 +23,12 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Content Status
 
+- **Kelas 8 — Persamaan Garis Lurus**: All 5 sub-topics fully implemented with rich content, extensive SVG coordinate-system diagrams (6-panel galleries, slope triangles, BEP charts, growth graphs), LaTeX formulas, collapsible sections, color-coded blocks, 3-level examples, and summary sections.
+  - Grafik Persamaan Garis Lurus
+  - Gradien (Kemiringan Garis)
+  - Menentukan Persamaan Garis Lurus
+  - Hubungan 2 Garis
+  - Aplikasi Persamaan Garis pada Soal Kontekstual
 - **Kelas 8 — Relasi dan Fungsi**: All 5 sub-topics fully implemented with rich content, LaTeX formulas, interactive collapsible sections, color-coded visual blocks, SVG charts, 3-level example problems (Easy/Medium/Hard) with full solutions, and summary sections.
   - Pengertian Relasi dan Penyajiannya
   - Pengertian Fungsi dan Penyajiannya
