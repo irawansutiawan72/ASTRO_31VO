@@ -135,6 +135,12 @@ import MenentukanPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-
 import Hubungan2GarisK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/Hubungan2GarisPage";
 import AplikasiKontekstualPGLK8Page from "./pages/latihan-mandiri/kelas8/persamaan-garis-lurus/AplikasiKontekstualPage";
 import TeoremaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/TeoremaPythagorasPage";
+import PembuktianPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/PembuktianPage";
+import MenghitungPanjangPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/MenghitungPanjangPage";
+import TriplePythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/TriplePythagorasPage";
+import JenisSegitigaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/JenisSegitigaPage";
+import SudutKhususPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/SudutKhususPage";
+import MasalahKontekstualPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/MasalahKontekstualPage";
 import LingkaranK8Page from "./pages/latihan-mandiri/kelas8/LingkaranPage";
 import GarisSinggungLingkaranK8Page from "./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage";
 import BangunRuangSisiDatarK8Page from "./pages/latihan-mandiri/kelas8/BangunRuangSisiDatarPage";
@@ -503,6 +509,12 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/hubungan-2-garis" element={<Hubungan2GarisK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/persamaan-garis-lurus/aplikasi-kontekstual" element={<AplikasiKontekstualPGLK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras" element={<TeoremaPythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/pembuktian" element={<PembuktianPythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/menghitung-panjang" element={<MenghitungPanjangPythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/triple-pythagoras" element={<TriplePythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/jenis-segitiga" element={<JenisSegitigaPythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
