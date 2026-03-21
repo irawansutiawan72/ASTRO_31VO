@@ -149,6 +149,11 @@ import BusurJuringLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran
 import SudutPusatKelilingLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/SudutPusatKelilingPage";
 import PenerapanKontekstualLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/PenerapanKontekstualPage";
 import GarisSinggungLingkaranK8Page from "./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage";
+import PengertianGSLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/PengertianPage";
+import MenghitungPanjangGSLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/MenghitungPanjangPage";
+import GSPLK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPLPage";
+import GSPDK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/GSPDPage";
+import SabukLilitanK8Page from "./pages/latihan-mandiri/kelas8/garis-singgung-lingkaran/SabukLilitanPage";
 import BangunRuangSisiDatarK8Page from "./pages/latihan-mandiri/kelas8/BangunRuangSisiDatarPage";
 
 // Kelas 9 Topic Pages
@@ -530,6 +535,11 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/pengertian" element={<PengertianGSLK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/menghitung-panjang" element={<MenghitungPanjangGSLK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspl" element={<GSPLK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
       
       {/* Kelas 9 Topic Routes */}
