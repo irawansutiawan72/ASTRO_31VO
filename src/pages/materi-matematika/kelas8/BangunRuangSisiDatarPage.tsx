@@ -5,7 +5,6 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  { name: "UNSUR-UNSUR BANGUN RUANG", path: "/coming-soon" },
   { name: "KUBUS", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/kubus" },
   { name: "BALOK", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" },
   { name: "PRISMA", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" },

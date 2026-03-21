@@ -5,7 +5,6 @@ import { Gamepad2, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "UNSUR-UNSUR BANGUN RUANG",
   "KUBUS",
   "BALOK",
   "PRISMA",
