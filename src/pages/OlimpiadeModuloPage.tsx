@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
+import { Trophy, ChevronDown, ChevronUp, BookOpen, CheckCircle2 } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+import { InlineMath, BlockMath } from 'react-katex';
 
-// Helper function to render text with LaTeX
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
   return parts.map((part, index) => {
@@ -229,20 +228,327 @@ Contoh:
   ]
 };
 
-const latihanDasar = [
-  { no: 1, soal: "Tentukan sisa dari:\na. 51 dibagi 5\nb. 123 dibagi 3\nc. 5 dibagi 9\nd. 5555 dibagi 4", options: [] },
-  { no: 2, soal: "Tentukan nilai setiap angka berikut pada modulo yang diberikan:\na. $23 \\mod 5$\nb. $27 \\mod 3$\nc. $6 \\mod 8$\nd. $0 \\mod 12$\ne. $38 \\mod 5$", options: [] },
-  { no: 3, soal: "Sebuah truk mengangkut tiga jenis barang dengan berat masing-masing 73 kg, 45 kg, dan 98 kg. Jika total berat semua barang tersebut akan dibagi rata ke dalam karung-karung berkapasitas 12 kg, berapakah sisa berat barang yang tidak dapat masuk ke dalam karung terakhir?", options: [] },
-  { no: 4, soal: "Berapakah sisa pembagian $(55 + 56 + 57 + 58 + 59 + 60 + 61)$ oleh 60?", options: [] },
-  { no: 5, soal: "Sebuah mesin pencetak tiket kereta api memberikan nomor urut secara berurutan. Untuk tujuan audit, setiap tiket yang dicetak diuji dengan mencari sisa pembagian nomor tiket tersebut dengan 150. Jika ada 7 tiket berturut-turut yang dicetak, yaitu dimulai dari tiket bernomor 145, 146, 147, 148, 149, 150, hingga 151, berapakah sisa pembagian total nomor 7 tiket tersebut ketika dibagi dengan 150?", options: [] },
-  { no: 6, soal: "Seorang programmer sedang menguji sebuah algoritma enkripsi yang melibatkan perkalian tiga bilangan besar: 25, 34, dan 18. Untuk alasan keamanan, hasil perkalian tersebut harus diuji sisa pembagiannya dengan 11. Berapakah sisa pembagian $(25 \\times 34 \\times 18)$ oleh 11?", options: [] },
-  { no: 7, soal: "Seorang desainer grafis membuat pola berulang berdasarkan digit terakhir dari hasil perkalian bilangan-bilangan. Berapakah digit terakhir (nilai satuan) dari hasil perkalian $(127 \\times 354 \\times 789 \\times 416)$?", options: [] },
-  { no: 8, soal: "Tentukan sisa dari:\na. $16^2$ dibagi 3\nb. $17^{20}$ dibagi 5\nc. $10^{99}$ dibagi 7\nd. $3^{100}$ dibagi oleh 5\ne. $2^{2015}$ dibagi 9\nf. $3^{1990}$ dibagi 41", options: [] },
-  { no: 9, soal: "Tentukan angka terakhir dari $777^{333}$", options: [] },
-  { no: 10, soal: "Berapakah digit terakhir dari $3^{2023}$?", options: ["A. 3", "B. 9", "C. 1", "D. 7"] },
-  { no: 11, soal: "Berapakah digit terakhir dari $2^{2025}$?", options: ["A. 2", "B. 4", "C. 6", "D. 8"] },
-  { no: 12, soal: "Bilangan bulat positif terkecil n sehingga $n!$ habis dibagi oleh 2012 adalah .... (Catatan: $n! = 1 \\times 2 \\times \\cdots \\times n$)", options: [] },
-  { no: 13, soal: "Misalkan n adalah bilangan bulat. Jika $n^2 + 2n + 2$ habis dibagi oleh $n + 1$, maka nilai n adalah ....", options: [] },
+type PembahasanStep = { label?: string; math?: string; text?: string };
+type LatihanItem = {
+  no: number;
+  soal: string;
+  options: string[];
+  pembahasan: {
+    jawaban: string;
+    steps: PembahasanStep[];
+  };
+};
+
+const latihanDasar: LatihanItem[] = [
+  {
+    no: 1,
+    soal: "Tentukan sisa dari:\na. 51 dibagi 5\nb. 123 dibagi 3\nc. 5 dibagi 9\nd. 5555 dibagi 4",
+    options: [],
+    pembahasan: {
+      jawaban: "a. 1 &nbsp; b. 0 &nbsp; c. 5 &nbsp; d. 3",
+      steps: [
+        { label: "a.", text: "51 dibagi 5:" },
+        { math: "51 = 10 \\times 5 + 1 \\implies 51 \\mod 5 = \\boxed{1}" },
+        { label: "b.", text: "123 dibagi 3:" },
+        { math: "123 = 41 \\times 3 + 0 \\implies 123 \\mod 3 = \\boxed{0}" },
+        { text: "Cara cepat: jumlah digit 1+2+3 = 6, dan 6 habis dibagi 3, jadi sisa = 0." },
+        { label: "c.", text: "5 dibagi 9:" },
+        { math: "5 = 0 \\times 9 + 5 \\implies 5 \\mod 9 = \\boxed{5}" },
+        { text: "Jika bilangan yang dibagi < pembagi, maka sisanya adalah bilangan itu sendiri." },
+        { label: "d.", text: "5555 dibagi 4:" },
+        { math: "5555 = 1388 \\times 4 + 3 \\implies 5555 \\mod 4 = \\boxed{3}" },
+        { text: "Cara cepat: 2 digit terakhir = 55. Maka 55 = 13×4 + 3, sisa = 3." },
+      ],
+    },
+  },
+  {
+    no: 2,
+    soal: "Tentukan nilai setiap angka berikut pada modulo yang diberikan:\na. $23 \\mod 5$\nb. $27 \\mod 3$\nc. $6 \\mod 8$\nd. $0 \\mod 12$\ne. $38 \\mod 5$",
+    options: [],
+    pembahasan: {
+      jawaban: "a. 3 &nbsp; b. 0 &nbsp; c. 6 &nbsp; d. 0 &nbsp; e. 3",
+      steps: [
+        { label: "a.", math: "23 = 4 \\times 5 + 3 \\implies 23 \\mod 5 = \\boxed{3}" },
+        { label: "b.", math: "27 = 9 \\times 3 + 0 \\implies 27 \\mod 3 = \\boxed{0}" },
+        { text: "Cek: jumlah digit 2+7 = 9, habis dibagi 3 → sisa 0." },
+        { label: "c.", math: "6 = 0 \\times 8 + 6 \\implies 6 \\mod 8 = \\boxed{6}" },
+        { text: "Karena 6 < 8, hasilnya adalah 6 itu sendiri." },
+        { label: "d.", math: "0 = 0 \\times 12 + 0 \\implies 0 \\mod 12 = \\boxed{0}" },
+        { text: "Nol dibagi bilangan apapun (≠0) selalu bersisa 0." },
+        { label: "e.", math: "38 = 7 \\times 5 + 3 \\implies 38 \\mod 5 = \\boxed{3}" },
+      ],
+    },
+  },
+  {
+    no: 3,
+    soal: "Sebuah truk mengangkut tiga jenis barang dengan berat masing-masing 73 kg, 45 kg, dan 98 kg. Jika total berat semua barang tersebut akan dibagi rata ke dalam karung-karung berkapasitas 12 kg, berapakah sisa berat barang yang tidak dapat masuk ke dalam karung terakhir?",
+    options: [],
+    pembahasan: {
+      jawaban: "0 kg (tidak ada sisa — semua barang dapat masuk ke dalam karung secara sempurna)",
+      steps: [
+        { text: "Langkah 1: Hitung total berat semua barang." },
+        { math: "73 + 45 + 98 = 216 \\text{ kg}" },
+        { text: "Langkah 2: Bagi total berat dengan kapasitas karung menggunakan modulo." },
+        { math: "216 \\mod 12 = ?" },
+        { math: "216 = 18 \\times 12 + 0" },
+        { math: "\\therefore\\; 216 \\mod 12 = \\boxed{0}" },
+        { text: "Verifikasi: 18 × 12 = 216 ✓" },
+        { text: "Kesimpulan: Sisa berat yang tidak dapat masuk ke karung terakhir adalah 0 kg, artinya 216 kg terbagi habis ke dalam 18 karung masing-masing berkapasitas 12 kg." },
+      ],
+    },
+  },
+  {
+    no: 4,
+    soal: "Berapakah sisa pembagian $(55 + 56 + 57 + 58 + 59 + 60 + 61)$ oleh 60?",
+    options: [],
+    pembahasan: {
+      jawaban: "46",
+      steps: [
+        { text: "Gunakan Kaidah Dasar 2 (Linearitas penjumlahan):" },
+        { math: "(a+b+\\cdots) \\mod n = [(a\\mod n) + (b\\mod n) + \\cdots] \\mod n" },
+        { text: "Hitung sisa masing-masing bilangan dibagi 60:" },
+        { math: "55 \\mod 60 = 55" },
+        { math: "56 \\mod 60 = 56" },
+        { math: "57 \\mod 60 = 57" },
+        { math: "58 \\mod 60 = 58" },
+        { math: "59 \\mod 60 = 59" },
+        { math: "60 \\mod 60 = 0" },
+        { math: "61 \\mod 60 = 1" },
+        { text: "Jumlahkan semua sisa:" },
+        { math: "(55+56+57+58+59+0+1) \\mod 60 = 286 \\mod 60" },
+        { text: "Sederhanakan:" },
+        { math: "286 = 4 \\times 60 + 46" },
+        { math: "\\therefore\\; 286 \\mod 60 = \\boxed{46}" },
+        { text: "Verifikasi langsung: 55+56+57+58+59+60+61 = 406, dan 406 = 6×60 + 46 ✓" },
+      ],
+    },
+  },
+  {
+    no: 5,
+    soal: "Sebuah mesin pencetak tiket kereta api memberikan nomor urut secara berurutan. Untuk tujuan audit, setiap tiket yang dicetak diuji dengan mencari sisa pembagian nomor tiket tersebut dengan 150. Jika ada 7 tiket berturut-turut yang dicetak, yaitu dimulai dari tiket bernomor 145, 146, 147, 148, 149, 150, hingga 151, berapakah sisa pembagian total nomor 7 tiket tersebut ketika dibagi dengan 150?",
+    options: [],
+    pembahasan: {
+      jawaban: "136",
+      steps: [
+        { text: "Langkah 1: Gunakan Kaidah Dasar 2 (Linearitas penjumlahan)." },
+        { text: "Hitung sisa masing-masing nomor tiket dibagi 150:" },
+        { math: "145 \\mod 150 = 145" },
+        { math: "146 \\mod 150 = 146" },
+        { math: "147 \\mod 150 = 147" },
+        { math: "148 \\mod 150 = 148" },
+        { math: "149 \\mod 150 = 149" },
+        { math: "150 \\mod 150 = 0" },
+        { math: "151 \\mod 150 = 1" },
+        { text: "Langkah 2: Jumlahkan semua sisa." },
+        { math: "145+146+147+148+149+0+1 = 736" },
+        { text: "Langkah 3: Hitung 736 mod 150." },
+        { math: "736 = 4 \\times 150 + 136" },
+        { math: "\\therefore\\; \\text{sisa} = \\boxed{136}" },
+        { text: "Verifikasi: Total nomor = 145+146+...+151 = 1036. Dan 1036 = 6×150 + 136 ✓" },
+      ],
+    },
+  },
+  {
+    no: 6,
+    soal: "Seorang programmer sedang menguji sebuah algoritma enkripsi yang melibatkan perkalian tiga bilangan besar: 25, 34, dan 18. Untuk alasan keamanan, hasil perkalian tersebut harus diuji sisa pembagiannya dengan 11. Berapakah sisa pembagian $(25 \\times 34 \\times 18)$ oleh 11?",
+    options: [],
+    pembahasan: {
+      jawaban: "10",
+      steps: [
+        { text: "Gunakan Kaidah Dasar 3 (Linearitas perkalian):" },
+        { math: "(a \\times b \\times c) \\mod n = [(a\\mod n)(b\\mod n)(c\\mod n)] \\mod n" },
+        { text: "Hitung sisa masing-masing faktor dibagi 11:" },
+        { math: "25 \\mod 11 = 3 \\quad (25 = 2 \\times 11 + 3)" },
+        { math: "34 \\mod 11 = 1 \\quad (34 = 3 \\times 11 + 1)" },
+        { math: "18 \\mod 11 = 7 \\quad (18 = 1 \\times 11 + 7)" },
+        { text: "Kalikan semua sisa dan hitung modulo 11:" },
+        { math: "(3 \\times 1 \\times 7) \\mod 11 = 21 \\mod 11" },
+        { math: "21 = 1 \\times 11 + 10" },
+        { math: "\\therefore\\; (25 \\times 34 \\times 18) \\mod 11 = \\boxed{10}" },
+        { text: "Verifikasi: 25×34×18 = 15300. Dan 15300 = 1390×11 + 10 ✓" },
+      ],
+    },
+  },
+  {
+    no: 7,
+    soal: "Seorang desainer grafis membuat pola berulang berdasarkan digit terakhir dari hasil perkalian bilangan-bilangan. Berapakah digit terakhir (nilai satuan) dari hasil perkalian $(127 \\times 354 \\times 789 \\times 416)$?",
+    options: [],
+    pembahasan: {
+      jawaban: "2",
+      steps: [
+        { text: "Digit terakhir = sisa pembagian oleh 10. Gunakan Kaidah Dasar 3:" },
+        { math: "(127 \\times 354 \\times 789 \\times 416) \\mod 10" },
+        { text: "Ambil hanya digit satuan masing-masing bilangan:" },
+        { math: "127 \\mod 10 = 7" },
+        { math: "354 \\mod 10 = 4" },
+        { math: "789 \\mod 10 = 9" },
+        { math: "416 \\mod 10 = 6" },
+        { text: "Kalikan bertahap:" },
+        { math: "7 \\times 4 = 28 \\implies 28 \\mod 10 = 8" },
+        { math: "8 \\times 9 = 72 \\implies 72 \\mod 10 = 2" },
+        { math: "2 \\times 6 = 12 \\implies 12 \\mod 10 = \\boxed{2}" },
+        { text: "Jadi digit terakhir hasil perkalian adalah 2." },
+      ],
+    },
+  },
+  {
+    no: 8,
+    soal: "Tentukan sisa dari:\na. $16^2$ dibagi 3\nb. $17^{20}$ dibagi 5\nc. $10^{99}$ dibagi 7\nd. $3^{100}$ dibagi oleh 5\ne. $2^{2015}$ dibagi 9\nf. $3^{1990}$ dibagi 41",
+    options: [],
+    pembahasan: {
+      jawaban: "a. 1 &nbsp; b. 1 &nbsp; c. 6 &nbsp; d. 1 &nbsp; e. 5 &nbsp; f. 32",
+      steps: [
+        { label: "a.", text: "16² mod 3:" },
+        { math: "16 \\mod 3 = 1 \\implies 16^2 \\mod 3 = 1^2 \\mod 3 = \\boxed{1}" },
+
+        { label: "b.", text: "17²⁰ mod 5:" },
+        { math: "17 \\mod 5 = 2 \\implies 17^{20} \\mod 5 = 2^{20} \\mod 5" },
+        { text: "Pola bilangan 2ⁿ mod 5: 2, 4, 3, 1, 2, 4, 3, 1, ... (periode 4)" },
+        { math: "20 \\mod 4 = 0 \\implies \\text{posisi ke-4 dalam pola} = 1" },
+        { math: "\\therefore\\; 17^{20} \\mod 5 = \\boxed{1}" },
+
+        { label: "c.", text: "10⁹⁹ mod 7:" },
+        { math: "10 \\mod 7 = 3 \\implies 10^{99} \\mod 7 = 3^{99} \\mod 7" },
+        { text: "Pola bilangan 3ⁿ mod 7: 3, 2, 6, 4, 5, 1, ... (periode 6)" },
+        { math: "99 \\mod 6 = 3 \\implies \\text{posisi ke-3 dalam pola} = 6" },
+        { math: "\\therefore\\; 10^{99} \\mod 7 = \\boxed{6}" },
+
+        { label: "d.", text: "3¹⁰⁰ mod 5:" },
+        { text: "Pola bilangan 3ⁿ mod 5: 3, 4, 2, 1, ... (periode 4)" },
+        { math: "100 \\mod 4 = 0 \\implies \\text{posisi ke-4 dalam pola} = 1" },
+        { math: "\\therefore\\; 3^{100} \\mod 5 = \\boxed{1}" },
+
+        { label: "e.", text: "2²⁰¹⁵ mod 9:" },
+        { text: "Pola bilangan 2ⁿ mod 9: 2, 4, 8, 7, 5, 1, ... (periode 6)" },
+        { math: "2015 \\mod 6 = 5 \\implies \\text{posisi ke-5 dalam pola} = 5" },
+        { math: "\\therefore\\; 2^{2015} \\mod 9 = \\boxed{5}" },
+
+        { label: "f.", text: "3¹⁹⁹⁰ mod 41:" },
+        { math: "3^4 = 81 = 2 \\times 41 - 1 \\equiv -1 \\pmod{41}" },
+        { math: "3^8 = (3^4)^2 \\equiv (-1)^2 = 1 \\pmod{41}" },
+        { text: "Jadi periode adalah 8. Sekarang hitung 1990 mod 8:" },
+        { math: "1990 = 248 \\times 8 + 6 \\implies 1990 \\mod 8 = 6" },
+        { math: "3^{1990} \\equiv 3^6 \\pmod{41}" },
+        { math: "3^6 = 3^4 \\times 3^2 \\equiv (-1) \\times 9 = -9 \\equiv 41 - 9 = \\boxed{32} \\pmod{41}" },
+      ],
+    },
+  },
+  {
+    no: 9,
+    soal: "Tentukan angka terakhir dari $777^{333}$",
+    options: [],
+    pembahasan: {
+      jawaban: "7",
+      steps: [
+        { text: "Angka terakhir = sisa pembagian oleh 10." },
+        { math: "777 \\mod 10 = 7 \\implies 777^{333} \\mod 10 = 7^{333} \\mod 10" },
+        { text: "Cari pola bilangan 7ⁿ mod 10:" },
+        { math: "7^1 \\mod 10 = 7" },
+        { math: "7^2 \\mod 10 = 9" },
+        { math: "7^3 \\mod 10 = 3" },
+        { math: "7^4 \\mod 10 = 1" },
+        { math: "7^5 \\mod 10 = 7 \\quad \\text{(berulang)}" },
+        { text: "Periode = 4. Hitung 333 mod 4:" },
+        { math: "333 = 83 \\times 4 + 1 \\implies 333 \\mod 4 = 1" },
+        { text: "Posisi ke-1 dalam pola = 7." },
+        { math: "\\therefore\\; 777^{333} \\mod 10 = 7^1 \\mod 10 = \\boxed{7}" },
+        { text: "Jadi angka terakhir dari 777³³³ adalah 7." },
+      ],
+    },
+  },
+  {
+    no: 10,
+    soal: "Berapakah digit terakhir dari $3^{2023}$?",
+    options: ["A. 3", "B. 9", "C. 1", "D. 7"],
+    pembahasan: {
+      jawaban: "D. 7",
+      steps: [
+        { text: "Digit terakhir = sisa pembagian oleh 10." },
+        { text: "Cari pola bilangan 3ⁿ mod 10:" },
+        { math: "3^1 \\mod 10 = 3" },
+        { math: "3^2 \\mod 10 = 9" },
+        { math: "3^3 \\mod 10 = 7" },
+        { math: "3^4 \\mod 10 = 1" },
+        { math: "3^5 \\mod 10 = 3 \\quad \\text{(berulang, periode = 4)}" },
+        { text: "Hitung 2023 mod 4:" },
+        { math: "2023 = 505 \\times 4 + 3 \\implies 2023 \\mod 4 = 3" },
+        { text: "Posisi ke-3 dalam pola 3, 9, 7, 1 adalah 7." },
+        { math: "\\therefore\\; 3^{2023} \\mod 10 = \\boxed{7}" },
+        { text: "Jawaban: D. 7" },
+      ],
+    },
+  },
+  {
+    no: 11,
+    soal: "Berapakah digit terakhir dari $2^{2025}$?",
+    options: ["A. 2", "B. 4", "C. 6", "D. 8"],
+    pembahasan: {
+      jawaban: "A. 2",
+      steps: [
+        { text: "Digit terakhir = sisa pembagian oleh 10." },
+        { text: "Cari pola bilangan 2ⁿ mod 10:" },
+        { math: "2^1 \\mod 10 = 2" },
+        { math: "2^2 \\mod 10 = 4" },
+        { math: "2^3 \\mod 10 = 8" },
+        { math: "2^4 \\mod 10 = 6" },
+        { math: "2^5 \\mod 10 = 2 \\quad \\text{(berulang, periode = 4)}" },
+        { text: "Hitung 2025 mod 4:" },
+        { math: "2025 = 506 \\times 4 + 1 \\implies 2025 \\mod 4 = 1" },
+        { text: "Posisi ke-1 dalam pola 2, 4, 8, 6 adalah 2." },
+        { math: "\\therefore\\; 2^{2025} \\mod 10 = \\boxed{2}" },
+        { text: "Jawaban: A. 2" },
+      ],
+    },
+  },
+  {
+    no: 12,
+    soal: "Bilangan bulat positif terkecil n sehingga $n!$ habis dibagi oleh 2012 adalah .... (Catatan: $n! = 1 \\times 2 \\times \\cdots \\times n$)",
+    options: [],
+    pembahasan: {
+      jawaban: "n = 503",
+      steps: [
+        { text: "Langkah 1: Faktorisasi prima 2012." },
+        { math: "2012 = 2 \\times 1006 = 2 \\times 2 \\times 503 = 4 \\times 503 = 2^2 \\times 503" },
+        { text: "Langkah 2: Periksa apakah 503 prima." },
+        { math: "\\sqrt{503} \\approx 22{,}4" },
+        { text: "Uji bilangan prima ≤ 22: 2, 3, 5, 7, 11, 13, 17, 19." },
+        { math: "503 \\div 2 = 251{,}5 \\quad \\text{(tidak habis)}" },
+        { math: "503 \\div 3: \\; 5+0+3=8 \\text{ (tidak habis dibagi 3)}" },
+        { math: "503 \\div 7 \\approx 71{,}8 \\quad \\text{(tidak habis)}" },
+        { math: "503 \\div 11 \\approx 45{,}7 \\quad \\text{(tidak habis)}" },
+        { math: "503 \\div 13 \\approx 38{,}7 \\quad \\text{(tidak habis)}" },
+        { math: "503 \\div 17 \\approx 29{,}6 \\quad \\text{(tidak habis)}" },
+        { math: "503 \\div 19 \\approx 26{,}5 \\quad \\text{(tidak habis)}" },
+        { text: "Kesimpulan: 503 adalah bilangan prima." },
+        { text: "Langkah 3: Tentukan n terkecil agar n! habis dibagi 2² × 503." },
+        { text: "Untuk 503 (prima) muncul di n!, kita butuh n ≥ 503." },
+        { text: "Pada n = 503: 503! mengandung faktor 503¹, dan juga mengandung banyak faktor 2 (lebih dari 2²)." },
+        { math: "\\therefore\\; n_{\\text{terkecil}} = \\boxed{503}" },
+      ],
+    },
+  },
+  {
+    no: 13,
+    soal: "Misalkan n adalah bilangan bulat. Jika $n^2 + 2n + 2$ habis dibagi oleh $n + 1$, maka nilai n adalah ....",
+    options: [],
+    pembahasan: {
+      jawaban: "n = 0 atau n = −2",
+      steps: [
+        { text: "Langkah 1: Ubah bentuk n² + 2n + 2 agar muncul faktor (n+1)." },
+        { math: "n^2 + 2n + 2 = n^2 + 2n + 1 + 1 = (n+1)^2 + 1" },
+        { text: "Langkah 2: Agar (n+1) membagi (n+1)² + 1:" },
+        { text: "Karena (n+1) jelas membagi (n+1)², maka syaratnya adalah:" },
+        { math: "(n+1) \\mid 1" },
+        { text: "Langkah 3: Tentukan semua pembagi bulat dari 1." },
+        { math: "n+1 = 1 \\implies n = 0" },
+        { math: "n+1 = -1 \\implies n = -2" },
+        { text: "Langkah 4: Verifikasi." },
+        { math: "n=0:\\; 0^2+2(0)+2 = 2,\\; n+1=1,\\; 2 \\div 1 = 2 \\;\\checkmark" },
+        { math: "n=-2:\\; (-2)^2+2(-2)+2 = 4-4+2=2,\\; n+1=-1,\\; 2 \\div (-1) = -2 \\;\\checkmark" },
+        { math: "\\therefore\\; n = \\boxed{0 \\text{ atau } n = -2}" },
+      ],
+    },
+  },
 ];
 
 const latihanOlimpiade = [
@@ -269,11 +575,19 @@ const OlimpiadeModuloPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [openPembahasan, setOpenPembahasan] = useState<number[]>([]);
 
   const toggleSection = (idx: number) => {
     playPopSound();
     setExpandedSections(prev =>
       prev.includes(idx) ? prev.filter(i => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const togglePembahasan = (no: number) => {
+    playPopSound();
+    setOpenPembahasan(prev =>
+      prev.includes(no) ? prev.filter(n => n !== no) : [...prev, no]
     );
   };
 
@@ -342,27 +656,103 @@ const OlimpiadeModuloPage = () => {
         {/* Latihan Dasar Tab */}
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
+            {latihanDasar.map((soal) => {
+              const isOpen = openPembahasan.includes(soal.no);
+              return (
+                <div key={soal.no} className="relative rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-slate-900/80 to-blue-900/20 backdrop-blur" />
+                  <div className="absolute inset-0 border border-cyan-500/20 rounded-2xl" />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    {/* Nomor & Soal */}
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center shrink-0">
+                        <span className="text-cyan-300 text-xs font-bold">{soal.no}</span>
                       </div>
-                    ))}
+                      <div className="flex-1 font-body text-sm text-white/90 leading-relaxed whitespace-pre-wrap">
+                        {soal.soal.split('\n').map((line, lineIdx) => (
+                          <span key={lineIdx}>
+                            {lineIdx > 0 && <br />}
+                            {renderWithLatex(line)}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Pilihan Ganda */}
+                    {soal.options.length > 0 && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 ml-11">
+                        {soal.options.map((opt, j) => (
+                          <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                            {renderWithLatex(opt)}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Tombol Pembahasan */}
+                    <div className="ml-11">
+                      <button
+                        onClick={() => togglePembahasan(soal.no)}
+                        className={`flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl border transition-all duration-300 cursor-pointer ${
+                          isOpen
+                            ? "bg-emerald-500/20 border-emerald-400/50 text-emerald-300"
+                            : "bg-white/5 border-white/20 text-white/60 hover:bg-emerald-500/10 hover:border-emerald-400/40 hover:text-emerald-300"
+                        }`}
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                        {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      </button>
+                    </div>
+
+                    {/* Panel Pembahasan */}
+                    {isOpen && (
+                      <div className="mt-3 ml-11 animate-slide-up">
+                        <div className="relative rounded-xl overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 to-teal-900/20" />
+                          <div className="absolute inset-0 border border-emerald-500/30 rounded-xl" />
+                          <div className="relative px-4 py-4">
+                            {/* Header jawaban */}
+                            <div className="flex items-center gap-2 mb-3">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Pembahasan</span>
+                            </div>
+                            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3">
+                              <span className="text-emerald-300 text-xs font-bold">Jawaban: </span>
+                              <span
+                                className="text-emerald-200 text-xs font-body"
+                                dangerouslySetInnerHTML={{ __html: soal.pembahasan.jawaban }}
+                              />
+                            </div>
+                            {/* Langkah-langkah */}
+                            <div className="flex flex-col gap-1.5">
+                              {soal.pembahasan.steps.map((step, si) => (
+                                <div key={si} className="flex items-start gap-2">
+                                  {step.label && (
+                                    <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5 min-w-[20px]">{step.label}</span>
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    {step.text && (
+                                      <p className="font-body text-sm text-white/80 leading-relaxed">{step.text}</p>
+                                    )}
+                                    {step.math && (
+                                      <div className="overflow-x-auto py-0.5">
+                                        <BlockMath>{step.math}</BlockMath>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         )}
 
