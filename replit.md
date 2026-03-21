@@ -30,6 +30,11 @@ npm start        # Run production server (Express serves built frontend on port 
   - LIMAS: 40 soal (segitiga, segiempat, segilima, apotema, luas permukaan, volume, kontekstual) — violet/purple theme with pyramid SVGs
   - All pages include: LaTeX formulas, inline formula reference cards, 3D SVG diagrams, UN/ANBK/TKA-style questions
 
+- **Kelas 8 — Latihan Mandiri — Bangun Ruang Sisi Datar Gabungan**: 40 soal, route `/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan`
+  - Covers: Balok+Limas, Kubus+Prisma, dua balok (L-shape), limas terpancung, benda berlubang, 3 balok bertingkat
+  - SVG diagrams: BalokLimas, KubusPrisma, DuaBalok, PrismaBalok (5 different combined solid types)
+  - indigo/blue theme — direct single page (no sub-topics hub)
+
 - **Kelas 8 — Garis Singgung Lingkaran**: All 5 sub-topics fully implemented with animated SVGs, LaTeX formulas, color-coded sections, 3-level examples, interactive tools.
   - Pengertian dan Sifat (3-case comparison SVG, tangent properties, inscribed circle problem)
   - Menghitung Panjang Garis Singgung (Pythagoras triangle SVG, 3 formula variations, two-tangent SVG)
