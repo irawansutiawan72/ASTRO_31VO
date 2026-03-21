@@ -7,6 +7,7 @@ const bukuRefs = [
   "Abdur Rahman As'ari, dkk. 2017. Matematika SMP/MTs Kelas VIII Semester I. Edisi Revisi. Jakarta: Kementerian Pendidikan dan Kebudayaan RI.",
   "Raharjo, M dan Setiawan, A. 2019. Matematik 2 untuk SMP/MTS Kelas VIII. Jakarta: Erlangga.",
   "B.K. Noormandiri. 2018. Matematika untuk SMA/MA Kelas XII Kelompok Wajib. Jakarta: Erlangga.",
+  "Sukino. 2020. The Great Matematika untuk Siswa SMP-MTs Kelas IX. Kab. Bandung: Srikandi Empat Widya Utama.",
 ];
 
 const internetRefs = [
