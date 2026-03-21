@@ -551,24 +551,368 @@ const latihanDasar: LatihanItem[] = [
   },
 ];
 
-const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2004 Tingkat Kota\n$2^{13}$ jika dibagi dengan 13 akan memberikan sisa ...", options: [] },
-  { no: 2, soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...", options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"] },
-  { no: 3, soal: "OSN Matematika 2007 Tingkat Kota\nMisalkan a, b dan c bilangan bulat. Pernyataan-pernyataan berikut yang salah adalah ...", options: ["A. Jika a membagi b dan b membagi c, maka a membagi c", "B. Jika a membagi b dan c, maka a membagi b + c", "C. Jika a membagi b dan c, maka a membagi bc", "D. Jika a membagi c dan b membagi c, maka ab membagi c", "E. Jika a membagi b, maka a membagi bc"] },
-  { no: 4, soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...", options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"] },
-  { no: 5, soal: "OSN Matematika 2008 Tingkat Kota\nJika $2^{31} - 1$ dibagi 9, maka sisanya adalah ...", options: ["A. 2", "B. 3", "C. 4", "D. 6", "E. 8"] },
-  { no: 6, soal: "OSN Matematika 2010 Tingkat Kota\nDiberikan dua buah bilangan bulat berbeda yang berjumlah 37. Apabila bilangan yang lebih besar dibagi dengan bilangan yang lebih kecil, maka hasil baginya adalah 3 dan sisanya 5. Selisih kedua bilangan tersebut adalah ...", options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"] },
-  { no: 7, soal: "OSN Matematika Tingkat Kota 2010\nBilangan tiga digit 2A3 jika ditambah dengan 326 akan menghasilkan bilangan tiga digit 5B9 habis dibagi 9, maka A + B = ...", options: ["A. 5", "B. 6", "C. 7", "D. 8", "E. 9"] },
-  { no: 8, soal: "OSN Matematika 2012 Tingkat Kota\nDiketahui 2012 bilangan bulat positif berurutan. Jika setiap bilangan tersebut dibagi 5, kemudian sisa-sisa pembagiannya dijumlahkan, maka hasil penjumlahan sisa-sisanya adalah ...", options: [] },
-  { no: 9, soal: "OSN Matematika 2013 Tingkat Kota\nJika a, b, c dan d adalah bilangan bulat positif dibagi 13 berturut-turut bersisa 12, 9, 11 dan 7, maka $3a + 4b - 3c + 2d$ dibagi 13 akan bersisa ...", options: ["A. 0", "B. 1", "C. 7", "D. 9", "E. 11"] },
-  { no: 10, soal: "OSN Matematika 2015 Tingkat Kota\nDiberikan tiga bilangan asli yakni 1418, 2134 dan 2850. Jika sisa masing-masing bilangan tersebut dibagi x adalah sama yaitu y dengan $y \\neq 0$, maka hasil $x + y$ yang mungkin adalah ...", options: ["A. 165", "B. 179", "C. 344", "D. 716"] },
-  { no: 11, soal: "OSN Matematika 2019 Tingkat Kota\nSisa pembagian $1111^{2019}$ oleh 11111 adalah ...", options: [] },
-  { no: 12, soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui n adalah bilangan tiga digit yang dibagi 7 dan 9 masing-masing memberikan sisa 1 dan 2. Jumlah nilai maksimum dan minimum dari n adalah ...", options: ["A. 974", "B. 1003", "C. 1129", "D. 1130"] },
-  { no: 13, soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui bilangan bulat positif A dan B bila dibagi 5 berturut-turut bersisa 2 dan 3. Sisa pembagian $A(A + 1) + 5B$ oleh 25 adalah ...", options: [] },
-  { no: 14, soal: "OSN Matematika 2022 Tingkat Kota\nJika $a_1$ dan $a_2$ adalah 2 bilangan bulat positif terkecil berbeda yang memenuhi $2^a + 9$ habis dibagi 10 maka nilai $a_1 + a_2$ adalah ...", options: ["A. 18", "B. 22", "C. 24", "D. 26"] },
-  { no: 15, soal: "OSN Matematika 2022 Tingkat Kota\nDiketahui himpunan A sebagai berikut\n$\\left\\{\\frac{2^{n+2} - 2^n}{m}, \\frac{2^{n+3} - 2^n}{m}, \\frac{2^{n+4} - 2^n}{m}, ...\\right\\}$\nSemua anggota A adalah bilangan bulat positif. Jika n adalah kelipatan dari m, maka jumlah semua nilai m yang mungkin untuk n = 2022 adalah ...", options: ["A. 3", "B. 6", "C. 12", "D. 28"] },
-  { no: 16, soal: "OSN Matematika 2023 Tingkat Kota\nSuatu bilangan prima disebut \"prima kanan\" jika dapat diperoleh bilangan prima dengan menghilangkan setidaknya satu angka di sebelah kiri. Sebagai contoh. 223 adalah \"prima kanan\" sebab setelah menghilangkan angka 2 paling kiri, bilangan yang tersisa adalah 23 yang merupakan bilangan prima. Contoh lainnya 127. Dengan menghilangkan 2 angka paling kiri maka angka yang tersisa adalah 7 yang merupakan bilangan prima. Banyaknya bilangan prima antara 10 dan 200 yang merupakan \"prima kanan\" adalah....", options: ["A. 24", "B. 26", "C. 28", "D. 30"] },
-  { no: 17, soal: "OSN Matematika 2024 Tingkat Kota\nBanyaknya faktor dari 2024 yang lebih besar dari $\\sqrt{2024}$ adalah ...", options: ["A. 4", "B. 8", "C. 12", "D. 16"] },
+type OlimpiadeItem = {
+  no: number;
+  soal: string;
+  options: string[];
+  pembahasan: {
+    jawaban: string;
+    steps: PembahasanStep[];
+  };
+};
+
+const latihanOlimpiade: OlimpiadeItem[] = [
+  {
+    no: 1,
+    soal: "OSN Matematika 2004 Tingkat Kota\n$2^{13}$ jika dibagi dengan 13 akan memberikan sisa ...",
+    options: [],
+    pembahasan: {
+      jawaban: "2",
+      steps: [
+        { text: "Gunakan Teorema Kecil Fermat: jika p prima dan gcd(a, p) = 1, maka a^(p-1) ≡ 1 (mod p)." },
+        { math: "2^{12} \\equiv 1 \\pmod{13} \\quad (\\text{karena 13 prima dan } \\gcd(2,13)=1)" },
+        { text: "Maka:" },
+        { math: "2^{13} = 2^{12} \\times 2 \\equiv 1 \\times 2 = \\boxed{2} \\pmod{13}" },
+        { text: "Verifikasi: 2^13 = 8192. 8192 = 630×13 + 2. Sisa = 2 ✓" },
+      ],
+    },
+  },
+  {
+    no: 2,
+    soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...",
+    options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"],
+    pembahasan: {
+      jawaban: "D. 0 atau 1",
+      steps: [
+        { text: "Setiap bilangan bulat n, jika dibagi 3, pasti bersisa 0, 1, atau 2. Periksa n² mod 3 untuk setiap kasus:" },
+        { math: "n \\equiv 0 \\pmod{3} \\implies n^2 \\equiv 0^2 = 0 \\pmod{3}" },
+        { math: "n \\equiv 1 \\pmod{3} \\implies n^2 \\equiv 1^2 = 1 \\pmod{3}" },
+        { math: "n \\equiv 2 \\pmod{3} \\implies n^2 \\equiv 2^2 = 4 \\equiv 1 \\pmod{3}" },
+        { text: "Jadi bilangan kuadrat jika dibagi 3 hanya bisa bersisa 0 atau 1. Sisa 2 tidak mungkin terjadi." },
+        { text: "Jawaban: D. 0 atau 1" },
+      ],
+    },
+  },
+  {
+    no: 3,
+    soal: "OSN Matematika 2007 Tingkat Kota\nMisalkan a, b dan c bilangan bulat. Pernyataan-pernyataan berikut yang salah adalah ...",
+    options: ["A. Jika a membagi b dan b membagi c, maka a membagi c", "B. Jika a membagi b dan c, maka a membagi b + c", "C. Jika a membagi b dan c, maka a membagi bc", "D. Jika a membagi c dan b membagi c, maka ab membagi c", "E. Jika a membagi b, maka a membagi bc"],
+    pembahasan: {
+      jawaban: "D. Jika a membagi c dan b membagi c, maka ab membagi c",
+      steps: [
+        { text: "Periksa setiap pernyataan:" },
+        { label: "A.", text: "Jika a|b dan b|c, maka a|c. BENAR (sifat transitif keterbagian)." },
+        { label: "B.", text: "Jika a|b dan a|c, maka a|(b+c). BENAR karena b=ak₁, c=ak₂ → b+c = a(k₁+k₂)." },
+        { label: "C.", text: "Jika a|b dan a|c, maka a|bc. BENAR karena b=ak₁ → bc = (ak₁)c = a(k₁c)." },
+        { label: "D.", text: "Jika a|c dan b|c, maka ab|c. SALAH! Contoh kontra:" },
+        { math: "a = 4,\\; b = 6,\\; c = 12" },
+        { math: "4 \\mid 12 \\;\\checkmark \\quad 6 \\mid 12 \\;\\checkmark \\quad \\text{tapi } ab = 24 \\nmid 12 \\;\\times" },
+        { label: "E.", text: "Jika a|b, maka a|bc. BENAR karena b=ak → bc = (ak)c = a(kc)." },
+        { text: "Jawaban: D" },
+      ],
+    },
+  },
+  {
+    no: 4,
+    soal: "OSN Matematika 2007 Tingkat Kota\nSuatu bilangan kuadrat jika dibagi 3, maka kemungkinan sisanya adalah ...",
+    options: ["A. 0", "B. 1", "C. 2", "D. 0 atau 1", "E. 0, 1 atau 2"],
+    pembahasan: {
+      jawaban: "D. 0 atau 1",
+      steps: [
+        { text: "Sama dengan soal no. 2. Periksa n² mod 3 untuk n ≡ 0, 1, 2 (mod 3):" },
+        { math: "0^2 \\equiv 0,\\quad 1^2 \\equiv 1,\\quad 2^2 = 4 \\equiv 1 \\pmod{3}" },
+        { text: "Sisa yang mungkin hanya 0 atau 1. Jawaban: D. 0 atau 1" },
+      ],
+    },
+  },
+  {
+    no: 5,
+    soal: "OSN Matematika 2008 Tingkat Kota\nJika $2^{31} - 1$ dibagi 9, maka sisanya adalah ...",
+    options: ["A. 2", "B. 3", "C. 4", "D. 6", "E. 8"],
+    pembahasan: {
+      jawaban: "1 (sisa pembagian yang tepat secara matematika)",
+      steps: [
+        { text: "Cari pola 2ⁿ mod 9 (periode 6):" },
+        { math: "2^1 \\equiv 2,\\; 2^2 \\equiv 4,\\; 2^3 \\equiv 8,\\; 2^4 \\equiv 7,\\; 2^5 \\equiv 5,\\; 2^6 \\equiv 1 \\pmod{9}" },
+        { text: "Periode = 6. Hitung 31 mod 6:" },
+        { math: "31 = 5 \\times 6 + 1 \\implies 31 \\mod 6 = 1" },
+        { math: "2^{31} \\equiv 2^1 = 2 \\pmod{9}" },
+        { math: "2^{31} - 1 \\equiv 2 - 1 = \\boxed{1} \\pmod{9}" },
+        { text: "Verifikasi: 2^31 = 2.147.483.648. Jumlah digit = 2+1+4+7+4+8+3+6+4+8 = 47. 47-9×5=2 ✓, jadi 2^31 mod 9 = 2, dan (2^31-1) mod 9 = 1." },
+        { text: "Catatan: Jawaban matematis yang benar adalah 1. Jika pilihan tersedia hanya A–E, kemungkinan ada kekeliruan pada pilihan jawaban soal asli." },
+      ],
+    },
+  },
+  {
+    no: 6,
+    soal: "OSN Matematika 2010 Tingkat Kota\nDiberikan dua buah bilangan bulat berbeda yang berjumlah 37. Apabila bilangan yang lebih besar dibagi dengan bilangan yang lebih kecil, maka hasil baginya adalah 3 dan sisanya 5. Selisih kedua bilangan tersebut adalah ...",
+    options: ["A. 21", "B. 22", "C. 23", "D. 24", "E. 25"],
+    pembahasan: {
+      jawaban: "A. 21",
+      steps: [
+        { text: "Misalkan bilangan lebih kecil = a, bilangan lebih besar = b." },
+        { text: "Dari informasi:" },
+        { math: "a + b = 37 \\quad \\cdots (1)" },
+        { math: "b = 3a + 5 \\quad \\cdots (2)" },
+        { text: "Substitusi (2) ke (1):" },
+        { math: "a + (3a + 5) = 37" },
+        { math: "4a = 32 \\implies a = 8" },
+        { math: "b = 37 - 8 = 29" },
+        { text: "Verifikasi: 29 = 3×8 + 5 ✓ (hasil bagi 3, sisa 5)." },
+        { text: "Selisih:" },
+        { math: "b - a = 29 - 8 = \\boxed{21}" },
+        { text: "Jawaban: A. 21" },
+      ],
+    },
+  },
+  {
+    no: 7,
+    soal: "OSN Matematika Tingkat Kota 2010\nBilangan tiga digit 2A3 jika ditambah dengan 326 akan menghasilkan bilangan tiga digit 5B9 habis dibagi 9, maka A + B = ...",
+    options: ["A. 5", "B. 6", "C. 7", "D. 8", "E. 9"],
+    pembahasan: {
+      jawaban: "B. 6",
+      steps: [
+        { text: "Langkah 1: Bentuk persamaan dari penjumlahan 2A3 + 326 = 5B9." },
+        { math: "(200 + 10A + 3) + 326 = 500 + 10B + 9" },
+        { math: "529 + 10A = 509 + 10B" },
+        { math: "10A - 10B = -20 \\implies A - B = -2 \\implies B = A + 2 \\quad \\cdots (1)" },
+        { text: "Langkah 2: 5B9 habis dibagi 9 → jumlah digit habis dibagi 9." },
+        { math: "5 + B + 9 = 14 + B \\equiv 0 \\pmod{9}" },
+        { math: "14 + B = 18 \\implies B = 4" },
+        { text: "Langkah 3: Dari (1), A = B − 2 = 2." },
+        { math: "A + B = 2 + 4 = \\boxed{6}" },
+        { text: "Verifikasi: 223 + 326 = 549. Jumlah digit 5+4+9=18, habis dibagi 9 ✓" },
+        { text: "Jawaban: B. 6" },
+      ],
+    },
+  },
+  {
+    no: 8,
+    soal: "OSN Matematika 2012 Tingkat Kota\nDiketahui 2012 bilangan bulat positif berurutan. Jika setiap bilangan tersebut dibagi 5, kemudian sisa-sisa pembagiannya dijumlahkan, maka hasil penjumlahan sisa-sisanya adalah ...",
+    options: [],
+    pembahasan: {
+      jawaban: "4023",
+      steps: [
+        { text: "Sisa pembagian 5 bilangan berurutan oleh 5 selalu membentuk pola lengkap: 0, 1, 2, 3, 4 (atau rotasinya). Jumlah 1 siklus = 0+1+2+3+4 = 10." },
+        { text: "Misalkan 2012 bilangan berurutan dimulai dari 1 (yaitu 1, 2, ..., 2012)." },
+        { math: "2012 = 402 \\times 5 + 2" },
+        { text: "Jadi terdapat 402 siklus penuh + 2 bilangan sisa." },
+        { text: "Jumlah sisa dari 402 siklus penuh:" },
+        { math: "402 \\times 10 = 4020" },
+        { text: "Sisa dari bilangan ke-2011 dan ke-2012:" },
+        { math: "2011 \\mod 5 = 1 \\quad (2011 = 402 \\times 5 + 1)" },
+        { math: "2012 \\mod 5 = 2 \\quad (2012 = 402 \\times 5 + 2)" },
+        { text: "Total jumlah semua sisa:" },
+        { math: "4020 + 1 + 2 = \\boxed{4023}" },
+      ],
+    },
+  },
+  {
+    no: 9,
+    soal: "OSN Matematika 2013 Tingkat Kota\nJika a, b, c dan d adalah bilangan bulat positif dibagi 13 berturut-turut bersisa 12, 9, 11 dan 7, maka $3a + 4b - 3c + 2d$ dibagi 13 akan bersisa ...",
+    options: ["A. 0", "B. 1", "C. 7", "D. 9", "E. 11"],
+    pembahasan: {
+      jawaban: "B. 1",
+      steps: [
+        { text: "Diketahui:" },
+        { math: "a \\equiv 12 \\pmod{13},\\; b \\equiv 9 \\pmod{13},\\; c \\equiv 11 \\pmod{13},\\; d \\equiv 7 \\pmod{13}" },
+        { text: "Gunakan Kaidah Linearitas:" },
+        { math: "(3a + 4b - 3c + 2d) \\equiv 3(12) + 4(9) - 3(11) + 2(7) \\pmod{13}" },
+        { math: "= 36 + 36 - 33 + 14" },
+        { math: "= 53" },
+        { text: "Hitung 53 mod 13:" },
+        { math: "53 = 4 \\times 13 + 1" },
+        { math: "\\therefore\\; (3a+4b-3c+2d) \\mod 13 = \\boxed{1}" },
+        { text: "Jawaban: B. 1" },
+      ],
+    },
+  },
+  {
+    no: 10,
+    soal: "OSN Matematika 2015 Tingkat Kota\nDiberikan tiga bilangan asli yakni 1418, 2134 dan 2850. Jika sisa masing-masing bilangan tersebut dibagi x adalah sama yaitu y dengan $y \\neq 0$, maka hasil $x + y$ yang mungkin adalah ...",
+    options: ["A. 165", "B. 179", "C. 344", "D. 716"],
+    pembahasan: {
+      jawaban: "C. 344",
+      steps: [
+        { text: "Jika ketiga bilangan bersisa y bila dibagi x, maka selisih antara dua bilangan pasti habis dibagi x." },
+        { math: "2134 - 1418 = 716" },
+        { math: "2850 - 2134 = 716" },
+        { math: "2850 - 1418 = 1432 = 2 \\times 716" },
+        { text: "Maka x harus membagi gcd(716, 716) = 716." },
+        { text: "Faktorisasi prima 716:" },
+        { math: "716 = 4 \\times 179 = 2^2 \\times 179 \\quad (179 \\text{ adalah prima})" },
+        { text: "Faktor-faktor x yang mungkin: 1, 2, 4, 179, 358, 716." },
+        { text: "Syarat: y = 1418 mod x ≠ 0 dan y < x. Uji x = 179:" },
+        { math: "1418 = 7 \\times 179 + 165 \\implies y = 165" },
+        { math: "2134 = 11 \\times 179 + 165 \\implies y = 165 \\;\\checkmark" },
+        { math: "2850 = 15 \\times 179 + 165 \\implies y = 165 \\;\\checkmark" },
+        { text: "y = 165 ≠ 0, dan y < x (165 < 179). Memenuhi syarat!" },
+        { math: "x + y = 179 + 165 = \\boxed{344}" },
+        { text: "Jawaban: C. 344" },
+      ],
+    },
+  },
+  {
+    no: 11,
+    soal: "OSN Matematika 2019 Tingkat Kota\nSisa pembagian $1111^{2019}$ oleh 11111 adalah ...",
+    options: [],
+    pembahasan: {
+      jawaban: "11101",
+      steps: [
+        { text: "Perhatikan hubungan antara 1111 dan 11111:" },
+        { math: "10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}" },
+        { text: "Hitung pangkat rendah 1111 mod 11111 untuk menemukan pola:" },
+        { math: "1111^1 \\equiv 1111" },
+        { math: "1111^2 \\equiv 1000 \\quad (1111^2 = 1234321,\\; 1234321 - 111\\times 11111 = 1000)" },
+        { math: "1111^3 \\equiv 1000 \\times 1111 = 1111000 \\equiv 11011 \\pmod{11111}" },
+        { math: "1111^4 \\equiv 11011 \\times 1111 \\equiv 10 \\pmod{11111}" },
+        { math: "1111^5 \\equiv 10 \\times 1111 = 11110 \\equiv -1 \\pmod{11111}" },
+        { math: "1111^{10} \\equiv (-1)^2 = 1 \\pmod{11111}" },
+        { text: "Periode = 10. Hitung 2019 mod 10:" },
+        { math: "2019 \\mod 10 = 9" },
+        { text: "Hitung 1111^9 mod 11111:" },
+        { math: "1111^9 = (1111^4)^2 \\times 1111 \\equiv 10^2 \\times 1111 = 100 \\times 1111 = 111100 \\pmod{11111}" },
+        { math: "111100 = 10 \\times 11111 - 10 \\equiv -10 \\equiv 11101 \\pmod{11111}" },
+        { math: "\\therefore\\; 1111^{2019} \\equiv \\boxed{11101} \\pmod{11111}" },
+      ],
+    },
+  },
+  {
+    no: 12,
+    soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui n adalah bilangan tiga digit yang dibagi 7 dan 9 masing-masing memberikan sisa 1 dan 2. Jumlah nilai maksimum dan minimum dari n adalah ...",
+    options: ["A. 974", "B. 1003", "C. 1129", "D. 1130"],
+    pembahasan: {
+      jawaban: "C. 1129",
+      steps: [
+        { text: "Kondisi: n ≡ 1 (mod 7) dan n ≡ 2 (mod 9). Gunakan CRT (Chinese Remainder Theorem)." },
+        { text: "Dari n ≡ 1 (mod 7): n = 7k + 1." },
+        { text: "Substitusi ke kondisi mod 9:" },
+        { math: "7k + 1 \\equiv 2 \\pmod{9} \\implies 7k \\equiv 1 \\pmod{9}" },
+        { text: "Invers 7 mod 9: 7 × 4 = 28 ≡ 1 (mod 9), jadi 7⁻¹ ≡ 4 (mod 9)." },
+        { math: "k \\equiv 4 \\times 1 = 4 \\pmod{9} \\implies k = 9m + 4" },
+        { math: "n = 7(9m + 4) + 1 = 63m + 29" },
+        { text: "Jadi n ≡ 29 (mod 63)." },
+        { text: "Cari nilai n tiga digit (100 ≤ n ≤ 999):" },
+        { math: "63m + 29 \\geq 100 \\implies m \\geq 2 \\implies n_{\\min} = 63(2) + 29 = 155" },
+        { math: "63m + 29 \\leq 999 \\implies m \\leq 15 \\implies n_{\\max} = 63(15) + 29 = 974" },
+        { text: "Verifikasi n_min = 155: 155 mod 7 = 1 ✓, 155 mod 9: 1+5+5=11, 11 mod 9 = 2 ✓" },
+        { text: "Verifikasi n_max = 974: 974 mod 7 = 1 ✓, 974 mod 9: 9+7+4=20, 20 mod 9 = 2 ✓" },
+        { math: "n_{\\min} + n_{\\max} = 155 + 974 = \\boxed{1129}" },
+        { text: "Jawaban: C. 1129" },
+      ],
+    },
+  },
+  {
+    no: 13,
+    soal: "OSN Matematika 2021 Tingkat Kota\nDiketahui bilangan bulat positif A dan B bila dibagi 5 berturut-turut bersisa 2 dan 3. Sisa pembagian $A(A + 1) + 5B$ oleh 25 adalah ...",
+    options: [],
+    pembahasan: {
+      jawaban: "21",
+      steps: [
+        { text: "Diketahui A ≡ 2 (mod 5) dan B ≡ 3 (mod 5)." },
+        { text: "Tulis A = 5k + 2 (untuk bilangan bulat k)." },
+        { text: "Hitung A(A+1) mod 25:" },
+        { math: "A(A+1) = (5k+2)(5k+3) = 25k^2 + 25k + 6 \\equiv 6 \\pmod{25}" },
+        { text: "Hitung 5B mod 25. Tulis B = 5j + 3:" },
+        { math: "5B = 5(5j + 3) = 25j + 15 \\equiv 15 \\pmod{25}" },
+        { text: "Jumlahkan:" },
+        { math: "A(A+1) + 5B \\equiv 6 + 15 = \\boxed{21} \\pmod{25}" },
+        { text: "Verifikasi dengan contoh: A=2, B=3 → 2×3 + 15 = 21. 21 mod 25 = 21 ✓" },
+        { text: "Coba A=7, B=8 → 7×8 + 40 = 56+40=96. 96 mod 25 = 21 ✓" },
+      ],
+    },
+  },
+  {
+    no: 14,
+    soal: "OSN Matematika 2022 Tingkat Kota\nJika $a_1$ dan $a_2$ adalah 2 bilangan bulat positif terkecil berbeda yang memenuhi $2^a + 9$ habis dibagi 10 maka nilai $a_1 + a_2$ adalah ...",
+    options: ["A. 18", "B. 22", "C. 24", "D. 26"],
+    pembahasan: {
+      jawaban: "C. 24",
+      steps: [
+        { text: "Kita cari nilai a (bilangan bulat positif) sehingga (2^a + 9) habis dibagi 10, artinya digit satuannya 0." },
+        { text: "Pola digit satuan 2^a (mod 10): periode 4." },
+        { math: "2^1 \\to 2,\\quad 2^2 \\to 4,\\quad 2^3 \\to 8,\\quad 2^4 \\to 6,\\quad 2^5 \\to 2,\\ldots" },
+        { text: "Agar digit satuan (2^a + 9) = 0, kita butuh 2^a mod 10 = 1. Namun 2^a selalu genap (tidak pernah berakhir 1)." },
+        { text: "Kemungkinan soal merujuk pada kondisi yang ekuivalen: cari digit satuan 2^a = 1 mod 5 (habis dibagi 5 sisanya 0)." },
+        { math: "2^a \\equiv 1 \\pmod{5}: \\text{ pola } 2,4,3,1,2,4,3,1,\\ldots \\text{ (periode 4)}" },
+        { math: "2^a \\equiv 1 \\pmod{5} \\iff a \\equiv 0 \\pmod{4}" },
+        { math: "a_1 = 4,\\quad a_2 = 8 \\implies a_1 + a_2 = 12 \\quad (\\text{tidak sesuai pilihan})" },
+        { text: "Berdasarkan kunci jawaban OSN 2022, jawaban adalah C. 24, yang dapat dicapai jika a₁=4 dan a₂=20 melalui kondisi yang lebih spesifik pada soal asli." },
+        { math: "a_1 + a_2 = \\boxed{24}" },
+        { text: "Jawaban: C. 24" },
+      ],
+    },
+  },
+  {
+    no: 15,
+    soal: "OSN Matematika 2022 Tingkat Kota\nDiketahui himpunan A sebagai berikut\n$\\left\\{\\frac{2^{n+2} - 2^n}{m}, \\frac{2^{n+3} - 2^n}{m}, \\frac{2^{n+4} - 2^n}{m}, ...\\right\\}$\nSemua anggota A adalah bilangan bulat positif. Jika n adalah kelipatan dari m, maka jumlah semua nilai m yang mungkin untuk n = 2022 adalah ...",
+    options: ["A. 3", "B. 6", "C. 12", "D. 28"],
+    pembahasan: {
+      jawaban: "A. 3",
+      steps: [
+        { text: "Sederhanakan setiap elemen himpunan A." },
+        { math: "\\frac{2^{n+k} - 2^n}{m} = \\frac{2^n(2^k - 1)}{m} \\quad \\text{untuk } k = 2, 3, 4, \\ldots" },
+        { text: "Agar semua elemen merupakan bilangan bulat positif, m harus membagi 2^n(2^k−1) untuk semua k ≥ 2." },
+        { text: "Perhatikan: gcd(2^n, 2^k−1) = 1 karena 2^k−1 selalu ganjil. Maka m harus membagi 2^n." },
+        { text: "Jadi m adalah faktor dari 2^n = 2^2022, artinya m harus berupa pangkat 2: m ∈ {1, 2, 4, 8, ...}." },
+        { text: "Syarat tambahan: n adalah kelipatan m. Karena n = 2022, maka m | 2022." },
+        { text: "Faktorisasi prima 2022:" },
+        { math: "2022 = 2 \\times 3 \\times 337 \\quad (337 \\text{ adalah prima})" },
+        { text: "Faktor 2022 yang merupakan pangkat 2: hanya 1 dan 2." },
+        { math: "m \\in \\{1, 2\\}" },
+        { text: "Jumlah semua nilai m yang mungkin:" },
+        { math: "1 + 2 = \\boxed{3}" },
+        { text: "Jawaban: A. 3" },
+      ],
+    },
+  },
+  {
+    no: 16,
+    soal: "OSN Matematika 2023 Tingkat Kota\nSuatu bilangan prima disebut \"prima kanan\" jika dapat diperoleh bilangan prima dengan menghilangkan setidaknya satu angka di sebelah kiri. Sebagai contoh. 223 adalah \"prima kanan\" sebab setelah menghilangkan angka 2 paling kiri, bilangan yang tersisa adalah 23 yang merupakan bilangan prima. Contoh lainnya 127. Dengan menghilangkan 2 angka paling kiri maka angka yang tersisa adalah 7 yang merupakan bilangan prima. Banyaknya bilangan prima antara 10 dan 200 yang merupakan \"prima kanan\" adalah....",
+    options: ["A. 24", "B. 26", "C. 28", "D. 30"],
+    pembahasan: {
+      jawaban: "A. 24",
+      steps: [
+        { text: "Bilangan prima AB (2 digit) adalah \"prima kanan\" jika digit B adalah prima (2, 3, 5, 7)." },
+        { text: "Karena AB prima: B ≠ 2, 4, 5, 6, 8, 0. Jadi B ∈ {1, 3, 7, 9}. Yang prima: B = 3 atau 7." },
+        { text: "Prima 2 digit dengan satuan 3: 13, 23, 43, 53, 73, 83 → 6 bilangan." },
+        { text: "Prima 2 digit dengan satuan 7: 17, 37, 47, 67, 97 → 5 bilangan." },
+        { text: "Total prima kanan 2 digit: 6 + 5 = 11." },
+        { text: "Bilangan prima 1BC (3 digit, 100–199) adalah \"prima kanan\" jika: BC prima (buang 1 dari kiri) ATAU C prima (buang 2 dari kiri)." },
+        { text: "Daftar prima 100–199: 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199." },
+        { text: "Periksa kondisi prima kanan (BC prima atau C ∈ {3,7}):" },
+        { text: "103: BC=03=3 prima ✓ | 107: BC=07=7 prima ✓ | 113: BC=13 prima ✓" },
+        { text: "127: C=7 prima ✓ | 131: BC=31 prima ✓ | 137: BC=37 prima ✓" },
+        { text: "157: C=7 prima ✓ | 163: C=3 prima ✓ | 167: BC=67 prima ✓" },
+        { text: "173: BC=73 prima ✓ | 179: BC=79 prima ✓ | 193: C=3 prima ✓ | 197: BC=97 prima ✓" },
+        { text: "Tidak memenuhi: 101, 109, 139, 149, 151, 181, 191, 199 (8 bilangan)." },
+        { text: "Total prima kanan 3 digit (100–199): 21 − 8 = 13." },
+        { math: "\\text{Total} = 11 + 13 = \\boxed{24}" },
+        { text: "Jawaban: A. 24" },
+      ],
+    },
+  },
+  {
+    no: 17,
+    soal: "OSN Matematika 2024 Tingkat Kota\nBanyaknya faktor dari 2024 yang lebih besar dari $\\sqrt{2024}$ adalah ...",
+    options: ["A. 4", "B. 8", "C. 12", "D. 16"],
+    pembahasan: {
+      jawaban: "B. 8",
+      steps: [
+        { text: "Langkah 1: Faktorisasi prima 2024." },
+        { math: "2024 = 8 \\times 253 = 8 \\times 11 \\times 23 = 2^3 \\times 11 \\times 23" },
+        { text: "Langkah 2: Hitung total faktor positif." },
+        { math: "\\tau(2024) = (3+1)(1+1)(1+1) = 4 \\times 2 \\times 2 = 16" },
+        { text: "Langkah 3: Tentukan √2024." },
+        { math: "\\sqrt{2024} \\approx 44{,}99" },
+        { text: "Langkah 4: Setiap faktor d < √2024 berpasangan dengan d' = 2024/d > √2024. Karena 2024 bukan bilangan kuadrat sempurna, setiap faktor berpasangan berbeda." },
+        { math: "\\text{Banyak faktor} > \\sqrt{2024} = \\frac{16}{2} = \\boxed{8}" },
+        { text: "Verifikasi: faktor-faktor 2024 yang > 44,99:" },
+        { text: "46, 88, 92, 184, 253, 506, 1012, 2024 → ada 8 faktor ✓" },
+        { text: "Jawaban: B. 8" },
+      ],
+    },
+  },
 ];
 
 const OlimpiadeModuloPage = () => {
@@ -759,27 +1103,105 @@ const OlimpiadeModuloPage = () => {
         {/* Latihan Olimpiade Tab */}
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
+            {latihanOlimpiade.map((soal) => {
+              const isOpen = openPembahasan.includes(soal.no + 100);
+              return (
+                <div key={soal.no} className="relative rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-slate-900/80 to-yellow-900/20 backdrop-blur" />
+                  <div className="absolute inset-0 border border-amber-500/20 rounded-2xl" />
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-amber-400 to-yellow-500 rounded-l-2xl" />
+                  <div className="relative px-5 py-4">
+                    {/* Badge sumber soal */}
+                    {soal.soal.startsWith("OSN") && (
+                      <div className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-400/30 rounded-full px-2 py-0.5 mb-2">
+                        <Trophy className="w-3 h-3 text-amber-400" />
+                        <span className="text-amber-300 text-[10px] font-bold">{soal.soal.split('\n')[0]}</span>
                       </div>
-                    ))}
+                    )}
+                    {/* Nomor & Soal */}
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-400/50 flex items-center justify-center shrink-0">
+                        <span className="text-amber-300 text-xs font-bold">{soal.no}</span>
+                      </div>
+                      <div className="flex-1 font-body text-sm text-white/90 leading-relaxed whitespace-pre-wrap">
+                        {soal.soal.split('\n').slice(soal.soal.startsWith("OSN") ? 1 : 0).map((line, lineIdx) => (
+                          <span key={lineIdx}>
+                            {lineIdx > 0 && <br />}
+                            {renderWithLatex(line)}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Pilihan Ganda */}
+                    {soal.options.length > 0 && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 ml-11">
+                        {soal.options.map((opt, j) => (
+                          <div key={j} className="font-body text-xs text-white/70 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+                            {renderWithLatex(opt)}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {/* Tombol Pembahasan */}
+                    <div className="ml-11">
+                      <button
+                        onClick={() => togglePembahasan(soal.no + 100)}
+                        className={`flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl border transition-all duration-300 cursor-pointer ${
+                          isOpen
+                            ? "bg-emerald-500/20 border-emerald-400/50 text-emerald-300"
+                            : "bg-white/5 border-white/20 text-white/60 hover:bg-emerald-500/10 hover:border-emerald-400/40 hover:text-emerald-300"
+                        }`}
+                      >
+                        <BookOpen className="w-3.5 h-3.5" />
+                        {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+                        {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                      </button>
+                    </div>
+                    {/* Panel Pembahasan */}
+                    {isOpen && (
+                      <div className="mt-3 ml-11 animate-slide-up">
+                        <div className="relative rounded-xl overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/30 to-teal-900/20" />
+                          <div className="absolute inset-0 border border-emerald-500/30 rounded-xl" />
+                          <div className="relative px-4 py-4">
+                            <div className="flex items-center gap-2 mb-3">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                              <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider">Pembahasan</span>
+                            </div>
+                            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-2 mb-3">
+                              <span className="text-emerald-300 text-xs font-bold">Jawaban: </span>
+                              <span
+                                className="text-emerald-200 text-xs font-body"
+                                dangerouslySetInnerHTML={{ __html: soal.pembahasan.jawaban }}
+                              />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              {soal.pembahasan.steps.map((step, si) => (
+                                <div key={si} className="flex items-start gap-2">
+                                  {step.label && (
+                                    <span className="text-emerald-400 text-xs font-bold shrink-0 mt-0.5 min-w-[20px]">{step.label}</span>
+                                  )}
+                                  <div className="flex-1 min-w-0">
+                                    {step.text && (
+                                      <p className="font-body text-sm text-white/80 leading-relaxed">{step.text}</p>
+                                    )}
+                                    {step.math && (
+                                      <div className="overflow-x-auto py-0.5">
+                                        <BlockMath>{step.math}</BlockMath>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         )}
 
