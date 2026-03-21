@@ -23,6 +23,12 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Content Status
 
+- **Kelas 8 — Latihan Mandiri — Bangun Ruang Sisi Datar**: 3 sub-topics fully implemented (120 soal total)
+  - KUBUS: 40 soal (unsur-unsur, luas permukaan, volume, jaring-jaring, kontekstual) — sky/cyan theme with 3D isometric cube SVG
+  - BALOK: 40 soal (unsur-unsur, luas permukaan, volume, jaring-jaring, kontekstual) — emerald/teal theme with 3D cuboid SVG
+  - PRISMA: 40 soal (segitiga, siku-siku, segiempat, luas permukaan, volume, kontekstual) — amber/orange theme with prism SVGs
+  - All pages include: LaTeX formulas, inline formula reference cards, 3D SVG diagrams, UN/ANBK/TKA-style questions
+
 - **Kelas 8 — Garis Singgung Lingkaran**: All 5 sub-topics fully implemented with animated SVGs, LaTeX formulas, color-coded sections, 3-level examples, interactive tools.
   - Pengertian dan Sifat (3-case comparison SVG, tangent properties, inscribed circle problem)
   - Menghitung Panjang Garis Singgung (Pythagoras triangle SVG, 3 formula variations, two-tangent SVG)

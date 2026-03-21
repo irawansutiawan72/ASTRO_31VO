@@ -284,6 +284,9 @@ import KelilingLuasBangunTakBeraturanPage from "./pages/materi-matematika/kelas7
 import KubusMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/KubusPage";
 import BalokMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/BalokPage";
 import PrismaMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/PrismaPage";
+import KubusLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/KubusPage";
+import BalokLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/BalokPage";
+import PrismaLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/PrismaPage";
 import LimasMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/LimasPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
 import PengertianKeanggotaanHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage";
@@ -541,6 +544,9 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/gspd" element={<GSPDK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran/sabuk-lilitan" element={<SabukLilitanK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/kubus" element={<KubusLMK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokLMK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaLMK8Page />} />
       
       {/* Kelas 9 Topic Routes */}
       <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatK9Page />} />

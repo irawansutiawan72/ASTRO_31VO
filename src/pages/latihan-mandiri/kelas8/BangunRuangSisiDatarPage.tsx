@@ -1,17 +1,52 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import { Box, Layers, Triangle, ChevronRight } from "lucide-react";
 
 const subtopics = [
-  "UNSUR-UNSUR BANGUN RUANG",
-  "KUBUS",
-  "BALOK",
-  "PRISMA",
-  "LIMAS",
-  "BANGUN RUANG SISI DATAR GABUNGAN",
-  "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR",
+  {
+    label: "KUBUS",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/kubus",
+    soal: 40,
+    icon: Box,
+    gradient: "from-sky-900/40 to-cyan-900/30",
+    border: "border-sky-500/30",
+    badge: "bg-sky-500/20 text-sky-300 border-sky-400/40",
+    iconBg: "bg-sky-500/20",
+    iconColor: "text-sky-400",
+    leftBar: "from-sky-400 to-cyan-500",
+    desc: "Unsur-unsur, luas permukaan, volume, jaring-jaring kubus",
+    emoji: "🧊",
+  },
+  {
+    label: "BALOK",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok",
+    soal: 40,
+    icon: Layers,
+    gradient: "from-emerald-900/40 to-teal-900/30",
+    border: "border-emerald-500/30",
+    badge: "bg-emerald-500/20 text-emerald-300 border-emerald-400/40",
+    iconBg: "bg-emerald-500/20",
+    iconColor: "text-emerald-400",
+    leftBar: "from-emerald-400 to-teal-500",
+    desc: "Unsur-unsur, luas permukaan, volume, jaring-jaring balok",
+    emoji: "📦",
+  },
+  {
+    label: "PRISMA",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma",
+    soal: 40,
+    icon: Triangle,
+    gradient: "from-amber-900/40 to-orange-900/30",
+    border: "border-amber-500/30",
+    badge: "bg-amber-500/20 text-amber-300 border-amber-400/40",
+    iconBg: "bg-amber-500/20",
+    iconColor: "text-amber-400",
+    leftBar: "from-amber-400 to-orange-500",
+    desc: "Prisma segitiga & segiempat, luas permukaan, volume, kontekstual",
+    emoji: "🔷",
+  },
 ];
 
 const BangunRuangSisiDatarPage = () => {
@@ -22,34 +57,71 @@ const BangunRuangSisiDatarPage = () => {
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <BookOpen className="w-10 h-10 text-accent mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          BANGUN RUANG SISI DATAR
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 - Latihan Mandiri</p>
 
-        <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
-            <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
-              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-accent/60 transition-all duration-300
-                cursor-pointer text-left animate-slide-up"
-              style={{ animationDelay: `${i * 0.03}s` }}
-            >
-              <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
-            </button>
-          ))}
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-16 h-16 rounded-full bg-sky-500/10 border-2 border-sky-400/40 flex items-center justify-center mb-4">
+            <span className="text-3xl">🏛️</span>
+          </div>
+          <h1 className="font-display text-2xl md:text-3xl font-bold text-sky-300 mb-1 text-center"
+            style={{ textShadow: '0 0 24px rgba(56,189,248,0.6)' }}>
+            BANGUN RUANG SISI DATAR
+          </h1>
+          <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
+          <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
+            <span className="text-yellow-400 text-sm">⭐</span>
+            <span className="text-white/70 text-xs font-body">120 Soal Total · Gambar Diagram & LaTeX</span>
+            <span className="text-yellow-400 text-sm">⭐</span>
+          </div>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="flex flex-col gap-4 animate-slide-up">
+          {subtopics.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <button
+                key={s.label}
+                onClick={() => { playPopSound(); navigate(s.path); }}
+                className="group relative rounded-2xl overflow-hidden text-left transition-all duration-300 hover:scale-[1.01] animate-slide-up"
+                style={{ animationDelay: `${i * 0.07}s` }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${s.gradient} backdrop-blur`} />
+                <div className={`absolute inset-0 border ${s.border} rounded-2xl`} />
+                <div className={`absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b ${s.leftBar} rounded-l-2xl`} />
+                <div className="relative px-5 py-4 flex items-center gap-4">
+                  <div className={`w-14 h-14 rounded-xl ${s.iconBg} border ${s.border} flex items-center justify-center shrink-0`}>
+                    <span className="text-3xl">{s.emoji}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className="font-display text-sm font-bold text-white">{s.label}</span>
+                    </div>
+                    <p className="text-white/40 text-xs font-body">{s.desc}</p>
+                  </div>
+                  <div className="flex flex-col items-end gap-2 shrink-0">
+                    <span className={`text-[10px] font-bold px-2 py-1 rounded-full border ${s.badge}`}>
+                      {s.soal} Soal
+                    </span>
+                    <ChevronRight className={`w-4 h-4 ${s.iconColor} group-hover:translate-x-1 transition-transform`} />
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4">
+          <p className="text-white/40 text-[10px] font-bold uppercase tracking-wider mb-2">📐 Fitur Visual</p>
+          <p className="text-white/60 text-xs font-body leading-relaxed">
+            Setiap soal dilengkapi dengan gambar diagram bangun ruang 3D yang jelas, rumus LaTeX, dan soal-soal kontekstual UN/ANBK/TKA untuk persiapan ujian resmi.
+          </p>
+        </div>
+
+        <div className="mt-6 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+            className="text-sm text-muted-foreground hover:text-sky-400 transition-colors cursor-pointer font-body"
           >
-            Kembali ke Kelas 8
+            ← Kembali ke Kelas 8
           </button>
         </div>
       </div>
