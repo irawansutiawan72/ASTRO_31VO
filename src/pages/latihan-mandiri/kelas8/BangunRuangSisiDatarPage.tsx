@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Box, Layers, Triangle, Mountain, ChevronRight } from "lucide-react";
+import { Box, Layers, Triangle, Mountain, BookOpen, ChevronRight } from "lucide-react";
 
 const subtopics = [
   {
@@ -62,6 +62,20 @@ const subtopics = [
     emoji: "🔺",
   },
   {
+    label: "MASALAH KONTEKSTUAL",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/masalah-kontekstual",
+    soal: 40,
+    icon: BookOpen,
+    gradient: "from-orange-900/40 to-amber-900/30",
+    border: "border-orange-500/30",
+    badge: "bg-orange-500/20 text-orange-300 border-orange-400/40",
+    iconBg: "bg-orange-500/20",
+    iconColor: "text-orange-400",
+    leftBar: "from-orange-400 to-amber-500",
+    desc: "Soal cerita UN/ANBK/TKA: balok, kubus, prisma, limas dalam kehidupan nyata",
+    emoji: "🏗️",
+  },
+  {
     label: "BANGUN RUANG GABUNGAN",
     path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan",
     soal: 40,
@@ -97,7 +111,7 @@ const BangunRuangSisiDatarPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">200 Soal Total · Gambar Diagram & LaTeX</span>
+            <span className="text-white/70 text-xs font-body">240 Soal Total · Gambar Diagram & LaTeX</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>

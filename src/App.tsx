@@ -288,6 +288,7 @@ import KubusLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-data
 import BalokLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/BalokPage";
 import PrismaLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/PrismaPage";
 import LimasLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/LimasPage";
+import MasalahKontekstualBRSDLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/MasalahKontekstualPage";
 import BRSDGabunganLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar-gabungan/GabunganPage";
 import LimasMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/LimasPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
@@ -550,6 +551,7 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokLMK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaLMK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasLMK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/masalah-kontekstual" element={<MasalahKontekstualBRSDLMK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan" element={<BRSDGabunganLMK8Page />} />
       
       {/* Kelas 9 Topic Routes */}
