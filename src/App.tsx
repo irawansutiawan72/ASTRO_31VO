@@ -181,6 +181,12 @@ import BolaLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengk
 import PerubahanVolumeLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/PerubahanVolumePage";
 import GabunganLMK9Page from "./pages/latihan-mandiri/kelas9/bangun-ruang-sisi-lengkung/GabunganPage";
 import StatistikaK9Page from "./pages/latihan-mandiri/kelas9/StatistikaPage";
+import PengantarStatistikaLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PengantarStatistikaPage";
+import PenyajianDataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PenyajianDataPage";
+import RataRataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/RataRataPage";
+import MedianModusLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/MedianModusPage";
+import KuartilLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/KuartilPage";
+import PenyebaranDataLMK9Page from "./pages/latihan-mandiri/kelas9/statistika/PenyebaranDataPage";
 import PeluangK9Page from "./pages/latihan-mandiri/kelas9/PeluangPage";
 import PersamaanKuadratK9Page from "./pages/latihan-mandiri/kelas9/PersamaanKuadratPage";
 import FungsiKuadratK9Page from "./pages/latihan-mandiri/kelas9/FungsiKuadratPage";
@@ -598,6 +604,12 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" element={<PerubahanVolumeLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung/gabungan" element={<GabunganLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/statistika" element={<StatistikaK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/pengantar" element={<PengantarStatistikaLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/penyajian-data" element={<PenyajianDataLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/rata-rata" element={<RataRataLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/median-modus" element={<MedianModusLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/kuartil" element={<KuartilLMK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/statistika/penyebaran-data" element={<PenyebaranDataLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/peluang" element={<PeluangK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat" element={<FungsiKuadratK9Page />} />
