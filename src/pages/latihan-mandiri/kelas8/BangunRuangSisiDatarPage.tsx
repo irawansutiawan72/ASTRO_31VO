@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
-import { Box, Layers, Triangle, ChevronRight } from "lucide-react";
+import { Box, Layers, Triangle, Mountain, ChevronRight } from "lucide-react";
 
 const subtopics = [
   {
@@ -47,6 +47,20 @@ const subtopics = [
     desc: "Prisma segitiga & segiempat, luas permukaan, volume, kontekstual",
     emoji: "🔷",
   },
+  {
+    label: "LIMAS",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar/limas",
+    soal: 40,
+    icon: Mountain,
+    gradient: "from-violet-900/40 to-purple-900/30",
+    border: "border-violet-500/30",
+    badge: "bg-violet-500/20 text-violet-300 border-violet-400/40",
+    iconBg: "bg-violet-500/20",
+    iconColor: "text-violet-400",
+    leftBar: "from-violet-400 to-purple-500",
+    desc: "Limas segitiga & segiempat, apotema, luas permukaan, volume, kontekstual",
+    emoji: "🔺",
+  },
 ];
 
 const BangunRuangSisiDatarPage = () => {
@@ -69,7 +83,7 @@ const BangunRuangSisiDatarPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">120 Soal Total · Gambar Diagram & LaTeX</span>
+            <span className="text-white/70 text-xs font-body">160 Soal Total · Gambar Diagram & LaTeX</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
