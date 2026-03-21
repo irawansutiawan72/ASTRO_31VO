@@ -124,19 +124,6 @@ const rumusData: RumusCategory[] = [
     ]
   },
   {
-    id: "persamaan-kuadrat",
-    title: "Persamaan Kuadrat",
-    icon: "x²",
-    rumus: [
-      { name: "Bentuk Umum", formula: "ax^2 + bx + c = 0", description: "a ≠ 0" },
-      { name: "Rumus ABC", formula: "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", description: "Rumus mencari akar-akar" },
-      { name: "Diskriminan", formula: "D = b^2 - 4ac", description: "D > 0: 2 akar real berbeda, D = 0: 2 akar sama, D < 0: tidak ada akar real" },
-      { name: "Jumlah Akar", formula: "x_1 + x_2 = -\\frac{b}{a}", description: "Jumlah kedua akar" },
-      { name: "Hasil Kali Akar", formula: "x_1 \\times x_2 = \\frac{c}{a}", description: "Hasil kali kedua akar" },
-      { name: "Faktorisasi", formula: "ax^2 + bx + c = a(x - x_1)(x - x_2)", description: "Bentuk faktorisasi" },
-    ]
-  },
-  {
     id: "aritmetika-sosial",
     title: "Aritmetika Sosial",
     icon: "Rp",
@@ -307,6 +294,19 @@ const rumusData: RumusCategory[] = [
       { name: "Deret Geometri (r < 1)", formula: "S_n = \\frac{a(1-r^n)}{1-r}", description: "Jumlah n suku pertama" },
       { name: "Deret Geometri (r > 1)", formula: "S_n = \\frac{a(r^n-1)}{r-1}", description: "Jumlah n suku pertama" },
       { name: "Deret Geometri Tak Hingga", formula: "S_\\infty = \\frac{a}{1-r}, \\quad |r| < 1", description: "Jumlah tak hingga" },
+    ]
+  },
+  {
+    id: "persamaan-kuadrat",
+    title: "Persamaan Kuadrat",
+    icon: "x²",
+    rumus: [
+      { name: "Bentuk Umum", formula: "ax^2 + bx + c = 0", description: "a ≠ 0" },
+      { name: "Rumus ABC", formula: "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}", description: "Rumus mencari akar-akar" },
+      { name: "Diskriminan", formula: "D = b^2 - 4ac", description: "D > 0: 2 akar real berbeda, D = 0: 2 akar sama, D < 0: tidak ada akar real" },
+      { name: "Jumlah Akar", formula: "x_1 + x_2 = -\\frac{b}{a}", description: "Jumlah kedua akar" },
+      { name: "Hasil Kali Akar", formula: "x_1 \\times x_2 = \\frac{c}{a}", description: "Hasil kali kedua akar" },
+      { name: "Faktorisasi", formula: "ax^2 + bx + c = a(x - x_1)(x - x_2)", description: "Bentuk faktorisasi" },
     ]
   },
 ];
