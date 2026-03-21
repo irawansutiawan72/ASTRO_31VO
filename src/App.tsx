@@ -142,6 +142,12 @@ import JenisSegitigaPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorem
 import SudutKhususPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/SudutKhususPage";
 import MasalahKontekstualPythagorasK8Page from "./pages/latihan-mandiri/kelas8/teorema-pythagoras/MasalahKontekstualPage";
 import LingkaranK8Page from "./pages/latihan-mandiri/kelas8/LingkaranPage";
+import UnsurUnsurLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/UnsurUnsurPage";
+import KelilingLuasLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/KelilingLuasPage";
+import KaitanBangunDatarLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/KaitanBangunDatarPage";
+import BusurJuringLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/BusurJuringPage";
+import SudutPusatKelilingLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/SudutPusatKelilingPage";
+import PenerapanKontekstualLingkaranK8Page from "./pages/latihan-mandiri/kelas8/lingkaran/PenerapanKontekstualPage";
 import GarisSinggungLingkaranK8Page from "./pages/latihan-mandiri/kelas8/GarisSinggungLingkaranPage";
 import BangunRuangSisiDatarK8Page from "./pages/latihan-mandiri/kelas8/BangunRuangSisiDatarPage";
 
@@ -517,6 +523,12 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/sudut-khusus" element={<SudutKhususPythagorasK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/teorema-pythagoras/masalah-kontekstual" element={<MasalahKontekstualPythagorasK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/lingkaran" element={<LingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/unsur-unsur" element={<UnsurUnsurLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/keliling-luas" element={<KelilingLuasLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/kaitan-bangun-datar" element={<KaitanBangunDatarLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/busur-juring" element={<BusurJuringLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/sudut-pusat-keliling" element={<SudutPusatKelilingLingkaranK8Page />} />
+      <Route path="/latihan-mandiri/kelas-8/lingkaran/penerapan-kontekstual" element={<PenerapanKontekstualLingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/garis-singgung-lingkaran" element={<GarisSinggungLingkaranK8Page />} />
       <Route path="/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" element={<BangunRuangSisiDatarK8Page />} />
       
