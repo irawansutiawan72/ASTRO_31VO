@@ -158,6 +158,11 @@ import BangunRuangSisiDatarK8Page from "./pages/latihan-mandiri/kelas8/BangunRua
 
 // Kelas 9 Topic Pages
 import BilanganBerpangkatK9Page from "./pages/latihan-mandiri/kelas9/BilanganBerpangkatPage";
+import PengertianNotasiK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PengertianNotasiPage";
+import SifatSifatK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/SifatSifatPage";
+import PangkatNolNegatifPecahanK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/PangkatNolNegatifPecahanPage";
+import BentukAkarK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/BentukAkarPage";
+import NotasiIlmiahK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
 import KesebangunanKekongruenK9Page from "./pages/latihan-mandiri/kelas9/KesebangunanKekongruenPage";
 import TransformasiGeometriK9Page from "./pages/latihan-mandiri/kelas9/TransformasiGeometriPage";
 import BangunRuangSisiLengkungK9Page from "./pages/latihan-mandiri/kelas9/BangunRuangSisiLengkungPage";
@@ -556,6 +561,11 @@ const AppInner = () => {
       
       {/* Kelas 9 Topic Routes */}
       <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pengertian-notasi" element={<PengertianNotasiK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/sifat-sifat" element={<SifatSifatK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/pangkat-nol-negatif-pecahan" element={<PangkatNolNegatifPecahanK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/transformasi-geometri" element={<TransformasiGeometriK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungK9Page />} />
