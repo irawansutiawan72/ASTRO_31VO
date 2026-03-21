@@ -78,12 +78,21 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ## Completed Content Pages
 
-### Kelas 9 - Kesebangunan dan Kekongruenan (all 5 sub-bab)
+### Kelas 9 - Kesebangunan dan Kekongruenan — Materi Matematika (all 5 sub-bab)
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/definisi` — Definisi Kesebangunan dan Kekongruenan
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/menghitung-panjang-rusuk` — Menghitung Panjang Rusuk Bangun Datar yang Sebangun
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun` — Segitiga – Segitiga yang Sebangun
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku` — Perbandingan Rusuk Segitiga Siku-siku
 - `/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar` — Kekongruenan pada Bangun Datar
+
+### Kelas 9 - Kesebangunan dan Kekongruenan — Latihan Mandiri (all 5 sub-bab, 200 soal total)
+- Shared SVG geometry component: `src/pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/GeoFigure.tsx`
+  - Exports: SimilarTriangles, SimilarRects, TriangleAltitude, CongruentTriangles, ParallelLinesTriangle, RightTriangleRatio, TwoShapesCongruent, ScaleFigure
+- `/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi` — Definisi (40 soal, cyan theme, SimilarRects/CongruentTriangles/TwoShapesCongruent diagrams)
+- `/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk` — Menghitung Rusuk (40 soal, orange theme, SimilarRects/ParallelLinesTriangle/ScaleFigure diagrams)
+- `/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun` — Segitiga Sebangun (40 soal, violet theme, SimilarTriangles/ParallelLinesTriangle/TriangleAltitude diagrams)
+- `/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk` — Rasio Rusuk Siku-Siku (40 soal, emerald theme, TriangleAltitude/RightTriangleRatio/SimilarTriangles diagrams)
+- `/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan` — Kekongruenan (40 soal, rose theme, CongruentTriangles/TwoShapesCongruent/SimilarTriangles diagrams)
 
 ### Kelas 9 - Peluang (1 of 5 sub-bab completed)
 - `/materi-matematika/kelas-9/peluang/ruang-sampel` — Ruang Sampel & Titik Sampel (definisi, notasi n(S)/n(K), kejadian tunggal: koin/dadu/kartu bridge, kejadian majemuk: 2koin/3koin/2dadu/koin+dadu, tabel silang, diagram pohon, 6 contoh soal bertahap)

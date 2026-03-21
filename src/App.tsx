@@ -164,6 +164,11 @@ import PangkatNolNegatifPecahanK9Page from "./pages/latihan-mandiri/kelas9/bilan
 import BentukAkarK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/BentukAkarPage";
 import NotasiIlmiahK9Page from "./pages/latihan-mandiri/kelas9/bilangan-berpangkat/NotasiIlmiahPage";
 import KesebangunanKekongruenK9Page from "./pages/latihan-mandiri/kelas9/KesebangunanKekongruenPage";
+import DefinisiKesebangunanK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/DefinisiKesebangunanPage";
+import MenghitungRusukK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/MenghitungRusukPage";
+import SegitigaSebangunK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/SegitigaSebangunPage";
+import RasioRusukK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/RasioRusukPage";
+import KekongruenBangunDatarK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
 import TransformasiGeometriK9Page from "./pages/latihan-mandiri/kelas9/TransformasiGeometriPage";
 import BangunRuangSisiLengkungK9Page from "./pages/latihan-mandiri/kelas9/BangunRuangSisiLengkungPage";
 import StatistikaK9Page from "./pages/latihan-mandiri/kelas9/StatistikaPage";
@@ -567,6 +572,11 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/bentuk-akar" element={<BentukAkarK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/bilangan-berpangkat/notasi-ilmiah" element={<NotasiIlmiahK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan" element={<KesebangunanKekongruenK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/definisi" element={<DefinisiKesebangunanK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" element={<MenghitungRusukK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" element={<SegitigaSebangunK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" element={<RasioRusukK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan" element={<KekongruenBangunDatarK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/transformasi-geometri" element={<TransformasiGeometriK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/statistika" element={<StatistikaK9Page />} />
