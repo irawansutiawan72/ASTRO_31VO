@@ -170,6 +170,10 @@ import SegitigaSebangunK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-
 import RasioRusukK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/RasioRusukPage";
 import KekongruenBangunDatarK9Page from "./pages/latihan-mandiri/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
 import TransformasiGeometriK9Page from "./pages/latihan-mandiri/kelas9/TransformasiGeometriPage";
+import TranslasiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/TranslasiPage";
+import RefleksiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/RefleksiPage";
+import RotasiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/RotasiPage";
+import DilatsiK9Page from "./pages/latihan-mandiri/kelas9/transformasi-geometri/DilatsiPage";
 import BangunRuangSisiLengkungK9Page from "./pages/latihan-mandiri/kelas9/BangunRuangSisiLengkungPage";
 import StatistikaK9Page from "./pages/latihan-mandiri/kelas9/StatistikaPage";
 import PeluangK9Page from "./pages/latihan-mandiri/kelas9/PeluangPage";
@@ -578,6 +582,10 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" element={<RasioRusukK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/kesebangunan-kekongruenan/kekongruenan" element={<KekongruenBangunDatarK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/transformasi-geometri" element={<TransformasiGeometriK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/translasi" element={<TranslasiK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/refleksi" element={<RefleksiK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/rotasi" element={<RotasiK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/transformasi-geometri/dilatasi" element={<DilatsiK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/statistika" element={<StatistikaK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/peluang" element={<PeluangK9Page />} />
