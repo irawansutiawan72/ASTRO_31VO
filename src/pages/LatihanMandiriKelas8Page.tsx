@@ -14,7 +14,6 @@ const topicsKelas8 = [
   { label: "LINGKARAN", path: "/latihan-mandiri/kelas-8/lingkaran" },
   { label: "GARIS SINGGUNG LINGKARAN", path: "/latihan-mandiri/kelas-8/garis-singgung-lingkaran" },
   { label: "BANGUN RUANG SISI DATAR", path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar" },
-  { label: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan" },
 ];
 
 const LatihanMandiriKelas8Page = () => {

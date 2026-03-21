@@ -664,9 +664,9 @@ const GabunganPage = () => {
         </div>
 
         <div className="mt-8 text-center">
-          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8"); }}
+          <button onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar"); }}
             className="text-sm text-muted-foreground hover:text-indigo-400 transition-colors cursor-pointer font-body">
-            ← Kembali ke Kelas 8
+            ← Kembali ke Bangun Ruang Sisi Datar
           </button>
         </div>
       </div>

@@ -61,6 +61,20 @@ const subtopics = [
     desc: "Limas segitiga & segiempat, apotema, luas permukaan, volume, kontekstual",
     emoji: "🔺",
   },
+  {
+    label: "BANGUN RUANG GABUNGAN",
+    path: "/latihan-mandiri/kelas-8/bangun-ruang-sisi-datar-gabungan",
+    soal: 40,
+    icon: Layers,
+    gradient: "from-indigo-900/40 to-blue-900/30",
+    border: "border-indigo-500/30",
+    badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40",
+    iconBg: "bg-indigo-500/20",
+    iconColor: "text-indigo-400",
+    leftBar: "from-indigo-400 to-blue-500",
+    desc: "Balok+Limas, Kubus+Prisma, benda gabungan, limas terpancung, benda berlubang",
+    emoji: "🏗️",
+  },
 ];
 
 const BangunRuangSisiDatarPage = () => {
@@ -83,7 +97,7 @@ const BangunRuangSisiDatarPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-3">Kelas 8 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">160 Soal Total · Gambar Diagram & LaTeX</span>
+            <span className="text-white/70 text-xs font-body">200 Soal Total · Gambar Diagram & LaTeX</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
