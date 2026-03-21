@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, Globe } from "lucide-react";
+import { BookOpen, Globe, Youtube } from "lucide-react";
 
 const bukuRefs = [
   "Abdur Rahman As'ari, dkk. 2017. Matematika SMP/MTs Kelas VIII Semester I. Edisi Revisi. Jakarta: Kementerian Pendidikan dan Kebudayaan RI.",
@@ -15,6 +15,7 @@ const internetRefs = [
   { label: "m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", url: "https://m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", akses: "November 2025" },
   { label: "pngtree.com/freepng/3d-sun-full-view_16171547.html", url: "https://pngtree.com/freepng/3d-sun-full-view_16171547.html", akses: "12 Maret 2026" },
   { label: "bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
+  { label: "youtube.com/watch?v=PXT5uJP1WwE", url: "https://www.youtube.com/watch?v=PXT5uJP1WwE", akses: "Maret 2026", author: "Nurahman, F.", title: "TEMPLATE GAME INTERAKTIF POWERPOINT #4" },
 ];
 
 const ReferensiPage = () => {
@@ -56,6 +57,16 @@ const ReferensiPage = () => {
               <div key={i} className="flex gap-3 text-sm font-body animate-slide-up" style={{ animationDelay: `${(bukuRefs.length + i) * 0.08}s` }}>
                 <span className="text-primary font-display font-bold shrink-0">[{bukuRefs.length + i + 1}]</span>
                 <div className="leading-relaxed">
+                  {(r as any).author && (
+                    <p className="text-muted-foreground mb-0.5">
+                      {(r as any).author}{" "}
+                      <span className="italic text-foreground/80">{(r as any).title}</span>
+                      {" "}
+                      <Youtube className="inline w-3.5 h-3.5 text-red-500 mb-0.5" />
+                      {" "}
+                      <span className="text-muted-foreground text-xs">YouTube.</span>
+                    </p>
+                  )}
                   <a
                     href={r.url}
                     target="_blank"
