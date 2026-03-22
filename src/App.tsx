@@ -195,6 +195,13 @@ import FrekuensiHarapanLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/Fre
 import KomplementLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/KomplementPage";
 import PersamaanKuadratK9Page from "./pages/latihan-mandiri/kelas9/PersamaanKuadratPage";
 import FungsiKuadratK9Page from "./pages/latihan-mandiri/kelas9/FungsiKuadratPage";
+import PKBentukUmumPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/BentukUmumPage";
+import PKPemfaktoranPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PemfaktoranPage";
+import PKRumusKuadratikPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/RumusKuadratikPage";
+import PKPelengkapKuadratPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PelengkapKuadratPage";
+import PKDiskriminanPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/DiskriminanPage";
+import PKMenyusunBaruPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/MenyusunPKBaruPage";
+import PKPenerapanKontekstualPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PenerapanKontekstualPage";
 
 // Math Game Arena Pages
 import MathGameArenaPage from "./pages/MathGameArenaPage";
@@ -622,6 +629,13 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/peluang/komplemen" element={<KomplementLMK9Page />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratK9Page />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKBentukUmumPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKPemfaktoranPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKRumusKuadratikPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKPelengkapKuadratPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/diskriminan" element={<PKDiskriminanPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMenyusunBaruPage />} />
+      <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualPage />} />
       <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat" element={<FungsiKuadratK9Page />} />
       
       {/* Math Game Arena Routes */}
