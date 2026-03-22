@@ -78,7 +78,7 @@ const TentangAplikasiPage = () => {
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 md:p-8 mb-6 animate-slide-up">
           <div className="space-y-4">
             <p className="text-white font-body text-sm md:text-base leading-relaxed text-justify">
-              <strong className="text-primary">Numatik (Versi 1A)</strong> adalah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <strong className="text-accent">bermakna dan menyenangkan</strong>.
+              <strong className="text-primary">Numatik</strong> adalah aplikasi edukasi matematika yang dirancang khusus untuk menjembatani tantangan belajar di era digital. Lahir dari semangat untuk menghadirkan pembelajaran yang tidak hanya informatif, tetapi juga <strong className="text-accent">bermakna dan menyenangkan</strong>.
             </p>
 
             <p className="text-white/90 font-body text-sm md:text-base leading-relaxed text-justify">
@@ -102,7 +102,7 @@ const TentangAplikasiPage = () => {
         {/* Footer */}
         <div className="text-center space-y-2 animate-slide-up" style={{ animationDelay: '0.5s' }}>
           <p className="text-white/40 font-body text-xs">
-            Versi 1A - © 2026 NUMATIK. All rights reserved.
+            Edisi Perdana · © 2026 NUMATIK. All rights reserved.
           </p>
         </div>
 
