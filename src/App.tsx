@@ -195,6 +195,12 @@ import FrekuensiHarapanLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/Fre
 import KomplementLMK9Page from "./pages/latihan-mandiri/kelas9/peluang/KomplementPage";
 import PersamaanKuadratK9Page from "./pages/latihan-mandiri/kelas9/PersamaanKuadratPage";
 import FungsiKuadratK9Page from "./pages/latihan-mandiri/kelas9/FungsiKuadratPage";
+import FKBentukUmumKarakteristikPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage";
+import FKTitikPotongPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/TitikPotongPage";
+import FKSumbuSimetriPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/SumbuSimetriPage";
+import FKMenggambarGrafikPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenggambarGrafikPage";
+import FKMenyusunFungsiPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/MenyusunFungsiPage";
+import FKPenerapanNilaiMaksMinPage from "./pages/latihan-mandiri/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage";
 import PKBentukUmumPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/BentukUmumPage";
 import PKPemfaktoranPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/PemfaktoranPage";
 import PKRumusKuadratikPage from "./pages/latihan-mandiri/kelas9/persamaan-kuadrat/RumusKuadratikPage";
@@ -637,7 +643,13 @@ const AppInner = () => {
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMenyusunBaruPage />} />
       <Route path="/latihan-mandiri/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKPenerapanKontekstualPage />} />
       <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat" element={<FungsiKuadratK9Page />} />
-      
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKBentukUmumKarakteristikPage />} />
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/titik-potong" element={<FKTitikPotongPage />} />
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKSumbuSimetriPage />} />
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMenggambarGrafikPage />} />
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMenyusunFungsiPage />} />
+      <Route path="/latihan-mandiri/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKPenerapanNilaiMaksMinPage />} />
+
       {/* Math Game Arena Routes */}
       <Route path="/math-game-arena" element={<MathGameArenaPage />} />
       <Route path="/math-game-arena/kelas-7" element={<MathGameArenaKelas7Page />} />

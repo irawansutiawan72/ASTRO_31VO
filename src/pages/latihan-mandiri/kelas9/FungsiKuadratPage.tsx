@@ -5,12 +5,12 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "BENTUK UMUM DAN KARAKTERISTIK GRAFIK",
-  "TITIK POTONG TERHADAP SUMBU-SUMBU",
-  "SUMBU SIMETRI DAN TITIK PUNCAK (OPTIMUM)",
-  "MENGGAMBAR GRAFIK FUNGSI KUADRAT",
-  "MENYUSUN FUNGSI KUADRAT",
-  "PENERAPAN FUNGSI KUADRAT (NILAI MAKSIMUM/MINIMUM)",
+  { label: "BENTUK UMUM DAN KARAKTERISTIK GRAFIK", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" },
+  { label: "TITIK POTONG TERHADAP SUMBU-SUMBU", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/titik-potong" },
+  { label: "SUMBU SIMETRI DAN TITIK PUNCAK (OPTIMUM)", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/sumbu-simetri" },
+  { label: "MENGGAMBAR GRAFIK FUNGSI KUADRAT", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/menggambar-grafik" },
+  { label: "MENYUSUN FUNGSI KUADRAT", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/menyusun-fungsi" },
+  { label: "PENERAPAN FUNGSI KUADRAT (NILAI MAKSIMUM/MINIMUM)", path: "/latihan-mandiri/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" },
 ];
 
 const FungsiKuadratPage = () => {
@@ -28,17 +28,17 @@ const FungsiKuadratPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 - Latihan Mandiri</p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
+          {subtopics.map(({ label, path }, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={label}
+              onClick={() => { playPopSound(); navigate(path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{label}</span>
             </button>
           ))}
         </div>
