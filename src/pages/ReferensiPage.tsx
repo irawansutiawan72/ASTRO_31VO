@@ -13,11 +13,11 @@ const bukuRefs = [
 ];
 
 const internetRefs = [
-  { label: "defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", url: "https://defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", akses: "Desember 2025" },
-  { label: "konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", url: "https://konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", akses: "Desember 2025" },
-  { label: "m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", url: "https://m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", akses: "November 2025" },
-  { label: "pngtree.com/freepng/3d-sun-full-view_16171547.html", url: "https://pngtree.com/freepng/3d-sun-full-view_16171547.html", akses: "12 Maret 2026" },
-  { label: "bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
+  { label: "Defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", url: "https://defantri.com/2022/01/pembahasan-garis-sudut-matematika-smp.html", akses: "Desember 2025" },
+  { label: "Konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", url: "https://konsep-matematika.com/2022/07/prinsip-teleskopik-olim-matik-sma.html", akses: "Desember 2025" },
+  { label: "M4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", url: "https://m4th-lab.net/2019/09/cara-mudah-memahami-modulo-persiapan.html", akses: "November 2025" },
+  { label: "Pngtree.com/freepng/3d-sun-full-view_16171547.html", url: "https://pngtree.com/freepng/3d-sun-full-view_16171547.html", akses: "12 Maret 2026" },
+  { label: "Bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
   { label: "youtube.com/watch?v=PXT5uJP1WwE", url: "https://www.youtube.com/watch?v=PXT5uJP1WwE", akses: "Maret 2026", author: "Nurahman, F.", title: "TEMPLATE GAME INTERAKTIF POWERPOINT #4" },
 ];
 
@@ -74,7 +74,7 @@ const ReferensiPage = () => {
                     href={r.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 break-all transition-colors"
+                    className="text-white hover:text-white/80 underline underline-offset-2 break-all transition-colors"
                   >
                     {r.label}
                   </a>
