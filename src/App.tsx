@@ -427,6 +427,13 @@ import PeluangTeoretikMMK9Page from "./pages/materi-matematika/kelas9/peluang/Pe
 import FrekuensiHarapanMMK9Page from "./pages/materi-matematika/kelas9/peluang/FrekuensiHarapanPage";
 import KomplementMMK9Page from "./pages/materi-matematika/kelas9/peluang/KomplementPage";
 import PersamaanKuadratMMK9Page from "./pages/materi-matematika/kelas9/PersamaanKuadratPage";
+import PKMMBentukUmumPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/BentukUmumPage";
+import PKMMPemfaktoranPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PemfaktoranPage";
+import PKMMRumusKuadratikPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/RumusKuadratikPage";
+import PKMMPelengkapKuadratPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PelengkapKuadratPage";
+import PKMMDiskriminanPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/DiskriminanPage";
+import PKMMMenyusunBaruPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/MenyusunPKBaruPage";
+import PKMMPenerapanKontekstualPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PenerapanKontekstualPage";
 import FungsiKuadratMMK9Page from "./pages/materi-matematika/kelas9/FungsiKuadratPage";
 
 const queryClient = new QueryClient();
@@ -862,6 +869,13 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/peluang/frekuensi-harapan" element={<FrekuensiHarapanMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/peluang/komplemen" element={<KomplementMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat" element={<PersamaanKuadratMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/bentuk-umum" element={<PKMMBentukUmumPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pemfaktoran" element={<PKMMPemfaktoranPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/rumus-kuadratik" element={<PKMMRumusKuadratikPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/pelengkap-kuadrat" element={<PKMMPelengkapKuadratPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/diskriminan" element={<PKMMDiskriminanPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMMMenyusunBaruPage />} />
+      <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKMMPenerapanKontekstualPage />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />
       
       <Route path="*" element={<NotFound />} />
