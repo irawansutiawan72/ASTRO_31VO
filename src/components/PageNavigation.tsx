@@ -22,7 +22,7 @@ const PageNavigation = ({ prevPath, nextPath }: PageNavigationProps) => {
         }}
       >
         <button
-          onClick={() => { playPopSound(); navigate(-1); }}
+          onClick={() => { playPopSound(); prevPath ? navigate(prevPath) : navigate(-1); }}
           className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
             flex items-center justify-center text-primary hover:border-primary/60 
             hover:box-glow-cyan transition-all duration-300 cursor-pointer"
