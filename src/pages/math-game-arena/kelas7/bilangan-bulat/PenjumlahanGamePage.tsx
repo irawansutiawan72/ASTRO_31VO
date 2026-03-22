@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import QuizNavigation from "@/components/QuizNavigation";
 import { useAudio } from "@/hooks/useAudio";
@@ -167,6 +168,7 @@ const PenjumlahanGamePage = () => {
 
   if (!started) {
     return (
+      <>
       <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
         <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/80" />
@@ -279,13 +281,27 @@ const PenjumlahanGamePage = () => {
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </button>
           
-          <div className="mt-8">
-            <button onClick={() => navigate("/math-game-arena/kelas-7/bilangan-bulat")} className="text-sm text-muted-foreground hover:text-cyan-400 transition-colors cursor-pointer font-body">
-              &larr; Kembali ke Bilangan Bulat
-            </button>
-          </div>
         </div>
       </div>
+
+      <div
+        className="fixed left-0 bottom-0 z-50 p-4"
+        style={{
+          paddingLeft: "max(1rem, env(safe-area-inset-left, 0px))",
+          paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))",
+        }}
+      >
+        <button
+          onClick={() => navigate("/math-game-arena/kelas-7/bilangan-bulat")}
+          className="w-11 h-11 rounded-full bg-card/80 backdrop-blur border border-border 
+            flex items-center justify-center text-primary hover:border-primary/60 
+            hover:box-glow-cyan transition-all duration-300 cursor-pointer"
+          title="Kembali ke Bilangan Bulat"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+      </div>
+      </>
     );
   }
 
