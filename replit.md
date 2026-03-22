@@ -21,6 +21,22 @@ npm start        # Run production server (Express serves built frontend on port 
 
 - `GOOGLE_GENERATIVE_AI_API_KEY` — Google AI Studio API key for Gemini access
 
+## Math Game Arena - Kelas 7 Status
+
+All 9 topics in Kelas 7 now have the **Meteor Shooting Game** fully implemented:
+
+| Topic | Sub-games |
+|-------|-----------|
+| Bilangan Bulat | 6 games (Penjumlahan, Pengurangan, Perkalian, Pembagian, Operasi Campuran, KPK/FPB) |
+| Pecahan (Bilangan Rasional) | 12 games (Arti Pecahan, Campuran/Persen, Penjumlahan, Pengurangan, Perkalian, Pembagian, Desimal ×5, Pembulatan) |
+| Aljabar | 8 games (Pengertian/Unsur, Penjumlahan/Pengurangan, Perkalian, Pembagian, Pemangkatan, Substitusi, Faktorisasi, Operasi Pecahan) |
+| PLSV & PtLSV | 7 games (Kalimat Terbuka, Pengertian PLSV, Penyelesaian PLSV, Model Matematika PLSV, Pengertian PtLSV, Penyelesaian PtLSV, Model Matematika PtLSV) |
+| Perbandingan | 4 games (Umum/Rasio, Senilai/Berbalik, Campuran, Skala) |
+| Aritmetika Sosial | 6 games (Jual Beli, Diskon, Bruto/Netto/Tara, Bunga Tunggal, PPN, PPh) |
+| Garis dan Sudut | 4 games (Hubungan 2 Garis, Sudut Pelurus/Penyiku, Sifat Sudut Sejajar, Jumlah Sudut Segibanyak) |
+| Segitiga dan Segiempat | 5 games (Garis Berat/Bagi/Tinggi, Keliling, Luas Segitiga, Luas Segiempat, Bangun Tak Beraturan) |
+| Himpunan | 4 games (Pengertian/Keanggotaan, Berhingga/Kosong/Tak Hingga, Diagram Venn, Pemecahan Masalah) |
+
 ## Content Status
 
 - **Kelas 9 — Materi Matematika — Fungsi Kuadrat (Pengayaan)**: 6 sub-topics fully implemented

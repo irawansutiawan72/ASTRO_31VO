@@ -8,7 +8,7 @@ const subtopics = [
   { label: "JUAL BELI, UNTUNG DAN RUGI", path: "/math-game-arena/kelas-7/aritmetika-sosial/jual-beli-untung-rugi" },
   { label: "DISKON", path: "/math-game-arena/kelas-7/aritmetika-sosial/diskon" },
   { label: "BRUTO, NETTO DAN TARA", path: "/math-game-arena/kelas-7/aritmetika-sosial/bruto-netto-tara" },
-  { label: "BUNGA TUNGGAL", path: "/coming-soon" },
+  { label: "BUNGA TUNGGAL", path: "/math-game-arena/kelas-7/aritmetika-sosial/bunga-tunggal" },
   { label: "PAJAK PERTAMBAHAN NILAI (PPN)", path: "/math-game-arena/kelas-7/aritmetika-sosial/ppn" },
   { label: "PAJAK PENGHASILAN (PPh)", path: "/math-game-arena/kelas-7/aritmetika-sosial/pph" },
 ];

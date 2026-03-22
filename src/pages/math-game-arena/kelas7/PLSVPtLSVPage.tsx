@@ -5,13 +5,13 @@ import { Gamepad2, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "KALIMAT TERBUKA DAN TERTUTUP (PERNYATAAN)",
-  "PENGERTIAN PLSV, KESAMAAN, DAN PERNYATAAAN EKUIVALEN",
-  "PENYELESAIAN PERSAMAAN LINEAR SATU VARIABEL",
-  "MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA",
-  "PENGERTIAN KETIDAKSAMAAN, PERTIDAKSAMAAN DAN PtLSV",
-  "PENYELESAIAN PERTIDAKSAMAAN LINEAR SATU VARIABEL",
-  "MODEL MATEMATIKA DAN PENERAPAN PERTIDAKSAMAAN PADA SOAL CERITA",
+  { name: "KALIMAT TERBUKA DAN TERTUTUP (PERNYATAAN)", path: "/math-game-arena/kelas-7/plsv-ptlsv/kalimat-terbuka" },
+  { name: "PENGERTIAN PLSV, KESAMAAN, DAN PERNYATAAAN EKUIVALEN", path: "/math-game-arena/kelas-7/plsv-ptlsv/pengertian-plsv" },
+  { name: "PENYELESAIAN PERSAMAAN LINEAR SATU VARIABEL", path: "/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-plsv" },
+  { name: "MODEL MATEMATIKA DAN PENERAPAN PERSAMAAN PADA SOAL CERITA", path: "/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-plsv" },
+  { name: "PENGERTIAN KETIDAKSAMAAN, PERTIDAKSAMAAN DAN PtLSV", path: "/math-game-arena/kelas-7/plsv-ptlsv/pengertian-ptlsv" },
+  { name: "PENYELESAIAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", path: "/math-game-arena/kelas-7/plsv-ptlsv/penyelesaian-ptlsv" },
+  { name: "MODEL MATEMATIKA DAN PENERAPAN PERTIDAKSAMAAN PADA SOAL CERITA", path: "/math-game-arena/kelas-7/plsv-ptlsv/model-matematika-ptlsv" },
 ];
 
 const PLSVPtLSVPage = () => {
@@ -31,15 +31,15 @@ const PLSVPtLSVPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
             </button>
           ))}
         </div>

@@ -5,11 +5,11 @@ import { Gamepad2, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA",
-  "KELILING SEGITIGA DAN SEGIEMPAT",
-  "LUAS SEGITIGA",
-  "LUAS SEGIEMPAT",
-  "KELILING DAN LUAS BANGUN TAK BERATURAN",
+  { name: "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" },
+  { name: "KELILING SEGITIGA DAN SEGIEMPAT", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat/keliling" },
+  { name: "LUAS SEGITIGA", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segitiga" },
+  { name: "LUAS SEGIEMPAT", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat/luas-segiempat" },
+  { name: "KELILING DAN LUAS BANGUN TAK BERATURAN", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat/bangun-tak-beraturan" },
 ];
 
 const SegitigaSegiempatPage = () => {
@@ -29,15 +29,15 @@ const SegitigaSegiempatPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
             </button>
           ))}
         </div>
