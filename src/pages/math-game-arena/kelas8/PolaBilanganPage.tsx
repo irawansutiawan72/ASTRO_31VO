@@ -17,7 +17,7 @@ const PolaBilanganPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath="/math-game-arena/kelas-8" />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Gamepad2 className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
