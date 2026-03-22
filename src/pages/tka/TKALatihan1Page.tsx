@@ -414,14 +414,12 @@ const TKALatihan1Page = () => {
             <p className="font-body text-white/80 text-xs mb-3 leading-relaxed">
               Denah tersebut digambar dengan skala 1 : 50 dan satuan angka pada gambar adalah cm. Pilih <strong className="text-yellow-400">lebih dari satu</strong> pernyataan yang benar:
             </p>
-            <div className="flex flex-col gap-2">
-              {[
-                {text:"1. Luas Kamar Tidur 1 dan 2 sebenarnya 18 m²", benar:true},
-                {text:"2. Luas seluruh lahan sebenarnya 400 m²", benar:false},
-                {text:"3. Keliling seluruh lahan sebenarnya 41 m", benar:false},
-                {text:"4. Keliling garasi sebenarnya 38 m", benar:false},
-              ].map(o=><div key={o.text} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.benar ? "bg-green-900/20 border-green-500/30 text-green-300" : "bg-white/5 border-white/10 text-white/80"}`}>{o.text}{o.benar?" ✓":""}</div>)}
-            </div>
+            <ComplexMCQ qn={5} items={[
+              {text:"1. Luas Kamar Tidur 1 dan 2 sebenarnya 18 m²", benar:true},
+              {text:"2. Luas seluruh lahan sebenarnya 400 m²", benar:false},
+              {text:"3. Keliling seluruh lahan sebenarnya 41 m", benar:false},
+              {text:"4. Keliling garasi sebenarnya 38 m", benar:false},
+            ]}/>
             <PembahasanBtn n={5}/>
             {expandedPembahasan.has(5) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -532,9 +530,33 @@ const TKALatihan1Page = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(1) <InlineMath math="A + B = 5\sqrt{2} + 2"/></td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(2) <InlineMath math="A - B = \sqrt{2} + 8"/></td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(3) <InlineMath math="A \times B = 2 - 3"/></td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
+                  {([
+                    {key:"8_1", label:<span>(1) <InlineMath math="A + B = 5\sqrt{2} + 2"/></span>, correct:"benar"},
+                    {key:"8_2", label:<span>(2) <InlineMath math="A - B = \sqrt{2} + 8"/></span>, correct:"benar"},
+                    {key:"8_3", label:<span>(3) <InlineMath math="A \times B = 2 - 3"/></span>, correct:"salah"},
+                  ] as const).map(row => {
+                    const picked = selectedTrueFalse[row.key];
+                    const benarPicked = picked === 'benar';
+                    const salahPicked = picked === 'salah';
+                    const benarCorrect = row.correct === 'benar';
+                    return (
+                      <tr key={row.key}>
+                        <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'benar')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${benarPicked ? benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"}`}>
+                            {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                          </button>
+                        </td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'salah')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${salahPicked ? !benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"}`}>
+                            {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -680,14 +702,12 @@ const TKALatihan1Page = () => {
                 <p className="font-body text-white/80 text-xs mb-2">Pilih <strong className="text-yellow-400">lebih dari satu</strong> pernyataan yang benar:</p>
               </div>
             </div>
-            <div className="flex flex-col gap-2">
-              {[
-                {text:"1. Harga 1 kg bawang merah adalah Rp47.000,00.", benar:false},
-                {text:"2. Harga 1 kg cabai merah adalah Rp60.000,00.", benar:true},
-                {text:"3. Harga 1 kg bawang merah dan 2 kg cabai merah adalah Rp165.000,00.", benar:true},
-                {text:"4. Selisih harga 1 kg cabai merah dan 1 kg bawang merah adalah Rp15.000,00.", benar:true},
-              ].map(o=><div key={o.text} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.benar ? "bg-green-900/20 border-green-500/30 text-green-300" : "bg-white/5 border-white/10 text-white/80"}`}>{o.text}{o.benar?" ✓":""}</div>)}
-            </div>
+            <ComplexMCQ qn={12} items={[
+              {text:"1. Harga 1 kg bawang merah adalah Rp47.000,00.", benar:false},
+              {text:"2. Harga 1 kg cabai merah adalah Rp60.000,00.", benar:true},
+              {text:"3. Harga 1 kg bawang merah dan 2 kg cabai merah adalah Rp165.000,00.", benar:true},
+              {text:"4. Selisih harga 1 kg cabai merah dan 1 kg bawang merah adalah Rp15.000,00.", benar:true},
+            ]}/>
             <PembahasanBtn n={12}/>
             {expandedPembahasan.has(12) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -791,9 +811,33 @@ const TKALatihan1Page = () => {
               <table className="w-full text-xs font-body border-collapse">
                 <thead><tr className="bg-white/10"><th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th><th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th><th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th></tr></thead>
                 <tbody>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(1) Rumus fungsi adalah <InlineMath math="f(x) = 2x+1"/></td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(2) Daerah hasil adalah {"{5, 9, 13}"}</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">(3) <InlineMath math="a + b = 4"/></td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
+                  {([
+                    {key:"14_1", label:<span>(1) Rumus fungsi adalah <InlineMath math="f(x) = 2x+1"/></span>, correct:"benar"},
+                    {key:"14_2", label:<span>(2) Daerah hasil adalah {"{5, 9, 13}"}</span>, correct:"salah"},
+                    {key:"14_3", label:<span>(3) <InlineMath math="a + b = 4"/></span>, correct:"salah"},
+                  ] as const).map(row => {
+                    const picked = selectedTrueFalse[row.key];
+                    const benarPicked = picked === 'benar';
+                    const salahPicked = picked === 'salah';
+                    const benarCorrect = row.correct === 'benar';
+                    return (
+                      <tr key={row.key}>
+                        <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'benar')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${benarPicked ? benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"}`}>
+                            {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                          </button>
+                        </td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'salah')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${salahPicked ? !benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"}`}>
+                            {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -919,9 +963,33 @@ const TKALatihan1Page = () => {
               <table className="w-full text-xs font-body border-collapse">
                 <thead><tr className="bg-white/10"><th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th><th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th><th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th></tr></thead>
                 <tbody>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">A. Nilai <InlineMath math="x = 32°"/></td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">B. Nilai <InlineMath math="y = 59°"/></td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">C. Nilai <InlineMath math="x - y = 42°"/></td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
+                  {([
+                    {key:"17A", label:<span>A. Nilai <InlineMath math="x = 32°"/></span>, correct:"benar"},
+                    {key:"17B", label:<span>B. Nilai <InlineMath math="y = 59°"/></span>, correct:"benar"},
+                    {key:"17C", label:<span>C. Nilai <InlineMath math="x - y = 42°"/></span>, correct:"salah"},
+                  ] as const).map(row => {
+                    const picked = selectedTrueFalse[row.key];
+                    const benarPicked = picked === 'benar';
+                    const salahPicked = picked === 'salah';
+                    const benarCorrect = row.correct === 'benar';
+                    return (
+                      <tr key={row.key}>
+                        <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'benar')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${benarPicked ? benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"}`}>
+                            {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                          </button>
+                        </td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'salah')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${salahPicked ? !benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"}`}>
+                            {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -978,9 +1046,33 @@ const TKALatihan1Page = () => {
               <table className="w-full text-xs font-body border-collapse">
                 <thead><tr className="bg-white/10"><th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th><th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th><th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th></tr></thead>
                 <tbody>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">A. Jarak mobil A (hijau) dengan gedung (AD) = 60 meter.</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">B. Jarak mobil B (merah) dengan gedung (BD) = 75 meter.</td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">C. Jarak mobil A dengan B adalah = 40 meter.</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
+                  {([
+                    {key:"18A", label:"A. Jarak mobil A (hijau) dengan gedung (AD) = 60 meter.", correct:"salah"},
+                    {key:"18B", label:"B. Jarak mobil B (merah) dengan gedung (BD) = 75 meter.", correct:"benar"},
+                    {key:"18C", label:"C. Jarak mobil A dengan B adalah = 40 meter.", correct:"salah"},
+                  ] as const).map(row => {
+                    const picked = selectedTrueFalse[row.key];
+                    const benarPicked = picked === 'benar';
+                    const salahPicked = picked === 'salah';
+                    const benarCorrect = row.correct === 'benar';
+                    return (
+                      <tr key={row.key}>
+                        <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'benar')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${benarPicked ? benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"}`}>
+                            {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                          </button>
+                        </td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button onClick={() => selectTrueFalse(row.key, 'salah')} disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs ${salahPicked ? !benarCorrect ? "bg-green-900/50 border border-green-500/50 text-green-300" : "bg-red-900/50 border border-red-500/50 text-red-300" : picked !== undefined ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50" : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"}`}>
+                            {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -1245,9 +1337,7 @@ const TKALatihan1Page = () => {
                 <text x="100" y="168" textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="sans-serif">sisi persegi = 20 m</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 157 m²","B. 286 m²","C. 372 m²","D. 443 m²"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===1?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={23} correct={1} options={["A. 157 m²","B. 286 m²","C. 372 m²","D. 443 m²"]}/>
             <PembahasanBtn n={23}/>
             {expandedPembahasan.has(23) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1417,12 +1507,7 @@ const TKALatihan1Page = () => {
                 <text x="145" y="50" fill="#fff" fontSize="8" fontFamily="sans-serif">TK=22</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">A. 9.200 cm³</div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">B. 9.620 cm³</div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">C. 10.020 cm³</div>
-              <div className="bg-green-900/30 border border-green-500/50 rounded-lg px-3 py-2 text-green-300 text-xs font-body font-bold">D. 10.800 cm³ ✓</div>
-            </div>
+            <MCQ qn={25} correct={3} options={["A. 9.200 cm³","B. 9.620 cm³","C. 10.020 cm³","D. 10.800 cm³"]}/>
             <PembahasanBtn n={25}/>
             {expandedPembahasan.has(25) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1473,9 +1558,7 @@ const TKALatihan1Page = () => {
                 </svg>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 144 truk tangki","B. 72 truk tangki","C. 48 truk tangki","D. 36 truk tangki"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===1?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={26} correct={1} options={["A. 144 truk tangki","B. 72 truk tangki","C. 48 truk tangki","D. 36 truk tangki"]}/>
             <PembahasanBtn n={26}/>
             {expandedPembahasan.has(26) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1539,9 +1622,7 @@ const TKALatihan1Page = () => {
                 <text x="155" y="8" textAnchor="middle" fill="#94a3b8" fontSize="7" fontFamily="sans-serif">Penjualan Beras (kg)</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 4 kg","B. 6 kg","C. 8 kg","D. 10 kg"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===0 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===0?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={27} correct={0} options={["A. 4 kg","B. 6 kg","C. 8 kg","D. 10 kg"]}/>
             <PembahasanBtn n={27}/>
             {expandedPembahasan.has(27) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1631,12 +1712,12 @@ const TKALatihan1Page = () => {
                 <circle cx="55" cy="55" r="5" fill="#e2e8f0"/>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">A. <InlineMath math="\dfrac{1}{6}"/></div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">B. <InlineMath math="\dfrac{1}{3}"/></div>
-              <div className="bg-green-900/30 border border-green-500/50 rounded-lg px-3 py-2 text-green-300 text-xs font-body font-bold">C. <InlineMath math="\dfrac{1}{2}"/> ✓</div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">D. <InlineMath math="\dfrac{2}{3}"/></div>
-            </div>
+            <MCQ qn={29} correct={2} options={[
+              <span>A. <InlineMath math="\dfrac{1}{6}"/></span>,
+              <span>B. <InlineMath math="\dfrac{1}{3}"/></span>,
+              <span>C. <InlineMath math="\dfrac{1}{2}"/></span>,
+              <span>D. <InlineMath math="\dfrac{2}{3}"/></span>,
+            ]}/>
             <PembahasanBtn n={29}/>
             {expandedPembahasan.has(29) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1677,9 +1758,7 @@ const TKALatihan1Page = () => {
                 </tbody>
               </table>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. Mesin A","B. Mesin B","C. Mesin C","D. Mesin D"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===3 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===3?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={30} correct={3} options={["A. Mesin A","B. Mesin B","C. Mesin C","D. Mesin D"]}/>
             <PembahasanBtn n={30}/>
             {expandedPembahasan.has(30) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
