@@ -5,8 +5,8 @@ import { BookOpen, Globe, Youtube } from "lucide-react";
 
 const bukuRefs = [
   "Abdur Rahman As'ari, dkk. 2017. Matematika SMP/MTs Kelas VIII Semester I. Edisi Revisi. Jakarta: Kementerian Pendidikan dan Kebudayaan RI.",
-  "Adinawan, M. C. 2017. MATEMATIKA UNTUK SMP/MTs KELAS VII SEMESTER 1. Jakarta: Erlangga.",
-  "Adinawan, M. C. 2017. MATEMATIKA UNTUK SMP/MTs KELAS VIII SEMESTER 2. Jakarta: Erlangga.",
+  "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VII Semester 1. Jakarta: Erlangga.",
+  "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VIII Semester 2. Jakarta: Erlangga.",
   "B.K. Noormandiri. 2018. Matematika untuk SMA/MA Kelas XII Kelompok Wajib. Jakarta: Erlangga.",
   "Raharjo, M dan Setiawan, A. 2019. Matematik 2 untuk SMP/MTS Kelas VIII. Jakarta: Erlangga.",
   "Sukino. 2020. The Great Matematika untuk Siswa SMP-MTs Kelas IX. Kab. Bandung: Srikandi Empat Widya Utama.",
