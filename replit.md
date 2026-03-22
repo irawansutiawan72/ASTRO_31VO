@@ -23,6 +23,14 @@ npm start        # Run production server (Express serves built frontend on port 
 
 ## Content Status
 
+- **Kelas 9 — Materi Matematika — Fungsi Kuadrat (Pengayaan)**: 6 sub-topics fully implemented
+  - BENTUK UMUM DAN KARAKTERISTIK GRAFIK: Intro, teori lengkap (SVG visual parabola), 6 contoh soal bertahap
+  - TITIK POTONG TERHADAP SUMBU-SUMBU: Teori diskriminan, SVG diagram 3 kasus, 6 contoh soal
+  - SUMBU SIMETRI DAN TITIK PUNCAK (OPTIMUM): Rumus xp & yp, SVG vertex diagram, metode melengkapi kuadrat, 6 contoh soal
+  - MENGGAMBAR GRAFIK FUNGSI KUADRAT: 5-langkah sistematis, tabel nilai SVG, 6 contoh soal
+  - MENYUSUN FUNGSI KUADRAT: 3 cara (akar, vertex, 3 titik), tabel panduan, 6 contoh soal + pembuktian
+  - PENERAPAN FUNGSI KUADRAT (NILAI MAKSIMUM/MINIMUM): Konteks nyata (fisika, ekonomi, geometri), 6 soal kontekstual bertahap
+
 - **Kelas 8 — Latihan Mandiri — Bangun Ruang Sisi Datar**: 4 sub-topics fully implemented (160 soal total)
   - KUBUS: 40 soal (unsur-unsur, luas permukaan, volume, jaring-jaring, kontekstual) — sky/cyan theme with 3D isometric cube SVG
   - BALOK: 40 soal (unsur-unsur, luas permukaan, volume, jaring-jaring, kontekstual) — emerald/teal theme with 3D cuboid SVG

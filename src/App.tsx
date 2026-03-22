@@ -435,6 +435,12 @@ import PKMMDiskriminanPage from "./pages/materi-matematika/kelas9/persamaan-kuad
 import PKMMMenyusunBaruPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/MenyusunPKBaruPage";
 import PKMMPenerapanKontekstualPage from "./pages/materi-matematika/kelas9/persamaan-kuadrat/PenerapanKontekstualPage";
 import FungsiKuadratMMK9Page from "./pages/materi-matematika/kelas9/FungsiKuadratPage";
+import FKMMBentukUmumKarakteristikPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/BentukUmumKarakteristikPage";
+import FKMMTitikPotongPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/TitikPotongPage";
+import FKMMSumbuSimetriPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/SumbuSimetriPage";
+import FKMMMenggambarGrafikPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/MenggambarGrafikPage";
+import FKMMMenyusunFungsiPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/MenyusunFungsiPage";
+import FKMMPenerapanNilaiMaksMinPage from "./pages/materi-matematika/kelas9/fungsi-kuadrat/PenerapanNilaiMaksMinPage";
 
 const queryClient = new QueryClient();
 
@@ -877,7 +883,13 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/menyusun-persamaan-baru" element={<PKMMMenyusunBaruPage />} />
       <Route path="/materi-matematika/kelas-9/persamaan-kuadrat/penerapan-kontekstual" element={<PKMMPenerapanKontekstualPage />} />
       <Route path="/materi-matematika/kelas-9/fungsi-kuadrat" element={<FungsiKuadratMMK9Page />} />
-      
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/bentuk-umum-karakteristik" element={<FKMMBentukUmumKarakteristikPage />} />
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/titik-potong" element={<FKMMTitikPotongPage />} />
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/sumbu-simetri" element={<FKMMSumbuSimetriPage />} />
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menggambar-grafik" element={<FKMMMenggambarGrafikPage />} />
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/menyusun-fungsi" element={<FKMMMenyusunFungsiPage />} />
+      <Route path="/materi-matematika/kelas-9/fungsi-kuadrat/penerapan-nilai-maks-min" element={<FKMMPenerapanNilaiMaksMinPage />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
