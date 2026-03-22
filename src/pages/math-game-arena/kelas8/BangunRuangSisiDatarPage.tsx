@@ -2,11 +2,11 @@ import GameSubtopicPage from "@/components/GameSubtopicPage";
 
 const subtopics = [
   { name: "KUBUS", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kubus-game" },
-  { name: "BALOK", path: "/coming-soon" },
-  { name: "PRISMA", path: "/coming-soon" },
-  { name: "LIMAS", path: "/coming-soon" },
-  { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/coming-soon" },
-  { name: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/coming-soon" },
+  { name: "BALOK", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/balok-game" },
+  { name: "PRISMA", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/prisma-game" },
+  { name: "LIMAS", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/limas-game" },
+  { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/gabungan-game" },
+  { name: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/math-game-arena/kelas-8/bangun-ruang-sisi-datar/kontekstual-game" },
 ];
 
 const BangunRuangSisiDatarPage = () => (

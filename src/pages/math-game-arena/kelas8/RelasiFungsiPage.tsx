@@ -1,11 +1,11 @@
 import GameSubtopicPage from "@/components/GameSubtopicPage";
 
 const subtopics = [
-  { name: "PENGERTIAN RELASI DAN PENYAJIANNYA", path: "/coming-soon" },
-  { name: "PENGERTIAN FUNGSI DAN PENYAJIANNYA", path: "/coming-soon" },
-  { name: "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU", path: "/coming-soon" },
-  { name: "NOTASI DAN RUMUS FUNGSI", path: "/coming-soon" },
-  { name: "GRAFIK FUNGSI", path: "/coming-soon" },
+  { name: "PENGERTIAN RELASI DAN PENYAJIANNYA", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/pengertian-relasi" },
+  { name: "PENGERTIAN FUNGSI DAN PENYAJIANNYA", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/pengertian-fungsi" },
+  { name: "MENENTUKAN BANYAK FUNGSI DAN KORESPONDENSI SATU-SATU", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/banyak-fungsi" },
+  { name: "NOTASI DAN RUMUS FUNGSI", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/notasi-rumus" },
+  { name: "GRAFIK FUNGSI", path: "/math-game-arena/kelas-8/relasi-dan-fungsi/grafik-fungsi" },
 ];
 
 const RelasiFungsiPage = () => (

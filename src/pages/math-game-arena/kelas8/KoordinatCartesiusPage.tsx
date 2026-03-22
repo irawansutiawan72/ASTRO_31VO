@@ -1,9 +1,9 @@
 import GameSubtopicPage from "@/components/GameSubtopicPage";
 
 const subtopics = [
-  { name: "UNSUR-UNSUR PADA DIAGRAM CARTESIUS", path: "/coming-soon" },
-  { name: "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS", path: "/coming-soon" },
-  { name: "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS", path: "/coming-soon" },
+  { name: "UNSUR-UNSUR PADA DIAGRAM CARTESIUS", path: "/math-game-arena/kelas-8/koordinat-cartesius/unsur-unsur" },
+  { name: "JARAK ANTAR DUA TITIK DAN JARAK TITIK KE GARIS", path: "/math-game-arena/kelas-8/koordinat-cartesius/jarak-titik" },
+  { name: "POSISI RELATIF SUATU TITIK TERHADAP SUATU GARIS", path: "/math-game-arena/kelas-8/koordinat-cartesius/posisi-relatif" },
 ];
 
 const KoordinatCartesiusPage = () => (

@@ -1,10 +1,10 @@
 import GameSubtopicPage from "@/components/GameSubtopicPage";
 
 const subtopics = [
-  { name: "PENGERTIAN POLA DAN BARISAN BILANGAN", path: "/coming-soon" },
-  { name: "POLA-POLA KHUSUS", path: "/coming-soon" },
-  { name: "POLA ARITMETIKA", path: "/coming-soon" },
-  { name: "POLA GEOMETRI", path: "/coming-soon" },
+  { name: "PENGERTIAN POLA DAN BARISAN BILANGAN", path: "/math-game-arena/kelas-8/pola-bilangan/pengertian-pola" },
+  { name: "POLA-POLA KHUSUS", path: "/math-game-arena/kelas-8/pola-bilangan/pola-khusus" },
+  { name: "POLA ARITMETIKA", path: "/math-game-arena/kelas-8/pola-bilangan/pola-aritmetika" },
+  { name: "POLA GEOMETRI", path: "/math-game-arena/kelas-8/pola-bilangan/pola-geometri" },
 ];
 
 const PolaBilanganPage = () => (
