@@ -41,7 +41,7 @@ const ReferensiPage = () => {
           </div>
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-5 space-y-4">
             {bukuRefs.map((r, i) => (
-              <div key={i} className="flex gap-3 text-sm text-muted-foreground font-body animate-slide-up" style={{ animationDelay: `${i * 0.08}s` }}>
+              <div key={i} className="flex gap-3 text-sm text-white font-body animate-slide-up" style={{ animationDelay: `${i * 0.08}s` }}>
                 <span className="text-primary font-display font-bold shrink-0">[{i + 1}]</span>
                 <p className="leading-relaxed">{r}</p>
               </div>
@@ -61,13 +61,13 @@ const ReferensiPage = () => {
                 <span className="text-primary font-display font-bold shrink-0">[{bukuRefs.length + i + 1}]</span>
                 <div className="leading-relaxed">
                   {(r as any).author && (
-                    <p className="text-muted-foreground mb-0.5">
+                    <p className="text-white mb-0.5">
                       {(r as any).author}{" "}
-                      <span className="italic text-foreground/80">{(r as any).title}</span>
+                      <span className="italic text-white">{(r as any).title}</span>
                       {" "}
                       <Youtube className="inline w-3.5 h-3.5 text-red-500 mb-0.5" />
                       {" "}
-                      <span className="text-muted-foreground text-xs">YouTube.</span>
+                      <span className="text-white text-xs">YouTube.</span>
                     </p>
                   )}
                   <a
@@ -78,7 +78,7 @@ const ReferensiPage = () => {
                   >
                     {r.label}
                   </a>
-                  <span className="text-muted-foreground ml-1">(diakses {r.akses})</span>
+                  <span className="text-white ml-1">(diakses {r.akses})</span>
                 </div>
               </div>
             ))}
