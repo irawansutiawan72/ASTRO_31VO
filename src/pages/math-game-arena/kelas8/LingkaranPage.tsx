@@ -1,59 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import Starfield from "@/components/Starfield";
-import PageNavigation from "@/components/PageNavigation";
-import { Gamepad2, ChevronRight } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import GameSubtopicPage from "@/components/GameSubtopicPage";
 
 const subtopics = [
-  "UNSUR-UNSUR LINGKARAN",
-  "KELILING DAN LUAS LINGKARAN",
-  "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA",
-  "PANJANG BUSUR DAN LUAS JURING",
-  "SUDUT PUSAT DAN SUDUT KELILING",
-  "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL",
+  { name: "UNSUR-UNSUR LINGKARAN", path: "/coming-soon" },
+  { name: "KELILING DAN LUAS LINGKARAN", path: "/coming-soon" },
+  { name: "KAITAN LINGKARAN DENGAN BANGUN DATAR LAINNYA", path: "/coming-soon" },
+  { name: "PANJANG BUSUR DAN LUAS JURING", path: "/coming-soon" },
+  { name: "SUDUT PUSAT DAN SUDUT KELILING", path: "/coming-soon" },
+  { name: "PENERAPAN KONSEP LINGKARAN PADA PERMASALAHAN KONTEKSTUAL", path: "/coming-soon" },
 ];
 
-const LingkaranPage = () => {
-  const navigate = useNavigate();
-
-  return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
-      <Starfield />
-      <PageNavigation prevPath="/math-game-arena/kelas-8" />
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <Gamepad2 className="w-10 h-10 text-accent mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          LINGKARAN
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 - Math Game Arena</p>
-
-        <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
-            <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
-              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-accent/60 transition-all duration-300
-                cursor-pointer text-left animate-slide-up"
-              style={{ animationDelay: `${i * 0.03}s` }}
-            >
-              <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/math-game-arena/kelas-8"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
-          >
-            Kembali ke Kelas 8
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+const LingkaranPage = () => (
+  <GameSubtopicPage
+    title="LINGKARAN"
+    subtopics={subtopics}
+    backPath="/math-game-arena/kelas-8"
+    backLabel="Kembali ke Kelas 8"
+    icon="⭕"
+    kelasLabel="Kelas 8"
+  />
+);
 
 export default LingkaranPage;

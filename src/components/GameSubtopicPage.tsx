@@ -15,6 +15,7 @@ interface GameSubtopicPageProps {
   backPath?: string;
   backLabel?: string;
   icon?: string;
+  kelasLabel?: string;
 }
 
 const LEVEL_COLORS = [
@@ -38,6 +39,7 @@ const GameSubtopicPage = ({
   backPath = "/math-game-arena/kelas-7",
   backLabel = "Kembali ke Kelas 7",
   icon = "🚀",
+  kelasLabel = "Kelas 7",
 }: GameSubtopicPageProps) => {
   const navigate = useNavigate();
 
@@ -56,7 +58,7 @@ const GameSubtopicPage = ({
             {title}
           </h1>
           <p className="text-cyan-400/60 text-xs font-body tracking-widest uppercase">
-            Kelas 7 · Math Game Arena
+            {kelasLabel} · Math Game Arena
           </p>
           <div className="mt-3 flex items-center justify-center gap-2 text-white/40 text-[11px] font-body">
             <span>☄️</span>
@@ -68,20 +70,24 @@ const GameSubtopicPage = ({
           {subtopics.map((subtopic, i) => {
             const colors = LEVEL_COLORS[i % LEVEL_COLORS.length];
             const levelNum = String(i + 1).padStart(2, "0");
+            const isComingSoon = subtopic.path === "/coming-soon";
 
             return (
               <button
                 key={subtopic.name}
                 onClick={() => { playPopSound(); navigate(subtopic.path); }}
-                className="group relative flex items-stretch overflow-hidden rounded-2xl cursor-pointer text-left
-                  transition-all duration-300 hover:scale-[1.015] animate-slide-up"
+                className={`group relative flex items-stretch overflow-hidden rounded-2xl text-left
+                  transition-all duration-300 animate-slide-up
+                  ${isComingSoon ? "cursor-default opacity-70" : "cursor-pointer hover:scale-[1.015]"}`}
                 style={{
                   animationDelay: `${i * 0.05}s`,
                   boxShadow: `0 2px 20px rgba(0,0,0,0.4)`,
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.boxShadow =
-                    `0 4px 30px ${colors.glow}, 0 2px 10px rgba(0,0,0,0.5)`;
+                  if (!isComingSoon) {
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow =
+                      `0 4px 30px ${colors.glow}, 0 2px 10px rgba(0,0,0,0.5)`;
+                  }
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLButtonElement).style.boxShadow =
@@ -89,43 +95,59 @@ const GameSubtopicPage = ({
                 }}
               >
                 <div
-                  className="absolute inset-0 opacity-[0.08] group-hover:opacity-[0.14] transition-opacity duration-300"
+                  className="absolute inset-0 transition-opacity duration-300"
                   style={{
-                    background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
+                    background: isComingSoon
+                      ? "rgba(255,255,255,0.03)"
+                      : `linear-gradient(135deg, ${colors.from}14, ${colors.to}14)`,
+                    opacity: isComingSoon ? 1 : undefined,
                   }}
                 />
+                {!isComingSoon && (
+                  <div
+                    className="absolute inset-0 opacity-[0.08] group-hover:opacity-[0.14] transition-opacity duration-300"
+                    style={{ background: `linear-gradient(135deg, ${colors.from}, ${colors.to})` }}
+                  />
+                )}
                 <div
-                  className="absolute inset-0 border border-white/10 group-hover:border-white/20 rounded-2xl transition-colors duration-300"
+                  className="absolute inset-0 border rounded-2xl transition-colors duration-300"
+                  style={{ borderColor: isComingSoon ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.10)" }}
                 />
 
-                <div
-                  className="absolute top-0 left-0 right-0 h-px opacity-40"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${colors.from}, ${colors.to}, transparent)`,
-                  }}
-                />
+                {!isComingSoon && (
+                  <div
+                    className="absolute top-0 left-0 right-0 h-px opacity-40"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${colors.from}, ${colors.to}, transparent)`,
+                    }}
+                  />
+                )}
 
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 
-                    -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
-                />
+                {!isComingSoon && (
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 
+                      -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"
+                  />
+                )}
 
                 <div
                   className="relative flex-shrink-0 flex flex-col items-center justify-center w-16 border-r"
                   style={{
-                    borderColor: "rgba(255,255,255,0.08)",
-                    background: `linear-gradient(180deg, ${colors.from}22, ${colors.to}22)`,
+                    borderColor: "rgba(255,255,255,0.07)",
+                    background: isComingSoon
+                      ? "rgba(255,255,255,0.03)"
+                      : `linear-gradient(180deg, ${colors.from}22, ${colors.to}22)`,
                   }}
                 >
                   <span
                     className="text-[9px] font-black tracking-widest"
-                    style={{ color: colors.from }}
+                    style={{ color: isComingSoon ? "rgba(255,255,255,0.2)" : colors.from }}
                   >
                     LVL
                   </span>
                   <span
                     className="text-2xl font-black leading-tight"
-                    style={{
+                    style={isComingSoon ? { color: "rgba(255,255,255,0.2)" } : {
                       background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
@@ -133,45 +155,58 @@ const GameSubtopicPage = ({
                   >
                     {levelNum}
                   </span>
-                  <span className="text-[8px] text-white/30 mt-0.5">STAGE</span>
+                  <span className="text-[8px] text-white/20 mt-0.5">STAGE</span>
                 </div>
 
                 <div className="relative flex-1 flex items-center gap-3 px-4 py-3.5 min-w-0">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 mb-0.5">
-                      <span className="text-base leading-none">☄️</span>
-                      <span className="font-body text-[11px] text-xs font-bold text-white leading-tight">
+                      <span className="text-base leading-none">{isComingSoon ? "🔒" : "☄️"}</span>
+                      <span className={`font-body text-[11px] text-xs font-bold leading-tight ${isComingSoon ? "text-white/40" : "text-white"}`}>
                         {subtopic.name}
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5 mt-1.5">
-                      <span
-                        className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
-                        style={{
-                          background: `linear-gradient(90deg, ${colors.from}33, ${colors.to}33)`,
-                          color: colors.to,
-                          border: `1px solid ${colors.to}44`,
-                        }}
-                      >
-                        🎯 5 SOAL
-                      </span>
-                      <span className="text-[9px] text-white/30">· Meteor Shooting</span>
+                      {isComingSoon ? (
+                        <span className="text-[9px] text-white/25">Sedang disiapkan...</span>
+                      ) : (
+                        <>
+                          <span
+                            className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
+                            style={{
+                              background: `linear-gradient(90deg, ${colors.from}33, ${colors.to}33)`,
+                              color: colors.to,
+                              border: `1px solid ${colors.to}44`,
+                            }}
+                          >
+                            🎯 5 SOAL
+                          </span>
+                          <span className="text-[9px] text-white/30">· Meteor Shooting</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
 
                 <div className="relative flex-shrink-0 flex items-center pr-4">
-                  <div
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-xl font-black text-[11px] text-white
-                      transition-all duration-300 group-hover:scale-105"
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
-                      boxShadow: `0 2px 12px ${colors.glow}`,
-                    }}
-                  >
-                    <Play className="w-3 h-3 fill-white" />
-                    <span>MAIN!</span>
-                  </div>
+                  {isComingSoon ? (
+                    <div className="flex items-center gap-1 px-3 py-2 rounded-xl font-black text-[10px] text-white/25 border border-white/10">
+                      <span>⏳</span>
+                      <span>SEGERA</span>
+                    </div>
+                  ) : (
+                    <div
+                      className="flex items-center gap-1.5 px-3 py-2 rounded-xl font-black text-[11px] text-white
+                        transition-all duration-300 group-hover:scale-105"
+                      style={{
+                        background: `linear-gradient(135deg, ${colors.from}, ${colors.to})`,
+                        boxShadow: `0 2px 12px ${colors.glow}`,
+                      }}
+                    >
+                      <Play className="w-3 h-3 fill-white" />
+                      <span>MAIN!</span>
+                    </div>
+                  )}
                 </div>
               </button>
             );
