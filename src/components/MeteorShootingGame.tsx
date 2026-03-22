@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 import Starfield from "@/components/Starfield";
 import QuizNavigation from "@/components/QuizNavigation";
 import { useAudio } from "@/hooks/useAudio";
@@ -408,6 +409,14 @@ const MeteorShootingGame = ({ questions, topicLabel, backPath, backLabel = "Kemb
       <img src={spaceBg} alt="" className="absolute inset-0 w-full h-full object-cover" />
       <Starfield />
       <QuizNavigation />
+
+      <button
+        onClick={() => { stopBgMusic(); navigate(backPath); }}
+        className="absolute top-4 left-4 z-30 flex items-center gap-1 px-3 py-1.5 rounded-lg bg-card/70 backdrop-blur border border-border text-foreground/80 hover:text-foreground hover:bg-card transition-all duration-200 font-body text-xs cursor-pointer"
+      >
+        <ChevronLeft className="w-4 h-4" />
+        {backLabel}
+      </button>
 
       <div className="relative z-20 shrink-0 flex flex-col items-center px-4 pt-10 md:pt-14 pb-1">
         <div className="font-display text-xs text-muted-foreground mb-0.5">
