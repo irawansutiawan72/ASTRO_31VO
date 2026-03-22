@@ -5,11 +5,11 @@ import { Gamepad2, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "RUANG SAMPEL DAN TITIK SAMPEL",
-  "PELUANG EMPIRIK DAN FREKUENSI RELATIF",
-  "PELUANG TEORETIK",
-  "FREKUENSI HARAPAN",
-  "KOMPLEMEN SUATU KEJADIAN",
+  { name: "RUANG SAMPEL DAN TITIK SAMPEL", path: "/math-game-arena/kelas-9/peluang/ruang-sampel" },
+  { name: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", path: "/math-game-arena/kelas-9/peluang/peluang-empirik" },
+  { name: "PELUANG TEORETIK", path: "/math-game-arena/kelas-9/peluang/peluang-teoretik" },
+  { name: "FREKUENSI HARAPAN", path: "/math-game-arena/kelas-9/peluang/frekuensi-harapan" },
+  { name: "KOMPLEMEN SUATU KEJADIAN", path: "/math-game-arena/kelas-9/peluang/komplemen" },
 ];
 
 const PeluangPage = () => {
@@ -29,15 +29,16 @@ const PeluangPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
+              <span className="ml-auto text-xs text-accent font-display">MAIN</span>
             </button>
           ))}
         </div>

@@ -5,11 +5,11 @@ import { Gamepad2, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const subtopics = [
-  "DEFINISI KESEBANGUNAN DAN KEKONGRUENAN",
-  "MENGHITUNG PANJANG RUSUK BANGUN DATAR YANG SEBANGUN",
-  "SEGITIGA – SEGITIGA YANG SEBANGUN",
-  "MENEMUKAN PERBANDINGAN/RASIO RUSUK-RUSUK SEGITIGA SIKU SIKU DENGAN KONSEP KESEBANGUNAN",
-  "KEKONGRUENAN PADA BANGUN DATAR",
+  { name: "DEFINISI KESEBANGUNAN DAN KEKONGRUENAN", path: "/math-game-arena/kelas-9/kesebangunan-kekongruenan/definisi" },
+  { name: "MENGHITUNG PANJANG RUSUK BANGUN DATAR YANG SEBANGUN", path: "/math-game-arena/kelas-9/kesebangunan-kekongruenan/menghitung-rusuk" },
+  { name: "SEGITIGA – SEGITIGA YANG SEBANGUN", path: "/math-game-arena/kelas-9/kesebangunan-kekongruenan/segitiga-sebangun" },
+  { name: "RASIO RUSUK SEGITIGA SIKU-SIKU DENGAN KONSEP KESEBANGUNAN", path: "/math-game-arena/kelas-9/kesebangunan-kekongruenan/rasio-rusuk" },
+  { name: "KEKONGRUENAN PADA BANGUN DATAR", path: "/math-game-arena/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar" },
 ];
 
 const KesebangunanKekongruenPage = () => {
@@ -29,15 +29,16 @@ const KesebangunanKekongruenPage = () => {
         <div className="flex flex-col gap-3 animate-slide-up">
           {subtopics.map((subtopic, i) => (
             <button
-              key={subtopic}
-              onClick={() => { playPopSound(); navigate("/coming-soon"); }}
+              key={subtopic.name}
+              onClick={() => { playPopSound(); navigate(subtopic.path); }}
               className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
                 hover:border-accent/60 transition-all duration-300
                 cursor-pointer text-left animate-slide-up"
               style={{ animationDelay: `${i * 0.03}s` }}
             >
               <ChevronRight className="w-4 h-4 text-accent shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic}</span>
+              <span className="font-body text-sm text-white">{subtopic.name}</span>
+              <span className="ml-auto text-xs text-accent font-display">MAIN</span>
             </button>
           ))}
         </div>
