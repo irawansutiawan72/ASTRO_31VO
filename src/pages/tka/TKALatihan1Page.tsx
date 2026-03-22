@@ -10,6 +10,8 @@ const TKALatihan1Page = () => {
   const navigate = useNavigate();
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
+  const [selectedComplexAnswers, setSelectedComplexAnswers] = useState<Record<number, Set<number>>>({});
+  const [selectedTrueFalse, setSelectedTrueFalse] = useState<Record<string, 'benar' | 'salah'>>({});
 
   const togglePembahasan = (n: number) => {
     setExpandedPembahasan(prev => {
@@ -23,6 +25,52 @@ const TKALatihan1Page = () => {
     if (selectedAnswers[qn] !== undefined) return;
     playPopSound();
     setSelectedAnswers(prev => ({ ...prev, [qn]: idx }));
+  };
+
+  const selectComplexAnswer = (qn: number, idx: number) => {
+    const existing = selectedComplexAnswers[qn] ?? new Set<number>();
+    if (existing.has(idx)) return;
+    playPopSound();
+    setSelectedComplexAnswers(prev => {
+      const next = new Set(prev[qn] ?? []);
+      next.add(idx);
+      return { ...prev, [qn]: next };
+    });
+  };
+
+  const selectTrueFalse = (key: string, choice: 'benar' | 'salah') => {
+    if (selectedTrueFalse[key] !== undefined) return;
+    playPopSound();
+    setSelectedTrueFalse(prev => ({ ...prev, [key]: choice }));
+  };
+
+  const ComplexMCQ = ({ qn, items }: {
+    qn: number;
+    items: { text: React.ReactNode; benar: boolean }[];
+  }) => {
+    const clicks = selectedComplexAnswers[qn] ?? new Set<number>();
+    return (
+      <div className="flex flex-col gap-2">
+        {items.map((item, i) => {
+          const isClicked = clicks.has(i);
+          let cls = "border rounded-lg px-3 py-2 text-xs font-body transition-all flex items-center justify-between ";
+          if (!isClicked) {
+            cls += "bg-white/5 border-white/10 text-white/80 cursor-pointer hover:bg-white/10 hover:border-cyan-500/40 active:scale-95";
+          } else if (item.benar) {
+            cls += "bg-green-900/30 border-green-500/50 text-green-300 font-bold";
+          } else {
+            cls += "bg-red-900/30 border-red-500/50 text-red-300";
+          }
+          return (
+            <div key={i} className={cls} onClick={() => selectComplexAnswer(qn, i)}>
+              <span>{item.text}</span>
+              {isClicked && item.benar && <span className="ml-2 text-green-400 font-bold shrink-0">✓ Benar!</span>}
+              {isClicked && !item.benar && <span className="ml-2 text-red-400 font-bold shrink-0">✗ Salah</span>}
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   const MCQ = ({ qn, options, correct, cols = 2 }: {
@@ -1036,14 +1084,12 @@ const TKALatihan1Page = () => {
                 <text x="125" y="120" textAnchor="middle" fill="#eab308" fontSize="8" fontFamily="sans-serif">72 cm</text>
               </svg>
             </div>
-            <div className="flex flex-col gap-2">
-              {[
-                {text:"1. Panjang QR = 54 cm", benar:true},
-                {text:"2. Luas karton 4.800 cm²", benar:true},
-                {text:"3. Luas lukisan 3.672 cm²", benar:false},
-                {text:"4. Luas karton tidak tertutup lukisan 912 cm²", benar:false},
-              ].map(o=><div key={o.text} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.benar ? "bg-green-900/20 border-green-500/30 text-green-300" : "bg-white/5 border-white/10 text-white/80"}`}>{o.text}{o.benar?" ✓":""}</div>)}
-            </div>
+            <ComplexMCQ qn={20} items={[
+              {text:"1. Panjang QR = 54 cm", benar:true},
+              {text:"2. Luas karton 4.800 cm²", benar:true},
+              {text:"3. Luas lukisan 3.672 cm²", benar:false},
+              {text:"4. Luas karton tidak tertutup lukisan 912 cm²", benar:false},
+            ]}/>
             <PembahasanBtn n={20}/>
             {expandedPembahasan.has(20) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1099,14 +1145,12 @@ const TKALatihan1Page = () => {
                 <text x={90+3*22+5} y={80-2*22-3} fill="#ef4444" fontSize="9" fontFamily="sans-serif">A(3,2)</text>
               </svg>
             </div>
-            <div className="flex flex-col gap-2">
-              {[
-                {text:"1. Ditranslasikan oleh (-1,4) bayangannya adalah A'(4,6)", benar:false},
-                {text:"2. Dirotasikan 90° berlawanan jarum jam pusat O(0,0), bayangannya A'(-2,3)", benar:true},
-                {text:"3. Dicerminkan terhadap sumbu-X bayangannya adalah A'(-3,2)", benar:false},
-                {text:"4. Didilatasikan pusat O(0,0) faktor skala -4, bayangannya A'(-12,-8)", benar:true},
-              ].map(o=><div key={o.text} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.benar ? "bg-green-900/20 border-green-500/30 text-green-300" : "bg-white/5 border-white/10 text-white/80"}`}>{o.text}{o.benar?" ✓":""}</div>)}
-            </div>
+            <ComplexMCQ qn={21} items={[
+              {text:"1. Ditranslasikan oleh (-1,4) bayangannya adalah A'(4,6)", benar:false},
+              {text:"2. Dirotasikan 90° berlawanan jarum jam pusat O(0,0), bayangannya A'(-2,3)", benar:true},
+              {text:"3. Dicerminkan terhadap sumbu-X bayangannya adalah A'(-3,2)", benar:false},
+              {text:"4. Didilatasikan pusat O(0,0) faktor skala -4, bayangannya A'(-12,-8)", benar:true},
+            ]}/>
             <PembahasanBtn n={21}/>
             {expandedPembahasan.has(21) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1264,11 +1308,63 @@ const TKALatihan1Page = () => {
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-xs font-body border-collapse">
-                <thead><tr className="bg-white/10"><th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th><th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th><th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th></tr></thead>
+                <thead>
+                  <tr className="bg-white/10">
+                    <th className="border border-white/20 px-3 py-2 text-white text-left">Pernyataan</th>
+                    <th className="border border-white/20 px-3 py-2 text-white text-center">Benar</th>
+                    <th className="border border-white/20 px-3 py-2 text-white text-center">Salah</th>
+                  </tr>
+                </thead>
                 <tbody>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">A. Gambar nomor 1 adalah jaring-jaring kubus</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td><td className="border border-white/10 px-3 py-2 text-center text-red-400 font-bold">✓</td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">B. Gambar nomor 2 adalah jaring-jaring prisma segi enam</td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
-                  <tr><td className="border border-white/10 px-3 py-2 text-white/80">C. Gambar nomor 3 adalah jaring-jaring limas segi empat</td><td className="border border-white/10 px-3 py-2 text-center text-green-400 font-bold">✓</td><td className="border border-white/10 px-3 py-2 text-center"><div className="w-4 h-4 border border-white/30 rounded mx-auto"/></td></tr>
+                  {([
+                    {key:"24A", label:"A. Gambar nomor 1 adalah jaring-jaring kubus", correct:"salah"},
+                    {key:"24B", label:"B. Gambar nomor 2 adalah jaring-jaring prisma segi enam", correct:"benar"},
+                    {key:"24C", label:"C. Gambar nomor 3 adalah jaring-jaring limas segi empat", correct:"benar"},
+                  ] as const).map(row => {
+                    const picked = selectedTrueFalse[row.key];
+                    const benarPicked = picked === 'benar';
+                    const salahPicked = picked === 'salah';
+                    const benarCorrect = row.correct === 'benar';
+                    return (
+                      <tr key={row.key}>
+                        <td className="border border-white/10 px-3 py-2 text-white/80">{row.label}</td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button
+                            onClick={() => selectTrueFalse(row.key, 'benar')}
+                            disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs
+                              ${benarPicked
+                                ? benarCorrect
+                                  ? "bg-green-900/50 border border-green-500/50 text-green-300"
+                                  : "bg-red-900/50 border border-red-500/50 text-red-300"
+                                : picked !== undefined
+                                  ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50"
+                                  : "bg-white/5 border border-white/10 text-white/70 hover:bg-green-900/20 hover:border-green-500/30 hover:text-green-300 cursor-pointer"
+                              }`}
+                          >
+                            {benarPicked ? (benarCorrect ? "✓ Benar!" : "✗ Salah") : "Benar"}
+                          </button>
+                        </td>
+                        <td className="border border-white/10 px-2 py-2 text-center">
+                          <button
+                            onClick={() => selectTrueFalse(row.key, 'salah')}
+                            disabled={picked !== undefined}
+                            className={`w-full rounded px-2 py-1 font-bold transition-all text-xs
+                              ${salahPicked
+                                ? !benarCorrect
+                                  ? "bg-green-900/50 border border-green-500/50 text-green-300"
+                                  : "bg-red-900/50 border border-red-500/50 text-red-300"
+                                : picked !== undefined
+                                  ? "opacity-30 cursor-default bg-white/5 border border-white/10 text-white/50"
+                                  : "bg-white/5 border border-white/10 text-white/70 hover:bg-red-900/20 hover:border-red-500/30 hover:text-red-300 cursor-pointer"
+                              }`}
+                          >
+                            {salahPicked ? (!benarCorrect ? "✓ Benar!" : "✗ Salah") : "Salah"}
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -1482,14 +1578,12 @@ const TKALatihan1Page = () => {
                 <tbody><tr><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">Frekuensi</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">1</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">3</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">6</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">4</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">3</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">2</td><td className="border border-white/10 px-2 py-1.5 text-white/80 text-center">1</td></tr></tbody>
               </table>
             </div>
-            <div className="flex flex-col gap-2">
-              {[
-                {text:"1. Nilai modus adalah 155 cm", benar:true},
-                {text:"2. Nilai median adalah 156 cm", benar:false},
-                {text:"3. Nilai rata-rata adalah 158 cm", benar:false},
-                {text:"4. Banyak siswa memiliki tinggi badan di bawah rata-rata 10 orang", benar:true},
-              ].map(o=><div key={o.text} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.benar ? "bg-green-900/20 border-green-500/30 text-green-300" : "bg-white/5 border-white/10 text-white/80"}`}>{o.text}{o.benar?" ✓":""}</div>)}
-            </div>
+            <ComplexMCQ qn={28} items={[
+              {text:"1. Nilai modus adalah 155 cm", benar:true},
+              {text:"2. Nilai median adalah 156 cm", benar:false},
+              {text:"3. Nilai rata-rata adalah 158 cm", benar:false},
+              {text:"4. Banyak siswa memiliki tinggi badan di bawah rata-rata 10 orang", benar:true},
+            ]}/>
             <PembahasanBtn n={28}/>
             {expandedPembahasan.has(28) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
