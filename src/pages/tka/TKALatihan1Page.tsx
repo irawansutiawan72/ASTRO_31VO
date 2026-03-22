@@ -9,6 +9,7 @@ import "katex/dist/katex.min.css";
 const TKALatihan1Page = () => {
   const navigate = useNavigate();
   const [expandedPembahasan, setExpandedPembahasan] = useState<Set<number>>(new Set());
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
 
   const togglePembahasan = (n: number) => {
     setExpandedPembahasan(prev => {
@@ -16,6 +17,44 @@ const TKALatihan1Page = () => {
       next.has(n) ? next.delete(n) : next.add(n);
       return next;
     });
+  };
+
+  const selectAnswer = (qn: number, idx: number) => {
+    if (selectedAnswers[qn] !== undefined) return;
+    playPopSound();
+    setSelectedAnswers(prev => ({ ...prev, [qn]: idx }));
+  };
+
+  const MCQ = ({ qn, options, correct, cols = 2 }: {
+    qn: number; options: React.ReactNode[]; correct: number; cols?: number;
+  }) => {
+    const sel = selectedAnswers[qn];
+    const answered = sel !== undefined;
+    return (
+      <div className={cols === 1 ? "flex flex-col gap-2" : "grid grid-cols-2 gap-2"}>
+        {options.map((opt, i) => {
+          const isSelected = sel === i;
+          const isCorrect = i === correct;
+          let cls = "border rounded-lg px-3 py-2 text-xs font-body transition-all flex items-center justify-between ";
+          if (!answered) {
+            cls += "bg-white/5 border-white/10 text-white/80 cursor-pointer hover:bg-white/10 hover:border-cyan-500/40 active:scale-95";
+          } else if (isCorrect) {
+            cls += "bg-green-900/30 border-green-500/50 text-green-300 font-bold";
+          } else if (isSelected) {
+            cls += "bg-red-900/30 border-red-500/50 text-red-300";
+          } else {
+            cls += "bg-white/5 border-white/10 text-white/30";
+          }
+          return (
+            <div key={i} className={cls} onClick={() => selectAnswer(qn, i)}>
+              <span>{opt}</span>
+              {answered && isCorrect && <span className="ml-2 text-green-400 font-bold shrink-0">✓ Benar!</span>}
+              {answered && isSelected && !isCorrect && <span className="ml-2 text-red-400 font-bold shrink-0">✗ Salah</span>}
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   const PembahasanBtn = ({ n }: { n: number }) => (
@@ -96,9 +135,7 @@ const TKALatihan1Page = () => {
             <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
               Seorang peserta menjawab 27 butir soal dan 24 di antaranya benar. Skor yang diperoleh peserta tersebut adalah ….
             </p>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 90","B. 93","C. 96","D. 108"].map(o=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${o.startsWith("B") ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}</div>)}
-            </div>
+            <MCQ qn={1} correct={1} options={["A. 90","B. 93","C. 96","D. 108"]}/>
             <PembahasanBtn n={1}/>
             {expandedPembahasan.has(1) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -138,9 +175,24 @@ const TKALatihan1Page = () => {
                 [{label:"½", x:30}, {label:"70%", x:95}, {label:"1,2", x:165}, {label:"1¼", x:225}],
                 [{label:"½", x:30}, {label:"70%", x:95}, {label:"1¼", x:155}, {label:"1,2", x:225}],
               ];
+              const correct = 2;
+              const sel = selectedAnswers[2];
+              const answered = sel !== undefined;
+              const isCorrect = idx === correct;
+              const isSelected = sel === idx;
+              let rowCls = "flex items-center gap-3 mb-2 rounded-lg px-2 py-1 border transition-all ";
+              if (!answered) {
+                rowCls += "border-transparent cursor-pointer hover:bg-white/5 hover:border-cyan-500/30 active:scale-95";
+              } else if (isCorrect) {
+                rowCls += "bg-green-900/20 border-green-500/30";
+              } else if (isSelected) {
+                rowCls += "bg-red-900/20 border-red-500/30";
+              } else {
+                rowCls += "border-transparent opacity-40";
+              }
               return (
-                <div key={opt} className={`flex items-center gap-3 mb-2 rounded-lg px-2 py-1 ${idx===2 ? "bg-green-900/20 border border-green-500/30" : ""}`}>
-                  <span className={`font-body text-xs w-4 ${idx===2 ? "text-green-300 font-bold" : "text-white/60"}`}>{opt}.</span>
+                <div key={opt} className={rowCls} onClick={() => selectAnswer(2, idx)}>
+                  <span className={`font-body text-xs w-4 shrink-0 ${isCorrect && answered ? "text-green-300 font-bold" : isSelected && answered ? "text-red-300" : "text-white/60"}`}>{opt}.</span>
                   <svg width="270" height="38" className="bg-white/5 rounded-lg">
                     <line x1="15" y1="20" x2="255" y2="20" stroke="#64748b" strokeWidth="1.5"/>
                     <polygon points="255,16 263,20 255,24" fill="#64748b"/>
@@ -151,6 +203,8 @@ const TKALatihan1Page = () => {
                       </g>
                     ))}
                   </svg>
+                  {answered && isCorrect && <span className="ml-1 text-green-400 font-bold text-xs shrink-0">✓ Benar!</span>}
+                  {answered && isSelected && !isCorrect && <span className="ml-1 text-red-400 font-bold text-xs shrink-0">✗ Salah</span>}
                 </div>
               );
             })}
@@ -186,12 +240,12 @@ const TKALatihan1Page = () => {
                 Diketahui tiga bilangan 240, 360, dan 450. Faktor persekutuan terbesar dari ketiga bilangan tersebut adalah ….
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">A. <InlineMath math="2^2 \cdot 3^2 \cdot 5^2"/></div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">B. <InlineMath math="2^2 \cdot 3^2 \cdot 5"/></div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">C. <InlineMath math="2 \cdot 3^2 \cdot 5"/></div>
-              <div className="bg-green-900/30 border border-green-500/50 rounded-lg px-3 py-2 text-green-300 text-xs font-body font-bold">D. <InlineMath math="2 \cdot 3 \cdot 5"/> ✓</div>
-            </div>
+            <MCQ qn={3} correct={3} options={[
+              <span>A. <InlineMath math="2^2 \cdot 3^2 \cdot 5^2"/></span>,
+              <span>B. <InlineMath math="2^2 \cdot 3^2 \cdot 5"/></span>,
+              <span>C. <InlineMath math="2 \cdot 3^2 \cdot 5"/></span>,
+              <span>D. <InlineMath math="2 \cdot 3 \cdot 5"/></span>,
+            ]}/>
             <PembahasanBtn n={3}/>
             {expandedPembahasan.has(3) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -252,9 +306,7 @@ const TKALatihan1Page = () => {
             <p className="font-body text-white/90 text-sm leading-relaxed mb-3">
               Berapa banyak cat kemasan A dan B yang harus dibeli ayah agar biaya yang dikeluarkan minimum?
             </p>
-            <div className="grid grid-cols-1 gap-2">
-              {["A. 4 kemasan B dan 1 kemasan A","B. 3 kemasan B dan 2 kemasan A","C. 2 kemasan B dan 3 kemasan A","D. 1 kemasan B dan 3 kemasan A"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===0 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===0?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={4} correct={0} cols={1} options={["A. 4 kemasan B dan 1 kemasan A","B. 3 kemasan B dan 2 kemasan A","C. 2 kemasan B dan 3 kemasan A","D. 1 kemasan B dan 3 kemasan A"]}/>
             <PembahasanBtn n={4}/>
             {expandedPembahasan.has(4) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -356,9 +408,7 @@ const TKALatihan1Page = () => {
                 Seorang peternak memiliki 200 ekor ayam dan menyediakan pakan yang cukup untuk 30 hari. Setelah 12 hari berjalan, peternak tersebut menjual 50 ekor ayamnya. Sisa pakan yang tersedia akan habis dalam waktu ….
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 18 hari","B. 24 hari","C. 30 hari","D. 32 hari"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===1?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={6} correct={1} options={["A. 18 hari","B. 24 hari","C. 30 hari","D. 32 hari"]}/>
             <PembahasanBtn n={6}/>
             {expandedPembahasan.has(6) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -391,9 +441,7 @@ const TKALatihan1Page = () => {
                 Di sebuah toko buah, harga 5 kilogram jeruk Rp120.000,00. Jika Ibu memiliki uang Rp250.000,00 dan akan membeli 9 kilogram jeruk yang sama, maka uang kembalian yang diterima Ibu adalah …..
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. Rp34.000,00","B. Rp32.000,00","C. Rp25.000,00","D. Rp10.000,00"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===0 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===0?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={7} correct={0} options={["A. Rp34.000,00","B. Rp32.000,00","C. Rp25.000,00","D. Rp10.000,00"]}/>
             <PembahasanBtn n={7}/>
             {expandedPembahasan.has(7) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -486,9 +534,7 @@ const TKALatihan1Page = () => {
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. Toko Merapi","B. Toko Merbabu","C. Toko Himalaya","D. Toko Suralaya"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===0 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===0?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={9} correct={0} options={["A. Toko Merapi","B. Toko Merbabu","C. Toko Himalaya","D. Toko Suralaya"]}/>
             <PembahasanBtn n={9}/>
             {expandedPembahasan.has(9) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -521,9 +567,7 @@ const TKALatihan1Page = () => {
                 Diketahui persamaan <InlineMath math="4(2x+3)-13=5x+8"/>. Nilai dari <InlineMath math="6x+5"/> adalah ….
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 3","B. 13","C. 21","D. 23"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===3 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===3?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={10} correct={3} options={["A. 3","B. 13","C. 21","D. 23"]}/>
             <PembahasanBtn n={10}/>
             {expandedPembahasan.has(10) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -554,9 +598,7 @@ const TKALatihan1Page = () => {
                 Aldi memiliki uang sebesar Rp100.000,00 yang akan digunakan untuk membeli buku dan pulpen. Biaya perjalanan menuju toko Rp8.000,00. Harga sebuah buku Rp9.000,00 dan harga sebuah pulpen Rp7.000,00. Jika Aldi membeli 3 pulpen, maka jumlah maksimal buku yang dapat dibeli adalah ….
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 6 buah","B. 7 buah","C. 8 buah","D. 9 buah"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===1?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={11} correct={1} options={["A. 6 buah","B. 7 buah","C. 8 buah","D. 9 buah"]}/>
             <PembahasanBtn n={11}/>
             {expandedPembahasan.has(11) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -643,12 +685,12 @@ const TKALatihan1Page = () => {
                 <text x="138" y="65" fill="#eab308" fontSize="9" fontFamily="sans-serif">t</text>
               </svg>
             </div>
-            <div className="grid grid-cols-1 gap-2">
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">A. <InlineMath math="(2x^2 + 7x + 6)\text{ cm}^2"/></div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">B. <InlineMath math="(2x^2 + 8x + 8)\text{ cm}^2"/></div>
-              <div className="bg-green-900/30 border border-green-500/50 rounded-lg px-3 py-2 text-green-300 text-xs font-body font-bold">C. <InlineMath math="(2x^2 + 12x + 16)\text{ cm}^2"/> ✓</div>
-              <div className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white/80 text-xs font-body">D. <InlineMath math="(4x^2 + 8x + 16)\text{ cm}^2"/></div>
-            </div>
+            <MCQ qn={13} correct={2} cols={1} options={[
+              <span>A. <InlineMath math="(2x^2 + 7x + 6)\text{ cm}^2"/></span>,
+              <span>B. <InlineMath math="(2x^2 + 8x + 8)\text{ cm}^2"/></span>,
+              <span>C. <InlineMath math="(2x^2 + 12x + 16)\text{ cm}^2"/></span>,
+              <span>D. <InlineMath math="(4x^2 + 8x + 16)\text{ cm}^2"/></span>,
+            ]}/>
             <PembahasanBtn n={13}/>
             {expandedPembahasan.has(13) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -738,9 +780,7 @@ const TKALatihan1Page = () => {
                 Diketahui suatu barisan aritmatika 8, 11, 14, 17, 20, … Nilai dari <InlineMath math="U_{60} - U_{12}"/> adalah ….
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 96","B. 120","C. 144","D. 156"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===2 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===2?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={15} correct={2} options={["A. 96","B. 120","C. 144","D. 156"]}/>
             <PembahasanBtn n={15}/>
             {expandedPembahasan.has(15) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -786,9 +826,7 @@ const TKALatihan1Page = () => {
                 <text x="235" y="73" textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="sans-serif">Pola 3</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 7.452 batang","B. 7.590 batang","C. 7.755 batang","D. 8.036 batang"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===1 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===1?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={16} correct={1} options={["A. 7.452 batang","B. 7.590 batang","C. 7.755 batang","D. 8.036 batang"]}/>
             <PembahasanBtn n={16}/>
             {expandedPembahasan.has(16) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -951,9 +989,7 @@ const TKALatihan1Page = () => {
                 <text x="60" y="95" textAnchor="middle" fill="#94a3b8" fontSize="8" fontFamily="sans-serif">3,6 cm</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 1,3 cm","B. 1,5 cm","C. 2,0 cm","D. 3,0 cm"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===3 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===3?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={19} correct={3} options={["A. 1,3 cm","B. 1,5 cm","C. 2,0 cm","D. 3,0 cm"]}/>
             <PembahasanBtn n={19}/>
             {expandedPembahasan.has(19) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
@@ -1121,9 +1157,7 @@ const TKALatihan1Page = () => {
                 <text x="182" y="80" fill="#94a3b8" fontSize="8" fontFamily="sans-serif">BC=15</text>
               </svg>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["A. 80 cm","B. 89 cm","C. 92 cm","D. 105 cm"].map((o,i)=><div key={o} className={`border rounded-lg px-3 py-2 text-xs font-body ${i===2 ? "bg-green-900/30 border-green-500/50 text-green-300 font-bold" : "bg-white/5 border-white/10 text-white/80"}`}>{o}{i===2?" ✓":""}</div>)}
-            </div>
+            <MCQ qn={22} correct={2} options={["A. 80 cm","B. 89 cm","C. 92 cm","D. 105 cm"]}/>
             <PembahasanBtn n={22}/>
             {expandedPembahasan.has(22) && (
               <div className="mt-3 rounded-xl border border-cyan-500/30 bg-cyan-950/30 p-4 space-y-3 text-xs font-body">
