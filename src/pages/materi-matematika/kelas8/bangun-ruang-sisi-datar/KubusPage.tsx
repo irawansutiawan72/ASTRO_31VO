@@ -1268,7 +1268,136 @@ const KubusPage = () => {
         </div>
       ),
     },
-    ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    { title: sections[0].title, icon: sections[0].icon, content: sections[0].content },
+    {
+      title: "Unsur Kubus — Rusuk",
+      icon: "📏",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-cyan-950/40 border border-cyan-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-cyan-300 font-semibold">① Rusuk (12 buah)</p>
+            <p className="text-xs text-white/70">Rusuk adalah <strong>ruas garis yang merupakan pertemuan dua sisi</strong> kubus. Semua rusuk kubus sama panjang (<InlineMath math="= s" />).</p>
+            <RusukAnimSVG />
+          </div>
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+            <p>🔑 <strong className="text-cyan-300">Jumlah rusuk kubus = 12</strong>, semuanya memiliki panjang yang sama yaitu <InlineMath math="s" />.</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Unsur Kubus — Sisi / Bidang",
+      icon: "🟦",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-blue-950/40 border border-blue-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-blue-300 font-semibold">② Sisi / Bidang (6 buah)</p>
+            <p className="text-xs text-white/70">Sisi adalah <strong>bidang yang membatasi</strong> kubus. Setiap sisi berbentuk persegi dengan luas <InlineMath math="s^2" />. Ada 6 sisi: depan, belakang, kiri, kanan, atas, bawah.</p>
+            <SisiAnimSVG />
+          </div>
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+            <p>🔑 <strong className="text-blue-300">Jumlah sisi kubus = 6</strong>, setiap sisi berbentuk persegi dengan luas <InlineMath math="s^2" />.</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Unsur Kubus — Titik Sudut",
+      icon: "🔷",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-yellow-950/40 border border-yellow-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-yellow-300 font-semibold">③ Titik Sudut (8 buah)</p>
+            <p className="text-xs text-white/70">Titik sudut adalah <strong>titik pertemuan tiga rusuk</strong>. Diberi nama dengan huruf kapital (A, B, C, D, E, F, G, H).</p>
+            <TitikSudutAnimSVG />
+          </div>
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300">
+            <p>🔑 <strong className="text-yellow-300">Jumlah titik sudut kubus = 8</strong>, setiap titik merupakan pertemuan tiga rusuk.</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Unsur Kubus — Diagonal Bidang",
+      icon: "📐",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-green-950/40 border border-green-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-green-300 font-semibold">④ Diagonal Bidang (12 buah)</p>
+            <p className="text-xs text-white/70">Diagonal bidang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dalam satu sisi</strong>. Setiap sisi memiliki 2 diagonal bidang → total 12.</p>
+            <DiagonalBidangSVG />
+            <div className="bg-green-950/60 rounded p-2 text-center">
+              <BlockMath math="d_b = s\sqrt{2}" />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Unsur Kubus — Diagonal Ruang",
+      icon: "🔀",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-red-950/40 border border-red-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-red-300 font-semibold">⑤ Diagonal Ruang (4 buah)</p>
+            <p className="text-xs text-white/70">Diagonal ruang adalah <strong>ruas garis yang menghubungkan dua titik sudut yang berhadapan dan melewati bagian dalam kubus</strong>.</p>
+            <DiagonalRuangSVG />
+            <div className="bg-red-950/60 rounded p-2 text-center">
+              <BlockMath math="d_r = s\sqrt{3}" />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Unsur Kubus — Bidang Diagonal",
+      icon: "🔲",
+      content: (
+        <div className="space-y-3 text-sm text-white/85 font-body">
+          <div className="bg-violet-950/40 border border-violet-700/40 rounded-lg p-4 space-y-2">
+            <p className="text-violet-300 font-semibold">⑥ Bidang Diagonal (6 buah)</p>
+            <p className="text-xs text-white/70">Bidang diagonal adalah <strong>bidang yang memotong melalui empat titik sudut dan dua diagonal ruang</strong>. Berbentuk persegi panjang (diagonal bidang × sisi).</p>
+            <BidangDiagonalSVG />
+            <div className="bg-violet-950/60 rounded p-2 text-center">
+              <BlockMath math="L_{\text{bidang diag}} = s \times s\sqrt{2} = s^2\sqrt{2}" />
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    { title: sections[2].title, icon: sections[2].icon, content: sections[2].content },
+    {
+      title: "Jaring-jaring Kubus — 3D Interaktif",
+      icon: "🧊",
+      content: (
+        <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
+          <p>
+            <strong className="text-cyan-300">Jaring-jaring kubus</strong> adalah pola 2D yang jika dilipat akan membentuk kubus.
+            Gunakan kubus 3D di bawah untuk melihat proses "pembongkaran" kubus menjadi jaring-jaringnya!
+          </p>
+          <InteractiveCube3D />
+        </div>
+      ),
+    },
+    {
+      title: "11 Pola Jaring-jaring Kubus",
+      icon: "🗂️",
+      content: (
+        <div className="space-y-4 text-sm text-white/85 font-body leading-relaxed">
+          <p className="text-white/70 text-xs text-center">
+            Ada tepat <strong className="text-yellow-300">11 pola jaring-jaring</strong> yang berbeda dan valid untuk sebuah kubus:
+          </p>
+          <NetGallery />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+            <p>🔑 <strong className="text-white">Cara memverifikasi jaring-jaring:</strong></p>
+            <p>Bayangkan melipat setiap kotak. Jika 6 kotak bisa menutup semua sisi kubus tanpa tumpang tindih dan tanpa celah, maka itu adalah jaring-jaring yang valid!</p>
+          </div>
+        </div>
+      ),
+    },
+    { title: sections[4].title, icon: sections[4].icon, content: sections[4].content },
+    { title: sections[5].title, icon: sections[5].icon, content: sections[5].content },
+    { title: sections[6].title, icon: sections[6].icon, content: sections[6].content },
     {
       title: "Contoh Soal — Luas Permukaan",
       icon: "🎨",
