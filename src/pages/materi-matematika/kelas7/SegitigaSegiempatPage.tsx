@@ -1,58 +1,22 @@
-import { useNavigate } from "react-router-dom";
-import Starfield from "@/components/Starfield";
-import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronRight } from "lucide-react";
-import { playPopSound } from "@/hooks/useAudio";
+import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { name: "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" },
-  { name: "KELILING SEGITIGA DAN SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-segitiga-segiempat" },
-  { name: "LUAS SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" },
-  { name: "LUAS SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segiempat" },
-  { name: "KELILING DAN LUAS BANGUN TAK BERATURAN", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" },
+  { label: "GARIS BERAT, GARIS BAGI DAN GARIS TINGGI PADA SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/garis-berat-bagi-tinggi" },
+  { label: "KELILING SEGITIGA DAN SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-segitiga-segiempat" },
+  { label: "LUAS SEGITIGA", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segitiga" },
+  { label: "LUAS SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/luas-segiempat" },
+  { label: "KELILING DAN LUAS BANGUN TAK BERATURAN", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat/keliling-luas-bangun-tak-beraturan" },
 ];
 
-const SegitigaSegiempatPage = () => {
-  const navigate = useNavigate();
-
-  return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
-      <Starfield />
-      <PageNavigation />
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-        <BookOpen className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
-          SEGITIGA DAN SEGIEMPAT
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Materi Matematika</p>
-
-        <div className="flex flex-col gap-3 animate-slide-up">
-          {subtopics.map((subtopic, i) => (
-            <button
-              key={subtopic.name}
-              onClick={() => { playPopSound(); navigate(subtopic.path); }}
-              className="group flex items-center gap-4 bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4
-                hover:border-primary/60 transition-all duration-300
-                cursor-pointer text-left animate-slide-up"
-              style={{ animationDelay: `${i * 0.03}s` }}
-            >
-              <ChevronRight className="w-4 h-4 text-primary shrink-0 group-hover:translate-x-1 transition-transform" />
-              <span className="font-body text-sm text-white">{subtopic.name}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-7"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
-          >
-            Kembali ke Kelas 7
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+const SegitigaSegiempatPage = () => (
+  <MateriTopicPage
+    title="SEGITIGA DAN SEGIEMPAT"
+    emoji="🔺"
+    kelas="Kelas 7"
+    subtopics={subtopics}
+    backPath="/materi-matematika/kelas-7"
+    backLabel="Kembali ke Kelas 7"
+  />
+);
 
 export default SegitigaSegiempatPage;
