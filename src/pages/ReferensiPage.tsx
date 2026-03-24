@@ -20,6 +20,8 @@ const internetRefs = [
   { label: "Pngtree.com/freepng/3d-sun-full-view_16171547.html", url: "https://pngtree.com/freepng/3d-sun-full-view_16171547.html", akses: "12 Maret 2026" },
   { label: "Bing.com/images/create", url: "https://bing.com/images/create", akses: "Januari 2026" },
   { label: "youtube.com/watch?v=PXT5uJP1WwE", url: "https://www.youtube.com/watch?v=PXT5uJP1WwE", akses: "Maret 2026", author: "Nurahman, F.", title: "TEMPLATE GAME INTERAKTIF POWERPOINT #4" },
+  { label: "youtube.com/watch?v=mRy5nXHrHQk", url: "https://www.youtube.com/watch?v=mRy5nXHrHQk", akses: "Maret 2026", author: "Saya Bisa.", title: "Bilangan Bulat: Penjumlahan dan Pengurangan | Matematika | SayaBisa." },
+  { label: "youtube.com/watch?v=JrWic2SG_ts", url: "https://www.youtube.com/watch?v=JrWic2SG_ts", akses: "Maret 2026", author: "Saya Bisa.", title: "Operasi Hitung Bilangan Bulat: Perkalian dan Pembagian | Matematika | SayaBisa." },
 ];
 
 const ReferensiPage = () => {
