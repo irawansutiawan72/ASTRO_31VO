@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Send, Bot, User, ChevronLeft, Sparkles } from "lucide-react";
+import { Send, User, ChevronLeft, Sparkles } from "lucide-react";
 import { InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 
@@ -128,8 +128,8 @@ const ChatAIPage = () => {
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-cyan-500/40 flex items-center justify-center shrink-0">
-          <Bot className="w-5 h-5 text-cyan-400" />
+        <div className="w-9 h-9 rounded-xl overflow-hidden border border-cyan-500/40 shrink-0">
+          <img src="/numatik-ai-avatar.png" alt="NUMATIK AI" className="w-full h-full object-cover" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-display text-sm font-bold text-primary leading-none">NUMATIK AI</p>
@@ -146,16 +146,15 @@ const ChatAIPage = () => {
         {messages.map((msg, i) => (
           <div key={i} className={`flex gap-2 ${msg.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
             {/* Avatar */}
-            <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center border ${
-              msg.role === "model"
-                ? "bg-gradient-to-br from-cyan-900/60 to-purple-900/60 border-cyan-500/40"
-                : "bg-gradient-to-br from-accent/30 to-yellow-500/20 border-accent/40"
-            }`}>
-              {msg.role === "model"
-                ? <Bot className="w-4 h-4 text-cyan-400" />
-                : <User className="w-4 h-4 text-accent" />
-              }
-            </div>
+            {msg.role === "model" ? (
+              <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden border border-cyan-500/40">
+                <img src="/numatik-ai-avatar.png" alt="NUMATIK AI" className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center border bg-gradient-to-br from-accent/30 to-yellow-500/20 border-accent/40">
+                <User className="w-4 h-4 text-accent" />
+              </div>
+            )}
 
             {/* Bubble */}
             <div className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm font-body leading-relaxed shadow-lg ${
@@ -171,8 +170,8 @@ const ChatAIPage = () => {
         {/* Loading indicator */}
         {loading && (
           <div className="flex gap-2 flex-row">
-            <div className="w-8 h-8 rounded-full shrink-0 flex items-center justify-center bg-gradient-to-br from-cyan-900/60 to-purple-900/60 border border-cyan-500/40">
-              <Bot className="w-4 h-4 text-cyan-400" />
+            <div className="w-8 h-8 rounded-full shrink-0 overflow-hidden border border-cyan-500/40">
+              <img src="/numatik-ai-avatar.png" alt="NUMATIK AI" className="w-full h-full object-cover" />
             </div>
             <div className="bg-card/90 border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-2">
               <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
