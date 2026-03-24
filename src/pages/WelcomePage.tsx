@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import SpaceObjects from "@/components/SpaceObjects";
+import ExitDialog from "@/components/ExitDialog";
 import { spaceBg } from "@/assets/placeholder";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -29,6 +30,17 @@ const WelcomePage = () => {
 
       {/* Starfield (dark) or Snowfall (light) */}
       <Starfield />
+
+      {/* Exit button — top right */}
+      <div
+        className="fixed right-0 top-0 z-50 p-4"
+        style={{
+          paddingRight: "max(1rem, env(safe-area-inset-right, 0px))",
+          paddingTop: "max(1rem, env(safe-area-inset-top, 0px))",
+        }}
+      >
+        <ExitDialog />
+      </div>
 
       {/* Main content */}
       <div className="relative z-10 text-center w-full max-w-2xl flex flex-col items-center px-4 py-16 sm:px-6">
