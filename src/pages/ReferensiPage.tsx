@@ -27,7 +27,7 @@ const ReferensiPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <PageNavigation prevPath="/latihan" />
+      <PageNavigation prevPath="/menu" />
       <div className="relative z-10 max-w-2xl w-full px-4 py-10">
         <h1 className="font-display text-3xl font-bold text-primary text-glow-cyan mb-8 text-center">
           SUMBER REFERENSI
