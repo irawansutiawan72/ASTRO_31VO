@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
+import PageNavigation from "@/components/PageNavigation";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Send, User, ChevronLeft, Sparkles } from "lucide-react";
 import { InlineMath } from "react-katex";
@@ -119,6 +120,7 @@ const ChatAIPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col gradient-space overflow-hidden">
       <Starfield />
+      <PageNavigation prevPath="/menu" />
 
       {/* Header */}
       <div className="relative z-10 flex items-center gap-3 px-4 py-3 bg-card/80 backdrop-blur border-b border-border shrink-0">
