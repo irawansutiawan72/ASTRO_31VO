@@ -129,7 +129,7 @@ const OlimpiadePage = () => {
                 style={{ animationDelay: `${i * 0.03}s` }}
               >
                 <Trophy className="w-5 h-5 text-accent shrink-0 group-hover:scale-110 transition-transform" />
-                <span className="font-body text-sm text-white">{topik}</span>
+                <span className="font-body text-sm text-white uppercase">{topik}</span>
                 {hasContent && (
                   <span className="ml-auto text-xs text-accent font-display">BUKA</span>
                 )}
