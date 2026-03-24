@@ -1,11 +1,11 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "TABUNG", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" },
-  { label: "KERUCUT", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut" },
-  { label: "BOLA", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola" },
-  { label: "PERUBAHAN LUAS DAN VOLUME BANGUN RUANG SISI LENGKUNG", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume" },
-  { label: "BANGUN RUANG SISI LENGKUNG GABUNGAN", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/gabungan" },
+  { label: "TABUNG", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung", icon: "🥫" },
+  { label: "KERUCUT", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/kerucut", icon: "🍦" },
+  { label: "BOLA", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/bola", icon: "⚽" },
+  { label: "PERUBAHAN LUAS DAN VOLUME BANGUN RUANG SISI LENGKUNG", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/perubahan-volume", icon: "📐" },
+  { label: "BANGUN RUANG SISI LENGKUNG GABUNGAN", path: "/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/gabungan", icon: "🔗" },
 ];
 
 const BangunRuangSisiLengkungPage = () => (

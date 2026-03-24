@@ -5,21 +5,22 @@ import { BookOpen, ChevronRight } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const COLOR_PALETTE = [
-  { gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", iconBg: "bg-blue-500/20", iconColor: "text-blue-300", leftBar: "from-blue-400 to-indigo-500", numBg: "bg-blue-500/20 text-blue-300 border-blue-400/40" },
-  { gradient: "from-cyan-900/40 to-sky-900/30", border: "border-cyan-500/30", iconBg: "bg-cyan-500/20", iconColor: "text-cyan-300", leftBar: "from-cyan-400 to-sky-500", numBg: "bg-cyan-500/20 text-cyan-300 border-cyan-400/40" },
-  { gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", iconBg: "bg-violet-500/20", iconColor: "text-violet-300", leftBar: "from-violet-400 to-purple-500", numBg: "bg-violet-500/20 text-violet-300 border-violet-400/40" },
-  { gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", iconBg: "bg-sky-500/20", iconColor: "text-sky-300", leftBar: "from-sky-400 to-blue-500", numBg: "bg-sky-500/20 text-sky-300 border-sky-400/40" },
-  { gradient: "from-indigo-900/40 to-blue-900/30", border: "border-indigo-500/30", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-300", leftBar: "from-indigo-400 to-blue-500", numBg: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40" },
-  { gradient: "from-purple-900/40 to-fuchsia-900/30", border: "border-purple-500/30", iconBg: "bg-purple-500/20", iconColor: "text-purple-300", leftBar: "from-purple-400 to-fuchsia-500", numBg: "bg-purple-500/20 text-purple-300 border-purple-400/40" },
-  { gradient: "from-teal-900/40 to-emerald-900/30", border: "border-teal-500/30", iconBg: "bg-teal-500/20", iconColor: "text-teal-300", leftBar: "from-teal-400 to-emerald-500", numBg: "bg-teal-500/20 text-teal-300 border-teal-400/40" },
-  { gradient: "from-green-900/40 to-emerald-900/30", border: "border-green-500/30", iconBg: "bg-green-500/20", iconColor: "text-green-300", leftBar: "from-green-400 to-emerald-500", numBg: "bg-green-500/20 text-green-300 border-green-400/40" },
-  { gradient: "from-rose-900/40 to-pink-900/30", border: "border-rose-500/30", iconBg: "bg-rose-500/20", iconColor: "text-rose-300", leftBar: "from-rose-400 to-pink-500", numBg: "bg-rose-500/20 text-rose-300 border-rose-400/40" },
-  { gradient: "from-orange-900/40 to-amber-900/30", border: "border-orange-500/30", iconBg: "bg-orange-500/20", iconColor: "text-orange-300", leftBar: "from-orange-400 to-amber-500", numBg: "bg-orange-500/20 text-orange-300 border-orange-400/40" },
+  { gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", iconBg: "bg-blue-500/20", iconColor: "text-blue-300", leftBar: "from-blue-400 to-indigo-500" },
+  { gradient: "from-cyan-900/40 to-sky-900/30", border: "border-cyan-500/30", iconBg: "bg-cyan-500/20", iconColor: "text-cyan-300", leftBar: "from-cyan-400 to-sky-500" },
+  { gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", iconBg: "bg-violet-500/20", iconColor: "text-violet-300", leftBar: "from-violet-400 to-purple-500" },
+  { gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", iconBg: "bg-sky-500/20", iconColor: "text-sky-300", leftBar: "from-sky-400 to-blue-500" },
+  { gradient: "from-indigo-900/40 to-blue-900/30", border: "border-indigo-500/30", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-300", leftBar: "from-indigo-400 to-blue-500" },
+  { gradient: "from-purple-900/40 to-fuchsia-900/30", border: "border-purple-500/30", iconBg: "bg-purple-500/20", iconColor: "text-purple-300", leftBar: "from-purple-400 to-fuchsia-500" },
+  { gradient: "from-teal-900/40 to-emerald-900/30", border: "border-teal-500/30", iconBg: "bg-teal-500/20", iconColor: "text-teal-300", leftBar: "from-teal-400 to-emerald-500" },
+  { gradient: "from-green-900/40 to-emerald-900/30", border: "border-green-500/30", iconBg: "bg-green-500/20", iconColor: "text-green-300", leftBar: "from-green-400 to-emerald-500" },
+  { gradient: "from-rose-900/40 to-pink-900/30", border: "border-rose-500/30", iconBg: "bg-rose-500/20", iconColor: "text-rose-300", leftBar: "from-rose-400 to-pink-500" },
+  { gradient: "from-orange-900/40 to-amber-900/30", border: "border-orange-500/30", iconBg: "bg-orange-500/20", iconColor: "text-orange-300", leftBar: "from-orange-400 to-amber-500" },
 ];
 
 interface Subtopic {
   label: string;
   path: string;
+  icon?: string;
 }
 
 interface MateriTopicPageProps {
@@ -69,8 +70,8 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel }
                 <div className={`absolute inset-0 border ${c.border} rounded-2xl ${isComingSoon ? '' : 'group-hover:border-opacity-80'} transition-colors`} />
                 <div className={`absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b ${c.leftBar} rounded-l-2xl`} />
                 <div className="relative px-5 py-4 flex items-center gap-4">
-                  <div className={`w-10 h-10 rounded-xl ${c.iconBg} border ${c.border} flex items-center justify-center shrink-0`}>
-                    <span className={`font-display font-bold text-sm ${c.iconColor}`}>{i + 1}</span>
+                  <div className={`w-11 h-11 rounded-xl ${c.iconBg} border ${c.border} flex items-center justify-center shrink-0`}>
+                    <span className="text-xl leading-none">{subtopic.icon ?? String(i + 1)}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="font-display text-sm font-bold text-white block leading-snug">{subtopic.label}</span>

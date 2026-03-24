@@ -1,14 +1,14 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PENGERTIAN DAN UNSUR-UNSUR BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pengertian-unsur" },
-  { label: "PENJUMLAHAN DAN PENGURANGAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/penjumlahan-pengurangan" },
-  { label: "PERKALIAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/perkalian" },
-  { label: "PEMBAGIAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pembagian" },
-  { label: "PEMANGKATAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pemangkatan" },
-  { label: "SUBSTITUSI BILANGAN PADA BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/substitusi" },
-  { label: "FAKTORISASI BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/faktorisasi" },
-  { label: "OPERASI PECAHAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/operasi-pecahan" },
+  { label: "PENGERTIAN DAN UNSUR-UNSUR BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pengertian-unsur", icon: "📝" },
+  { label: "PENJUMLAHAN DAN PENGURANGAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/penjumlahan-pengurangan", icon: "➕" },
+  { label: "PERKALIAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/perkalian", icon: "✖️" },
+  { label: "PEMBAGIAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pembagian", icon: "➗" },
+  { label: "PEMANGKATAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/pemangkatan", icon: "⬆️" },
+  { label: "SUBSTITUSI BILANGAN PADA BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/substitusi", icon: "🔄" },
+  { label: "FAKTORISASI BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/faktorisasi", icon: "🔬" },
+  { label: "OPERASI PECAHAN BENTUK ALJABAR", path: "/materi-matematika/kelas-7/aljabar/operasi-pecahan", icon: "🔣" },
 ];
 
 const AljabarPage = () => (

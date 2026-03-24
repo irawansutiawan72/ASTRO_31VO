@@ -1,10 +1,10 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PENGERTIAN POLA DAN BARISAN BILANGAN", path: "/materi-matematika/kelas-8/pola-bilangan/pengertian" },
-  { label: "POLA-POLA KHUSUS", path: "/materi-matematika/kelas-8/pola-bilangan/pola-khusus" },
-  { label: "POLA ARITMETIKA", path: "/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika" },
-  { label: "POLA GEOMETRI", path: "/materi-matematika/kelas-8/pola-bilangan/pola-geometri" },
+  { label: "PENGERTIAN POLA DAN BARISAN BILANGAN", path: "/materi-matematika/kelas-8/pola-bilangan/pengertian", icon: "📝" },
+  { label: "POLA-POLA KHUSUS", path: "/materi-matematika/kelas-8/pola-bilangan/pola-khusus", icon: "⭐" },
+  { label: "POLA ARITMETIKA", path: "/materi-matematika/kelas-8/pola-bilangan/pola-aritmetika", icon: "➕" },
+  { label: "POLA GEOMETRI", path: "/materi-matematika/kelas-8/pola-bilangan/pola-geometri", icon: "📐" },
 ];
 
 const PolaBilanganPage = () => (

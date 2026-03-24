@@ -1,12 +1,12 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PEMBUKTIAN TEOREMA PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/pembuktian" },
-  { label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU", path: "/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang" },
-  { label: "TRIPLE PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras" },
-  { label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA", path: "/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga" },
-  { label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS", path: "/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus" },
-  { label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL", path: "/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual" },
+  { label: "PEMBUKTIAN TEOREMA PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/pembuktian", icon: "📐" },
+  { label: "MENGHITUNG PANJANG SISI SEGITIGA SIKU-SIKU", path: "/materi-matematika/kelas-8/teorema-pythagoras/menghitung-panjang", icon: "📏" },
+  { label: "TRIPLE PYTHAGORAS", path: "/materi-matematika/kelas-8/teorema-pythagoras/triple-pythagoras", icon: "🔺" },
+  { label: "PYTHAGORAS DAN JENIS-JENIS SEGITIGA", path: "/materi-matematika/kelas-8/teorema-pythagoras/jenis-segitiga", icon: "🔶" },
+  { label: "PERBANDINGAN SISI SEGITIGA SIKU-SIKU SUDUT KHUSUS", path: "/materi-matematika/kelas-8/teorema-pythagoras/sudut-khusus", icon: "⭐" },
+  { label: "PENERAPAN TEOREMA PYTHAGORAS PADA MASALAH KONTEKSTUAL", path: "/materi-matematika/kelas-8/teorema-pythagoras/masalah-kontekstual", icon: "🏗️" },
 ];
 
 const TeoremaPythagorasPage = () => (

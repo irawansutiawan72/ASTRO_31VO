@@ -1,11 +1,11 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "RUANG SAMPEL DAN TITIK SAMPEL", path: "/materi-matematika/kelas-9/peluang/ruang-sampel" },
-  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", path: "/materi-matematika/kelas-9/peluang/peluang-empirik" },
-  { label: "PELUANG TEORETIK", path: "/materi-matematika/kelas-9/peluang/peluang-teoretik" },
-  { label: "FREKUENSI HARAPAN", path: "/materi-matematika/kelas-9/peluang/frekuensi-harapan" },
-  { label: "KOMPLEMEN SUATU KEJADIAN", path: "/materi-matematika/kelas-9/peluang/komplemen" },
+  { label: "RUANG SAMPEL DAN TITIK SAMPEL", path: "/materi-matematika/kelas-9/peluang/ruang-sampel", icon: "🎯" },
+  { label: "PELUANG EMPIRIK DAN FREKUENSI RELATIF", path: "/materi-matematika/kelas-9/peluang/peluang-empirik", icon: "📊" },
+  { label: "PELUANG TEORETIK", path: "/materi-matematika/kelas-9/peluang/peluang-teoretik", icon: "🎲" },
+  { label: "FREKUENSI HARAPAN", path: "/materi-matematika/kelas-9/peluang/frekuensi-harapan", icon: "📈" },
+  { label: "KOMPLEMEN SUATU KEJADIAN", path: "/materi-matematika/kelas-9/peluang/komplemen", icon: "🔄" },
 ];
 
 const PeluangPage = () => (

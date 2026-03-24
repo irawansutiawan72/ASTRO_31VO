@@ -1,10 +1,10 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "HUBUNGAN 2 GARIS", path: "/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis" },
-  { label: "SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG", path: "/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak" },
-  { label: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: "/materi-matematika/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar" },
-  { label: "JUMLAH SUDUT PADA SEGI BANYAK", path: "/materi-matematika/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak" },
+  { label: "HUBUNGAN 2 GARIS", path: "/materi-matematika/kelas-7/garis-dan-sudut/hubungan-2-garis", icon: "↔️" },
+  { label: "SUDUT PELURUS, SUDUT PENYIKU DAN SUDUT BERTOLAK BELAKANG", path: "/materi-matematika/kelas-7/garis-dan-sudut/sudut-pelurus-penyiku-bertolak", icon: "📐" },
+  { label: "SIFAT SUDUT DUA GARIS SEJAJAR JIKA DIPOTONG GARIS LAIN", path: "/materi-matematika/kelas-7/garis-dan-sudut/sifat-sudut-dua-garis-sejajar", icon: "📏" },
+  { label: "JUMLAH SUDUT PADA SEGI BANYAK", path: "/materi-matematika/kelas-7/garis-dan-sudut/jumlah-sudut-segi-banyak", icon: "🔺" },
 ];
 
 const GarisDanSudutPage = () => (

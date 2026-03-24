@@ -1,10 +1,10 @@
 import MateriTopicPage from "@/components/MateriTopicPage";
 
 const subtopics = [
-  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/materi-matematika/kelas-7/perbandingan/umum" },
-  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/materi-matematika/kelas-7/perbandingan/senilai" },
-  { label: "PERBANDINGAN CAMPURAN", path: "/materi-matematika/kelas-7/perbandingan/campuran" },
-  { label: "SKALA", path: "/materi-matematika/kelas-7/perbandingan/skala" },
+  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/materi-matematika/kelas-7/perbandingan/umum", icon: "⚖️" },
+  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/materi-matematika/kelas-7/perbandingan/senilai", icon: "🔄" },
+  { label: "PERBANDINGAN CAMPURAN", path: "/materi-matematika/kelas-7/perbandingan/campuran", icon: "🔀" },
+  { label: "SKALA", path: "/materi-matematika/kelas-7/perbandingan/skala", icon: "🗺️" },
 ];
 
 const PerbandinganPage = () => (
