@@ -9,7 +9,7 @@ const subtopics = [
   { name: "BALOK", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" },
   { name: "PRISMA", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" },
   { name: "LIMAS", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/limas" },
-  { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/coming-soon" },
+  { name: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/gabungan" },
   { name: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/coming-soon" },
 ];
 

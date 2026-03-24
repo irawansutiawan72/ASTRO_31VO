@@ -493,6 +493,7 @@ import LimasLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-data
 import MasalahKontekstualBRSDLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar/MasalahKontekstualPage";
 import BRSDGabunganLMK8Page from "./pages/latihan-mandiri/kelas8/bangun-ruang-sisi-datar-gabungan/GabunganPage";
 import LimasMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/LimasPage";
+import GabunganMMK8Page from "./pages/materi-matematika/kelas8/bangun-ruang-sisi-datar/GabunganPage";
 import HimpunanMMK7Page from "./pages/materi-matematika/kelas7/HimpunanPage";
 import PengertianKeanggotaanHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/PengertianKeanggotaanPage";
 import JenisHimpunanPage from "./pages/materi-matematika/kelas7/himpunan/JenisHimpunanPage";
@@ -1158,6 +1159,7 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/balok" element={<BalokMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma" element={<PrismaMMK8Page />} />
       <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/limas" element={<LimasMMK8Page />} />
+      <Route path="/materi-matematika/kelas-8/bangun-ruang-sisi-datar/gabungan" element={<GabunganMMK8Page />} />
       
       {/* Materi Matematika - Kelas 9 Topic Routes */}
       <Route path="/materi-matematika/kelas-9/bilangan-berpangkat" element={<BilanganBerpangkatMMK9Page />} />
