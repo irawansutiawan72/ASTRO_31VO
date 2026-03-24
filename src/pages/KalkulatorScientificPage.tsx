@@ -116,6 +116,56 @@ const formatResult = (value: number, displayMode: DisplayMode): string => {
   return Number.isInteger(rounded) ? rounded.toString() : rounded.toString();
 };
 
+// Render expression string with proper superscripts for ^(...) notation
+const renderExpression = (expr: string, inExp: boolean, expStr: string): React.ReactNode => {
+  const elements: React.ReactNode[] = [];
+  let i = 0;
+  let currentText = "";
+  let key = 0;
+
+  while (i < expr.length) {
+    if (expr[i] === "^" && i + 1 < expr.length && expr[i + 1] === "(") {
+      if (currentText) {
+        elements.push(<span key={key++}>{currentText}</span>);
+        currentText = "";
+      }
+      i += 2;
+      let depth = 1;
+      let exponent = "";
+      while (i < expr.length && depth > 0) {
+        if (expr[i] === "(") depth++;
+        else if (expr[i] === ")") {
+          depth--;
+          if (depth === 0) break;
+        }
+        exponent += expr[i];
+        i++;
+      }
+      i++; // skip closing )
+      elements.push(
+        <sup key={key++} className="text-[0.6em] leading-none">
+          {exponent}
+        </sup>
+      );
+    } else {
+      currentText += expr[i];
+      i++;
+    }
+  }
+
+  if (currentText) elements.push(<span key={key++}>{currentText}</span>);
+
+  if (inExp) {
+    elements.push(
+      <sup key={key++} className="text-[0.6em] leading-none text-yellow-300">
+        {expStr || "▮"}
+      </sup>
+    );
+  }
+
+  return elements.length > 0 ? <>{elements}</> : <span> </span>;
+};
+
 const KalkulatorScientificPage = () => {
   const navigate = useNavigate();
   const [expression, setExpression] = useState<string>("");
@@ -130,6 +180,8 @@ const KalkulatorScientificPage = () => {
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(0);
+  const [isInExponent, setIsInExponent] = useState(false);
+  const [exponentStr, setExponentStr] = useState("");
   const displayRef = useRef<HTMLDivElement>(null);
 
   // Handle keyboard input
@@ -171,15 +223,23 @@ const KalkulatorScientificPage = () => {
     setDisplayExpression("");
     setResult("0");
     setCursorPosition(0);
+    setIsInExponent(false);
+    setExponentStr("");
   };
 
   const handleDelete = () => {
     playPopSound();
+    if (isInExponent) {
+      if (exponentStr.length > 0) {
+        setExponentStr(prev => prev.slice(0, -1));
+      } else {
+        setIsInExponent(false);
+      }
+      return;
+    }
     if (expression.length > 0) {
-      // Check if we're deleting a function
-      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^(", "^(", "^(1/"];
+      const funcs = ["sin(", "cos(", "tan(", "log₁₀(", "ln(", "√(", "∛(", "asin(", "acos(", "atan(", "sinh(", "cosh(", "tanh(", "asinh(", "acosh(", "atanh(", "abs(", "Exp(", "10^(", "e^(", "^(1/"];
       let deleted = false;
-      
       for (const func of funcs) {
         if (expression.endsWith(func)) {
           setExpression(expression.slice(0, -func.length));
@@ -187,7 +247,6 @@ const KalkulatorScientificPage = () => {
           break;
         }
       }
-      
       if (!deleted) {
         setExpression(expression.slice(0, -1));
       }
