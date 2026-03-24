@@ -45,6 +45,7 @@ import OlimpiadeTransformasiPage from "./pages/OlimpiadeTransformasiPage";
 import OlimpiadePeluangPage from "./pages/OlimpiadePeluangPage";
 import TKAPage from "./pages/TKAPage";
 import TKALatihan1Page from "./pages/tka/TKALatihan1Page";
+import TKATipsPage from "./pages/tka/TKATipsPage";
 import PapanPeringkatPage from "./pages/PapanPeringkatPage";
 import BankSoalPage from "./pages/BankSoalPage";
 import BankSoalBilanganBulatPage from "./pages/bank-soal/BilanganBulatPage";
@@ -657,6 +658,7 @@ const AppInner = () => {
       <Route path="/olimpiade/transformasi-geometri" element={<OlimpiadeTransformasiPage />} />
       <Route path="/olimpiade/peluang" element={<OlimpiadePeluangPage />} />
       <Route path="/tka" element={<TKAPage />} />
+      <Route path="/tka/tips" element={<TKATipsPage />} />
       <Route path="/tka/paket-1" element={<TKALatihan1Page />} />
       <Route path="/papan-peringkat" element={<PapanPeringkatPage />} />
       <Route path="/bank-soal" element={<BankSoalPage />} />

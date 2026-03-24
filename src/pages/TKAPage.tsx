@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Brain, ChevronRight, FileText } from "lucide-react";
+import { Brain, ChevronRight, FileText, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { playPopSound } from "@/hooks/useAudio";
 
@@ -31,6 +31,20 @@ const TKAPage = () => {
         </p>
 
         <div className="flex flex-col gap-3 animate-slide-up">
+          {/* Tips Button */}
+          <button
+            onClick={() => { playPopSound(); navigate("/tka/tips"); }}
+            className="group flex items-center gap-4 bg-gradient-to-r from-accent/20 to-primary/10 backdrop-blur border border-accent/40 rounded-xl px-5 py-4
+              hover:border-accent/70 hover:box-glow-cyan transition-all duration-300 cursor-pointer text-left"
+          >
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-accent/20 border border-accent/40">
+              <Star className="w-4 h-4 text-accent" />
+            </div>
+            <span className="font-body text-sm flex-1 text-accent font-bold">TIPS MENGHADAPI TKA</span>
+            <span className="text-xs font-body text-accent/70 border border-accent/30 px-2 py-0.5 rounded-full">10 Tips</span>
+            <ChevronRight className="w-4 h-4 shrink-0 text-accent group-hover:translate-x-1 transition-transform" />
+          </button>
+
           {packages.map((pkg, i) => (
             <button
               key={pkg.id}
