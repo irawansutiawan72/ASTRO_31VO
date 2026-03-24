@@ -1070,25 +1070,8 @@ const volExamples: Ex[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   ACCORDION + EXAMPLE CARD
+   EXAMPLE CARD
 ───────────────────────────────────────────────────────────── */
-const AccordionSection = ({ sec, idx }: { sec: Sec; idx: number }) => {
-  const [open, setOpen] = useState(idx === 0);
-  return (
-    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-      <button onClick={() => { playPopSound(); setOpen(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/5 transition-colors cursor-pointer">
-        <span className="flex items-center gap-3">
-          <span className="text-xl">{sec.icon}</span>
-          <span className="font-display text-sm font-semibold text-white">{sec.title}</span>
-        </span>
-        {open ? <ChevronUp className="w-4 h-4 text-primary shrink-0" /> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />}
-      </button>
-      {open && <div className="px-5 pb-5 border-t border-border/50"><div className="pt-4">{sec.content}</div></div>}
-    </div>
-  );
-};
-
 const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
   const [show, setShow] = useState(false);
   return (
@@ -1112,56 +1095,282 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 };
 
 /* ─────────────────────────────────────────────────────────────
+   SLIDES DATA
+───────────────────────────────────────────────────────────── */
+type Slide = { icon: string; title: string; content: React.ReactNode };
+
+const slides: Slide[] = [
+  {
+    icon: "📦",
+    title: "Pengantar",
+    content: (
+      <div className="text-sm font-body text-white/75 leading-relaxed space-y-3">
+        <p>
+          Dari kotak sepatu hingga lemari, kulkas, dan aquarium — balok ada di mana-mana dalam kehidupan kita!
+          Pelajari semua tentang <strong className="text-cyan-300">balok</strong> — mulai dari unsur-unsurnya,
+          jaring-jaring interaktif 3D, hingga cara menghitung{" "}
+          <strong className="text-yellow-300">luas permukaan</strong> dan{" "}
+          <strong className="text-green-300">volume</strong>-nya.
+        </p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
+          <p className="text-cyan-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
+          <p>• Definisi &amp; sifat balok</p>
+          <p>• Unsur-unsur: rusuk, sisi, titik sudut, diagonal</p>
+          <p>• Jaring-jaring interaktif 3D</p>
+          <p>• Luas permukaan dan volume</p>
+          <p>• Contoh soal bertingkat</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "📦",
+    title: "Definisi Balok",
+    content: sections[0].content,
+  },
+  {
+    icon: "⬛",
+    title: "Unsur — Rusuk Balok",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Balok (12 rusuk)</p>
+          <RusukBalokSVG />
+          <div className="text-xs text-white/70 space-y-1 mt-2">
+            <p>• <strong className="text-cyan-300">4 rusuk panjang (p):</strong> rusuk sejajar arah panjang</p>
+            <p>• <strong className="text-orange-300">4 rusuk lebar (l):</strong> rusuk sejajar arah lebar</p>
+            <p>• <strong className="text-yellow-300">4 rusuk tinggi (t):</strong> rusuk sejajar arah tinggi</p>
+            <div className="bg-slate-700/60 rounded p-2 mt-2">
+              <BlockMath math="K = 4(p + l + t)" />
+            </div>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "⬜",
+    title: "Unsur — Sisi Balok",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-green-300 font-semibold mb-2">⬜ Sisi Balok (6 sisi, 3 pasang)</p>
+          <SisiBalokSVG />
+          <div className="text-xs text-white/70 space-y-1 mt-2">
+            <p>• 2 sisi <strong className="text-blue-300">DEPAN &amp; BELAKANG</strong>: berukuran p × t</p>
+            <p>• 2 sisi <strong className="text-green-300">KIRI &amp; KANAN</strong>: berukuran l × t</p>
+            <p>• 2 sisi <strong className="text-yellow-300">ATAS &amp; BAWAH</strong>: berukuran p × l</p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "●",
+    title: "Unsur — Titik Sudut",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-yellow-300 font-semibold mb-2">● Titik Sudut (8 titik)</p>
+          <p className="text-xs text-white/70">
+            Setiap sudut balok adalah pertemuan 3 rusuk yang saling tegak lurus. Total 8 titik sudut — sama seperti kubus.
+          </p>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
+          <p className="text-cyan-300 font-semibold">📋 Ringkasan Unsur Balok:</p>
+          <p>• Rusuk: <strong className="text-yellow-300">12</strong> (3 kelompok × 4)</p>
+          <p>• Sisi: <strong className="text-yellow-300">6</strong> (3 pasang)</p>
+          <p>• Titik sudut: <strong className="text-yellow-300">8</strong></p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "↗",
+    title: "Unsur — Diagonal Bidang",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-orange-300 font-semibold mb-2">↗ Diagonal Bidang (12 diagonal)</p>
+          <DiagBidangSVG />
+          <div className="text-xs text-white/70 space-y-1 mt-2">
+            <p>• Sisi depan/belakang: <InlineMath math="d = \sqrt{p^2 + t^2}" /> (× 4)</p>
+            <p>• Sisi atas/bawah: <InlineMath math="d = \sqrt{p^2 + l^2}" /> (× 4)</p>
+            <p>• Sisi kiri/kanan: <InlineMath math="d = \sqrt{l^2 + t^2}" /> (× 4)</p>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "⟋",
+    title: "Unsur — Diagonal Ruang",
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-yellow-300 font-semibold mb-2">⟋ Diagonal Ruang (4 diagonal)</p>
+          <DiagRuangSVG />
+          <div className="text-xs text-white/70 mt-2">
+            <div className="bg-slate-700/60 rounded p-2">
+              <BlockMath math="d_r = \sqrt{p^2 + l^2 + t^2}" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p className="text-orange-300 font-semibold">💡 Perbedaan Diagonal:</p>
+          <p>• <strong className="text-orange-300">Diagonal Bidang</strong>: hanya melintasi 1 sisi (2D)</p>
+          <p>• <strong className="text-yellow-300">Diagonal Ruang</strong>: menembus tengah balok (3D)</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "🔲",
+    title: "Jaring-jaring Balok 3D",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <p>
+          Jaring-jaring balok adalah <strong className="text-cyan-300">bentuk 2D yang jika dilipat akan membentuk balok</strong>.
+          Setiap jaring-jaring balok terdiri dari 6 persegi panjang — 3 pasang ukuran berbeda.
+          Sisi <strong className="text-violet-300">BELAKANG (ungu)</strong> adalah tumpuan tetap.
+        </p>
+        <InteractiveBalok3D />
+      </div>
+    ),
+  },
+  {
+    icon: "🔲",
+    title: "Contoh Pola Jaring-jaring",
+    content: (
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
+          <p className="text-cyan-300 font-semibold mb-3 text-xs">📐 Contoh Pola Jaring-jaring Balok:</p>
+          <NetGallery />
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(["p×t","l×t","p×l"] as const).map((label, i) => (
+              <div key={i} className="flex items-center gap-1 text-[10px] text-white/60 font-body">
+                <div className="w-3 h-3 rounded-sm" style={{ background: ["#8b5cf6","#22c55e","#eab308"][i] }}/>
+                <span>{label === "p×t" ? "Depan/Belakang" : label === "l×t" ? "Kiri/Kanan" : "Atas/Bawah"} ({label})</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200">
+          <p>💡 Ada <strong className="text-yellow-300">54 jenis</strong> jaring-jaring balok berbeda yang bisa dibuat!</p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    icon: "🎨",
+    title: "Luas Permukaan Balok",
+    content: sections[3].content,
+  },
+  {
+    icon: "📦",
+    title: "Volume Balok",
+    content: sections[4].content,
+  },
+  {
+    icon: "📊",
+    title: "Kesimpulan — Rumus Lengkap",
+    content: sections[5].content,
+  },
+  {
+    icon: "📝",
+    title: "Contoh Soal — Luas Permukaan",
+    content: (
+      <div className="flex flex-col gap-3">
+        {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal LP" />)}
+      </div>
+    ),
+  },
+  {
+    icon: "📝",
+    title: "Contoh Soal — Volume",
+    content: (
+      <div className="flex flex-col gap-3">
+        {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal Vol" />)}
+      </div>
+    ),
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────────────────────────── */
 const BalokPage = () => {
   const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const total = slides.length;
+
+  const goNext = () => { playPopSound(); setCurrentSlide(s => Math.min(s + 1, total - 1)); };
+  const goPrev = () => { playPopSound(); setCurrentSlide(s => Math.max(s - 1, 0)); };
+
+  const slide = slides[currentSlide];
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+
+        {/* Title */}
         <Box className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           BALOK
         </h1>
-        <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
 
-        <div className="bg-card/60 border border-border rounded-xl p-4 mb-6 text-sm font-body text-white/75 leading-relaxed">
-          <p>
-            Dari kotak sepatu hingga lemari, kulkas, dan aquarium — balok ada di mana-mana dalam kehidupan kita! Pelajari semua tentang
-            <strong className="text-cyan-300"> balok</strong> — mulai dari unsur-unsurnya, jaring-jaring interaktif 3D,
-            hingga cara menghitung <strong className="text-yellow-300">luas permukaan</strong> dan <strong className="text-green-300">volume</strong>-nya.
-          </p>
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { playPopSound(); setCurrentSlide(i); }}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                i === currentSlide
+                  ? "w-6 h-2.5 bg-primary"
+                  : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
+              }`}
+            />
+          ))}
         </div>
 
-        <div className="flex flex-col gap-3 mb-8">
-          {sections.map((sec, i) => <AccordionSection key={sec.title} sec={sec} idx={i} />)}
-        </div>
-
-        {/* Contoh soal luas */}
-        <div className="mb-6">
-          <h2 className="font-display text-base font-bold text-white mb-4 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-primary" />
-            Contoh Soal — Luas Permukaan Balok
-          </h2>
-          <div className="flex flex-col gap-3">
-            {luasExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal LP" />)}
+        {/* Slide card */}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 bg-white/5">
+            <span className="flex items-center gap-2">
+              <span className="text-lg">{slide.icon}</span>
+              <span className="font-display text-sm font-semibold text-white">{slide.title}</span>
+            </span>
+            <span className="text-xs text-muted-foreground font-body">{currentSlide + 1} / {total}</span>
           </div>
+          <div className="px-5 py-5">{slide.content}</div>
         </div>
 
-        {/* Contoh soal volume */}
-        <div className="mb-8">
-          <h2 className="font-display text-base font-bold text-white mb-4 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-primary" />
-            Contoh Soal — Volume Balok
-          </h2>
-          <div className="flex flex-col gap-3">
-            {volExamples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} prefix="Soal Vol" />)}
-          </div>
+        {/* Navigation buttons */}
+        <div className="flex items-center justify-between gap-3 mb-6">
+          <button
+            onClick={goPrev}
+            disabled={currentSlide === 0}
+            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
+              text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10
+              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+          >
+            ← Sebelumnya
+          </button>
+          <button
+            onClick={goNext}
+            disabled={currentSlide === total - 1}
+            className="flex-1 py-2.5 rounded-lg border border-primary/60 bg-primary/15 text-sm font-semibold font-display
+              text-primary hover:bg-primary/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+          >
+            Selanjutnya →
+          </button>
         </div>
 
-        <div className="mt-4 text-center">
+        <div className="mt-2 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/bangun-ruang-sisi-datar"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
