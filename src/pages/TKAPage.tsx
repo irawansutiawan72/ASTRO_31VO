@@ -7,7 +7,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const packages = [
   { id: 1, label: "LATIHAN TKA PAKET 1", path: "/tka/paket-1", available: true },
-  { id: 2, label: "LATIHAN TKA PAKET 2", path: "/coming-soon", available: false },
+  { id: 2, label: "LATIHAN TKA PAKET 2", path: "/tka/paket-2", available: true },
 ];
 
 const TKAPage = () => {
