@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Sparkles } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Sparkles, List } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -377,7 +377,7 @@ const NumberLineContoh1SVG = () => {
 
 const PenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh", "kesimpulan"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh", "sifat", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -695,6 +695,139 @@ const PenjumlahanBilanganBulatPage = () => {
             )}
           </div>
 
+          {/* Section: Sifat-sifat Penjumlahan Bilangan Bulat */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("sifat")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <List className="w-5 h-5 text-blue-400" />
+                <span className="font-body font-semibold text-white">Sifat-sifat Penjumlahan Bilangan Bulat</span>
+              </div>
+              {expandedSections.includes("sifat") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("sifat") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Penjumlahan pada bilangan bulat memiliki empat sifat penting yang perlu dipahami:
+                </p>
+
+                {/* Sifat 1: Komutatif */}
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-blue-500/30 text-blue-200 text-xs font-bold px-2 py-0.5 rounded-full">Sifat 1</span>
+                    <p className="font-body text-sm font-bold text-blue-300">Sifat Komutatif (Pertukaran)</p>
+                  </div>
+                  <p className="font-body text-sm text-white/70 mb-3">
+                    Menukar urutan dua bilangan yang dijumlahkan <strong className="text-white">tidak mengubah hasilnya</strong>.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center mb-2">
+                    <BlockMath math="a + b = b + a" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">Contoh positif:</p>
+                      <InlineMath math="3 + 5 = 5 + 3 = 8" />
+                    </div>
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">Contoh negatif:</p>
+                      <InlineMath math="-7 + 4 = 4 + (-7) = -3" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sifat 2: Unsur Identitas */}
+                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-green-500/30 text-green-200 text-xs font-bold px-2 py-0.5 rounded-full">Sifat 2</span>
+                    <p className="font-body text-sm font-bold text-green-300">Unsur Identitas pada Penjumlahan</p>
+                  </div>
+                  <p className="font-body text-sm text-white/70 mb-3">
+                    Bilangan <strong className="text-white">0 (nol)</strong> disebut unsur identitas penjumlahan karena menjumlahkan bilangan apapun dengan 0 menghasilkan bilangan itu sendiri.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center mb-2">
+                    <BlockMath math="a + 0 = 0 + a = a" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">Contoh positif:</p>
+                      <InlineMath math="9 + 0 = 0 + 9 = 9" />
+                    </div>
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">Contoh negatif:</p>
+                      <InlineMath math="-6 + 0 = 0 + (-6) = -6" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sifat 3: Asosiatif */}
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-purple-500/30 text-purple-200 text-xs font-bold px-2 py-0.5 rounded-full">Sifat 3</span>
+                    <p className="font-body text-sm font-bold text-purple-300">Sifat Asosiatif (Pengelompokan)</p>
+                  </div>
+                  <p className="font-body text-sm text-white/70 mb-3">
+                    Cara <strong className="text-white">mengelompokkan</strong> tiga atau lebih bilangan yang dijumlahkan tidak mengubah hasilnya.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center mb-2">
+                    <BlockMath math="(a + b) + c = a + (b + c)" />
+                  </div>
+                  <div className="bg-slate-900/40 rounded-lg p-3 mt-1">
+                    <p className="font-body text-xs text-white/60 mb-2 text-center">Contoh dengan angka:</p>
+                    <div className="space-y-1 text-center">
+                      <div><InlineMath math="(2 + 3) + 4 = 5 + 4 = 9" /></div>
+                      <div className="text-white/40 text-xs">sama dengan</div>
+                      <div><InlineMath math="2 + (3 + 4) = 2 + 7 = 9" /></div>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/40 rounded-lg p-3 mt-2">
+                    <p className="font-body text-xs text-white/60 mb-2 text-center">Contoh dengan bilangan negatif:</p>
+                    <div className="space-y-1 text-center">
+                      <div><InlineMath math="(-5 + 3) + (-2) = -2 + (-2) = -4" /></div>
+                      <div className="text-white/40 text-xs">sama dengan</div>
+                      <div><InlineMath math="-5 + (3 + (-2)) = -5 + 1 = -4" /></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sifat 4: Tertutup */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="bg-orange-500/30 text-orange-200 text-xs font-bold px-2 py-0.5 rounded-full">Sifat 4</span>
+                    <p className="font-body text-sm font-bold text-orange-300">Sifat Tertutup</p>
+                  </div>
+                  <p className="font-body text-sm text-white/70 mb-3">
+                    Hasil penjumlahan dua bilangan bulat <strong className="text-white">selalu bilangan bulat juga</strong>. Operasi ini tidak pernah menghasilkan bilangan di luar himpunan bilangan bulat.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-lg p-3 text-center mb-2">
+                    <BlockMath math="\forall\, a, b \in \mathbb{Z},\quad a + b \in \mathbb{Z}" />
+                  </div>
+                  <p className="font-body text-xs text-white/50 text-center mb-2">(Untuk setiap a dan b bilangan bulat, hasil a + b juga bilangan bulat)</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">positif + positif</p>
+                      <InlineMath math="4 + 6 = 10 \in \mathbb{Z}" />
+                    </div>
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">negatif + negatif</p>
+                      <InlineMath math="-3 + (-5) = -8 \in \mathbb{Z}" />
+                    </div>
+                    <div className="bg-slate-900/40 rounded-lg p-2 text-center">
+                      <p className="font-body text-xs text-white/60 mb-1">positif + negatif</p>
+                      <InlineMath math="7 + (-4) = 3 \in \mathbb{Z}" />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
+          </div>
+
           {/* Section: Kesimpulan dan Tips */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
@@ -824,6 +957,43 @@ const PenjumlahanBilanganBulatPage = () => {
                         <strong className="text-yellow-300">Menjumlah dengan 0 hasilnya tetap:</strong> <InlineMath math="a + 0 = a" /><br/>
                         <span className="text-white/60 text-xs">0 disebut elemen identitas penjumlahan.</span>
                       </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Catatan sifat-sifat */}
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-bold text-blue-300 mb-3 flex items-center gap-2">
+                    <List className="w-4 h-4" /> Penjumlahan Bilangan Bulat Memenuhi Sifat-sifat Berikut:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded-lg px-3 py-2">
+                      <span className="w-6 h-6 rounded-full bg-blue-500/30 text-blue-200 text-xs font-bold flex items-center justify-center flex-shrink-0">1</span>
+                      <div>
+                        <p className="font-body text-xs font-semibold text-blue-300">Komutatif</p>
+                        <p className="font-body text-xs text-white/60">a + b = b + a</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded-lg px-3 py-2">
+                      <span className="w-6 h-6 rounded-full bg-green-500/30 text-green-200 text-xs font-bold flex items-center justify-center flex-shrink-0">2</span>
+                      <div>
+                        <p className="font-body text-xs font-semibold text-green-300">Unsur Identitas</p>
+                        <p className="font-body text-xs text-white/60">a + 0 = 0 + a = a</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded-lg px-3 py-2">
+                      <span className="w-6 h-6 rounded-full bg-purple-500/30 text-purple-200 text-xs font-bold flex items-center justify-center flex-shrink-0">3</span>
+                      <div>
+                        <p className="font-body text-xs font-semibold text-purple-300">Asosiatif</p>
+                        <p className="font-body text-xs text-white/60">(a + b) + c = a + (b + c)</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded-lg px-3 py-2">
+                      <span className="w-6 h-6 rounded-full bg-orange-500/30 text-orange-200 text-xs font-bold flex items-center justify-center flex-shrink-0">4</span>
+                      <div>
+                        <p className="font-body text-xs font-semibold text-orange-300">Tertutup</p>
+                        <p className="font-body text-xs text-white/60">a + b selalu bilangan bulat</p>
+                      </div>
                     </div>
                   </div>
                 </div>
