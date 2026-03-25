@@ -7,6 +7,154 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+/* ── Garis Bilangan SVG (-5 sampai 5) ──────────────────────── */
+const NumberLineSVG = () => {
+  const nums = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+  const cx = (n: number) => 300 + n * 50; // 0 berada di tengah x=300
+
+  return (
+    <svg viewBox="0 0 620 88" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr-r" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        </marker>
+        <marker id="arr-l" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        </marker>
+      </defs>
+
+      {/* Sumbu utama */}
+      <line x1="14" y1="38" x2="606" y2="38"
+        stroke="#FFD700" strokeWidth="2.5"
+        markerEnd="url(#arr-r)" markerStart="url(#arr-l)" />
+
+      {/* Elipsis */}
+      <text x="7"   y="43" fill="#FFD700" fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
+      <text x="613" y="43" fill="#FFD700" fontSize="15" fontFamily="monospace" textAnchor="middle">…</text>
+
+      {/* Tick + label per angka */}
+      {nums.map(n => {
+        const x = cx(n);
+        const isZero = n === 0;
+        return (
+          <g key={n}>
+            {/* Tick mark */}
+            <line
+              x1={x} y1={isZero ? 26 : 30}
+              x2={x} y2={isZero ? 50 : 46}
+              stroke={isZero ? "#FFFFFF" : "#FFD700"}
+              strokeWidth={isZero ? 2.5 : 1.8}
+            />
+            {/* Angka */}
+            <text
+              x={x} y={66}
+              textAnchor="middle"
+              fill={isZero ? "#FFFFFF" : "#FFE57F"}
+              fontSize={isZero ? "14" : "12"}
+              fontWeight={isZero ? "bold" : "normal"}
+              fontFamily="monospace"
+            >{n}</text>
+          </g>
+        );
+      })}
+
+      {/* Label negatif / positif */}
+      <text x="58"  y="83" fill="#FFD700" fontSize="10" fontFamily="sans-serif" opacity="0.65">← negatif</text>
+      <text x="475" y="83" fill="#FFD700" fontSize="10" fontFamily="sans-serif" opacity="0.65">positif →</text>
+    </svg>
+  );
+};
+
+/* ── Garis Bilangan Contoh 1: 8 + (-3) = 5 ─────────────────── */
+const NumberLineContoh1SVG = () => {
+  // Rentang: -1 sampai 10, spacing 52px
+  const spacing = 52;
+  const origin = 50; // x untuk angka -1
+  const cx = (n: number) => origin + (n + 1) * spacing; // n=-1 → x=50, n=0 → x=102
+
+  const x0  = cx(0);  // 102
+  const x8  = cx(8);  // 102 + 8*52 = 518
+  const x5  = cx(5);  // 102 + 5*52 = 362
+  const nums = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  return (
+    <svg viewBox="0 0 640 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        {/* Panah kanan (sumbu) */}
+        <marker id="ax-r" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        </marker>
+        <marker id="ax-l" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
+          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        </marker>
+        {/* Panah +8 (hijau) */}
+        <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#4ade80" />
+        </marker>
+        {/* Panah -3 (merah) */}
+        <marker id="arr-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#f87171" />
+        </marker>
+      </defs>
+
+      {/* Sumbu utama */}
+      <line x1="12" y1="72" x2="628" y2="72"
+        stroke="#FFD700" strokeWidth="2.5"
+        markerEnd="url(#ax-r)" markerStart="url(#ax-l)" />
+
+      {/* Tick + angka */}
+      {nums.map(n => {
+        const x = cx(n);
+        const isZero = n === 0;
+        const isKey  = n === 5 || n === 8;
+        return (
+          <g key={n}>
+            <line
+              x1={x} y1={isZero || isKey ? 60 : 64}
+              x2={x} y2={isZero || isKey ? 84 : 80}
+              stroke={n === 5 ? "#67e8f9" : isZero ? "#fff" : "#FFD700"}
+              strokeWidth={isZero || isKey ? 2.5 : 1.8}
+            />
+            <text
+              x={x} y={99}
+              textAnchor="middle"
+              fill={n === 5 ? "#67e8f9" : isZero ? "#fff" : "#FFE57F"}
+              fontSize={isZero || isKey ? "13" : "11"}
+              fontWeight={isZero || isKey ? "bold" : "normal"}
+              fontFamily="monospace"
+            >{n}</text>
+          </g>
+        );
+      })}
+
+      {/* Panah +8: dari 0 ke 8, busur di atas sumbu */}
+      <path
+        d={`M ${x0},70 C ${x0},30 ${x8},30 ${x8},70`}
+        fill="none" stroke="#4ade80" strokeWidth="2.2"
+        markerEnd="url(#arr-g)" />
+      <text
+        x={(x0 + x8) / 2} y="22"
+        textAnchor="middle" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
+        +8 (kanan)
+      </text>
+
+      {/* Panah -3: dari 8 ke 5, busur di bawah sumbu */}
+      <path
+        d={`M ${x8},74 C ${x8},112 ${x5},112 ${x5},74`}
+        fill="none" stroke="#f87171" strokeWidth="2.2"
+        markerEnd="url(#arr-red)" />
+      <text
+        x={(x5 + x8) / 2} y="126"
+        textAnchor="middle" fill="#f87171" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
+        -3 (kiri)
+      </text>
+
+      {/* Lingkaran titik akhir di angka 5 */}
+      <circle cx={x5} cy={72} r="7" fill="none" stroke="#67e8f9" strokeWidth="2.2" />
+    </svg>
+  );
+};
+
 const PenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh"]);
@@ -109,12 +257,9 @@ const PenjumlahanBilanganBulatPage = () => {
                   </ul>
                 </div>
 
-                <div className="bg-slate-800/50 rounded-lg p-4 font-mono text-xs text-center overflow-x-auto">
-                  <p className="text-white/60 mb-2">Garis Bilangan:</p>
-                  <p className="text-primary whitespace-nowrap">
-                    {"... ←─ -5 ─ -4 ─ -3 ─ -2 ─ -1 ─ 0 ─ 1 ─ 2 ─ 3 ─ 4 ─ 5 ─→ ..."}
-                  </p>
-                  <p className="text-white/50 mt-2">{"negatif ← ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ → positif"}</p>
+                <div className="bg-slate-900/60 rounded-xl p-4 border border-yellow-500/20">
+                  <p className="text-yellow-300/70 text-xs text-center mb-2 font-body">Garis Bilangan</p>
+                  <NumberLineSVG />
                 </div>
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
@@ -178,8 +323,20 @@ const PenjumlahanBilanganBulatPage = () => {
                     <div className="space-y-2 font-body text-sm text-white/80">
                       <p><strong>Langkah 1:</strong> Mulai dari titik 0, bergerak 8 satuan ke <strong className="text-green-400">kanan</strong> (karena 8 positif).</p>
                       <p><strong>Langkah 2:</strong> Dari titik 8, bergerak 3 satuan ke <strong className="text-red-400">kiri</strong> (karena -3 negatif).</p>
-                      <p><strong>Langkah 3:</strong> Titik akhir berada di angka <strong className="text-primary">5</strong>.</p>
-                      <div className="bg-slate-900/50 rounded p-3 mt-3">
+                      <p><strong>Langkah 3:</strong> Titik akhir berada di angka <strong className="text-cyan-300">5</strong>.</p>
+
+                      {/* Visualisasi garis bilangan */}
+                      <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20 mt-2">
+                        <p className="text-yellow-300/70 text-xs text-center mb-1 font-body">Visualisasi di Garis Bilangan</p>
+                        <NumberLineContoh1SVG />
+                        <div className="flex flex-wrap gap-3 justify-center mt-1 text-xs font-body">
+                          <span className="flex items-center gap-1"><span className="inline-block w-6 h-0.5 bg-green-400"></span> +8 ke kanan</span>
+                          <span className="flex items-center gap-1"><span className="inline-block w-6 h-0.5 bg-red-400"></span> −3 ke kiri</span>
+                          <span className="flex items-center gap-1"><span className="inline-block w-3 h-3 rounded-full border-2 border-cyan-300"></span> hasil = 5</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-slate-900/50 rounded p-3 mt-2">
                         <BlockMath math="8 + (-3) = 8 - 3 = 5" />
                       </div>
                       <p className="text-primary font-semibold">Jadi, <InlineMath math="8 + (-3) = 5" /></p>
