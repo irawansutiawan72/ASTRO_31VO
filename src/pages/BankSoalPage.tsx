@@ -70,7 +70,7 @@ const BankSoalPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden py-8">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath="/menu" />
       <div className="relative z-10 max-w-4xl w-full px-4 text-center mt-16">
         <FileText className="w-12 h-12 text-primary mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2">

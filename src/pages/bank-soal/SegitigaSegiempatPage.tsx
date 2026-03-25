@@ -1092,7 +1092,7 @@ const BankSoalSegitigaSegiempatPage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden py-8">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath="/bank-soal" />
 
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px]" />
