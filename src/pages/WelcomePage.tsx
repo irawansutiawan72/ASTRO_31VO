@@ -98,16 +98,30 @@ const WelcomePage = () => {
           </button>
         </div>
 
-        {/* Sun (fits well as a "sunny winter day" too) */}
+        {/* Sun (dark mode) or Crystal Ball (light mode) */}
         <div className="mt-8 mb-12">
           <div className="relative w-28 h-28 mx-auto">
-            <div className="absolute inset-0 rounded-full bg-orange-400 opacity-30 blur-2xl animate-pulse scale-125" />
-            <img
-              src="/sun.png"
-              alt="Matahari"
-              className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
-              style={{ filter: "drop-shadow(0 0 16px rgba(251,146,60,0.8)) drop-shadow(0 0 32px rgba(234,88,12,0.4))" }}
-            />
+            {isLight ? (
+              <>
+                <div className="absolute inset-0 rounded-full bg-blue-300 opacity-30 blur-2xl animate-pulse scale-125" />
+                <img
+                  src="/bola-kristal.png"
+                  alt="Bola Kristal"
+                  className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
+                  style={{ filter: "drop-shadow(0 0 16px rgba(147,197,253,0.8)) drop-shadow(0 0 32px rgba(59,130,246,0.4))" }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute inset-0 rounded-full bg-orange-400 opacity-30 blur-2xl animate-pulse scale-125" />
+                <img
+                  src="/sun.png"
+                  alt="Matahari"
+                  className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
+                  style={{ filter: "drop-shadow(0 0 16px rgba(251,146,60,0.8)) drop-shadow(0 0 32px rgba(234,88,12,0.4))" }}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
