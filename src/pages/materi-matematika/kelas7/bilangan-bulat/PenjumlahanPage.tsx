@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -65,92 +65,141 @@ const NumberLineSVG = () => {
   );
 };
 
-/* ── Garis Bilangan Contoh 1: 8 + (-3) = 5 ─────────────────── */
+/* ── Animasi bertahap: 8 + (−3) = 5 ────────────────────────────
+   step 0       : jeda awal
+   step 1–8     : busur hijau satu-satu (0→1, 1→2, … 7→8)
+   step 9       : jeda sejenak
+   step 10–12   : busur merah satu-satu (8→7, 7→6, 6→5)
+   step 13      : tampilkan hasil, lalu mulai ulang
+──────────────────────────────────────────────────────────────── */
 const NumberLineContoh1SVG = () => {
-  // Rentang: -1 sampai 10, spacing 52px
-  const spacing = 52;
-  const origin = 50; // x untuk angka -1
-  const cx = (n: number) => origin + (n + 1) * spacing; // n=-1 → x=50, n=0 → x=102
+  const [step, setStep] = useState(0);
 
-  const x0  = cx(0);  // 102
-  const x8  = cx(8);  // 102 + 8*52 = 518
-  const x5  = cx(5);  // 102 + 5*52 = 362
+  useEffect(() => {
+    const delay =
+      step === 0  ? 700  :
+      step === 9  ? 900  :   // jeda setelah semua hijau
+      step === 13 ? 2600 :   // tampilkan hasil sebelum reset
+      480;
+    const t = setTimeout(() => setStep(s => (s >= 13 ? 0 : s + 1)), delay);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  const sp   = 50;
+  const cx   = (n: number) => 90 + n * sp;  // cx(0)=90, cx(8)=490, cx(5)=340
+  const yA   = 68;                            // y sumbu
   const nums = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+  const numGreen   = Math.min(step, 8);
+  const numRed     = step >= 10 ? step - 9 : 0;
+  const showResult = step >= 12;
+
+  const statusText =
+    step === 0  ? "Siap..." :
+    step <= 8   ? `Langkah +${step} · dari ${step - 1} ke ${step}` :
+    step === 9  ? "Sudah di 8 · sekarang mundur −3..." :
+    step <= 12  ? `Langkah −${step - 9} · dari ${8 - (step - 10)} ke ${7 - (step - 10)}` :
+                  "Hasil: 8 + (−3) = 5  ✓";
+
+  const statusColor =
+    step >= 13 ? "#67e8f9" :
+    step >= 10 ? "#f87171" :
+    "#4ade80";
+
   return (
-    <svg viewBox="0 0 640 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 640 136" width="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        {/* Panah kanan (sumbu) */}
-        <marker id="ax-r" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
-          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        <marker id="nl2-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
         </marker>
-        <marker id="ax-l" markerWidth="9" markerHeight="7" refX="1" refY="3.5" orient="auto-start-reverse">
-          <polygon points="0 0, 9 3.5, 0 7" fill="#FFD700" />
+        <marker id="nl2-al" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
         </marker>
-        {/* Panah +8 (hijau) */}
-        <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#4ade80" />
+        <marker id="nl2-g" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+          <polygon points="0 0,7 2.5,0 5" fill="#4ade80"/>
         </marker>
-        {/* Panah -3 (merah) */}
-        <marker id="arr-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#f87171" />
+        <marker id="nl2-r" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+          <polygon points="0 0,7 2.5,0 5" fill="#f87171"/>
         </marker>
       </defs>
 
-      {/* Sumbu utama */}
-      <line x1="12" y1="72" x2="628" y2="72"
+      {/* ── Sumbu kuning ── */}
+      <line x1="12" y1={yA} x2="628" y2={yA}
         stroke="#FFD700" strokeWidth="2.5"
-        markerEnd="url(#ax-r)" markerStart="url(#ax-l)" />
+        markerEnd="url(#nl2-ar)" markerStart="url(#nl2-al)"/>
 
-      {/* Tick + angka */}
+      {/* ── Tick + angka ── */}
       {nums.map(n => {
-        const x = cx(n);
-        const isZero = n === 0;
-        const isKey  = n === 5 || n === 8;
+        const x       = cx(n);
+        const isZero  = n === 0;
+        const isKey   = n === 5 || n === 8;
+        const tickClr = n === 5 && showResult ? "#67e8f9"
+                       : n === 8 && step >= 9  ? "#86efac"
+                       : isZero               ? "#ffffff"
+                       :                        "#FFD700";
+        const txtClr  = n === 5 && showResult ? "#67e8f9"
+                       : n === 8 && step >= 9  ? "#86efac"
+                       : isZero               ? "#ffffff"
+                       :                        "#FFE57F";
         return (
           <g key={n}>
             <line
-              x1={x} y1={isZero || isKey ? 60 : 64}
-              x2={x} y2={isZero || isKey ? 84 : 80}
-              stroke={n === 5 ? "#67e8f9" : isZero ? "#fff" : "#FFD700"}
-              strokeWidth={isZero || isKey ? 2.5 : 1.8}
+              x1={x} y1={isZero || isKey ? 57 : 62}
+              x2={x} y2={isZero || isKey ? 79 : 74}
+              stroke={tickClr} strokeWidth={isZero || isKey ? 2.5 : 1.8}
             />
-            <text
-              x={x} y={99}
-              textAnchor="middle"
-              fill={n === 5 ? "#67e8f9" : isZero ? "#fff" : "#FFE57F"}
+            <text x={x} y={93} textAnchor="middle" fontFamily="monospace"
+              fill={txtClr}
               fontSize={isZero || isKey ? "13" : "11"}
               fontWeight={isZero || isKey ? "bold" : "normal"}
-              fontFamily="monospace"
             >{n}</text>
           </g>
         );
       })}
 
-      {/* Panah +8: dari 0 ke 8, busur di atas sumbu */}
-      <path
-        d={`M ${x0},70 C ${x0},30 ${x8},30 ${x8},70`}
-        fill="none" stroke="#4ade80" strokeWidth="2.2"
-        markerEnd="url(#arr-g)" />
-      <text
-        x={(x0 + x8) / 2} y="22"
-        textAnchor="middle" fill="#4ade80" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
-        +8 (kanan)
-      </text>
+      {/* ── Busur HIJAU: tiap langkah +1 ke kanan ── */}
+      {Array.from({length: numGreen}, (_, i) => {
+        const x1 = cx(i), x2 = cx(i + 1), mx = (x1 + x2) / 2;
+        return (
+          <path key={`g${i}`}
+            d={`M ${x1},${yA} Q ${mx},${yA - 26} ${x2},${yA}`}
+            fill="none" stroke="#4ade80" strokeWidth="2.2"
+            markerEnd="url(#nl2-g)"
+          />
+        );
+      })}
 
-      {/* Panah -3: dari 8 ke 5, busur di bawah sumbu */}
-      <path
-        d={`M ${x8},74 C ${x8},112 ${x5},112 ${x5},74`}
-        fill="none" stroke="#f87171" strokeWidth="2.2"
-        markerEnd="url(#arr-red)" />
-      <text
-        x={(x5 + x8) / 2} y="126"
-        textAnchor="middle" fill="#f87171" fontSize="12" fontWeight="bold" fontFamily="sans-serif">
-        -3 (kiri)
-      </text>
+      {/* ── Busur MERAH: tiap langkah −1 ke kiri ── */}
+      {Array.from({length: numRed}, (_, i) => {
+        const x1 = cx(8 - i), x2 = cx(7 - i), mx = (x1 + x2) / 2;
+        return (
+          <path key={`r${i}`}
+            d={`M ${x1},${yA} Q ${mx},${yA + 26} ${x2},${yA}`}
+            fill="none" stroke="#f87171" strokeWidth="2.2"
+            markerEnd="url(#nl2-r)"
+          />
+        );
+      })}
 
-      {/* Lingkaran titik akhir di angka 5 */}
-      <circle cx={x5} cy={72} r="7" fill="none" stroke="#67e8f9" strokeWidth="2.2" />
+      {/* ── Lingkaran hasil di angka 5 ── */}
+      {showResult && (
+        <circle cx={cx(5)} cy={yA} r="8"
+          fill="none" stroke="#67e8f9" strokeWidth="2.5"/>
+      )}
+
+      {/* ── Titik posisi saat ini ── */}
+      {step >= 1 && step <= 8 && (
+        <circle cx={cx(step)} cy={yA} r="4" fill="#4ade80"/>
+      )}
+      {step >= 10 && step <= 12 && (
+        <circle cx={cx(8 - (step - 10))} cy={yA} r="4" fill="#f87171"/>
+      )}
+
+      {/* ── Label status di bawah ── */}
+      <text x="320" y="122" textAnchor="middle" fontFamily="sans-serif"
+        fontSize="11.5" fontWeight="bold" fill={statusColor}>
+        {statusText}
+      </text>
     </svg>
   );
 };
