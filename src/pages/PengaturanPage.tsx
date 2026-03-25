@@ -1,14 +1,16 @@
 import Starfield from "@/components/Starfield";
 import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
-import { Settings, Moon, Sun, Volume2, VolumeX } from "lucide-react";
+import { Settings, Moon, Sun, Volume2, VolumeX, Music2, Music4 } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useSound } from "@/contexts/SoundContext";
+import { useMusic } from "@/contexts/MusicContext";
 
 const PengaturanPage = () => {
   const { theme, toggleTheme } = useTheme();
   const { soundOn, toggleSound } = useSound();
+  const { musicOn, toggleMusic } = useMusic();
 
   const isDark = theme === "dark";
 
@@ -192,6 +194,104 @@ const PengaturanPage = () => {
                     : isDark ? "text-gray-600" : "text-gray-400"
                 }`}>
                   Efek suara dimatikan 🔇
+                </p>
+              </div>
+            </button>
+
+          </div>
+        </div>
+
+        {/* ── MUSIK LATAR ── */}
+        <div className={`rounded-2xl p-6 ${isDark ? "bg-[#141d35]/90 backdrop-blur-md" : "bg-white/90 backdrop-blur-md shadow-xl"}`}>
+          <h2 className={`font-display text-lg font-bold mb-1 ${isDark ? "text-white" : "text-gray-900"}`}>
+            Musik Latar
+          </h2>
+          <p className={`font-body text-sm mb-6 leading-snug ${isDark ? "text-white/55" : "text-gray-500"}`}>
+            Musik piano lembut untuk menemani belajarmu
+          </p>
+
+          <div className="grid grid-cols-2 gap-3">
+
+            {/* Musik ON */}
+            <button
+              onClick={() => { if (!musicOn) toggleMusic(); }}
+              className={`rounded-xl py-6 px-3 flex flex-col items-center gap-3 border-2 transition-all duration-300 cursor-pointer ${
+                musicOn
+                  ? isDark
+                    ? "border-violet-500 bg-[#1a1040] shadow-[0_0_18px_rgba(139,92,246,0.35)]"
+                    : "border-violet-500 bg-violet-50 shadow-[0_0_18px_rgba(139,92,246,0.2)]"
+                  : isDark
+                    ? "border-[#2a3560] bg-[#1a2040] hover:border-violet-600"
+                    : "border-gray-200 bg-gray-100 hover:border-violet-300"
+              }`}
+            >
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                musicOn
+                  ? isDark ? "bg-[#2a1a50]" : "bg-violet-100"
+                  : isDark ? "bg-[#252d50]" : "bg-gray-200"
+              }`}>
+                <Music2 className={`w-8 h-8 transition-colors duration-300 ${
+                  musicOn
+                    ? isDark ? "text-violet-300" : "text-violet-600"
+                    : isDark ? "text-gray-500" : "text-gray-400"
+                }`} />
+              </div>
+              <div className="text-center">
+                <p className={`font-display font-bold text-base leading-tight transition-colors duration-300 ${
+                  musicOn
+                    ? isDark ? "text-white" : "text-violet-700"
+                    : isDark ? "text-gray-500" : "text-gray-400"
+                }`}>
+                  Musik<br />Aktif
+                </p>
+                <p className={`font-body text-[11px] mt-1 ${
+                  musicOn
+                    ? isDark ? "text-violet-400/70" : "text-violet-600/70"
+                    : isDark ? "text-gray-600" : "text-gray-400"
+                }`}>
+                  Piano lembut 🎹
+                </p>
+              </div>
+            </button>
+
+            {/* Musik OFF */}
+            <button
+              onClick={() => { if (musicOn) toggleMusic(); }}
+              className={`rounded-xl py-6 px-3 flex flex-col items-center gap-3 border-2 transition-all duration-300 cursor-pointer ${
+                !musicOn
+                  ? isDark
+                    ? "border-rose-500 bg-[#2d1020] shadow-[0_0_18px_rgba(244,63,94,0.3)]"
+                    : "border-rose-400 bg-rose-50 shadow-[0_0_18px_rgba(244,63,94,0.15)]"
+                  : isDark
+                    ? "border-[#2a3560] bg-[#1a2040] hover:border-rose-700"
+                    : "border-gray-200 bg-gray-100 hover:border-rose-300"
+              }`}
+            >
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-colors duration-300 ${
+                !musicOn
+                  ? isDark ? "bg-[#3d0e1e]" : "bg-rose-100"
+                  : isDark ? "bg-[#252d50]" : "bg-gray-200"
+              }`}>
+                <Music4 className={`w-8 h-8 transition-colors duration-300 ${
+                  !musicOn
+                    ? isDark ? "text-rose-400" : "text-rose-600"
+                    : isDark ? "text-gray-500" : "text-gray-400"
+                }`} />
+              </div>
+              <div className="text-center">
+                <p className={`font-display font-bold text-base leading-tight transition-colors duration-300 ${
+                  !musicOn
+                    ? isDark ? "text-white" : "text-rose-700"
+                    : isDark ? "text-gray-500" : "text-gray-400"
+                }`}>
+                  Musik<br />Mati
+                </p>
+                <p className={`font-body text-[11px] mt-1 ${
+                  !musicOn
+                    ? isDark ? "text-rose-400/70" : "text-rose-500/70"
+                    : isDark ? "text-gray-600" : "text-gray-400"
+                }`}>
+                  Musik dimatikan 🔇
                 </p>
               </div>
             </button>
