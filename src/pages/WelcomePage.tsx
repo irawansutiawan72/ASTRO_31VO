@@ -105,8 +105,8 @@ const WelcomePage = () => {
               <>
                 <div className="absolute inset-0 rounded-full bg-blue-300 opacity-30 blur-2xl animate-pulse scale-125" />
                 <img
-                  src="/bola-kristal.png"
-                  alt="Bola Kristal"
+                  src="/salju.png"
+                  alt="Salju"
                   className="relative w-28 h-28 mx-auto object-contain animate-rotate-slow drop-shadow-2xl"
                   style={{ filter: "drop-shadow(0 0 16px rgba(147,197,253,0.8)) drop-shadow(0 0 32px rgba(59,130,246,0.4))" }}
                 />
