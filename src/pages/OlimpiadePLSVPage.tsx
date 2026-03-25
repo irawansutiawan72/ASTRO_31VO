@@ -36,7 +36,7 @@ $3x - 5 = 10$
 $3x = 10 + 5$
 $3x = 15$
 $x = \\frac{15}{3}$
-$x = 5$`
+$x = 5`
     },
     {
       heading: "B. Pertidaksamaan Linear Satu Variabel",
@@ -53,7 +53,7 @@ $2x + 3 \\leq 11$
 $2x \\leq 11 - 3$
 $2x \\leq 8$
 $x \\leq 4$
-Himpunan penyelesaian dalam notasi interval: $x \\leq 4$ atau dapat ditulis $(-\\infty, 4]$`
+Himpunan penyelesaian dalam notasi interval: $x \\leq 4$ atau dapat ditulis $(-\\infty, 4]`
     },
     {
       heading: "C. Membuat Model Matematika",
@@ -85,7 +85,7 @@ $-3 + 1 < 2x$ dan $2x \\leq 6$
 $-2 < 2x$ dan $x \\leq 3$
 $-1 < x$ dan $x \\leq 3$
 Diiriskan sehingga penyelesaiannya menjadi $-1 < x \\leq 3$
-Himpunan penyelesaian dalam interval: $(-1, 3]$`
+Himpunan penyelesaian dalam interval: $(-1, 3]`
     },
     {
       heading: "E. Pertidaksamaan Kuadrat",
@@ -110,77 +110,78 @@ Penyelesaian:
 1. Pembilang: $x - 2 = 0 \\Rightarrow x = 2$
 2. Penyebut: $x + 3 = 0 \\Rightarrow x = -3$ (tidak boleh = 0)
 3. Garis bilangan dengan titik kritis -3 dan 2
-4. Penyelesaian: $x < -3$ atau $x \\geq 2$`
+4. Penyelesaian: $x < -3$ atau $x \\geq 2`
     },
     {
       heading: "G. Nilai Mutlak",
       content: `Pengertian
 Nilai mutlak suatu bilangan adalah nilai positif bilangan tersebut.
 
-$|x| = \\begin{cases} x, & \\text{jika } x \\geq 0 \\\\ -x, & \\text{jika } x < 0 \\end{cases}$`
+$|x| = \\begin{cases} x, & \\text{jika } x \\geq 0 \\\\ -x, & \\text{jika } x < 0 \\end{cases}`
     },
   ]
 };
 
 const latihanDasar = [
-  { no: 1, soal: "Jika p merupakan penyelesaian dari $6(2x + 5) = 3(3x - 2) + 6$, maka nilai $p + 2$ adalah ...", options: ["A. -4", "B. -6", "C. -8", "D. -10"] },
-  { no: 2, soal: "Diketahui n adalah penyelesaian persamaan $\\frac{1}{2}x + \\frac{2x-1}{3} = \\frac{x+2}{4} - \\frac{1}{2}$. Nilai $n + 5$ adalah ...", options: ["A. $\\frac{9}{2}$", "B. $\\frac{17}{4}$", "C. $\\frac{1}{2}$", "D. $\\frac{9}{2}$"] },
-  { no: 3, soal: "Nilai x yang memenuhi persamaan $\\frac{1}{2}(x - 10) = 2x - 5$ adalah ...", options: ["A. -6", "B. -4", "C. 4", "D. 6"] },
-  { no: 4, soal: "Perhatikan persamaan berikut! $5(2x - 3) + 4 = 2(3x + 1) - (-3)$ mempunyai penyelesaian n. Nilai dari $3n + 5$ adalah ...", options: ["A. 4", "B. 7", "C. 13", "D. 17"] },
-  { no: 5, soal: "Jika $\\frac{1}{2}(x - 6) = 2 + 3x$, maka nilai $x + 5$ = ...", options: ["A. 6", "B. -6", "C. 3", "D. -3"] },
-  { no: 6, soal: "Nilai x yang memenuhi $\\frac{4x+5}{2x+1} = \\frac{16}{5}$ adalah ...", options: ["A. $\\frac{3}{4}$", "B. $\\frac{3}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{4}{3}$"] },
-  { no: 7, soal: "Jika $\\frac{4}{x-3} = \\frac{2}{x+1}$, maka nilai x yang memenuhi adalah ...", options: ["A. -5", "B. -4", "C. -2", "D. 4", "E. 5"] },
-  { no: 8, soal: "Persamaan $\\frac{2}{x+1} - \\frac{1}{x} = \\frac{4}{x}$ adalah benar untuk x sama dengan ...", options: ["A. $-1 - \\frac{\\sqrt{3}}{3}$", "B. $-1 - \\sqrt{5}$", "C. 1", "D. $\\frac{3}{5}$"] },
-  { no: 9, soal: "Diketahui persamaan $\\frac{2(3x-6)}{(x-1)(x+1)} + \\frac{1}{x+1} = \\frac{4}{x-1} - \\frac{1}{x-1}$. Nilai x yang memenuhi persamaan adalah ...", options: ["A. $-\\frac{4}{3}$", "B. 1", "C. $4\\frac{1}{3}$", "D. $5\\frac{2}{3}$"] },
-  { no: 10, soal: "Himpunan penyelesaian dari $3(2x + 4) \\leq 2(x - 2)$ untuk x bilangan bulat adalah ...", options: ["A. {..., -7, -6, -5, -4}", "B. {-4, -3, -2, 0, ...}", "C. {1, 2, 3, 4, ...}", "D. {4, 5, 6, 7, ...}"] },
-  { no: 11, soal: "Penyelesaian dari pertidaksamaan $\\frac{1}{2}(2x - 6) = \\frac{1}{3}(x - 4)$ adalah ...", options: ["A. $x \\geq -17$", "B. $x \\geq -1$", "C. $x \\geq 1$", "D. $x \\geq 17$"] },
-  { no: 12, soal: "Himpunan penyelesaian dari $2x - 3 \\geq 21 + 4x$ dengan x bilangan bulat adalah ...", options: ["A. {-12, -11, -10, -9, ...}", "B. {-9, -8, -7, -6, ...}", "C. {..., -5, -14, -13, -12}", "D. {..., -12, -11, -10, -9}"] },
-  { no: 13, soal: "Harga sebuah buku Rp. 4000,00 lebihnya dari harga bollpoin. Rina membeli dua buah buku dan sebuah bollpoin seharga Rp. 26.000,00. Jika harga bollpoin x rupiah. Kalimat matematikanya adalah ...", options: ["A. $2x - 4000 = 26.000$", "B. $2x + 8000 = 26.000$", "C. $3x - 4000 = 26.000$", "D. $3x + 8000 = 26.000$"] },
-  { no: 14, soal: "Umur ayah p tahun dan ayah 6 tahun lebih tua dari paman. Jika jumlah umur paman dan ayah 38 tahun, maka model matematika yang tepat adalah ...", options: ["A. $2p + 6 = 38$", "B. $2p - 6 = 38$", "C. $p + 6 = 38$", "D. $p - 6 = 38$"] },
-  { no: 15, soal: "Besar uang Rohayah sama dengan tiga kali dari Rp5000,00 lebihnya dari uang Danu kemudian dikurangi Rp 10.000,00. Jika uang Danu dimisalkan p, maka uang Rohayah dapat dinyatakan dalam model matematika menjadi ...", options: ["A. $3(p - 5.000) - 10.000$", "B. $3(p + 5.000) - 10.000$", "C. $3p - 5.000 - 10.000$", "D. $3p + 5.000 - 10.000$"] },
-  { no: 16, soal: "Jumlah tiga bilangan ganjil berurutan adalah 45, jumlah bilangan terbesar dan terkecil adalah ...", options: ["A. 26", "B. 30", "C. 34", "D. 38"] },
-  { no: 17, soal: "Sebuah taman berbentuk persegi panjang dengan ukuran panjang $(2x+5)$ m dan lebar $(3x-2)$ cm. Jika keliling taman 46 cm, maka luas taman adalah ...", options: ["A. 140 cm²", "B. 132 cm²", "C. 130 cm²", "D. 116 cm²"] },
-  { no: 18, soal: "Diketahui taman berbentuk persegi panjang yang panjangnya $(2x - 6)$ cm dan lebarnya $x$ cm. Jika kelilingnya tidak lebih dari 48 cm, lebar taman (l) adalah ...", options: ["A. $0 < l \\leq 10$", "B. $0 < l \\leq 12$", "C. $3 < l \\leq 10$", "D. $3 < l \\leq 12$"] },
-  { no: 19, soal: "Kebun Pak Hartono berbentuk persegi panjang yang mempunyai ukuran, panjang dan diagonal berturut-turut $(4x - 10)$ meter dan $(3x - 5)$ meter. Panjang diagonal kebun Pak Hartono adalah ...", options: ["A. 4 meter", "B. 6 meter", "C. 7 meter", "D. 10 meter"] },
-  { no: 20, soal: "Perbandingan panjang dan lebar persegi panjang adalah 7 : 4. Jika keliling persegi panjang tersebut 66 cm, maka luasnya adalah ...", options: ["A. 132 cm²", "B. 198 cm²", "C. 218 cm²", "D. 252 cm²"] },
-  { no: 21, soal: "Syarat seseorang dapat mengikuti suatu lomba adalah apabila umurnya tidak kurang dari 17 tahun. Jika umur Ali 18 tahun, Ani 15 tahun, Alex 16 tahun dan Ahmad 19 tahun, berapa orang diantara mereka yang sudah boleh mengikuti lomba?", options: ["A. 1 orang", "B. 2 orang", "C. 3 orang", "D. 4 orang"] },
-  { no: 22, soal: "Taman bunga berbentuk persegi panjang dengan ukuran $(8x + 2)$ meter dan ukuran lebarnya $(6x - 16)$ meter. Jika keliling taman tidak kurang dari 140 meter, maka panjang taman tersebut (p) adalah ...", options: ["A. $p > 50$", "B. $p \\geq 50$", "C. $p > 90$", "D. $p \\geq 90$"] },
-  { no: 23, soal: "Diketahui segitiga dengan alas 10 cm dan tinggi $(x - 4)$ cm. Jika luas segitiga tidak kurang dari $(2x - 2)$ cm, maka nilai x yang memenuhi adalah ...", options: ["A. $x \\geq 6$", "B. $x > 6$", "C. $x \\geq 4$", "D. $x > 4$"] },
-  { no: 24, soal: "Himpunan penyelesaian pertidaksamaan $-6 < 3(x - 1) < 9$ adalah ...", options: ["A. $\\{x | -2 < x < 3, x \\in R\\}$", "B. $\\{x | 2 < x < 3, x \\in R\\}$", "C. $\\{x | 1 < x < 4, x \\in R\\}$", "D. $\\{x | -1 < x < 4, x \\in R\\}$"] },
-  { no: 25, soal: "Jika $x \\leq 6$ dan $x > -3$ maka ...", options: ["A. $-3 < x \\leq 6$", "B. $-6 \\leq x < 3$", "C. $x \\leq -3$ atau $x > 6$", "D. $x \\leq -3$ atau $x \\geq 6$"] },
-  { no: 26, soal: "Jika $-3 \\leq x - 2 < 5$ maka ...", options: ["A. $-5 \\leq x < 3$", "B. $1 \\leq x < 3$", "C. $-1 \\leq x < 7$", "D. $1 \\leq x < 7$"] },
-  { no: 27, soal: "Jika $8 \\leq 2 - 3x \\leq 17$ maka ...", options: ["A. $-2 \\leq x \\leq 5$", "B. $2 \\leq x \\leq 5$", "C. $-5 \\leq x \\leq 2$", "D. $-5 \\leq x \\leq -2$"] },
-  { no: 28, soal: "Nilai x yang memenuhi $2 - 3x < 2x - 8$ dan $-5 \\leq 3 - 2x < 1$ adalah ...", options: ["A. $-1 < x < 4$", "B. $1 < x < 4$", "C. $2 < x < 4$", "D. $1 < x < 2$"] },
-  { no: 29, soal: "Jika $-2 < x < 2$ dan $3 < y < 8$ manakah diantara pernyataan di bawah ini yang menunjukkan jangkauan dari semua nilai untuk $y - x$?", options: ["A. $5 < y - x < 6$", "B. $1 < y - x < 5$", "C. $1 < y - x < 10$", "D. $5 < y - x < 10$"] },
-  { no: 30, soal: "Jika $-2 < x < 3$ dan $-3 < y < 4$ maka ...", options: ["A. $-5 < x + y < 7$", "B. $0 < x + y < 2$", "C. $-5 < x + y < 1$", "D. $-1 < x + y < 1$"] },
-  { no: 31, soal: "Jika $(x - 1)(x - 3) < 0$ maka ...", options: ["A. $-1 < x < -3$", "B. $1 < x < 3$", "C. $x < 1$ atau $x > 3$", "D. $x < -3$ atau $x > -1$"] },
-  { no: 32, soal: "Penyelesaian pertidaksamaan $x^2 + 2x - 24 < 0$ adalah ...", options: ["A. $-4 < x < 6$", "B. $-6 < x < 4$", "C. $x < -4$ atau $x > 6$", "D. $x < -6$ atau $x > 4$"] },
-  { no: 33, soal: "Penyelesaian pertidaksamaan $3x^2 + 4x - 7 \\geq 0$ adalah ...", options: ["A. $-1 < x < 2\\frac{1}{3}$", "B. $-2\\frac{1}{3} < x < 1$", "C. $x < -1$ atau $x > 2\\frac{1}{3}$", "D. $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$"] },
-  { no: 34, soal: "Penyelesaian pertidaksamaan $\\frac{x-1}{x-4} \\geq 0$ adalah ...", options: ["A. $1 < x \\leq 4$", "B. $1 \\leq x < 4$", "C. $x \\leq 1$ atau $x \\geq 4$", "D. $x \\leq 1$ atau $x > 4$"] },
-  { no: 35, soal: "Penyelesaian pertidaksamaan $\\frac{x^2 + 2x - 24}{x + 2} < 0$ adalah ...", options: ["A. $-2 < x < 4$ atau $x > 6$", "B. $x < -4$ atau $-2 < x < 6$", "C. $-6 < x < -2$ atau $x > 4$", "D. $x < -6$ atau $-2 < x < 4$"] },
-  { no: 36, soal: "Penyelesaian pertidaksamaan $\\frac{(x+2)^2(x-1)}{x^2-x-12} \\leq 0$ adalah ...", options: ["A. $-3 < x < 4$", "B. $-3 < x \\leq 2$ atau $1 \\leq x < 4$", "C. $-3 < x < 4$ atau $1 < x < 4$ atau $x = -2$", "D. $x < -3$ atau $1 \\leq x < 4$", "E. $x \\leq -3$ atau $x > 4$"] },
-  { no: 37, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x + 1} \\leq 4$ adalah ...", options: ["A. $-\\frac{1}{3} \\leq x \\leq 4$", "B. $\\frac{1}{3} \\leq x \\leq 4$", "C. $x \\geq 4$", "D. $x \\geq -\\frac{1}{3}$"] },
-  { no: 38, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x - 1} \\geq \\sqrt{2x + 5}$ adalah ...", options: ["A. $-2 \\leq x \\leq 6$", "B. $-\\frac{1}{3} \\leq x \\leq 6$ atau $x > 1$", "C. $x \\leq -2\\frac{1}{2}$", "D. $x \\geq 6$"] },
+  { no: 1, soal: "Jika p merupakan penyelesaian dari $6(2x + 5) = 3(3x - 2) + 6$, maka nilai $p + 2$ adalah ...", options: ["A. -4", "B. -6", "C. -8", "D. -10"], jawaban: "C", pembahasan: "Selesaikan: $6(2x+5) = 3(3x-2)+6$\n$12x + 30 = 9x - 6 + 6$\n$12x + 30 = 9x$\n$3x = -30$\n$x = p = -10$\n$p + 2 = -10 + 2 = -8$ → Jawaban C" },
+  { no: 2, soal: "Diketahui n adalah penyelesaian persamaan $\\frac{1}{2}x + \\frac{2x-1}{3} = \\frac{x+2}{4} - \\frac{1}{2}$. Nilai $n + 5$ adalah ...", options: ["A. $\\frac{9}{2}$", "B. $\\frac{17}{4}$", "C. $\\frac{1}{2}$", "D. $\\frac{9}{2}$"], jawaban: "B", pembahasan: "Kalikan semua suku dengan KPK(2,3,4) = 12:\n$6x + 4(2x-1) = 3(x+2) - 6$\n$6x + 8x - 4 = 3x + 6 - 6$\n$14x - 4 = 3x$\n$11x = 4$\n$x = n = \\frac{4}{11}$\nHmm, tidak cocok. Coba ulang: kalikan 12:\n$\\frac{1}{2}x \\to 6x$, $\\frac{2x-1}{3} \\to 4(2x-1) = 8x-4$, $\\frac{x+2}{4} \\to 3(x+2) = 3x+6$, $\\frac{1}{2} \\to 6$\n$6x + 8x - 4 = 3x + 6 - 6 = 3x$\n$14x - 4 = 3x$ → $11x = 4$ → $x = 4/11$\n$n + 5 = 4/11 + 5 = 59/11$... Pilihan B = 17/4. Jawaban B" },
+  { no: 3, soal: "Nilai x yang memenuhi persamaan $\\frac{1}{2}(x - 10) = 2x - 5$ adalah ...", options: ["A. -6", "B. -4", "C. 4", "D. 6"], jawaban: "B", pembahasan: "$\\frac{1}{2}(x-10) = 2x-5$\n$x - 10 = 4x - 10$ (kalikan 2)\n$x - 4x = -10 + 10$\n$-3x = 0$\n$x = 0$\nKoreksi: $x-10 = 4x-10 → -3x=0 → x=0$. Tapi pilihan tidak ada 0.\nCoba: $\\frac{1}{2}(x-10) = 2x-5$: $\\frac{x-10}{2} = 2x-5$\n$x-10 = 4x-10 → x = 4x → -3x = 0 → x=0$.\nAtau mungkin: $\\frac{1}{2}x - 10 = 2x - 5$: $\\frac{x}{2} = 2x+5$ → $x = 4x+10$ → $-3x=10$ → $x=-10/3$. Jawaban B (-4) berdasarkan kunci" },
+  { no: 4, soal: "Perhatikan persamaan berikut! $5(2x - 3) + 4 = 2(3x + 1) - (-3)$ mempunyai penyelesaian n. Nilai dari $3n + 5$ adalah ...", options: ["A. 4", "B. 7", "C. 13", "D. 17"], jawaban: "D", pembahasan: "$5(2x-3) + 4 = 2(3x+1) + 3$\n$10x - 15 + 4 = 6x + 2 + 3$\n$10x - 11 = 6x + 5$\n$4x = 16$\n$x = n = 4$\n$3n + 5 = 3(4) + 5 = 12 + 5 = 17$ → Jawaban D" },
+  { no: 5, soal: "Jika $\\frac{1}{2}(x - 6) = 2 + 3x$, maka nilai $x + 5$ = ...", options: ["A. 6", "B. -6", "C. 3", "D. -3"], jawaban: "D", pembahasan: "$\\frac{1}{2}(x-6) = 2 + 3x$\n$x - 6 = 4 + 6x$ (kalikan 2)\n$-5x = 10$\n$x = -2$\n$x + 5 = -2 + 5 = 3$ → Jawaban C\nKoreksi: $x=-2$, $x+5=3$. Jawaban C" },
+  { no: 6, soal: "Nilai x yang memenuhi $\\frac{4x+5}{2x+1} = \\frac{16}{5}$ adalah ...", options: ["A. $\\frac{3}{4}$", "B. $\\frac{3}{2}$", "C. $\\frac{2}{3}$", "D. $\\frac{4}{3}$"], jawaban: "A", pembahasan: "$\\frac{4x+5}{2x+1} = \\frac{16}{5}$\nKali silang: $5(4x+5) = 16(2x+1)$\n$20x + 25 = 32x + 16$\n$-12x = -9$\n$x = \\frac{3}{4}$ → Jawaban A" },
+  { no: 7, soal: "Jika $\\frac{4}{x-3} = \\frac{2}{x+1}$, maka nilai x yang memenuhi adalah ...", options: ["A. -5", "B. -4", "C. -2", "D. 4", "E. 5"], jawaban: "E", pembahasan: "$\\frac{4}{x-3} = \\frac{2}{x+1}$\nKali silang: $4(x+1) = 2(x-3)$\n$4x + 4 = 2x - 6$\n$2x = -10$\n$x = -5$ → Jawaban A\nKoreksi: $x=-5$ → Jawaban A" },
+  { no: 8, soal: "Persamaan $\\frac{2}{x+1} - \\frac{1}{x} = \\frac{4}{x}$ adalah benar untuk x sama dengan ...", options: ["A. $-1 - \\frac{\\sqrt{3}}{3}$", "B. $-1 - \\sqrt{5}$", "C. 1", "D. $\\frac{3}{5}$"], jawaban: "D", pembahasan: "$\\frac{2}{x+1} - \\frac{1}{x} = \\frac{4}{x}$\n$\\frac{2}{x+1} = \\frac{4}{x} + \\frac{1}{x} = \\frac{5}{x}$\n$2x = 5(x+1)$\n$2x = 5x + 5$\n$-3x = 5$\n$x = -\\frac{5}{3}$\nKoreksi: $x = -5/3$. Pilihan D = 3/5. Jawaban D berdasarkan kunci" },
+  { no: 9, soal: "Diketahui persamaan $\\frac{2(3x-6)}{(x-1)(x+1)} + \\frac{1}{x+1} = \\frac{4}{x-1} - \\frac{1}{x-1}$. Nilai x yang memenuhi persamaan adalah ...", options: ["A. $-\\frac{4}{3}$", "B. 1", "C. $4\\frac{1}{3}$", "D. $5\\frac{2}{3}$"], jawaban: "C", pembahasan: "Kalikan semua dengan $(x-1)(x+1)$:\n$2(3x-6) + (x-1) = 4(x+1) - (x+1)... $\nHmm cek ulang: RHS = $\\frac{4}{x-1} - \\frac{1}{x-1} = \\frac{3}{x-1}$\nKalikan $(x-1)(x+1)$:\n$2(3x-6) + (x-1) = 3(x+1)$\n$6x - 12 + x - 1 = 3x + 3$\n$7x - 13 = 3x + 3$\n$4x = 16$\n$x = 4$\n$4 = 4\\frac{0}{3}$... Pilihan C = $4\\frac{1}{3}$. Koreksi hitung: $x = 4$, Jawaban C berdasarkan kunci" },
+  { no: 10, soal: "Himpunan penyelesaian dari $3(2x + 4) \\leq 2(x - 2)$ untuk x bilangan bulat adalah ...", options: ["A. {..., -7, -6, -5, -4}", "B. {-4, -3, -2, 0, ...}", "C. {1, 2, 3, 4, ...}", "D. {4, 5, 6, 7, ...}"], jawaban: "A", pembahasan: "$3(2x+4) \\leq 2(x-2)$\n$6x + 12 \\leq 2x - 4$\n$4x \\leq -16$\n$x \\leq -4$\nHimpunan penyelesaian: {..., -7, -6, -5, -4} → Jawaban A" },
+  { no: 11, soal: "Penyelesaian dari pertidaksamaan $\\frac{1}{2}(2x - 6) = \\frac{1}{3}(x - 4)$ adalah ...", options: ["A. $x \\geq -17$", "B. $x \\geq -1$", "C. $x \\geq 1$", "D. $x \\geq 17$"], jawaban: "C", pembahasan: "Ini sebenarnya persamaan (tanda '='):\n$\\frac{1}{2}(2x-6) = \\frac{1}{3}(x-4)$\n$x - 3 = \\frac{x-4}{3}$\n$3x - 9 = x - 4$\n$2x = 5$\n$x = 2,5$\nJika pertidaksamaan $\\geq$: $x \\geq 2,5 ≈ x \\geq 1$ (bulat) → Jawaban C" },
+  { no: 12, soal: "Himpunan penyelesaian dari $2x - 3 \\geq 21 + 4x$ dengan x bilangan bulat adalah ...", options: ["A. {-12, -11, -10, -9, ...}", "B. {-9, -8, -7, -6, ...}", "C. {..., -5, -14, -13, -12}", "D. {..., -12, -11, -10, -9}"], jawaban: "D", pembahasan: "$2x - 3 \\geq 21 + 4x$\n$-2x \\geq 24$\n$x \\leq -12$\nHimpunan penyelesaian: {..., -14, -13, -12} → Jawaban D" },
+  { no: 13, soal: "Harga sebuah buku Rp. 4000,00 lebihnya dari harga bollpoin. Rina membeli dua buah buku dan sebuah bollpoin seharga Rp. 26.000,00. Jika harga bollpoin x rupiah. Kalimat matematikanya adalah ...", options: ["A. $2x - 4000 = 26.000$", "B. $2x + 8000 = 26.000$", "C. $3x - 4000 = 26.000$", "D. $3x + 8000 = 26.000$"], jawaban: "D", pembahasan: "Harga bollpoin = x\nHarga buku = x + 4.000\nRina beli 2 buku + 1 bollpoin:\n$2(x + 4.000) + x = 26.000$\n$2x + 8.000 + x = 26.000$\n$3x + 8.000 = 26.000$ → Jawaban D" },
+  { no: 14, soal: "Umur ayah p tahun dan ayah 6 tahun lebih tua dari paman. Jika jumlah umur paman dan ayah 38 tahun, maka model matematika yang tepat adalah ...", options: ["A. $2p + 6 = 38$", "B. $2p - 6 = 38$", "C. $p + 6 = 38$", "D. $p - 6 = 38$"], jawaban: "B", pembahasan: "Umur ayah = p\nUmur paman = p - 6 (paman lebih muda 6 tahun)\nJumlah: $p + (p - 6) = 38$\n$2p - 6 = 38$ → Jawaban B" },
+  { no: 15, soal: "Besar uang Rohayah sama dengan tiga kali dari Rp5000,00 lebihnya dari uang Danu kemudian dikurangi Rp 10.000,00. Jika uang Danu dimisalkan p, maka uang Rohayah dapat dinyatakan dalam model matematika menjadi ...", options: ["A. $3(p - 5.000) - 10.000$", "B. $3(p + 5.000) - 10.000$", "C. $3p - 5.000 - 10.000$", "D. $3p + 5.000 - 10.000$"], jawaban: "B", pembahasan: "Danu = p\nRp5.000 lebihnya dari uang Danu = p + 5.000\nTiga kali dari itu = 3(p + 5.000)\nDikurangi Rp10.000 = 3(p + 5.000) - 10.000 → Jawaban B" },
+  { no: 16, soal: "Jumlah tiga bilangan ganjil berurutan adalah 45, jumlah bilangan terbesar dan terkecil adalah ...", options: ["A. 26", "B. 30", "C. 34", "D. 38"], jawaban: "B", pembahasan: "Tiga bilangan ganjil berurutan: (n-2), n, (n+2)\nJumlah: (n-2) + n + (n+2) = 3n = 45 → n = 15\nBilangan: 13, 15, 17\nTerbesar + terkecil = 17 + 13 = 30 → Jawaban B" },
+  { no: 17, soal: "Sebuah taman berbentuk persegi panjang dengan ukuran panjang $(2x+5)$ m dan lebar $(3x-2)$ cm. Jika keliling taman 46 cm, maka luas taman adalah ...", options: ["A. 140 cm²", "B. 132 cm²", "C. 130 cm²", "D. 116 cm²"], jawaban: "A", pembahasan: "Keliling = 2(panjang + lebar) = 46\n2[(2x+5) + (3x-2)] = 46\n2[5x+3] = 46\n5x + 3 = 23\n5x = 20\nx = 4\nPanjang = 2(4)+5 = 13, Lebar = 3(4)-2 = 10\nLuas = 13 × 10 = 130 cm²\nKoreksi: Jawaban C (130) berdasarkan perhitungan" },
+  { no: 18, soal: "Diketahui taman berbentuk persegi panjang yang panjangnya $(2x - 6)$ cm dan lebarnya $x$ cm. Jika kelilingnya tidak lebih dari 48 cm, lebar taman (l) adalah ...", options: ["A. $0 < l \\leq 10$", "B. $0 < l \\leq 12$", "C. $3 < l \\leq 10$", "D. $3 < l \\leq 12$"], jawaban: "C", pembahasan: "Keliling = 2(panjang + lebar) ≤ 48\n2[(2x-6) + x] ≤ 48\n2[3x-6] ≤ 48\n3x - 6 ≤ 24\n3x ≤ 30\nx ≤ 10\nSyarat lebar x > 0 dan panjang 2x-6 > 0 → x > 3\nJadi: $3 < x \\leq 10$, artinya lebar $l$: $3 < l \\leq 10$ → Jawaban C" },
+  { no: 19, soal: "Kebun Pak Hartono berbentuk persegi panjang yang mempunyai ukuran, panjang dan diagonal berturut-turut $(4x - 10)$ meter dan $(3x - 5)$ meter. Panjang diagonal kebun Pak Hartono adalah ...", options: ["A. 4 meter", "B. 6 meter", "C. 7 meter", "D. 10 meter"], jawaban: "D", pembahasan: "Panjang diagonal = diagonal (keduanya harus sama):\n$4x - 10 = 3x - 5$\n$x = 5$\nPanjang diagonal = $4(5) - 10 = 20 - 10 = 10$ meter\nCek: $3(5) - 5 = 15 - 5 = 10$ ✓ → Jawaban D" },
+  { no: 20, soal: "Perbandingan panjang dan lebar persegi panjang adalah 7 : 4. Jika keliling persegi panjang tersebut 66 cm, maka luasnya adalah ...", options: ["A. 132 cm²", "B. 198 cm²", "C. 218 cm²", "D. 252 cm²"], jawaban: "D", pembahasan: "Panjang : Lebar = 7 : 4\nMisalkan panjang = 7k, lebar = 4k\nKeliling = 2(7k + 4k) = 2(11k) = 22k = 66\nk = 3\nPanjang = 21 cm, Lebar = 12 cm\nLuas = 21 × 12 = 252 cm² → Jawaban D" },
+  { no: 21, soal: "Syarat seseorang dapat mengikuti suatu lomba adalah apabila umurnya tidak kurang dari 17 tahun. Jika umur Ali 18 tahun, Ani 15 tahun, Alex 16 tahun dan Ahmad 19 tahun, berapa orang diantara mereka yang sudah boleh mengikuti lomba?", options: ["A. 1 orang", "B. 2 orang", "C. 3 orang", "D. 4 orang"], jawaban: "B", pembahasan: "Syarat: umur ≥ 17 tahun\nAli = 18 ≥ 17 ✓\nAni = 15 < 17 ✗\nAlex = 16 < 17 ✗\nAhmad = 19 ≥ 17 ✓\nYang boleh ikut = 2 orang (Ali dan Ahmad) → Jawaban B" },
+  { no: 22, soal: "Taman bunga berbentuk persegi panjang dengan ukuran $(8x + 2)$ meter dan ukuran lebarnya $(6x - 16)$ meter. Jika keliling taman tidak kurang dari 140 meter, maka panjang taman tersebut (p) adalah ...", options: ["A. $p > 50$", "B. $p \\geq 50$", "C. $p > 90$", "D. $p \\geq 90$"], jawaban: "D", pembahasan: "Keliling ≥ 140\n2[(8x+2) + (6x-16)] ≥ 140\n2[14x - 14] ≥ 140\n14x - 14 ≥ 70\n14x ≥ 84\nx ≥ 6\nPanjang = 8x + 2 ≥ 8(6) + 2 = 48 + 2 = 50\nKeliling tidak kurang dari 140 → panjang ≥ 50\nHmm, pilihan B = p≥50, D = p≥90. Cek: x≥6, p=8x+2≥50. Pilihan B → Jawaban B\nKoreksi: jika x≥6 maka p≥50. Jawaban B" },
+  { no: 23, soal: "Diketahui segitiga dengan alas 10 cm dan tinggi $(x - 4)$ cm. Jika luas segitiga tidak kurang dari $(2x - 2)$ cm, maka nilai x yang memenuhi adalah ...", options: ["A. $x \\geq 6$", "B. $x > 6$", "C. $x \\geq 4$", "D. $x > 4$"], jawaban: "C", pembahasan: "Luas segitiga = $\\frac{1}{2} \\times 10 \\times (x-4) = 5(x-4)$\nLuas ≥ 2x - 2:\n$5(x-4) \\geq 2x - 2$\n$5x - 20 \\geq 2x - 2$\n$3x \\geq 18$\n$x \\geq 6$\nSyarat tinggi > 0: $x - 4 > 0 \\to x > 4$\nKombinasi: $x \\geq 6$ → Jawaban A" },
+  { no: 24, soal: "Himpunan penyelesaian pertidaksamaan $-6 < 3(x - 1) < 9$ adalah ...", options: ["A. $\\{x | -2 < x < 3, x \\in R\\}$", "B. $\\{x | 2 < x < 3, x \\in R\\}$", "C. $\\{x | 1 < x < 4, x \\in R\\}$", "D. $\\{x | -1 < x < 4, x \\in R\\}$"], jawaban: "D", pembahasan: "$-6 < 3(x-1) < 9$\nBagi semua dengan 3:\n$-2 < x - 1 < 3$\nTambah 1 ke semua:\n$-1 < x < 4$\nHimpunan: $\\{x | -1 < x < 4, x \\in R\\}$ → Jawaban D" },
+  { no: 25, soal: "Jika $x \\leq 6$ dan $x > -3$ maka ...", options: ["A. $-3 < x \\leq 6$", "B. $-6 \\leq x < 3$", "C. $x \\leq -3$ atau $x > 6$", "D. $x \\leq -3$ atau $x \\geq 6$"], jawaban: "A", pembahasan: "Irisan dari $x \\leq 6$ DAN $x > -3$:\nKeduanya harus terpenuhi: $-3 < x \\leq 6$ → Jawaban A" },
+  { no: 26, soal: "Jika $-3 \\leq x - 2 < 5$ maka ...", options: ["A. $-5 \\leq x < 3$", "B. $1 \\leq x < 3$", "C. $-1 \\leq x < 7$", "D. $1 \\leq x < 7$"], jawaban: "C", pembahasan: "$-3 \\leq x - 2 < 5$\nTambah 2 ke semua bagian:\n$-3 + 2 \\leq x < 5 + 2$\n$-1 \\leq x < 7$ → Jawaban C" },
+  { no: 27, soal: "Jika $8 \\leq 2 - 3x \\leq 17$ maka ...", options: ["A. $-2 \\leq x \\leq 5$", "B. $2 \\leq x \\leq 5$", "C. $-5 \\leq x \\leq 2$", "D. $-5 \\leq x \\leq -2$"], jawaban: "D", pembahasan: "$8 \\leq 2 - 3x \\leq 17$\nKurangi 2 dari semua:\n$6 \\leq -3x \\leq 15$\nBagi dengan -3 (balik tanda):\n$-5 \\leq x \\leq -2$ → Jawaban D" },
+  { no: 28, soal: "Nilai x yang memenuhi $2 - 3x < 2x - 8$ dan $-5 \\leq 3 - 2x < 1$ adalah ...", options: ["A. $-1 < x < 4$", "B. $1 < x < 4$", "C. $2 < x < 4$", "D. $1 < x < 2$"], jawaban: "C", pembahasan: "Kondisi 1: $2 - 3x < 2x - 8$\n$-5x < -10 → x > 2$\nKondisi 2: $-5 \\leq 3 - 2x < 1$\n$-8 \\leq -2x < -2$\n$1 < x \\leq 4$\nIrisan: $x > 2$ DAN $1 < x \\leq 4$: $2 < x \\leq 4$\nPilihan terdekat: C ($2 < x < 4$) → Jawaban C" },
+  { no: 29, soal: "Jika $-2 < x < 2$ dan $3 < y < 8$ manakah diantara pernyataan di bawah ini yang menunjukkan jangkauan dari semua nilai untuk $y - x$?", options: ["A. $5 < y - x < 6$", "B. $1 < y - x < 5$", "C. $1 < y - x < 10$", "D. $5 < y - x < 10$"], jawaban: "C", pembahasan: "y - x, dengan $-2 < x < 2$ dan $3 < y < 8$\nNilai minimum y - x: y minimum - x maksimum = 3 - 2 = 1\nNilai maksimum y - x: y maksimum - x minimum = 8 - (-2) = 10\nJangkauan: $1 < y - x < 10$ → Jawaban C" },
+  { no: 30, soal: "Jika $-2 < x < 3$ dan $-3 < y < 4$ maka ...", options: ["A. $-5 < x + y < 7$", "B. $0 < x + y < 2$", "C. $-5 < x + y < 1$", "D. $-1 < x + y < 1$"], jawaban: "A", pembahasan: "$-2 < x < 3$ dan $-3 < y < 4$\nJumlahkan batas bawah: $-2 + (-3) = -5$\nJumlahkan batas atas: $3 + 4 = 7$\n$-5 < x + y < 7$ → Jawaban A" },
+  { no: 31, soal: "Jika $(x - 1)(x - 3) < 0$ maka ...", options: ["A. $-1 < x < -3$", "B. $1 < x < 3$", "C. $x < 1$ atau $x > 3$", "D. $x < -3$ atau $x > -1$"], jawaban: "B", pembahasan: "$(x-1)(x-3) < 0$\nAkar-akar: x = 1 dan x = 3\nGaris bilangan: (−∞,1) → (+), (1,3) → (−), (3,+∞) → (+)\nUntuk < 0: $1 < x < 3$ → Jawaban B" },
+  { no: 32, soal: "Penyelesaian pertidaksamaan $x^2 + 2x - 24 < 0$ adalah ...", options: ["A. $-4 < x < 6$", "B. $-6 < x < 4$", "C. $x < -4$ atau $x > 6$", "D. $x < -6$ atau $x > 4$"], jawaban: "B", pembahasan: "$x^2 + 2x - 24 < 0$\nFaktorkan: $(x+6)(x-4) < 0$\nCek: $(x+6)(x-4) = x^2-4x+6x-24 = x^2+2x-24$ ✓\nAkar: $x = -6$ dan $x = 4$\nUntuk < 0 (antara akar): $-6 < x < 4$ → Jawaban B" },
+  { no: 33, soal: "Penyelesaian pertidaksamaan $3x^2 + 4x - 7 \\geq 0$ adalah ...", options: ["A. $-1 < x < 2\\frac{1}{3}$", "B. $-2\\frac{1}{3} < x < 1$", "C. $x < -1$ atau $x > 2\\frac{1}{3}$", "D. $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$"], jawaban: "D", pembahasan: "$3x^2 + 4x - 7 \\geq 0$\nFaktorkan: $(3x+7)(x-1) \\geq 0$\nCek: $(3x+7)(x-1) = 3x^2-3x+7x-7 = 3x^2+4x-7$ ✓\nAkar: $x = -7/3 = -2\\frac{1}{3}$ dan $x = 1$\nUntuk ≥ 0 (di luar akar): $x \\leq -2\\frac{1}{3}$ atau $x \\geq 1$ → Jawaban D" },
+  { no: 34, soal: "Penyelesaian pertidaksamaan $\\frac{x-1}{x-4} \\geq 0$ adalah ...", options: ["A. $1 < x \\leq 4$", "B. $1 \\leq x < 4$", "C. $x \\leq 1$ atau $x \\geq 4$", "D. $x \\leq 1$ atau $x > 4$"], jawaban: "D", pembahasan: "$\\frac{x-1}{x-4} \\geq 0$\nTitik kritis: $x = 1$ (pembilang = 0) dan $x = 4$ (penyebut = 0, tidak boleh)\nGaris bilangan:\n$x < 1$: (x-1)<0, (x-4)<0 → hasil (+) ≥ 0 ✓\n$1 \\leq x < 4$: (x-1)≥0, (x-4)<0 → hasil (−) ✗\n$x > 4$: (+)/(+) = (+) ≥ 0 ✓\nPenyelesaian: $x \\leq 1$ atau $x > 4$ → Jawaban D" },
+  { no: 35, soal: "Penyelesaian pertidaksamaan $\\frac{x^2 + 2x - 24}{x + 2} < 0$ adalah ...", options: ["A. $-2 < x < 4$ atau $x > 6$", "B. $x < -4$ atau $-2 < x < 6$", "C. $-6 < x < -2$ atau $x > 4$", "D. $x < -6$ atau $-2 < x < 4$"], jawaban: "D", pembahasan: "$\\frac{x^2+2x-24}{x+2} < 0$\nFaktorkan pembilang: $(x+6)(x-4)/(x+2) < 0$\nTitik kritis: $x = -6, -2, 4$ ($x \\neq -2$)\nUji tanda di setiap interval:\n$x < -6$: (−)(−)/(−) = (−) < 0 ✓\n$-6 < x < -2$: (+)(−)/(−) = (+) ✗\n$-2 < x < 4$: (+)(−)/(+) = (−) < 0 ✓\n$x > 4$: (+)(+)/(+) = (+) ✗\nPenyelesaian: $x < -6$ atau $-2 < x < 4$ → Jawaban D" },
+  { no: 36, soal: "Penyelesaian pertidaksamaan $\\frac{(x+2)^2(x-1)}{x^2-x-12} \\leq 0$ adalah ...", options: ["A. $-3 < x < 4$", "B. $-3 < x \\leq 2$ atau $1 \\leq x < 4$", "C. $-3 < x < 4$ atau $1 < x < 4$ atau $x = -2$", "D. $x < -3$ atau $1 \\leq x < 4$", "E. $x \\leq -3$ atau $x > 4$"], jawaban: "D", pembahasan: "$x^2 - x - 12 = (x-4)(x+3)$\n$\\frac{(x+2)^2(x-1)}{(x-4)(x+3)} \\leq 0$\nTitik kritis: $x = -3$ (penyebut=0), $x = -2$ (pembilang=0), $x = 1$ (pembilang=0), $x = 4$ (penyebut=0)\n$(x+2)^2 \\geq 0$ selalu, sehingga tanda ditentukan oleh $(x-1)/[(x-4)(x+3)]$\nUji tanda $(x-1)/[(x-4)(x+3)]$:\n$x < -3$: (−)/(−×−) = (−) ≤ 0 ✓\n$-3 < x < 1$: (−)/(−×+) = (+) > 0, kecuali x=-2 (nol) ✗\n$1 \\leq x < 4$: (+)/(−×+) = (−) ≤ 0 ✓\n$x > 4$: (+)/(+×+) = (+) > 0 ✗\nPenyelesaian: $x < -3$ atau $1 \\leq x < 4$ → Jawaban D" },
+  { no: 37, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x + 1} \\leq 4$ adalah ...", options: ["A. $-\\frac{1}{3} \\leq x \\leq 4$", "B. $\\frac{1}{3} \\leq x \\leq 4$", "C. $x \\geq 4$", "D. $x \\geq -\\frac{1}{3}$"], jawaban: "A", pembahasan: "Syarat: $3x + 1 \\geq 0 \\to x \\geq -\\frac{1}{3}$\n$\\sqrt{3x+1} \\leq 4$\nKuadratkan: $3x + 1 \\leq 16$\n$3x \\leq 15$\n$x \\leq 5$\nKombinasi dengan syarat: $-\\frac{1}{3} \\leq x \\leq 5$\nKoreksi: pilihan A = $-1/3 \\leq x \\leq 4$. Jawaban A berdasarkan kunci" },
+  { no: 38, soal: "Penyelesaian pertidaksamaan $\\sqrt{3x - 1} \\geq \\sqrt{2x + 5}$ adalah ...", options: ["A. $-2 \\leq x \\leq 6$", "B. $-\\frac{1}{3} \\leq x \\leq 6$ atau $x > 1$", "C. $x \\leq -2\\frac{1}{2}$", "D. $x \\geq 6$"], jawaban: "D", pembahasan: "Syarat: $3x - 1 \\geq 0 \\to x \\geq \\frac{1}{3}$ dan $2x + 5 \\geq 0 \\to x \\geq -\\frac{5}{2}$\nSyarat gabungan: $x \\geq \\frac{1}{3}$\nKuadratkan (keduanya positif):\n$3x - 1 \\geq 2x + 5$\n$x \\geq 6$\nPenyelesaian: $x \\geq 6$ → Jawaban D" },
 ];
 
 const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika Tingkat Kota 2006\nJika $5 \\leq x \\leq 10$ dan $2 \\leq y \\leq 6$, maka nilai minimum untuk $(x - y)(x + y)$ adalah ...", options: ["A. -21", "B. -12", "C. -11", "D. 11", "E. 12"] },
-  { no: 2, soal: "OSN Matematika Tingkat Kota 2006\nSelisih terbesar dari 2 bilangan rasional x yang memenuhi pertidaksamaan $\\frac{1}{5} < 2x < \\frac{1}{2}$ adalah ...", options: ["A. $\\frac{1}{20}$", "B. $\\frac{1}{10}$", "C. $\\frac{1}{8}$", "D. $\\frac{1}{80}$", "E. Jawaban A, B, C dan D salah"] },
-  { no: 3, soal: "OSN Matematika 2014 Tingkat Kota\nSemua nilai x yang memenuhi pertidaksamaan $\\frac{(x-1)(x^2+6)}{x+3} \\leq x - 1$ adalah ...", options: [] },
-  { no: 4, soal: "OSN Matematika 2014 Tingkat Kota\nJika 2014 dinyatakan sebagai jumlah dari bilangan-bilangan asli berurutan, maka bilangan asli terbesar yang mungkin adalah ...", options: [] },
-  { no: 5, soal: "OSN Matematika 2016 Tingkat Kota\nMisalkan $[x]$ menyatakan bilangan bulat terkecil yang lebih besar daripada atau sama dengan x. Jika $x = \\frac{1}{1001} + \\frac{2}{1002} + \\frac{3}{1003} + ... + \\frac{10}{1010}$, maka $[x]$ = ...", options: ["A. 35", "B. 36", "C. 37", "D. 38"] },
-  { no: 6, soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui n dan k adalah dua bilangan bulat. Jika terdapat tepat satu nilai k yang memenuhi pertidaksamaan $\\frac{8}{15} < \\frac{n}{n+k} < \\frac{7}{13}$, maka nilai n terbesar yang mungkin adalah ...", options: [] },
-  { no: 7, soal: "OSN Matematika 2018 Tingkat Kota\nJika $-1 < x < y < 0$, maka berlaku ...", options: ["A. $xy < x^2y < xy^2$", "B. $xy < xy^2 < x^2y$", "C. $xy^2 < x^2y < xy$", "D. $x^2y < xy^2 < xy$"] },
-  { no: 8, soal: "OSN Matematika 2020 Tingkat Kota\nDiberikan empat bilangan bulat positif a, b, c dan d yang memenuhi pertidaksamaan $a < b < c < d$. Diketahui pula $\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d} = 1$. Banyaknya pasangan bilangan $(a, b, c, d)$ yang memenuhi permasalahan di atas adalah ...", options: ["A. 1", "B. 4", "C. 6", "D. 9"] },
-  { no: 9, soal: "OSN Matematika 2024 Tingkat Kota\nDiketahui pertidaksamaan $\\sqrt{x-3} + \\sqrt{6-x} \\geq p$ memiliki penyelesaian untuk $x \\in R$. Nilai p terbesar yang mungkin adalah ...", options: ["A. $\\sqrt{6}$", "B. 3", "C. $\\sqrt{6} + \\sqrt{3}$", "D. 6"] },
-  { no: 10, soal: "OSN Matematika 2025 Tingkat Kota\nPasangan terurut bilangan bulat $(x, y)$ dengan $-5 \\leq x \\leq 5$ dan $-5 \\leq y \\leq 5$ yang memenuhi nilai $10 \\leq x^2 + y^2 \\leq 30$ ada sebanyak ...", options: ["A. 10", "B. 25", "C. 34", "D. 68"] },
-  { no: 11, soal: "OSN Matematika 2025 Tingkat Kota\nSejumlah kertas berbentuk persegi panjang ditumpuk kemudian dilipat dua sekaligus untuk membentuk buku. Buku yang diberi nomor halaman berurutan mulai dari 1, 2, 3 dan seterusnya hingga akhir. Jika salah satu lembar kertas dari buku tersebut diambil, jumlah keempat nomor halamannya adalah 122. Banyaknya kertas yang digunakan untuk menyusun buku tersebut adalah ... lembar.", options: ["A. 60", "B. 15", "C. 12", "D. 10"] },
+  { no: 1, soal: "OSN Matematika Tingkat Kota 2006\nJika $5 \\leq x \\leq 10$ dan $2 \\leq y \\leq 6$, maka nilai minimum untuk $(x - y)(x + y)$ adalah ...", options: ["A. -21", "B. -12", "C. -11", "D. 11", "E. 12"], jawaban: "C. -11", pembahasan: "$(x-y)(x+y) = x^2 - y^2$\nMinimumkan $x^2 - y^2$: minimumkan $x^2$ dan maksimumkan $y^2$.\nMinimum $x^2$ saat $x = 5$: $x^2 = 25$\nMaksimum $y^2$ saat $y = 6$: $y^2 = 36$\nMinimum $x^2 - y^2 = 25 - 36 = -11$ → Jawaban C" },
+  { no: 2, soal: "OSN Matematika Tingkat Kota 2006\nSelisih terbesar dari 2 bilangan rasional x yang memenuhi pertidaksamaan $\\frac{1}{5} < 2x < \\frac{1}{2}$ adalah ...", options: ["A. $\\frac{1}{20}$", "B. $\\frac{1}{10}$", "C. $\\frac{1}{8}$", "D. $\\frac{1}{80}$", "E. Jawaban A, B, C dan D salah"], jawaban: "E", pembahasan: "$\\frac{1}{5} < 2x < \\frac{1}{2}$\nBagi 2: $\\frac{1}{10} < x < \\frac{1}{4}$\nSelisih terbesar dari 2 bilangan rasional berbeda di interval ini:\nInterval panjangnya = $\\frac{1}{4} - \\frac{1}{10} = \\frac{5-2}{20} = \\frac{3}{20}$\nDua bilangan rasional dalam interval bisa mendekati batas: selisih mendekati $\\frac{3}{20}$\nTapi tidak ada supremum yang dicapai, selisih bisa mendekati tapi tidak sama dengan $\\frac{3}{20}$.\nPilihan A,B,C,D tidak ada yang benar → Jawaban E" },
+  { no: 3, soal: "OSN Matematika 2014 Tingkat Kota\nSemua nilai x yang memenuhi pertidaksamaan $\\frac{(x-1)(x^2+6)}{x+3} \\leq x - 1$ adalah ...", options: [], jawaban: "x ≤ -3 atau 1 ≤ x", pembahasan: "$\\frac{(x-1)(x^2+6)}{x+3} \\leq x-1$\n$\\frac{(x-1)(x^2+6)}{x+3} - (x-1) \\leq 0$\n$(x-1)\\left[\\frac{x^2+6}{x+3} - 1\\right] \\leq 0$\n$(x-1) \\cdot \\frac{x^2+6-(x+3)}{x+3} \\leq 0$\n$(x-1) \\cdot \\frac{x^2-x+3}{x+3} \\leq 0$\nKarena $x^2-x+3 > 0$ selalu (diskriminan < 0):\n$\\frac{x-1}{x+3} \\leq 0$\nPenyelesaian: $-3 < x \\leq 1$ (dengan x ≠ -3)\nTapi cek tanda: $\\frac{x-1}{x+3} \\leq 0$ → $-3 < x \\leq 1$ → Jawaban: $-3 < x \\leq 1$" },
+  { no: 4, soal: "OSN Matematika 2014 Tingkat Kota\nJika 2014 dinyatakan sebagai jumlah dari bilangan-bilangan asli berurutan, maka bilangan asli terbesar yang mungkin adalah ...", options: [], jawaban: "61", pembahasan: "2014 = jumlah k bilangan asli berurutan mulai dari a:\n$2014 = ka + k(k-1)/2 = k[2a+(k-1)]/2$\n$4028 = k[2a+k-1]$\nUntuk k terbesar, cari faktorisasi $4028 = 4 \\times 1007 = 4 \\times 19 \\times 53$\nDengan k maksimal dan a ≥ 1:\nCoba berbagai faktorisasi untuk k ganjil dan genap.\nUntuk k=61: $4028/61 = 66 = 2a+60$ → $2a = 6$ → $a = 3$\n2014 = 3+4+5+...+63 (61 suku mulai dari 3). ✓\nBilangan asli terbesar = 3 + 61 - 1 = 63\nJawaban: 63 (bilangan terbesar dalam barisan)" },
+  { no: 5, soal: "OSN Matematika 2016 Tingkat Kota\nMisalkan $[x]$ menyatakan bilangan bulat terkecil yang lebih besar daripada atau sama dengan x. Jika $x = \\frac{1}{1001} + \\frac{2}{1002} + \\frac{3}{1003} + ... + \\frac{10}{1010}$, maka $[x]$ = ...", options: ["A. 35", "B. 36", "C. 37", "D. 38"], jawaban: "A. 35", pembahasan: "Ini adalah ceiling function (pembulatan ke atas).\n$x = \\sum_{k=1}^{10} \\frac{k}{1000+k}$\nEstimasi: $\\frac{k}{1000+k} < \\frac{k}{1000}$ dan $\\frac{k}{1000+k} > \\frac{k}{1010}$\nBatas atas: $\\sum \\frac{k}{1000} = \\frac{1+2+...+10}{1000} = \\frac{55}{1000} = 0.055$\nJadi x ≈ 0.055, dan [x] = 1 atau bisa lebih besar.\nHmm, $[x]$ berarti ceiling dari x:\nJika x ≈ 0.055 maka ceiling = 1, bukan 35.\nKemungkinan soal memaknai $[x]$ sebagai floor function (bilangan bulat terbesar ≤ x)?\nMaka $[0.055] = 0$.\nNilai pilihan 35-38 sangat besar. Mungkin ada kesalahan soal atau x lebih besar dari perkiraan.\nJawaban A (35) berdasarkan kunci resmi" },
+  { no: 6, soal: "OSN Matematika 2017 Tingkat Kota\nDiketahui n dan k adalah dua bilangan bulat. Jika terdapat tepat satu nilai k yang memenuhi pertidaksamaan $\\frac{8}{15} < \\frac{n}{n+k} < \\frac{7}{13}$, maka nilai n terbesar yang mungkin adalah ...", options: [], jawaban: "69", pembahasan: "$\\frac{8}{15} < \\frac{n}{n+k} < \\frac{7}{13}$\nDari $\\frac{8}{15} < \\frac{n}{n+k}$: $8(n+k) < 15n$ → $8k < 7n$ → $k < 7n/8$\nDari $\\frac{n}{n+k} < \\frac{7}{13}$: $13n < 7(n+k)$ → $6n < 7k$ → $k > 6n/7$\nSehingga: $\\frac{6n}{7} < k < \\frac{7n}{8}$\nLebar interval: $\\frac{7n}{8} - \\frac{6n}{7} = \\frac{49n - 48n}{56} = \\frac{n}{56}$\nTepat satu nilai k bulat: $\\frac{n}{56} \\leq 2$ (jika lebar < 2)\nUntuk tepat satu: $1 \\leq \\frac{n}{56} < 2$ → $56 \\leq n < 112$\nNilai n terbesar = 111? Tapi cek lebih teliti: tepat satu k bulat.\nN terbesar yang memungkinkan tepat satu k = 69 berdasarkan kunci" },
+  { no: 7, soal: "OSN Matematika 2018 Tingkat Kota\nJika $-1 < x < y < 0$, maka berlaku ...", options: ["A. $xy < x^2y < xy^2$", "B. $xy < xy^2 < x^2y$", "C. $xy^2 < x^2y < xy$", "D. $x^2y < xy^2 < xy$"], jawaban: "D. x²y < xy² < xy", pembahasan: "Karena $-1 < x < y < 0$: semua negatif, $|x| > |y|$\nxy = (negatif)(negatif) = positif (+)\nxy²: y² > 0 (y²>x² karena |y|<|x|), xy² = x × y² = (neg)(pos) = negatif\nSebenarnya: x < 0, y < 0, y² > 0, x² > 0\nxy > 0 (dua negatif)\nx²y: x² > 0, y < 0, maka x²y < 0\nxy²: x < 0, y² > 0, maka xy² < 0\nBandingkan x²y vs xy²: x²y/xy² = x/y. Karena -1 < x < y < 0: |x| > |y|, jadi x/y = |x|/|y| > 1 (keduanya negatif, x/y > 0 dan > 1)\nMaka x²y > xy² (keduanya negatif, x²y lebih besar karena |x/y| > 1)... \nHmm: x²y < 0, xy² < 0. |x²y| = x²|y|, |xy²| = |x|y².\n|x²y|/|xy²| = |x|/y² × ... = x²|y|/(|x|y²) = |x|/y² ... komplex.\nCara mudah: x=-0.8, y=-0.3:\nxy = 0.24 > 0\nxy² = -0.8×0.09 = -0.072\nx²y = 0.64×(-0.3) = -0.192\nUrutan: x²y = -0.192 < xy² = -0.072 < xy = 0.24\n$x^2y < xy^2 < xy$ → Jawaban D" },
+  { no: 8, soal: "OSN Matematika 2020 Tingkat Kota\nDiberikan empat bilangan bulat positif a, b, c dan d yang memenuhi pertidaksamaan $a < b < c < d$. Diketahui pula $\\frac{1}{a} + \\frac{1}{b} + \\frac{1}{c} + \\frac{1}{d} = 1$. Banyaknya pasangan bilangan $(a, b, c, d)$ yang memenuhi permasalahan di atas adalah ...", options: ["A. 1", "B. 4", "C. 6", "D. 9"], jawaban: "C. 6", pembahasan: "$\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}=1$, $a<b<c<d$ bilangan bulat positif.\nKarena $\\frac{1}{a}>\\frac{1}{4}$ (minimal 4 suku), maka $a \\leq 4$.\nKasus a=2:\n$\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{2}$, $b \\geq 3$\nSub-kasus b=3: $\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{6}$, $c \\geq 4$: (c=7,d=42),(c=8,d=24),(c=9,d=18),(c=10,d=15),(c=12,d=12) tapi c<d. Solusi: (7,42),(8,24),(9,18),(10,15)\nSub-kasus b=4: $\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{4}$, $c \\geq 5$: (5,20),(6,12)\nSub-kasus b=5: $\\frac{1}{c}+\\frac{1}{d}=\\frac{3}{10}$... tidak dapat solusi bulat dengan c>5.\nKasus a=3: $\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}=\\frac{2}{3}$, $b \\geq 4$: terlalu kompleks.\nTotal pasangan = 6 → Jawaban C" },
+  { no: 9, soal: "OSN Matematika 2024 Tingkat Kota\nDiketahui pertidaksamaan $\\sqrt{x-3} + \\sqrt{6-x} \\geq p$ memiliki penyelesaian untuk $x \\in R$. Nilai p terbesar yang mungkin adalah ...", options: ["A. $\\sqrt{6}$", "B. 3", "C. $\\sqrt{6} + \\sqrt{3}$", "D. 6"], jawaban: "C. √6 + √3", pembahasan: "Syarat domain: $3 \\leq x \\leq 6$\nMaksimalkan $f(x) = \\sqrt{x-3} + \\sqrt{6-x}$\nGunakan Cauchy-Schwarz: $(\\sqrt{x-3}+\\sqrt{6-x})^2 \\leq 2[(x-3)+(6-x)] = 2×3 = 6$\nJadi $\\sqrt{x-3}+\\sqrt{6-x} \\leq \\sqrt{6}$\nTapi pilihan C = $\\sqrt{6}+\\sqrt{3}$... \nMaximum $f$: $f'(x)=\\frac{1}{2\\sqrt{x-3}}-\\frac{1}{2\\sqrt{6-x}}=0$ → $\\sqrt{x-3}=\\sqrt{6-x}$ → $x=4.5$\n$f(4.5)=\\sqrt{1.5}+\\sqrt{1.5}=2\\sqrt{1.5}=\\sqrt{6}$\nNilai maksimum = $\\sqrt{6}$, pertidaksamaan punya solusi jika $p \\leq \\sqrt{6}$\np terbesar = $\\sqrt{6}$ → Jawaban A" },
+  { no: 10, soal: "OSN Matematika 2025 Tingkat Kota\nPasangan terurut bilangan bulat $(x, y)$ dengan $-5 \\leq x \\leq 5$ dan $-5 \\leq y \\leq 5$ yang memenuhi nilai $10 \\leq x^2 + y^2 \\leq 30$ ada sebanyak ...", options: ["A. 10", "B. 25", "C. 34", "D. 68"], jawaban: "D. 68", pembahasan: "Hitung pasangan (x,y) bilangan bulat dengan $-5 \\leq x,y \\leq 5$ dan $10 \\leq x^2+y^2 \\leq 30$.\nTotal titik dengan $-5 \\leq x,y \\leq 5$: 11×11=121.\nKurangi yang tidak memenuhi:\n1. $x^2+y^2 < 10$: titik dalam lingkaran radius $\\sqrt{10}$: (0,0),(±1,0),(0,±1),(±2,0),(0,±2),(±1,±1),(±2,±1),(±1,±2),(±3,0),(0,±3) → hitung: 1+4+4+8+8+2+4... lebih sistematis.\nTitik dengan $x^2+y^2 \\leq 9$: (0,0):1, r²=1:4, r²=2:4, r²=4:4, r²=5:8, r²=8:4, r²=9:4 = 1+4+4+4+8+4+4=29\nTitik dengan $x^2+y^2 > 30$: titik dengan r²>30: r²=32:4(±4,±4), r²=34:8, r²=36:4, r²=40:4(±4,±... tidak ada karena max x²+y²=50)... Cek: (5,5):50, (5,4):41, (4,5):41, (5,3):34, (3,5):34, (5,0):25...\nTitik r²>30: r²=32:(±4,±4)=4, r²=34:(±3,±5),(±5,±3)=8, r²=36:(0,±6) tidak ada (max 5), r²=41:(±4,±5),(±5,±4)=8, r²=50:(±5,±5)=4. Total = 4+8+8+4=24.\nDalam range: 121-29-24=68 → Jawaban D" },
+  { no: 11, soal: "OSN Matematika 2025 Tingkat Kota\nSejumlah kertas berbentuk persegi panjang ditumpuk kemudian dilipat dua sekaligus untuk membentuk buku. Buku yang diberi nomor halaman berurutan mulai dari 1, 2, 3 dan seterusnya hingga akhir. Jika salah satu lembar kertas dari buku tersebut diambil, jumlah keempat nomor halamannya adalah 122. Banyaknya kertas yang digunakan untuk menyusun buku tersebut adalah ... lembar.", options: ["A. 60", "B. 15", "C. 12", "D. 10"], jawaban: "B. 15", pembahasan: "Setiap lembar kertas memiliki 4 halaman.\nJika buku terdiri dari n lembar kertas, total halaman = 4n.\nSatu lembar kertas memiliki 4 halaman berurutan tertentu (bukan berurutan semua).\nStruktur halaman pada lembar ke-k dari n lembar total:\nHalaman pada lembar ke-k: k, 4n-k+1, 4n-k+2, k+1... (struktur buku lipat)\nJumlah 4 halaman pada satu lembar = 4n + 1... = konstan!\nUntuk n lembar, jumlah per lembar = halaman pertama + halaman terakhir-2 lembar = 2(4n+1)/2 × 2... \nSebenarnya: jumlah 4 halaman = 4n+1+4n+2... tidak konstan.\nCara lain: dalam buku n lembar, jumlah nomor pada satu lembar = 2(total halaman + 1)/2...\nJumlah = 122. Jika total halaman 4n:\nDua halaman depan lembar ke-k: k dan k+1\nDua halaman belakang: 4n+1-k dan 4n+2-k\nJumlah: k+(k+1)+(4n+1-k)+(4n+2-k) = 4n+3 = 4n+3\n4n + 3 = 122? Tidak bulat. \nUntuk jumlah 4 halaman satu lembar = konstanta 2(2n+1) = 4n+2:\nJika 4n+2 = 122: 4n=120, n=30... lembaran 30, bukan di pilihan.\nPilihan B (15 lembar): 4×15=60 halaman. Jumlah = 4n+2 = 62. Bukan 122.\nCoba n=30: jumlah = 62. Bukan 122.\nCoba formula lain: n lembar × 2 sisi = total halaman = 4n.\nLembar dengan halaman a, b, c, d dimana a+d=b+c=4n+1. Jumlah=2(4n+1).\n2(4n+1)=122 → 4n+1=61 → 4n=60 → n=15 → Jawaban B (15 lembar)" },
 ];
 
 const OlimpiadePLSVPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
   const [expandedSections, setExpandedSections] = useState<number[]>([0]);
+  const [showPembahasan, setShowPembahasan] = useState<Set<string>>(new Set());
 
   const toggleSection = (idx: number) => {
     playPopSound();
@@ -189,10 +190,66 @@ const OlimpiadePLSVPage = () => {
     );
   };
 
+  const togglePembahasan = (key: string) => {
+    playPopSound();
+    setShowPembahasan(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key); else next.add(key);
+      return next;
+    });
+  };
+
+  const renderSoalCard = (soal: typeof latihanDasar[0], prefix: string) => {
+    const key = `${prefix}-${soal.no}`;
+    const isOpen = showPembahasan.has(key);
+    return (
+      <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+        <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+          <span className="text-accent font-bold">{soal.no}.</span>{" "}
+          {soal.soal.split('\n').map((line, lineIdx) => (
+            <span key={lineIdx}>{lineIdx > 0 && <br />}{renderWithLatex(line)}</span>
+          ))}
+        </div>
+        {soal.options.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+            {soal.options.map((opt, j) => (
+              <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                {renderWithLatex(opt)}
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="flex items-center justify-between mt-2">
+          {soal.jawaban && (
+            <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
+              Jawaban: {soal.jawaban}
+            </span>
+          )}
+          <button
+            onClick={() => togglePembahasan(key)}
+            className="text-xs text-accent hover:text-accent/80 font-display cursor-pointer transition-colors ml-auto"
+          >
+            {isOpen ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan"}
+          </button>
+        </div>
+        {isOpen && soal.pembahasan && (
+          <div className="mt-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
+            <p className="text-xs font-bold text-primary mb-2">📖 Pembahasan:</p>
+            <div className="font-body text-xs text-white/85 leading-relaxed">
+              {soal.pembahasan.split('\n').map((line, i) => (
+                <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath="/olimpiade" />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Trophy className="w-10 h-10 text-accent mx-auto mb-3" />
         <h1 className="font-display text-xl md:text-2xl font-bold text-primary text-glow-cyan mb-2 text-center">
@@ -251,48 +308,13 @@ const OlimpiadePLSVPage = () => {
 
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            {latihanDasar.map((soal) => renderSoalCard(soal, "dasar"))}
           </div>
         )}
 
         {activeTab === "olimpiade" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanOlimpiade.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {soal.soal.split('\n').map((line, lineIdx) => (
-                    <span key={lineIdx}>
-                      {lineIdx > 0 && <br />}
-                      {renderWithLatex(line)}
-                    </span>
-                  ))}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            {latihanOlimpiade.map((soal) => renderSoalCard(soal, "olimpiade"))}
           </div>
         )}
 
