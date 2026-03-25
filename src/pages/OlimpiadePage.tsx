@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Trophy, ArrowLeft } from "lucide-react";
+import { Trophy } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 
 const olimpiadeTopics = [
@@ -138,13 +138,12 @@ const OlimpiadePage = () => {
           })}
         </div>
 
-        <div className="mt-8 pb-4 flex justify-start">
+        <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/menu"); }}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-card/80 backdrop-blur border border-border text-sm font-semibold text-foreground hover:bg-primary/20 hover:border-primary hover:text-primary transition-all duration-200 cursor-pointer font-body shadow"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Kembali ke Menu
+            ← Kembali ke Menu
           </button>
         </div>
       </div>
