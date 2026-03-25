@@ -65,6 +65,177 @@ const NumberLineSVG = () => {
   );
 };
 
+/* ── Demo Arah: positif=kanan, negatif=kiri ──────────────────────
+   Phase A (step 1–4)  : busur hijau ke kanan  0→+4
+   Phase B (step 5)    : tahan hasil kanan (2 detik)
+   Phase C (step 6)    : transisi
+   Phase D (step 7–10) : busur merah ke kiri   0→−4
+   Phase E (step 11)   : tahan hasil kiri (2 detik)
+   → loop
+──────────────────────────────────────────────────────────────── */
+const DirectionDemoSVG = () => {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const delay =
+      step === 0  ? 700  :
+      step === 5  ? 2000 :
+      step === 6  ? 450  :
+      step === 11 ? 2000 :
+      step === 12 ? 600  :
+      750;
+    const t = setTimeout(() => setStep(s => (s >= 12 ? 0 : s + 1)), delay);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  const sp   = 52;
+  const cx   = (n: number) => 320 + n * sp;
+  const yA   = 72;
+  const nums = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+
+  const numGreen = step >= 1 && step <= 5 ? Math.min(step, 4) : 0;
+  const numRed   = step >= 7 && step <= 11 ? Math.min(step - 6, 4) : 0;
+
+  const showResultRight = step === 5;
+  const showResultLeft  = step === 11;
+  const isPhaseRight    = step >= 1 && step <= 5;
+  const isPhaseLeft     = step >= 7;
+
+  const statusText =
+    step === 0  ? "" :
+    step <= 4   ? `Langkah +${step} · dari ${step - 1} ke ${step}` :
+    step === 5  ? "0 + 4 = 4  ✓  Positif → bergerak ke KANAN →" :
+    step === 6  ? "Sekarang dengan bilangan negatif..." :
+    step <= 10  ? `Langkah −${step - 6} · dari ${step === 7 ? 0 : -(step - 7)} ke ${-(step - 6)}` :
+    step === 11 ? "0 + (−4) = −4  ✓  Negatif → bergerak ke KIRI ←" :
+                  "";
+
+  const statusColor =
+    step === 5  ? "#4ade80" :
+    step === 11 ? "#f87171" :
+    step >= 7   ? "#f87171" :
+    step >= 1   ? "#4ade80" :
+    "#ffffff";
+
+  return (
+    <svg viewBox="0 0 640 152" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="dird-ar" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+        </marker>
+        <marker id="dird-al" markerWidth="8" markerHeight="6" refX="1" refY="3" orient="auto-start-reverse">
+          <polygon points="0 0,8 3,0 6" fill="#FFD700"/>
+        </marker>
+        <marker id="dird-g" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+          <polygon points="0 0,7 2.5,0 5" fill="#4ade80"/>
+        </marker>
+        <marker id="dird-r" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+          <polygon points="0 0,7 2.5,0 5" fill="#f87171"/>
+        </marker>
+      </defs>
+
+      {/* ── Label arah kiri/kanan ── */}
+      <text x="14" y="15" fill="#f87171" fontSize="10" fontFamily="sans-serif" fontWeight="bold">← KIRI</text>
+      <text x="14" y="27" fill="#f87171" fontSize="9"  fontFamily="sans-serif" opacity="0.8">(negatif)</text>
+      <text x="626" y="15" fill="#4ade80" fontSize="10" fontFamily="sans-serif" fontWeight="bold" textAnchor="end">KANAN →</text>
+      <text x="626" y="27" fill="#4ade80" fontSize="9"  fontFamily="sans-serif" opacity="0.8" textAnchor="end">(positif)</text>
+
+      {/* ── Label operasi sedang berjalan ── */}
+      {isPhaseRight && (
+        <text x="320" y="22" textAnchor="middle" fill="#4ade8099" fontSize="11" fontFamily="sans-serif" fontWeight="bold">
+          0 + 4 = ?
+        </text>
+      )}
+      {isPhaseLeft && (
+        <text x="320" y="22" textAnchor="middle" fill="#f8717199" fontSize="11" fontFamily="sans-serif" fontWeight="bold">
+          0 + (−4) = ?
+        </text>
+      )}
+
+      {/* ── Sumbu kuning ── */}
+      <line x1="12" y1={yA} x2="628" y2={yA}
+        stroke="#FFD700" strokeWidth="2.5"
+        markerEnd="url(#dird-ar)" markerStart="url(#dird-al)"/>
+
+      {/* ── Titik awal di 0 (putih) ── */}
+      <circle cx={cx(0)} cy={yA} r="5" fill="#ffffff" opacity="0.9"/>
+
+      {/* ── Tick + angka ── */}
+      {nums.map(n => {
+        const x         = cx(n);
+        const isZero    = n === 0;
+        const isResR    = showResultRight && n === 4;
+        const isResL    = showResultLeft  && n === -4;
+        const tickColor = isResR ? "#4ade80" : isResL ? "#f87171" : isZero ? "#ffffff" : "#FFD700";
+        const txtColor  = isResR ? "#4ade80" : isResL ? "#f87171" : isZero ? "#ffffff" : "#FFE57F";
+        const prominent = isZero || isResR || isResL;
+        return (
+          <g key={n}>
+            <line
+              x1={x} y1={prominent ? 60 : 65}
+              x2={x} y2={prominent ? 84 : 79}
+              stroke={tickColor} strokeWidth={prominent ? 2.5 : 1.8}
+            />
+            <text x={x} y={97} textAnchor="middle" fontFamily="monospace"
+              fill={txtColor}
+              fontSize={prominent ? "13" : "11"}
+              fontWeight={prominent ? "bold" : "normal"}
+            >{n}</text>
+          </g>
+        );
+      })}
+
+      {/* ── Busur HIJAU: +1 ke kanan, satu-satu ── */}
+      {Array.from({length: numGreen}, (_, i) => {
+        const x1 = cx(i), x2 = cx(i + 1), mx = (x1 + x2) / 2;
+        return (
+          <path key={`dg${i}`}
+            d={`M ${x1},${yA} Q ${mx},${yA - 30} ${x2},${yA}`}
+            fill="none" stroke="#4ade80" strokeWidth="2.2"
+            markerEnd="url(#dird-g)"
+          />
+        );
+      })}
+
+      {/* ── Busur MERAH: −1 ke kiri, satu-satu ── */}
+      {Array.from({length: numRed}, (_, i) => {
+        const x1 = cx(-i), x2 = cx(-i - 1), mx = (x1 + x2) / 2;
+        return (
+          <path key={`dr${i}`}
+            d={`M ${x1},${yA} Q ${mx},${yA + 30} ${x2},${yA}`}
+            fill="none" stroke="#f87171" strokeWidth="2.2"
+            markerEnd="url(#dird-r)"
+          />
+        );
+      })}
+
+      {/* ── Lingkaran hasil ── */}
+      {showResultRight && (
+        <circle cx={cx(4)}  cy={yA} r="9" fill="none" stroke="#4ade80" strokeWidth="2.5"/>
+      )}
+      {showResultLeft && (
+        <circle cx={cx(-4)} cy={yA} r="9" fill="none" stroke="#f87171" strokeWidth="2.5"/>
+      )}
+
+      {/* ── Titik posisi saat ini ── */}
+      {step >= 1 && step <= 4 && (
+        <circle cx={cx(step)}        cy={yA} r="5" fill="#4ade80"/>
+      )}
+      {step >= 7 && step <= 10 && (
+        <circle cx={cx(-(step - 6))} cy={yA} r="5" fill="#f87171"/>
+      )}
+
+      {/* ── Teks status ── */}
+      {statusText && (
+        <text x="320" y="136" textAnchor="middle" fontFamily="sans-serif"
+          fontSize="11.5" fontWeight="bold" fill={statusColor}>
+          {statusText}
+        </text>
+      )}
+    </svg>
+  );
+};
+
 /* ── Animasi bertahap: 8 + (−3) = 5 ────────────────────────────
    step 0       : jeda awal
    step 1–8     : busur hijau satu-satu (0→1, 1→2, … 7→8)
@@ -309,6 +480,14 @@ const PenjumlahanBilanganBulatPage = () => {
                 <div className="bg-slate-900/60 rounded-xl p-4 border border-yellow-500/20">
                   <p className="text-yellow-300/70 text-xs text-center mb-2 font-body">Garis Bilangan</p>
                   <NumberLineSVG />
+                </div>
+
+                {/* ── Demo Arah Pergerakan ── */}
+                <div className="bg-slate-900/60 rounded-xl p-3 border border-cyan-500/20">
+                  <p className="text-cyan-300/70 text-xs text-center mb-1 font-body">
+                    Demo: Tambah Positif = Kanan · Tambah Negatif = Kiri
+                  </p>
+                  <DirectionDemoSVG />
                 </div>
 
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
