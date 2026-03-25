@@ -138,12 +138,13 @@ const OlimpiadePage = () => {
           })}
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-8 pb-4 flex justify-start">
           <button
             onClick={() => { playPopSound(); navigate("/menu"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-card/80 backdrop-blur border border-border text-sm font-semibold text-foreground hover:bg-primary/20 hover:border-primary hover:text-primary transition-all duration-200 cursor-pointer font-body shadow"
           >
-            ← Kembali ke Menu
+            <ArrowLeft className="w-4 h-4" />
+            Kembali ke Menu
           </button>
         </div>
       </div>
