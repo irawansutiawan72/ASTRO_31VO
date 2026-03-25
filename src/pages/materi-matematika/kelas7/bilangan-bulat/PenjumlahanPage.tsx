@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Sparkles } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -377,7 +377,7 @@ const NumberLineContoh1SVG = () => {
 
 const PenjumlahanBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "konsep", "contoh", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -493,6 +493,10 @@ const PenjumlahanBilanganBulatPage = () => {
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
                   <p className="font-body text-sm font-semibold text-purple-300 mb-3">Rumus Penjumlahan Bilangan Bulat:</p>
                   <div className="space-y-3">
+                    <div className="bg-slate-900/50 rounded p-3 border border-green-500/20">
+                      <p className="text-white/70 text-xs mb-1">Kedua bilangan <strong className="text-green-400">positif</strong>:</p>
+                      <BlockMath math="a + b = a + b" />
+                    </div>
                     <div className="bg-slate-900/50 rounded p-3">
                       <p className="text-white/70 text-xs mb-1">Jika <InlineMath math="a > b" /> :</p>
                       <BlockMath math="-a + b = -(a - b)" />
@@ -687,6 +691,143 @@ const PenjumlahanBilanganBulatPage = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Kesimpulan dan Tips */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("kesimpulan")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Sparkles className="w-5 h-5 text-yellow-300" />
+                <span className="font-body font-semibold text-white">Kesimpulan dan Tips</span>
+              </div>
+              {expandedSections.includes("kesimpulan") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("kesimpulan") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* Cara 1: Garis Bilangan */}
+                <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-bold text-green-300 mb-3 flex items-center gap-2">
+                    <Target className="w-4 h-4" /> Cara 1 — Menggunakan Garis Bilangan
+                  </p>
+                  <p className="font-body text-sm text-white/80 mb-3 leading-relaxed">
+                    Bayangkan kamu berdiri di titik awal pada garis bilangan. Setiap angka yang dijumlahkan menentukan arah gerakmu:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="bg-green-500/10 border border-green-500/40 rounded-lg p-3 text-center">
+                      <p className="text-green-300 text-2xl font-bold mb-1">→</p>
+                      <p className="font-body text-sm font-semibold text-green-300">Bilangan Positif (+)</p>
+                      <p className="font-body text-xs text-green-200/80 mt-1">Bergerak ke <strong>kanan</strong> sejumlah angka tersebut</p>
+                      <p className="font-body text-xs text-white/50 mt-2 italic">Contoh: +5 → maju 5 langkah ke kanan</p>
+                    </div>
+                    <div className="bg-red-500/10 border border-red-500/40 rounded-lg p-3 text-center">
+                      <p className="text-red-300 text-2xl font-bold mb-1">←</p>
+                      <p className="font-body text-sm font-semibold text-red-300">Bilangan Negatif (−)</p>
+                      <p className="font-body text-xs text-red-200/80 mt-1">Bergerak ke <strong>kiri</strong> sejumlah nilai absolutnya</p>
+                      <p className="font-body text-xs text-white/50 mt-2 italic">Contoh: −3 → mundur 3 langkah ke kiri</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/50 rounded-lg p-3 mt-3 text-center">
+                    <p className="font-body text-xs text-white/60">Langkah-langkah:</p>
+                    <p className="font-body text-sm text-white/90 mt-1">
+                      <span className="text-white font-semibold">① Mulai dari 0</span>
+                      <span className="text-white/40 mx-2">→</span>
+                      <span className="text-green-300 font-semibold">② Bergerak sesuai bilangan pertama</span>
+                      <span className="text-white/40 mx-2">→</span>
+                      <span className="text-primary font-semibold">③ Lanjut sesuai bilangan kedua</span>
+                      <span className="text-white/40 mx-2">→</span>
+                      <span className="text-cyan-300 font-semibold">④ Posisi akhir = hasil</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Cara 2: Rumus */}
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-4">
+                  <p className="font-body text-sm font-bold text-purple-300 mb-3 flex items-center gap-2">
+                    <Calculator className="w-4 h-4" /> Cara 2 — Menggunakan Rumus
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="bg-slate-900/60 rounded-lg p-3 border border-green-500/20">
+                      <p className="font-body text-xs text-green-300 font-semibold mb-1">Kedua positif</p>
+                      <p className="font-body text-xs text-white/60 mb-2">a &gt; 0, b &gt; 0</p>
+                      <div className="text-center">
+                        <InlineMath math="a + b = a + b" />
+                      </div>
+                      <p className="font-body text-xs text-white/50 mt-2 italic text-center">Contoh: 3 + 5 = 8</p>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg p-3 border border-red-500/20">
+                      <p className="font-body text-xs text-red-300 font-semibold mb-1">Kedua negatif</p>
+                      <p className="font-body text-xs text-white/60 mb-2">a &gt; 0, b &gt; 0</p>
+                      <div className="text-center">
+                        <InlineMath math="-a + (-b) = -(a+b)" />
+                      </div>
+                      <p className="font-body text-xs text-white/50 mt-2 italic text-center">Contoh: −3 + (−5) = −8</p>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg p-3 border border-yellow-500/20">
+                      <p className="font-body text-xs text-yellow-300 font-semibold mb-1">Beda tanda, <InlineMath math="|a| > |b|" /></p>
+                      <p className="font-body text-xs text-white/60 mb-2">hasil bertanda negatif</p>
+                      <div className="text-center">
+                        <InlineMath math="-a + b = -(a-b)" />
+                      </div>
+                      <p className="font-body text-xs text-white/50 mt-2 italic text-center">Contoh: −7 + 3 = −4</p>
+                    </div>
+                    <div className="bg-slate-900/60 rounded-lg p-3 border border-blue-500/20">
+                      <p className="font-body text-xs text-blue-300 font-semibold mb-1">Beda tanda, <InlineMath math="|b| > |a|" /></p>
+                      <p className="font-body text-xs text-white/60 mb-2">hasil bertanda positif</p>
+                      <div className="text-center">
+                        <InlineMath math="-a + b = b - a" />
+                      </div>
+                      <p className="font-body text-xs text-white/50 mt-2 italic text-center">Contoh: −3 + 7 = 4</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tips */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 space-y-2">
+                  <p className="font-body text-sm font-bold text-yellow-300 mb-2 flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4" /> Tips Cepat
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-yellow-400 font-bold text-sm mt-0.5">1.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Tanda sama → jumlahkan, pakai tanda itu.</strong><br/>
+                        <span className="text-white/60 text-xs">Contoh: 4 + 6 = 10 &nbsp;|&nbsp; −4 + (−6) = −10</span>
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-yellow-400 font-bold text-sm mt-0.5">2.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Tanda beda → kurangkan nilai absolutnya, pakai tanda yang lebih besar.</strong><br/>
+                        <span className="text-white/60 text-xs">Contoh: −8 + 5 = −3 &nbsp;(|−8| &gt; |5|, hasilnya negatif)</span>
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-yellow-400 font-bold text-sm mt-0.5">3.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Penjumlahan bersifat komutatif:</strong> <InlineMath math="a + b = b + a" /><br/>
+                        <span className="text-white/60 text-xs">Urutan tidak mengubah hasil.</span>
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-yellow-400 font-bold text-sm mt-0.5">4.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Menjumlah dengan 0 hasilnya tetap:</strong> <InlineMath math="a + 0 = a" /><br/>
+                        <span className="text-white/60 text-xs">0 disebut elemen identitas penjumlahan.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             )}
           </div>
