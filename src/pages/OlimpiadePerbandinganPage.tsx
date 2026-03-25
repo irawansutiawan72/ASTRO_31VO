@@ -141,45 +141,64 @@ const OlimpiadePerbandinganPage = () => {
     const key = `${prefix}-${soal.no}`;
     const isOpen = showPembahasan.has(key);
     return (
-      <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-        <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-          <span className="text-accent font-bold">{soal.no}.</span>{" "}
-          {soal.soal.split('\n').map((line, lineIdx) => (
-            <span key={lineIdx}>{lineIdx > 0 && <br />}{renderWithLatex(line)}</span>
-          ))}
-        </div>
-        {soal.options.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
-            {soal.options.map((opt, j) => (
-              <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                {renderWithLatex(opt)}
-              </div>
+      <div
+        key={soal.no}
+        className="group relative bg-card/40 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:border-primary/40 transition-all duration-300"
+        style={{
+          background: "linear-gradient(135deg, rgba(30,41,59,0.6) 0%, rgba(15,23,42,0.8) 100%)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05)"
+        }}
+      >
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
+        />
+        <div className="relative p-5">
+          <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
+              {soal.no}
+            </span>
+            {soal.soal.split('\n').map((line, lineIdx) => (
+              <span key={lineIdx}>{lineIdx > 0 && <br />}{renderWithLatex(line)}</span>
             ))}
           </div>
-        )}
-        <div className="flex items-center justify-between mt-2">
-          {soal.jawaban && (
-            <span className="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">
-              Jawaban: {soal.jawaban}
-            </span>
+          {soal.options.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+              {soal.options.map((opt, j) => (
+                <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                  {renderWithLatex(opt)}
+                </div>
+              ))}
+            </div>
           )}
           <button
             onClick={() => togglePembahasan(key)}
-            className="text-xs text-accent hover:text-accent/80 font-display cursor-pointer transition-colors ml-auto"
+            className="flex items-center gap-2 text-xs font-semibold text-primary hover:text-primary/80 transition-colors cursor-pointer mt-3"
           >
-            {isOpen ? "▲ Tutup Pembahasan" : "▼ Lihat Pembahasan"}
+            {isOpen ? "Tutup Pembahasan" : "Lihat Pembahasan"}
+            {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
-        </div>
-        {isOpen && soal.pembahasan && (
-          <div className="mt-3 p-3 rounded-lg bg-primary/10 border border-primary/20">
-            <p className="text-xs font-bold text-primary mb-2">📖 Pembahasan:</p>
-            <div className="font-body text-xs text-white/85 leading-relaxed">
-              {soal.pembahasan.split('\n').map((line, i) => (
-                <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-              ))}
+          {isOpen && soal.pembahasan && (
+            <div className="mt-4 relative overflow-hidden animate-slide-up">
+              <div
+                className="p-4 rounded-xl border border-primary/30"
+                style={{ background: "linear-gradient(135deg, rgba(0,200,255,0.05) 0%, rgba(139,92,246,0.05) 100%)" }}
+              >
+                <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                  <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
+                  <span className="text-sm text-emerald-300 font-body">{renderWithLatex(soal.jawaban)}</span>
+                </div>
+                <div>
+                  <h5 className="text-xs font-semibold text-secondary mb-2 uppercase tracking-wide">Pembahasan</h5>
+                  <div className="font-body text-sm text-foreground/80 leading-relaxed">
+                    {soal.pembahasan.split('\n').map((line, i) => (
+                      <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   };
