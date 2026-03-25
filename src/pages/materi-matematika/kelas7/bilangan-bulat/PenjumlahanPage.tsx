@@ -77,10 +77,10 @@ const NumberLineContoh1SVG = () => {
 
   useEffect(() => {
     const delay =
-      step === 0  ? 700  :
-      step === 9  ? 900  :   // jeda setelah semua hijau
-      step === 13 ? 2600 :   // tampilkan hasil sebelum reset
-      480;
+      step === 0  ? 800  :
+      step === 9  ? 1100 :   // jeda setelah semua hijau
+      step === 13 ? 2800 :   // tampilkan hasil sebelum reset
+      750;
     const t = setTimeout(() => setStep(s => (s >= 13 ? 0 : s + 1)), delay);
     return () => clearTimeout(t);
   }, [step]);
@@ -91,7 +91,7 @@ const NumberLineContoh1SVG = () => {
   const nums = [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const numGreen   = Math.min(step, 8);
-  const numRed     = step >= 10 ? step - 9 : 0;
+  const numRed     = Math.min(step >= 10 ? step - 9 : 0, 3);  // max 3 busur
   const showResult = step >= 12;
 
   const statusText =
@@ -192,7 +192,7 @@ const NumberLineContoh1SVG = () => {
         <circle cx={cx(step)} cy={yA} r="4" fill="#4ade80"/>
       )}
       {step >= 10 && step <= 12 && (
-        <circle cx={cx(8 - (step - 10))} cy={yA} r="4" fill="#f87171"/>
+        <circle cx={cx(7 - (step - 10))} cy={yA} r="4" fill="#f87171"/>
       )}
 
       {/* ── Label status di bawah ── */}
