@@ -555,16 +555,6 @@ const SoalCard = ({ soal }: { soal: Question }) => {
           </div>
         )}
 
-        {/* Correct Answer */}
-        {soal.correctAnswer && (
-          <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-            <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-            <span className="text-sm text-emerald-300 font-body">
-              <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} />
-            </span>
-          </div>
-        )}
-
         {/* Toggle Button */}
         <button
           onClick={() => { playPopSound(); setIsOpen(!isOpen); }}
@@ -599,6 +589,14 @@ const SoalCard = ({ soal }: { soal: Question }) => {
                 Pembahasan
               </h4>
             </div>
+            {soal.correctAnswer && (
+              <div className="mb-4 p-3 rounded-lg bg-emerald-500/15 border border-emerald-500/40">
+                <p className="text-xs font-semibold text-emerald-400 mb-1">✅ Kunci Jawaban</p>
+                <span className="text-sm text-emerald-300 font-body">
+                  <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} />
+                </span>
+              </div>
+            )}
 
             {/* Concept */}
             <div className="mb-4">

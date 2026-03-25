@@ -949,26 +949,6 @@ const SoalCard = ({ soal }: { soal: Question }) => {
             ))}
           </div>
         )}
-        {soal.correctAnswer && (
-          <div className="mb-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
-            <span className="text-xs font-semibold text-emerald-400">Jawaban: </span>
-            <span className="text-sm text-emerald-300 font-body">
-              <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} />
-            </span>
-          </div>
-        )}
-        {soal.statements && (
-          <div className="mb-4 p-3 rounded-lg bg-slate-700/40 border border-slate-600/40">
-            <p className="text-xs font-semibold text-slate-300 mb-2">Jawaban:</p>
-            <div className="flex flex-wrap gap-2">
-              {soal.statements.map((s, i) => (
-                <span key={i} className={`text-xs px-2 py-1 rounded font-body ${s.isCorrect ? "bg-emerald-500/20 text-emerald-400" : "bg-rose-500/20 text-rose-400"}`}>
-                  ({i+1}) {s.isCorrect ? "✓ Benar" : "✗ Salah"}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
         <button onClick={() => { playPopSound(); setIsOpen(!isOpen); }}
           className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30 hover:from-primary/30 hover:to-secondary/30 hover:border-primary/50 transition-all duration-300 cursor-pointer">
           <span className="text-sm font-semibold text-primary">{isOpen ? "Sembunyikan Pembahasan" : "Lihat Pembahasan"}</span>
@@ -978,6 +958,26 @@ const SoalCard = ({ soal }: { soal: Question }) => {
           <div className="relative p-5 rounded-xl border border-primary/20"
             style={{ background: "linear-gradient(135deg,rgba(0,200,255,0.05) 0%,rgba(139,92,246,0.05) 100%)" }}>
             <h4 className="font-display text-sm md:text-base font-bold text-primary mb-3">Pembahasan</h4>
+            {soal.correctAnswer && (
+              <div className="mb-3 p-3 rounded-lg bg-emerald-500/15 border border-emerald-500/40">
+                <p className="text-xs font-semibold text-emerald-400 mb-1">✅ Kunci Jawaban</p>
+                <span className="text-sm text-emerald-300 font-body">
+                  <MathText text={Array.isArray(soal.correctAnswer) ? soal.correctAnswer.join(", ") : soal.correctAnswer} />
+                </span>
+              </div>
+            )}
+            {soal.statements && (
+              <div className="mb-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                <p className="text-xs font-semibold text-emerald-400 mb-2">✅ Kunci Jawaban</p>
+                <div className="flex flex-wrap gap-2">
+                  {soal.statements.map((s, i) => (
+                    <span key={i} className={`text-xs px-2 py-1 rounded font-body ${s.isCorrect ? "bg-emerald-500/20 text-emerald-400" : "bg-rose-500/20 text-rose-400"}`}>
+                      ({i+1}) {s.isCorrect ? "✓ Benar" : "✗ Salah"}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="mb-3 p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
               <p className="text-xs font-semibold text-blue-300 mb-1">📖 Konsep</p>
               <p className="text-sm text-white/80 font-body">{soal.explanation.concept}</p>
