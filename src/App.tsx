@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { startGlobalAmbient } from "@/hooks/useAudio";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -610,6 +610,12 @@ import FKMMPenerapanNilaiMaksMinPage from "./pages/materi-matematika/kelas9/fung
 
 const queryClient = new QueryClient();
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+};
+
 const AppInner = () => {
   useEffect(() => {
     const handleInteraction = () => {
@@ -621,7 +627,9 @@ const AppInner = () => {
   }, []);
 
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       <Route path="/" element={<WelcomePage />} />
       <Route path="/menu" element={<MenuPage />} />
       <Route path="/petunjuk" element={<PetunjukPage />} />
@@ -1223,6 +1231,7 @@ const AppInner = () => {
 
       <Route path="*" element={<NotFound />} />
     </Routes>
+    </>
   );
 };
 

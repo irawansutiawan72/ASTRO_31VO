@@ -11,7 +11,7 @@ const MusicContext = createContext<MusicContextType | undefined>(undefined);
 export const MusicProvider = ({ children }: { children: ReactNode }) => {
   const [musicOn, setMusicOn] = useState<boolean>(() => {
     const saved = localStorage.getItem("numatik-music");
-    return saved === "true";
+    return saved === null ? true : saved === "true";
   });
 
   useEffect(() => {
