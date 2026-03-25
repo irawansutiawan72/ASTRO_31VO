@@ -47,7 +47,7 @@ const OlimpiadePage = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath="/menu" />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <Trophy className="w-12 h-12 text-accent mx-auto mb-4" />
         <h1 className="font-display text-2xl md:text-3xl font-bold text-primary text-glow-cyan mb-2 text-center">
