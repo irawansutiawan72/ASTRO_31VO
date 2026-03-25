@@ -345,7 +345,7 @@ const slides: Slide[] = [
     icon: <Star className="w-8 h-8" />,
     color: "text-cyan-400",
     bgGradient: "from-cyan-900/30 to-blue-900/30",
-    description: "NUMATIK (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) adalah aplikasi pembelajaran matematika interaktif untuk siswa SMP kelas 7, 8, dan 9. Dirancang dengan tema galaksi yang seru dan modern.",
+    description: "NUMATIK (Numerasi Aktif dengan Teknologi Informasi dan Komunikasi) adalah aplikasi pembelajaran matematika interaktif untuk siswa SMP kelas 7, 8, dan 9. Dirancang dengan tema galaksi dan Salju yang seru dan modern.",
     steps: [
       "Buka aplikasi dan klik tombol 'MULAI' di halaman beranda",
       "Pilih menu yang ingin kamu gunakan dari Menu Utama",
@@ -382,7 +382,11 @@ const slides: Slide[] = [
       "Pilih bab atau topik yang ingin dipelajari",
       "Baca materi dengan seksama dan pelajari contoh soalnya",
     ],
-    submenus: ["Kelas 7: Bilangan, Aljabar, Geometri, Statistika", "Kelas 8: Persamaan, Fungsi, Bangun Ruang, Peluang", "Kelas 9: Bilangan Berpangkat, Barisan, Lingkaran, Bangun Ruang Sisi Lengkung"],
+    submenus: [
+      "Kelas 7 : Bilangan bulat, Pecahan, Aljabar, Persamaan dan Pertidaksamaan Linear Satu Variabel, Perbandingan, Aritmetika Sosial, Garis dan Sudut, Segitiga dan Segiempat, Himpunan",
+      "Kelas 8 : Pola Bilangan, Koordinat Cartesius, Relasi dan Fungsi, Sistem Persamaan Linear Dua Variabel, Persamaan Garis Lurus, Teorema Pythagoras, Lingkaran, Garis Singgung Lingkaran, Bangun Ruang Sisi Datar",
+      "Kelas 9 : Bilangan Berpangkat, Kesebangunan dan Kekongruenan, Transformasi Geometri, Bangun Ruang Sisi Lengkung, Statistika, Peluang, Persamaan Kuadrat (Pengayaan), Fungsi Kuadrat (Pengayaan)",
+    ],
     mockup: <MateriMockup />,
   },
   {
@@ -412,9 +416,9 @@ const slides: Slide[] = [
       "Pilih 'MATH GAME ARENA' dari Menu Utama",
       "Pilih kelas yang sesuai (7, 8, atau 9)",
       "Pilih jenis game yang ingin dimainkan",
-      "Kerjakan soal matematika dalam format game yang menyenangkan",
+      "Kerjakan soal matematika dalam format game yang menyenangkan dengan cara menekan meteor pada jawaban yang benar maka pesawat otomatis akan menembak dan keluar notif benar, namun jika menekan meteor dengan jawaban yang salah maka akan keluar notif salah",
     ],
-    submenus: ["Kelas 7 — Game matematika dasar", "Kelas 8 — Game aljabar dan geometri", "Kelas 9 — Game tingkat lanjut"],
+    submenus: ["Kelas 7 - Game Materi Kelas 7", "Kelas 8 - Game Materi Kelas 8", "Kelas 9 - Game Materi Kelas 9"],
     mockup: <GameMockup />,
   },
   {
@@ -463,7 +467,7 @@ const slides: Slide[] = [
       "Baca dan pelajari rumus beserta keterangannya",
       "Gunakan sebagai referensi saat mengerjakan latihan soal",
     ],
-    submenus: ["Aljabar & Aritmetika", "Geometri Datar (Luas & Keliling)", "Geometri Ruang (Volume & Luas Permukaan)", "Statistika & Peluang", "Trigonometri"],
+    submenus: ["Seluruh Materi Kelas 7, Kelas 8, Kelas 9"],
     mockup: <RumusMockup />,
   },
   {
@@ -497,23 +501,8 @@ const slides: Slide[] = [
       "Tonton video pembelajaran dengan seksama",
       "Pause atau putar ulang jika ada bagian yang belum dipahami",
     ],
-    submenus: ["Kelas 7 — Video materi dasar SMP", "Kelas 8 — Video materi menengah", "Kelas 9 — Video persiapan UN/ujian"],
+    submenus: ["Kelas 7 : Seluruh Materi Kelas 7", "Kelas 8 : Seluruh Materi Kelas 8", "Kelas 9 : Seluruh Materi Kelas 9"],
     mockup: <VideoMockup />,
-  },
-  {
-    id: 11,
-    title: "Papan Peringkat",
-    icon: <Award className="w-8 h-8" />,
-    color: "text-yellow-400",
-    bgGradient: "from-yellow-900/20 to-amber-900/20",
-    description: "Lihat papan peringkat siswa-siswa terbaik dalam penggunaan aplikasi NUMATIK. Motivasi dirimu untuk terus belajar dan meningkatkan skor!",
-    steps: [
-      "Pilih 'PAPAN PERINGKAT' dari Menu Utama",
-      "Lihat daftar peringkat siswa berdasarkan skor tertinggi",
-      "Bandingkan pencapaianmu dengan siswa lainnya",
-      "Jadikan ini sebagai motivasi untuk terus berlatih!",
-    ],
-    mockup: <PeringkatMockup />,
   },
   {
     id: 12,
@@ -528,7 +517,7 @@ const slides: Slide[] = [
       "Kerjakan soal-soal yang tersedia",
       "Periksa jawabanmu dan pelajari pembahasannya",
     ],
-    submenus: ["Bilangan (Bulat, Rasional, Berpangkat)", "Aljabar & Persamaan Linear", "Geometri (Garis, Sudut, Bangun Datar)", "Statistika & Peluang", "Dan banyak topik lainnya"],
+    submenus: ["Seluruh Materi Kelas 7, 8 dan 9"],
     mockup: <BankSoalMockup />,
   },
   {
@@ -558,8 +547,8 @@ const slides: Slide[] = [
     steps: [
       "Pilih 'TES KEMAMPUAN AKADEMIK' dari Menu Utama",
       "Baca petunjuk tes dengan seksama sebelum mulai",
-      "Kerjakan soal dalam waktu yang ditentukan",
-      "Setelah selesai, lihat skor dan pembahasan jawaban",
+      "Ketika jawaban di klik akan muncul apakah jawabanmu benar/salah",
+      "Boleh dilihat pembahasannya agar kamu lebih mengerti",
     ],
     mockup: <TKAMockup />,
   },
