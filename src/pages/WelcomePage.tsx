@@ -48,7 +48,7 @@ const WelcomePage = () => {
         {/* Welcome text */}
         <p
           className={`font-display text-2xl sm:text-3xl font-bold tracking-widest mb-6 animate-fade-in ${
-            isLight ? "text-blue-700" : "text-cyan-400"
+            isLight ? "text-cyan-500" : "text-cyan-400"
           }`}
         >
           Selamat Datang di Aplikasi
@@ -57,11 +57,11 @@ const WelcomePage = () => {
         {/* Main title */}
         <h1
           className={`font-display text-5xl sm:text-7xl font-black mb-8 drop-shadow-lg ${
-            isLight ? "text-blue-800" : "text-yellow-400"
+            isLight ? "text-indigo-700" : "text-yellow-400"
           }`}
           style={
             isLight
-              ? { textShadow: "0 0 20px rgba(29,78,216,0.3), 0 2px 8px rgba(29,78,216,0.2)" }
+              ? { textShadow: "0 0 24px rgba(99,102,241,0.4), 0 0 48px rgba(147,197,253,0.3), 0 2px 8px rgba(99,102,241,0.2)" }
               : { textShadow: "0 0 20px rgba(34,211,238,0.6), 0 0 40px rgba(34,211,238,0.3), 0 0 60px rgba(59,130,246,0.2)" }
           }
         >
@@ -71,7 +71,7 @@ const WelcomePage = () => {
         {/* Subtitle */}
         <p
           className={`font-display text-sm sm:text-base font-semibold mb-12 leading-relaxed ${
-            isLight ? "text-blue-600" : "text-cyan-300"
+            isLight ? "text-slate-400" : "text-cyan-300"
           }`}
         >
           Numerasi Aktif dengan Teknologi<br />Informasi dan Komunikasi
@@ -82,7 +82,7 @@ const WelcomePage = () => {
           <div
             className={`absolute inset-0 rounded-2xl blur-xl opacity-50 animate-button-pulse ${
               isLight
-                ? "bg-gradient-to-r from-blue-500 to-cyan-500"
+                ? "bg-gradient-to-r from-indigo-400 via-cyan-300 to-sky-400"
                 : "bg-gradient-to-r from-cyan-500 to-blue-600"
             }`}
           />
@@ -90,7 +90,7 @@ const WelcomePage = () => {
             onClick={() => { playPopSound(); navigate("/menu"); }}
             className={`relative font-display text-xl sm:text-2xl px-12 py-6 rounded-2xl font-bold tracking-widest shadow-2xl transition-all duration-300 cursor-pointer animate-button-pulse text-white border-2 active:scale-95 ${
               isLight
-                ? "bg-gradient-to-r from-blue-600 to-cyan-500 border-blue-300 hover:border-blue-200 hover:shadow-blue-400/50"
+                ? "bg-gradient-to-r from-indigo-500 via-cyan-400 to-sky-400 border-cyan-200 hover:border-white hover:shadow-cyan-300/60"
                 : "bg-gradient-to-r from-cyan-500 to-blue-600 border-cyan-300 hover:border-cyan-200 hover:shadow-cyan-500/50"
             }`}
           >
@@ -130,7 +130,7 @@ const WelcomePage = () => {
       <div
         className={`absolute bottom-8 left-0 right-0 z-20 overflow-hidden border-t backdrop-blur-sm py-4 ${
           isLight
-            ? "bg-white/70 border-blue-300/50"
+            ? "bg-white/60 border-cyan-200/50"
             : "bg-background/60 border-cyan-500/30"
         }`}
       >
@@ -139,7 +139,7 @@ const WelcomePage = () => {
             <span
               key={i}
               className={`font-body font-semibold inline-block px-8 ${
-                isLight ? "text-blue-700" : "text-cyan-300"
+                isLight ? "text-indigo-400" : "text-cyan-300"
               }`}
             >
               ✨ APLIKASI MULTIMEDIA PEMBELAJARAN INTERAKTIF MATEMATIKA SMP ✨
