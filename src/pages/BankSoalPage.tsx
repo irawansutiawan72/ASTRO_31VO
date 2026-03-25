@@ -34,7 +34,7 @@ const bankSoalTopics = [
   { label: "BILANGAN BULAT", icon: Calculator, path: "/bank-soal/bilangan-bulat", ready: true },
   { label: "BILANGAN RASIONAL", icon: Sigma, path: "/coming-soon", ready: false },
   { label: "ALJABAR", icon: Variable, path: "/bank-soal/aljabar", ready: true },
-  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/coming-soon", ready: false },
+  { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/bank-soal/plsv", ready: true },
   { label: "PERBANDINGAN", icon: Percent, path: "/coming-soon", ready: false },
   { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/coming-soon", ready: false },
   { label: "GARIS DAN SUDUT", icon: Ruler, path: "/coming-soon", ready: false },

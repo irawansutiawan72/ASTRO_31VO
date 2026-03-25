@@ -52,6 +52,7 @@ import BankSoalPage from "./pages/BankSoalPage";
 import BankSoalBilanganBulatPage from "./pages/bank-soal/BilanganBulatPage";
 import BankSoalSegitigaSegiempatPage from "./pages/bank-soal/SegitigaSegiempatPage";
 import BankSoalAljabarPage from "./pages/bank-soal/AljabarPage";
+import BankSoalPLSVPage from "./pages/bank-soal/PLSVPage";
 import ChatAIPage from "./pages/ChatAIPage";
 import PengaturanPage from "./pages/PengaturanPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
@@ -668,6 +669,7 @@ const AppInner = () => {
       <Route path="/bank-soal/bilangan-bulat" element={<BankSoalBilanganBulatPage />} />
       <Route path="/bank-soal/segitiga-dan-segiempat" element={<BankSoalSegitigaSegiempatPage />} />
       <Route path="/bank-soal/aljabar" element={<BankSoalAljabarPage />} />
+      <Route path="/bank-soal/plsv" element={<BankSoalPLSVPage />} />
       <Route path="/chat-ai" element={<ChatAIPage />} />
       <Route path="/pengaturan" element={<PengaturanPage />} />
       <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
