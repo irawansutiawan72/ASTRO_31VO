@@ -236,11 +236,9 @@ const OlimpiadeHimpunanPage = () => {
                                           alt="Diagram dua himpunan saling lepas"
                                           className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
                                         />
-                                        <img
-                                          src="/images/rumus-saling-lepas.png"
-                                          alt="Rumus himpunan saling lepas"
-                                          className="w-full max-w-sm bg-white rounded-lg p-2"
-                                        />
+                                        <div className="text-center text-sm text-white/80 font-body mt-1">
+                                          <InlineMath math="A \cup B = \{x \mid x \in A \text{ atau } x \in B \text{ dengan } A \cap B = \emptyset\}" />
+                                        </div>
                                       </figure>
                                     </>
                                   : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
