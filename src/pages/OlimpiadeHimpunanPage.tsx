@@ -206,32 +206,45 @@ const OlimpiadeHimpunanPage = () => {
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i}>
-                          {idx === 2 && line.startsWith('$S = A + B') && (
-                            <figure className="flex flex-col items-center gap-2 my-3">
-                              <img
-                                src="/images/diagram-venn-himpunan.png"
-                                alt="Diagram Venn himpunan A dan B dalam semesta S"
-                                className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
-                              />
-                            </figure>
-                          )}
-                          {idx === 3 && line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas'
-                            ? <div className="mb-1 mt-3 font-semibold text-white">- {line}</div>
-                            : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
-                          }
-                          {idx === 3 && line === '- Irisan ($\\cap$)' && (
-                            <figure className="flex flex-col items-center gap-2 my-3">
-                              <img
-                                src="/images/irisan-himpunan.png"
-                                alt="Diagram Venn irisan himpunan A dan B"
-                                className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
-                              />
-                            </figure>
-                          )}
-                        </div>
-                      ))}
+                      {(() => {
+                        const lines = section.content.split('\n');
+                        let subNum = 0;
+                        const subHeadingColors = ['text-cyan-400', 'text-yellow-400', 'text-green-400', 'text-pink-400', 'text-orange-400'];
+                        return lines.map((line, i) => {
+                          const isDashHeading = idx === 3 && line.startsWith('- ');
+                          const isSalingLepas = idx === 3 && line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas';
+                          if (isDashHeading || isSalingLepas) subNum++;
+                          const color = subHeadingColors[(subNum - 1) % subHeadingColors.length];
+                          return (
+                            <div key={i}>
+                              {idx === 2 && line.startsWith('$S = A + B') && (
+                                <figure className="flex flex-col items-center gap-2 my-3">
+                                  <img
+                                    src="/images/diagram-venn-himpunan.png"
+                                    alt="Diagram Venn himpunan A dan B dalam semesta S"
+                                    className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                                  />
+                                </figure>
+                              )}
+                              {isDashHeading
+                                ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line.slice(2)}</div>
+                                : isSalingLepas
+                                  ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line}</div>
+                                  : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
+                              }
+                              {idx === 3 && line === '- Irisan ($\\cap$)' && (
+                                <figure className="flex flex-col items-center gap-2 my-3">
+                                  <img
+                                    src="/images/irisan-himpunan.png"
+                                    alt="Diagram Venn irisan himpunan A dan B"
+                                    className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                                  />
+                                </figure>
+                              )}
+                            </div>
+                          );
+                        });
+                      })()}
                     </div>
                     {idx === 1 && (
                       <figure className="flex flex-col items-center gap-2 mt-4">
