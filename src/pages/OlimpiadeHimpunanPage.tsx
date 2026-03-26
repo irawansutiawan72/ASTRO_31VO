@@ -228,7 +228,21 @@ const OlimpiadeHimpunanPage = () => {
                               {isDashHeading
                                 ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line.slice(2)}</div>
                                 : isSalingLepas
-                                  ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line}</div>
+                                  ? <>
+                                      <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line}</div>
+                                      <figure className="flex flex-col items-center gap-2 my-3">
+                                        <img
+                                          src="/images/saling-lepas-himpunan.png"
+                                          alt="Diagram dua himpunan saling lepas"
+                                          className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                                        />
+                                        <img
+                                          src="/images/rumus-saling-lepas.png"
+                                          alt="Rumus himpunan saling lepas"
+                                          className="w-full max-w-sm bg-white rounded-lg p-2"
+                                        />
+                                      </figure>
+                                    </>
                                   : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
                               }
                               {idx === 3 && line === '- Irisan ($\\cap$)' && (
