@@ -134,7 +134,7 @@ Selesaikan: $\\frac{x-2}{x+3} \\geq 0$
 
 Penyelesaian:
 1) Pembilang: $x - 2 = 0 \\Rightarrow x = 2$
-2) Penyebut: $x + 3 = 0 \\Rightarrow x = -3$ (tidak boleh = 0)
+2) Penyebut: $x + 3 \\neq 0 \\Rightarrow x \\neq -3$ (tidak boleh = 0)
 3) Garis bilangan dengan titik kritis -3 dan 2
 4) Penyelesaian: $x < -3$ atau $x \\geq 2$`
     },
