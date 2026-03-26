@@ -218,7 +218,7 @@ const OlimpiadeHimpunanPage = () => {
                             </figure>
                           )}
                           <div className="mb-1">{renderWithLatex(line)}</div>
-                          {idx === 3 && line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas' && (
+                          {idx === 3 && line.startsWith('$A \\cap B') && (
                             <figure className="flex flex-col items-center gap-2 my-3">
                               <img
                                 src="/images/irisan-himpunan.png"
