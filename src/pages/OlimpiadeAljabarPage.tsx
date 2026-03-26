@@ -142,7 +142,7 @@ const latihanOlimpiade = [
   { no: 2, soal: "OSN Matematika 2006 Tingkat Kota\nJika jumlah dua bilangan adalah 3 dan selisih kuadrat bilangan itu adalah 6, maka hasil kali kedua bilangan itu adalah ...", options: [], jawaban: "3/4", pembahasan: "Misalkan dua bilangan a dan b.\na + b = 3\na² - b² = 6 → (a+b)(a-b) = 6 → 3(a-b) = 6 → a-b = 2\nDari a+b=3 dan a-b=2:\n2a = 5 → a = 5/2\nb = 3 - 5/2 = 1/2\na × b = (5/2)(1/2) = 5/4\nKoreksi: 5/4" },
   { no: 3, soal: "OSN Matematika 2006 Tingkat Kota\nSemua pasangan bilangan real $(x, y)$ yang memenuhi $x^2 + y^2 = 2x - 4y - 5$ adalah ...", options: [], jawaban: "(1, -2)", pembahasan: "$x^2 + y^2 = 2x - 4y - 5$\n$x^2 - 2x + y^2 + 4y + 5 = 0$\n$(x^2 - 2x + 1) + (y^2 + 4y + 4) = 0$\n$(x-1)^2 + (y+2)^2 = 0$\nKarena jumlah dua kuadrat = 0:\n$(x-1)^2 = 0$ dan $(y+2)^2 = 0$\n$x = 1$ dan $y = -2$\nPasangan: $(1, -2)$" },
   { no: 4, soal: "OSN Matematika 2007 Tingkat Kota\nKonstanta dari $\\left(3x^3 - \\frac{2}{x}\\right)^8$ adalah ...", options: ["A. $14.328$", "B. $15.552$", "C. $16.112$", "D. $16.128$", "E. $17.128$"], jawaban: "B. 15.552", pembahasan: "Suku umum ekspansi $(3x^3 - \\frac{2}{x})^8$:\n$T_{r+1} = \\binom{8}{r}(3x^3)^{8-r}(-\\frac{2}{x})^r$\n$= \\binom{8}{r} 3^{8-r}(-2)^r x^{3(8-r)-r}$\n$= \\binom{8}{r} 3^{8-r}(-2)^r x^{24-4r}$\nKonstanta: eksponen x = 0 → $24 - 4r = 0$ → $r = 6$\n$T_7 = \\binom{8}{6} 3^2 (-2)^6 = 28 \\times 9 \\times 64 = 16.128$\nKoreksi: $28 \\times 9 \\times 64 = 16128$ → Jawaban D" },
-  { no: 5, soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika bilangan pada daerah persegi tidak diarsir diperoleh dengan menjumlahkan dua bilangan pada persegi tidak diarsir di bawah dan terhubung dengannya maka nilai $x$ adalah ...\n[Tabel: Baris atas: kosong, 6x, kosong | Baris bawah: 1, x, 6, 8]", options: ["A. $1$", "B. $6$", "C. $9$", "D. $27$", "E. $54$"], jawaban: "C. 9", pembahasan: "Dari pola: baris bawah: 1, x, 6, 8\nBaris tengah: (1+x), (x+6), (6+8)=(14)\nBaris atas: (1+x)+(x+6) = 2x+7, dan soal bilang nilainya 6x.\n2x + 7 = 6x\n7 = 4x\nx = 7/4? Tidak tepat.\nCoba pola lain: baris atas = 6x, maka (x+6) + baris tengah lainnya = 6x.\nCoba: (1+x) + (x+6) + ... = 6x? Atau cuma dua baris.\nBaris atas hanya satu nilai 6x: (1+x) + (x+6) = 2x+7 = 6x → 4x=7 → tidak bulat.\nCoba: (x) + (6) ... hmm. Jawaban C (9): jika x=9: baris bawah: 1,9,6,8. Baris tengah: 10,15,14. Baris atas: 25,29. Tidak ada yang 6×9=54.\nJawaban C (9) → C" },
+  { no: 5, soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika bilangan pada daerah persegi tidak diarsir diperoleh dengan menjumlahkan dua bilangan pada persegi tidak diarsir di bawah dan terhubung dengannya maka nilai $x$ adalah ...\n[IMAGE:/images/aljabar-olimpiade-no5.png|small]", options: ["A. $1$", "B. $6$", "C. $9$", "D. $27$", "E. $54$"], jawaban: "C. 9", pembahasan: "Dari pola: baris bawah: 1, x, 6, 8\nBaris tengah: (1+x), (x+6), (6+8)=(14)\nBaris atas: (1+x)+(x+6) = 2x+7, dan soal bilang nilainya 6x.\n2x + 7 = 6x\n7 = 4x\nx = 7/4? Tidak tepat.\nCoba pola lain: baris atas = 6x, maka (x+6) + baris tengah lainnya = 6x.\nCoba: (1+x) + (x+6) + ... = 6x? Atau cuma dua baris.\nBaris atas hanya satu nilai 6x: (1+x) + (x+6) = 2x+7 = 6x → 4x=7 → tidak bulat.\nCoba: (x) + (6) ... hmm. Jawaban C (9): jika x=9: baris bawah: 1,9,6,8. Baris tengah: 10,15,14. Baris atas: 25,29. Tidak ada yang 6×9=54.\nJawaban C (9) → C" },
   { no: 6, soal: "OSN Matematika 2012 Tingkat Kota\nJika $a = b + 2$, $a^2 = b^2 + 6$ dan $3(a + b)^2c + 3(a + b)c^2 + c^3 = 10 + (a + b)^3$, maka nilai $c$ adalah ...", options: [], jawaban: "1", pembahasan: "Dari $a = b + 2$: $a - b = 2$\nDari $a^2 = b^2 + 6$: $(a+b)(a-b) = 6$ → $(a+b)(2) = 6$ → $a+b = 3$\nSubstitusi ke persamaan ketiga:\n$3(3)^2c + 3(3)c^2 + c^3 = 10 + 3^3$\n$27c + 9c^2 + c^3 = 10 + 27 = 37$\n$c^3 + 9c^2 + 27c - 37 = 0$\nCoba $c = 1$: $1 + 9 + 27 - 37 = 0$ ✓\nNilai $c = 1$" },
   { no: 7, soal: "OSN Matematika 2013 Tingkat Kota\nSemua bilangan asli $n$ yang memenuhi sifat bahwa $6n^2 + 5n - 4$ adalah bilangan prima adalah ...", options: [], jawaban: "n = 1", pembahasan: "$6n^2 + 5n - 4 = (2n-1)(3n+4)$\nCek faktorisasi: $(2n-1)(3n+4) = 6n^2+8n-3n-4 = 6n^2+5n-4$ ✓\nUntuk hasilnya prima, salah satu faktor harus bernilai 1:\nFaktor $(2n-1) = 1$ → $n = 1$\nCek: $(2)(3+4) = 2 \\times 7 = 14$... bukan prima.\nFaktor $(3n+4) = 1$ → $3n = -3$ → $n = -1$ (bukan bilangan asli)\nCoba $n=1$: $(2-1)(3+4) = 1 \\times 7 = 7$ (prima!) ✓\nJadi $n = 1$" },
   { no: 8, soal: "OSN Matematika 2013 Tingkat Kota\nBentuk $x^4 - 1$ mempunyai faktor sebanyak ...", options: ["A. $3$", "B. $4$", "C. $5$", "D. $6$", "E. $7$"], jawaban: "B. 4", pembahasan: "$x^4 - 1 = (x^2-1)(x^2+1) = (x-1)(x+1)(x^2+1)$\nFaktor-faktornya:\n1. $(x-1)$\n2. $(x+1)$\n3. $(x^2+1)$\n4. $(x^2-1) = (x-1)(x+1)$\nBanyak faktor yang berbeda dari $x^4-1$: 4 faktor (non-trivial) → Jawaban B" },
@@ -195,13 +195,25 @@ const OlimpiadeAljabarPage = () => {
           style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
         />
         <div className="relative p-5">
-          <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+          <div className="font-body text-sm text-white mb-3 leading-relaxed">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
               {soal.no}
             </span>
-            {soal.soal.split('\n').map((line, lineIdx) => (
-              <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>
-            ))}
+            {soal.soal.split('\n').map((line, lineIdx) => {
+              const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+              if (imgMatch) {
+                const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
+                return <div key={lineIdx} className="my-2 flex justify-center"><img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className={`${sizeClass} rounded-lg`} /></div>;
+              }
+              return (
+                <span key={lineIdx}>
+                  {lineIdx > 0 && <br />}
+                  {lineIdx === 0 && line.startsWith('OSN')
+                    ? <span className="text-yellow-400 font-semibold">{line}</span>
+                    : renderWithLatex(line)}
+                </span>
+              );
+            })}
           </div>
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
