@@ -31,7 +31,7 @@ const GrafikTitikPotong = () => {
       width="280"
       height="220"
       className="my-3"
-      style={{ display: "block" }}
+      style={{ display: "block", margin: "0 auto" }}
     >
       {/* X axis */}
       <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
@@ -64,7 +64,7 @@ const GrafikTitikPotong = () => {
 // Origin SVG: (100,120). -a at (40,120). b at (100,60).
 // Line: (12,148) → (142,18). Slope check: (18-148)/(142-12)=-130/130=-1 ✓
 const GrafikTitikPotong2 = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
     <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
     <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
     <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
@@ -88,7 +88,7 @@ const GrafikTitikPotong2 = () => (
 // Origin SVG: (100,120). -a at (40,120). -b at (100,180).
 // Line: (12,92) → (121,201). Slope check: (180-120)/(100-40)=60/60=1 ✓
 const GrafikTitikPotong3 = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
     <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
     <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
     <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
@@ -112,7 +112,7 @@ const GrafikTitikPotong3 = () => (
 // Origin SVG: (100,120). a at (190,120). -b at (100,180).
 // Line: (63,205) → (232,92). Slope check: (120-180)/(190-100)=-60/90=-0.667 ✓
 const GrafikTitikPotong4 = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
     <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
     <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
     <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
@@ -139,7 +139,7 @@ const TabelTitikGrafik = () => (
     width="200"
     height="160"
     className="my-3"
-    style={{ display: "block" }}
+    style={{ display: "block", margin: "0 auto" }}
   >
     <rect x="1" y="1" width="198" height="158" rx="4" ry="4"
       fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
