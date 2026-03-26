@@ -598,9 +598,19 @@ const PenguranganBilanganBulatPage = () => {
                     <span className="font-body font-semibold text-white">Contoh 3: Soal Cerita</span>
                   </div>
                   <div className="bg-slate-800/50 rounded-lg p-4">
-                    <p className="font-body text-sm text-white mb-2">
+                    <p className="font-body text-sm text-white mb-4">
                       Seekor lumba-lumba melompat hingga mencapai ketinggian <InlineMath math="3" /> meter di atas permukaan air laut, kemudian menyelam hingga kedalaman <InlineMath math="7" /> meter di bawah permukaan. Berapa jarak total antara titik tertinggi lompatan dengan titik terendah penyelaman?
                     </p>
+                    <figure className="flex flex-col items-center gap-2">
+                      <img
+                        src="/images/lumba-lumba-pengurangan.png"
+                        alt="Ilustrasi lumba-lumba melompat dan menyelam"
+                        className="w-full max-w-xl rounded-lg shadow-lg border border-white/10"
+                      />
+                      <figcaption className="font-body text-xs text-white/60 text-center italic max-w-xl">
+                        Ilustrasi seekor lumba-lumba yang melompat setinggi +3 meter di atas permukaan laut dan menyelam sedalam −7 meter di bawah permukaan. Jarak total antara titik tertinggi dan titik terendah = 3 − (−7) = 3 + 7 = <strong className="text-primary">10 meter</strong>.
+                      </figcaption>
+                    </figure>
                   </div>
                   <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                     <p className="font-body text-xs font-semibold text-red-400 mb-3">PEMBAHASAN:</p>
