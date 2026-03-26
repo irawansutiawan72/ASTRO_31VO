@@ -561,6 +561,17 @@ const PerkalianBilanganBulatPage = () => {
                   </div>
                 </div>
 
+                {/* Header Neg×Neg */}
+                <div className="flex items-center gap-3 pt-2">
+                  <Zap className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                  <div>
+                    <p className="font-body font-semibold text-white">Negatif × Negatif = Positif</p>
+                    <p className="font-body text-sm text-white/70 mt-1">
+                      Bagaimana jika bilangan negatif dikalikan dengan negatif? Perhatikan pola busur berikut — hasilnya justru berbalik menjadi positif!
+                    </p>
+                  </div>
+                </div>
+
                 {/* Pola Neg×Neg — Animasi Busur */}
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-orange-300 mb-3">
