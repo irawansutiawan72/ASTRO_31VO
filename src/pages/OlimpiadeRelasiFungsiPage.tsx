@@ -61,7 +61,8 @@ Jika himpunan A adalah Domain (daerah asal) dan himpunan B adalah kodomain (daer
 [CENTER:Contoh fungsi]
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang merupakan fungsi karena anggota pada domain (daerah asal) A mempunyai pasangan tepat satu di kodomain (daerah kawan) B, yaitu {(a,y), (b,z), (c,z)}. Pada diagram panah di atas kita peroleh Range (daerah hasil) yaitu {y, z}
 
-Contoh bukan fungsi:
+[IMAGE:/images/relasi-bukan-fungsi.png]
+[CENTER:Contoh bukan fungsi]
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang bukan fungsi karena anggota pada domain A ada yang mempunyai pasangan di kodomain B lebih dari satu, yaitu {(b,x)} dan {(b,z)}.
 
 Jika himpunan A banyak anggota adalah n(A) dan himpunan B banyak anggota adalah n(B), maka banyaknya fungsi (pemetaan) yang dapat terjadi dapat kita hitung dengan rumus:
