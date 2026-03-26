@@ -43,7 +43,7 @@ const NegTimesNegPatternSVG = () => {
   const showConclusion = step >= 6;
 
   return (
-    <svg viewBox="0 0 490 425" width="100%" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 490 452" width="100%" xmlns="http://www.w3.org/2000/svg">
 
       {/* Shaded region for neg × neg rows — always visible */}
       <rect
