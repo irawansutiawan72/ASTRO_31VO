@@ -219,6 +219,15 @@ const OlimpiadeHimpunanPage = () => {
                         />
                       </figure>
                     )}
+                    {idx === 2 && (
+                      <figure className="flex flex-col items-center gap-2 mt-4">
+                        <img
+                          src="/images/diagram-venn-himpunan.png"
+                          alt="Diagram Venn himpunan A dan B dalam semesta S"
+                          className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                        />
+                      </figure>
+                    )}
                   </div>
                 )}
               </div>
