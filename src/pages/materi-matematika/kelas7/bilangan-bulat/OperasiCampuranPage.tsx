@@ -9,7 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 
 const OperasiCampuranBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "prioritas", "kurung", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "prioritas", "kurung", "contoh", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -463,6 +463,102 @@ const OperasiCampuranBilanganBulatPage = () => {
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
                     <strong>Tips Anti Salah:</strong> Selalu tandai atau garis bawahi operasi yang harus dikerjakan lebih dulu sebelum mulai menghitung. Ini akan membantu kamu tetap fokus pada urutan yang benar!
                   </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Kesimpulan & Tips */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("kesimpulan")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-primary" />
+                <span className="font-body font-semibold text-white">Kesimpulan & Tips Operasi Campuran</span>
+              </div>
+              {expandedSections.includes("kesimpulan") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("kesimpulan") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* Urutan Prioritas */}
+                <div className="bg-gradient-to-br from-green-500/10 to-cyan-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-green-300 mb-3">Kesimpulan Urutan Prioritas:</p>
+                  <div className="flex items-center justify-center gap-2 flex-wrap">
+                    <span className="bg-green-500/20 border border-green-500/40 text-green-300 font-bold px-3 py-2 rounded-lg text-sm">1. Kurung ( ) [ ] &#123; &#125;</span>
+                    <span className="text-white/40 font-bold">→</span>
+                    <span className="bg-blue-500/20 border border-blue-500/40 text-blue-300 font-bold px-3 py-2 rounded-lg text-sm">2. Pangkat</span>
+                    <span className="text-white/40 font-bold">→</span>
+                    <span className="bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 font-bold px-3 py-2 rounded-lg text-sm">3. × dan ÷</span>
+                    <span className="text-white/40 font-bold">→</span>
+                    <span className="bg-red-500/20 border border-red-500/40 text-red-300 font-bold px-3 py-2 rounded-lg text-sm">4. + dan −</span>
+                  </div>
+                  <div className="bg-slate-900/60 rounded p-3 mt-3">
+                    <BlockMath math="\text{Kurung} \rightarrow \text{Pangkat} \rightarrow \times\div \rightarrow +-" />
+                    <p className="text-white/60 text-xs text-center mt-1">Operasi setingkat dikerjakan dari <strong className="text-cyan-300">kiri ke kanan</strong></p>
+                  </div>
+                </div>
+
+                {/* Aturan Penting */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-purple-300 mb-3">Aturan Penting:</p>
+                  <div className="space-y-2">
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <Zap className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">× dan ÷ setingkat</strong> — jika keduanya ada bersamaan, kerjakan dari kiri ke kanan, bukan × dulu baru ÷.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <Zap className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-red-300">+ dan − setingkat</strong> — jika keduanya ada bersamaan, kerjakan dari kiri ke kanan, bukan + dulu baru −.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <AlertTriangle className="w-4 h-4 text-orange-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-orange-300">Kurung bertingkat</strong> — kerjakan kurung paling dalam ( ) terlebih dahulu, baru [ ], lalu &#123; &#125;.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tips */}
+                <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-yellow-300 mb-3">Tips Cepat Mengerjakan Soal:</p>
+                  <div className="space-y-3">
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">1.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Baca soal dulu secara keseluruhan</strong> sebelum menghitung — identifikasi semua jenis operasi yang ada, lalu tandai mana yang dikerjakan lebih dulu.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">2.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Kerjakan langkah demi langkah</strong> dan tulis hasilnya setiap langkah. Hindari menghitung semuanya sekaligus dalam kepala — rawan salah!
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">3.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Jangan tertipu urutan penulisan.</strong> <InlineMath math="3 + 2 \times 4" /> bukan berarti 3+2 dikerjakan dulu! Perkalian tetap lebih prioritas meski ditulis belakangan.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">4.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Verifikasi hasil akhir</strong> dengan mensubstitusi kembali ke soal asal. Kalau tidak yakin, ulangi dari langkah pertama.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
