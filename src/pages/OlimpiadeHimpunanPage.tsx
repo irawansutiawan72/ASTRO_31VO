@@ -217,7 +217,10 @@ const OlimpiadeHimpunanPage = () => {
                               />
                             </figure>
                           )}
-                          <div className={`mb-1 ${idx === 3 && (line.startsWith('$A \\cap B') || line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
+                          {idx === 3 && line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas'
+                            ? <div className="mb-1 mt-3 font-semibold text-white">- {line}</div>
+                            : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
+                          }
                           {idx === 3 && line === '- Irisan ($\\cap$)' && (
                             <figure className="flex flex-col items-center gap-2 my-3">
                               <img
