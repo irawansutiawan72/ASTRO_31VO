@@ -278,7 +278,7 @@ const OlimpiadeRelasiFungsiPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                    <div className={`font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed${section.heading.startsWith('C.') ? ' text-justify' : ''}`}>
                       {section.content.split('\n').map((line, i) => {
                         const imgMatch = line.match(/^\[IMAGE:(.+)\]$/);
                         if (imgMatch) {
