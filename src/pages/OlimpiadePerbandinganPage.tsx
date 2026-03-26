@@ -90,7 +90,7 @@ const latihanDasar = [
   { no: 10, soal: "Jarak dua kota pada peta adalah 20 cm. Jika skala peta 1 : 600.000, jarak dua kota sebenarnya adalah...", options: ["A. 1.200 km", "B. 120 km", "C. 30 km", "D. 12 km"], jawaban: "D", pembahasan: "Skala = 1 : 600.000\nJarak peta = 20 cm\nJarak sebenarnya = jarak peta × penyebut skala\n= 20 cm × 600.000\n= 12.000.000 cm\n= 120.000 m\n= 120 km → Jawaban B\nKoreksi: 12.000.000 cm = 120 km → B" },
   { no: 11, soal: "Sebuah kebun pada denah berukuran 12 cm x 15 cm. Jika ukuran kebun yang sebenarnya 50 m x 40 m, maka skala yang digunakan adalah....", options: ["A. 3 : 100", "B. 3 : 800", "C. 3 : 1.250", "D. 3 : 1.000"], jawaban: "C", pembahasan: "Bandingkan panjang: denah 12 cm, sebenarnya 50 m = 5000 cm\nSkala = 12 : 5000 = 12/5000 = 3/1250\nSkala = 3 : 1250 → Jawaban C\n(Cek: denah 15 cm, sebenarnya 40 m = 4000 cm. 15:4000 = 3:800. Ada ketidakkonsistenan → periksa soal asli)\nJawaban C" },
   { no: 12, soal: "Pada denah skala 1 : 200 terdapat gambar kebun yang berbentuk persegi panjang dengan ukuran 7 cm x 4,5 cm. Luas kebun sebenarnya adalah...", options: ["A. 58 $m^2$", "B. 63 $m^2$", "C. 126 $m^2$", "D. 140 $m^2$"], jawaban: "C", pembahasan: "Skala 1 : 200\nPanjang sebenarnya = 7 × 200 = 1400 cm = 14 m\nLebar sebenarnya = 4,5 × 200 = 900 cm = 9 m\nLuas = 14 × 9 = 126 m² → Jawaban C" },
-  { no: 13, soal: "Perhatikan denah sebuah rumah berikut!\nJika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...", options: ["A. 46 $m^2$", "B. 92 $m^2$", "C. 184 $m^2$", "D. 368 $m^2$"], jawaban: "C", pembahasan: "Skala 1 : 200\nMisal luas pada denah = L cm². Luas sebenarnya = L × 200² = L × 40.000 cm² = L × 4 m²\nBerdasarkan denah (luas denah = 46 cm² misalnya):\nLuas sebenarnya = 46 × 200² cm² = 46 × 40.000 = 1.840.000 cm² = 184 m² → Jawaban C" },
+  { no: 13, soal: "Perhatikan denah sebuah rumah berikut!\n[IMAGE:/images/perbandingan-latdar-no13-denah.png]\nJika skala denah rumah adalah 1 : 200, maka luas bangunan rumah sebenarnya adalah ...", options: ["A. 46 $m^2$", "B. 92 $m^2$", "C. 184 $m^2$", "D. 368 $m^2$"], jawaban: "C", pembahasan: "Skala 1 : 200\nMisal luas pada denah = L cm². Luas sebenarnya = L × 200² = L × 40.000 cm² = L × 4 m²\nBerdasarkan denah (luas denah = 46 cm² misalnya):\nLuas sebenarnya = 46 × 200² cm² = 46 × 40.000 = 1.840.000 cm² = 184 m² → Jawaban C" },
   { no: 14, soal: "Denah sebuah gedung berskala 1 : 300. Jika luas denah 125 $cm^2$, maka luas gedung sebenarnya adalah ...", options: ["A. 375 $m^2$", "B. 1.125 $m^2$", "C. 3.750 $m^2$", "D. 11.250 $m^2$"], jawaban: "B", pembahasan: "Skala 1 : 300\nLuas sebenarnya = Luas denah × (penyebut skala)²\n= 125 × 300²\n= 125 × 90.000\n= 11.250.000 cm²\n= 1.125 m² → Jawaban B" },
   { no: 15, soal: "Diketahui denah sebuah rumah digambar dengan skala 1 : 30. Ukuran kamar mandi yang berbentuk persegi panjang pada denah tersebut adalah 5 cm x 7 cm. Luas kamar mandi tersebut yang sebenarnya adalah ...", options: ["A. 3,15 $m^2$", "B. 3,50 $m^2$", "C. 4,25 $m^2$", "D. 10,50 $m^2$"], jawaban: "D", pembahasan: "Skala 1 : 30\nPanjang sebenarnya = 5 × 30 = 150 cm = 1,5 m\nLebar sebenarnya = 7 × 30 = 210 cm = 2,1 m\nLuas = 1,5 × 2,1 = 3,15 m²\nKoreksi: 1,5 × 2,1 = 3,15 → Jawaban A\nAtau: Luas = 5×7 × 30² = 35 × 900 = 31.500 cm² = 3,15 m² → A" },
   { no: 16, soal: "Adi dapat menyelesaikan suatu pekerjaan selama 4 jam. Budi dapat menyelesaikan pekerjaan yang sama dalam waktu 6 jam. Jika pekerjaan tersebut dikerjakan Adi dan Budi bersama-sama, maka pekerjaan tersebut akan selesai dalam waktu ...", options: ["A. 1 jam 4 menit", "B. 1 jam 24 menit", "C. 2 jam 4 menit", "D. 2 jam 24 menit"], jawaban: "D", pembahasan: "Kecepatan kerja Adi = 1/4 pekerjaan per jam\nKecepatan kerja Budi = 1/6 pekerjaan per jam\nBersama = 1/4 + 1/6 = 3/12 + 2/12 = 5/12 pekerjaan per jam\nWaktu = 1 ÷ (5/12) = 12/5 jam = 2,4 jam = 2 jam 24 menit → Jawaban D" },
@@ -153,13 +153,25 @@ const OlimpiadePerbandinganPage = () => {
           style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
         />
         <div className="relative p-5">
-          <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+          <div className="font-body text-sm text-white mb-3 leading-relaxed">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
               {soal.no}
             </span>
-            {soal.soal.split('\n').map((line, lineIdx) => (
-              <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>
-            ))}
+            {soal.soal.split('\n').map((line, lineIdx) => {
+              const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+              if (imgMatch) {
+                const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
+                return <div key={lineIdx} className="my-2"><img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className={`${sizeClass} rounded-lg`} /></div>;
+              }
+              return (
+                <span key={lineIdx}>
+                  {lineIdx > 0 && <br />}
+                  {lineIdx === 0 && line.startsWith('OSN')
+                    ? <span className="text-yellow-400 font-semibold">{line}</span>
+                    : renderWithLatex(line)}
+                </span>
+              );
+            })}
           </div>
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
