@@ -119,7 +119,7 @@ const OlimpiadeHimpunanPage = () => {
               if (line === '[IMAGE]' && 'image' in soal && soal.image) {
                 return (
                   <span key={lineIdx} className="block my-3">
-                    <img src={soal.image as string} alt={`Diagram soal ${soal.no}`} className="max-w-[280px] w-full bg-white rounded-lg p-2 mx-auto" />
+                    <img src={soal.image as string} alt={`Diagram soal ${soal.no}`} className="max-w-[480px] w-full bg-white rounded-lg p-2 mx-auto" />
                   </span>
                 );
               }
