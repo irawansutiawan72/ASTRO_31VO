@@ -70,12 +70,12 @@ Jika himpunan A banyak anggota adalah n(A) dan himpunan B banyak anggota adalah 
     },
     {
       heading: "D. Korespondensi Satu-Satu",
-      content: `a. Syarat korespondensi satu-satu:
+      content: `[SUBHEADING:a. Syarat korespondensi satu-satu]
 - Banyaknya anggota domain sama dengan banyaknya anggota kodomain
 - Setiap anggota domain dan kodomain memiliki tepat satu pasangan
 
-b. Banyaknya korespondensi 1-1 yang mungkin $f : A \\to B$ yang memiliki anggota domain = banyak anggota kodomain = n adalah:
-$n(f) = n! = n \\times (n-1) \\times (n-2) \\times ... \\times 1`
+[SUBHEADING:b. Banyaknya korespondensi 1-1 yang mungkin $f : A \\to B$ yang memiliki anggota domain = banyak anggota kodomain = n adalah]
+$n(f) = n! = n \\times (n-1) \\times (n-2) \\times ... \\times 1$`
     },
     {
       heading: "E. Notasi Fungsi Dan Nilai Fungsi",
@@ -291,6 +291,10 @@ const OlimpiadeRelasiFungsiPage = () => {
                         const centerMatch = line.match(/^\[CENTER:(.+)\]$/);
                         if (centerMatch) {
                           return <div key={i} className="text-center font-semibold mb-1">{centerMatch[1]}</div>;
+                        }
+                        const subheadingMatch = line.match(/^\[SUBHEADING:(.+)\]$/);
+                        if (subheadingMatch) {
+                          return <div key={i} className="text-yellow-300 font-semibold mt-3 mb-1">{renderWithLatex(subheadingMatch[1])}</div>;
                         }
                         const formulaBoxMatch = line.match(/^\[FORMULABOX:([^|]+)\|(.+)\]$/);
                         if (formulaBoxMatch) {
