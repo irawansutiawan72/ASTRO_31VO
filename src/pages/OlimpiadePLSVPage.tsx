@@ -125,7 +125,6 @@ $\\frac{f(x)}{g(x)} > 0$,   $\\frac{f(x)}{g(x)} < 0$   dan sebagainya
 1) Tentukan pembilang = 0 → cari akar pembilang
 2) Tentukan penyebut = 0 → tentukan titik kritis (harus dikecualikan)
 3) Buat garis bilangan → uji tanda di setiap interval
-[IMAGE:/images/plsv-garis-bilangan-pecahan.svg|medium]
 4) Pilih interval yang memenuhi pertidaksamaan
 
 Contoh Soal & Pembahasan
@@ -134,8 +133,9 @@ Selesaikan: $\\frac{x-2}{x+3} \\geq 0$
 
 Penyelesaian:
 1) Pembilang: $x - 2 = 0 \\Rightarrow x = 2$
-2) Penyebut: $x + 3 \\neq 0 \\Rightarrow x \\neq -3$ (tidak boleh = 0)
+2) Penyebut: $x + 3 \\neq 0 \\Rightarrow x \\neq -3$ (tidak boleh $\\neq 0$)
 3) Garis bilangan dengan titik kritis -3 dan 2
+[IMAGE:/images/plsv-garis-bilangan-pecahan.svg|medium]
 4) Penyelesaian: $x < -3$ atau $x \\geq 2$`
     },
   ]
