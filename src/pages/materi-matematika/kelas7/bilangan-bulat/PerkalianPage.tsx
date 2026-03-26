@@ -114,15 +114,106 @@ const PosTimesNegPatternSVG = makePatternSVG(
   "#fb923c", "#fdba74",
 );
 
-const NegTimesPosPatternSVG = makePatternSVG(
-  ["(\u22121) \u00d7 3 = \u22123", "(\u22122) \u00d7 3 = \u22126",
-   "(\u22123) \u00d7 3 = \u22129", "(\u22124) \u00d7 3 = \u221212"],
-  "\u22123",
-  "#f87171", "#450a0a40", "#dc262650",
-  "#f87171cc", "#f87171",
-  "Setiap faktor \u22121 \u2192 hasil turun \u22123  \u2234 (\u2212) \u00d7 (+) = (\u2212) \u2713",
-  "#f87171", "#fca5a5",
-);
+const NegTimesPosPatternSVG = () => {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const delay =
+      step === 0 ? 700  :
+      step === 4 ? 1000 :
+      step === 7 ? 3200 :
+      step === 8 ? 500  :
+      860;
+    const t = setTimeout(() => setStep(s => (s >= 8 ? 0 : s + 1)), delay);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  const rows = [
+    { label: "3 \u00d7 2 = 6",       isNegPos: false },
+    { label: "2 \u00d7 2 = 4",       isNegPos: false },
+    { label: "1 \u00d7 2 = 2",       isNegPos: false },
+    { label: "0 \u00d7 2 = 0",       isNegPos: false },
+    { label: "(\u22121) \u00d7 2 = \u22122", isNegPos: true  },
+    { label: "(\u22122) \u00d7 2 = \u22124", isNegPos: true  },
+    { label: "(\u22123) \u00d7 2 = \u22126", isNegPos: true  },
+  ];
+
+  const rowY    = (i: number) => 48 + i * 52;
+  const rightX  = 390;
+  const arcOutX = 446;
+  const numArcs = Math.min(step, 6);
+
+  return (
+    <svg viewBox="0 0 490 490" width="100%" xmlns="http://www.w3.org/2000/svg">
+      {/* Shaded region for neg × pos rows */}
+      <rect
+        x="10" y={rowY(4) - 22} width="388" height={52 * 3 + 18}
+        rx="8" fill="#450a0a18" stroke="#dc262630" strokeWidth="1"
+      />
+
+      {rows.map((row, i) => {
+        const y    = rowY(i);
+        const isNP = row.isNegPos;
+        return (
+          <g key={i}>
+            <rect
+              x="12" y={y - 17} width="374" height="34" rx="6"
+              fill={isNP ? "#450a0a50" : "#0f172a80"}
+              stroke={isNP ? "#dc262660" : "#ffffff15"}
+              strokeWidth="1"
+            />
+            <text x="28" y={y + 7} fontSize="14" fontFamily="monospace"
+              fill={isNP ? "#f87171" : "#e2e8f0"} letterSpacing="0.5">
+              {row.label}
+            </text>
+          </g>
+        );
+      })}
+
+      {Array.from({ length: numArcs }, (_, i) => {
+        const y1       = rowY(i);
+        const y2       = rowY(i + 1);
+        const isNPArc  = i >= 3;
+        const stroke   = isNPArc ? "#f87171dd" : "#64748b60";
+        const lbl      = isNPArc ? "#f87171"   : "#475569";
+        const sw       = isNPArc ? 2.2 : 1.4;
+        const dash     = isNPArc ? undefined : "5 3";
+        return (
+          <g key={`arc${i}`}>
+            <path
+              d={`M ${rightX},${y1} C ${arcOutX},${y1 + 20} ${arcOutX},${y2 - 20} ${rightX},${y2}`}
+              fill="none" stroke={stroke} strokeWidth={sw} strokeDasharray={dash}
+            />
+            <path
+              d={`M ${rightX - 6},${y2 - 10} L ${rightX},${y2} L ${rightX + 6},${y2 - 10}`}
+              fill="none" stroke={stroke} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"
+            />
+            <text x={arcOutX + 10} y={(y1 + y2) / 2 + 5}
+              fill={lbl} fontSize="12" fontFamily="sans-serif" fontWeight="bold">
+              -1
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Conclusion box */}
+      <g>
+        <rect
+          x="12" y={rowY(7) + 6} width="466" height="44" rx="8"
+          fill="#450a0a50" strokeWidth="2"
+        >
+          <animate attributeName="stroke" values="#dc262670;#f87171aa;#dc262670" dur="5s" repeatCount="indefinite"/>
+          <animate attributeName="fill-opacity" values="0.25;0.4;0.25" dur="5s" repeatCount="indefinite"/>
+        </rect>
+        <text x="245" y={rowY(7) + 29} textAnchor="middle"
+          fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+          <animate attributeName="fill" values="#f87171;#fca5a5;#ef4444;#f87171" dur="5s" repeatCount="indefinite"/>
+          Setiap faktor &#8722;1 &#8594; hasil turun &#8722;2  &#8756; (&#8722;) &times; (+) = (&#8722;) &#10003;
+        </text>
+      </g>
+    </svg>
+  );
+};
 
 /* ── Animasi Pola: −1 × n, dari n=2 turun ke n=−3 ──────────────
    Setiap baris muncul satu per satu, dihubungkan busur "+1" di
