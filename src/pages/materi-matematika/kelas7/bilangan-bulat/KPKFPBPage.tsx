@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Zap, Calculator, AlertTriangle, Layers } from "lucide-react";
+import FactorTreeAnimation from "@/components/FactorTreeAnimation";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
@@ -236,6 +237,8 @@ const KPKFPBPage = () => {
                     <strong>Tips Jitu:</strong> Gunakan pohon faktor untuk mempermudah proses faktorisasi. Bagi bilangan dengan bilangan prima terkecil (2, 3, 5, 7, ...) secara berurutan hingga hasilnya 1.
                   </p>
                 </div>
+
+                <FactorTreeAnimation />
               </div>
             )}
           </div>
