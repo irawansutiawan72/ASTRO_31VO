@@ -7,6 +7,123 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+/* ── Helper: buat komponen animasi busur generik ──────────────── */
+const makePatternSVG = (
+  rows: string[],
+  arcLabel: string,
+  rowColor: string,
+  rowBg: string,
+  rowBorder: string,
+  arcStroke: string,
+  arcLabel_color: string,
+  conclusionText: string,
+  conclusionColor1: string,
+  conclusionColor2: string,
+) => {
+  const rowY    = (i: number) => 46 + i * 52;
+  const rightX  = 390;
+  const arcOutX = 448;
+  const nArcs   = rows.length - 1;
+  const svgH    = rowY(rows.length) + 60;
+
+  return function PatternSVG() {
+    const [step, setStep] = useState(0);
+    useEffect(() => {
+      const delay =
+        step === 0             ? 700  :
+        step <= nArcs          ? 820  :
+        step === nArcs + 1     ? 2200 :
+        500;
+      const t = setTimeout(
+        () => setStep(s => (s >= nArcs + 2 ? 0 : s + 1)),
+        delay,
+      );
+      return () => clearTimeout(t);
+    }, [step]);
+
+    const numArcs = Math.min(step, nArcs);
+
+    return (
+      <svg viewBox={`0 0 490 ${svgH}`} width="100%" xmlns="http://www.w3.org/2000/svg">
+        {rows.map((label, i) => (
+          <g key={i}>
+            <rect x="12" y={rowY(i) - 18} width="374" height="34" rx="6"
+              fill={rowBg} stroke={rowBorder} strokeWidth="1"/>
+            <text x="28" y={rowY(i) + 7} fontSize="14" fontFamily="monospace"
+              fill={rowColor} letterSpacing="0.5">{label}</text>
+          </g>
+        ))}
+
+        {Array.from({ length: numArcs }, (_, i) => {
+          const y1 = rowY(i);
+          const y2 = rowY(i + 1);
+          return (
+            <g key={`arc${i}`}>
+              <path
+                d={`M ${rightX},${y1} C ${arcOutX},${y1+20} ${arcOutX},${y2-20} ${rightX},${y2}`}
+                fill="none" stroke={arcStroke} strokeWidth="2.2" strokeLinecap="round"/>
+              <path
+                d={`M ${rightX-6},${y2-10} L ${rightX},${y2} L ${rightX+6},${y2-10}`}
+                fill="none" stroke={arcStroke} strokeWidth="2.2"
+                strokeLinecap="round" strokeLinejoin="round"/>
+              <text x={arcOutX + 10} y={(y1 + y2) / 2 + 5}
+                fill={arcLabel_color} fontSize="12" fontFamily="sans-serif" fontWeight="bold">
+                {arcLabel}
+              </text>
+            </g>
+          );
+        })}
+
+        <g>
+          <rect x="12" y={rowY(rows.length) + 4} width="466" height="44" rx="8"
+            fill="#0f172a50" strokeWidth="2">
+            <animate attributeName="stroke"
+              values={`${conclusionColor1}70;${conclusionColor1}bb;${conclusionColor1}70`}
+              dur="5s" repeatCount="indefinite"/>
+            <animate attributeName="fill-opacity" values="0.25;0.45;0.25" dur="5s" repeatCount="indefinite"/>
+          </rect>
+          <text x="245" y={rowY(rows.length) + 27} textAnchor="middle"
+            fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+            <animate attributeName="fill"
+              values={`${conclusionColor1};${conclusionColor2};${conclusionColor1}`}
+              dur="5s" repeatCount="indefinite"/>
+            {conclusionText}
+          </text>
+        </g>
+      </svg>
+    );
+  };
+};
+
+const PosTimesPosPatternSVG = makePatternSVG(
+  ["1 \u00d7 3 = 3", "2 \u00d7 3 = 6", "3 \u00d7 3 = 9", "4 \u00d7 3 = 12"],
+  "+3",
+  "#4ade80", "#14532d40", "#16a34a50",
+  "#4ade80cc", "#4ade80",
+  "Setiap faktor +1 \u2192 hasil naik +3  \u2234 (+) \u00d7 (+) = (+) \u2713",
+  "#4ade80", "#86efac",
+);
+
+const PosTimesNegPatternSVG = makePatternSVG(
+  ["1 \u00d7 (\u22123) = \u22123", "2 \u00d7 (\u22123) = \u22126",
+   "3 \u00d7 (\u22123) = \u22129", "4 \u00d7 (\u22123) = \u221212"],
+  "\u22123",
+  "#fb923c", "#431a0540", "#c2410c50",
+  "#fb923ccc", "#fb923c",
+  "Setiap faktor +1 \u2192 hasil turun \u22123  \u2234 (+) \u00d7 (\u2212) = (\u2212) \u2713",
+  "#fb923c", "#fdba74",
+);
+
+const NegTimesPosPatternSVG = makePatternSVG(
+  ["(\u22121) \u00d7 3 = \u22123", "(\u22122) \u00d7 3 = \u22126",
+   "(\u22123) \u00d7 3 = \u22129", "(\u22124) \u00d7 3 = \u221212"],
+  "\u22123",
+  "#f87171", "#450a0a40", "#dc262650",
+  "#f87171cc", "#f87171",
+  "Setiap faktor \u22121 \u2192 hasil turun \u22123  \u2234 (\u2212) \u00d7 (+) = (\u2212) \u2713",
+  "#f87171", "#fca5a5",
+);
+
 /* ── Animasi Pola: −1 × n, dari n=2 turun ke n=−3 ──────────────
    Setiap baris muncul satu per satu, dihubungkan busur "+1" di
    sebelah kanan. Baris neg×neg disorot kuning.
@@ -342,10 +459,42 @@ const PerkalianBilanganBulatPage = () => {
             {expandedSections.includes("negatifNegatif") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Nah, ini yang sering bikin bingung! Kenapa negatif dikali negatif hasilnya jadi positif? Mari kita lihat polanya:
+                  Nah, ini yang sering bikin bingung! Kenapa negatif dikali negatif hasilnya jadi positif? Sebelum ke sana, lihat dulu pola ketiga kasus lainnya — supaya polanya lengkap!
                 </p>
 
-                {/* Pola 1 — Animasi Busur */}
+                {/* Tiga animasi busur: Pos×Pos, Pos×Neg, Neg×Pos */}
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-green-300 mb-2">
+                      (+) × (+) — pola naik:
+                    </p>
+                    <div className="bg-slate-900/60 rounded-xl p-2 border border-green-500/20">
+                      <PosTimesPosPatternSVG />
+                    </div>
+                  </div>
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-orange-300 mb-2">
+                      (+) × (−) — pola turun:
+                    </p>
+                    <div className="bg-slate-900/60 rounded-xl p-2 border border-orange-500/20">
+                      <PosTimesNegPatternSVG />
+                    </div>
+                  </div>
+                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                    <p className="font-body text-xs font-semibold text-red-300 mb-2">
+                      (−) × (+) — pola turun:
+                    </p>
+                    <div className="bg-slate-900/60 rounded-xl p-2 border border-red-500/20">
+                      <NegTimesPosPatternSVG />
+                    </div>
+                  </div>
+                </div>
+
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Sekarang lihat apa yang terjadi saat kita lanjutkan pola negatif × negatif:
+                </p>
+
+                {/* Pola Neg×Neg — Animasi Busur */}
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-orange-300 mb-3">
                     Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
