@@ -480,45 +480,6 @@ const PerkalianBilanganBulatPage = () => {
                       <PosTimesNegPatternSVG />
                     </div>
                   </div>
-                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-red-300 mb-2">
-                      (−) × (+) — pola turun:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-xl p-2 border border-red-500/20">
-                      <NegTimesPosPatternSVG />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Pola 2 */}
-                <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-pink-300 mb-3">Pola untuk <InlineMath math="-2 \times ..." />:</p>
-                  <div className="space-y-2 font-mono text-sm">
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-2 \times 2 = -4" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-2 \times 1 = -2" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-2 \times 0 = 0" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-2 \times (-1) = 2" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-2 \times (-2) = 4" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-2 \times (-3) = 6" /></span>
-                      <span className="text-green-400 text-xs">+2 dari bawah</span>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Pola Neg×Neg — Animasi Busur */}
