@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -7,9 +7,126 @@ import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
+/* ── Animasi Pola: −1 × n, dari n=2 turun ke n=−3 ──────────────
+   Setiap baris muncul satu per satu, dihubungkan busur "+1" di
+   sebelah kanan. Baris neg×neg disorot kuning.
+──────────────────────────────────────────────────────────────── */
+const NegTimesNegPatternSVG = () => {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const delay =
+      step === 0 ? 700  :
+      step === 4 ? 1000 :
+      step === 7 ? 700  :
+      step === 8 ? 3200 :
+      step === 9 ? 500  :
+      860;
+    const t = setTimeout(() => setStep(s => (s >= 9 ? 0 : s + 1)), delay);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  const rows = [
+    { label: "-1 \u00d7 2 = -2",    isNegNeg: false },
+    { label: "-1 \u00d7 1 = -1",    isNegNeg: false },
+    { label: "-1 \u00d7 0 =  0",    isNegNeg: false },
+    { label: "-1 \u00d7 (\u22121) = 1",  isNegNeg: true  },
+    { label: "-1 \u00d7 (\u22122) = 2",  isNegNeg: true  },
+    { label: "-1 \u00d7 (\u22123) = 3",  isNegNeg: true  },
+  ];
+
+  const rowY    = (i: number) => 48 + i * 56;
+  const rightX  = 390;
+  const arcOutX = 446;
+
+  const numRows = step === 0 ? 0 : Math.min(step, 6);
+  const numArcs = step <= 1  ? 0 : Math.min(step - 1, 5);
+  const showConclusion = step >= 7;
+
+  return (
+    <svg viewBox="0 0 490 425" width="100%" xmlns="http://www.w3.org/2000/svg">
+
+      {/* Shaded region for neg × neg rows */}
+      {numRows >= 4 && (
+        <rect
+          x="10" y={rowY(3) - 22} width="388" height={56 * 3 + 18}
+          rx="8" fill="#78350f18" stroke="#d9770630" strokeWidth="1"
+        />
+      )}
+
+      {/* Rows */}
+      {rows.slice(0, numRows).map((row, i) => {
+        const y    = rowY(i);
+        const isNN = row.isNegNeg;
+        return (
+          <g key={i}>
+            <rect
+              x="12" y={y - 17} width="374" height="34" rx="6"
+              fill={isNN ? "#78350f50" : "#0f172a80"}
+              stroke={isNN ? "#d9770660" : "#ffffff15"}
+              strokeWidth="1"
+            />
+            <text x="28" y={y + 7} fontSize="14" fontFamily="monospace"
+              fill={isNN ? "#FDE047" : "#e2e8f0"} letterSpacing="0.5">
+              {row.label}
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Arcs + "+1" labels */}
+      {Array.from({ length: numArcs }, (_, i) => {
+        const y1      = rowY(i);
+        const y2      = rowY(i + 1);
+        const isNNArc = i >= 2;
+        const stroke  = isNNArc ? "#f59e0bdd" : "#64748b60";
+        const lbl     = isNNArc ? "#FBBF24"   : "#475569";
+        const sw      = isNNArc ? 2.2 : 1.4;
+        const dash    = isNNArc ? undefined : "5 3";
+
+        return (
+          <g key={`arc${i}`}>
+            <path
+              d={`M ${rightX},${y1} C ${arcOutX},${y1 + 20} ${arcOutX},${y2 - 20} ${rightX},${y2}`}
+              fill="none" stroke={stroke} strokeWidth={sw} strokeDasharray={dash}
+            />
+            {/* small arrowhead at destination */}
+            <path
+              d={`M ${rightX - 6},${y2 - 10} L ${rightX},${y2} L ${rightX + 6},${y2 - 10}`}
+              fill="none" stroke={stroke} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round"
+            />
+            <text
+              x={arcOutX + 10} y={(y1 + y2) / 2 + 5}
+              fill={lbl} fontSize="12" fontFamily="sans-serif" fontWeight="bold"
+            >+1</text>
+          </g>
+        );
+      })}
+
+      {/* Conclusion box */}
+      {showConclusion && (
+        <g>
+          <rect
+            x="12" y={rowY(6) + 6} width="466" height="50" rx="8"
+            fill="#14532d35" stroke="#16a34a70" strokeWidth="1.5"
+          />
+          <text x="245" y={rowY(6) + 27} textAnchor="middle"
+            fill="#4ade80" fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+            Pola selalu +1 ke bawah &#8594; ketika pengurang menjadi negatif,
+          </text>
+          <text x="245" y={rowY(6) + 44} textAnchor="middle"
+            fill="#86efac" fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+            hasilnya menjadi positif! &#8756; (&minus;) &times; (&minus;) = (+) &#10003;
+          </text>
+        </g>
+      )}
+    </svg>
+  );
+};
+
 const PerkalianBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "positifNegatif", "negatifNegatif", "nolSatu", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "positifPositif", "positifNegatif", "negatifNegatif", "nolSatu", "contoh"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -77,6 +194,67 @@ const PerkalianBilanganBulatPage = () => {
             )}
           </div>
 
+          {/* Section: Perkalian Positif x Positif */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("positifPositif")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-green-400" />
+                <span className="font-body font-semibold text-white">Positif × Positif = Positif</span>
+              </div>
+              {expandedSections.includes("positifPositif") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("positifPositif") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Ini adalah kasus paling mudah dan sudah kamu kenal sejak SD. Karena perkalian adalah <strong className="text-primary">penjumlahan berulang</strong>, hasil positif dikali positif sudah pasti positif.
+                </p>
+
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-green-300 mb-3">Perhatikan polanya (mengalikan dengan 3):</p>
+                  <div className="space-y-2 font-mono text-sm">
+                    <div className="bg-slate-900/50 rounded p-2 flex items-center justify-between">
+                      <span><InlineMath math="1 \times 3 = 3" /></span>
+                      <span className="text-white/50 text-xs">(satu buah 3)</span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 flex items-center justify-between">
+                      <span><InlineMath math="2 \times 3 = 3 + 3 = 6" /></span>
+                      <span className="text-white/50 text-xs">(dua buah 3)</span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 flex items-center justify-between">
+                      <span><InlineMath math="3 \times 3 = 3 + 3 + 3 = 9" /></span>
+                      <span className="text-white/50 text-xs">(tiga buah 3)</span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 flex items-center justify-between">
+                      <span><InlineMath math="4 \times 3 = 3 + 3 + 3 + 3 = 12" /></span>
+                      <span className="text-white/50 text-xs">(empat buah 3)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-green-300 mb-2">Kesimpulan:</p>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <BlockMath math="\text{Positif} \times \text{Positif} = \textbf{Positif}" />
+                    <BlockMath math="a \times b = ab \quad (a, b > 0)" />
+                  </div>
+                </div>
+
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm text-cyan-200 leading-relaxed">
+                    <strong>Logika Sederhana:</strong> Jika kamu punya <InlineMath math="a" /> kelompok yang masing-masing berisi <InlineMath math="b" /> benda, totalnya selalu <InlineMath math="a \times b" /> benda — tidak pernah negatif!
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* Section: Perkalian Positif dengan Negatif */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
@@ -84,8 +262,8 @@ const PerkalianBilanganBulatPage = () => {
               className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <Target className="w-5 h-5 text-green-400" />
-                <span className="font-body font-semibold text-white">Positif x Negatif = Negatif</span>
+                <Target className="w-5 h-5 text-orange-400" />
+                <span className="font-body font-semibold text-white">Positif × Negatif = Negatif</span>
               </div>
               {expandedSections.includes("positifNegatif") ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
@@ -168,34 +346,16 @@ const PerkalianBilanganBulatPage = () => {
                   Nah, ini yang sering bikin bingung! Kenapa negatif dikali negatif hasilnya jadi positif? Mari kita lihat polanya:
                 </p>
 
-                {/* Pola 1 */}
+                {/* Pola 1 — Animasi Busur */}
                 <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-orange-300 mb-3">Pola untuk <InlineMath math="-1 \times ..." />:</p>
-                  <div className="space-y-2 font-mono text-sm">
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-1 \times 2 = -2" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-1 \times 1 = -1" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
-                    <div className="bg-slate-900/50 rounded p-2 flex items-center gap-3">
-                      <span className="flex-1"><InlineMath math="-1 \times 0 = 0" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-1 \times (-1) = 1" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-1 \times (-2) = 2" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
-                    <div className="bg-yellow-500/20 rounded p-2 flex items-center gap-3 border border-yellow-500/40">
-                      <span className="flex-1 text-yellow-300"><InlineMath math="-1 \times (-3) = 3" /></span>
-                      <span className="text-green-400 text-xs">+1 dari bawah</span>
-                    </div>
+                  <p className="font-body text-sm font-semibold text-orange-300 mb-3">
+                    Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
+                  </p>
+                  <p className="font-body text-xs text-white/50 mb-3">
+                    Perhatikan: setiap kali faktor kedua turun 1 (dari 2 → 1 → 0 → −1 → …), hasilnya selalu naik +1. Busur redup menunjukkan pola, busur terang menandai masuknya wilayah negatif × negatif.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20">
+                    <NegTimesNegPatternSVG />
                   </div>
                 </div>
 
