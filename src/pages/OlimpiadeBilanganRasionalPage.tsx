@@ -1273,6 +1273,17 @@ const OlimpiadeBilanganRasionalPage = () => {
                     </span>
                     {renderWithLatex(soal.soal)}
                   </div>
+                  {soal.no === 1 && (
+                    <div className="flex justify-center mb-4">
+                      <div className="bg-white rounded-xl p-3 shadow-lg shadow-black/30 inline-block">
+                        <img
+                          src="/Picture1_1774497198057.png"
+                          alt="Kotak operasi: □ + □/□ × □"
+                          className="h-20 w-auto object-contain"
+                        />
+                      </div>
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
                       {soal.options.map((opt, j) => (
