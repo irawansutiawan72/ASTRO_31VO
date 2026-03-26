@@ -226,7 +226,7 @@ const OlimpiadeHimpunanPage = () => {
                                 </figure>
                               )}
                               {isDashHeading
-                                ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line.slice(2)}</div>
+                                ? <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {renderWithLatex(line.slice(2))}</div>
                                 : isSalingLepas
                                   ? <>
                                       <div className={`mb-1 mt-3 font-semibold ${color}`}>{subNum}. {line}</div>
