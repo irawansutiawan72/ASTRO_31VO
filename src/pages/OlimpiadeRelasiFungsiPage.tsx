@@ -29,7 +29,8 @@ Misal himpunan A = {1, 2, 4} dan himpunan B = {(1,1), (1,2), (1,4), (2,2), (2,4)
 1. Diagram panah
 [IMAGE:/images/relasi-diagram-panah.png]
 2. Himpunan pasangan terurut: {(1,2), (1,3), (1,4), (2,2), (2,4), (4,4)}
-3. Koordinat Kartesius`
+3. Koordinat Kartesius
+[IMAGE:/images/relasi-diagram-kartesius.png]`
     },
     {
       heading: "B. Domain, Kodomain, Range",
