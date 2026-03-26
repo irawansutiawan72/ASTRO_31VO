@@ -516,17 +516,6 @@ const PerkalianBilanganBulatPage = () => {
                   </div>
                 </div>
 
-                {/* Berlaku juga sebaliknya */}
-                <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">Berlaku juga sebaliknya:</p>
-                  <p className="font-body text-sm text-white/80 mb-3">
-                    Karena sifat komutatif perkalian (<InlineMath math="a \times b = b \times a" />), maka:
-                  </p>
-                  <div className="bg-slate-900/50 rounded p-3">
-                    <BlockMath math="\text{Negatif} \times \text{Positif} = \textbf{Negatif}" />
-                    <BlockMath math="(-a) \times b = -ab" />
-                  </div>
-                </div>
               </div>
             )}
           </div>
@@ -560,6 +549,15 @@ const PerkalianBilanganBulatPage = () => {
                   </p>
                   <div className="bg-slate-900/60 rounded-xl p-2 border border-red-500/20">
                     <NegTimesPosPatternSVG />
+                  </div>
+                </div>
+
+                {/* Kesimpulan Negatif × Positif */}
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-red-300 mb-2">Kesimpulan:</p>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <BlockMath math="\text{Negatif} \times \text{Positif} = \textbf{Negatif}" />
+                    <BlockMath math="-a \times b = -ab" />
                   </div>
                 </div>
 
