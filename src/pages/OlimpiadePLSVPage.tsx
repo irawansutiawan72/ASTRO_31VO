@@ -99,7 +99,19 @@ Langkah penyelesaian:
 1. Faktorkan atau gunakan rumus kuadrat untuk mencari akar-akar
 2. Buat garis bilangan dengan titik-titik kritis
 3. Uji tanda pada setiap interval
-4. Tentukan penyelesaian berdasarkan tanda pertidaksamaan`
+4. Tentukan penyelesaian berdasarkan tanda pertidaksamaan
+
+Contoh Soal & Pembahasan
+
+Tentukan himpunan penyelesaian dari $x^2 - 5x + 6 < 0$
+
+Penyelesaian:
+1. Faktorkan: $(x - 2)(x - 3) = 0$
+2. Akar: $x = 2$ dan $x = 3$
+3. Garis bilangan: Bagi jadi 3 interval:
+[IMAGE:/images/plsv-garis-bilangan-kuadrat.svg|medium]
+Karena pada soal meminta nilai $< 0$ yang artinya bilangan negatif, maka kita ambil interval $2 < x < 3$.
+Sehingga penyelesaian dari $x^2 - 5x + 6 < 0$ adalah $\\{x \\ | \\ 2 < x < 3, \\ x \\in \\mathbb{R}\\}$`
     },
     {
       heading: "F. Pertidaksamaan Pecahan",
@@ -313,10 +325,15 @@ const OlimpiadePLSVPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
+                    <div className="font-body text-sm text-white/80 leading-relaxed">
+                      {section.content.split('\n').map((line, i) => {
+                        const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+                        if (imgMatch) {
+                          const sizeClass = imgMatch[2] === 'small' ? 'max-w-[200px]' : imgMatch[2] === 'medium' ? 'max-w-sm w-full' : 'max-w-lg w-full';
+                          return <div key={i} className="my-3 flex justify-center"><img src={imgMatch[1]} alt="Ilustrasi" className={`${sizeClass} rounded-lg`} /></div>;
+                        }
+                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                      })}
                     </div>
                   </div>
                 )}
