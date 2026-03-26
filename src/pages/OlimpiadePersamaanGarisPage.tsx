@@ -161,6 +161,60 @@ const TabelTitikGrafik = () => (
   </svg>
 );
 
+// Gradien Positif (m = +): line rises left-to-right
+// Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
+const GarisGradienPositif = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="280" height="200"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Main line */}
+    <line x1="20" y1="182" x2="248" y2="32" stroke="white" strokeWidth="2" />
+    {/* Arrow lower-left */}
+    <polygon points="20,182 30,181 25,174" fill="white" />
+    {/* Arrow upper-right */}
+    <polygon points="248,32 242,40 238,34" fill="white" />
+    {/* Vertical dashed (sisi tegak): from P2=(210,57) down to corner=(210,152) */}
+    <line x1="210" y1="57" x2="210" y2="152" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
+    {/* Horizontal dashed (sisi datar): from P1=(65,152) to corner=(210,152) */}
+    <line x1="65" y1="152" x2="210" y2="152" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
+    {/* Right-angle square at corner (210,152) — inner toward upper-left */}
+    <polyline points="202,152 202,144 210,144" fill="none" stroke="#4ADE80" strokeWidth="1.5" />
+    {/* Label m = + */}
+    <text x="218" y="29" fill="#34D399" fontSize="13" fontFamily="sans-serif" fontWeight="bold">m = +</text>
+    {/* Label Panjang sisi tegak — right of vertical dashed */}
+    <text x="216" y="112" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">Panjang sisi</text>
+    <text x="216" y="126" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">tegak</text>
+    {/* Label Panjang sisi datar — below horizontal dashed */}
+    <text x="108" y="168" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">Panjang sisi datar</text>
+  </svg>
+);
+
+// Gradien Negatif (m = -): line falls left-to-right
+// Main line: (20,18)→(252,178). Triangle: P_upper=(70,53), P_lower=(210,153), corner=(70,153)
+const GarisGradienNegatif = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="280" height="200"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Main line */}
+    <line x1="20" y1="18" x2="252" y2="178" stroke="white" strokeWidth="2" />
+    {/* Arrow upper-left */}
+    <polygon points="20,18 30,19 25,26" fill="white" />
+    {/* Arrow lower-right */}
+    <polygon points="252,178 241,176 247,169" fill="white" />
+    {/* Vertical dashed (sisi tegak): from P_upper=(70,53) down to corner=(70,153) */}
+    <line x1="70" y1="53" x2="70" y2="153" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
+    {/* Horizontal dashed (sisi datar): from corner=(70,153) to P_lower=(210,153) */}
+    <line x1="70" y1="153" x2="210" y2="153" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
+    {/* Right-angle square at corner (70,153) — inner toward upper-right */}
+    <polyline points="78,153 78,145 70,145" fill="none" stroke="#4ADE80" strokeWidth="1.5" />
+    {/* Label m = - */}
+    <text x="55" y="13" fill="#F472B6" fontSize="13" fontFamily="sans-serif" fontWeight="bold">m = -</text>
+    {/* Label Panjang sisi tegak — left of vertical dashed */}
+    <text x="2" y="100" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">Panjang sisi</text>
+    <text x="2" y="114" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">tegak</text>
+    {/* Label Panjang sisi datar — below horizontal dashed */}
+    <text x="108" y="169" fill="#93C5FD" fontSize="11" fontFamily="sans-serif">Panjang sisi datar</text>
+  </svg>
+);
+
 type SectionItem =
   | { t: 'heading'; text: string; color: string }
   | { t: 'text'; text: string; color?: string }
@@ -221,6 +275,8 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
         '$m = +\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (naik ke kanan)',
         '$m = -\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (turun ke kanan)',
       ]},
+      { t: 'svg', name: 'GRADIEN_POSITIF' },
+      { t: 'svg', name: 'GRADIEN_NEGATIF' },
       { t: 'formula', headline: 'b. Diketahui 2 Titik yang Dilalui', color: 'blue', lines: [
         'Garis melalui titik $A(x_1, y_1)$ dan $B(x_2, y_2)$',
         '$m = \\dfrac{y_2 - y_1}{x_2 - x_1}$',
@@ -385,6 +441,8 @@ const OlimpiadePersamaanGarisPage = () => {
                           GRAFIK2: <GrafikTitikPotong2 />,
                           GRAFIK3: <GrafikTitikPotong3 />,
                           GRAFIK4: <GrafikTitikPotong4 />,
+                          GRADIEN_POSITIF: <GarisGradienPositif />,
+                          GRADIEN_NEGATIF: <GarisGradienNegatif />,
                         };
                         return <div key={i}>{svgMap[item.name]}</div>;
                       }
