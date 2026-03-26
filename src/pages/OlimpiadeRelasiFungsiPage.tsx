@@ -57,6 +57,7 @@ Syarat fungsi:
 
 Jika himpunan A adalah Domain (daerah asal) dan himpunan B adalah kodomain (daerah kawan) maka relasi himpunan A ke himpunan B merupakan fungsi saat anggota domain mempunyai pasangan tepat satu pada kodomain.
 
+[IMAGE:/images/relasi-fungsi-pemetaan.png]
 Contoh fungsi:
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang merupakan fungsi karena anggota pada domain (daerah asal) A mempunyai pasangan tepat satu di kodomain (daerah kawan) B, yaitu {(a,y), (b,z), (c,z)}. Pada diagram panah di atas kita peroleh Range (daerah hasil) yaitu {y, z}
 
