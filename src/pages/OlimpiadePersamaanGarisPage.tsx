@@ -18,6 +18,35 @@ const renderWithLatex = (text: string) => {
   });
 };
 
+const TabelTitikGrafik = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 200 160"
+    width="200"
+    height="160"
+    className="my-3"
+    style={{ display: "block" }}
+  >
+    <rect x="1" y="1" width="198" height="158" rx="4" ry="4"
+      fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+    <line x1="100" y1="1" x2="100" y2="159" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+    <line x1="1" y1="54" x2="199" y2="54" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+    <line x1="1" y1="107" x2="199" y2="107" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+    <text x="50" y="33" textAnchor="middle" fill="rgba(255,255,255,0.9)"
+      fontSize="18" fontFamily="serif" fontWeight="bold">x</text>
+    <text x="150" y="33" textAnchor="middle" fill="rgba(255,255,255,0.9)"
+      fontSize="18" fontFamily="serif" fontWeight="bold">y</text>
+    <text x="50" y="88" textAnchor="middle" fill="rgba(255,255,255,0.7)"
+      fontSize="22" fontFamily="serif">?</text>
+    <text x="150" y="88" textAnchor="middle" fill="rgba(255,255,255,0.9)"
+      fontSize="18" fontFamily="serif" fontWeight="bold">0</text>
+    <text x="50" y="141" textAnchor="middle" fill="rgba(255,255,255,0.9)"
+      fontSize="18" fontFamily="serif" fontWeight="bold">0</text>
+    <text x="150" y="141" textAnchor="middle" fill="rgba(255,255,255,0.7)"
+      fontSize="22" fontFamily="serif">?</text>
+  </svg>
+);
+
 const materiSection = {
   title: "MATERI - PERSAMAAN GARIS",
   sections: [
@@ -28,6 +57,7 @@ Implisit : $ax + by + c = 0$
 
 1. Menggambar Grafik
 Gunakan minimal 2 titik koordinat diantaranya kita bisa menggunakan titik ketika nilai $x = 0$ atau titik ketika nilai $y = 0$
+[TABLE_TITIK]
 
 2. Menentukan gradien/kemiringan garis lurus
 a. Diketahui panjang sisi tegak dan sisi datar
@@ -163,9 +193,12 @@ const OlimpiadePersamaanGarisPage = () => {
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
+                      {section.content.split('\n').map((line, i) => {
+                        if (line === '[TABLE_TITIK]') {
+                          return <TabelTitikGrafik key={i} />;
+                        }
+                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                      })}
                     </div>
                   </div>
                 )}
