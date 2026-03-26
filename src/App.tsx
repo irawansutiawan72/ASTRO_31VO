@@ -572,6 +572,9 @@ import SegitigaSebangunMMK9Page from "./pages/materi-matematika/kelas9/kesebangu
 import PerbandinganRusukSikuSikuMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/PerbandinganRusukSikuSikuPage";
 import KekongruenBangunDatarMMK9Page from "./pages/materi-matematika/kelas9/kesebangunan-kekongruenan/KekongruenBangunDatarPage";
 import TransformasiGeometriMMK9Page from "./pages/materi-matematika/kelas9/TransformasiGeometriPage";
+import TranslasiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/TranslasiPage";
+import RefleksiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/RefleksiPage";
+import RotasiMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/RotasiPage";
 import DilatasisMMK9Page from "./pages/materi-matematika/kelas9/transformasi-geometri/DilatasisPage";
 import BangunRuangSisiLengkungMMK9Page from "./pages/materi-matematika/kelas9/BangunRuangSisiLengkungPage";
 import TabungMMK9Page from "./pages/materi-matematika/kelas9/bangun-ruang-sisi-lengkung/TabungPage";
@@ -1193,6 +1196,9 @@ const AppInner = () => {
       <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/perbandingan-rusuk-siku-siku" element={<PerbandinganRusukSikuSikuMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/kesebangunan-kekongruenan/kekongruenan-bangun-datar" element={<KekongruenBangunDatarMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/transformasi-geometri" element={<TransformasiGeometriMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/transformasi-geometri/translasi" element={<TranslasiMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/transformasi-geometri/refleksi" element={<RefleksiMMK9Page />} />
+      <Route path="/materi-matematika/kelas-9/transformasi-geometri/rotasi" element={<RotasiMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/transformasi-geometri/dilatasi" element={<DilatasisMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung" element={<BangunRuangSisiLengkungMMK9Page />} />
       <Route path="/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung/tabung" element={<TabungMMK9Page />} />
