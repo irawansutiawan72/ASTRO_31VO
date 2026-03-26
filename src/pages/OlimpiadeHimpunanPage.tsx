@@ -241,13 +241,22 @@ const OlimpiadeHimpunanPage = () => {
                                         </div>
                                       </figure>
                                     </>
-                                  : <div className={`mb-1 ${idx === 3 && line.startsWith('$A \\cap B') ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
+                                  : <div className={`mb-1 ${idx === 3 && (line.startsWith('$A \\cap B') || line.startsWith('$A \\cup B')) ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
                               }
                               {idx === 3 && line === '- Irisan ($\\cap$)' && (
                                 <figure className="flex flex-col items-center gap-2 my-3">
                                   <img
                                     src="/images/irisan-himpunan.png"
                                     alt="Diagram Venn irisan himpunan A dan B"
+                                    className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                                  />
+                                </figure>
+                              )}
+                              {idx === 3 && line === '- Gabungan ($\\cup$)' && (
+                                <figure className="flex flex-col items-center gap-2 my-3">
+                                  <img
+                                    src="/images/gabungan-himpunan.png"
+                                    alt="Diagram Venn gabungan himpunan A dan B"
                                     className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
                                   />
                                 </figure>
