@@ -553,31 +553,13 @@ const PerkalianBilanganBulatPage = () => {
                   Nah, ini yang sering bikin bingung! Kenapa negatif dikali negatif hasilnya jadi positif? Sebelum ke sana, lihat dulu pola ketiga kasus lainnya — supaya polanya lengkap!
                 </p>
 
-                {/* Tiga animasi busur: Pos×Pos, Pos×Neg, Neg×Pos */}
-                <div className="grid grid-cols-1 gap-3">
-                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-green-300 mb-2">
-                      (+) × (+) — pola naik:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-xl p-2 border border-green-500/20">
-                      <PosTimesPosPatternSVG />
-                    </div>
-                  </div>
-                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-orange-300 mb-2">
-                      (+) × (−) — pola turun:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-xl p-2 border border-orange-500/20">
-                      <PosTimesNegPatternSVG />
-                    </div>
-                  </div>
-                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-red-300 mb-2">
-                      (−) × (+) — pola turun:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-xl p-2 border border-red-500/20">
-                      <NegTimesPosPatternSVG />
-                    </div>
+                {/* Animasi busur: Neg×Pos */}
+                <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                  <p className="font-body text-xs font-semibold text-red-300 mb-2">
+                    (−) × (+) — pola turun:
+                  </p>
+                  <div className="bg-slate-900/60 rounded-xl p-2 border border-red-500/20">
+                    <NegTimesPosPatternSVG />
                   </div>
                 </div>
 
