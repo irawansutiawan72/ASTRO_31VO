@@ -210,7 +210,7 @@ const OlimpiadeRelasiFungsiPage = () => {
                   return (
                     <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
                       <span className="font-semibold self-start">{imgMatch[1]}</span>
-                      <img src={imgMatch[2]} alt={`Opsi ${imgMatch[1]}`} className="max-w-[140px] rounded-lg" />
+                      <img src={imgMatch[2]} alt={`Opsi ${imgMatch[1]}`} className="w-full rounded-lg" />
                     </div>
                   );
                 }
