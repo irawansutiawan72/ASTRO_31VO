@@ -115,7 +115,20 @@ Sehingga penyelesaian dari $x^2 - 5x + 6 < 0$ adalah $\\{x \\ | \\ 2 < x < 3, \\
     },
     {
       heading: "F. Pertidaksamaan Pecahan",
-      content: `Contoh:
+      content: `1. Pengertian
+Pertidaksamaan rasional melibatkan bentuk pecahan dengan variabel di penyebut atau pembilang.
+
+2. Bentuk Umum
+$\\frac{f(x)}{g(x)} > 0$,   $\\frac{f(x)}{g(x)} < 0$   dan sebagainya
+
+✎ Langkah Penyelesaian
+1. Tentukan pembilang = 0 → cari akar pembilang
+2. Tentukan penyebut = 0 → tentukan titik kritis (harus dikecualikan)
+3. Buat garis bilangan → uji tanda di setiap interval
+4. Pilih interval yang memenuhi pertidaksamaan
+
+Contoh Soal & Pembahasan
+
 Selesaikan: $\\frac{x-2}{x+3} \\geq 0$
 
 Penyelesaian:
