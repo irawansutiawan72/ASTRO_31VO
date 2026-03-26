@@ -87,8 +87,8 @@ Misalnya diketahui fungsi $f(x) = 2x + 3$, maka nilai fungsi untuk $x = 1$ dinya
 [BLOCKMATH:f(x) &= 2x + 3 \\\\ f(1) &= 2(1) + 3 \\\\ &= 2 + 3 \\\\ &= 5]`
     },
     {
-      heading: "F. Rumus Fungsi f(x)",
-      content: `Notasi rumus fungsi $f: x \\to ax + b$ dapat ditulis kedalam bentuk $f(x) = ax + b$. Dimana untuk $f(x) = ax + b$ maka $f(k) = a(k) + b`
+      heading: "F. Rumus Fungsi $f(x)$",
+      content: `Notasi rumus fungsi $f: x \\to ax + b$ dapat ditulis kedalam bentuk $f(x) = ax + b$. Dimana untuk $f(x) = ax + b$ maka $f(k) = ak + b$`
     },
   ]
 };
@@ -270,7 +270,7 @@ const OlimpiadeRelasiFungsiPage = () => {
                   onClick={() => toggleSection(idx)}
                   className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
                 >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
+                  <span className="font-display text-sm text-accent font-bold">{renderWithLatex(section.heading)}</span>
                   {expandedSections.includes(idx) ? <ChevronUp className="w-4 h-4 text-accent shrink-0" /> : <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />}
                 </button>
                 {expandedSections.includes(idx) && (
