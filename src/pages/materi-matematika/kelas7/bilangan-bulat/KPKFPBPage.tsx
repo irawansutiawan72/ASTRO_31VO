@@ -587,6 +587,47 @@ const KPKFPBPage = () => {
                   </div>
                 </div>
 
+                {/* Kesimpulan dan Tips */}
+                <div className="bg-gradient-to-br from-indigo-500/15 to-purple-500/15 border border-indigo-400/40 rounded-lg p-4 space-y-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-lg">📌</span>
+                    <span className="font-body font-bold text-indigo-300 text-sm">Kesimpulan Materi KPK dan FPB</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-3">
+                    <div className="bg-slate-900/50 rounded-lg p-3 border border-green-500/20">
+                      <p className="font-body font-semibold text-green-300 text-sm mb-2">✅ Poin Kunci KPK</p>
+                      <ul className="text-white/70 text-xs space-y-1 list-disc list-inside">
+                        <li><strong className="text-white/90">KPK</strong> = Kelipatan Persekutuan <strong className="text-green-400">Terkecil</strong></li>
+                        <li>Ambil semua faktor prima dengan pangkat <strong className="text-green-400">tertinggi</strong></li>
+                        <li>Hasilnya selalu <strong className="text-white/90">≥</strong> bilangan terbesar dari yang dicari</li>
+                        <li>Digunakan saat mencari waktu atau kejadian yang <strong className="text-white/90">berulang bersama</strong></li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-slate-900/50 rounded-lg p-3 border border-orange-500/20">
+                      <p className="font-body font-semibold text-orange-300 text-sm mb-2">✅ Poin Kunci FPB</p>
+                      <ul className="text-white/70 text-xs space-y-1 list-disc list-inside">
+                        <li><strong className="text-white/90">FPB</strong> = Faktor Persekutuan <strong className="text-orange-400">Terbesar</strong></li>
+                        <li>Ambil faktor prima yang <strong className="text-orange-400">sama</strong> dengan pangkat <strong className="text-orange-400">terendah</strong></li>
+                        <li>Hasilnya selalu <strong className="text-white/90">≤</strong> bilangan terkecil dari yang dicari</li>
+                        <li>Digunakan saat membagi sesuatu secara <strong className="text-white/90">merata</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-900/60 rounded-lg p-3 border border-yellow-500/20 space-y-2">
+                    <p className="font-body font-semibold text-yellow-300 text-sm">💡 Tips Belajar Efektif</p>
+                    <ul className="text-white/70 text-xs space-y-1.5">
+                      <li>🌳 <strong className="text-white/90">Gunakan pohon faktor</strong> untuk bilangan yang besar agar tidak bingung</li>
+                      <li>🔁 <strong className="text-white/90">Latih hafalan bilangan prima</strong>: 2, 3, 5, 7, 11, 13, 17, 19, 23 ...</li>
+                      <li>✏️ <strong className="text-white/90">Tulis faktorisasi prima</strong> kedua bilangan sebelum memulai perhitungan</li>
+                      <li>🔍 <strong className="text-white/90">Baca soal cerita dua kali</strong> — cari kata kunci untuk menentukan pakai KPK atau FPB</li>
+                      <li>📐 <strong className="text-white/90">Cek jawabanmu</strong>: KPK harus habis dibagi oleh semua bilangan; FPB harus bisa membagi semua bilangan</li>
+                    </ul>
+                  </div>
+                </div>
+
                 {/* Tips Membedakan */}
                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-3">
