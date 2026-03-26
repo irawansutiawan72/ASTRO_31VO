@@ -166,6 +166,8 @@ const TabelTitikGrafik = () => (
 const GarisGradienPositif = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="280" height="200"
     className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Green frame */}
+    <rect x="1" y="1" width="278" height="198" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
     <line x1="20" y1="182" x2="248" y2="32" stroke="white" strokeWidth="2" />
     {/* Arrow lower-left */}
@@ -193,6 +195,8 @@ const GarisGradienPositif = () => (
 const GarisGradienNegatif = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 200" width="280" height="200"
     className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Green frame */}
+    <rect x="1" y="1" width="278" height="198" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
     <line x1="20" y1="18" x2="252" y2="178" stroke="white" strokeWidth="2" />
     {/* Arrow upper-left */}
@@ -218,7 +222,7 @@ const GarisGradienNegatif = () => (
 type SectionItem =
   | { t: 'heading'; text: string; color: string }
   | { t: 'text'; text: string; color?: string }
-  | { t: 'formula'; headline: string; lines: string[]; color: string }
+  | { t: 'formula'; headline: string; lines: FormulaLine[]; color: string }
   | { t: 'svg'; name: string };
 
 const colorMap: Record<string, { text: string; border: string; bg: string; dot: string }> = {
@@ -231,7 +235,12 @@ const colorMap: Record<string, { text: string; border: string; bg: string; dot: 
   teal:   { text: 'text-teal-300',   border: 'border-teal-500/60',   bg: 'bg-teal-950/40',   dot: 'bg-teal-400' },
 };
 
-interface FormulaCardProps { headline: string; lines: string[]; color: string; }
+type FormulaLine = string | { svg: string };
+interface FormulaCardProps { headline: string; lines: FormulaLine[]; color: string; }
+const formulaSvgMap: Record<string, JSX.Element> = {
+  GRADIEN_POSITIF: <GarisGradienPositif />,
+  GRADIEN_NEGATIF: <GarisGradienNegatif />,
+};
 const FormulaCard = ({ headline, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
   return (
@@ -240,12 +249,18 @@ const FormulaCard = ({ headline, lines, color }: FormulaCardProps) => {
         <span className={`w-2 h-2 rounded-full ${c.dot} shrink-0`} />
         <span className={`font-display text-xs font-bold ${c.text} uppercase tracking-wide`}>{headline}</span>
       </div>
-      <div className="px-4 py-3 space-y-1.5">
-        {lines.map((line, i) => (
-          <div key={i} className="font-body text-sm text-white/90 text-center">
-            {renderWithLatex(line)}
-          </div>
-        ))}
+      <div className="px-4 py-3 space-y-2">
+        {lines.map((line, i) =>
+          typeof line === 'string' ? (
+            <div key={i} className="font-body text-sm text-white/90 text-center">
+              {renderWithLatex(line)}
+            </div>
+          ) : (
+            <div key={i} className="flex justify-center">
+              {formulaSvgMap[line.svg]}
+            </div>
+          )
+        )}
       </div>
     </div>
   );
@@ -272,11 +287,11 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
       { t: 'svg', name: 'GRAFIK4' },
       { t: 'heading', text: '2. Menentukan Gradien / Kemiringan Garis Lurus', color: 'green' },
       { t: 'formula', headline: 'a. Diketahui Panjang Sisi Tegak dan Sisi Datar', color: 'green', lines: [
+        { svg: 'GRADIEN_POSITIF' },
         '$m = +\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (naik ke kanan)',
+        { svg: 'GRADIEN_NEGATIF' },
         '$m = -\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (turun ke kanan)',
       ]},
-      { t: 'svg', name: 'GRADIEN_POSITIF' },
-      { t: 'svg', name: 'GRADIEN_NEGATIF' },
       { t: 'formula', headline: 'b. Diketahui 2 Titik yang Dilalui', color: 'blue', lines: [
         'Garis melalui titik $A(x_1, y_1)$ dan $B(x_2, y_2)$',
         '$m = \\dfrac{y_2 - y_1}{x_2 - x_1}$',
