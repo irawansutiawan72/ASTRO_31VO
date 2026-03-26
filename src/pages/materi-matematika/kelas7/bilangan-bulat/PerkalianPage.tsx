@@ -539,7 +539,7 @@ const PerkalianBilanganBulatPage = () => {
             >
               <div className="flex items-center gap-3">
                 <Target className="w-5 h-5 text-red-400" />
-                <span className="font-body font-semibold text-white">Positif × Negatif = Negatif</span>
+                <span className="font-body font-semibold text-white">Negatif × Positif = Negatif</span>
               </div>
               {expandedSections.includes("negatifNegatif") ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
