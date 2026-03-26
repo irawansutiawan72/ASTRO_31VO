@@ -5,7 +5,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { Trophy, ChevronDown, ChevronUp } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+import { InlineMath, BlockMath } from 'react-katex';
 
 const renderWithLatex = (text: string) => {
   const parts = text.split(/(\$[^$]+\$)/g);
@@ -84,10 +84,7 @@ $n(f) = n! = n \\times (n-1) \\times (n-2) \\times ... \\times 1$`
 Untuk nilai fungsi dari suatu domain, hasil yang diperoleh disebut juga daerah hasil (range).
 
 Misalnya diketahui fungsi $f(x) = 2x + 3$, maka nilai fungsi untuk $x = 1$ dinyatakan dalam bentuk:
-$f(x) = 2x + 3$
-$f(1) = 2(1) + 3$
-$= 2 + 3$
-$= 5`
+[BLOCKMATH:f(x) &= 2x + 3 \\\\ f(1) &= 2(1) + 3 \\\\ &= 2 + 3 \\\\ &= 5]`
     },
     {
       heading: "F. Rumus Fungsi f(x)",
@@ -295,6 +292,14 @@ const OlimpiadeRelasiFungsiPage = () => {
                         const subheadingMatch = line.match(/^\[SUBHEADING:(.+)\]$/);
                         if (subheadingMatch) {
                           return <div key={i} className="text-yellow-300 font-semibold mt-3 mb-1">{renderWithLatex(subheadingMatch[1])}</div>;
+                        }
+                        const blockMathMatch = line.match(/^\[BLOCKMATH:(.+)\]$/);
+                        if (blockMathMatch) {
+                          return (
+                            <div key={i} className="flex justify-start my-2 pl-4">
+                              <BlockMath math={`\\begin{aligned}${blockMathMatch[1]}\\end{aligned}`} />
+                            </div>
+                          );
                         }
                         const formulaBoxMatch = line.match(/^\[FORMULABOX:([^|]+)\|(.+)\]$/);
                         if (formulaBoxMatch) {
