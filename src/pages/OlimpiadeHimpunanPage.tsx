@@ -210,6 +210,15 @@ const OlimpiadeHimpunanPage = () => {
                         <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                       ))}
                     </div>
+                    {idx === 1 && (
+                      <figure className="flex flex-col items-center gap-2 mt-4">
+                        <img
+                          src="/images/segitiga-pascal-himpunan.png"
+                          alt="Segitiga Pascal untuk himpunan bagian"
+                          className="w-full max-w-xl rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                        />
+                      </figure>
+                    )}
                   </div>
                 )}
               </div>
