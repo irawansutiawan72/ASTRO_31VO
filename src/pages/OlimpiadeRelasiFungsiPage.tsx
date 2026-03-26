@@ -66,8 +66,7 @@ Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang merupakan fung
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang bukan fungsi karena anggota pada domain A ada yang mempunyai pasangan di kodomain B lebih dari satu, yaitu {(b, x)} dan {(b, z)}.
 
 Jika himpunan A banyak anggota adalah n(A) dan himpunan B banyak anggota adalah n(B), maka banyaknya fungsi (pemetaan) yang dapat terjadi dapat kita hitung dengan rumus:
-- $n(A \\to B) = n(B)^{n(A)}$
-- $n(B \\to A) = n(A)^{n(B)}$`
+[FORMULABOX:Rumus Banyak Fungsi|$n(A \\to B) = n(B)^{n(A)}$|$n(B \\to A) = n(A)^{n(B)}$]`
     },
     {
       heading: "D. Korespondensi Satu-Satu",
@@ -292,6 +291,21 @@ const OlimpiadeRelasiFungsiPage = () => {
                         const centerMatch = line.match(/^\[CENTER:(.+)\]$/);
                         if (centerMatch) {
                           return <div key={i} className="text-center font-semibold mb-1">{centerMatch[1]}</div>;
+                        }
+                        const formulaBoxMatch = line.match(/^\[FORMULABOX:([^|]+)\|(.+)\]$/);
+                        if (formulaBoxMatch) {
+                          const title = formulaBoxMatch[1];
+                          const formulas = formulaBoxMatch[2].split('|');
+                          return (
+                            <div key={i} className="flex justify-center my-4">
+                              <div className="border-2 border-yellow-400/60 rounded-xl bg-yellow-400/10 px-6 py-4 text-center min-w-[220px]">
+                                <div className="text-yellow-300 font-bold text-xs uppercase tracking-widest mb-3">{title}</div>
+                                {formulas.map((f, fi) => (
+                                  <div key={fi} className="text-white font-semibold text-base mb-1">{renderWithLatex(f)}</div>
+                                ))}
+                              </div>
+                            </div>
+                          );
                         }
                         return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
                       })}
