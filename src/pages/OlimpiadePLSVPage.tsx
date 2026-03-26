@@ -234,13 +234,18 @@ const OlimpiadePLSVPage = () => {
           style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
         />
         <div className="relative p-5">
-          <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+          <div className="font-body text-sm text-white mb-3 leading-relaxed">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
               {soal.no}
             </span>
-            {soal.soal.split('\n').map((line, lineIdx) => (
-              <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>
-            ))}
+            {soal.soal.split('\n').map((line, lineIdx) => {
+              const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
+              if (imgMatch) {
+                const sizeClass = imgMatch[2] === 'small' ? 'max-w-[200px]' : imgMatch[2] === 'medium' ? 'max-w-sm w-full' : 'max-w-lg w-full';
+                return <div key={lineIdx} className="my-3 flex justify-center"><img src={imgMatch[1]} alt="Ilustrasi" className={`${sizeClass} rounded-lg`} /></div>;
+              }
+              return <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>;
+            })}
           </div>
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
