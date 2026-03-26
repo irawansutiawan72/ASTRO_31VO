@@ -561,23 +561,22 @@ const PerkalianBilanganBulatPage = () => {
                   </div>
                 </div>
 
-                {/* Header Neg×Neg */}
-                <div className="flex items-center gap-3 pt-2">
-                  <Zap className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                  <div>
-                    <p className="font-body font-semibold text-white">Negatif × Negatif = Positif</p>
-                    <p className="font-body text-sm text-white/70 mt-1">
-                      Bagaimana jika bilangan negatif dikalikan dengan negatif? Perhatikan pola busur berikut — hasilnya justru berbalik menjadi positif!
-                    </p>
-                  </div>
-                </div>
-
                 {/* Pola Neg×Neg — Animasi Busur */}
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-orange-300 mb-3">
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Zap className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                    <p className="font-body font-semibold text-white">Negatif × Negatif = Positif</p>
+                  </div>
+                  <p className="font-body text-sm text-white/80">
+                    Bagaimana jika bilangan negatif dikalikan dengan negatif? Perhatikan pola busur berikut — hasilnya justru berbalik menjadi positif!
+                  </p>
+                  <p className="font-body text-sm text-white/80">
+                    Perhatikan pola berikut — setiap kali faktor pertama turun 1 (menjadi negatif), hasilnya malah naik (menjadi positif)!
+                  </p>
+                  <p className="font-body text-sm font-semibold text-orange-300">
                     Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
                   </p>
-                  <p className="font-body text-xs text-white/50 mb-3">
+                  <p className="font-body text-xs text-white/50">
                     Setiap kali faktor kedua turun 1 (dari 2 → 1 → 0 → −1 → …), hasilnya naik +1. Busur redup = pola awal, busur terang = wilayah negatif × negatif.
                   </p>
                   <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20">
