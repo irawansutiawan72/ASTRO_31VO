@@ -190,7 +190,7 @@ const GarisGradienPositif = () => (
     {/* Separator */}
     <line x1="10" y1="203" x2="270" y2="203" stroke="white" strokeOpacity="0.2" strokeWidth="1" />
     {/* Formula: m = + fraction */}
-    <text x="42" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = +</text>
+    <text x="97" y="234" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = +</text>
     <text x="160" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi tegak</text>
     <line x1="100" y1="230" x2="220" y2="230" stroke="white" strokeWidth="1.2" />
     <text x="160" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi datar</text>
@@ -228,7 +228,7 @@ const GarisGradienNegatif = () => (
     {/* Separator */}
     <line x1="10" y1="203" x2="270" y2="203" stroke="white" strokeOpacity="0.2" strokeWidth="1" />
     {/* Formula: m = - fraction */}
-    <text x="42" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = −</text>
+    <text x="97" y="234" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = −</text>
     <text x="160" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi tegak</text>
     <line x1="100" y1="230" x2="220" y2="230" stroke="white" strokeWidth="1.2" />
     <text x="160" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi datar</text>
