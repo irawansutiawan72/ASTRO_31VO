@@ -122,10 +122,10 @@ Pertidaksamaan rasional melibatkan bentuk pecahan dengan variabel di penyebut at
 $\\frac{f(x)}{g(x)} > 0$,   $\\frac{f(x)}{g(x)} < 0$   dan sebagainya
 
 ✎ Langkah Penyelesaian
-1. Tentukan pembilang = 0 → cari akar pembilang
-2. Tentukan penyebut = 0 → tentukan titik kritis (harus dikecualikan)
-3. Buat garis bilangan → uji tanda di setiap interval
-4. Pilih interval yang memenuhi pertidaksamaan
+1) Tentukan pembilang = 0 → cari akar pembilang
+2) Tentukan penyebut = 0 → tentukan titik kritis (harus dikecualikan)
+3) Buat garis bilangan → uji tanda di setiap interval
+4) Pilih interval yang memenuhi pertidaksamaan
 
 Contoh Soal & Pembahasan
 
