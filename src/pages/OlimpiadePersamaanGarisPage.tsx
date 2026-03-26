@@ -164,10 +164,10 @@ const TabelTitikGrafik = () => (
 // Gradien Positif (m = +): line rises left-to-right
 // Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
 const GarisGradienPositif = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 278" width="280" height="278"
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 308 306" width="308" height="306"
     className="my-2" style={{ display: "block", margin: "0 auto" }}>
     {/* Green frame */}
-    <rect x="1" y="1" width="278" height="276" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
+    <rect x="-13" y="-13" width="306" height="304" rx="10" ry="10" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
     <line x1="20" y1="182" x2="248" y2="32" stroke="white" strokeWidth="2" />
     {/* Arrow lower-left */}
@@ -202,10 +202,10 @@ const GarisGradienPositif = () => (
 // Gradien Negatif (m = -): line falls left-to-right
 // Main line: (20,18)→(252,178). Triangle: P_upper=(70,53), P_lower=(210,153), corner=(70,153)
 const GarisGradienNegatif = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 278" width="280" height="278"
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 -14 308 306" width="308" height="306"
     className="my-2" style={{ display: "block", margin: "0 auto" }}>
     {/* Green frame */}
-    <rect x="1" y="1" width="278" height="276" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
+    <rect x="-13" y="-13" width="306" height="304" rx="10" ry="10" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
     <line x1="20" y1="18" x2="252" y2="178" stroke="white" strokeWidth="2" />
     {/* Arrow upper-left */}
