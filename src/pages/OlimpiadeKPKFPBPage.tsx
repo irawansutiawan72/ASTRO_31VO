@@ -1091,7 +1091,7 @@ const OlimpiadeKPKFPBPage = () => {
                     {soal.soal.split('\n').map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {lineIdx > 0 && <br />}
-                        {renderWithLatex(line)}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
                       </span>
                     ))}
                   </div>
@@ -1188,7 +1188,7 @@ const OlimpiadeKPKFPBPage = () => {
                     {soal.soal.split('\n').map((line, lineIdx) => (
                       <span key={lineIdx}>
                         {lineIdx > 0 && <br />}
-                        {renderWithLatex(line)}
+                        {lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}
                       </span>
                     ))}
                   </div>

@@ -1115,7 +1115,7 @@ const OlimpiadeModuloPage = () => {
                     {soal.soal.startsWith("OSN") && (
                       <div className="inline-flex items-center gap-1 bg-amber-500/15 border border-amber-400/30 rounded-full px-2 py-0.5 mb-2">
                         <Trophy className="w-3 h-3 text-amber-400" />
-                        <span className="text-amber-300 text-[10px] font-bold">{soal.soal.split('\n')[0]}</span>
+                        <span className="text-yellow-400 text-[10px] font-bold">{soal.soal.split('\n')[0]}</span>
                       </div>
                     )}
                     {/* Nomor & Soal */}

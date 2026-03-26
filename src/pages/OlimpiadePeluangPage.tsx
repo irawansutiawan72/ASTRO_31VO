@@ -816,7 +816,13 @@ export default function OlimpiadePeluangPage() {
                     </span>
                     <div className="flex-1 space-y-2">
                       <p className="text-sm leading-relaxed whitespace-pre-line">
-                        {renderWithLatex(q.soal)}
+                        {(() => {
+                          const firstNewline = q.soal.indexOf('\n');
+                          if (firstNewline === -1 || !q.soal.startsWith('OSN')) return renderWithLatex(q.soal);
+                          const header = q.soal.slice(0, firstNewline);
+                          const body = q.soal.slice(firstNewline + 1);
+                          return <><span className="text-yellow-400 font-semibold">{header}</span>{'\n'}{renderWithLatex(body)}</>;
+                        })()}
                       </p>
                       {q.options.length > 0 && (
                         <div className="grid grid-cols-2 gap-1">
@@ -845,7 +851,13 @@ export default function OlimpiadePeluangPage() {
                     </span>
                     <div className="flex-1 space-y-2">
                       <p className="text-sm leading-relaxed whitespace-pre-line">
-                        {renderWithLatex(q.soal)}
+                        {(() => {
+                          const firstNewline = q.soal.indexOf('\n');
+                          if (firstNewline === -1 || !q.soal.startsWith('OSN')) return renderWithLatex(q.soal);
+                          const header = q.soal.slice(0, firstNewline);
+                          const body = q.soal.slice(firstNewline + 1);
+                          return <><span className="text-yellow-400 font-semibold">{header}</span>{'\n'}{renderWithLatex(body)}</>;
+                        })()}
                       </p>
                       {q.options.length > 0 && (
                         <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">

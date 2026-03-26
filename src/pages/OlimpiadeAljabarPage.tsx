@@ -159,7 +159,7 @@ const OlimpiadeAljabarPage = () => {
               {soal.no}
             </span>
             {soal.soal.split('\n').map((line, lineIdx) => (
-              <span key={lineIdx}>{lineIdx > 0 && <br />}{renderWithLatex(line)}</span>
+              <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>
             ))}
           </div>
           {soal.options.length > 0 && (
