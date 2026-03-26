@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import BalanceScaleAnimation from "@/components/BalanceScaleAnimation";
 
 const PenyelesaianPLSVPage = () => {
   const navigate = useNavigate();
@@ -113,6 +114,10 @@ const PenyelesaianPLSVPage = () => {
                     <p>Jika <InlineMath math="a = b" />, maka <InlineMath math="a - c = b - c" /></p>
                   </div>
                 </div>
+
+                {/* Balance Scale Animation */}
+                <BalanceScaleAnimation />
+
                 <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm text-white/80">Contoh: Selesaikan <InlineMath math="x - 7 = 3" /></p>
                   <div className="bg-slate-900/50 rounded p-3 space-y-2 font-body text-sm text-white/80">
