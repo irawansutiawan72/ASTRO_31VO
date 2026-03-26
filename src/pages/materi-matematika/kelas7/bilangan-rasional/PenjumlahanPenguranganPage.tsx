@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target, Plus, 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import FractionCircleAnimation from "@/components/FractionCircleAnimation";
 
 const PenjumlahanPenguranganPage = () => {
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ const PenjumlahanPenguranganPage = () => {
         </p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+          {/* Animasi Interaktif */}
+          <FractionCircleAnimation />
+
           {/* Section 1: Penjumlahan Pecahan */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
