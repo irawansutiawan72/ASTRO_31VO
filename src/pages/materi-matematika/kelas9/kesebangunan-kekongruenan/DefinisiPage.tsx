@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Calculator, Target } from 
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import SimilarityAnimation from "@/components/SimilarityAnimation";
 
 /* ── DIAGRAMS ── */
 
@@ -146,6 +147,9 @@ const DefinisiPage = () => {
                     <p className="font-body text-xs text-white/50 mt-1">k = faktor skala (rasio kesebangunan)</p>
                   </div>
                 </div>
+                {/* Interactive Similarity Animation */}
+                <SimilarityAnimation />
+
                 <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4">
                   <p className="font-body text-xs font-semibold text-slate-300 mb-3">🔍 ILUSTRASI DUA BANGUN SEBANGUN:</p>
                   <DiagramSebangun />
