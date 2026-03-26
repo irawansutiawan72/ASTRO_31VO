@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
+import Snowfall from "@/components/Snowfall";
 import PageNavigation from "@/components/PageNavigation";
 import { playPopSound } from "@/hooks/useAudio";
 import { Play } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface Subtopic {
   name: string;
@@ -42,10 +44,12 @@ const GameSubtopicPage = ({
   kelasLabel = "Kelas 7",
 }: GameSubtopicPageProps) => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
-      <Starfield />
+    <div className={`relative min-h-screen flex flex-col items-center overflow-hidden ${isLight ? "gradient-snow" : "gradient-space"}`}>
+      {isLight ? <Snowfall /> : <Starfield />}
       <PageNavigation prevPath={backPath} />
 
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
