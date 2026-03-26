@@ -247,10 +247,39 @@ const OlimpiadePerbandinganPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
+                    <div className="font-body text-sm text-white/80 leading-relaxed">
+                      {section.content.split('\n').map((line, i) => {
+                        const trimmed = line.trim();
+                        // Numbered sub-heading: "1. Perbandingan Senilai ..."
+                        if (/^\d+\. [A-Z]/.test(trimmed)) {
+                          return (
+                            <div key={i} className="mt-4 mb-1 font-bold text-yellow-400 text-sm">
+                              {trimmed}
+                            </div>
+                          );
+                        }
+                        // "Rumus..." label line
+                        if (/^Rumus/.test(trimmed)) {
+                          return (
+                            <div key={i} className="mt-3 mb-1 font-semibold text-yellow-300 text-xs uppercase tracking-wide">
+                              {trimmed}
+                            </div>
+                          );
+                        }
+                        // Pure formula line: starts and ends with $
+                        if (trimmed.startsWith('$') && trimmed.endsWith('$') && trimmed.length > 2) {
+                          return (
+                            <div key={i} className="my-3 px-4 py-3 rounded-xl border-2 border-cyan-400/60 bg-cyan-950/40 text-center font-bold text-white text-base shadow-lg shadow-cyan-900/30">
+                              <span className="block text-[10px] text-cyan-400 font-semibold uppercase tracking-widest mb-1">Rumus Penting</span>
+                              {renderWithLatex(trimmed)}
+                            </div>
+                          );
+                        }
+                        // Empty line
+                        if (trimmed === '') return <div key={i} className="h-2" />;
+                        // Default
+                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                      })}
                     </div>
                   </div>
                 )}
