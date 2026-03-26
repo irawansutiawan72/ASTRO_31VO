@@ -615,6 +615,7 @@ interface OlimpiadeSoal {
   options: string[];
   jawaban: string;
   pembahasan: { konsep: string; langkah: string[]; rumus?: string; };
+  image?: string;
 }
 
 const latihanOlimpiade: OlimpiadeSoal[] = [
@@ -729,7 +730,8 @@ const latihanOlimpiade: OlimpiadeSoal[] = [
   },
   {
     no: 7,
-    soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika pada setiap persegi ditempatkan bilangan bulat positif sedemikian rupa sehingga perkalian bilangan-bilangan dari sembarang lima persegi yang berurutan menghasilkan 360, maka jumlah bilangan pada semua persegi tersebut adalah ...\n4 | _ | 3 | 5 | _ | _ | 2",
+    soal: "OSN Matematika 2007 Tingkat Kota\nPerhatikan gambar berikut. Jika pada setiap persegi ditempatkan bilangan bulat positif sedemikian rupa sehingga perkalian bilangan-bilangan dari sembarang lima persegi yang berurutan menghasilkan 360, maka jumlah bilangan pada semua persegi tersebut adalah ...",
+    image: "/NO_7_OLIMP_1774498206855.png",
     options: [],
     jawaban: "23",
     pembahasan: {
@@ -1192,6 +1194,13 @@ const OlimpiadeKPKFPBPage = () => {
                       </span>
                     ))}
                   </div>
+                  {soal.image && (
+                    <div className="mb-3 flex justify-center">
+                      <div className="bg-white rounded-lg p-2 inline-block">
+                        <img src={soal.image} alt={`Gambar soal ${soal.no}`} className="max-w-full h-auto max-h-48" />
+                      </div>
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
                       {soal.options.map((opt, j) => (
