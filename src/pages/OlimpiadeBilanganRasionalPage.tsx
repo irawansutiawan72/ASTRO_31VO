@@ -1271,7 +1271,19 @@ const OlimpiadeBilanganRasionalPage = () => {
                     <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
                       {soal.no}
                     </span>
-                    {renderWithLatex(soal.soal)}
+                    {(() => {
+                      const firstNewline = soal.soal.indexOf('\n');
+                      if (firstNewline === -1) return renderWithLatex(soal.soal);
+                      const header = soal.soal.slice(0, firstNewline);
+                      const body = soal.soal.slice(firstNewline + 1);
+                      return (
+                        <>
+                          <span className="text-yellow-400 font-semibold">{header}</span>
+                          {'\n'}
+                          {renderWithLatex(body)}
+                        </>
+                      );
+                    })()}
                   </div>
                   {soal.no === 1 && (
                     <div className="flex justify-center mb-4">
