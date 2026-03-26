@@ -119,15 +119,10 @@ const OperasiCampuranBilanganBulatPage = () => {
                     <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
                       <span className="bg-yellow-500 text-white font-bold px-3 py-1 rounded-full text-sm">3</span>
                       <div>
-                        <p className="font-body font-semibold text-yellow-300">Ka - Kali <InlineMath math="\times" /></p>
-                        <p className="text-white/60 text-xs">Perkalian dikerjakan dari kiri ke kanan</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
-                      <span className="bg-orange-500 text-white font-bold px-3 py-1 rounded-full text-sm">3</span>
-                      <div>
-                        <p className="font-body font-semibold text-orange-300">Ba - Bagi <InlineMath math="\div" /></p>
-                        <p className="text-white/60 text-xs">Pembagian setara dengan perkalian (kerjakan dari kiri)</p>
+                        <p className="font-body font-semibold text-yellow-300">
+                          Ka &amp; Ba — Kali <InlineMath math="\times" /> dan Bagi <InlineMath math="\div" />
+                        </p>
+                        <p className="text-white/60 text-xs">Setingkat — kerjakan dari kiri ke kanan</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
