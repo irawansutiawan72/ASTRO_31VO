@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Code } fro
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import FunctionMachineAnimation from "@/components/FunctionMachineAnimation";
 
 const NotasiFungsiPage = () => {
   const navigate = useNavigate();
@@ -51,6 +52,9 @@ const NotasiFungsiPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Relasi dan Fungsi · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* Function Machine Animation */}
+          <FunctionMachineAnimation />
 
           {/* PENGANTAR */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
