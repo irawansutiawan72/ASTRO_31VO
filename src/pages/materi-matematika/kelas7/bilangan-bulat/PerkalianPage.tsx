@@ -17,12 +17,12 @@ const NegTimesNegPatternSVG = () => {
   useEffect(() => {
     const delay =
       step === 0 ? 700  :
-      step === 4 ? 1000 :
-      step === 7 ? 700  :
-      step === 8 ? 3200 :
-      step === 9 ? 500  :
+      step === 3 ? 1000 :
+      step === 6 ? 700  :
+      step === 7 ? 3200 :
+      step === 8 ? 500  :
       860;
-    const t = setTimeout(() => setStep(s => (s >= 9 ? 0 : s + 1)), delay);
+    const t = setTimeout(() => setStep(s => (s >= 8 ? 0 : s + 1)), delay);
     return () => clearTimeout(t);
   }, [step]);
 
@@ -39,23 +39,20 @@ const NegTimesNegPatternSVG = () => {
   const rightX  = 390;
   const arcOutX = 446;
 
-  const numRows = step === 0 ? 0 : Math.min(step, 6);
-  const numArcs = step <= 1  ? 0 : Math.min(step - 1, 5);
-  const showConclusion = step >= 7;
+  const numArcs = Math.min(step, 5);
+  const showConclusion = step >= 6;
 
   return (
     <svg viewBox="0 0 490 425" width="100%" xmlns="http://www.w3.org/2000/svg">
 
-      {/* Shaded region for neg × neg rows */}
-      {numRows >= 4 && (
-        <rect
-          x="10" y={rowY(3) - 22} width="388" height={56 * 3 + 18}
-          rx="8" fill="#78350f18" stroke="#d9770630" strokeWidth="1"
-        />
-      )}
+      {/* Shaded region for neg × neg rows — always visible */}
+      <rect
+        x="10" y={rowY(3) - 22} width="388" height={56 * 3 + 18}
+        rx="8" fill="#78350f18" stroke="#d9770630" strokeWidth="1"
+      />
 
-      {/* Rows */}
-      {rows.slice(0, numRows).map((row, i) => {
+      {/* Rows — all permanently visible */}
+      {rows.map((row, i) => {
         const y    = rowY(i);
         const isNN = row.isNegNeg;
         return (
