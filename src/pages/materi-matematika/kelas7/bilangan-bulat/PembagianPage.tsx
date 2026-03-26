@@ -9,7 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 
 const PembagianBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "negatifPositif", "positifNegatif", "negatifNegatif", "pembagianNol", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "negatifPositif", "positifNegatif", "negatifNegatif", "pembagianNol", "contoh", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -507,6 +507,116 @@ const PembagianBilanganBulatPage = () => {
                       <p className="text-white/80 text-sm"><InlineMath math="-75 \div (-5) = 15" /></p>
                       <p className="text-green-400 text-sm mt-2">
                         Jadi, <InlineMath math="-75 \div [45 \div (-9)] = 15" />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Kesimpulan & Tips */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("kesimpulan")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-primary" />
+                <span className="font-body font-semibold text-white">Kesimpulan & Tips Pembagian Bilangan Bulat</span>
+              </div>
+              {expandedSections.includes("kesimpulan") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("kesimpulan") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* Kesimpulan Aturan Tanda */}
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-cyan-300 mb-3">Kesimpulan Aturan Tanda Pembagian:</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-green-400 font-mono text-sm font-bold w-36">(+) ÷ (+)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-green-400 font-bold">Positif (+)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-orange-400 font-mono text-sm font-bold w-36">(+) ÷ (−)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-red-400 font-bold">Negatif (−)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-orange-400 font-mono text-sm font-bold w-36">(−) ÷ (+)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-red-400 font-bold">Negatif (−)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-yellow-400 font-mono text-sm font-bold w-36">(−) ÷ (−)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-green-400 font-bold">Positif (+)</span>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/60 rounded p-3 mt-3">
+                    <p className="text-white/70 text-xs text-center">
+                      Cara mudah mengingat: <strong className="text-cyan-300">Tanda sama → positif &nbsp;|&nbsp; Tanda beda → negatif</strong>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Aturan Penting */}
+                <div className="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-red-300 mb-3">Aturan Penting yang Wajib Diingat:</p>
+                  <div className="space-y-2">
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-red-300">Tidak bisa dibagi nol:</strong> <InlineMath math="a \div 0" /> tidak terdefinisi untuk semua bilangan <InlineMath math="a" />.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <Lightbulb className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Nol dibagi bilangan apapun:</strong> <InlineMath math="0 \div a = 0" /> selama <InlineMath math="a \neq 0" />.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start bg-slate-900/50 rounded p-3">
+                      <Zap className="w-4 h-4 text-cyan-400 mt-0.5 flex-shrink-0" />
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-cyan-300">Hubungan dengan perkalian:</strong> <InlineMath math="a \div b = c" /> berarti <InlineMath math="b \times c = a" />. Gunakan ini untuk mengecek jawaban!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tips */}
+                <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-yellow-300 mb-3">Tips Cepat Mengerjakan Soal:</p>
+                  <div className="space-y-3">
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">1.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Tentukan tanda dulu, hitung nilai mutlaknya kemudian.</strong> Misalnya <InlineMath math="(-48) \div 6" />: tanda (−)÷(+) = negatif, nilai mutlak <InlineMath math="48 \div 6 = 8" />, jadi hasilnya <InlineMath math="-8" />.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">2.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Kerjakan kurung terdalam dahulu</strong> pada operasi bertingkat, baru lanjut ke luar.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">3.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Verifikasi jawaban dengan perkalian balik.</strong> Jika <InlineMath math="-36 \div (-4) = 9" />, cek: <InlineMath math="(-4) \times 9 = -36" /> ✓
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">4.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Ingat: pembagian TIDAK komutatif.</strong> <InlineMath math="12 \div (-3) \neq (-3) \div 12" />, jadi urutan pembagian tidak boleh ditukar!
                       </p>
                     </div>
                   </div>
