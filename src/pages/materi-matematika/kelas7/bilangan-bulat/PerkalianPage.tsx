@@ -568,16 +568,7 @@ const PerkalianBilanganBulatPage = () => {
                     <p className="font-body font-semibold text-white">Negatif × Negatif = Positif</p>
                   </div>
                   <p className="font-body text-sm text-white/80">
-                    Bagaimana jika bilangan negatif dikalikan dengan negatif? Perhatikan pola busur berikut — hasilnya justru berbalik menjadi positif!
-                  </p>
-                  <p className="font-body text-sm text-white/80">
-                    Perhatikan pola berikut — setiap kali faktor pertama turun 1 (menjadi negatif), hasilnya malah naik (menjadi positif)!
-                  </p>
-                  <p className="font-body text-sm font-semibold text-orange-300">
-                    Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
-                  </p>
-                  <p className="font-body text-xs text-white/50">
-                    Setiap kali faktor kedua turun 1 (dari 2 → 1 → 0 → −1 → …), hasilnya naik +1. Busur redup = pola awal, busur terang = wilayah negatif × negatif.
+                    Ikuti busur <InlineMath math="-1 \times \ldots" /> ke bawah — setiap kali faktor pertama turun 1 (menjadi negatif), hasilnya justru <strong className="text-yellow-300">naik menjadi positif</strong>! Busur redup = pola awal, busur terang = wilayah negatif × negatif.
                   </p>
                   <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20">
                     <NegTimesNegPatternSVG />
