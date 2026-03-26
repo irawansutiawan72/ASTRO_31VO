@@ -18,6 +18,44 @@ const renderWithLatex = (text: string) => {
   });
 };
 
+const GrafikTitikPotong = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 280 220"
+    width="280"
+    height="220"
+    className="my-3"
+    style={{ display: "block" }}
+  >
+    {/* X axis */}
+    <line x1="20" y1="120" x2="260" y2="120" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+    <polygon points="260,120 253,116 253,124" fill="rgba(255,255,255,0.85)" />
+    {/* Y axis */}
+    <line x1="100" y1="210" x2="100" y2="10" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+    <polygon points="100,10 96,17 104,17" fill="rgba(255,255,255,0.85)" />
+    {/* The line through (0,b)=(100,65) and (a,0)=(185,120), extended */}
+    <line x1="22" y1="14" x2="238" y2="173" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+    {/* Arrow at lower-right end */}
+    <polygon
+      points="238,173 228,163 235,160"
+      fill="rgba(255,255,255,0.85)"
+    />
+    {/* Arrow at upper-left end */}
+    <polygon
+      points="22,14 32,24 25,27"
+      fill="rgba(255,255,255,0.85)"
+    />
+    {/* Dot at b point (0, b) = (100, 65) */}
+    <circle cx="100" cy="65" r="2.5" fill="rgba(255,255,255,0.9)" />
+    {/* Dot at a point (a, 0) = (185, 120) */}
+    <circle cx="185" cy="120" r="2.5" fill="rgba(255,255,255,0.9)" />
+    {/* Label b */}
+    <text x="112" y="70" fill="rgba(255,255,255,0.9)" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+    {/* Label a */}
+    <text x="188" y="137" fill="rgba(255,255,255,0.9)" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+  </svg>
+);
+
 const TabelTitikGrafik = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -58,6 +96,8 @@ Implisit : $ax + by + c = 0$
 1. Menggambar Grafik
 Gunakan minimal 2 titik koordinat diantaranya kita bisa menggunakan titik ketika nilai $x = 0$ atau titik ketika nilai $y = 0$
 [TABLE_TITIK]
+Misalkan didapat titik potong sumbu x adalah (a, 0) dan titik potong sumbu y (0, b) maka gambar grafiknya adalah
+[GRAFIK_TITIK]
 
 2. Menentukan gradien/kemiringan garis lurus
 a. Diketahui panjang sisi tegak dan sisi datar
@@ -196,6 +236,9 @@ const OlimpiadePersamaanGarisPage = () => {
                       {section.content.split('\n').map((line, i) => {
                         if (line === '[TABLE_TITIK]') {
                           return <TabelTitikGrafik key={i} />;
+                        }
+                        if (line === '[GRAFIK_TITIK]') {
+                          return <GrafikTitikPotong key={i} />;
                         }
                         return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
                       })}
