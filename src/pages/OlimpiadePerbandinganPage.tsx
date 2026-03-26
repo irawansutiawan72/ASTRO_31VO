@@ -161,7 +161,7 @@ const OlimpiadePerbandinganPage = () => {
               const imgMatch = line.match(/^\[IMAGE:([^|]+)(?:\|(\w+))?\]$/);
               if (imgMatch) {
                 const sizeClass = imgMatch[2] === 'small' ? 'max-w-[160px]' : 'max-w-sm w-full';
-                return <div key={lineIdx} className="my-2"><img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className={`${sizeClass} rounded-lg`} /></div>;
+                return <div key={lineIdx} className="my-2 flex justify-center"><img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className={`${sizeClass} rounded-lg`} /></div>;
               }
               return (
                 <span key={lineIdx}>
