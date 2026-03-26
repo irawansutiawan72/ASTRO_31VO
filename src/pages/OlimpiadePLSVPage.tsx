@@ -137,13 +137,6 @@ Penyelesaian:
 3. Garis bilangan dengan titik kritis -3 dan 2
 4. Penyelesaian: $x < -3$ atau $x \\geq 2$`
     },
-    {
-      heading: "G. Nilai Mutlak",
-      content: `Pengertian
-Nilai mutlak suatu bilangan adalah nilai positif bilangan tersebut.
-
-$|x| = \\begin{cases} x, & \\text{jika } x \\geq 0 \\\\ -x, & \\text{jika } x < 0 \\end{cases}$`
-    },
   ]
 };
 
