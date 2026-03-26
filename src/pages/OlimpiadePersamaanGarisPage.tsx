@@ -34,28 +34,28 @@ const GrafikTitikPotong = () => {
       style={{ display: "block" }}
     >
       {/* X axis */}
-      <line x1="20" y1="120" x2="258" y2="120" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
-      <polygon points="260,120 252,116 252,124" fill="rgba(255,255,255,0.85)" />
+      <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
+      <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
       {/* Y axis */}
-      <line x1="100" y1="208" x2="100" y2="12" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
-      <polygon points="100,10 96,18 104,18" fill="rgba(255,255,255,0.85)" />
+      <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
+      <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
 
       {/* Line through b=(100,60) and a=(190,120), extended to (46,24)→(232,148) */}
-      <line x1="46" y1="24" x2="232" y2="148" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+      <line x1="46" y1="24" x2="232" y2="148" stroke="#FF8C00" strokeWidth="1.5" />
       {/* Upper-left arrowhead at (46,24) pointing toward upper-left */}
-      <polygon points="46,24 51,33 56,26" fill="rgba(255,255,255,0.85)" />
+      <polygon points="46,24 51,33 56,26" fill="#FF8C00" />
       {/* Lower-right arrowhead at (232,148) pointing toward lower-right */}
-      <polygon points="232,148 222,146 227,139" fill="rgba(255,255,255,0.85)" />
+      <polygon points="232,148 222,146 227,139" fill="#FF8C00" />
 
       {/* Dot exactly on y-axis at b: (100, 60) */}
-      <circle cx="100" cy="60" r="2.5" fill="rgba(255,255,255,0.95)" />
+      <circle cx="100" cy="60" r="2.5" fill="#FF8C00" />
       {/* Dot exactly on x-axis at a: (190, 120) */}
-      <circle cx="190" cy="120" r="2.5" fill="rgba(255,255,255,0.95)" />
+      <circle cx="190" cy="120" r="2.5" fill="#FF8C00" />
 
       {/* Label b — right of y-axis, at the b intersection */}
-      <text x="108" y="65" fill="rgba(255,255,255,0.95)" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+      <text x="108" y="65" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
       {/* Label a — below x-axis, at the a intersection */}
-      <text x="186" y="138" fill="rgba(255,255,255,0.95)" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+      <text x="186" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
     </svg>
   );
 };
