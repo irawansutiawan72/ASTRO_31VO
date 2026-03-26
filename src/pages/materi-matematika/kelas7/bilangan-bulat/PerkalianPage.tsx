@@ -531,15 +531,15 @@ const PerkalianBilanganBulatPage = () => {
             )}
           </div>
 
-          {/* Section: Perkalian Dua Bilangan Negatif */}
+          {/* Section: Perkalian Positif x Negatif */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
             <button
               onClick={() => toggleSection("negatifNegatif")}
               className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <Zap className="w-5 h-5 text-orange-400" />
-                <span className="font-body font-semibold text-white">Negatif x Negatif = Positif</span>
+                <Target className="w-5 h-5 text-red-400" />
+                <span className="font-body font-semibold text-white">Positif × Negatif = Negatif</span>
               </div>
               {expandedSections.includes("negatifNegatif") ? (
                 <ChevronUp className="w-5 h-5 text-primary" />
@@ -550,7 +550,7 @@ const PerkalianBilanganBulatPage = () => {
             {expandedSections.includes("negatifNegatif") && (
               <div className="px-5 pb-5 space-y-4">
                 <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Nah, ini yang sering bikin bingung! Kenapa negatif dikali negatif hasilnya jadi positif? Sebelum ke sana, lihat dulu pola ketiga kasus lainnya — supaya polanya lengkap!
+                  Bagaimana jika bilangan <strong className="text-red-400">negatif</strong> dikalikan dengan bilangan <strong className="text-white">positif</strong>? Perhatikan pola berikut — setiap kali faktor pertama turun 1 (menjadi negatif), hasilnya pun terus turun!
                 </p>
 
                 {/* Animasi busur: Neg×Pos */}
