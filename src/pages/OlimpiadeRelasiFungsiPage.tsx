@@ -58,7 +58,7 @@ Syarat fungsi:
 Jika himpunan A adalah Domain (daerah asal) dan himpunan B adalah kodomain (daerah kawan) maka relasi himpunan A ke himpunan B merupakan fungsi saat anggota domain mempunyai pasangan tepat satu pada kodomain.
 
 [IMAGE:/images/relasi-fungsi-pemetaan.png]
-Contoh fungsi:
+[CENTER:Contoh fungsi]
 Relasi himpunan A ke himpunan B di atas adalah contoh relasi yang merupakan fungsi karena anggota pada domain (daerah asal) A mempunyai pasangan tepat satu di kodomain (daerah kawan) B, yaitu {(a,y), (b,z), (c,z)}. Pada diagram panah di atas kita peroleh Range (daerah hasil) yaitu {y, z}
 
 Contoh bukan fungsi:
@@ -287,6 +287,10 @@ const OlimpiadeRelasiFungsiPage = () => {
                               <img src={imgMatch[1]} alt="Ilustrasi materi" className="max-w-[320px] w-full bg-white rounded-lg p-2" />
                             </div>
                           );
+                        }
+                        const centerMatch = line.match(/^\[CENTER:(.+)\]$/);
+                        if (centerMatch) {
+                          return <div key={i} className="text-center font-semibold mb-1">{centerMatch[1]}</div>;
                         }
                         return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
                       })}
