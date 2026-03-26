@@ -60,6 +60,78 @@ const GrafikTitikPotong = () => {
   );
 };
 
+// Graph 2: passes through (-a,0) on x-axis [left of origin] and (0,b) on y-axis [above origin]
+// Origin SVG: (100,120). -a at (40,120). b at (100,60).
+// Line: (12,148) → (142,18). Slope check: (18-148)/(142-12)=-130/130=-1 ✓
+const GrafikTitikPotong2 = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    {/* Line through -a=(40,120) and b=(100,60), extended */}
+    <line x1="12" y1="148" x2="142" y2="18" stroke="#FF8C00" strokeWidth="1.5" />
+    {/* Arrow upper-right at (142,18) */}
+    <polygon points="142,18 133,22 138,27" fill="#FF8C00" />
+    {/* Arrow lower-left at (12,148) */}
+    <polygon points="12,148 21,144 16,139" fill="#FF8C00" />
+    {/* Dots */}
+    <circle cx="40" cy="120" r="2.5" fill="#FF8C00" />
+    <circle cx="100" cy="60" r="2.5" fill="#FF8C00" />
+    {/* Labels */}
+    <text x="108" y="65" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+    <text x="28" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
+  </svg>
+);
+
+// Graph 3: passes through (-a,0) on x-axis [left] and (0,-b) on y-axis [below origin]
+// Origin SVG: (100,120). -a at (40,120). -b at (100,180).
+// Line: (12,92) → (121,201). Slope check: (180-120)/(100-40)=60/60=1 ✓
+const GrafikTitikPotong3 = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    {/* Line through -a=(40,120) and -b=(100,180), extended */}
+    <line x1="12" y1="92" x2="121" y2="201" stroke="#FF8C00" strokeWidth="1.5" />
+    {/* Arrow upper-left at (12,92) */}
+    <polygon points="12,92 21,96 16,101" fill="#FF8C00" />
+    {/* Arrow lower-right at (121,201) */}
+    <polygon points="121,201 112,197 117,192" fill="#FF8C00" />
+    {/* Dots */}
+    <circle cx="40" cy="120" r="2.5" fill="#FF8C00" />
+    <circle cx="100" cy="180" r="2.5" fill="#FF8C00" />
+    {/* Labels */}
+    <text x="28" y="115" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
+    <text x="108" y="185" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
+  </svg>
+);
+
+// Graph 4: passes through (a,0) on x-axis [right] and (0,-b) on y-axis [below origin]
+// Origin SVG: (100,120). a at (190,120). -b at (100,180).
+// Line: (63,205) → (232,92). Slope check: (120-180)/(190-100)=-60/90=-0.667 ✓
+const GrafikTitikPotong4 = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block" }}>
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    {/* Line through -b=(100,180) and a=(190,120), extended */}
+    <line x1="63" y1="205" x2="232" y2="92" stroke="#FF8C00" strokeWidth="1.5" />
+    {/* Arrow lower-left at (63,205) */}
+    <polygon points="63,205 72,203 68,197" fill="#FF8C00" />
+    {/* Arrow upper-right at (232,92) */}
+    <polygon points="232,92 222,94 227,100" fill="#FF8C00" />
+    {/* Dots */}
+    <circle cx="190" cy="120" r="2.5" fill="#FF8C00" />
+    <circle cx="100" cy="180" r="2.5" fill="#FF8C00" />
+    {/* Labels */}
+    <text x="186" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+    <text x="108" y="185" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
+  </svg>
+);
+
 const TabelTitikGrafik = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -102,6 +174,12 @@ Gunakan minimal 2 titik koordinat diantaranya kita bisa menggunakan titik ketika
 [TABLE_TITIK]
 Misalkan didapat titik potong sumbu x adalah (a, 0) dan titik potong sumbu y (0, b) maka gambar grafiknya adalah
 [GRAFIK_TITIK]
+Misalkan didapat titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y (0, b) maka gambar grafiknya adalah
+[GRAFIK2]
+Misalkan didapat titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y (0, -b) maka gambar grafiknya adalah
+[GRAFIK3]
+Misalkan didapat titik potong sumbu x adalah (a, 0) dan titik potong sumbu y (0, -b) maka gambar grafiknya adalah
+[GRAFIK4]
 
 2. Menentukan gradien/kemiringan garis lurus
 a. Diketahui panjang sisi tegak dan sisi datar
@@ -243,6 +321,15 @@ const OlimpiadePersamaanGarisPage = () => {
                         }
                         if (line === '[GRAFIK_TITIK]') {
                           return <GrafikTitikPotong key={i} />;
+                        }
+                        if (line === '[GRAFIK2]') {
+                          return <GrafikTitikPotong2 key={i} />;
+                        }
+                        if (line === '[GRAFIK3]') {
+                          return <GrafikTitikPotong3 key={i} />;
+                        }
+                        if (line === '[GRAFIK4]') {
+                          return <GrafikTitikPotong4 key={i} />;
                         }
                         return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
                       })}
