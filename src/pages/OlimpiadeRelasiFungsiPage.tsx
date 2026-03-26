@@ -24,11 +24,11 @@ const materiSection = {
       heading: "A. Relasi",
       content: `Relasi dari himpunan A ke himpunan B adalah hubungan yang memasangkan anggota himpunan A dengan anggota himpunan B.
 
-Misal himpunan A = {1, 2, 4} dan himpunan B = {(1,1), (1,2), (1,4), (2,2), (2,4), (4,4)} mempunyai relasi bahwa himpunan A merupakan faktor dari himpunan B. Relasi himpunan A dan himpunan B dapat dinyatakan dalam tiga cara yaitu Diagram Panah, Pasangan Berurutan dan Diagram Kartesius.
+Misal himpunan A = {1, 2, 4} dan himpunan B = {(1, 1), (1, 2), (1, 4), (2, 2), (2, 4), (4, 4)} mempunyai relasi bahwa himpunan A merupakan faktor dari himpunan B. Relasi himpunan A dan himpunan B dapat dinyatakan dalam tiga cara yaitu Diagram Panah, Pasangan Berurutan dan Diagram Kartesius.
 
 1. Diagram panah
 [IMAGE:/images/relasi-diagram-panah.png]
-2. Himpunan pasangan terurut: {(1,2), (1,3), (1,4), (2,2), (2,4), (4,4)}
+2. Himpunan pasangan terurut: {(1, 2), (1, 3), (1, 4), (2, 2), (2, 4), (4, 4)}
 3. Koordinat Kartesius
 [IMAGE:/images/relasi-diagram-kartesius.png]`
     },
