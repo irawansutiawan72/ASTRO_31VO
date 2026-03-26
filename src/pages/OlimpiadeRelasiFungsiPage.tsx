@@ -27,6 +27,7 @@ const materiSection = {
 Misal himpunan A = {1, 2, 4} dan himpunan B = {(1,1), (1,2), (1,4), (2,2), (2,4), (4,4)} mempunyai relasi bahwa himpunan A merupakan faktor dari himpunan B. Relasi himpunan A dan himpunan B dapat dinyatakan dalam tiga cara yaitu Diagram Panah, Pasangan Berurutan dan Diagram Kartesius.
 
 1. Diagram panah
+[IMAGE:/images/relasi-diagram-panah.png]
 2. Himpunan pasangan terurut: {(1,2), (1,3), (1,4), (2,2), (2,4), (4,4)}
 3. Koordinat Kartesius`
     },
@@ -275,9 +276,17 @@ const OlimpiadeRelasiFungsiPage = () => {
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
+                      {section.content.split('\n').map((line, i) => {
+                        const imgMatch = line.match(/^\[IMAGE:(.+)\]$/);
+                        if (imgMatch) {
+                          return (
+                            <div key={i} className="flex justify-center my-3">
+                              <img src={imgMatch[1]} alt="Ilustrasi materi" className="max-w-[320px] w-full bg-white rounded-lg p-2" />
+                            </div>
+                          );
+                        }
+                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
+                      })}
                     </div>
                   </div>
                 )}
