@@ -23,7 +23,7 @@ const materiSection = {
     { heading: "A. Definisi", content: `Definisi:\nHimpunan adalah sekumpulan benda atau objek yang didefinisikan dengan jelas\n\nNotasi:\n- Notasi $\\in$ menyatakan anggota himpunan\n- Notasi $\\notin$ menyatakan bukan anggota himpunan\n- Notasi $n(A)$ menyatakan jumlah anggota himpunan A` },
     { heading: "B. Jenis Himpunan", content: `- Himpunan kosong\nHimpunan kosong adalah himpunan yang tidak memiliki anggota. Ditulis: $\\{\\}$ atau $\\emptyset$\n\n- Himpunan semesta\nHimpunan semesta adalah yang memuat semua anggota yang sedang dibicarakan, dinotasikan dengan S\n\n- Himpunan bagian\nHimpunan A merupakan himpunan bagian B, jika setiap anggota A juga merupakan anggota B, dinotasikan $A \\subset B$\n\nBanyak anggota himpunan bagian: $2^n$\nn menyatakan jumlah anggota himpunan` },
     { heading: "C. Diagram Venn", content: `Diagram Venn adalah gambar himpunan yang digunakan untuk menyatakan hubungan beberapa himpunan\n\nAturan membuat diagram Venn:\n1) Himpunan semesta (S) dibatasi dengan persegi panjang dan simbol S diletakkan di pojok kiri atas\n2) Setiap himpunan anggota yang dibicarakan dinyatakan dengan kurva tertutup\n3) Setiap anggota himpunan anggota berhingga dinyatakan dengan noktah/titik yang diberi nama\n\n$S = A + B + C - X$\nA = Banyaknya anggota A\nB = Banyaknya anggota B\nC = Banyaknya yang bukan anggota A dan B\nX = Banyaknya anggota bersama A dan B\nS = Semesta (seluruh anggota pada diagram Venn)` },
-    { heading: "D. Operasi Himpunan", content: `- Irisan ($\\cap$)\n$A \\cap B = \\{x | x \\in A \\text{ dan } x \\in B\\}$\nDua himpunan yang tidak memiliki irisan disebut saling lepas\n\n- Gabungan ($\\cup$)\n$A \\cup B = \\{x | x \\in A \\text{ atau } x \\in B\\}$\n\n- Komplemen ($A^c$ atau $A'$)\n$A^c = \\{x | x \\in S \\text{ dan } x \\notin A\\}$\n\n- Selisih\n$A - B = \\{x | x \\in A \\text{ dan } x \\notin B\\}$` },
+    { heading: "D. Operasi Himpunan", content: `- Irisan ($\\cap$)\n$A \\cap B = \\{x | x \\in A \\text{ dan } x \\in B\\}$\nDua himpunan yang tidak memiliki irisan disebut saling lepas\n\n- Gabungan ($\\cup$)\n$A \\cup B = \\{x | x \\in A \\text{ atau } x \\in B\\}$\n\n- Komplemen ($A^c$ atau $A'$)\n$A^c = \\{x | x \\in S \\text{ dan } x \\notin A\\}$\n\n- Selisih (A - B)\n$A - B = \\{x | x \\in A \\text{ dan } x \\notin B\\}$` },
     { heading: "E. Hubungan Himpunan A dan Himpunan B", content: `$n(A \\cup B) = n(A) + n(B) - n(A \\cap B)$` },
     { heading: "F. Hubungan Himpunan A, Himpunan B dan Himpunan C", content: `Pada Himpunan Berlaku:\n$n(A \\cup B \\cup C) = n(A) + n(B) + n(C) - n(A \\cap B) - n(A \\cap C) - n(B \\cap C) + n(A \\cap B \\cap C)$` },
   ]
@@ -241,7 +241,7 @@ const OlimpiadeHimpunanPage = () => {
                                         </div>
                                       </figure>
                                     </>
-                                  : <div className={`mb-1 ${idx === 3 && (line.startsWith('$A \\cap B') || line.startsWith('$A \\cup B') || line.startsWith('$A^c')) ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
+                                  : <div className={`mb-1 ${idx === 3 && (line.startsWith('$A \\cap B') || line.startsWith('$A \\cup B') || line.startsWith('$A^c') || line.startsWith('$A - B')) ? 'text-center' : ''}`}>{renderWithLatex(line)}</div>
                               }
                               {idx === 3 && line === '- Irisan ($\\cap$)' && (
                                 <figure className="flex flex-col items-center gap-2 my-3">
@@ -266,6 +266,15 @@ const OlimpiadeHimpunanPage = () => {
                                   <img
                                     src="/images/komplemen-himpunan.png"
                                     alt="Diagram komplemen himpunan A"
+                                    className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                                  />
+                                </figure>
+                              )}
+                              {idx === 3 && line.startsWith('- Selisih') && (
+                                <figure className="flex flex-col items-center gap-2 my-3">
+                                  <img
+                                    src="/images/selisih-himpunan.png"
+                                    alt="Diagram selisih himpunan A - B"
                                     className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
                                   />
                                 </figure>
