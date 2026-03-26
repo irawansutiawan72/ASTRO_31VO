@@ -161,65 +161,110 @@ const TabelTitikGrafik = () => (
   </svg>
 );
 
-const materiSection = {
-  title: "MATERI - PERSAMAAN GARIS",
-  sections: [
-    {
-      heading: "A. Bentuk Umum Persamaan Garis Lurus",
-      content: `Eksplisit : $y = mx + c$
-Implisit : $ax + by + c = 0$
+type SectionItem =
+  | { t: 'heading'; text: string; color: string }
+  | { t: 'text'; text: string; color?: string }
+  | { t: 'formula'; headline: string; lines: string[]; color: string }
+  | { t: 'svg'; name: string };
 
-1. Menggambar Grafik
-Gunakan minimal 2 titik koordinat diantaranya kita bisa menggunakan titik ketika nilai $x = 0$ atau titik ketika nilai $y = 0$
-[TABLE_TITIK]
-Misalkan didapat titik potong sumbu x adalah (a, 0) dan titik potong sumbu y (0, b) maka gambar grafiknya adalah
-[GRAFIK_TITIK]
-Misalkan didapat titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y (0, b) maka gambar grafiknya adalah
-[GRAFIK2]
-Misalkan didapat titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y (0, -b) maka gambar grafiknya adalah
-[GRAFIK3]
-Misalkan didapat titik potong sumbu x adalah (a, 0) dan titik potong sumbu y (0, -b) maka gambar grafiknya adalah
-[GRAFIK4]
-
-2. Menentukan gradien/kemiringan garis lurus
-a. Diketahui panjang sisi tegak dan sisi datar
-$m = + \\frac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (naik ke kanan)
-$m = - \\frac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (turun ke kanan)
-
-b. Diketahui 2 titik yang dilalui
-Garis melalui titik $A(x_1, y_1)$ dan $B(x_2, y_2)$
-$m = \\frac{y_2 - y_1}{x_2 - x_1}$
-
-c. Diketahui nama persamaan garis
-$ax + by = c$ maka $m = -\\frac{a}{b}$
-$y = mx + c$ maka gradien adalah $m$ (koefisien $x$)`
-    },
-    {
-      heading: "B. Menyusun Persamaan Garis Lurus",
-      content: `a. Melalui titik $(x_1, y_1)$ dan bergradien $m$
-$y - y_1 = m(x - x_1)$
-
-b. Melalui 2 titik yaitu $A(x_1, y_1)$ dan $B(x_2, y_2)$
-$\\frac{y - y_1}{y_2 - y_1} = \\frac{x - x_1}{x_2 - x_1}$`
-    },
-    {
-      heading: "C. Hubungan Dua Garis Lurus",
-      content: `a. Hubungan 2 garis yang saling sejajar
-Jika $g \\parallel h$ maka gradiennya sama, $m_g = m_h$
-Jika $g : ax + by + c = 0$ dan $g \\parallel h$ serta melalui $A(x_1, y_1)$, maka $h : ax + by = ax_1 + by_1$
-
-b. Hubungan dua garis saling tegak lurus
-$g \\perp h$ maka $m_g \\cdot m_h = -1$
-Jika $g : ax + by + c = 0$ dan tegak lurus $h$ serta melalui $A(x_1, y_1)$, maka $h : ax + by = bx_1 - ay_1$
-
-c. Berpotongan
-Titik potong garis $g$ dan $h$ adalah $A(x_1, y_1)$ (diperoleh substitusi - eliminasi)
-
-d. Berimpit
-$g = A \\cdot h$ dengan A : Koefisien`
-    },
-  ]
+const colorMap: Record<string, { text: string; border: string; bg: string; dot: string }> = {
+  cyan:   { text: 'text-cyan-300',   border: 'border-cyan-500/60',   bg: 'bg-cyan-950/40',   dot: 'bg-cyan-400' },
+  green:  { text: 'text-green-300',  border: 'border-green-500/60',  bg: 'bg-green-950/40',  dot: 'bg-green-400' },
+  purple: { text: 'text-purple-300', border: 'border-purple-500/60', bg: 'bg-purple-950/40', dot: 'bg-purple-400' },
+  pink:   { text: 'text-pink-300',   border: 'border-pink-500/60',   bg: 'bg-pink-950/40',   dot: 'bg-pink-400' },
+  blue:   { text: 'text-blue-300',   border: 'border-blue-500/60',   bg: 'bg-blue-950/40',   dot: 'bg-blue-400' },
+  orange: { text: 'text-orange-300', border: 'border-orange-500/60', bg: 'bg-orange-950/40', dot: 'bg-orange-400' },
+  teal:   { text: 'text-teal-300',   border: 'border-teal-500/60',   bg: 'bg-teal-950/40',   dot: 'bg-teal-400' },
 };
+
+interface FormulaCardProps { headline: string; lines: string[]; color: string; }
+const FormulaCard = ({ headline, lines, color }: FormulaCardProps) => {
+  const c = colorMap[color] || colorMap.cyan;
+  return (
+    <div className={`rounded-xl border ${c.border} ${c.bg} overflow-hidden my-3`}>
+      <div className={`px-4 py-2 flex items-center gap-2 border-b ${c.border}`}>
+        <span className={`w-2 h-2 rounded-full ${c.dot} shrink-0`} />
+        <span className={`font-display text-xs font-bold ${c.text} uppercase tracking-wide`}>{headline}</span>
+      </div>
+      <div className="px-4 py-3 space-y-1.5">
+        {lines.map((line, i) => (
+          <div key={i} className="font-body text-sm text-white/90 text-center">
+            {renderWithLatex(line)}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const materiSections: { heading: string; items: SectionItem[] }[] = [
+  {
+    heading: "A. Bentuk Umum Persamaan Garis Lurus",
+    items: [
+      { t: 'formula', headline: 'Bentuk Persamaan Garis Lurus', color: 'cyan', lines: [
+        'Eksplisit : $y = mx + c$',
+        'Implisit : $ax + by + c = 0$',
+      ]},
+      { t: 'heading', text: '1. Menggambar Grafik', color: 'cyan' },
+      { t: 'text', text: 'Gunakan minimal 2 titik koordinat, yaitu ketika $x = 0$ atau ketika $y = 0$.' },
+      { t: 'svg', name: 'TABLE_TITIK' },
+      { t: 'text', text: 'Misalkan titik potong sumbu x adalah (a, 0) dan titik potong sumbu y adalah (0, b):', color: 'text-white/70' },
+      { t: 'svg', name: 'GRAFIK_TITIK' },
+      { t: 'text', text: 'Misalkan titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y adalah (0, b):', color: 'text-white/70' },
+      { t: 'svg', name: 'GRAFIK2' },
+      { t: 'text', text: 'Misalkan titik potong sumbu x adalah (-a, 0) dan titik potong sumbu y adalah (0, -b):', color: 'text-white/70' },
+      { t: 'svg', name: 'GRAFIK3' },
+      { t: 'text', text: 'Misalkan titik potong sumbu x adalah (a, 0) dan titik potong sumbu y adalah (0, -b):', color: 'text-white/70' },
+      { t: 'svg', name: 'GRAFIK4' },
+      { t: 'heading', text: '2. Menentukan Gradien / Kemiringan Garis Lurus', color: 'green' },
+      { t: 'formula', headline: 'a. Diketahui Panjang Sisi Tegak dan Sisi Datar', color: 'green', lines: [
+        '$m = +\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (naik ke kanan)',
+        '$m = -\\dfrac{\\text{Panjang sisi tegak}}{\\text{Panjang sisi datar}}$ (turun ke kanan)',
+      ]},
+      { t: 'formula', headline: 'b. Diketahui 2 Titik yang Dilalui', color: 'blue', lines: [
+        'Garis melalui titik $A(x_1, y_1)$ dan $B(x_2, y_2)$',
+        '$m = \\dfrac{y_2 - y_1}{x_2 - x_1}$',
+      ]},
+      { t: 'formula', headline: 'c. Diketahui Persamaan Garis', color: 'pink', lines: [
+        '$ax + by = c \\Rightarrow m = -\\dfrac{a}{b}$',
+        '$y = mx + c \\Rightarrow$ gradien adalah $m$ (koefisien $x$)',
+      ]},
+    ],
+  },
+  {
+    heading: "B. Menyusun Persamaan Garis Lurus",
+    items: [
+      { t: 'formula', headline: 'a. Melalui Titik (x₁, y₁) dan Bergradien m', color: 'teal', lines: [
+        '$y - y_1 = m(x - x_1)$',
+      ]},
+      { t: 'formula', headline: 'b. Melalui 2 Titik: A(x₁, y₁) dan B(x₂, y₂)', color: 'orange', lines: [
+        '$\\dfrac{y - y_1}{y_2 - y_1} = \\dfrac{x - x_1}{x_2 - x_1}$',
+      ]},
+    ],
+  },
+  {
+    heading: "C. Hubungan Dua Garis Lurus",
+    items: [
+      { t: 'formula', headline: 'a. Garis Sejajar (g ∥ h)', color: 'cyan', lines: [
+        'Jika $g \\parallel h$ maka gradiennya sama: $m_g = m_h$',
+        'Jika $g : ax + by + c = 0$ dan $g \\parallel h$ melalui $A(x_1, y_1)$:',
+        '$h : ax + by = ax_1 + by_1$',
+      ]},
+      { t: 'formula', headline: 'b. Garis Tegak Lurus (g ⊥ h)', color: 'pink', lines: [
+        '$g \\perp h \\Rightarrow m_g \\cdot m_h = -1$',
+        'Jika $g : ax + by + c = 0$ dan tegak lurus $h$ melalui $A(x_1, y_1)$:',
+        '$h : bx - ay = bx_1 - ay_1$',
+      ]},
+      { t: 'formula', headline: 'c. Berpotongan', color: 'green', lines: [
+        'Titik potong garis $g$ dan $h$ adalah $A(x_1, y_1)$',
+        '(diperoleh dengan substitusi - eliminasi)',
+      ]},
+      { t: 'formula', headline: 'd. Berimpit', color: 'purple', lines: [
+        '$g = A \\cdot h$ dengan $A$ adalah koefisien',
+      ]},
+    ],
+  },
+];
 
 const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
@@ -299,7 +344,7 @@ const OlimpiadePersamaanGarisPage = () => {
 
         {activeTab === "materi" && (
           <div className="space-y-3 animate-slide-up">
-            {materiSection.sections.map((section, idx) => (
+            {materiSections.map((section, idx) => (
               <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
                 <button
                   onClick={() => toggleSection(idx)}
@@ -313,27 +358,38 @@ const OlimpiadePersamaanGarisPage = () => {
                   )}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => {
-                        if (line === '[TABLE_TITIK]') {
-                          return <TabelTitikGrafik key={i} />;
-                        }
-                        if (line === '[GRAFIK_TITIK]') {
-                          return <GrafikTitikPotong key={i} />;
-                        }
-                        if (line === '[GRAFIK2]') {
-                          return <GrafikTitikPotong2 key={i} />;
-                        }
-                        if (line === '[GRAFIK3]') {
-                          return <GrafikTitikPotong3 key={i} />;
-                        }
-                        if (line === '[GRAFIK4]') {
-                          return <GrafikTitikPotong4 key={i} />;
-                        }
-                        return <div key={i} className="mb-1">{renderWithLatex(line)}</div>;
-                      })}
-                    </div>
+                  <div className="px-4 pb-5 pt-1 space-y-1">
+                    {section.items.map((item, i) => {
+                      if (item.t === 'formula') {
+                        return <FormulaCard key={i} headline={item.headline} lines={item.lines} color={item.color} />;
+                      }
+                      if (item.t === 'heading') {
+                        const c = colorMap[item.color] || colorMap.cyan;
+                        return (
+                          <div key={i} className={`font-display text-sm font-bold ${c.text} pt-3 pb-1`}>
+                            {item.text}
+                          </div>
+                        );
+                      }
+                      if (item.t === 'text') {
+                        return (
+                          <div key={i} className={`font-body text-sm ${item.color || 'text-white/80'} leading-relaxed py-0.5`}>
+                            {renderWithLatex(item.text)}
+                          </div>
+                        );
+                      }
+                      if (item.t === 'svg') {
+                        const svgMap: Record<string, JSX.Element> = {
+                          TABLE_TITIK: <TabelTitikGrafik />,
+                          GRAFIK_TITIK: <GrafikTitikPotong />,
+                          GRAFIK2: <GrafikTitikPotong2 />,
+                          GRAFIK3: <GrafikTitikPotong3 />,
+                          GRAFIK4: <GrafikTitikPotong4 />,
+                        };
+                        return <div key={i}>{svgMap[item.name]}</div>;
+                      }
+                      return null;
+                    })}
                   </div>
                 )}
               </div>
