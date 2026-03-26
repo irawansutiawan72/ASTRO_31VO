@@ -97,7 +97,7 @@ const latihanDasar = [
   { no: 1, soal: "Perhatikan gambar diagram panah berikut!\nRelasi dari A ke B adalah ....", image: "/images/relasi-latdar-no1.png", options: ["A. akar dari", "B. faktor dari", "C. kuadrat dari", "D. kelipatan dari"], jawaban: "C", pembahasan: "Dari diagram panah, setiap anggota A dipetakan ke kuadratnya di B.\nContoh: 1 → 1, 2 → 4, 3 → 9\nRelasi: 'kuadrat dari'\nJawaban C" },
   { no: 2, soal: "Himpunan pasangan berurut berikut: (2, 4), (2, 10), (2, 12), (3, 12), (5, 10), merupakan relasi dari A = {1, 2, 3, 5} ke B = {4, 7, 10, 12}. Relasi yang menghasilkan himpunan pasangan berurut itu adalah ...", options: ["A. Faktor dari", "B. Kelipatan dari", "C. Kurang dari", "D. Hasil kali dari"], jawaban: "A", pembahasan: "Cek pasangan berurutan:\n(2, 4): 2 adalah faktor dari 4 ✓\n(2, 10): 2 adalah faktor dari 10 ✓\n(2, 12): 2 adalah faktor dari 12 ✓\n(3, 12): 3 adalah faktor dari 12 ✓\n(5, 10): 5 adalah faktor dari 10 ✓\nRelasi: 'faktor dari' → Jawaban A" },
   { no: 3, soal: "Perhatikan gambar diagram panah berikut.\n[IMAGE:/images/relasi-latdar-no3.png]\nHimpunan daerah kawan (kodomain) dari diagram panah di atas adalah ...", options: ["A. {1, 2, 3, 4, 5}", "B. {1, 2, 3, 4}", "C. {1, 4, 9, 10}", "D. {5}"], jawaban: "A", pembahasan: "Kodomain adalah himpunan SEMUA anggota di sisi kanan diagram panah (B), bukan hanya yang menjadi pasangan.\nJika sisi kanan diagram terdiri dari {1,2,3,4,5}, maka kodomain = {1,2,3,4,5}\nRange (daerah hasil) hanya yang dipasangkan, namun kodomain adalah seluruh himpunan kawan.\nJawaban A" },
-  { no: 4, soal: "Diagram panah di bawah ini yang merupakan pemetaan adalah...", options: ["A. (Diagram A)", "B. (Diagram B)", "C. (Diagram C)", "D. (Diagram D)"], jawaban: "B", pembahasan: "Syarat pemetaan (fungsi):\n1. Setiap anggota domain memiliki tepat SATU pasangan\n2. Tidak boleh ada anggota domain yang tidak memiliki pasangan\n3. Boleh ada anggota kodomain yang tidak memiliki pasangan\nDiagram yang memenuhi kedua syarat tersebut adalah diagram B → Jawaban B" },
+  { no: 4, soal: "Diagram panah di bawah ini yang merupakan pemetaan adalah...", options: ["A. [IMAGE:/images/relasi-latdar-no4-A.png]", "B. [IMAGE:/images/relasi-latdar-no4-B.png]", "C. [IMAGE:/images/relasi-latdar-no4-C.png]", "D. [IMAGE:/images/relasi-latdar-no4-D.png]"], jawaban: "B", pembahasan: "Syarat pemetaan (fungsi):\n1. Setiap anggota domain memiliki tepat SATU pasangan\n2. Tidak boleh ada anggota domain yang tidak memiliki pasangan\n3. Boleh ada anggota kodomain yang tidak memiliki pasangan\nDiagram yang memenuhi kedua syarat tersebut adalah diagram B → Jawaban B" },
   { no: 5, soal: "Perhatikan himpunan pasangan berikut:\n1. {(1, a), (2, b), (3, b)}\n2. {(1, a), (1, b), (3, c)}\n3. {(2, 4), (4, 8), (6, 12)}\n4. {(2, 4), (2, 8), (6, 12)}\nHimpunan pasangan yang merupakan pemetaan adalah...", options: ["A. 1 dan 2", "B. 1 dan 3", "C. 2 dan 3", "D. 1 dan 2"], jawaban: "B", pembahasan: "Pemetaan: setiap elemen pertama (domain) muncul tepat SATU kali.\n1. {(1, a), (2, b), (3, b)}: 1→a, 2→b, 3→b. Setiap domain satu pasangan. PEMETAAN ✓\n2. {(1, a), (1, b), (3, c)}: 1 punya dua pasangan (a dan b). BUKAN pemetaan ✗\n3. {(2, 4), (4, 8), (6, 12)}: 2→4, 4→8, 6→12. Setiap domain satu pasangan. PEMETAAN ✓\n4. {(2, 4), (2, 8), (6, 12)}: 2 punya dua pasangan (4 dan 8). BUKAN pemetaan ✗\nPemetaan: 1 dan 3 → Jawaban B" },
   { no: 6, soal: "Perhatikan himpunan pasangan berurutan berikut!\n(1) {(1, a), (2, a), (3, a), (4, a)}\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}\n(3) {(1, a), (2, a), (1, b), (2, b)}\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}\nYang merupakan fungsi adalah...", options: ["A. (1) dan (2)", "B. (1) dan (3)", "C. (2) dan (3)", "D. (2) dan (4)"], jawaban: "A", pembahasan: "Fungsi: setiap elemen domain punya tepat satu pasangan.\n(1) {(1, a), (2, a), (3, a), (4, a)}: 1→a, 2→a, 3→a, 4→a. Semua domain satu pasangan. FUNGSI ✓\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}: a→1, b→1, c→1, d→1. Semua domain satu pasangan. FUNGSI ✓\n(3) {(1, a), (2, a), (1, b), (2, b)}: 1 punya 2 pasangan (a dan b). BUKAN fungsi ✗\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}: a punya 4 pasangan. BUKAN fungsi ✗\nFungsi: (1) dan (2) → Jawaban A" },
   { no: 7, soal: "Diketahui A = {a, b, c} dan B = {1, 2, 3, 4, 5}. Banyak pemetaan yang mungkin dari A ke B adalah ...", options: ["A. 15", "B. 32", "C. 125", "D. 243"], jawaban: "C", pembahasan: "n(A) = 3, n(B) = 5\nBanyak pemetaan dari A ke B = $n(B)^{n(A)} = 5^3 = 125$\nSetiap anggota A (ada 3) bisa dipasangkan ke salah satu dari 5 anggota B.\nJawaban C" },
@@ -204,11 +204,22 @@ const OlimpiadeRelasiFungsiPage = () => {
           )}
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-              {soal.options.map((opt, j) => (
-                <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
-                  {renderWithLatex(opt)}
-                </div>
-              ))}
+              {soal.options.map((opt, j) => {
+                const imgMatch = opt.match(/^([A-D]\.\s*)\[IMAGE:(.+)\]$/);
+                if (imgMatch) {
+                  return (
+                    <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
+                      <span className="font-semibold self-start">{imgMatch[1]}</span>
+                      <img src={imgMatch[2]} alt={`Opsi ${imgMatch[1]}`} className="max-w-[140px] rounded-lg" />
+                    </div>
+                  );
+                }
+                return (
+                  <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                    {renderWithLatex(opt)}
+                  </div>
+                );
+              })}
             </div>
           )}
           <button
