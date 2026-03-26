@@ -30,7 +30,7 @@ const materiSection = {
 };
 
 const latihanDasar = [
-  { no: 1, soal: "Diketahui\nS = {x | x < 15, x $\\in$ bilangan asli}\nP = {x | 2 $\\leq$ x < 10, x $\\in$ bilangan prima}\nQ = {x | 2 < x $\\leq$ 10, x $\\in$ bilangan genap}\nDiagram Venn yang menyatakan hubungan di atas adalah ...", options: ["A. (Diagram A)", "B. (Diagram B)", "C. (Diagram C)", "D. (Diagram D)"], jawaban: "C", pembahasan: "S = {1,2,...,14}\nP = {2,3,5,7} (prima dengan 2 ≤ x < 10)\nQ = {4,6,8,10} (genap dengan 2 < x ≤ 10)\nP ∩ Q = ∅ (tidak ada anggota bersama, 2 tidak masuk Q karena Q mengharuskan x > 2)\nDiagram: P dan Q adalah dua lingkaran SALING LEPAS (tidak beririsan) di dalam persegi S\nAnggota P yang tidak masuk Q: {2,3,5,7}\nAnggota Q yang tidak masuk P: {4,6,8,10}" },
+  { no: 1, soal: "Diketahui\nS = {x | x < 15, x $\\in$ bilangan asli}\nP = {x | 2 $\\leq$ x < 10, x $\\in$ bilangan prima}\nQ = {x | 2 < x $\\leq$ 10, x $\\in$ bilangan genap}\nDiagram Venn yang menyatakan hubungan di atas adalah ...", options: ["A.|/images/himpunan-latihan-no1-a.png", "B.|/images/himpunan-latihan-no1-b.png", "C.|/images/himpunan-latihan-no1-c.png", "D.|/images/himpunan-latihan-no1-d.png"], jawaban: "C", pembahasan: "S = {1,2,...,14}\nP = {2,3,5,7} (prima dengan 2 ≤ x < 10)\nQ = {4,6,8,10} (genap dengan 2 < x ≤ 10)\nP ∩ Q = ∅ (tidak ada anggota bersama, 2 tidak masuk Q karena Q mengharuskan x > 2)\nDiagram: P dan Q adalah dua lingkaran SALING LEPAS (tidak beririsan) di dalam persegi S\nAnggota P yang tidak masuk Q: {2,3,5,7}\nAnggota Q yang tidak masuk P: {4,6,8,10}" },
   { no: 2, soal: "Diketahui:\nS = {x | 1 $\\leq$ x $\\leq$ 10, x $\\in$ bilangan asli}\nP = {x | x $\\leq$ 6, x $\\in$ bilangan prima}\nQ = {x | 1 $\\leq$ x $\\leq$ 9, x $\\in$ bilangan genap}\nDiagram Venn untuk himpunan-himpunan di atas adalah ...", options: ["A. (Diagram A)", "B. (Diagram B)", "C. (Diagram C)", "D. (Diagram D)"], jawaban: "B", pembahasan: "S = {1,2,3,4,5,6,7,8,9,10}\nP = {2,3,5} (prima ≤ 6)\nQ = {2,4,6,8} (genap, 1 ≤ x ≤ 9)\nP ∩ Q = {2} (hanya 2 yang prima dan genap)\nHanya P = {3,5}\nHanya Q = {4,6,8}\nDi luar P dan Q: {1,7,9,10}\nDiagram: dua lingkaran P dan Q beririsan, dengan 2 di bagian irisan" },
   { no: 3, soal: "Perhatikan gambar diagram Venn berikut!\nPernyataan berikut yang benar adalah ....", options: ["A. $B \\cup C = \\{1, 2, 3, 4, 5, 6, 8\\}$", "B. $B \\cap C = \\{2, 6, 7, 9\\}$", "C. $B - C = \\{1, 3, 9\\}$", "D. $C - B = \\{5, 8\\}$"], jawaban: "C", pembahasan: "Dari diagram Venn (berdasarkan data soal):\nB = {1, 2, 3, 6, 7, 9}, C = {2, 5, 6, 7, 8}\nCek pilihan C: B - C = anggota B yang tidak ada di C\nB - C = {1, 3, 9} ✓ BENAR\nCek pilihan A: B∪C = {1,2,3,5,6,7,8,9} bukan {1,2,3,4,5,6,8} ✗\nCek pilihan B: B∩C = {2,6,7} bukan {2,6,7,9} ✗\nCek pilihan D: C - B = {5,8} → ini benar juga! Periksa soal asli untuk pilihan yang tepat.\nJawaban yang paling umum untuk soal tipe ini: C (B-C = {1,3,9})" },
   { no: 4, soal: "Diketahui\nP = {x | 2 $\\leq$ x $\\leq$ 12, x $\\in$ bilangan cacah} dan Q = {x | x faktor dari 12}.\n$P \\cap Q$ = ...", options: ["A. {3, 4, 6}", "B. {3, 4, 6, 12}", "C. {2, 3, 4, 6, 12}", "D. {1, 2, 3, 4, 6, 12}"], jawaban: "C", pembahasan: "P = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}\nQ = faktor dari 12 = {1, 2, 3, 4, 6, 12}\nP ∩ Q = anggota yang ada di P DAN di Q\nPeriksa setiap anggota Q:\n- 1 ∉ P (P dimulai dari 2) ✗\n- 2 ∈ P ✓, 3 ∈ P ✓, 4 ∈ P ✓, 6 ∈ P ✓, 12 ∈ P ✓\nP ∩ Q = {2, 3, 4, 6, 12} → Jawaban C" },
@@ -121,11 +121,23 @@ const OlimpiadeHimpunanPage = () => {
           </div>
           {soal.options.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
-              {soal.options.map((opt, j) => (
-                <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
-                  {renderWithLatex(opt)}
-                </div>
-              ))}
+              {soal.options.map((opt, j) => {
+                const isImageOpt = opt.includes('|/images/');
+                if (isImageOpt) {
+                  const [label, imgSrc] = opt.split('|');
+                  return (
+                    <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200 flex flex-col items-center gap-1">
+                      <span className="font-semibold self-start">{label}</span>
+                      <img src={imgSrc} alt={`Pilihan ${label}`} className="w-full max-w-[160px] bg-white rounded p-1" />
+                    </div>
+                  );
+                }
+                return (
+                  <div key={j} className="font-body text-xs text-white/80 bg-muted/30 border border-border/30 rounded-lg px-3 py-2 hover:bg-muted/50 hover:border-primary/30 transition-all duration-200">
+                    {renderWithLatex(opt)}
+                  </div>
+                );
+              })}
             </div>
           )}
           <button
