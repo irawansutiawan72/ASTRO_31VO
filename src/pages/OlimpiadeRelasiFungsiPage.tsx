@@ -96,7 +96,7 @@ Misalnya diketahui fungsi $f(x) = 2x + 3$, maka nilai fungsi untuk $x = 1$ dinya
 const latihanDasar = [
   { no: 1, soal: "Perhatikan gambar diagram panah berikut!\nRelasi dari A ke B adalah ....", image: "/images/relasi-latdar-no1.png", options: ["A. akar dari", "B. faktor dari", "C. kuadrat dari", "D. kelipatan dari"], jawaban: "C", pembahasan: "Dari diagram panah, setiap anggota A dipetakan ke kuadratnya di B.\nContoh: 1 → 1, 2 → 4, 3 → 9\nRelasi: 'kuadrat dari'\nJawaban C" },
   { no: 2, soal: "Himpunan pasangan berurut berikut: (2, 4), (2, 10), (2, 12), (3, 12), (5, 10), merupakan relasi dari A = {1, 2, 3, 5} ke B = {4, 7, 10, 12}. Relasi yang menghasilkan himpunan pasangan berurut itu adalah ...", options: ["A. Faktor dari", "B. Kelipatan dari", "C. Kurang dari", "D. Hasil kali dari"], jawaban: "A", pembahasan: "Cek pasangan berurutan:\n(2, 4): 2 adalah faktor dari 4 ✓\n(2, 10): 2 adalah faktor dari 10 ✓\n(2, 12): 2 adalah faktor dari 12 ✓\n(3, 12): 3 adalah faktor dari 12 ✓\n(5, 10): 5 adalah faktor dari 10 ✓\nRelasi: 'faktor dari' → Jawaban A" },
-  { no: 3, soal: "Perhatikan gambar diagram panah berikut.\nHimpunan daerah kawan (kodomain) dari diagram panah di atas adalah ...", options: ["A. {1, 2, 3, 4, 5}", "B. {1, 2, 3, 4}", "C. {1, 4, 9, 10}", "D. {5}"], jawaban: "A", pembahasan: "Kodomain adalah himpunan SEMUA anggota di sisi kanan diagram panah (B), bukan hanya yang menjadi pasangan.\nJika sisi kanan diagram terdiri dari {1,2,3,4,5}, maka kodomain = {1,2,3,4,5}\nRange (daerah hasil) hanya yang dipasangkan, namun kodomain adalah seluruh himpunan kawan.\nJawaban A" },
+  { no: 3, soal: "Perhatikan gambar diagram panah berikut.\n[IMAGE:/images/relasi-latdar-no3.png]\nHimpunan daerah kawan (kodomain) dari diagram panah di atas adalah ...", options: ["A. {1, 2, 3, 4, 5}", "B. {1, 2, 3, 4}", "C. {1, 4, 9, 10}", "D. {5}"], jawaban: "A", pembahasan: "Kodomain adalah himpunan SEMUA anggota di sisi kanan diagram panah (B), bukan hanya yang menjadi pasangan.\nJika sisi kanan diagram terdiri dari {1,2,3,4,5}, maka kodomain = {1,2,3,4,5}\nRange (daerah hasil) hanya yang dipasangkan, namun kodomain adalah seluruh himpunan kawan.\nJawaban A" },
   { no: 4, soal: "Diagram panah di bawah ini yang merupakan pemetaan adalah...", options: ["A. (Diagram A)", "B. (Diagram B)", "C. (Diagram C)", "D. (Diagram D)"], jawaban: "B", pembahasan: "Syarat pemetaan (fungsi):\n1. Setiap anggota domain memiliki tepat SATU pasangan\n2. Tidak boleh ada anggota domain yang tidak memiliki pasangan\n3. Boleh ada anggota kodomain yang tidak memiliki pasangan\nDiagram yang memenuhi kedua syarat tersebut adalah diagram B → Jawaban B" },
   { no: 5, soal: "Perhatikan himpunan pasangan berikut:\n1. {(1, a), (2, b), (3, b)}\n2. {(1, a), (1, b), (3, c)}\n3. {(2, 4), (4, 8), (6, 12)}\n4. {(2, 4), (2, 8), (6, 12)}\nHimpunan pasangan yang merupakan pemetaan adalah...", options: ["A. 1 dan 2", "B. 1 dan 3", "C. 2 dan 3", "D. 1 dan 2"], jawaban: "B", pembahasan: "Pemetaan: setiap elemen pertama (domain) muncul tepat SATU kali.\n1. {(1, a), (2, b), (3, b)}: 1→a, 2→b, 3→b. Setiap domain satu pasangan. PEMETAAN ✓\n2. {(1, a), (1, b), (3, c)}: 1 punya dua pasangan (a dan b). BUKAN pemetaan ✗\n3. {(2, 4), (4, 8), (6, 12)}: 2→4, 4→8, 6→12. Setiap domain satu pasangan. PEMETAAN ✓\n4. {(2, 4), (2, 8), (6, 12)}: 2 punya dua pasangan (4 dan 8). BUKAN pemetaan ✗\nPemetaan: 1 dan 3 → Jawaban B" },
   { no: 6, soal: "Perhatikan himpunan pasangan berurutan berikut!\n(1) {(1, a), (2, a), (3, a), (4, a)}\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}\n(3) {(1, a), (2, a), (1, b), (2, b)}\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}\nYang merupakan fungsi adalah...", options: ["A. (1) dan (2)", "B. (1) dan (3)", "C. (2) dan (3)", "D. (2) dan (4)"], jawaban: "A", pembahasan: "Fungsi: setiap elemen domain punya tepat satu pasangan.\n(1) {(1, a), (2, a), (3, a), (4, a)}: 1→a, 2→a, 3→a, 4→a. Semua domain satu pasangan. FUNGSI ✓\n(2) {(a, 1), (b, 1), (c, 1), (d, 1)}: a→1, b→1, c→1, d→1. Semua domain satu pasangan. FUNGSI ✓\n(3) {(1, a), (2, a), (1, b), (2, b)}: 1 punya 2 pasangan (a dan b). BUKAN fungsi ✗\n(4) {(a, 1), (a, 2), (a, 3), (a, 4)}: a punya 4 pasangan. BUKAN fungsi ✗\nFungsi: (1) dan (2) → Jawaban A" },
@@ -181,13 +181,21 @@ const OlimpiadeRelasiFungsiPage = () => {
           style={{ background: "radial-gradient(circle at 50% 0%, rgba(0,200,255,0.1) 0%, transparent 50%)" }}
         />
         <div className="relative p-5">
-          <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap leading-relaxed">
+          <div className="font-body text-sm text-white mb-3 leading-relaxed">
             <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold mr-2">
               {soal.no}
             </span>
-            {soal.soal.split('\n').map((line, lineIdx) => (
-              <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>
-            ))}
+            {soal.soal.split('\n').map((line, lineIdx) => {
+              const imgMatch = line.match(/^\[IMAGE:(.+)\]$/);
+              if (imgMatch) {
+                return (
+                  <span key={lineIdx} className="block flex justify-center my-3">
+                    <img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className="max-w-[180px] rounded-lg border border-border/30" />
+                  </span>
+                );
+              }
+              return <span key={lineIdx}>{lineIdx > 0 && <br />}{lineIdx === 0 && line.startsWith('OSN') ? <span className="text-yellow-400 font-semibold">{line}</span> : renderWithLatex(line)}</span>;
+            })}
           </div>
           {'image' in soal && (soal as any).image && (
             <div className="flex justify-center my-3">
