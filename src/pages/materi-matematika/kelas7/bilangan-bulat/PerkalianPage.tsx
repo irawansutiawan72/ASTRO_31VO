@@ -472,14 +472,6 @@ const PerkalianBilanganBulatPage = () => {
                       <PosTimesPosPatternSVG />
                     </div>
                   </div>
-                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3">
-                    <p className="font-body text-xs font-semibold text-orange-300 mb-2">
-                      (+) × (−) — pola turun:
-                    </p>
-                    <div className="bg-slate-900/60 rounded-xl p-2 border border-orange-500/20">
-                      <PosTimesNegPatternSVG />
-                    </div>
-                  </div>
                 </div>
 
                 {/* Pola Neg×Neg — Animasi Busur */}
