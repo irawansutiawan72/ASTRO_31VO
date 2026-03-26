@@ -43,15 +43,6 @@ const NegTimesNegPatternSVG = () => {
 
   return (
     <svg viewBox="0 0 490 452" width="100%" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="green-glow" x="-30%" y="-80%" width="160%" height="260%">
-          <feGaussianBlur stdDeviation="5" result="blur"/>
-          <feMerge>
-            <feMergeNode in="blur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
 
       {/* Shaded region for neg × neg rows — always visible */}
       <rect
@@ -114,17 +105,17 @@ const NegTimesNegPatternSVG = () => {
           x="12" y={rowY(6) + 6} width="466" height="50" rx="8"
           fill="#14532d50" strokeWidth="2"
         >
-          <animate attributeName="stroke" values="#16a34a70;#4ade80cc;#16a34a70" dur="2.2s" repeatCount="indefinite"/>
-          <animate attributeName="fill-opacity" values="0.25;0.5;0.25" dur="2.2s" repeatCount="indefinite"/>
+          <animate attributeName="stroke" values="#16a34a70;#4ade80aa;#16a34a70" dur="5s" repeatCount="indefinite"/>
+          <animate attributeName="fill-opacity" values="0.25;0.4;0.25" dur="5s" repeatCount="indefinite"/>
         </rect>
         <text x="245" y={rowY(6) + 27} textAnchor="middle"
-          fill="#4ade80" fontSize="12.5" fontFamily="sans-serif" fontWeight="bold"
-          filter="url(#green-glow)">
+          fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+          <animate attributeName="fill" values="#4ade80;#86efac;#22c55e;#4ade80" dur="5s" repeatCount="indefinite"/>
           Pola selalu +1 ke bawah &#8594; ketika pengurang menjadi negatif,
         </text>
         <text x="245" y={rowY(6) + 44} textAnchor="middle"
-          fill="#86efac" fontSize="12.5" fontFamily="sans-serif" fontWeight="bold"
-          filter="url(#green-glow)">
+          fontSize="12.5" fontFamily="sans-serif" fontWeight="bold">
+          <animate attributeName="fill" values="#86efac;#4ade80;#bbf7d0;#86efac" dur="5s" repeatCount="indefinite"/>
           hasilnya menjadi positif! &#8756; (&minus;) &times; (&minus;) = (+) &#10003;
         </text>
       </g>
