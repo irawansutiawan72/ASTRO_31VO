@@ -18,43 +18,47 @@ const renderWithLatex = (text: string) => {
   });
 };
 
-const GrafikTitikPotong = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 280 220"
-    width="280"
-    height="220"
-    className="my-3"
-    style={{ display: "block" }}
-  >
-    {/* X axis */}
-    <line x1="20" y1="120" x2="260" y2="120" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
-    <polygon points="260,120 253,116 253,124" fill="rgba(255,255,255,0.85)" />
-    {/* Y axis */}
-    <line x1="100" y1="210" x2="100" y2="10" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
-    <polygon points="100,10 96,17 104,17" fill="rgba(255,255,255,0.85)" />
-    {/* The line through (0,b)=(100,65) and (a,0)=(185,120), extended */}
-    <line x1="22" y1="14" x2="238" y2="173" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
-    {/* Arrow at lower-right end */}
-    <polygon
-      points="238,173 228,163 235,160"
-      fill="rgba(255,255,255,0.85)"
-    />
-    {/* Arrow at upper-left end */}
-    <polygon
-      points="22,14 32,24 25,27"
-      fill="rgba(255,255,255,0.85)"
-    />
-    {/* Dot at b point (0, b) = (100, 65) */}
-    <circle cx="100" cy="65" r="2.5" fill="rgba(255,255,255,0.9)" />
-    {/* Dot at a point (a, 0) = (185, 120) */}
-    <circle cx="185" cy="120" r="2.5" fill="rgba(255,255,255,0.9)" />
-    {/* Label b */}
-    <text x="112" y="70" fill="rgba(255,255,255,0.9)" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
-    {/* Label a */}
-    <text x="188" y="137" fill="rgba(255,255,255,0.9)" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
-  </svg>
-);
+const GrafikTitikPotong = () => {
+  // Origin at SVG coord (100, 120)
+  // b on y-axis: (100, 60) — 60px above origin
+  // a on x-axis: (190, 120) — 90px right of origin
+  // Line direction unit vector: (90,60)/108.2 ≈ (0.832, 0.555)
+  // Line extended: (46, 24) → (232, 148)
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 280 220"
+      width="280"
+      height="220"
+      className="my-3"
+      style={{ display: "block" }}
+    >
+      {/* X axis */}
+      <line x1="20" y1="120" x2="258" y2="120" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+      <polygon points="260,120 252,116 252,124" fill="rgba(255,255,255,0.85)" />
+      {/* Y axis */}
+      <line x1="100" y1="208" x2="100" y2="12" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+      <polygon points="100,10 96,18 104,18" fill="rgba(255,255,255,0.85)" />
+
+      {/* Line through b=(100,60) and a=(190,120), extended to (46,24)→(232,148) */}
+      <line x1="46" y1="24" x2="232" y2="148" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" />
+      {/* Upper-left arrowhead at (46,24) pointing toward upper-left */}
+      <polygon points="46,24 51,33 56,26" fill="rgba(255,255,255,0.85)" />
+      {/* Lower-right arrowhead at (232,148) pointing toward lower-right */}
+      <polygon points="232,148 222,146 227,139" fill="rgba(255,255,255,0.85)" />
+
+      {/* Dot exactly on y-axis at b: (100, 60) */}
+      <circle cx="100" cy="60" r="2.5" fill="rgba(255,255,255,0.95)" />
+      {/* Dot exactly on x-axis at a: (190, 120) */}
+      <circle cx="190" cy="120" r="2.5" fill="rgba(255,255,255,0.95)" />
+
+      {/* Label b — right of y-axis, at the b intersection */}
+      <text x="108" y="65" fill="rgba(255,255,255,0.95)" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+      {/* Label a — below x-axis, at the a intersection */}
+      <text x="186" y="138" fill="rgba(255,255,255,0.95)" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+    </svg>
+  );
+};
 
 const TabelTitikGrafik = () => (
   <svg
