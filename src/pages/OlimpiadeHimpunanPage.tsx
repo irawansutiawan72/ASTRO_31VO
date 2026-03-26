@@ -209,12 +209,11 @@ const OlimpiadeHimpunanPage = () => {
                       {(() => {
                         const lines = section.content.split('\n');
                         let subNum = 0;
-                        const subHeadingColors = ['text-cyan-400', 'text-yellow-400', 'text-green-400', 'text-pink-400', 'text-orange-400'];
                         return lines.map((line, i) => {
                           const isDashHeading = idx === 3 && line.startsWith('- ');
                           const isSalingLepas = idx === 3 && line === 'Dua himpunan yang tidak memiliki irisan disebut saling lepas';
                           if (isDashHeading || isSalingLepas) subNum++;
-                          const color = subHeadingColors[(subNum - 1) % subHeadingColors.length];
+                          const color = 'text-yellow-400';
                           return (
                             <div key={i}>
                               {idx === 2 && line.startsWith('$S = A + B') && (
