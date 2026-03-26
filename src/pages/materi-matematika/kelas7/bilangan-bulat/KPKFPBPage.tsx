@@ -54,7 +54,7 @@ const KPKFPBPage = () => {
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-bold text-purple-300 mb-3">Ringkasan Intisari:</p>
                   <p className="font-body text-sm text-white/80 leading-relaxed">
-                    <strong className="text-primary">Kelipatan</strong> suatu bilangan $a$ diperoleh dengan mengalikan $a$ dengan bilangan asli berurutan $(1, 2, 3, 4, ...)$. 
+                    <strong className="text-primary">Kelipatan</strong> suatu bilangan <InlineMath math="a" /> diperoleh dengan mengalikan <InlineMath math="a" /> dengan bilangan asli berurutan <InlineMath math="(1, 2, 3, 4, ...)" />. 
                     Ketika dua bilangan atau lebih memiliki kelipatan yang sama, bilangan tersebut disebut <strong className="text-cyan-400">Kelipatan Persekutuan</strong>. 
                     Yang terkecil dari kelipatan persekutuan ini dinamakan <strong className="text-green-400">KPK (Kelipatan Persekutuan Terkecil)</strong>.
                   </p>
