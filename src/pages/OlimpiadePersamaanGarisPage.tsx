@@ -169,11 +169,11 @@ const GarisGradienPositif = () => (
     {/* Green frame */}
     <rect x="1" y="1" width="278" height="276" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
-    <line x1="20" y1="182" x2="248" y2="32" stroke="white" strokeWidth="2" />
+    <line x1="20" y1="182" x2="248" y2="32" stroke="#FACC15" strokeWidth="2" />
     {/* Arrow lower-left */}
-    <polygon points="20,182 30,181 25,174" fill="white" />
+    <polygon points="20,182 30,181 25,174" fill="#FACC15" />
     {/* Arrow upper-right */}
-    <polygon points="248,32 242,40 238,34" fill="white" />
+    <polygon points="248,32 242,40 238,34" fill="#FACC15" />
     {/* Vertical dashed (sisi tegak) */}
     <line x1="210" y1="57" x2="210" y2="152" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
     {/* Horizontal dashed (sisi datar) */}
@@ -190,10 +190,10 @@ const GarisGradienPositif = () => (
     {/* Separator */}
     <line x1="10" y1="203" x2="270" y2="203" stroke="white" strokeOpacity="0.2" strokeWidth="1" />
     {/* Formula: m = + fraction */}
-    <text x="42" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = +</text>
-    <text x="160" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi tegak</text>
-    <line x1="50" y1="230" x2="270" y2="230" stroke="white" strokeWidth="1.2" />
-    <text x="160" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi datar</text>
+    <text x="52" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = +</text>
+    <text x="140" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">sisi tegak</text>
+    <line x1="58" y1="230" x2="222" y2="230" stroke="white" strokeWidth="1.2" />
+    <text x="140" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">sisi datar</text>
     {/* (naik ke kanan) */}
     <text x="140" y="268" fill="#34D399" fontSize="11" fontFamily="sans-serif" textAnchor="middle" fontStyle="italic">(naik ke kanan)</text>
   </svg>
@@ -207,11 +207,11 @@ const GarisGradienNegatif = () => (
     {/* Green frame */}
     <rect x="1" y="1" width="278" height="276" rx="8" ry="8" fill="none" stroke="#22C55E" strokeWidth="2" />
     {/* Main line */}
-    <line x1="20" y1="18" x2="252" y2="178" stroke="white" strokeWidth="2" />
+    <line x1="20" y1="18" x2="252" y2="178" stroke="#FACC15" strokeWidth="2" />
     {/* Arrow upper-left */}
-    <polygon points="20,18 30,19 25,26" fill="white" />
+    <polygon points="20,18 30,19 25,26" fill="#FACC15" />
     {/* Arrow lower-right */}
-    <polygon points="252,178 241,176 247,169" fill="white" />
+    <polygon points="252,178 241,176 247,169" fill="#FACC15" />
     {/* Vertical dashed (sisi tegak) */}
     <line x1="70" y1="53" x2="70" y2="153" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="5,4" />
     {/* Horizontal dashed (sisi datar) */}
@@ -228,10 +228,10 @@ const GarisGradienNegatif = () => (
     {/* Separator */}
     <line x1="10" y1="203" x2="270" y2="203" stroke="white" strokeOpacity="0.2" strokeWidth="1" />
     {/* Formula: m = - fraction */}
-    <text x="42" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = −</text>
-    <text x="160" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi tegak</text>
-    <line x1="50" y1="230" x2="270" y2="230" stroke="white" strokeWidth="1.2" />
-    <text x="160" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">Panjang sisi datar</text>
+    <text x="52" y="236" fill="white" fontSize="12" fontFamily="sans-serif" textAnchor="end" fontWeight="bold">m = −</text>
+    <text x="140" y="225" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">sisi tegak</text>
+    <line x1="58" y1="230" x2="222" y2="230" stroke="white" strokeWidth="1.2" />
+    <text x="140" y="246" fill="white" fontSize="11" fontFamily="sans-serif" textAnchor="middle">sisi datar</text>
     {/* (turun ke kanan) */}
     <text x="140" y="268" fill="#F472B6" fontSize="11" fontFamily="sans-serif" textAnchor="middle" fontStyle="italic">(turun ke kanan)</text>
   </svg>
