@@ -422,10 +422,22 @@ const PenjumlahanBilanganBulatPage = () => {
                   Dulu di Sekolah Dasar, kita sudah kenal dengan <strong className="text-primary">bilangan asli</strong> (1, 2, 3, 4, ...) dan <strong className="text-primary">bilangan cacah</strong> (0, 1, 2, 3, ...). Tapi ternyata, kedua jenis bilangan ini belum cukup untuk menggambarkan semua situasi di dunia nyata.
                 </p>
                 
-                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4 space-y-3">
                   <p className="font-body text-sm text-cyan-200 leading-relaxed">
                     <strong>Contoh nyata:</strong> Bayangkan kamu sedang melihat prakiraan cuaca di Jepang saat musim dingin. Suhunya tertulis <InlineMath math="-5°C" />. Bagaimana cara menuliskan suhu yang berada di bawah titik beku (0°C) kalau kita hanya punya bilangan positif?
                   </p>
+                  <figure className="flex flex-col items-center gap-2">
+                    <img
+                      src="/images/termometer-penjumlahan.png"
+                      alt="Termometer menunjukkan suhu di bawah nol"
+                      className="w-full max-w-xl rounded-lg shadow-lg border border-white/10"
+                    />
+                    <figcaption className="font-body text-xs text-cyan-200/60 text-center italic max-w-xl">
+                      <a href="https://gemini.google.com/app/d3c60af4ffbee066?hl=id" target="_blank" rel="noopener noreferrer" className="text-primary/70 hover:text-primary underline">
+                        https://gemini.google.com/app/d3c60af4ffbee066?hl=id
+                      </a>
+                    </figcaption>
+                  </figure>
                 </div>
 
                 <p className="font-body text-sm text-white/80 leading-relaxed">
