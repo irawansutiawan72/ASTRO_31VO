@@ -490,23 +490,6 @@ const PerkalianBilanganBulatPage = () => {
                   </div>
                 </div>
 
-                <p className="font-body text-sm text-white/80 leading-relaxed">
-                  Sekarang lihat apa yang terjadi saat kita lanjutkan pola negatif × negatif:
-                </p>
-
-                {/* Pola Neg×Neg — Animasi Busur */}
-                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
-                  <p className="font-body text-sm font-semibold text-orange-300 mb-3">
-                    Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
-                  </p>
-                  <p className="font-body text-xs text-white/50 mb-3">
-                    Perhatikan: setiap kali faktor kedua turun 1 (dari 2 → 1 → 0 → −1 → …), hasilnya selalu naik +1. Busur redup menunjukkan pola, busur terang menandai masuknya wilayah negatif × negatif.
-                  </p>
-                  <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20">
-                    <NegTimesNegPatternSVG />
-                  </div>
-                </div>
-
                 {/* Pola 2 */}
                 <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-4">
                   <p className="font-body text-sm font-semibold text-pink-300 mb-3">Pola untuk <InlineMath math="-2 \times ..." />:</p>
@@ -535,6 +518,19 @@ const PerkalianBilanganBulatPage = () => {
                       <span className="flex-1 text-yellow-300"><InlineMath math="-2 \times (-3) = 6" /></span>
                       <span className="text-green-400 text-xs">+2 dari bawah</span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Pola Neg×Neg — Animasi Busur */}
+                <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-orange-300 mb-3">
+                    Pola untuk <InlineMath math="-1 \times \ldots" /> — ikuti busur +1 ke bawah:
+                  </p>
+                  <p className="font-body text-xs text-white/50 mb-3">
+                    Setiap kali faktor kedua turun 1 (dari 2 → 1 → 0 → −1 → …), hasilnya naik +1. Busur redup = pola awal, busur terang = wilayah negatif × negatif.
+                  </p>
+                  <div className="bg-slate-900/60 rounded-xl p-3 border border-yellow-500/20">
+                    <NegTimesNegPatternSVG />
                   </div>
                 </div>
 
