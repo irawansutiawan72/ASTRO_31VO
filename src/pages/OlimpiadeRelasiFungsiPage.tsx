@@ -190,7 +190,7 @@ const OlimpiadeRelasiFungsiPage = () => {
               if (imgMatch) {
                 return (
                   <span key={lineIdx} className="block flex justify-center my-3">
-                    <img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className="max-w-[180px] rounded-lg border border-border/30" />
+                    <img src={imgMatch[1]} alt={`Gambar soal ${soal.no}`} className="w-full max-w-sm rounded-lg border border-border/30" />
                   </span>
                 );
               }
