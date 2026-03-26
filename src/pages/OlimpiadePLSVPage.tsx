@@ -36,7 +36,7 @@ $3x - 5 = 10$
 $3x = 10 + 5$
 $3x = 15$
 $x = \\frac{15}{3}$
-$x = 5`
+$x = 5$`
     },
     {
       heading: "B. Pertidaksamaan Linear Satu Variabel",
@@ -53,7 +53,7 @@ $2x + 3 \\leq 11$
 $2x \\leq 11 - 3$
 $2x \\leq 8$
 $x \\leq 4$
-Himpunan penyelesaian dalam notasi interval: $x \\leq 4$ atau dapat ditulis $(-\\infty, 4]`
+Himpunan penyelesaian dalam notasi interval: $x \\leq 4$ atau dapat ditulis $(-\\infty, 4]$`
     },
     {
       heading: "C. Membuat Model Matematika",
@@ -85,7 +85,7 @@ $-3 + 1 < 2x$ dan $2x \\leq 6$
 $-2 < 2x$ dan $x \\leq 3$
 $-1 < x$ dan $x \\leq 3$
 Diiriskan sehingga penyelesaiannya menjadi $-1 < x \\leq 3$
-Himpunan penyelesaian dalam interval: $(-1, 3]`
+Himpunan penyelesaian dalam interval: $(-1, 3]$`
     },
     {
       heading: "E. Pertidaksamaan Kuadrat",
@@ -110,14 +110,14 @@ Penyelesaian:
 1. Pembilang: $x - 2 = 0 \\Rightarrow x = 2$
 2. Penyebut: $x + 3 = 0 \\Rightarrow x = -3$ (tidak boleh = 0)
 3. Garis bilangan dengan titik kritis -3 dan 2
-4. Penyelesaian: $x < -3$ atau $x \\geq 2`
+4. Penyelesaian: $x < -3$ atau $x \\geq 2$`
     },
     {
       heading: "G. Nilai Mutlak",
       content: `Pengertian
 Nilai mutlak suatu bilangan adalah nilai positif bilangan tersebut.
 
-$|x| = \\begin{cases} x, & \\text{jika } x \\geq 0 \\\\ -x, & \\text{jika } x < 0 \\end{cases}`
+$|x| = \\begin{cases} x, & \\text{jika } x \\geq 0 \\\\ -x, & \\text{jika } x < 0 \\end{cases}$`
     },
   ]
 };
