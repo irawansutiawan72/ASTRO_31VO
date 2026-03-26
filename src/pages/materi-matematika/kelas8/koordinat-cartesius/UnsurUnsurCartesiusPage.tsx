@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Grid } from "lucid
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import CartesianDragAnimation from "@/components/CartesianDragAnimation";
 
 const UnsurUnsurCartesiusPage = () => {
   const navigate = useNavigate();
@@ -111,6 +112,9 @@ const UnsurUnsurCartesiusPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Koordinat Cartesius · Materi Matematika</p>
 
         <div className="flex flex-col gap-4 animate-slide-up">
+
+          {/* Draggable Cartesian Animation */}
+          <CartesianDragAnimation />
 
           {/* INTRO */}
           <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
