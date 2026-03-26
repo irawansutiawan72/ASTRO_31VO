@@ -207,7 +207,18 @@ const OlimpiadeHimpunanPage = () => {
                   <div className="px-5 pb-4">
                     <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
                       {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+                        <div key={i}>
+                          {idx === 2 && line.startsWith('$S = A + B') && (
+                            <figure className="flex flex-col items-center gap-2 my-3">
+                              <img
+                                src="/images/diagram-venn-himpunan.png"
+                                alt="Diagram Venn himpunan A dan B dalam semesta S"
+                                className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
+                              />
+                            </figure>
+                          )}
+                          <div className="mb-1">{renderWithLatex(line)}</div>
+                        </div>
                       ))}
                     </div>
                     {idx === 1 && (
@@ -216,15 +227,6 @@ const OlimpiadeHimpunanPage = () => {
                           src="/images/segitiga-pascal-himpunan.png"
                           alt="Segitiga Pascal untuk himpunan bagian"
                           className="w-full max-w-xl rounded-lg shadow-lg border border-white/10 bg-white p-2"
-                        />
-                      </figure>
-                    )}
-                    {idx === 2 && (
-                      <figure className="flex flex-col items-center gap-2 mt-4">
-                        <img
-                          src="/images/diagram-venn-himpunan.png"
-                          alt="Diagram Venn himpunan A dan B dalam semesta S"
-                          className="w-full max-w-xs rounded-lg shadow-lg border border-white/10 bg-white p-2"
                         />
                       </figure>
                     )}
