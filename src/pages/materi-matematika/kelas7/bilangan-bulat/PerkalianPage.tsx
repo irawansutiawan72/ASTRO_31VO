@@ -333,7 +333,7 @@ const NegTimesNegPatternSVG = () => {
 
 const PerkalianBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "positifPositif", "positifNegatif", "negatifNegatif", "nolSatu", "contoh"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "positifPositif", "positifNegatif", "negatifNegatif", "nolSatu", "contoh", "sifatPerkalian", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -880,6 +880,207 @@ const PerkalianBilanganBulatPage = () => {
                         <p className="mb-1"><strong>Langkah 2:</strong> <InlineMath math="(-14) \times (-9) = 126" /></p>
                         <p className="text-primary font-semibold">Jawaban: <InlineMath math="126" /></p>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Sifat-Sifat Perkalian */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("sifatPerkalian")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Lightbulb className="w-5 h-5 text-yellow-400" />
+                <span className="font-body font-semibold text-white">Sifat-Sifat Perkalian Bilangan Bulat</span>
+              </div>
+              {expandedSections.includes("sifatPerkalian") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("sifatPerkalian") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* 1. Komutatif */}
+                <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-cyan-300 mb-2">1. Sifat Komutatif (Pertukaran)</p>
+                  <p className="font-body text-sm text-white/80 mb-3">
+                    Urutan faktor dalam perkalian tidak mempengaruhi hasil. Menukar posisi kedua bilangan tidak mengubah hasilnya.
+                  </p>
+                  <div className="bg-slate-900/50 rounded p-3 mb-3">
+                    <BlockMath math="a \times b = b \times a" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm font-mono">
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-cyan-300"><InlineMath math="3 \times (-5) = -15" /></span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-cyan-300"><InlineMath math="(-5) \times 3 = -15" /></span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Unsur Identitas */}
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-blue-300 mb-2">2. Unsur Identitas Perkalian</p>
+                  <p className="font-body text-sm text-white/80 mb-3">
+                    Bilangan <strong className="text-primary">1</strong> adalah unsur identitas perkalian. Apapun bilangan yang dikalikan dengan 1, hasilnya adalah bilangan itu sendiri.
+                  </p>
+                  <div className="bg-slate-900/50 rounded p-3 mb-3">
+                    <BlockMath math="a \times 1 = 1 \times a = a" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm font-mono">
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-blue-300"><InlineMath math="(-7) \times 1 = -7" /></span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-blue-300"><InlineMath math="1 \times 15 = 15" /></span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Asosiatif */}
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-purple-300 mb-2">3. Sifat Asosiatif (Pengelompokan)</p>
+                  <p className="font-body text-sm text-white/80 mb-3">
+                    Cara mengelompokkan tiga bilangan yang dikalikan tidak mempengaruhi hasil akhirnya.
+                  </p>
+                  <div className="bg-slate-900/50 rounded p-3 mb-3">
+                    <BlockMath math="(a \times b) \times c = a \times (b \times c)" />
+                  </div>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <p className="text-white/60 text-xs mb-1">Contoh:</p>
+                    <BlockMath math="(2 \times (-3)) \times 4 = 2 \times ((-3) \times 4)" />
+                    <BlockMath math="(-6) \times 4 = 2 \times (-12) = -24 \checkmark" />
+                  </div>
+                </div>
+
+                {/* 4. Tertutup */}
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-green-300 mb-2">4. Sifat Tertutup</p>
+                  <p className="font-body text-sm text-white/80 mb-3">
+                    Hasil perkalian dua bilangan bulat selalu berupa bilangan bulat juga. Perkalian tidak pernah menghasilkan bilangan di luar himpunan bilangan bulat.
+                  </p>
+                  <div className="bg-slate-900/50 rounded p-3 mb-3">
+                    <BlockMath math="\text{Jika } a, b \in \mathbb{Z} \text{, maka } a \times b \in \mathbb{Z}" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-sm font-mono">
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-green-300"><InlineMath math="(-4) \times 6 = -24 \in \mathbb{Z}" /></span>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-2 text-center">
+                      <span className="text-green-300"><InlineMath math="(-9) \times (-3) = 27 \in \mathbb{Z}" /></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Kesimpulan */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("kesimpulan")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-primary" />
+                <span className="font-body font-semibold text-white">Kesimpulan & Tips Perkalian Bilangan Bulat</span>
+              </div>
+              {expandedSections.includes("kesimpulan") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("kesimpulan") && (
+              <div className="px-5 pb-5 space-y-4">
+
+                {/* Kesimpulan Aturan Tanda */}
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-cyan-300 mb-3">Kesimpulan Aturan Tanda:</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-green-400 font-mono text-sm font-bold w-36">(+) × (+)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-green-400 font-bold">Positif (+)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-orange-400 font-mono text-sm font-bold w-36">(+) × (−)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-red-400 font-bold">Negatif (−)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-orange-400 font-mono text-sm font-bold w-36">(−) × (+)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-red-400 font-bold">Negatif (−)</span>
+                    </div>
+                    <div className="flex items-center gap-3 bg-slate-900/50 rounded p-3">
+                      <span className="text-yellow-400 font-mono text-sm font-bold w-36">(−) × (−)</span>
+                      <span className="text-white/50">=</span>
+                      <span className="text-green-400 font-bold">Positif (+)</span>
+                    </div>
+                  </div>
+                  <div className="bg-slate-900/60 rounded p-3 mt-3">
+                    <p className="text-white/70 text-xs text-center">Cara mudah mengingat: <strong className="text-cyan-300">Tanda sama → positif &nbsp;|&nbsp; Tanda beda → negatif</strong></p>
+                  </div>
+                </div>
+
+                {/* Ringkasan Sifat */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-purple-300 mb-3">Ringkasan Sifat-Sifat:</p>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex gap-2 items-start">
+                      <span className="text-cyan-400 font-bold min-w-fit">Komutatif:</span>
+                      <span className="text-white/80"><InlineMath math="a \times b = b \times a" /></span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <span className="text-blue-400 font-bold min-w-fit">Identitas:</span>
+                      <span className="text-white/80"><InlineMath math="a \times 1 = a" /></span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <span className="text-purple-400 font-bold min-w-fit">Asosiatif:</span>
+                      <span className="text-white/80"><InlineMath math="(a \times b) \times c = a \times (b \times c)" /></span>
+                    </div>
+                    <div className="flex gap-2 items-start">
+                      <span className="text-green-400 font-bold min-w-fit">Tertutup:</span>
+                      <span className="text-white/80">Hasil perkalian bilangan bulat selalu bilangan bulat</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tips */}
+                <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-bold text-yellow-300 mb-3">Tips Cepat Mengerjakan Soal:</p>
+                  <div className="space-y-3">
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">1.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Hitung nilai mutlaknya dulu</strong>, baru tentukan tandanya. Misalnya <InlineMath math="(-6) \times (-7)" />: nilai mutlak = <InlineMath math="6 \times 7 = 42" />, tanda: (−)×(−) = (+), jadi hasilnya <InlineMath math="42" />.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">2.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Kerjakan kurung terdalam dahulu</strong> pada perkalian bertingkat, baru lanjutkan ke luar.
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">3.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Hitung jumlah tanda negatif</strong>: genap → hasil positif, ganjil → hasil negatif. Contoh: <InlineMath math="(-1) \times (-2) \times (-3) = -6" /> (3 tanda negatif = ganjil → negatif).
+                      </p>
+                    </div>
+                    <div className="flex gap-3 items-start">
+                      <span className="text-yellow-400 font-bold text-lg leading-none">4.</span>
+                      <p className="font-body text-sm text-white/80">
+                        <strong className="text-yellow-300">Gunakan sifat komutatif</strong> untuk mempermudah perhitungan. Susun ulang urutan faktor agar lebih mudah dikalikan.
+                      </p>
                     </div>
                   </div>
                 </div>
