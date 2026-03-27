@@ -224,7 +224,7 @@ export default function RusukTigaPrismaAnimation() {
 
           {/* Bottom caption band */}
           <rect x="0" y="204" width="340" height="14" fill="transparent" />
-          <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
+          <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">
             Alas dan Tutup selalu SAMA bentuknya  ·  Rusuk = 3n
           </text>
         </svg>
