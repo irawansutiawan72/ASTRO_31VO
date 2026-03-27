@@ -583,10 +583,47 @@ const GrafikSoal2C = () => (
   </svg>
 );
 
+const GrafikSoal3 = () => (
+  // Line h through (-2, 0) and (0, 3), gradient = 3/2
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display: "block", margin: "0 auto" }}>
+    {/* X axis */}
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    {/* Y axis */}
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    {/* Axis labels */}
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    {/* Tick x = -2 */}
+    <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="28" y="124" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    {/* Tick y = 3 */}
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    {/* Line h: through (-2,0)→(40,110) and (0,3)→(80,50), extended */}
+    <line x1="10" y1="155" x2="107" y2="9" stroke={_lineYellow} strokeWidth="2" />
+    {/* Arrow lower-left */}
+    <polygon points="10,155 19,146 13,143" fill={_lineYellow} />
+    {/* Arrow upper-right */}
+    <polygon points="107,9 101,20 96,15" fill={_lineYellow} />
+    {/* Dots at intercepts */}
+    <circle cx="40" cy="110" r="2.5" fill={_lineYellow} />
+    <circle cx="80" cy="50" r="2.5" fill={_lineYellow} />
+    {/* Label h near upper-right */}
+    <text x="110" y="18" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
+const soalSvgMap: Record<string, JSX.Element> = {
+  SOAL3: <GrafikSoal3 />,
+};
+
 const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL1A", "SVG:SOAL1B", "SVG:SOAL1C", "SVG:SOAL1D"] },
   { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL2A", "SVG:SOAL2B", "SVG:SOAL2C", "SVG:SOAL2D"] },
-  { no: 3, soal: "Gradien garis h pada gambar di bawah adalah ...", options: ["A. $-\\frac{3}{2}$", "B. $-\\frac{2}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{2}$"] },
+  { no: 3, soal: "Gradien garis h pada gambar di bawah adalah ...", soalSvg: "SOAL3", options: ["A. $-\\frac{3}{2}$", "B. $-\\frac{2}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{2}$"] },
   { no: 4, soal: "Perhatikan gambar! Gradien garis g adalah ...", options: ["A. $\\frac{3}{2}$", "B. $\\frac{2}{3}$", "C. $-\\frac{2}{3}$", "D. $-\\frac{3}{2}$"] },
   { no: 5, soal: "Gradien garis yang melalui titik $(2, 1)$ dan $(4, 7)$ adalah ...", options: ["A. 0,2", "B. 0,5", "C. 2", "D. 3"] },
   { no: 6, soal: "Gradien garis dengan persamaan $3x + 8y = 9$ adalah ...", options: ["A. $\\frac{8}{3}$", "B. $\\frac{3}{8}$", "C. $-\\frac{3}{8}$", "D. $-\\frac{8}{3}$"] },
@@ -736,6 +773,11 @@ const OlimpiadePersamaanGarisPage = () => {
                   <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                     <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                   </div>
+                  {'soalSvg' in soal && soal.soalSvg && (
+                    <div className="mb-3">
+                      {soalSvgMap[soal.soalSvg]}
+                    </div>
+                  )}
                   {soal.options.length > 0 && (
                     <div className={`grid gap-2 ${hasSvgOptions ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
                       {soal.options.map((opt, j) => {
