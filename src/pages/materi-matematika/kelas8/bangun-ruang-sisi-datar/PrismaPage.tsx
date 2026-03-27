@@ -8,6 +8,7 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
 import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
+import TitikSudutTigaPrismaAnimation from "@/components/TitikSudutTigaPrismaAnimation";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -977,10 +978,18 @@ const slides: Slide[] = [
     title: "Unsur — Titik Sudut & Tabel",
     content: (
       <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-yellow-300 font-semibold mb-2">● Titik Sudut (6 titik)</p>
-          <TitikSudutPrismaSVG />
-          <div className="bg-slate-700/60 rounded p-2 mt-2 text-xs text-white/70">
+        <div className="bg-slate-800/60 border border-yellow-700/40 rounded-xl p-4">
+          <p className="text-yellow-300 font-semibold mb-1">🎬 Perbandingan Titik Sudut — 3 Jenis Prisma Berdiri</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan titik sudut pada tiap prisma.
+            Tekan tombol untuk melihat <strong className="text-cyan-300">Titik Sudut Alas</strong> atau <strong className="text-yellow-300">Titik Sudut Atas</strong>!
+          </p>
+          <TitikSudutTigaPrismaAnimation />
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p>• <strong className="text-cyan-300">n titik sudut alas</strong> di bawah</p>
+          <p>• <strong className="text-yellow-300">n titik sudut atas</strong> di atas — sama banyak</p>
+          <div className="bg-slate-700/60 rounded p-2 mt-2">
             <BlockMath math="\text{Titik sudut} = 2n = 2 \times 3 = 6" />
           </div>
         </div>
