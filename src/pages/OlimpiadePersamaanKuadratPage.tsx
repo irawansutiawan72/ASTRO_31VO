@@ -73,22 +73,22 @@ $x^2 - (\\alpha + \\beta)x + (\\alpha \\cdot \\beta) = 0$`
 };
 
 const SvgSegitiga28 = () => (
-  <svg viewBox="0 0 180 170" width="160" height="150" className="my-3 mx-auto block">
-    <polygon points="20,15 20,140 150,140" fill="none" stroke="white" strokeWidth="2" />
-    <rect x="20" y="120" width="20" height="20" fill="none" stroke="white" strokeWidth="1.5" />
-    <text x="10" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
-    <text x="85" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
-    <text x="105" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+  <svg viewBox="-30 0 210 170" width="170" height="150" className="my-3 mx-auto block">
+    <polygon points="20,15 20,140 150,140" fill="none" stroke="#facc15" strokeWidth="2" />
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#facc15" strokeWidth="1.5" />
+    <text x="-10" y="82" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="85" y="158" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="105" y="68" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
   </svg>
 );
 
 const SvgSegitiga30 = () => (
-  <svg viewBox="0 0 180 170" width="160" height="150" className="my-3 mx-auto block">
-    <polygon points="160,15 30,140 160,140" fill="none" stroke="white" strokeWidth="2" />
-    <rect x="140" y="120" width="20" height="20" fill="none" stroke="white" strokeWidth="1.5" />
-    <text x="170" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
-    <text x="95" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
-    <text x="75" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+  <svg viewBox="0 0 200 170" width="170" height="150" className="my-3 mx-auto block">
+    <polygon points="160,15 30,140 160,140" fill="none" stroke="#facc15" strokeWidth="2" />
+    <rect x="140" y="120" width="20" height="20" fill="none" stroke="#facc15" strokeWidth="1.5" />
+    <text x="185" y="82" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="95" y="158" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="75" y="68" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
   </svg>
 );
 
