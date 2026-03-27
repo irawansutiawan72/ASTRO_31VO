@@ -559,9 +559,33 @@ const GrafikSoal1D = () => (
   </svg>
 );
 
+const GrafikSoal2C = () => (
+  // y = 2x + 3: passes through (0,3) and (-2,-1), slope +2
+  <svg viewBox="0 0 200 200" width="150" height="150" style={{ display: "block", margin: "0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="28" y="124" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <line x1="40" y1="130" x2="80" y2="130" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="40" y1="110" x2="40" y2="130" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="18" y1="174" x2="100" y2="10" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="18,174 27,165 20,162" fill={_lineYellow} />
+    <polygon points="100,10 94,21 89,16" fill={_lineYellow} />
+    <text x="82" y="48" fill="white" fontSize="9" fontFamily="sans-serif">(0,3)</text>
+    <text x="2" y="128" fill="white" fontSize="9" fontFamily="sans-serif">(-2,-1)</text>
+  </svg>
+);
+
 const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL1A", "SVG:SOAL1B", "SVG:SOAL1C", "SVG:SOAL1D"] },
-  { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL2A", "SVG:SOAL2B", "SVG:SOAL2C", "SVG:SOAL2D"] },
   { no: 3, soal: "Gradien garis h pada gambar di bawah adalah ...", options: ["A. $-\\frac{3}{2}$", "B. $-\\frac{2}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{2}$"] },
   { no: 4, soal: "Perhatikan gambar! Gradien garis g adalah ...", options: ["A. $\\frac{3}{2}$", "B. $\\frac{2}{3}$", "C. $-\\frac{2}{3}$", "D. $-\\frac{3}{2}$"] },
   { no: 5, soal: "Gradien garis yang melalui titik $(2, 1)$ dan $(4, 7)$ adalah ...", options: ["A. 0,2", "B. 0,5", "C. 2", "D. 3"] },
@@ -701,6 +725,10 @@ const OlimpiadePersamaanGarisPage = () => {
                 "SVG:SOAL1B": <GrafikSoal1B />,
                 "SVG:SOAL1C": <GrafikSoal1C />,
                 "SVG:SOAL1D": <GrafikSoal1D />,
+                "SVG:SOAL2A": <GrafikSoal1A />,
+                "SVG:SOAL2B": <GrafikSoal1B />,
+                "SVG:SOAL2C": <GrafikSoal2C />,
+                "SVG:SOAL2D": <GrafikSoal1D />,
               };
               const hasSvgOptions = soal.options.some(opt => opt.startsWith("SVG:"));
               return (
