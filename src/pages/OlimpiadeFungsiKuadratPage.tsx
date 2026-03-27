@@ -421,7 +421,7 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: 
 
 const olimpSoal1Svg = (): ReactNode => {
   const ac="#67e8f9", cc="#facc15", tc="#ffffff";
-  const W=140, H=95, ox=42, ay=58;
+  const W=140, H=95, ox=38, ay=55;
   const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
     ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
     : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
@@ -433,7 +433,7 @@ const olimpSoal1Svg = (): ReactNode => {
       <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
       {arr(ox,5,'u')}
       <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-      <path d="M 10,5 C 22,27 32,42 42,58 C 60,82 94,82 112,58 C 121,42 130,26 132,5"
+      <path d="M 8,5 C 16,24 28,44 38,55 Q 75,95 112,55 C 120,44 128,24 132,8"
         fill="none" stroke={cc} strokeWidth="2"/>
       <text x="112" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
       <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
@@ -449,7 +449,8 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
     : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
 
   if (variant === 'A') {
-    const ox=42, ay=72;
+    // g(x)=x²+ax+5: opens up, vertex left of y-axis, ABOVE x-axis (definit positif, no roots)
+    const ox=38, ay=72;
     return (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
         <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -458,15 +459,16 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
         <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
         {arr(ox,5,'u')}
         <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-        <path d="M 5,8 C 16,28 24,40 27,44 C 35,48 42,34 48,28 C 60,16 82,5 105,2"
+        <path d="M 5,10 C 10,30 17,46 21,48 C 25,46 72,18 112,4"
           fill="none" stroke={cc} strokeWidth="2"/>
-        <text x="95" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x="108" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
         <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
       </svg>
     );
   }
   if (variant === 'B') {
-    const ox=28, ay=50;
+    // Wrong: U-shape, left root at negative x (left of y-axis), right root at (a,0)
+    const ox=40, ay=52;
     return (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
         <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -475,15 +477,17 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
         <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
         {arr(ox,5,'u')}
         <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-        <path d="M 3,2 C 15,22 26,38 38,50 C 58,75 98,75 118,50 C 122,42 127,26 129,8"
+        <path d="M 4,4 C 8,18 12,38 15,52 Q 63,88 112,52 C 118,38 125,20 128,4"
           fill="none" stroke={cc} strokeWidth="2"/>
-        <text x="118" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x="112" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
         <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
       </svg>
     );
   }
   if (variant === 'C') {
-    const ox=28, ay=60;
+    // Wrong: U-shape, left root far negative x, right root at (a,0),
+    // y-axis sits between the two roots but closer to right root
+    const ox=88, ay=60;
     return (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
         <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -492,14 +496,15 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
         <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
         {arr(ox,5,'u')}
         <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-        <path d="M 3,3 C 28,28 58,50 100,60 C 110,59 120,54 130,46"
+        <path d="M 4,4 C 8,20 15,44 22,60 Q 62,94 103,60 C 108,48 116,26 122,8"
           fill="none" stroke={cc} strokeWidth="2"/>
-        <text x="100" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x="103" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
         <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
       </svg>
     );
   }
-  const ox=68, ay=50;
+  // D: Wrong: U-shape symmetric about y-axis, vertex below x-axis on y-axis
+  const ox=65, ay=50;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
       <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -508,9 +513,9 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
       <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
       {arr(ox,5,'u')}
       <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-      <path d="M 5,5 C 16,24 23,38 30,50 C 45,88 91,88 106,50 C 113,38 120,24 130,5"
+      <path d="M 6,5 C 12,22 16,38 20,50 Q 65,92 110,50 C 114,38 120,22 126,5"
         fill="none" stroke={cc} strokeWidth="2"/>
-      <text x="98" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+      <text x="110" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
       <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
     </svg>
   );
