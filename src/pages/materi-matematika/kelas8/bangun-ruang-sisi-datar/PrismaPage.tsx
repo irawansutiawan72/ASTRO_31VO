@@ -9,6 +9,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
 import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
 import TitikSudutTigaPrismaAnimation from "@/components/TitikSudutTigaPrismaAnimation";
+import JaringPrismaInteraktif from "@/components/JaringPrismaInteraktif";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -1023,7 +1024,24 @@ const slides: Slide[] = [
   {
     icon: "🔲",
     title: "Jaring-jaring Prisma 3D",
-    content: sections[2].content,
+    content: (
+      <div className="space-y-3 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-violet-700/40 rounded-xl p-4">
+          <p className="text-violet-300 font-semibold mb-1">🎬 Jaring-jaring Interaktif — 3 Jenis Prisma</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            <strong className="text-orange-300">Drag</strong> untuk memutar prisma 3D.
+            Tekan <strong className="text-orange-300">Bongkar</strong> untuk membuka jaring-jaring,
+            lalu <strong className="text-cyan-300">Satukan</strong> untuk merakitnya kembali!
+          </p>
+          <JaringPrismaInteraktif />
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/70 space-y-1">
+          <p>• Jaring-jaring adalah <strong className="text-white">bangun datar</strong> yang jika dilipat membentuk prisma</p>
+          <p>• Setiap prisma segi-n memiliki <strong className="text-violet-300">n sisi tegak</strong> (persegi panjang) + <strong className="text-yellow-300">2 sisi alas/tutup</strong> (segi-n)</p>
+          <p>• Total bidang = n + 2</p>
+        </div>
+      </div>
+    ),
   },
   {
     icon: "🎨",
