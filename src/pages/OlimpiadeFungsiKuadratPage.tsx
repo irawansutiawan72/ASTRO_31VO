@@ -117,9 +117,12 @@ const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
       </svg>
     );
   }
-  // variant D: a>0, roots 3 and 5, y-intercept=15 on y-axis
-  const ox=28, ay=80;
-  const r1x=76, r2x=108, yIntY=20;
+  // variant D: a>0, roots 3 and 5, y-intercept=15
+  // Represents y=(x-3)(x-5)=x²-8x+15, vertex at (4,-1) barely below x-axis
+  // Pixel layout: ox=28 (y-axis), ay=80 (x-axis), scX=16, scY=4
+  // Key coords: y-int=(28,20), root3=(76,80), vertex=(92,84), root5=(108,80)
+  // Cubic bezier control points derived from actual parabola tangent slopes
+  const ox=28, ay=80, r1x=76, r2x=108, yIntY=20;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
       <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -128,7 +131,10 @@ const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
       <line x1={ox} y1="5" x2={ox} y2="105" stroke={ac} strokeWidth="1.2"/>
       {axisArrow(ox,5,'up')}
       <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
-      <path d={`M 8,10 Q 28,16 ${r1x},${ay} Q 92,88 ${r2x},${ay} Q 128,48 145,10`} fill="none" stroke={cc} strokeWidth="2"/>
+      <path
+        d="M 23,10 C 41,48 58,71 76,80 C 87,85 97,85 108,80 C 121,73 135,58 148,35"
+        fill="none" stroke={cc} strokeWidth="2"
+      />
       <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
       <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
       <line x1={ox-3} y1={yIntY} x2={ox+3} y2={yIntY} stroke={tc} strokeWidth="1"/>
