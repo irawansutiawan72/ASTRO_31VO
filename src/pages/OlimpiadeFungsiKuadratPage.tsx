@@ -43,6 +43,104 @@ const miniParabola = (r1: number, r2: number, openUp: boolean): ReactNode => {
   );
 };
 
+const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff";
+  const W=155, H=115;
+  const axisArrow = (ex: number, ey: number, dir: 'right'|'up') => dir === 'right'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+
+  if (variant === 'A') {
+    // a>0, roots -5 and 3, vertex deep below (labeled -15)
+    const ox=68, ay=48, sc=10;
+    const r1x=ox+(-5)*sc, r2x=ox+3*sc, vx=ox+(-1)*sc, ctrlY=108;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(150,ay,'right')}
+        <text x="153" y={ay+4} fill={tc} fontSize="10" textAnchor="middle" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="107" stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(ox,5,'up')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d={`M ${r1x},${ay} Q ${vx},${ctrlY} ${r2x},${ay}`} fill="none" stroke={cc} strokeWidth="2"/>
+        <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <text x={r1x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">-5</text>
+        <text x={ox+5} y={ay+13} fill={tc} fontSize="9" textAnchor="start">O</text>
+        <text x={r2x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">3</text>
+        <text x={vx-3} y="90" fill={tc} fontSize="9" textAnchor="middle">-15</text>
+      </svg>
+    );
+  }
+  if (variant === 'B') {
+    // a>0, roots -3 and 5, vertex deep below (labeled -15) — CORRECT answer
+    const ox=60, ay=48, sc=11;
+    const r1x=ox+(-3)*sc, r2x=ox+5*sc, vx=ox+1*sc, ctrlY=108;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(150,ay,'right')}
+        <text x="153" y={ay+4} fill={tc} fontSize="10" textAnchor="middle" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="107" stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(ox,5,'up')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d={`M ${r1x},${ay} Q ${vx},${ctrlY} ${r2x},${ay}`} fill="none" stroke={cc} strokeWidth="2"/>
+        <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <text x={r1x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">-3</text>
+        <text x={ox+5} y={ay+13} fill={tc} fontSize="9" textAnchor="start">O</text>
+        <text x={r2x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">5</text>
+        <text x={vx-2} y="90" fill={tc} fontSize="9" textAnchor="middle">-15</text>
+      </svg>
+    );
+  }
+  if (variant === 'C') {
+    // a<0 (∩ shape), roots -3 and 5, vertex labeled 15 at top
+    const ox=60, ay=78, sc=11;
+    const r1x=ox+(-3)*sc, r2x=ox+5*sc, vx=ox+1*sc, ctrlY=12;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(150,ay,'right')}
+        <text x="153" y={ay+4} fill={tc} fontSize="10" textAnchor="middle" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="107" stroke={ac} strokeWidth="1.2"/>
+        {axisArrow(ox,5,'up')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d={`M ${r1x},${ay} Q ${vx},${ctrlY} ${r2x},${ay}`} fill="none" stroke={cc} strokeWidth="2"/>
+        <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+        <text x={r1x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">-3</text>
+        <text x={ox+5} y={ay+13} fill={tc} fontSize="9" textAnchor="start">O</text>
+        <text x={r2x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">5</text>
+        <text x={ox-8} y="26" fill={tc} fontSize="9" textAnchor="end">15</text>
+        <line x1={ox-3} y1="22" x2={ox+3} y2="22" stroke={tc} strokeWidth="1"/>
+      </svg>
+    );
+  }
+  // variant D: a>0, vertex between 3 and 5 (shallow), y-intercept=15 on y-axis
+  const ox=22, ay=70, scX=15, scY=4;
+  const r1x=ox+3*scX, r2x=ox+5*scX, vx=ox+4*scX;
+  const yIntY=ay-15*scY;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {axisArrow(150,ay,'right')}
+      <text x="153" y={ay+4} fill={tc} fontSize="10" textAnchor="middle" fontStyle="italic">X</text>
+      <line x1={ox} y1="5" x2={ox} y2="105" stroke={ac} strokeWidth="1.2"/>
+      {axisArrow(ox,5,'up')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+      <path d={`M ${ox},${yIntY} Q ${60},${12} ${r1x},${ay} Q ${vx},${ay+4} ${r2x},${ay} Q ${118},${66} ${138},${38}`} fill="none" stroke={cc} strokeWidth="2"/>
+      <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+      <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+      <line x1={ox-3} y1={yIntY} x2={ox+3} y2={yIntY} stroke={tc} strokeWidth="1"/>
+      <text x={ox+5} y={ay+13} fill={tc} fontSize="9" textAnchor="start">O</text>
+      <text x={r1x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">3</text>
+      <text x={r2x} y={ay+13} fill={tc} fontSize="9" textAnchor="middle">5</text>
+      <text x={ox-4} y={yIntY+4} fill={tc} fontSize="9" textAnchor="end">15</text>
+    </svg>
+  );
+};
+
 const SvgParabolaTable = () => {
   const ac = "#67e8f9";
   const cc = "#facc15";
@@ -157,7 +255,7 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: 
   { no: 10, soal: "Nilai maksimum fungsi $f(x) = -x^2 + 6x + 7$ adalah ...", options: ["A. 18", "B. 16", "C. 12", "D. 9"] },
   { no: 11, soal: "Koordinat titik balik pada kurva $f(x) = x^2 - 10x + 29$ adalah ...", options: ["A. (-5, 5)", "B. (-5, 4)", "C. (5, -4)", "D. (5, 4)"] },
   { no: 12, soal: "Diketahui fungsi $f(x) = -x^2 + bx + c$ mempunyai koordinat titik balik minimum $(-5, 11)$. Nilai b dan c berturut-turut adalah ...", options: ["A. -10 dan 14", "B. -10 dan 36", "C. 10 dan 14", "D. 10 dan 36"] },
-  { no: 13, soal: "Grafik dari fungsi $f(x) = x^2 - 2x - 15$ adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 13, soal: "Grafik dari fungsi $f(x) = x^2 - 2x - 15$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q13Svg('A'), q13Svg('B'), q13Svg('C'), q13Svg('D')] },
   { no: 14, soal: "Perhatikan gambar! Gambar tersebut adalah grafik fungsi kuadrat ...", options: ["A. $y = x^2 + 2x + 3$", "B. $y = x^2 - 2x - 3$", "C. $y = -x^2 + 2x - 3$", "D. $y = -x^2 - 2x + 3$", "E. $y = -x^2 + 2x + 3$"] },
   { no: 15, soal: "Perhatikan grafik $f(x) = ax^2 + bx + c$. Nilai a, b dan c yang mungkin adalah ...", options: ["A. $a < 0$, $b > 0$, $c > 0$", "B. $a < 0$, $b > 0$, $c < 0$", "C. $a < 0$, $b < 0$, $c > 0$", "D. $a > 0$, $b < 0$, $c < 0$"] },
   { no: 16, soal: "Fungsi $f(x) = ax^2 + bx + c$ mempunyai $a < 0$, $b > 0$ dan $c < 0$. Grafik yang sesuai adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
