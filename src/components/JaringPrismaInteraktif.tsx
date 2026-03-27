@@ -150,14 +150,7 @@ export default function JaringPrismaInteraktif() {
     .map(f => {
       const poly = getFacePoly(f);
       const avgZ = f.v3d.reduce((s, v) => s + rotXv(rotYv(v, ry), rx)[2], 0) / f.v3d.length;
-      /* Back-face culling only in assembled view */
-      let visible = true;
-      if (progress < 0.3) {
-        const [a, b, c] = poly;
-        const cross = (b[0]-a[0])*(c[1]-a[1]) - (b[1]-a[1])*(c[0]-a[0]);
-        visible = cross < 0;
-      }
-      return { ...f, poly, avgZ, visible };
+      return { ...f, poly, avgZ };
     })
     .sort((a, b) => b.avgZ - a.avgZ);
 
@@ -276,7 +269,6 @@ export default function JaringPrismaInteraktif() {
         <svg viewBox="0 0 340 245" className="w-full" style={{ maxHeight: 265 }}>
 
           {sorted.map((f, fi) => {
-            if (!f.visible && !isFlatNet && progress < 0.3) return null;
             const pts = f.poly.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
             const mx  = f.poly.reduce((s, p) => s + p[0], 0) / f.poly.length;
             const my  = f.poly.reduce((s, p) => s + p[1], 0) / f.poly.length;
