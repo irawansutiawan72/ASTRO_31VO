@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -16,6 +16,31 @@ const renderWithLatex = (text: string) => {
     }
     return <span key={index}>{part}</span>;
   });
+};
+
+const miniParabola = (r1: number, r2: number, openUp: boolean): ReactNode => {
+  const ac = "#67e8f9", cc = "#facc15", tc = "#ffffff";
+  const W = 150, H = 78, axisY = 46, scale = 18;
+  const midX = (r1 + r2) / 2;
+  const originX = W / 2 - midX * scale;
+  const r1x = originX + r1 * scale;
+  const r2x = originX + r2 * scale;
+  const vx = originX + midX * scale;
+  const ctrlY = openUp ? axisY + 48 : axisY - 48;
+  const axisStart = Math.max(5, r1x - 15);
+  const axisEnd = Math.min(W - 12, r2x + 22);
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ maxWidth: `${W}px` }} className="mt-1 block">
+      <line x1={axisStart} y1={axisY} x2={axisEnd} y2={axisY} stroke={ac} strokeWidth="1.2" />
+      <polygon points={`${axisEnd},${axisY-3} ${axisEnd},${axisY+3} ${axisEnd+5},${axisY}`} fill={ac} />
+      <text x={axisEnd + 9} y={axisY + 4} fill={tc} fontSize="10" textAnchor="middle" fontStyle="italic">X</text>
+      <path d={`M ${r1x},${axisY} Q ${vx},${ctrlY} ${r2x},${axisY}`} fill="none" stroke={cc} strokeWidth="2" />
+      <line x1={r1x} y1={axisY - 3} x2={r1x} y2={axisY + 3} stroke={tc} strokeWidth="1" />
+      <line x1={r2x} y1={axisY - 3} x2={r2x} y2={axisY + 3} stroke={tc} strokeWidth="1" />
+      <text x={r1x} y={axisY + 14} fill={tc} fontSize="9" textAnchor="middle">{r1}</text>
+      <text x={r2x} y={axisY + 14} fill={tc} fontSize="9" textAnchor="middle">{r2}</text>
+    </svg>
+  );
 };
 
 const SvgParabolaTable = () => {
@@ -119,13 +144,13 @@ $y = ax^2 + bx + c$`
   ]
 };
 
-const latihanDasar = [
+const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: ReactNode[] }[] = [
   { no: 1, soal: "Fungsi $f(x) = 3(x - 1)^2 + 5$ dapat dinyatakan dalam bentuk $f(x) = ax^2 + bx + c$. Nilai b dan c berturut-turut adalah ...", options: ["A. -6 dan 8", "B. -6 dan 2", "C. -3 dan 8", "D. 3 dan 2"] },
   { no: 2, soal: "Jika titik $(3, a)$ terletak pada kurva $f(x) = 2x^2 - x + 4$, maka nilai $a$ = ...", options: ["A. 19", "B. 17", "C. 16", "D. 13"] },
   { no: 3, soal: "Grafik fungsi $f(x) = x^2 - 2x - 3$ dipotong oleh garis $y = 5$. Salah satu absis titik potongnya adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 5"] },
   { no: 4, soal: "Fungsi $f(x) = x^2 - x - 12$ memotong sumbu X di titik $(p, 0)$ dan $(q, 0)$. Jika $p > q$, maka nilai p dan q berturut-turut adalah ...", options: ["A. 4 dan 3", "B. 4 dan -3", "C. 3 dan -4", "D. 3 dan 2"] },
   { no: 5, soal: "Titik potong kurva $f(x) = x^2 + 4x + 7$ dengan sumbu Y adalah ...", options: ["A. (0, 7)", "B. (0, 3)", "C. (-2, 0)", "D. (-3, 3)"] },
-  { no: 6, soal: "Kurva yang mempunyai sumbu simetri di $x = 1$ adalah ...", options: ["A. (Gambar kurva)", "B. (Gambar kurva)", "C. (Gambar kurva)", "D. (Gambar kurva)"] },
+  { no: 6, soal: "Kurva yang mempunyai sumbu simetri di $x = 1$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [miniParabola(-2, 3, true), miniParabola(-3, 2, true), miniParabola(-1, 3, false), miniParabola(-1, 2, false)] },
   { no: 7, soal: "Sumbu simetri dari kurva $f(x) = x^2 + 6x + 5$ adalah ...", options: ["A. $x = -3$", "B. $x = -35$", "C. $x = 52$", "D. $x = 3$"] },
   { no: 8, soal: "Sumbu simetri pada fungsi $f(x) = (x + 6)^2 - 5$ adalah ...", options: ["A. $x = 6$", "B. $x = 5$", "C. $x = -3$", "D. $x = -6$"] },
   { no: 9, soal: "Nilai minimum fungsi $f(x) = 3(x + 2)^2 + 5$ adalah ...", options: ["A. 17", "B. 8", "C. 5", "D. -7"] },
@@ -249,6 +274,7 @@ const OlimpiadeFungsiKuadratPage = () => {
                     {soal.options.map((opt, j) => (
                       <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
                         {renderWithLatex(opt)}
+                        {soal.svgOptions?.[j]}
                       </div>
                     ))}
                   </div>
