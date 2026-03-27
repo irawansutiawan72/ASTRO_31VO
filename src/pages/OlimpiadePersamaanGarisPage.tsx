@@ -453,6 +453,7 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
       ]},
       { t: 'formula', headline: 'd. Garis Berimpit', color: 'purple', lines: [
         { svg: 'GARIS_BERIMPIT' },
+        '$m_g = m_h$',
         '$g = A \\cdot h$ dengan $A$ adalah koefisien',
       ]},
     ],
