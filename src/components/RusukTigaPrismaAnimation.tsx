@@ -130,9 +130,9 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
       ))}
 
       {/* Label */}
-      <text x={cx} y={164} textAnchor="middle" fontSize="8.5" fill="#e2e8f0"
+      <text x={cx} y={174} textAnchor="middle" fontSize="8.5" fill="#e2e8f0"
         fontFamily="sans-serif" fontWeight="bold">{name}</text>
-      <text x={cx} y={175} textAnchor="middle" fontSize="7.5" fill="#94a3b8"
+      <text x={cx} y={186} textAnchor="middle" fontSize="7.5" fill="#94a3b8"
         fontFamily="monospace">{rusukLabel}</text>
     </g>
   );
@@ -186,7 +186,7 @@ export default function RusukTigaPrismaAnimation() {
 
       {/* SVG with 3 prisms */}
       <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
-        <svg viewBox="0 0 340 185" className="w-full" style={{ maxHeight: 210 }}>
+        <svg viewBox="0 0 340 200" className="w-full" style={{ maxHeight: 225 }}>
           <defs>
             <style>{`
               @keyframes glowPulseAlas {
@@ -262,8 +262,8 @@ export default function RusukTigaPrismaAnimation() {
           ))}
 
           {/* Bottom caption band */}
-          <rect x="0" y="178" width="340" height="7" fill="transparent" />
-          <text x="170" y="186" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
+          <rect x="0" y="192" width="340" height="7" fill="transparent" />
+          <text x="170" y="199" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
             Alas dan Tutup selalu SAMA bentuknya  ·  Rusuk = 3n
           </text>
         </svg>
