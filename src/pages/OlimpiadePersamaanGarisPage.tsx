@@ -460,6 +460,105 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
   },
 ];
 
+const _axisBlue = "#3B82F6";
+const _lineYellow = "#FACC15";
+
+const GrafikSoal1A = () => (
+  // y = 2x - 3: passes through (0,-3) and (2,1), slope +2
+  <svg viewBox="0 0 200 200" width="150" height="150" style={{ display: "block", margin: "0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="120" y1="107" x2="120" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="116" y="124" fill="white" fontSize="9" fontFamily="sans-serif">2</text>
+    <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
+    <text x="54" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-3</text>
+    <line x1="80" y1="90" x2="120" y2="90" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="120" y1="90" x2="120" y2="110" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="70" y1="190" x2="142" y2="46" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="142,46 140,58 133,55" fill={_lineYellow} />
+    <polygon points="70,190 79,181 72,178" fill={_lineYellow} />
+    <text x="124" y="89" fill="white" fontSize="9" fontFamily="sans-serif">(2,1)</text>
+    <text x="82" y="168" fill="white" fontSize="9" fontFamily="sans-serif">(0,-3)</text>
+  </svg>
+);
+
+const GrafikSoal1B = () => (
+  // y = -2x + 3: passes through (0,3) and (2,-1), slope -2
+  <svg viewBox="0 0 200 200" width="150" height="150" style={{ display: "block", margin: "0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="120" y1="107" x2="120" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="116" y="124" fill="white" fontSize="9" fontFamily="sans-serif">2</text>
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <line x1="80" y1="130" x2="120" y2="130" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="120" y1="110" x2="120" y2="130" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="70" y1="30" x2="142" y2="174" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="70,30 72,42 79,39" fill={_lineYellow} />
+    <polygon points="142,174 133,165 140,162" fill={_lineYellow} />
+    <text x="82" y="48" fill="white" fontSize="9" fontFamily="sans-serif">(0,3)</text>
+    <text x="124" y="132" fill="white" fontSize="9" fontFamily="sans-serif">(2,-1)</text>
+  </svg>
+);
+
+const GrafikSoal1C = () => (
+  // y = x + 3: passes through (0,3) and (-2,1), slope +1
+  <svg viewBox="0 0 200 200" width="150" height="150" style={{ display: "block", margin: "0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="28" y="124" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <line x1="40" y1="90" x2="80" y2="90" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="40" y1="90" x2="40" y2="110" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="8" y1="122" x2="118" y2="12" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="8,122 19,116 14,111" fill={_lineYellow} />
+    <polygon points="118,12 112,23 107,18" fill={_lineYellow} />
+    <text x="82" y="48" fill="white" fontSize="9" fontFamily="sans-serif">(0,3)</text>
+    <text x="2" y="88" fill="white" fontSize="9" fontFamily="sans-serif">(-2,1)</text>
+  </svg>
+);
+
+const GrafikSoal1D = () => (
+  // y = -2x - 3: passes through (0,-3) and (-2,1), slope -2
+  <svg viewBox="0 0 200 200" width="150" height="150" style={{ display: "block", margin: "0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="28" y="124" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
+    <text x="54" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-3</text>
+    <line x1="40" y1="90" x2="80" y2="90" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="40" y1="90" x2="40" y2="110" stroke="white" strokeWidth="0.8" strokeDasharray="3,2" />
+    <line x1="8" y1="26" x2="90" y2="190" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="8,26 10,38 17,35" fill={_lineYellow} />
+    <polygon points="90,190 81,181 88,178" fill={_lineYellow} />
+    <text x="2" y="88" fill="white" fontSize="9" fontFamily="sans-serif">(-2,1)</text>
+    <text x="82" y="168" fill="white" fontSize="9" fontFamily="sans-serif">(0,-3)</text>
+  </svg>
+);
+
 const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
   { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
