@@ -146,6 +146,149 @@ const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
   );
 };
 
+const q14Svg = (): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff", dc="rgba(255,255,255,0.45)";
+  const W=140, H=110, ox=38, ay=75;
+  const r1x=18, r2x=98, vx=58, vy=35;
+  const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="5" y1={ay} x2="128" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {arr(133,ay,'r')}
+      <text x="137" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+      <line x1={ox} y1="5" x2={ox} y2="103" stroke={ac} strokeWidth="1.2"/>
+      {arr(ox,5,'u')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+      <path d="M 8,98 C 11,88 15,81 18,75 C 44,22 71,22 98,75 C 101,82 105,90 108,98"
+        fill="none" stroke={cc} strokeWidth="2"/>
+      <line x1={ox} y1={vy} x2={vx} y2={vy} stroke={dc} strokeWidth="1" strokeDasharray="3,2"/>
+      <line x1={vx} y1={ay} x2={vx} y2={vy} stroke={dc} strokeWidth="1" strokeDasharray="3,2"/>
+      <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+      <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
+      <line x1={vx} y1={ay-3} x2={vx} y2={ay+3} stroke={tc} strokeWidth="1"/>
+      <line x1={ox-3} y1={vy} x2={ox+3} y2={vy} stroke={tc} strokeWidth="1"/>
+      <text x={r1x} y={ay+12} fill={tc} fontSize="9" textAnchor="middle">-1</text>
+      <text x={ox+5} y={ay+12} fill={tc} fontSize="9">O</text>
+      <text x={vx} y={ay+12} fill={tc} fontSize="9" textAnchor="middle">1</text>
+      <text x={r2x} y={ay+12} fill={tc} fontSize="9" textAnchor="middle">3</text>
+      <text x={ox-4} y={vy+4} fill={tc} fontSize="9" textAnchor="end">4</text>
+    </svg>
+  );
+};
+
+const q15Svg = (): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff";
+  const W=155, H=103, ox=115, ay=80;
+  const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="20" y1={ay} x2="143" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {arr(148,ay,'r')}
+      <text x="152" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">X</text>
+      <line x1={ox} y1="5" x2={ox} y2="97" stroke={ac} strokeWidth="1.2"/>
+      {arr(ox,5,'u')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+      <path d="M 49,100 C 51,93 53,86 55,80 C 79,8 103,8 127,80 C 129,86 131,93 133,100"
+        fill="none" stroke={cc} strokeWidth="2"/>
+      <text x={ox+5} y={ay+12} fill={tc} fontSize="9">O</text>
+    </svg>
+  );
+};
+
+const q16Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff";
+  const W=135, H=100;
+  const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+
+  if (variant === 'A') {
+    const ox=55, ay=60;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="95" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d="M 3,83 C 5,75 8,66 10,60 C 30,7 50,7 70,60 C 74,71 78,83 82,98"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  if (variant === 'B') {
+    const ox=25, ay=55;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="95" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d="M 14,97 C 18,90 21,84 25,79 C 32,68 40,60 47,55 C 62,44 76,44 91,55 C 98,60 106,68 113,79 C 117,84 120,90 124,97"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  if (variant === 'C') {
+    const ox=95, ay=55;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">X</text>
+        <line x1={ox} y1="5" x2={ox} y2="95" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+        <path d="M 20,70 C 25,63 30,58 35,55 C 45,48 55,48 65,55 C 75,62 85,75 95,95 C 97,97 100,98 103,99"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  const ox=45, ay=45;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {arr(128,ay,'r')}
+      <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">X</text>
+      <line x1={ox} y1="5" x2={ox} y2="95" stroke={ac} strokeWidth="1.2"/>
+      {arr(ox,5,'u')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
+      <path d="M 15,23 C 18,31 22,38 25,45 C 52,98 78,98 105,45 C 108,38 112,31 115,23"
+        fill="none" stroke={cc} strokeWidth="2"/>
+      <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+    </svg>
+  );
+};
+
+const q27Svg = (): ReactNode => {
+  const tc="#ffffff", sc="rgba(255,255,255,0.55)";
+  return (
+    <svg viewBox="0 0 205 92" width="100%" style={{maxWidth:"205px"}} className="mt-2 block">
+      <defs>
+        <pattern id="hatch27" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
+        </pattern>
+      </defs>
+      <rect x="12" y="22" width="88" height="58" fill="url(#hatch27)" stroke={sc} strokeWidth="1.2"/>
+      <rect x="108" y="14" width="76" height="66" fill="url(#hatch27)" stroke={sc} strokeWidth="1.2"/>
+      <text x="56" y="54" fill={tc} fontSize="9" textAnchor="middle">(7 - x)</text>
+      <text x="9" y="54" fill={tc} fontSize="9" textAnchor="end">(x + 1)</text>
+      <text x="146" y="10" fill={tc} fontSize="9" textAnchor="middle">5 cm</text>
+      <text x="188" y="50" fill={tc} fontSize="9" textAnchor="start">5 cm</text>
+    </svg>
+  );
+};
+
 const SvgParabolaTable = () => {
   const ac = "#67e8f9";
   const cc = "#facc15";
@@ -261,9 +404,9 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: 
   { no: 11, soal: "Koordinat titik balik pada kurva $f(x) = x^2 - 10x + 29$ adalah ...", options: ["A. (-5, 5)", "B. (-5, 4)", "C. (5, -4)", "D. (5, 4)"] },
   { no: 12, soal: "Diketahui fungsi $f(x) = -x^2 + bx + c$ mempunyai koordinat titik balik minimum $(-5, 11)$. Nilai b dan c berturut-turut adalah ...", options: ["A. -10 dan 14", "B. -10 dan 36", "C. 10 dan 14", "D. 10 dan 36"] },
   { no: 13, soal: "Grafik dari fungsi $f(x) = x^2 - 2x - 15$ adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q13Svg('A'), q13Svg('B'), q13Svg('C'), q13Svg('D')] },
-  { no: 14, soal: "Perhatikan gambar! Gambar tersebut adalah grafik fungsi kuadrat ...", options: ["A. $y = x^2 + 2x + 3$", "B. $y = x^2 - 2x - 3$", "C. $y = -x^2 + 2x - 3$", "D. $y = -x^2 - 2x + 3$", "E. $y = -x^2 + 2x + 3$"] },
-  { no: 15, soal: "Perhatikan grafik $f(x) = ax^2 + bx + c$. Nilai a, b dan c yang mungkin adalah ...", options: ["A. $a < 0$, $b > 0$, $c > 0$", "B. $a < 0$, $b > 0$, $c < 0$", "C. $a < 0$, $b < 0$, $c > 0$", "D. $a > 0$, $b < 0$, $c < 0$"] },
-  { no: 16, soal: "Fungsi $f(x) = ax^2 + bx + c$ mempunyai $a < 0$, $b > 0$ dan $c < 0$. Grafik yang sesuai adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 14, soal: "Perhatikan gambar! Gambar tersebut adalah grafik fungsi kuadrat ...", options: ["A. $y = x^2 + 2x + 3$", "B. $y = x^2 - 2x - 3$", "C. $y = -x^2 + 2x - 3$", "D. $y = -x^2 - 2x + 3$", "E. $y = -x^2 + 2x + 3$"], svgQuestion: q14Svg() },
+  { no: 15, soal: "Perhatikan grafik $f(x) = ax^2 + bx + c$. Nilai a, b dan c yang mungkin adalah ...", options: ["A. $a < 0$, $b > 0$, $c > 0$", "B. $a < 0$, $b > 0$, $c < 0$", "C. $a < 0$, $b < 0$, $c > 0$", "D. $a > 0$, $b < 0$, $c < 0$"], svgQuestion: q15Svg() },
+  { no: 16, soal: "Fungsi $f(x) = ax^2 + bx + c$ mempunyai $a < 0$, $b > 0$ dan $c < 0$. Grafik yang sesuai adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [q16Svg('A'), q16Svg('B'), q16Svg('C'), q16Svg('D')] },
   { no: 17, soal: "Nilai diskriminan pada fungsi $f(x) = -x^2 + 2x + 15$ adalah ...", options: ["A. 64", "B. 56", "C. 36", "D. 25"] },
   { no: 18, soal: "Diantara fungsi kuadrat berikut yang grafiknya memotong sumbu x di dua titik adalah ...", options: ["A. $f(x) = x^2 + 6x + 9$", "B. $f(x) = x^2 - x + 3$", "C. $f(x) = x^2 + x - 20$", "D. $f(x) = x^2 - 2x + 1$"] },
   { no: 19, soal: "Perhatikan fungsi kuadrat berikut:\n(i) $f(x) = x^2 - 16$\n(ii) $f(x) = x^2 - 25$\n(iii) $f(x) = x^2 + x - 20$\n(iv) $f(x) = x^2 - 10x + 25$\nFungsi kuadrat yang grafiknya menyinggung sumbu x adalah ...", options: ["A. (i)", "B. (ii)", "C. (iii)", "D. (iv)"] },
@@ -274,7 +417,7 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: 
   { no: 24, soal: "Sebuah peluru ditembakkan vertikal memiliki rumus ketinggian per detik, $h(t) = (120t - t^2)$ meter. Tinggi tembakan maksimum peluru itu adalah ...", options: ["A. 4.800 m", "B. 4.500 m", "C. 3.600 m", "D. 3.000 m"] },
   { no: 25, soal: "Sebuah bola digelindingkan pada bidang miring dari atas ke bawah. Tinggi bola tiap detiknya memiliki rumus $h(t) = 80 + 2t - t^2$ (dalam cm). Bola akan menyentuh tanah pada detik ke- ...", options: ["A. 5", "B. 8", "C. 10", "D. 16"] },
   { no: 26, soal: "Sebuah persegi panjang mempunyai luas 42 cm² dan kelilingnya 34 cm. Lebar persegi panjang itu adalah ...", options: ["A. 2 cm", "B. 3 cm", "C. 5 cm", "D. 14 cm"] },
-  { no: 27, soal: "Perhatikan gambar berikut. Untuk $x \\in$ bilangan asli, luas maksimum bidang yang diarsir adalah ...", options: ["A. 30 cm²", "B. 36 cm²", "C. 41 cm²", "D. 48 cm²"] },
+  { no: 27, soal: "Perhatikan gambar berikut. Untuk $x \\in$ bilangan asli, luas maksimum bidang yang diarsir adalah ...", options: ["A. 30 cm²", "B. 36 cm²", "C. 41 cm²", "D. 48 cm²"], svgQuestion: q27Svg() },
   { no: 28, soal: "Grafik fungsi $g(x) = x^2 + 3$ dapat diperoleh dari grafik $f(x) = x^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $f(x)$ 3 satuan ke kanan", "B. Menggeser $f(x)$ 3 satuan ke kiri", "C. Menggeser $f(x)$ 3 satuan ke bawah", "D. Menggeser $f(x)$ 3 satuan ke atas"] },
   { no: 29, soal: "Grafik fungsi $L(x) = x^2 + 2x - 3$ dapat diperoleh dari grafik $K(x) = (x + 1)^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $K(x)$, 4 satuan ke kiri", "B. Menggeser $K(x)$, 3 satuan ke kiri", "C. Menggeser $K(x)$, 4 satuan ke bawah", "D. Menggeser $K(x)$, 3 satuan ke bawah"] },
 ];
@@ -369,9 +512,14 @@ const OlimpiadeFungsiKuadratPage = () => {
           <div className="space-y-4 animate-slide-up">
             {latihanDasar.map((soal) => (
               <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                <div className="font-body text-sm text-white mb-2 whitespace-pre-wrap">
                   <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                 </div>
+                {(soal as any).svgQuestion && (
+                  <div className="mb-3 flex justify-center">
+                    {(soal as any).svgQuestion}
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
