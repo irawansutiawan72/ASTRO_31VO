@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Sliders, TrendingUp } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Layers, Sliders, TrendingUp, PlayCircle } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import GradienInvariantAnimation from "@/components/GradienInvariantAnimation";
 
 const W = 180, H = 150, MX = 90, MY = 75, SC = 14;
 const toX = (x: number) => MX + x * SC;
@@ -35,7 +36,7 @@ const CoordSys = ({ children, label = "", w = W, h = H }: { children?: React.Rea
 const GradienPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "definisi", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "definisi", "animasi", "rumus", "visualgradien", "jenis", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
   const toggle = (s: string) => { playPopSound(); setExpandedSections(p => p.includes(s) ? p.filter(x => x !== s) : [...p, s]); };
   const SH = ({ id, icon, iconColor, title }: { id: string; icon: React.ReactNode; iconColor?: string; title: string }) => (
@@ -97,39 +98,66 @@ const GradienPage = () => {
                 <div className="bg-violet-500/10 border border-violet-500/30 rounded-lg p-4">
                   <p className="text-sm font-semibold text-violet-300 mb-2 font-body">🎯 Ringkasan Intisari</p>
                   <p className="text-sm text-white/80 font-body leading-relaxed">
-                    <strong className="text-cyan-300">Gradien (m)</strong> adalah perbandingan antara perubahan nilai <InlineMath math="y" /> terhadap perubahan nilai <InlineMath math="x" /> ketika bergerak dari satu titik ke titik lain di atas garis.
+                    <strong className="text-cyan-300">Gradien (m)</strong> adalah perbandingan antara panjang{" "}
+                    <strong className="text-pink-300">sisi tegak</strong> (jarak naik/turun) dan panjang{" "}
+                    <strong className="text-green-300">sisi datar</strong> (jarak ke kanan) dari segitiga siku-siku yang terbentuk di bawah garis.
                   </p>
                   <div className="bg-violet-900/40 border border-violet-400/30 rounded-xl p-4 mt-3 text-center">
-                    <BlockMath math="m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}" />
+                    <BlockMath math="m = \frac{\text{sisi tegak}}{\text{sisi datar}} = \frac{y_2 - y_1}{x_2 - x_1}" />
+                  </div>
+                </div>
+
+                {/* Positif vs Negatif */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-green-900/30 border border-green-500/40 rounded-xl p-3 text-center">
+                    <p className="text-3xl mb-1">↗</p>
+                    <p className="text-xs font-bold text-green-300 font-body">Garis ke kanan ATAS</p>
+                    <p className="text-xs text-white/60 font-body mt-1">Gradien <strong className="text-green-300">POSITIF (+)</strong></p>
+                    <p className="text-xs text-white/40 font-body mt-0.5">sisi tegak naik ke atas</p>
+                  </div>
+                  <div className="bg-red-900/30 border border-red-500/40 rounded-xl p-3 text-center">
+                    <p className="text-3xl mb-1">↘</p>
+                    <p className="text-xs font-bold text-red-300 font-body">Garis ke kanan BAWAH</p>
+                    <p className="text-xs text-white/60 font-body mt-1">Gradien <strong className="text-red-300">NEGATIF (−)</strong></p>
+                    <p className="text-xs text-white/40 font-body mt-0.5">sisi tegak turun ke bawah</p>
                   </div>
                 </div>
 
                 {/* Segitiga gradien visual */}
                 <div className="bg-slate-800/60 border border-cyan-500/20 rounded-xl p-4">
-                  <p className="text-xs font-bold text-cyan-300 mb-3">📐 Segitiga Gradien (Rise over Run)</p>
+                  <p className="text-xs font-bold text-cyan-300 mb-3">📐 Segitiga Gradien — Sisi Tegak & Sisi Datar</p>
                   <div className="flex justify-center">
                     <svg viewBox="0 0 220 140" className="w-full max-w-xs rounded-xl" style={{ maxHeight: 150, background: "rgba(15,23,42,0.8)" }}>
-                      {/* axes */}
                       <line x1="20" y1="110" x2="200" y2="110" stroke="#475569" strokeWidth="1.5" />
                       <line x1="20" y1="10" x2="20" y2="115" stroke="#475569" strokeWidth="1.5" />
-                      {/* the line */}
                       <line x1="30" y1="100" x2="180" y2="30" stroke="#22d3ee" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* P1 and P2 */}
                       <circle cx="50" cy="88" r="4" fill="#facc15" />
                       <circle cx="150" cy="38" r="4" fill="#facc15" />
                       <text x="30" y="100" fill="#facc15" fontSize="9">P₁(x₁, y₁)</text>
                       <text x="152" y="34" fill="#facc15" fontSize="9">P₂(x₂, y₂)</text>
-                      {/* triangle */}
-                      <line x1="50" y1="88" x2="150" y2="88" stroke="#4ade80" strokeWidth="1.5" strokeDasharray="4,2" />
-                      <line x1="150" y1="88" x2="150" y2="38" stroke="#f472b6" strokeWidth="1.5" strokeDasharray="4,2" />
-                      {/* labels */}
-                      <text x="88" y="101" fill="#4ade80" fontSize="9">Δx (run)</text>
-                      <text x="154" y="66" fill="#f472b6" fontSize="9">Δy (rise)</text>
-                      {/* formula */}
-                      <text x="60" y="128" fill="#a78bfa" fontSize="9">m = Δy/Δx = rise/run</text>
+                      <line x1="50" y1="88" x2="150" y2="88" stroke="#4ade80" strokeWidth="1.8" strokeDasharray="4,2" />
+                      <line x1="150" y1="88" x2="150" y2="38" stroke="#f472b6" strokeWidth="1.8" strokeDasharray="4,2" />
+                      <text x="78" y="101" fill="#4ade80" fontSize="9" fontWeight="bold">sisi datar</text>
+                      <text x="153" y="66" fill="#f472b6" fontSize="9" fontWeight="bold">sisi tegak</text>
+                      <text x="40" y="128" fill="#a78bfa" fontSize="9">m = sisi tegak / sisi datar</text>
                     </svg>
                   </div>
                 </div>
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI INVARIANSI GRADIEN */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SH id="animasi" icon={<PlayCircle className="w-5 h-5" />} iconColor="text-cyan-400" title="🎬 Animasi: Gradien Tidak Bergantung Panjang Garis" />
+            {expandedSections.includes("animasi") && (
+              <div className="px-5 pb-5 space-y-3">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Kamu bisa menggambar segitiga siku-siku di <strong className="text-cyan-300">bagian mana pun</strong> dari sebuah garis —
+                  besar atau kecil — dan perbandingan <strong className="text-pink-300">sisi tegak / sisi datar</strong> selalu menghasilkan nilai gradien yang sama.
+                  Coba buktikan sendiri!
+                </p>
+                <GradienInvariantAnimation />
               </div>
             )}
           </div>
