@@ -168,21 +168,21 @@ const GarisSejajar = () => (
     {/* Border frame */}
     <rect x="1" y="1" width="218" height="188" rx="10" ry="10" fill="none" stroke="rgba(34,211,238,0.5)" strokeWidth="1.5" />
     {/* Line g: from (50,168) to (100,22) */}
-    <line x1="50" y1="168" x2="100" y2="22" stroke="white" strokeWidth="2" />
+    <line x1="50" y1="168" x2="100" y2="22" stroke="#FACC15" strokeWidth="2" />
     {/* Upper arrowhead g at (100,22) */}
-    <polygon points="100,22 100.5,35 92.5,32" fill="white" />
+    <polygon points="100,22 100.5,35 92.5,32" fill="#FACC15" />
     {/* Lower arrowhead g at (50,168) */}
-    <polygon points="50,168 57.5,157 49.5,154" fill="white" />
+    <polygon points="50,168 57.5,157 49.5,154" fill="#FACC15" />
     {/* Line h: from (122,168) to (172,22) */}
-    <line x1="122" y1="168" x2="172" y2="22" stroke="white" strokeWidth="2" />
+    <line x1="122" y1="168" x2="172" y2="22" stroke="#FACC15" strokeWidth="2" />
     {/* Upper arrowhead h at (172,22) */}
-    <polygon points="172,22 172.5,35 164.5,32" fill="white" />
+    <polygon points="172,22 172.5,35 164.5,32" fill="#FACC15" />
     {/* Lower arrowhead h at (122,168) */}
-    <polygon points="122,168 129.5,157 121.5,154" fill="white" />
+    <polygon points="122,168 129.5,157 121.5,154" fill="#FACC15" />
     {/* Label g */}
-    <text x="62" y="105" fill="white" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    <text x="62" y="105" fill="#FACC15" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
     {/* Label h */}
-    <text x="140" y="128" fill="white" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+    <text x="140" y="128" fill="#FACC15" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
   </svg>
 );
 
