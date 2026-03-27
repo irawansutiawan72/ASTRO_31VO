@@ -180,9 +180,9 @@ const GarisSejajar = () => (
     {/* Lower arrowhead h at (122,168) */}
     <polygon points="122,168 129.5,157 121.5,154" fill="#FACC15" />
     {/* Label g */}
-    <text x="62" y="105" fill="#FACC15" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    <text x="62" y="105" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
     {/* Label h */}
-    <text x="140" y="128" fill="#FACC15" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+    <text x="140" y="128" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
   </svg>
 );
 
