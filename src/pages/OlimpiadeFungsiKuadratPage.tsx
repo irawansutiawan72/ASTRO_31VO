@@ -419,8 +419,105 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgOptions?: 
   { no: 29, soal: "Grafik fungsi $L(x) = x^2 + 2x - 3$ dapat diperoleh dari grafik $K(x) = (x + 1)^2$. Cara yang tepat adalah ...", options: ["A. Menggeser $K(x)$, 4 satuan ke kiri", "B. Menggeser $K(x)$, 3 satuan ke kiri", "C. Menggeser $K(x)$, 4 satuan ke bawah", "D. Menggeser $K(x)$, 3 satuan ke bawah"] },
 ];
 
+const olimpSoal1Svg = (): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff";
+  const W=140, H=95, ox=42, ay=58;
+  const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="5" y1={ay} x2="128" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {arr(133,ay,'r')}
+      <text x="137" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+      <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
+      {arr(ox,5,'u')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+      <path d="M 10,5 C 22,27 32,42 42,58 C 60,82 94,82 112,58 C 121,42 130,26 132,5"
+        fill="none" stroke={cc} strokeWidth="2"/>
+      <text x="112" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+      <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+    </svg>
+  );
+};
+
+const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
+  const ac="#67e8f9", cc="#facc15", tc="#ffffff";
+  const W=135, H=95;
+  const arr = (ex:number,ey:number,d:'r'|'u') => d==='r'
+    ? <polygon points={`${ex-5},${ey-3} ${ex-5},${ey+3} ${ex},${ey}`} fill={ac}/>
+    : <polygon points={`${ex-3},${ey+5} ${ex+3},${ey+5} ${ex},${ey}`} fill={ac}/>;
+
+  if (variant === 'A') {
+    const ox=42, ay=72;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+        <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+        <path d="M 5,8 C 16,28 24,40 27,44 C 35,48 42,34 48,28 C 60,16 82,5 105,2"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x="95" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  if (variant === 'B') {
+    const ox=28, ay=50;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+        <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+        <path d="M 3,2 C 15,22 26,38 38,50 C 58,75 98,75 118,50 C 122,42 127,26 129,8"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x="118" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  if (variant === 'C') {
+    const ox=28, ay=60;
+    return (
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+        <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+        {arr(128,ay,'r')}
+        <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+        <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
+        {arr(ox,5,'u')}
+        <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+        <path d="M 3,3 C 28,28 58,50 100,60 C 110,59 120,54 130,46"
+          fill="none" stroke={cc} strokeWidth="2"/>
+        <text x="100" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+        <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+      </svg>
+    );
+  }
+  const ox=68, ay=50;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      <line x1="5" y1={ay} x2="123" y2={ay} stroke={ac} strokeWidth="1.2"/>
+      {arr(128,ay,'r')}
+      <text x="132" y={ay+4} fill={tc} fontSize="9" fontStyle="italic">x</text>
+      <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
+      {arr(ox,5,'u')}
+      <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
+      <path d="M 5,5 C 16,24 23,38 30,50 C 45,88 91,88 106,50 C 113,38 120,24 130,5"
+        fill="none" stroke={cc} strokeWidth="2"/>
+      <text x="98" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
+      <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
+    </svg>
+  );
+};
+
 const latihanOlimpiade = [
-  { no: 1, soal: "OSN Matematika 2010 Tingkat Kota\nFungsi $f(x) = x^2 - ax$ mempunyai grafik berikut. Grafik fungsi $g(x) = x^2 + ax + 5$ adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 1, soal: "OSN Matematika 2010 Tingkat Kota\nFungsi $f(x) = x^2 - ax$ mempunyai grafik berikut. Grafik fungsi $g(x) = x^2 + ax + 5$ adalah ...", options: ["A.", "B.", "C.", "D."], svgQuestion: olimpSoal1Svg(), svgOptions: [olimp1Svg('A'), olimp1Svg('B'), olimp1Svg('C'), olimp1Svg('D')] },
   { no: 2, soal: "OSN Matematika 2010 Tingkat Kota\nJika $P(x) = Q(x) \\cdot (x - a)$, Dimana $P(x)$ dan $Q(x)$ polinom, maka:", options: ["A. $P(a) \\neq 0$", "B. $x - a$ bukan faktor dari $P(x)$", "C. Kurva $y = P(x)$ memotong sumbu x di titik $(a, 0)$", "D. Kurva $y = P(x)$ memotong sumbu x di titik $(-a, 0)$", "E. Titik potong terhadap sumbu x tidak dapat ditentukan"] },
   { no: 3, soal: "OSN Matematika 2014 Tingkat Kota\nDiketahui persamaan kurva $y = x^3 + 4x^2 + 5x + 1$ dan $y = x^2 + 2x - 1$. Jika kurva digambarkan pada bidang yang sama, maka banyak titik potong kedua kurva tersebut adalah ...", options: ["A. 0", "B. 1", "C. 2", "D. 3"] },
   { no: 4, soal: "OSN Matematika 2015 Tingkat Kota\nParabola $y = ax^2 + bx + c$ melalui titik $(-2, 6)$ dan mempunyai sumbu simetri $x = -1$. Jika a, b dan c merupakan bilangan genap positif berurutan, maka nilai $a + b + c$ adalah ...", options: [] },
@@ -544,11 +641,15 @@ const OlimpiadeFungsiKuadratPage = () => {
                     </span>
                   ))}
                 </div>
+                {(soal as any).svgQuestion && (
+                  <div className="flex justify-center mb-3">{(soal as any).svgQuestion}</div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2 flex flex-col items-center">
                         {renderWithLatex(opt)}
+                        {(soal as any).svgOptions?.[j]}
                       </div>
                     ))}
                   </div>
