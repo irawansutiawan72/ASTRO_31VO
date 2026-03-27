@@ -265,7 +265,7 @@ const GarisGradienNegatif = () => (
 type SectionItem =
   | { t: 'heading'; text: string; color: string }
   | { t: 'text'; text: string; color?: string }
-  | { t: 'formula'; headline: string; lines: FormulaLine[]; color: string }
+  | { t: 'formula'; headline: string; headlineSuffix?: string; lines: FormulaLine[]; color: string }
   | { t: 'svg'; name: string };
 
 const colorMap: Record<string, { text: string; border: string; bg: string; dot: string }> = {
@@ -279,19 +279,21 @@ const colorMap: Record<string, { text: string; border: string; bg: string; dot: 
 };
 
 type FormulaLine = string | { svg: string };
-interface FormulaCardProps { headline: string; lines: FormulaLine[]; color: string; }
+interface FormulaCardProps { headline: string; headlineSuffix?: string; lines: FormulaLine[]; color: string; }
 const formulaSvgMap: Record<string, JSX.Element> = {
   GRADIEN_POSITIF: <GarisGradienPositif />,
   GRADIEN_NEGATIF: <GarisGradienNegatif />,
   GARIS_SEJAJAR: <GarisSejajar />,
 };
-const FormulaCard = ({ headline, lines, color }: FormulaCardProps) => {
+const FormulaCard = ({ headline, headlineSuffix, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
   return (
     <div className={`rounded-xl border ${c.border} ${c.bg} overflow-hidden my-3`}>
       <div className={`px-4 py-2 flex items-center gap-2 border-b ${c.border}`}>
         <span className={`w-2 h-2 rounded-full ${c.dot} shrink-0`} />
-        <span className={`font-display text-xs font-bold ${c.text} uppercase tracking-wide`}>{headline}</span>
+        <span className={`font-display text-xs font-bold ${c.text} uppercase tracking-wide`}>
+          {headline}{headlineSuffix && <span className="normal-case">{headlineSuffix}</span>}
+        </span>
       </div>
       <div className="px-4 py-3 space-y-2">
         {lines.map((line, i) =>
@@ -358,7 +360,7 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
   {
     heading: "C. Hubungan Dua Garis Lurus",
     items: [
-      { t: 'formula', headline: 'a. Garis Sejajar (g // h)', color: 'cyan', lines: [
+      { t: 'formula', headline: 'a. Garis Sejajar ', headlineSuffix: '(g // h)', color: 'cyan', lines: [
         { svg: 'GARIS_SEJAJAR' },
         'Jika $g // h$ maka gradiennya sama: $m_g = m_h$',
         'Jika $g : ax + by + c = 0$ dan $g // h$ melalui $A(x_1, y_1)$:',
@@ -475,7 +477,7 @@ const OlimpiadePersamaanGarisPage = () => {
                   <div className="px-4 pb-5 pt-1 space-y-1">
                     {section.items.map((item, i) => {
                       if (item.t === 'formula') {
-                        return <FormulaCard key={i} headline={item.headline} lines={item.lines} color={item.color} />;
+                        return <FormulaCard key={i} headline={item.headline} headlineSuffix={item.headlineSuffix} lines={item.lines} color={item.color} />;
                       }
                       if (item.t === 'heading') {
                         const c = colorMap[item.color] || colorMap.cyan;
