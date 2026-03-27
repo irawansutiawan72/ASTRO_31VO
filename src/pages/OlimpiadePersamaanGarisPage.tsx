@@ -186,6 +186,33 @@ const GarisSejajar = () => (
   </svg>
 );
 
+// Dua Garis Tegak Lurus: g ⊥ h
+const GarisTegakLurus = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 195" width="190" height="160"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Border frame */}
+    <rect x="1" y="1" width="228" height="193" rx="10" ry="10" fill="none" stroke="rgba(244,114,182,0.5)" strokeWidth="1.5" />
+    {/* Line g: upper-left (40,20) to lower-right (185,165) */}
+    <line x1="40" y1="20" x2="185" y2="165" stroke="#FACC15" strokeWidth="2" />
+    {/* Upper-left arrowhead g */}
+    <polygon points="40,20 45,32 52,25" fill="#FACC15" />
+    {/* Lower-right arrowhead g */}
+    <polygon points="185,165 173,160 180,153" fill="#FACC15" />
+    {/* Line h: upper-right (185,20) to lower-left (40,165) */}
+    <line x1="185" y1="20" x2="40" y2="165" stroke="#FACC15" strokeWidth="2" />
+    {/* Upper-right arrowhead h */}
+    <polygon points="185,20 180,32 173,25" fill="#FACC15" />
+    {/* Lower-left arrowhead h */}
+    <polygon points="40,165 52,160 45,153" fill="#FACC15" />
+    {/* Right-angle square at intersection (113,93) */}
+    <polyline points="120,100 113,107 106,100" fill="none" stroke="white" strokeWidth="1.5" />
+    {/* Label g */}
+    <text x="22" y="19" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    {/* Label h */}
+    <text x="189" y="19" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
 // Gradien Positif (m = +): line rises left-to-right
 // Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
 const GarisGradienPositif = () => (
@@ -284,6 +311,7 @@ const formulaSvgMap: Record<string, JSX.Element> = {
   GRADIEN_POSITIF: <GarisGradienPositif />,
   GRADIEN_NEGATIF: <GarisGradienNegatif />,
   GARIS_SEJAJAR: <GarisSejajar />,
+  GARIS_TEGAK_LURUS: <GarisTegakLurus />,
 };
 const FormulaCard = ({ headline, headlineSuffix, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
@@ -366,7 +394,8 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
         'Jika $g : ax + by + c = 0$ dan $g // h$ melalui $A(x_1, y_1)$:',
         '$h : ax + by = ax_1 + by_1$',
       ]},
-      { t: 'formula', headline: 'b. Garis Tegak Lurus (g ⊥ h)', color: 'pink', lines: [
+      { t: 'formula', headline: 'b. Garis Tegak Lurus ', headlineSuffix: '(g ⊥ h)', color: 'pink', lines: [
+        { svg: 'GARIS_TEGAK_LURUS' },
         '$g \\perp h \\Rightarrow m_g \\cdot m_h = -1$',
         'Jika $g : ax + by + c = 0$ dan tegak lurus $h$ melalui $A(x_1, y_1)$:',
         '$h : bx - ay = bx_1 - ay_1$',
