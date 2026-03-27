@@ -213,6 +213,31 @@ const GarisTegakLurus = () => (
   </svg>
 );
 
+// Dua Garis Berpotongan: g dan h (tidak tegak lurus)
+const GarisBerpotongan = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 195" width="190" height="160"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Border frame */}
+    <rect x="1" y="1" width="228" height="193" rx="10" ry="10" fill="none" stroke="rgba(74,222,128,0.5)" strokeWidth="1.5" />
+    {/* Line h: upper-left (35,22) to lower-right (195,168) */}
+    <line x1="35" y1="22" x2="195" y2="168" stroke="#FACC15" strokeWidth="2" />
+    {/* Upper-left arrowhead h */}
+    <polygon points="35,22 40,32 46,26" fill="#FACC15" />
+    {/* Lower-right arrowhead h */}
+    <polygon points="195,168 190,164 184,158" fill="#FACC15" />
+    {/* Line g: lower-left (35,168) to upper-right (195,55) */}
+    <line x1="35" y1="168" x2="195" y2="55" stroke="#FACC15" strokeWidth="2" />
+    {/* Lower-left arrowhead g */}
+    <polygon points="35,168 46,165 42,159" fill="#FACC15" />
+    {/* Upper-right arrowhead g */}
+    <polygon points="195,55 188,65 184,58" fill="#FACC15" />
+    {/* Label h upper-left */}
+    <text x="18" y="22" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+    {/* Label g lower-left */}
+    <text x="18" y="182" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+  </svg>
+);
+
 // Gradien Positif (m = +): line rises left-to-right
 // Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
 const GarisGradienPositif = () => (
@@ -312,6 +337,7 @@ const formulaSvgMap: Record<string, JSX.Element> = {
   GRADIEN_NEGATIF: <GarisGradienNegatif />,
   GARIS_SEJAJAR: <GarisSejajar />,
   GARIS_TEGAK_LURUS: <GarisTegakLurus />,
+  GARIS_BERPOTONGAN: <GarisBerpotongan />,
 };
 const FormulaCard = ({ headline, headlineSuffix, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
@@ -400,7 +426,8 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
         'Jika $g : ax + by + c = 0$ dan tegak lurus $h$ melalui $A(x_1, y_1)$:',
         '$h : bx - ay = bx_1 - ay_1$',
       ]},
-      { t: 'formula', headline: 'c. Berpotongan', color: 'green', lines: [
+      { t: 'formula', headline: 'c. Garis Berpotongan', color: 'green', lines: [
+        { svg: 'GARIS_BERPOTONGAN' },
         'Titik potong garis $g$ dan $h$ adalah $A(x_1, y_1)$',
         '(diperoleh dengan substitusi - eliminasi)',
       ]},
