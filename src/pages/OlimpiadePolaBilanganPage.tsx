@@ -178,14 +178,14 @@ const latihanDasar = [
   { no: 32, soal: "Hitunglah jumlah tak hingga dari deret geometri berikut:\n$18 + 6 + 2 + \\frac{2}{3} + ...$", options: ["A. 24", "B. 27", "C. 36", "D. Tak hingga"] },
   { no: 33, soal: "Jumlah tak hingga dari deret:\n$\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\frac{1}{16} + ...$", options: ["A. 4", "B. 5", "C. 1", "D. Deret divergen (tidak memiliki jumlah)"] },
   { no: 34, soal: "Sebuah bola tenis dijatuhkan dari ketinggian 12 meter. Setelah menyentuh lantai, bola memantul kembali dengan ketinggian $\\frac{2}{3}$ dari ketinggian sebelumnya. Pantulan ini terjadi terus-menerus hingga bola berhenti. Total panjang lintasan yang ditempuh bola tersebut adalah ....", options: ["A. 24 m", "B. 36 m", "C. 48 m", "D. 60 m"] },
-  { no: 35, soal: "Bentuk sederhana dari $\\left(1-\\frac{1}{2^2}\\right)\\left(1-\\frac{1}{3^2}\\right)\\left(1-\\frac{1}{4^2}\\right)...\\left(1-\\frac{1}{2022^2}\\right)$ adalah ....", options: [] },
+  { no: 35, soal: "Bentuk sederhana dari $\\left(1-\\frac{1}{2^2}\\right)\\left(1-\\frac{1}{3^2}\\right)\\left(1-\\frac{1}{4^2}\\right)...\\left(1-\\frac{1}{2022^2}\\right)$ adalah ....", options: ["A. $\\frac{2023}{4044}$", "B. $\\frac{1011}{2022}$", "C. $\\frac{2023}{2022}$", "D. $\\frac{1}{4044}$"] },
   { no: 36, soal: "Nilai dari $\\frac{1}{2} + \\frac{1}{6} + \\frac{1}{12} + \\frac{1}{20} + ... + \\frac{1}{420}$ adalah ....", options: ["A. $\\frac{21}{20}$", "B. $\\frac{20}{21}$", "C. $\\frac{21}{10}$", "D. $\\frac{10}{21}$"] },
-  { no: 37, soal: "Nilai dari $\\frac{1}{1 \\cdot 4} + \\frac{1}{4 \\cdot 7} + \\frac{1}{7 \\cdot 10} + ... + \\frac{1}{1998 \\cdot 2001}$ adalah ....", options: [] },
-  { no: 38, soal: "Perhatikan persamaan berikut.\n$(2^2+1)(2^4+1)(2^8+1)...(2^{2048}+1) = 2^a - b$\nNilai a dan b yang memenuhi persamaan tersebut adalah ....", options: [] },
+  { no: 37, soal: "Nilai dari $\\frac{1}{1 \\cdot 4} + \\frac{1}{4 \\cdot 7} + \\frac{1}{7 \\cdot 10} + ... + \\frac{1}{1999 \\cdot 2002}$ adalah ....", options: ["A. $\\frac{1}{3}$", "B. $\\frac{667}{2002}$", "C. $\\frac{2001}{6006}$", "D. $\\frac{1}{2002}$"] },
+  { no: 38, soal: "Perhatikan persamaan berikut.\n$(2+1)(2^2+1)(2^4+1)(2^8+1)...(2^{2048}+1) = 2^a - b$\nNilai a dan b yang memenuhi persamaan tersebut adalah ....", options: ["A. $a = 4096,\\ b = 1$", "B. $a = 2048,\\ b = 1$", "C. $a = 4096,\\ b = 3$", "D. $a = 4095,\\ b = 1$"] },
   { no: 39, soal: "Hasil dari $\\left(1+\\frac{1}{3}\\right)\\left(1+\\frac{1}{4}\\right)\\left(1+\\frac{1}{5}\\right)...\\left(1+\\frac{1}{2018}\\right)$ adalah ....", options: ["A. $\\sqrt{672}$", "B. $\\sqrt{673}$", "C. $\\sqrt{2018}$", "D. $\\sqrt{2019}$"] },
   { no: 40, soal: "Perhatikan bentuk berikut:\n$\\left(1-\\frac{1}{4}\\right)\\left(1-\\frac{1}{9}\\right)\\left(1-\\frac{1}{16}\\right)...\\left(1-\\frac{1}{n^2}\\right)$\nNilai dari bentuk di atas adalah ....", options: ["A. $\\frac{n+1}{2n}$", "B. $\\frac{n+1}{2}$", "C. $\\frac{n}{2(n+1)}$", "D. $\\frac{2n}{n+1}$"] },
   { no: 41, soal: "Nilai dari $\\frac{1}{1 \\cdot 2} + \\frac{1}{2 \\cdot 3} + \\frac{1}{3 \\cdot 4} + ... + \\frac{1}{n(n+1)}$ adalah ....", options: ["A. $\\frac{n}{n+1}$", "B. $\\frac{n+1}{n}$", "C. $\\frac{1}{n(n+1)}$", "D. $\\frac{n}{2(n+1)}$"] },
-  { no: 42, soal: "Tentukan nilai dari\n$\\frac{1}{1} + \\frac{1}{1+2} + \\frac{1}{1+2+3} + \\frac{1}{1+2+3+4} + ... + \\frac{1}{1+2+3+...+2024}$", options: [] },
+  { no: 42, soal: "Tentukan nilai dari\n$\\frac{1}{1} + \\frac{1}{1+2} + \\frac{1}{1+2+3} + \\frac{1}{1+2+3+4} + ... + \\frac{1}{1+2+3+...+2024}$", options: ["A. $\\frac{4048}{2025}$", "B. $\\frac{2024}{2025}$", "C. $\\frac{4048}{2024}$", "D. $\\frac{2023}{2025}$"] },
 ];
 
 const latihanOlimpiade = [
