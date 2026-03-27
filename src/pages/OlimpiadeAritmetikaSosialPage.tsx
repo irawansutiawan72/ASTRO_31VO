@@ -169,7 +169,52 @@ const latihanDasar = [
   { no: 6, soal: "Egi menabung Rp. 600.000,00 pada sebuah bank. Setelah 10 bulan tabungan Egi menjadi Rp. 640.000,00. Persentase bunga per tahun pada bank tersebut adalah ...", options: ["A. 6%", "B. 6,7%", "C. 8%", "D. 8,5%"] },
   { no: 7, soal: "Nina menabung pada sebuah bank dengan bunga tunggal 16% setahun. Setelah 9 bulan uangnya menjadi Rp. 2.240.000,00. Tabungan awal Nina adalah ...", options: ["A. Rp. 1.800.000,00", "B. Rp. 1.900.000,00", "C. Rp. 2.000.000,00", "D. Rp. 2.100.000,00"] },
   { no: 8, soal: "Pak Budi meminjam uang di koperasi sebesar Rp. 4.800.000,00. Ia dikenakan bunga 24% setahun. Ia berencana mengembalikan dalam 2 tahun. Besar cicilan yang harus dibayar tiap bulan adalah ...", options: ["A. Rp296.000,00", "B. Rp269.000,00", "C. Rp260.000,00", "D. Rp209.000,00"] },
-  { no: 9, soal: "Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut:\nSepatu (Harga Rp140.000): Damai 20%, Tentram 25%, Rukun 15%, Sentosa 30%\nKaos (Harga Rp100.000): Damai 25%, Tentram 20%, Rukun 30%, Sentosa 15%\nJika Febian akan membeli sepatu dan kaos, maka toko yang dipilihnya adalah ...", options: ["A. Toko Damai", "B. Toko Tentram", "C. Toko Rukun", "D. Toko Sentosa"] },
+  { no: 9, soal: "Data harga dan diskon sepatu dan kaos dari ke-empat toko sebagai berikut. Jika Febian akan membeli sepatu dan kaos, maka toko yang dipilihnya adalah ...", options: ["A. Toko Damai", "B. Toko Tentram", "C. Toko Rukun", "D. Toko Sentosa"], svgQuestion: (
+    <svg viewBox="0 0 400 86" width="100%" style={{maxWidth:"400px"}} className="my-2 block">
+      {/* Border colors */}
+      {/* Outer rect */}
+      <rect x="0.5" y="0.5" width="399" height="85" fill="none" stroke="#67e8f9" strokeWidth="1"/>
+      {/* Row dividers */}
+      <line x1="0" y1="20" x2="400" y2="20" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="0" y1="42" x2="400" y2="42" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="0" y1="64" x2="400" y2="64" stroke="#67e8f9" strokeWidth="1"/>
+      {/* Col dividers */}
+      <line x1="65" y1="0" x2="65" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="145" y1="0" x2="145" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="210" y1="20" x2="210" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="275" y1="20" x2="275" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="335" y1="20" x2="335" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      {/* Header backgrounds */}
+      <rect x="1" y="1" width="64" height="41" fill="rgba(103,232,249,0.12)"/>
+      <rect x="66" y="1" width="79" height="41" fill="rgba(103,232,249,0.12)"/>
+      <rect x="146" y="1" width="253" height="19" fill="rgba(103,232,249,0.18)"/>
+      <rect x="146" y="21" width="253" height="21" fill="rgba(103,232,249,0.10)"/>
+      {/* "Diskon Toko" spanning header */}
+      <text x="272" y="14" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Diskon Toko</text>
+      {/* Column headers row 2 */}
+      <text x="32" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Barang</text>
+      <text x="105" y="28" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Harga</text>
+      <text x="105" y="39" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">(Rp)</text>
+      <text x="177" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Damai</text>
+      <text x="242" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Tentram</text>
+      <text x="305" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Rukun</text>
+      <text x="367" y="34" fill="#ffffff" fontSize="9" fontWeight="bold" textAnchor="middle">Sentosa</text>
+      {/* Row: Sepatu */}
+      <text x="32" y="57" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
+      <text x="105" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">140.000</text>
+      <text x="177" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
+      <text x="242" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
+      <text x="305" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
+      <text x="367" y="57" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
+      {/* Row: Kaos */}
+      <text x="32" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Kaos</text>
+      <text x="105" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">100.000</text>
+      <text x="177" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
+      <text x="242" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
+      <text x="305" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">30%</text>
+      <text x="367" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
+    </svg>
+  ) },
   { no: 10, soal: "Perhatikan tabel berikut!\nJenis | Harga | Disc\nTas | Rp. 80.000,00 | 15%\nSendal | Rp 50.000,00 | 25%\nSepatu | Rp 120.000,00 | 20%\nJika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"] },
   { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] },
   { no: 12, soal: "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:\n• Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.\n• Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.\nDi toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?", options: ["A. Toko A, karena harga per kg netto sekitar Rp10.204", "B. Toko B, karena harga per kg netto sekitar Rp10.206", "C. Toko B, karena harga karungnya lebih murah (Rp990.000)", "D. Sama saja, karena brutonya sama-sama 100 kg"] },
@@ -277,6 +322,9 @@ const OlimpiadeAritmetikaSosialPage = () => {
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                   <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                 </div>
+                {'svgQuestion' in soal && soal.svgQuestion && (
+                  <div className="mb-3">{soal.svgQuestion}</div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
