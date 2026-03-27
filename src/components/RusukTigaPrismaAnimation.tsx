@@ -29,13 +29,13 @@ interface PrismaProps {
 }
 
 const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
-  const topCX = cx + 7, topCY = 28;
-  const botCX = cx - 7, botCY = 148;
+  const topCY = 28;
+  const botCY = 148;
   const faceRX = 26, faceRY = 9;
 
   const startAngle = n === 4 ? -Math.PI / 4 : -Math.PI / 2;
-  const top: Point[] = ngon(topCX, topCY, faceRX, faceRY, n, startAngle);
-  const bot: Point[] = ngon(botCX, botCY, faceRX, faceRY, n, startAngle);
+  const top: Point[] = ngon(cx, topCY, faceRX, faceRY, n, startAngle);
+  const bot: Point[] = ngon(cx, botCY, faceRX, faceRY, n, startAngle);
 
   const showAlas  = phase === 0 || phase === 3;
   const showTegak = phase === 1 || phase === 3;
@@ -48,6 +48,10 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
   const swAlas  = showAlas  ? 3.2 : 1.5;
   const swTegak = showTegak ? 3.2 : 1.5;
   const swAtas  = showAtas  ? 3.2 : 1.5;
+
+  const glowAlas  = showAlas  ? "url(#glowAlas)"  : undefined;
+  const glowTegak = showTegak ? "url(#glowTegak)" : undefined;
+  const glowAtas  = showAtas  ? "url(#glowAtas)"  : undefined;
 
   return (
     <g>
@@ -85,6 +89,7 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
             x2={b2[0].toFixed(1)} y2={b2[1].toFixed(1)}
             stroke={COLORS.alas} strokeWidth={swAlas} strokeOpacity={opAlas}
             strokeLinecap="round"
+            filter={glowAlas}
           />
         );
       })}
@@ -99,11 +104,12 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
             x2={t2[0].toFixed(1)} y2={t2[1].toFixed(1)}
             stroke={COLORS.atas} strokeWidth={swAtas} strokeOpacity={opAtas}
             strokeLinecap="round"
+            filter={glowAtas}
           />
         );
       })}
 
-      {/* ─── Rusuk Tegak ─── */}
+      {/* ─── Rusuk Tegak (vertical) ─── */}
       {bot.map((b, i) => {
         const t = top[i];
         return (
@@ -113,6 +119,7 @@ const StandingPrisma = ({ n, cx, name, rusukLabel, phase }: PrismaProps) => {
             x2={t[0].toFixed(1)} y2={t[1].toFixed(1)}
             stroke={COLORS.tegak} strokeWidth={swTegak} strokeOpacity={opTegak}
             strokeLinecap="round"
+            filter={glowTegak}
           />
         );
       })}
@@ -180,6 +187,65 @@ export default function RusukTigaPrismaAnimation() {
       {/* SVG with 3 prisms */}
       <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
         <svg viewBox="0 0 340 185" className="w-full" style={{ maxHeight: 210 }}>
+          <defs>
+            <style>{`
+              @keyframes glowPulseAlas {
+                0%,100% { stdDeviation: 4; }
+                50%      { stdDeviation: 1; }
+              }
+              @keyframes glowPulseTegak {
+                0%,100% { stdDeviation: 4; }
+                50%      { stdDeviation: 1; }
+              }
+              @keyframes glowPulseAtas {
+                0%,100% { stdDeviation: 4; }
+                50%      { stdDeviation: 1; }
+              }
+              .glow-alas-blur  { animation: glowPulseAlas  1.6s ease-in-out infinite; }
+              .glow-tegak-blur { animation: glowPulseTegak 1.6s ease-in-out infinite 0.3s; }
+              .glow-atas-blur  { animation: glowPulseAtas  1.6s ease-in-out infinite 0.6s; }
+            `}</style>
+
+            <filter id="glowAlas" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur">
+                <animate attributeName="stdDeviation" values="4;1;4" dur="1.6s" repeatCount="indefinite" />
+              </feGaussianBlur>
+              <feFlood floodColor="#22d3ee" floodOpacity="0.85" result="color" />
+              <feComposite in="color" in2="blur" operator="in" result="glow" />
+              <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <filter id="glowTegak" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur">
+                <animate attributeName="stdDeviation" values="4;1;4" dur="1.6s" begin="0.3s" repeatCount="indefinite" />
+              </feGaussianBlur>
+              <feFlood floodColor="#f97316" floodOpacity="0.85" result="color" />
+              <feComposite in="color" in2="blur" operator="in" result="glow" />
+              <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <filter id="glowAtas" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur">
+                <animate attributeName="stdDeviation" values="4;1;4" dur="1.6s" begin="0.6s" repeatCount="indefinite" />
+              </feGaussianBlur>
+              <feFlood floodColor="#facc15" floodOpacity="0.85" result="color" />
+              <feComposite in="color" in2="blur" operator="in" result="glow" />
+              <feMerge>
+                <feMergeNode in="glow" />
+                <feMergeNode in="glow" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
           {/* Column dividers */}
           <line x1="113.5" y1="5" x2="113.5" y2="155" stroke="#1e293b" strokeWidth="1" />
           <line x1="226.5" y1="5" x2="226.5" y2="155" stroke="#1e293b" strokeWidth="1" />
