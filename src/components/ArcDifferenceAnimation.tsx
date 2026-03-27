@@ -49,6 +49,18 @@ const patterns: PatternConfig[] = [
     note: "Beda: +3, +5, +7, +9, +11 → bilangan ganjil!",
   },
   {
+    label: "Pola Persegi Panjang",
+    color: "text-green-200",
+    borderColor: "border-green-500/60",
+    arcColor: "#4ade80",
+    labelColor: "#bbf7d0",
+    bgColor: "bg-green-900/40",
+    terms: [2, 6, 12, 20, 30, 42],
+    getDifferences: (t) => t.slice(1).map((v, i) => v - t[i]),
+    diffLabel: "Beda bertambah +2 setiap kali",
+    note: "Beda: +4, +6, +8, +10, +12 → bilangan genap!",
+  },
+  {
     label: "Pola Segitiga",
     color: "text-yellow-200",
     borderColor: "border-yellow-500/60",
@@ -247,7 +259,7 @@ export default function ArcDifferenceAnimation() {
             arcColor={pattern.arcColor}
             labelColor={pattern.labelColor}
             animate={true}
-            isFibonacci={selected === 4}
+            isFibonacci={selected === 5}
           />
         </div>
 
