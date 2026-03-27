@@ -117,10 +117,9 @@ const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
       </svg>
     );
   }
-  // variant D: a>0, vertex between 3 and 5 (shallow), y-intercept=15 on y-axis
-  const ox=22, ay=70, scX=15, scY=4;
-  const r1x=ox+3*scX, r2x=ox+5*scX, vx=ox+4*scX;
-  const yIntY=ay-15*scY;
+  // variant D: a>0, roots 3 and 5, y-intercept=15 on y-axis
+  const ox=28, ay=80;
+  const r1x=76, r2x=108, yIntY=20;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
       <line x1="5" y1={ay} x2="145" y2={ay} stroke={ac} strokeWidth="1.2"/>
@@ -129,7 +128,7 @@ const q13Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
       <line x1={ox} y1="5" x2={ox} y2="105" stroke={ac} strokeWidth="1.2"/>
       {axisArrow(ox,5,'up')}
       <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">Y</text>
-      <path d={`M ${ox},${yIntY} Q ${60},${12} ${r1x},${ay} Q ${vx},${ay+4} ${r2x},${ay} Q ${118},${66} ${138},${38}`} fill="none" stroke={cc} strokeWidth="2"/>
+      <path d={`M 8,10 Q 28,16 ${r1x},${ay} Q 92,88 ${r2x},${ay} Q 128,48 145,10`} fill="none" stroke={cc} strokeWidth="2"/>
       <line x1={r1x} y1={ay-3} x2={r1x} y2={ay+3} stroke={tc} strokeWidth="1"/>
       <line x1={r2x} y1={ay-3} x2={r2x} y2={ay+3} stroke={tc} strokeWidth="1"/>
       <line x1={ox-3} y1={yIntY} x2={ox+3} y2={yIntY} stroke={tc} strokeWidth="1"/>
