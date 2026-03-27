@@ -560,7 +560,7 @@ const GrafikSoal1D = () => (
 );
 
 const latihanDasar = [
-  { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL1A", "SVG:SOAL1B", "SVG:SOAL1C", "SVG:SOAL1D"] },
   { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
   { no: 3, soal: "Gradien garis h pada gambar di bawah adalah ...", options: ["A. $-\\frac{3}{2}$", "B. $-\\frac{2}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{2}$"] },
   { no: 4, soal: "Perhatikan gambar! Gradien garis g adalah ...", options: ["A. $\\frac{3}{2}$", "B. $\\frac{2}{3}$", "C. $-\\frac{2}{3}$", "D. $-\\frac{3}{2}$"] },
@@ -694,22 +694,42 @@ const OlimpiadePersamaanGarisPage = () => {
 
         {activeTab === "dasar" && (
           <div className="space-y-4 animate-slide-up">
-            {latihanDasar.map((soal) => (
-              <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
-                <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
-                  <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
-                </div>
-                {soal.options.length > 0 && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {soal.options.map((opt, j) => (
-                      <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
-                        {renderWithLatex(opt)}
-                      </div>
-                    ))}
+            {latihanDasar.map((soal) => {
+              const optLabels = ["A", "B", "C", "D"];
+              const svgOptionMap: Record<string, JSX.Element> = {
+                "SVG:SOAL1A": <GrafikSoal1A />,
+                "SVG:SOAL1B": <GrafikSoal1B />,
+                "SVG:SOAL1C": <GrafikSoal1C />,
+                "SVG:SOAL1D": <GrafikSoal1D />,
+              };
+              const hasSvgOptions = soal.options.some(opt => opt.startsWith("SVG:"));
+              return (
+                <div key={soal.no} className="bg-card/80 backdrop-blur border border-border rounded-xl px-5 py-4">
+                  <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
+                    <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                   </div>
-                )}
-              </div>
-            ))}
+                  {soal.options.length > 0 && (
+                    <div className={`grid gap-2 ${hasSvgOptions ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"}`}>
+                      {soal.options.map((opt, j) => {
+                        const svgEl = svgOptionMap[opt];
+                        return (
+                          <div key={j} className="font-body text-xs text-white/70 bg-muted/30 rounded-lg px-3 py-2">
+                            {svgEl ? (
+                              <div>
+                                <span className="text-white font-bold block mb-1">{optLabels[j]}.</span>
+                                {svgEl}
+                              </div>
+                            ) : (
+                              renderWithLatex(opt)
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
 
