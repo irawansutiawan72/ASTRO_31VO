@@ -6,6 +6,7 @@ import { BookOpen, ChevronDown, ChevronUp, Triangle } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -919,10 +920,20 @@ const slides: Slide[] = [
     icon: "⬛",
     title: "Unsur — Rusuk Prisma",
     content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <p className="text-xs text-white/60">Contoh: prisma segitiga (n = 3)</p>
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        {/* 3-prism interactive animation */}
+        <div className="bg-slate-800/60 border border-cyan-700/40 rounded-xl p-4">
+          <p className="text-cyan-300 font-semibold mb-1">🎬 Perbandingan Rusuk — 3 Jenis Prisma Berdiri</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan: ketiga prisma <strong className="text-yellow-300">berdiri tegak</strong> — alas di bawah, tutup di atas.
+            Alas dan tutup <em>selalu berbentuk sama</em>. Tekan tombol untuk melihat kelompok rusuknya!
+          </p>
+          <RusukTigaPrismaAnimation />
+        </div>
+
+        <p className="text-xs text-white/60">Detail untuk prisma segitiga (n = 3):</p>
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Prisma Segitiga (9 rusuk)</p>
+          <p className="text-cyan-300 font-semibold mb-2">⬛ Rusuk Prisma Segitiga — Animasi Detail (9 rusuk)</p>
           <RusukPrismaSVG />
           <div className="text-xs text-white/70 space-y-1 mt-2">
             <p>• <strong className="text-cyan-300">3 rusuk alas:</strong> membentuk segitiga alas bawah</p>
