@@ -238,28 +238,22 @@ const GarisBerpotongan = () => (
   </svg>
 );
 
-// Dua Garis Berimpit: g dan h (coincident)
+// Dua Garis Berimpit: g dan h (coincident — satu garis, dua label)
 const GarisBerimpit = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 195" width="190" height="160"
     className="my-2" style={{ display: "block", margin: "0 auto" }}>
     {/* Border frame */}
     <rect x="1" y="1" width="228" height="193" rx="10" ry="10" fill="none" stroke="rgba(192,132,252,0.5)" strokeWidth="1.5" />
-    {/* Line g (slightly lower): lower-left (47,170) to upper-right (187,30) */}
-    <line x1="47" y1="170" x2="187" y2="30" stroke="#FACC15" strokeWidth="2" />
-    {/* Lower-left arrowhead g */}
-    <polygon points="47,170 58,165 52,159" fill="#FACC15" />
-    {/* Upper-right arrowhead g */}
-    <polygon points="187,30 182,41 176,35" fill="#FACC15" />
-    {/* Line h (slightly upper): lower-left (43,166) to upper-right (183,26) */}
-    <line x1="43" y1="166" x2="183" y2="26" stroke="#FACC15" strokeWidth="2" />
-    {/* Lower-left arrowhead h */}
-    <polygon points="43,166 54,161 48,155" fill="#FACC15" />
-    {/* Upper-right arrowhead h */}
-    <polygon points="183,26 178,37 172,31" fill="#FACC15" />
-    {/* Label g */}
-    <text x="52" y="130" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
-    {/* Label h */}
-    <text x="118" y="82" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+    {/* Single coincident line: lower-left (40,168) to upper-right (190,27) */}
+    <line x1="40" y1="168" x2="190" y2="27" stroke="#FACC15" strokeWidth="2.5" />
+    {/* Lower-left arrowhead */}
+    <polygon points="40,168 52,163 46,157" fill="#FACC15" />
+    {/* Upper-right arrowhead */}
+    <polygon points="190,27 185,39 179,33" fill="#FACC15" />
+    {/* Label g — lower portion of line */}
+    <text x="58" y="148" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    {/* Label h — upper portion of line */}
+    <text x="138" y="72" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
   </svg>
 );
 
