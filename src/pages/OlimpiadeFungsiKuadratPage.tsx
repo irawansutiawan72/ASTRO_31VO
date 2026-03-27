@@ -433,7 +433,7 @@ const olimpSoal1Svg = (): ReactNode => {
       <line x1={ox} y1="5" x2={ox} y2="88" stroke={ac} strokeWidth="1.2"/>
       {arr(ox,5,'u')}
       <text x={ox} y="4" fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">y</text>
-      <path d="M 8,5 C 16,24 28,44 38,55 Q 75,95 112,55 C 120,44 128,24 132,8"
+      <path d="M 8,5 C 15,22 27,45 38,55 Q 75,96 112,55 C 121,45 128,22 132,5"
         fill="none" stroke={cc} strokeWidth="2"/>
       <text x="112" y={ay+12} fill={tc} fontSize="9" textAnchor="middle">(a,0)</text>
       <text x={ox+4} y={ay+12} fill={tc} fontSize="9">O</text>
