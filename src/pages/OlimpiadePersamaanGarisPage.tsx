@@ -358,10 +358,10 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
   {
     heading: "C. Hubungan Dua Garis Lurus",
     items: [
-      { t: 'formula', headline: 'a. Garis Sejajar (g ∥ h)', color: 'cyan', lines: [
+      { t: 'formula', headline: 'a. Garis Sejajar (g // h)', color: 'cyan', lines: [
         { svg: 'GARIS_SEJAJAR' },
-        'Jika $g \\parallel h$ maka gradiennya sama: $m_g = m_h$',
-        'Jika $g : ax + by + c = 0$ dan $g \\parallel h$ melalui $A(x_1, y_1)$:',
+        'Jika $g // h$ maka gradiennya sama: $m_g = m_h$',
+        'Jika $g : ax + by + c = 0$ dan $g // h$ melalui $A(x_1, y_1)$:',
         '$h : ax + by = ax_1 + by_1$',
       ]},
       { t: 'formula', headline: 'b. Garis Tegak Lurus (g ⊥ h)', color: 'pink', lines: [
