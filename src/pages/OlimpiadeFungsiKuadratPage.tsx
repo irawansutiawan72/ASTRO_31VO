@@ -521,6 +521,58 @@ const olimp1Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
   );
 };
 
+const olimp9Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
+  const tc="#ffffff", gc="rgba(255,255,255,0.15)", dc="rgba(255,255,255,0.5)", cc="#facc15", ac="#67e8f9";
+  const W=165, H=172;
+  const gx0=38, gx1=155, gy0=8, gy1=148;
+  const sx=(gx1-gx0)/6;
+  const sy=(gy1-gy0)/55;
+  const px=(t:number)=>Math.round(gx0+t*sx);
+  const py=(s:number)=>Math.round(gy1-s*sy);
+  const sVals=[0,5,10,15,20,25,30,35,40,45,50,55];
+  const tVals=[0,1,2,3,4,5,6];
+
+  let curvePath='';
+  if (variant==='A') {
+    // Steep concave-up: rapid drop then levels near 0 at t≈2.5
+    curvePath=`M ${px(1)},${py(50)} C ${px(1)+1},${py(25)} ${px(2.4)},${py(1)} ${px(2.5)},${py(0)}`;
+  } else if (variant==='B') {
+    // Gentle concave-down: slow start then accelerates, reaches 0 at t=6
+    curvePath=`M ${px(1)},${py(50)} C ${px(2)},${py(48)} ${px(4.8)},${py(16)} ${px(6)},${py(0)}`;
+  } else if (variant==='C') {
+    // Straight line from (1,50) to (5,0)
+    curvePath=`M ${px(1)},${py(50)} L ${px(5)},${py(0)}`;
+  } else {
+    // Steeper straight line from (1,50) to (3.5,0)
+    curvePath=`M ${px(1)},${py(50)} L ${px(3.5)},${py(0)}`;
+  }
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{maxWidth:`${W}px`}} className="mt-1 block">
+      {sVals.map(s=>(
+        <line key={`h${s}`} x1={gx0} y1={py(s)} x2={gx1} y2={py(s)} stroke={gc} strokeWidth="0.6"/>
+      ))}
+      {tVals.map(t=>(
+        <line key={`v${t}`} x1={px(t)} y1={gy0} x2={px(t)} y2={gy1} stroke={gc} strokeWidth="0.6"/>
+      ))}
+      <line x1={gx0} y1={gy0} x2={gx0} y2={gy1} stroke={ac} strokeWidth="1.2"/>
+      <line x1={gx0} y1={gy1} x2={gx1+4} y2={gy1} stroke={ac} strokeWidth="1.2"/>
+      <line x1={px(1)} y1={gy0} x2={px(1)} y2={gy1} stroke={dc} strokeWidth="0.9" strokeDasharray="3,2"/>
+      <line x1={gx0} y1={py(50)} x2={px(1)} y2={py(50)} stroke={dc} strokeWidth="0.9" strokeDasharray="3,2"/>
+      <text fill={tc} fontSize="6" textAnchor="middle"
+        transform={`translate(9,${Math.round(gy0+(gy1-gy0)/2)}) rotate(-90)`}>jarak (S)</text>
+      <text x={Math.round(gx0+(gx1-gx0)/2)} y={gy1+16} fill={tc} fontSize="6" textAnchor="middle">waktu (t)</text>
+      {[5,10,15,20,25,30,35,40,45,50,55].map(s=>(
+        <text key={s} x={gx0-2} y={py(s)+2} fill={tc} fontSize="4.5" textAnchor="end">{s}</text>
+      ))}
+      {[1,2,3,4,5,6].map(t=>(
+        <text key={t} x={px(t)} y={gy1+8} fill={tc} fontSize="5" textAnchor="middle">{t}</text>
+      ))}
+      <path d={curvePath} fill="none" stroke={cc} strokeWidth="1.8"/>
+    </svg>
+  );
+};
+
 const latihanOlimpiade = [
   { no: 1, soal: "OSN Matematika 2010 Tingkat Kota\nFungsi $f(x) = x^2 - ax$ mempunyai grafik berikut. Grafik fungsi $g(x) = x^2 + ax + 5$ adalah ...", options: ["A.", "B.", "C.", "D."], svgQuestion: olimpSoal1Svg(), svgOptions: [olimp1Svg('A'), olimp1Svg('B'), olimp1Svg('C'), olimp1Svg('D')] },
   { no: 2, soal: "OSN Matematika 2010 Tingkat Kota\nJika $P(x) = Q(x) \\cdot (x - a)$, Dimana $P(x)$ dan $Q(x)$ polinom, maka:", options: ["A. $P(a) \\neq 0$", "B. $x - a$ bukan faktor dari $P(x)$", "C. Kurva $y = P(x)$ memotong sumbu x di titik $(a, 0)$", "D. Kurva $y = P(x)$ memotong sumbu x di titik $(-a, 0)$", "E. Titik potong terhadap sumbu x tidak dapat ditentukan"] },
@@ -530,7 +582,7 @@ const latihanOlimpiade = [
   { no: 6, soal: "OSN Matematika 2018 Tingkat Kota\nJika $0 < a < 1$ dan grafik fungsi kuadrat $y = a(x - 1)^2 + 2a$ berada di bawah grafik fungsi $y = (a^2 + 2a)(x + 1) - 2a(2a + 1)$, maka nilai x yang memenuhi adalah ...", options: ["A. $0 < x < 3$", "B. $a < x < 3$", "C. $a + 1 < x < 3$", "D. $3 < x < 3 + a$"] },
   { no: 7, soal: "OSN Matematika 2019 Tingkat Kota\nParabola $y = ax^2 + bx + c$ mempunyai puncak di $(p, p)$ dan titik potong dengan sumbu y di $(0, -p)$ jika $p \\neq 0$, maka nilai b adalah ...", options: ["A. 1", "B. 2", "C. 4", "D. 8"] },
   { no: 8, soal: "OSN Matematika 2021 Tingkat Kota\nP adalah titik minimum grafik fungsi kuadrat yang melalui $(2a, 0)$, $(4a, 0)$, dan $(0, 3a)$ dengan $a > 0$. Agar jarak P ke sumbu-x lebih dari 3 satuan, maka nilai a adalah ...", options: ["A. $0 < a < 3$", "B. $0 < a < 8$", "C. $a > 3$", "D. $a > 8$"] },
-  { no: 9, soal: "OSN Matematika 2023 Tingkat Kota\nA bergerak mendekati B yang berjarak 55 km dengan kecepatan 5 km/jam. Satu jam kemudian, B bergerak menuju A dengan kecepatan x km/jam, dengan x adalah waktu (dalam jam) ketika B berangkat sampai ketemu A. Grafik yang menyatakan hubungan antara waktu (t) yang dibutuhkan A bertemu B dengan jarak (s) A dan B adalah ...", options: ["A. (Gambar grafik)", "B. (Gambar grafik)", "C. (Gambar grafik)", "D. (Gambar grafik)"] },
+  { no: 9, soal: "OSN Matematika 2023 Tingkat Kota\nA bergerak mendekati B yang berjarak 55 km dengan kecepatan 5 km/jam. Satu jam kemudian, B bergerak menuju A dengan kecepatan x km/jam, dengan x adalah waktu (dalam jam) ketika B berangkat sampai ketemu A. Grafik yang menyatakan hubungan antara waktu (t) yang dibutuhkan A bertemu B dengan jarak (s) A dan B adalah ...", options: ["A.", "B.", "C.", "D."], svgOptions: [olimp9Svg('A'), olimp9Svg('B'), olimp9Svg('C'), olimp9Svg('D')] },
   { no: 10, soal: "OSN Matematika 2023 Tingkat Kota\nDiketahui suatu konstanta $k > 0$. Garis l dengan persamaan $y = 2kx + 3k^2$ memotong parabola dengan persamaan $y = x^2$ pada titik P di kuadran I dan titik Q di kuadran II. Jika koordinat O adalah $(0, 0)$ dan luas daerah segitiga POQ adalah 48 satuan luas, maka kemiringan garis l adalah ...", options: ["A. $\\frac{2}{3}$", "B. 2", "C. $\\frac{4}{3}$", "D. 4"] },
 ];
 
