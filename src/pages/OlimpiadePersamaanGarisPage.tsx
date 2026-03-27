@@ -161,6 +161,31 @@ const TabelTitikGrafik = () => (
   </svg>
 );
 
+// Dua Garis Sejajar: g dan h
+const GarisSejajar = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190" width="180" height="160"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Border frame */}
+    <rect x="1" y="1" width="218" height="188" rx="10" ry="10" fill="none" stroke="rgba(34,211,238,0.5)" strokeWidth="1.5" />
+    {/* Line g: from (50,168) to (100,22) */}
+    <line x1="50" y1="168" x2="100" y2="22" stroke="white" strokeWidth="2" />
+    {/* Upper arrowhead g at (100,22) */}
+    <polygon points="100,22 100.5,35 92.5,32" fill="white" />
+    {/* Lower arrowhead g at (50,168) */}
+    <polygon points="50,168 57.5,157 49.5,154" fill="white" />
+    {/* Line h: from (122,168) to (172,22) */}
+    <line x1="122" y1="168" x2="172" y2="22" stroke="white" strokeWidth="2" />
+    {/* Upper arrowhead h at (172,22) */}
+    <polygon points="172,22 172.5,35 164.5,32" fill="white" />
+    {/* Lower arrowhead h at (122,168) */}
+    <polygon points="122,168 129.5,157 121.5,154" fill="white" />
+    {/* Label g */}
+    <text x="62" y="105" fill="white" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    {/* Label h */}
+    <text x="140" y="128" fill="white" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
 // Gradien Positif (m = +): line rises left-to-right
 // Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
 const GarisGradienPositif = () => (
@@ -258,6 +283,7 @@ interface FormulaCardProps { headline: string; lines: FormulaLine[]; color: stri
 const formulaSvgMap: Record<string, JSX.Element> = {
   GRADIEN_POSITIF: <GarisGradienPositif />,
   GRADIEN_NEGATIF: <GarisGradienNegatif />,
+  GARIS_SEJAJAR: <GarisSejajar />,
 };
 const FormulaCard = ({ headline, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
@@ -333,6 +359,7 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
     heading: "C. Hubungan Dua Garis Lurus",
     items: [
       { t: 'formula', headline: 'a. Garis Sejajar (g ∥ h)', color: 'cyan', lines: [
+        { svg: 'GARIS_SEJAJAR' },
         'Jika $g \\parallel h$ maka gradiennya sama: $m_g = m_h$',
         'Jika $g : ax + by + c = 0$ dan $g \\parallel h$ melalui $A(x_1, y_1)$:',
         '$h : ax + by = ax_1 + by_1$',
