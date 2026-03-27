@@ -22,6 +22,8 @@ const internetRefs = [
   { label: "youtube.com/watch?v=PXT5uJP1WwE", url: "https://www.youtube.com/watch?v=PXT5uJP1WwE", akses: "Maret 2026", author: "Nurahman, F.", title: "TEMPLATE GAME INTERAKTIF POWERPOINT #4" },
   { label: "youtube.com/watch?v=mRy5nXHrHQk", url: "https://www.youtube.com/watch?v=mRy5nXHrHQk", akses: "Maret 2026", author: "Saya Bisa.", title: "Bilangan Bulat: Penjumlahan dan Pengurangan | Matematika | SayaBisa." },
   { label: "youtube.com/watch?v=JrWic2SG_ts", url: "https://www.youtube.com/watch?v=JrWic2SG_ts", akses: "Maret 2026", author: "Saya Bisa.", title: "Operasi Hitung Bilangan Bulat: Perkalian dan Pembagian | Matematika | SayaBisa." },
+  { label: "gemini.google.com/app/d3c60af4ffbee066", url: "https://gemini.google.com/app/d3c60af4ffbee066?hl=id", akses: "Maret 2026" },
+  { label: "gemini.google.com/app/5eb5a48656083a32", url: "https://gemini.google.com/app/5eb5a48656083a32?hl=id", akses: "Maret 2026" },
 ];
 
 const ReferensiPage = () => {
