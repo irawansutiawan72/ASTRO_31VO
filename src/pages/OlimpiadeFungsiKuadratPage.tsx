@@ -18,6 +18,67 @@ const renderWithLatex = (text: string) => {
   });
 };
 
+const SvgParabolaTable = () => {
+  const ac = "#67e8f9";
+  const cc = "#facc15";
+  const tc = "#ffffff";
+  const bc = "#dc2626";
+
+  const cells: { x: number; y: number; type: string; label?: string; labelY?: number }[] = [
+    { x: 127, y: 100, type: "a+D+" },
+    { x: 272, y: 100, type: "a+D0" },
+    { x: 417, y: 100, type: "a+D-", label: "Definit Positif", labelY: 152 },
+    { x: 127, y: 228, type: "a-D+" },
+    { x: 272, y: 228, type: "a-D0" },
+    { x: 417, y: 228, type: "a-D-", label: "Definit Negatif", labelY: 175 },
+  ];
+
+  const curve = (x: number, y: number, type: string) => {
+    switch (type) {
+      case "a+D+": return `M ${x-40},${y} Q ${x},${y+38} ${x+40},${y}`;
+      case "a+D0": return `M ${x-40},${y-26} Q ${x},${y+26} ${x+40},${y-26}`;
+      case "a+D-": return `M ${x-35},${y-35} Q ${x},${y-5} ${x+35},${y-35}`;
+      case "a-D+": return `M ${x-40},${y} Q ${x},${y-38} ${x+40},${y}`;
+      case "a-D0": return `M ${x-40},${y+26} Q ${x},${y-26} ${x+40},${y+26}`;
+      case "a-D-": return `M ${x-35},${y+35} Q ${x},${y+5} ${x+35},${y+35}`;
+      default: return "";
+    }
+  };
+
+  return (
+    <svg viewBox="0 0 490 296" width="100%" style={{ maxWidth: "490px" }} className="my-4 mx-auto block">
+      <rect x="0.75" y="0.75" width="488.5" height="294.5" fill="none" stroke={bc} strokeWidth="1.5" />
+      <line x1="0" y1="32" x2="490" y2="32" stroke={bc} strokeWidth="1.5" />
+      <line x1="55" y1="0" x2="55" y2="296" stroke={bc} strokeWidth="1.5" />
+      <line x1="200" y1="0" x2="200" y2="296" stroke={bc} strokeWidth="1.5" />
+      <line x1="345" y1="0" x2="345" y2="296" stroke={bc} strokeWidth="1.5" />
+      <line x1="0" y1="163" x2="490" y2="163" stroke={bc} strokeWidth="1.5" />
+      <line x1="0" y1="0" x2="55" y2="32" stroke={bc} strokeWidth="1" />
+
+      <text x="127" y="22" fill={tc} fontSize="12" textAnchor="middle" fontWeight="bold">{'D > 0'}</text>
+      <text x="272" y="22" fill={tc} fontSize="12" textAnchor="middle" fontWeight="bold">{'D = 0'}</text>
+      <text x="417" y="22" fill={tc} fontSize="12" textAnchor="middle" fontWeight="bold">{'D < 0'}</text>
+      <text x="27" y="100" fill={tc} fontSize="11" textAnchor="middle" fontWeight="bold">{'a > 0'}</text>
+      <text x="27" y="228" fill={tc} fontSize="11" textAnchor="middle" fontWeight="bold">{'a < 0'}</text>
+
+      {cells.map((cell, i) => (
+        <g key={i}>
+          <line x1={cell.x - 46} y1={cell.y} x2={cell.x + 50} y2={cell.y} stroke={ac} strokeWidth="1.2" />
+          <polygon points={`${cell.x+50},${cell.y-3} ${cell.x+50},${cell.y+3} ${cell.x+56},${cell.y}`} fill={ac} />
+          <line x1={cell.x} y1={cell.y + 44} x2={cell.x} y2={cell.y - 50} stroke={ac} strokeWidth="1.2" />
+          <polygon points={`${cell.x-3},${cell.y-50} ${cell.x+3},${cell.y-50} ${cell.x},${cell.y-56}`} fill={ac} />
+          <text x={cell.x + 61} y={cell.y + 4} fill={tc} fontSize="9" textAnchor="middle" fontStyle="italic">x</text>
+          <text x={cell.x + 3} y={cell.y - 57} fill={tc} fontSize="9" textAnchor="start" fontStyle="italic">y</text>
+          <path d={curve(cell.x, cell.y, cell.type)} fill="none" stroke={cc} strokeWidth="2" />
+          {cell.label && (
+            <text x={cell.x + 10} y={cell.labelY} fill={tc} fontSize="8.5" textAnchor="middle" fontWeight="bold">{cell.label}</text>
+          )}
+        </g>
+      ))}
+    </svg>
+  );
+};
+
 const materiSection = {
   title: "MATERI - FUNGSI KUADRAT",
   sections: [
@@ -168,6 +229,7 @@ const OlimpiadeFungsiKuadratPage = () => {
                         <div key={i} className="mb-1">{renderWithLatex(line)}</div>
                       ))}
                     </div>
+                    {idx === 0 && <SvgParabolaTable />}
                   </div>
                 )}
               </div>
