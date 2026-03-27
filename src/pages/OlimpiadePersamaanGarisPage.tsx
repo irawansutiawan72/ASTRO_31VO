@@ -616,15 +616,60 @@ const GrafikSoal3 = () => (
   </svg>
 );
 
+const GrafikSoal4 = () => {
+  // Grid: 8x8 cells, 16px each, starting at (8,8)
+  // Line g from (col=1,row=6) to (col=7,row=2): math slope = -2/3
+  const offset = 8;
+  const cell = 16;
+  const cols = 8;
+  const rows = 8;
+  const w = offset + cols * cell + offset; // 144
+  const h = offset + rows * cell + offset; // 144
+
+  const gx = (col: number) => offset + col * cell;
+  const gy = (row: number) => offset + (rows - row) * cell;
+
+  const x1 = gx(1), y1 = gy(6);
+  const x2 = gx(7), y2 = gy(2);
+
+  const gridLines: JSX.Element[] = [];
+  for (let c = 0; c <= cols; c++) {
+    gridLines.push(
+      <line key={`v${c}`} x1={gx(c)} y1={offset} x2={gx(c)} y2={h - offset}
+        stroke="#FACC15" strokeWidth="0.7" strokeOpacity="0.6" />
+    );
+  }
+  for (let r = 0; r <= rows; r++) {
+    gridLines.push(
+      <line key={`h${r}`} x1={offset} y1={gy(r)} x2={w - offset} y2={gy(r)}
+        stroke="#FACC15" strokeWidth="0.7" strokeOpacity="0.6" />
+    );
+  }
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} width="160" height="160"
+      style={{ display: "block", margin: "0 auto" }}>
+      <rect x="0" y="0" width={w} height={h} rx="6" fill="rgba(0,0,0,0.35)" />
+      {gridLines}
+      <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#38BDF8" strokeWidth="2.2" strokeLinecap="round" />
+      <circle cx={x1} cy={y1} r="3.5" fill="#38BDF8" />
+      <circle cx={x2} cy={y2} r="3.5" fill="#38BDF8" />
+      <text x={(x1 + x2) / 2 + 6} y={(y1 + y2) / 2 + 4}
+        fill="white" fontSize="13" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    </svg>
+  );
+};
+
 const soalSvgMap: Record<string, JSX.Element> = {
   SOAL3: <GrafikSoal3 />,
+  SOAL4: <GrafikSoal4 />,
 };
 
 const latihanDasar = [
   { no: 1, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL1A", "SVG:SOAL1B", "SVG:SOAL1C", "SVG:SOAL1D"] },
   { no: 2, soal: "Grafik garis dengan persamaan $2x - y = 3$, x dan y $\\in$ R adalah ...", options: ["SVG:SOAL2A", "SVG:SOAL2B", "SVG:SOAL2C", "SVG:SOAL2D"] },
   { no: 3, soal: "Gradien garis h pada gambar di bawah adalah ...", soalSvg: "SOAL3", options: ["A. $-\\frac{3}{2}$", "B. $-\\frac{2}{3}$", "C. $\\frac{2}{3}$", "D. $\\frac{3}{2}$"] },
-  { no: 4, soal: "Perhatikan gambar! Gradien garis g adalah ...", options: ["A. $\\frac{3}{2}$", "B. $\\frac{2}{3}$", "C. $-\\frac{2}{3}$", "D. $-\\frac{3}{2}$"] },
+  { no: 4, soal: "Perhatikan gambar! Gradien garis g adalah ...", soalSvg: "SOAL4", options: ["A. $\\frac{3}{2}$", "B. $\\frac{2}{3}$", "C. $-\\frac{2}{3}$", "D. $-\\frac{3}{2}$"] },
   { no: 5, soal: "Gradien garis yang melalui titik $(2, 1)$ dan $(4, 7)$ adalah ...", options: ["A. 0,2", "B. 0,5", "C. 2", "D. 3"] },
   { no: 6, soal: "Gradien garis dengan persamaan $3x + 8y = 9$ adalah ...", options: ["A. $\\frac{8}{3}$", "B. $\\frac{3}{8}$", "C. $-\\frac{3}{8}$", "D. $-\\frac{8}{3}$"] },
   { no: 7, soal: "Gradien garis yang mempunyai persamaan $3y = 4x + 5$ adalah ...", options: ["A. $-\\frac{4}{5}$", "B. $\\frac{4}{3}$", "C. $\\frac{3}{4}$", "D. $\\frac{3}{5}$"] },
