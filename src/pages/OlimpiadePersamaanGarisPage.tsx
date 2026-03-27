@@ -660,9 +660,220 @@ const GrafikSoal4 = () => {
   );
 };
 
+// No. 16 — line m through (0,−3) and (4,0), slope 3/4
+// Origin (80,110), scale 20px
+const GrafikSoal16 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">X</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">Y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="160" y1="107" x2="160" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="155" y="124" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
+    <text x="53" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-3</text>
+    {/* line m: (80,170)=(0,-3) and (160,110)=(4,0), SVG slope -3/4 */}
+    <line x1="42" y1="198" x2="183" y2="91" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="42,198 51,196 46,190" fill={_lineYellow} />
+    <polygon points="183,91 179,99 173,96" fill={_lineYellow} />
+    <text x="173" y="89" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">m</text>
+  </svg>
+);
+
+// No. 17 — line k through (0,1) and dot at (2,3), slope 1
+// Origin (80,110), scale 20px
+const GrafikSoal17 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="77" y1="90" x2="83" y2="90" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="94" fill="white" fontSize="9" fontFamily="sans-serif">1</text>
+    {/* line k: (80,90)=(0,1) → (120,50)=(2,3), SVG slope -1 */}
+    <line x1="10" y1="160" x2="152" y2="18" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="10,160 21,157 18,150" fill={_lineYellow} />
+    <polygon points="152,18 146,29 140,25" fill={_lineYellow} />
+    <circle cx="120" cy="50" r="3.5" fill={_lineYellow} />
+    <text x="124" y="48" fill="white" fontSize="9" fontFamily="sans-serif">(2,3)</text>
+    <text x="153" y="16" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">k</text>
+  </svg>
+);
+
+// No. 20 — two parallel lines, slope 2
+// Line 1: through (-2,0) and (0,4); Line h: through (0,-6)
+// Origin (80,110), scale 10px
+const GrafikSoal20 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="195" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="60" y1="107" x2="60" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="48" y="123" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <line x1="77" y1="70" x2="83" y2="70" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="74" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
+    <text x="57" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-6</text>
+    {/* Line 1: (60,110)=(-2,0), (80,70)=(0,4), SVG slope -2. Extended (20,190)→(110,10) */}
+    <line x1="20" y1="190" x2="110" y2="10" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="20,190 28,183 23,178" fill={_lineYellow} />
+    <polygon points="110,10 105,20 99,17" fill={_lineYellow} />
+    {/* Line h: (80,170)=(0,-6), same slope. Extended (70,190)→(140,50) */}
+    <line x1="70" y1="190" x2="140" y2="50" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="70,190 78,183 73,178" fill={_lineYellow} />
+    <polygon points="140,50 136,61 130,57" fill={_lineYellow} />
+    <text x="143" y="46" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
+// No. 21 — two perpendicular lines at (4,0): line 1 through (0,3)→(4,0); line b perpendicular
+// Origin (80,110), scale 15px
+const GrafikSoal21 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">X</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">Y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="77" y1="65" x2="83" y2="65" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="69" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <line x1="140" y1="107" x2="140" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="135" y="124" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    {/* Line 1: (80,65)=(0,3) → (140,110)=(4,0), SVG slope 3/4. Extended (10,13)→(185,144) */}
+    <line x1="10" y1="13" x2="185" y2="144" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="10,13 20,15 17,22" fill={_lineYellow} />
+    <polygon points="185,144 176,141 179,134" fill={_lineYellow} />
+    {/* Line b: through (140,110), SVG slope -4/3. Extended (100,163)→(177,61) */}
+    <line x1="100" y1="163" x2="177" y2="61" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="100,163 109,158 106,151" fill={_lineYellow} />
+    <polygon points="177,61 169,68 164,63" fill={_lineYellow} />
+    {/* Right angle at (140,110) — along line1 dir (0.8,0.6) and lineB dir (0.6,-0.8) */}
+    <polyline points="146,115 151,109 145,104" fill="none" stroke="white" strokeWidth="1.2" />
+    <text x="179" y="57" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">b</text>
+  </svg>
+);
+
+// No. 22 — lines a and b perpendicular at (2,3)
+// a: through (0,4) and (6,0); b: through (2,3), perpendicular to a
+// Origin (80,110), scale 15px
+const GrafikSoal22 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="60" y="54" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <line x1="170" y1="107" x2="170" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="165" y="124" fill="white" fontSize="9" fontFamily="sans-serif">6</text>
+    {/* Line a: (80,50)=(0,4) → (170,110)=(6,0), SVG slope 2/3. Extended (10,3)→(192,125) */}
+    <line x1="10" y1="3" x2="192" y2="125" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="10,3 21,4 18,11" fill={_lineYellow} />
+    <polygon points="192,125 183,121 186,114" fill={_lineYellow} />
+    {/* Line b: (110,65)=(2,3), SVG slope -3/2. Extended (54,149)→(148,8) */}
+    <line x1="54" y1="149" x2="148" y2="8" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="54,149 63,143 59,137" fill={_lineYellow} />
+    <polygon points="148,8 141,17 136,12" fill={_lineYellow} />
+    {/* Right angle at (110,65) — along a dir (3,2)/√13 and b dir (2,-3)/√13 */}
+    <polyline points="117,69 121,63 114,58" fill="none" stroke="white" strokeWidth="1.2" />
+    <text x="5" y="7" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">a</text>
+    <text x="149" y="6" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">b</text>
+    <text x="114" y="62" fill="white" fontSize="8" fontFamily="sans-serif">(2,3)</text>
+  </svg>
+);
+
+// No. 23 — lines g and h perpendicular
+// g: through (-2,0) and (0,3), slope 3/2; h: through (1,0), slope -2/3
+// Origin (80,110), scale 20px
+const GrafikSoal23 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
+    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="27" y="123" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <line x1="100" y1="107" x2="100" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="96" y="123" fill="white" fontSize="9" fontFamily="sans-serif">1</text>
+    <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
+    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    {/* g: (40,110)=(-2,0) → (80,50)=(0,3), SVG slope -3/2. Extended (18,143)→(112,2) */}
+    <line x1="18" y1="143" x2="112" y2="2" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="18,143 27,136 22,131" fill={_lineYellow} />
+    <polygon points="112,2 106,13 100,9" fill={_lineYellow} />
+    {/* h: (100,110)=(1,0), SVG slope +2/3. Extended (10,50)→(180,163) */}
+    <line x1="10" y1="50" x2="180" y2="163" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="10,50 20,53 17,59" fill={_lineYellow} />
+    <polygon points="180,163 172,155 176,149" fill={_lineYellow} />
+    {/* Right angle at intersection (~59,82) */}
+    <polyline points="63,76 69,80 65,86" fill="none" stroke="white" strokeWidth="1.2" />
+    <text x="113" y="4" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">g</text>
+    <text x="5" y="47" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
+// No. 24 — three lines q, l, p
+// q: through (-6,0) and (0,9), slope 3/2; l: through (0,9), slope -2/3; p: through (0,-4), slope -1/2
+// Origin (90,110), scale 10px
+const GrafikSoal24 = () => (
+  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+    <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
+    <line x1="90" y1="195" x2="90" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
+    <polygon points="90,8 86,16 94,16" fill={_axisBlue} />
+    <text x="183" y="107" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">X</text>
+    <text x="93" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">Y</text>
+    <text x="76" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <line x1="30" y1="107" x2="30" y2="113" stroke={_axisBlue} strokeWidth="1" />
+    <text x="16" y="123" fill="white" fontSize="9" fontFamily="sans-serif">-6</text>
+    <line x1="87" y1="150" x2="93" y2="150" stroke={_axisBlue} strokeWidth="1" />
+    <text x="66" y="154" fill="white" fontSize="9" fontFamily="sans-serif">-4</text>
+    {/* q: (30,110)=(-6,0) → (90,20)=(0,9), SVG slope -3/2. Extended (20,125)→(100,5) */}
+    <line x1="20" y1="125" x2="100" y2="5" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="20,125 29,119 24,114" fill={_lineYellow} />
+    <polygon points="100,5 95,16 89,12" fill={_lineYellow} />
+    {/* l: (90,20)=(0,9), SVG slope +2/3. From (60,0) → (190,87) */}
+    <line x1="60" y1="0" x2="190" y2="87" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="60,0 68,6 63,12" fill={_lineYellow} />
+    <polygon points="190,87 182,80 186,73" fill={_lineYellow} />
+    {/* p: (90,150)=(0,-4), SVG slope +1/2. Extended (10,110)→(180,150)... */}
+    {/* Through (90,150): at x=10 → y=150+(10-90)/2=110; at x=180 → y=150+45=195 */}
+    <line x1="10" y1="110" x2="180" y2="195" stroke={_lineYellow} strokeWidth="2" />
+    <polygon points="10,110 20,112 17,119" fill={_lineYellow} />
+    <polygon points="180,195 173,188 177,181" fill={_lineYellow} />
+    <text x="15" y="118" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">q</text>
+    <text x="148" y="54" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">l</text>
+    <text x="176" y="192" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">p</text>
+  </svg>
+);
+
 const soalSvgMap: Record<string, JSX.Element> = {
   SOAL3: <GrafikSoal3 />,
   SOAL4: <GrafikSoal4 />,
+  SOAL16: <GrafikSoal16 />,
+  SOAL17: <GrafikSoal17 />,
+  SOAL20: <GrafikSoal20 />,
+  SOAL21: <GrafikSoal21 />,
+  SOAL22: <GrafikSoal22 />,
+  SOAL23: <GrafikSoal23 />,
+  SOAL24: <GrafikSoal24 />,
 };
 
 const latihanDasar = [
@@ -681,15 +892,15 @@ const latihanDasar = [
   { no: 13, soal: "Persamaan garis yang melalui titik $(0, 3)$ dan gradien $\\frac{1}{2}$ adalah ...", options: ["A. $2x - 4y - 6 = 0$", "B. $2y - x = 6$", "C. $y - 4x - 6 = 0$", "D. $2y - 3x - 3 = 0$"] },
   { no: 14, soal: "Sebuah garis melalui titik $(8, 9)$ dan memiliki gradien $-\\frac{3}{4}$. Persamaan garis tersebut adalah ...", options: ["A. $4y - 3x - 60 = 0$", "B. $4y + 3x - 60 = 0$", "C. $4y - 3x + 60 = 0$", "D. $4y + 3x + 60 = 0$"] },
   { no: 15, soal: "Persamaan garis yang melalui titik $(2, -5)$ dan $(-3, 6)$ adalah ...", options: ["A. $11x - 5y = -3$", "B. $11x + 5y = -3$", "C. $11x + 5y = 3$", "D. $11x - 5y = 3$"] },
-  { no: 16, soal: "Perhatikan gambar! Persamaan garis m adalah ...", options: ["A. $4y - 3x - 12 = 0$", "B. $4x - 3y - 12 = 0$", "C. $4y - 3x + 12 = 0$", "D. $4x - 3y + 12 = 0$"] },
-  { no: 17, soal: "Perhatikan gambar berikut! Persamaan garis k adalah ...", options: ["A. $2x + 2y = 2$", "B. $2x - 2y = 2$", "C. $2x + 2y = -2$", "D. $2x - 2y = -2$"] },
+  { no: 16, soal: "Perhatikan gambar! Persamaan garis m adalah ...", soalSvg: "SOAL16", options: ["A. $4y - 3x - 12 = 0$", "B. $4x - 3y - 12 = 0$", "C. $4y - 3x + 12 = 0$", "D. $4x - 3y + 12 = 0$"] },
+  { no: 17, soal: "Perhatikan gambar berikut! Persamaan garis k adalah ...", soalSvg: "SOAL17", options: ["A. $2x + 2y = 2$", "B. $2x - 2y = 2$", "C. $2x + 2y = -2$", "D. $2x - 2y = -2$"] },
   { no: 18, soal: "Garis g mempunyai persamaan $8x + 4y - 16 = 0$. Garis h sejajar dengan garis g dan melalui titik $(5, -3)$. Persamaan garis h adalah ...", options: ["A. $2x - y - 13 = 0$", "B. $2x + y - 7 = 0$", "C. $x - 2y - 7 = 0$", "D. $-x + 2y + 11 = 0$"] },
   { no: 19, soal: "Persamaan garis melalui $(-1, 2)$ dan tegak lurus terhadap garis $4y = -3x + 5$ adalah ...", options: ["A. $4x - 3y + 10 = 0$", "B. $4x - 3y - 10 = 0$", "C. $3x + 4y - 5 = 0$", "D. $3x + 4y + 5 = 0$"] },
-  { no: 20, soal: "Perhatikan gambar berikut! Persamaan garis h adalah ...", options: ["A. $3x + y = 4$", "B. $3x - y = 4$", "C. $x + 3y = 4$", "D. $x - 3y = 4$"] },
-  { no: 21, soal: "Perhatikan gambar berikut! Persamaan garis b adalah ...", options: ["A. $y = \\frac{3}{4}x - \\frac{16}{3}$", "B. $y = \\frac{4}{3}x - \\frac{16}{3}$", "C. $y = \\frac{3}{4}x + \\frac{16}{3}$", "D. $y = \\frac{4}{3}x + \\frac{16}{3}$"] },
-  { no: 22, soal: "Perhatikan gambar berikut! Persamaan garis lurus b adalah ...", options: ["A. $2y - 3x = -5$", "B. $2y - 3x = 0$", "C. $3y - 2x = 5$", "D. $3y - 2x = 0$"] },
-  { no: 23, soal: "Perhatikan gambar! Persamaan garis h adalah ...", options: ["A. $3y + 2x = 3$", "B. $3y - 2x = 3$", "C. $2x + 3y = 1$", "D. $3x - 2y = 3$"] },
-  { no: 24, soal: "Perhatikan gambar di bawah ini! Persamaan garis adalah ...", options: ["A. $2x + 3y - 27 = 0$", "B. $2x + 3y + 27 = 0$", "C. $2x - 3y - 27 = 0$", "D. $3x + 2y - 27 = 0$"] },
+  { no: 20, soal: "Perhatikan gambar berikut! Persamaan garis h adalah ...", soalSvg: "SOAL20", options: ["A. $3x + y = 4$", "B. $3x - y = 4$", "C. $x + 3y = 4$", "D. $x - 3y = 4$"] },
+  { no: 21, soal: "Perhatikan gambar berikut! Persamaan garis b adalah ...", soalSvg: "SOAL21", options: ["A. $y = \\frac{3}{4}x - \\frac{16}{3}$", "B. $y = \\frac{4}{3}x - \\frac{16}{3}$", "C. $y = \\frac{3}{4}x + \\frac{16}{3}$", "D. $y = \\frac{4}{3}x + \\frac{16}{3}$"] },
+  { no: 22, soal: "Perhatikan gambar berikut! Persamaan garis lurus b adalah ...", soalSvg: "SOAL22", options: ["A. $2y - 3x = -5$", "B. $2y - 3x = 0$", "C. $3y - 2x = 5$", "D. $3y - 2x = 0$"] },
+  { no: 23, soal: "Perhatikan gambar! Persamaan garis h adalah ...", soalSvg: "SOAL23", options: ["A. $3y + 2x = 3$", "B. $3y - 2x = 3$", "C. $2x + 3y = 1$", "D. $3x - 2y = 3$"] },
+  { no: 24, soal: "Perhatikan gambar di bawah ini! Persamaan garis adalah ...", soalSvg: "SOAL24", options: ["A. $2x + 3y - 27 = 0$", "B. $2x + 3y + 27 = 0$", "C. $2x - 3y - 27 = 0$", "D. $3x + 2y - 27 = 0$"] },
 ];
 
 const latihanOlimpiade = [
