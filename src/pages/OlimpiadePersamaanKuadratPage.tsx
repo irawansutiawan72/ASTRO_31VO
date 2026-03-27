@@ -76,21 +76,12 @@ const SvgSegitiga28 = () => (
   <svg viewBox="-30 0 210 170" width="170" height="150" className="my-3 mx-auto block">
     <polygon points="20,15 20,140 150,140" fill="none" stroke="#facc15" strokeWidth="2" />
     <rect x="20" y="120" width="20" height="20" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="-10" y="82" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
-    <text x="85" y="158" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
-    <text x="105" y="68" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+    <text x="-10" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="85" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="105" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
   </svg>
 );
 
-const SvgSegitiga30 = () => (
-  <svg viewBox="0 0 200 170" width="170" height="150" className="my-3 mx-auto block">
-    <polygon points="160,15 30,140 160,140" fill="none" stroke="#facc15" strokeWidth="2" />
-    <rect x="140" y="120" width="20" height="20" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="185" y="82" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
-    <text x="95" y="158" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
-    <text x="75" y="68" fill="#facc15" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
-  </svg>
-);
 
 const latihanDasar: { no: number; soal: string; options: string[]; svgImage?: ReactNode }[] = [
   { no: 1, soal: "Jika bentuk umum dari persamaan $x^2 - 4 = 3(x - 2)$ adalah $ax^2 + bx + c = 0$, maka nilai a, b dan c berturut-turut adalah ...", options: ["A. 1, -3, 2", "B. 1, -2, 3", "C. 1, 3, -2", "D. 1, -3, -10"] },
@@ -122,7 +113,6 @@ const latihanDasar: { no: number; soal: string; options: string[]; svgImage?: Re
   { no: 27, soal: "Diketahui sebidang tanah berbentuk persegi panjang luasnya 72 m². Jika panjangnya tiga kali lebarnya, maka panjang diagonal bidang tersebut adalah ... m.", options: ["A. $6\\sqrt{6}$", "B. $4\\sqrt{15}$", "C. $4\\sqrt{30}$", "D. $6\\sqrt{15}$"] },
   { no: 28, soal: "Perhatikan gambar segitiga siku-siku berikut. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 60 cm²", "C. 32,5 cm²", "D. 78 cm²"], svgImage: <SvgSegitiga28 /> },
   { no: 29, soal: "Dua bilangan cacah genap berurutan adalah p dan q. Jika $pq = 168$, maka nilai $(p + q)^2$ = ...", options: ["A. 324", "B. 676", "C. 484", "D. 900"] },
-  { no: 30, soal: "Perhatikan gambar segitiga siku-siku berikut. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 32,5 cm²", "C. 60 cm²", "D. 78 cm²"], svgImage: <SvgSegitiga30 /> },
 ];
 
 const latihanOlimpiade = [
