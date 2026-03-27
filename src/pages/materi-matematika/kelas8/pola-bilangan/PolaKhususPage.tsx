@@ -213,21 +213,31 @@ const PolaKhususPage = () => {
                   <p className="font-body text-xs text-white/70 mb-2">Setiap bilangan = jumlah dua bilangan di atasnya. Baris dimulai dan diakhiri angka 1.</p>
                   <div className="flex flex-col items-center gap-1 my-3 font-mono text-xs">
                     {[
-                      [1],
-                      [1, 1],
-                      [1, 2, 1],
-                      [1, 3, 3, 1],
-                      [1, 4, 6, 4, 1],
-                      [1, 5, 10, 10, 5, 1],
-                    ].map((row, ri) => (
-                      <div key={ri} className="flex gap-2">
-                        {row.map((val, ci) => (
-                          <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[24px] text-center">{val}</span>
-                        ))}
+                      { row: [1],                sum: 1  },
+                      { row: [1, 1],             sum: 2  },
+                      { row: [1, 2, 1],          sum: 4  },
+                      { row: [1, 3, 3, 1],       sum: 8  },
+                      { row: [1, 4, 6, 4, 1],    sum: 16 },
+                      { row: [1, 5, 10, 10, 5, 1], sum: 32 },
+                    ].map(({ row, sum }, ri) => (
+                      <div key={ri} className="flex items-center gap-2">
+                        <div className="flex gap-1">
+                          {row.map((val, ci) => (
+                            <span key={ci} className="bg-pink-700/50 border border-pink-400/40 text-pink-200 font-bold rounded px-1.5 py-0.5 min-w-[24px] text-center">{val}</span>
+                          ))}
+                        </div>
+                        <span className="text-white/30 text-xs">→</span>
+                        <span className="bg-pink-500/20 border border-pink-400/50 text-pink-100 font-bold rounded px-1.5 py-0.5 min-w-[28px] text-center">{sum}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="font-body text-xs text-white/70">Keistimewaan: Baris ke-n (mulai dari 0) mengandung koefisien binomial <InlineMath math="\binom{n}{k}" /></p>
+                  <div className="mt-2 space-y-1">
+                    <p className="font-body text-xs text-white/70">Jumlah bilangan pada setiap baris: <strong className="text-pink-300">1, 2, 4, 8, 16, 32, ...</strong></p>
+                    <p className="font-body text-xs text-white/70">Setiap baris, jumlahnya <strong className="text-pink-300">berlipat ganda (×2)</strong> dari baris sebelumnya.</p>
+                    <div className="bg-pink-500/10 border border-pink-500/30 rounded-lg p-2 mt-2">
+                      <BlockMath math="\text{Jumlah baris ke-}n = 2^{n-1}" />
+                    </div>
+                  </div>
                 </div>
 
                 {/* 7. Fibonacci */}
