@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { InlineMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 interface PatternConfig {
   label: string;
@@ -10,7 +12,7 @@ interface PatternConfig {
   terms: number[];
   getDifferences: (terms: number[]) => (number | string)[];
   diffLabel?: string;
-  note?: string;
+  note?: React.ReactNode;
 }
 
 const patterns: PatternConfig[] = [
@@ -82,7 +84,7 @@ const patterns: PatternConfig[] = [
     terms: [1, 2, 4, 8, 16, 32],
     getDifferences: (t) => t.slice(1).map((v, i) => v - t[i]),
     diffLabel: "Beda selalu ×2 (berlipat ganda)",
-    note: "Beda: +1, +2, +4, +8, +16 → jumlah baris ke-n = 2^(n-1)!",
+    note: <>Beda: +1, +2, +4, +8, +16 → jumlah baris ke-n = <InlineMath math="2^{n-1}" /></>,
   },
   {
     label: "Pola Fibonacci",
