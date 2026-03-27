@@ -238,6 +238,31 @@ const GarisBerpotongan = () => (
   </svg>
 );
 
+// Dua Garis Berimpit: g dan h (coincident)
+const GarisBerimpit = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 195" width="190" height="160"
+    className="my-2" style={{ display: "block", margin: "0 auto" }}>
+    {/* Border frame */}
+    <rect x="1" y="1" width="228" height="193" rx="10" ry="10" fill="none" stroke="rgba(192,132,252,0.5)" strokeWidth="1.5" />
+    {/* Line g (slightly lower): lower-left (47,170) to upper-right (187,30) */}
+    <line x1="47" y1="170" x2="187" y2="30" stroke="#FACC15" strokeWidth="2" />
+    {/* Lower-left arrowhead g */}
+    <polygon points="47,170 58,165 52,159" fill="#FACC15" />
+    {/* Upper-right arrowhead g */}
+    <polygon points="187,30 182,41 176,35" fill="#FACC15" />
+    {/* Line h (slightly upper): lower-left (43,166) to upper-right (183,26) */}
+    <line x1="43" y1="166" x2="183" y2="26" stroke="#FACC15" strokeWidth="2" />
+    {/* Lower-left arrowhead h */}
+    <polygon points="43,166 54,161 48,155" fill="#FACC15" />
+    {/* Upper-right arrowhead h */}
+    <polygon points="183,26 178,37 172,31" fill="#FACC15" />
+    {/* Label g */}
+    <text x="52" y="130" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">g</text>
+    {/* Label h */}
+    <text x="118" y="82" fill="#67E8F9" fontSize="15" fontFamily="serif" fontStyle="italic" fontWeight="bold">h</text>
+  </svg>
+);
+
 // Gradien Positif (m = +): line rises left-to-right
 // Main line: (20,182)→(248,32). Triangle: P1=(65,152), P2=(210,57), corner=(210,152)
 const GarisGradienPositif = () => (
@@ -338,6 +363,7 @@ const formulaSvgMap: Record<string, JSX.Element> = {
   GARIS_SEJAJAR: <GarisSejajar />,
   GARIS_TEGAK_LURUS: <GarisTegakLurus />,
   GARIS_BERPOTONGAN: <GarisBerpotongan />,
+  GARIS_BERIMPIT: <GarisBerimpit />,
 };
 const FormulaCard = ({ headline, headlineSuffix, lines, color }: FormulaCardProps) => {
   const c = colorMap[color] || colorMap.cyan;
@@ -431,7 +457,8 @@ const materiSections: { heading: string; items: SectionItem[] }[] = [
         'Titik potong garis $g$ dan $h$ adalah $A(x_1, y_1)$',
         '(diperoleh dengan substitusi - eliminasi)',
       ]},
-      { t: 'formula', headline: 'd. Berimpit', color: 'purple', lines: [
+      { t: 'formula', headline: 'd. Garis Berimpit', color: 'purple', lines: [
+        { svg: 'GARIS_BERIMPIT' },
         '$g = A \\cdot h$ dengan $A$ adalah koefisien',
       ]},
     ],
