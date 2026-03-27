@@ -34,28 +34,28 @@ const GrafikTitikPotong = () => {
       style={{ display: "block", margin: "0 auto" }}
     >
       {/* X axis */}
-      <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
-      <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
+      <line x1="20" y1="120" x2="258" y2="120" stroke="#94A3B8" strokeWidth="1.5" />
+      <polygon points="260,120 252,116 252,124" fill="#94A3B8" />
       {/* Y axis */}
-      <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
-      <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+      <line x1="100" y1="208" x2="100" y2="12" stroke="#94A3B8" strokeWidth="1.5" />
+      <polygon points="100,10 96,18 104,18" fill="#94A3B8" />
 
       {/* Line through b=(100,60) and a=(190,120), extended to (46,24)→(232,148) */}
-      <line x1="46" y1="24" x2="232" y2="148" stroke="#FF8C00" strokeWidth="1.5" />
+      <line x1="46" y1="24" x2="232" y2="148" stroke="#22D3EE" strokeWidth="1.5" />
       {/* Upper-left arrowhead at (46,24) pointing toward upper-left */}
-      <polygon points="46,24 51,33 56,26" fill="#FF8C00" />
+      <polygon points="46,24 51,33 56,26" fill="#22D3EE" />
       {/* Lower-right arrowhead at (232,148) pointing toward lower-right */}
-      <polygon points="232,148 222,146 227,139" fill="#FF8C00" />
+      <polygon points="232,148 222,146 227,139" fill="#22D3EE" />
 
       {/* Dot exactly on y-axis at b: (100, 60) */}
-      <circle cx="100" cy="60" r="2.5" fill="#FF8C00" />
+      <circle cx="100" cy="60" r="2.5" fill="#22D3EE" />
       {/* Dot exactly on x-axis at a: (190, 120) */}
-      <circle cx="190" cy="120" r="2.5" fill="#FF8C00" />
+      <circle cx="190" cy="120" r="2.5" fill="#22D3EE" />
 
       {/* Label b — right of y-axis, at the b intersection */}
-      <text x="108" y="65" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+      <text x="108" y="65" fill="#22D3EE" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
       {/* Label a — below x-axis, at the a intersection */}
-      <text x="186" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+      <text x="186" y="138" fill="#22D3EE" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
     </svg>
   );
 };
@@ -65,22 +65,22 @@ const GrafikTitikPotong = () => {
 // Line: (12,148) → (142,18). Slope check: (18-148)/(142-12)=-130/130=-1 ✓
 const GrafikTitikPotong2 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
-    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
-    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#94A3B8" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#94A3B8" />
     {/* Line through -a=(40,120) and b=(100,60), extended */}
-    <line x1="12" y1="148" x2="142" y2="18" stroke="#FF8C00" strokeWidth="1.5" />
+    <line x1="12" y1="148" x2="142" y2="18" stroke="#4ADE80" strokeWidth="1.5" />
     {/* Arrow upper-right at (142,18) */}
-    <polygon points="142,18 133,22 138,27" fill="#FF8C00" />
+    <polygon points="142,18 133,22 138,27" fill="#4ADE80" />
     {/* Arrow lower-left at (12,148) */}
-    <polygon points="12,148 21,144 16,139" fill="#FF8C00" />
+    <polygon points="12,148 21,144 16,139" fill="#4ADE80" />
     {/* Dots */}
-    <circle cx="40" cy="120" r="2.5" fill="#FF8C00" />
-    <circle cx="100" cy="60" r="2.5" fill="#FF8C00" />
+    <circle cx="40" cy="120" r="2.5" fill="#4ADE80" />
+    <circle cx="100" cy="60" r="2.5" fill="#4ADE80" />
     {/* Labels */}
-    <text x="108" y="65" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
-    <text x="28" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
+    <text x="108" y="65" fill="#4ADE80" fontSize="14" fontFamily="serif" fontStyle="italic">b</text>
+    <text x="28" y="138" fill="#4ADE80" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
   </svg>
 );
 
@@ -89,22 +89,22 @@ const GrafikTitikPotong2 = () => (
 // Line: (12,92) → (121,201). Slope check: (180-120)/(100-40)=60/60=1 ✓
 const GrafikTitikPotong3 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
-    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
-    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#94A3B8" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#94A3B8" />
     {/* Line through -a=(40,120) and -b=(100,180), extended */}
-    <line x1="12" y1="92" x2="121" y2="201" stroke="#FF8C00" strokeWidth="1.5" />
+    <line x1="12" y1="92" x2="121" y2="201" stroke="#F472B6" strokeWidth="1.5" />
     {/* Arrow upper-left at (12,92) */}
-    <polygon points="12,92 21,96 16,101" fill="#FF8C00" />
+    <polygon points="12,92 21,96 16,101" fill="#F472B6" />
     {/* Arrow lower-right at (121,201) */}
-    <polygon points="121,201 112,197 117,192" fill="#FF8C00" />
+    <polygon points="121,201 112,197 117,192" fill="#F472B6" />
     {/* Dots */}
-    <circle cx="40" cy="120" r="2.5" fill="#FF8C00" />
-    <circle cx="100" cy="180" r="2.5" fill="#FF8C00" />
+    <circle cx="40" cy="120" r="2.5" fill="#F472B6" />
+    <circle cx="100" cy="180" r="2.5" fill="#F472B6" />
     {/* Labels */}
-    <text x="28" y="115" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
-    <text x="108" y="185" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
+    <text x="28" y="115" fill="#F472B6" fontSize="14" fontFamily="serif" fontStyle="italic">-a</text>
+    <text x="108" y="185" fill="#F472B6" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
   </svg>
 );
 
@@ -113,22 +113,22 @@ const GrafikTitikPotong3 = () => (
 // Line: (63,205) → (232,92). Slope check: (120-180)/(190-100)=-60/90=-0.667 ✓
 const GrafikTitikPotong4 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 220" width="280" height="220" className="my-3" style={{ display: "block", margin: "0 auto" }}>
-    <line x1="20" y1="120" x2="258" y2="120" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="260,120 252,116 252,124" fill="#FF8C00" />
-    <line x1="100" y1="208" x2="100" y2="12" stroke="#FF8C00" strokeWidth="1.5" />
-    <polygon points="100,10 96,18 104,18" fill="#FF8C00" />
+    <line x1="20" y1="120" x2="258" y2="120" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="260,120 252,116 252,124" fill="#94A3B8" />
+    <line x1="100" y1="208" x2="100" y2="12" stroke="#94A3B8" strokeWidth="1.5" />
+    <polygon points="100,10 96,18 104,18" fill="#94A3B8" />
     {/* Line through -b=(100,180) and a=(190,120), extended */}
-    <line x1="63" y1="205" x2="232" y2="92" stroke="#FF8C00" strokeWidth="1.5" />
+    <line x1="63" y1="205" x2="232" y2="92" stroke="#A78BFA" strokeWidth="1.5" />
     {/* Arrow lower-left at (63,205) */}
-    <polygon points="63,205 72,203 68,197" fill="#FF8C00" />
+    <polygon points="63,205 72,203 68,197" fill="#A78BFA" />
     {/* Arrow upper-right at (232,92) */}
-    <polygon points="232,92 222,94 227,100" fill="#FF8C00" />
+    <polygon points="232,92 222,94 227,100" fill="#A78BFA" />
     {/* Dots */}
-    <circle cx="190" cy="120" r="2.5" fill="#FF8C00" />
-    <circle cx="100" cy="180" r="2.5" fill="#FF8C00" />
+    <circle cx="190" cy="120" r="2.5" fill="#A78BFA" />
+    <circle cx="100" cy="180" r="2.5" fill="#A78BFA" />
     {/* Labels */}
-    <text x="186" y="138" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
-    <text x="108" y="185" fill="#FF8C00" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
+    <text x="186" y="138" fill="#A78BFA" fontSize="14" fontFamily="serif" fontStyle="italic">a</text>
+    <text x="108" y="185" fill="#A78BFA" fontSize="14" fontFamily="serif" fontStyle="italic">-b</text>
   </svg>
 );
 
