@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import RusukTigaPrismaAnimation from "@/components/RusukTigaPrismaAnimation";
+import SisiTigaPrismaAnimation from "@/components/SisiTigaPrismaAnimation";
 
 /* ─────────────────────────────────────────────────────────────
    SVG-BASED 3D INTERACTIVE PRISMA — rotate & net view
@@ -951,16 +952,21 @@ const slides: Slide[] = [
     icon: "⬜",
     title: "Unsur — Sisi Prisma",
     content: (
-      <div className="space-y-3 text-sm text-white/85 font-body">
-        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4">
-          <p className="text-green-300 font-semibold mb-2">⬜ Sisi Prisma Segitiga (5 sisi)</p>
-          <SisiPrismaSVG />
-          <div className="text-xs text-white/70 space-y-1 mt-2">
-            <p>• 2 sisi <strong className="text-yellow-300">ALAS &amp; TUTUP</strong>: berbentuk segitiga</p>
-            <p>• 3 sisi <strong className="text-blue-300">TEGAK</strong>: berbentuk persegi panjang (a × t)</p>
-            <div className="bg-slate-700/60 rounded p-2 mt-2">
-              <BlockMath math="\text{Jumlah sisi} = n + 2 = 3 + 2 = 5" />
-            </div>
+      <div className="space-y-4 text-sm text-white/85 font-body">
+        <div className="bg-slate-800/60 border border-green-700/40 rounded-xl p-4">
+          <p className="text-green-300 font-semibold mb-1">🎬 Perbandingan Sisi — 3 Jenis Prisma Berdiri</p>
+          <p className="text-xs text-white/55 mb-3 font-body">
+            Perhatikan kelompok sisi pada tiap prisma.
+            Tekan tombol untuk melihat <strong className="text-red-300">Sisi Alas &amp; Tutup</strong> atau <strong className="text-blue-300">Sisi Tegak</strong>!
+          </p>
+          <SisiTigaPrismaAnimation />
+        </div>
+
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-4 text-xs text-white/70 space-y-1">
+          <p>• <strong className="text-red-300">2 sisi Alas &amp; Tutup</strong>: berbentuk segitiga (sama persis)</p>
+          <p>• <strong className="text-blue-300">3 sisi Tegak</strong>: berbentuk persegi panjang (a × t)</p>
+          <div className="bg-slate-700/60 rounded p-2 mt-2">
+            <BlockMath math="\text{Jumlah sisi} = n + 2 = 3 + 2 = 5" />
           </div>
         </div>
       </div>
