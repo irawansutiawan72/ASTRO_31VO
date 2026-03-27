@@ -186,7 +186,7 @@ export default function RusukTigaPrismaAnimation() {
 
       {/* SVG with 3 prisms */}
       <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl overflow-hidden">
-        <svg viewBox="0 0 340 200" className="w-full" style={{ maxHeight: 225 }}>
+        <svg viewBox="0 0 340 218" className="w-full" style={{ maxHeight: 245 }}>
           <defs>
             <style>{`
               @keyframes glowAlas {
@@ -223,8 +223,8 @@ export default function RusukTigaPrismaAnimation() {
           ))}
 
           {/* Bottom caption band */}
-          <rect x="0" y="192" width="340" height="7" fill="transparent" />
-          <text x="170" y="199" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
+          <rect x="0" y="204" width="340" height="14" fill="transparent" />
+          <text x="170" y="213" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
             Alas dan Tutup selalu SAMA bentuknya  ·  Rusuk = 3n
           </text>
         </svg>
