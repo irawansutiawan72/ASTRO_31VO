@@ -437,7 +437,7 @@ const PolaKhususPage = () => {
                         ["Persegi", "1, 4, 9, 16, ...", "n²"],
                         ["Persegi Panjang", "2, 6, 12, 20, ...", "n(n+1)"],
                         ["Segitiga", "1, 3, 6, 10, ...", "n(n+1)/2"],
-                        ["Pascal (baris n)", "1 | 1,1 | 1,2,1 | ...", "Koefisien binom C(n−1,k)"],
+                        ["Pascal (jumlah baris n)", "1, 2, 4, 8, 16, 32, ...", "2ⁿ⁻¹"],
                         ["Fibonacci", "1, 1, 2, 3, 5, ...", "Uₙ = Uₙ₋₁ + Uₙ₋₂"],
                       ].map(([nama, contoh, rumus], i) => (
                         <tr key={i} className={i % 2 === 0 ? "bg-slate-800/30" : "bg-slate-700/20"}>

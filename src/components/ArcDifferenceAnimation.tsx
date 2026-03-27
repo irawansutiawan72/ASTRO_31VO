@@ -228,6 +228,9 @@ function ArcSVG({
   );
 }
 
+const sub = (n: number) =>
+  String(n).split("").map((d) => "₀₁₂₃₄₅₆₇₈₉"[+d]).join("");
+
 export default function ArcDifferenceAnimation() {
   const [selected, setSelected] = useState(0);
   const [animKey, setAnimKey] = useState(0);
@@ -300,7 +303,7 @@ export default function ArcDifferenceAnimation() {
                 color: pattern.labelColor,
               }}
             >
-              {`U${i + 1}→U${i + 2}: `}
+              {`U${sub(i + 1)}→U${sub(i + 2)}: `}
               {typeof d === "number" ? (d >= 0 ? `+${d}` : `${d}`) : d}
             </span>
           ))}
