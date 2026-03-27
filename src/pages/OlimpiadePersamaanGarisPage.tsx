@@ -593,15 +593,15 @@ const GrafikSoal3 = () => (
     <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
     {/* Axis labels */}
-    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
-    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
-    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <text x="188" y="115" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="10" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="63" y="123" fill="white" fontSize="13" fontFamily="sans-serif">0</text>
     {/* Tick x = -2 */}
     <line x1="40" y1="107" x2="40" y2="113" stroke={_axisBlue} strokeWidth="1" />
-    <text x="28" y="124" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <text x="24" y="126" fill="white" fontSize="13" fontFamily="sans-serif">-2</text>
     {/* Tick y = 3 */}
     <line x1="77" y1="50" x2="83" y2="50" stroke={_axisBlue} strokeWidth="1" />
-    <text x="84" y="54" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <text x="84" y="55" fill="white" fontSize="13" fontFamily="sans-serif">3</text>
     {/* Line h: through (-2,0)→(40,110) and (0,3)→(80,50), extended */}
     <line x1="10" y1="155" x2="107" y2="9" stroke={_lineYellow} strokeWidth="2" />
     {/* Arrow lower-left */}
@@ -612,7 +612,7 @@ const GrafikSoal3 = () => (
     <circle cx="40" cy="110" r="2.5" fill={_lineYellow} />
     <circle cx="80" cy="50" r="2.5" fill={_lineYellow} />
     {/* Label h near upper-right */}
-    <text x="110" y="18" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
+    <text x="110" y="18" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
   </svg>
 );
 
@@ -663,46 +663,46 @@ const GrafikSoal4 = () => {
 // No. 16 — line m through (0,−3) and (4,0), slope 3/4
 // Origin (80,110), scale 20px
 const GrafikSoal16 = () => (
-  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+  <svg viewBox="0 0 200 200" width="185" height="185" style={{ display:"block", margin:"0 auto" }}>
     <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
     <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
-    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">X</text>
-    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">Y</text>
-    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <text x="188" y="116" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">X</text>
+    <text x="83" y="11" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">Y</text>
+    <text x="63" y="124" fill="white" fontSize="13" fontFamily="sans-serif">0</text>
     <line x1="160" y1="107" x2="160" y2="113" stroke={_axisBlue} strokeWidth="1" />
-    <text x="155" y="124" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <text x="155" y="126" fill="white" fontSize="13" fontFamily="sans-serif">4</text>
     <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
-    <text x="53" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-3</text>
+    <text x="49" y="175" fill="white" fontSize="13" fontFamily="sans-serif">-3</text>
     {/* line m: (80,170)=(0,-3) and (160,110)=(4,0), SVG slope -3/4 */}
     <line x1="42" y1="198" x2="183" y2="91" stroke={_lineYellow} strokeWidth="2" />
     <polygon points="42,198 51,196 46,190" fill={_lineYellow} />
     <polygon points="183,91 179,99 173,96" fill={_lineYellow} />
-    <text x="173" y="89" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">m</text>
+    <text x="172" y="88" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">m</text>
   </svg>
 );
 
 // No. 17 — line k through (0,1) and dot at (2,3), slope 1
 // Origin (80,110), scale 20px
 const GrafikSoal17 = () => (
-  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+  <svg viewBox="0 0 200 200" width="185" height="185" style={{ display:"block", margin:"0 auto" }}>
     <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
     <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
-    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
-    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
-    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <text x="188" y="116" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="11" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="63" y="124" fill="white" fontSize="13" fontFamily="sans-serif">0</text>
     <line x1="77" y1="90" x2="83" y2="90" stroke={_axisBlue} strokeWidth="1" />
-    <text x="84" y="94" fill="white" fontSize="9" fontFamily="sans-serif">1</text>
+    <text x="84" y="95" fill="white" fontSize="13" fontFamily="sans-serif">1</text>
     {/* line k: (80,90)=(0,1) → (120,50)=(2,3), SVG slope -1 */}
     <line x1="10" y1="160" x2="152" y2="18" stroke={_lineYellow} strokeWidth="2" />
     <polygon points="10,160 21,157 18,150" fill={_lineYellow} />
     <polygon points="152,18 146,29 140,25" fill={_lineYellow} />
     <circle cx="120" cy="50" r="3.5" fill={_lineYellow} />
-    <text x="124" y="48" fill="white" fontSize="9" fontFamily="sans-serif">(2,3)</text>
-    <text x="153" y="16" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">k</text>
+    <text x="124" y="46" fill="white" fontSize="12" fontFamily="sans-serif">(2,3)</text>
+    <text x="153" y="15" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">k</text>
   </svg>
 );
 
@@ -710,20 +710,20 @@ const GrafikSoal17 = () => (
 // Line 1: through (-2,0) and (0,4); Line h: through (0,-6)
 // Origin (80,110), scale 10px
 const GrafikSoal20 = () => (
-  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+  <svg viewBox="0 0 200 200" width="185" height="185" style={{ display:"block", margin:"0 auto" }}>
     <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
     <line x1="80" y1="195" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
-    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">x</text>
-    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">y</text>
-    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <text x="188" y="116" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">x</text>
+    <text x="83" y="11" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">y</text>
+    <text x="63" y="124" fill="white" fontSize="13" fontFamily="sans-serif">0</text>
     <line x1="60" y1="107" x2="60" y2="113" stroke={_axisBlue} strokeWidth="1" />
-    <text x="48" y="123" fill="white" fontSize="9" fontFamily="sans-serif">-2</text>
+    <text x="44" y="126" fill="white" fontSize="13" fontFamily="sans-serif">-2</text>
     <line x1="77" y1="70" x2="83" y2="70" stroke={_axisBlue} strokeWidth="1" />
-    <text x="84" y="74" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <text x="84" y="75" fill="white" fontSize="13" fontFamily="sans-serif">4</text>
     <line x1="77" y1="170" x2="83" y2="170" stroke={_axisBlue} strokeWidth="1" />
-    <text x="57" y="174" fill="white" fontSize="9" fontFamily="sans-serif">-6</text>
+    <text x="53" y="175" fill="white" fontSize="13" fontFamily="sans-serif">-6</text>
     {/* Line 1: (60,110)=(-2,0), (80,70)=(0,4), SVG slope -2. Extended (20,190)→(110,10) */}
     <line x1="20" y1="190" x2="110" y2="10" stroke={_lineYellow} strokeWidth="2" />
     <polygon points="20,190 28,183 23,178" fill={_lineYellow} />
@@ -732,25 +732,25 @@ const GrafikSoal20 = () => (
     <line x1="70" y1="190" x2="140" y2="50" stroke={_lineYellow} strokeWidth="2" />
     <polygon points="70,190 78,183 73,178" fill={_lineYellow} />
     <polygon points="140,50 136,61 130,57" fill={_lineYellow} />
-    <text x="143" y="46" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
+    <text x="143" y="44" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">h</text>
   </svg>
 );
 
 // No. 21 — two perpendicular lines at (4,0): line 1 through (0,3)→(4,0); line b perpendicular
 // Origin (80,110), scale 15px
 const GrafikSoal21 = () => (
-  <svg viewBox="0 0 200 200" width="160" height="160" style={{ display:"block", margin:"0 auto" }}>
+  <svg viewBox="0 0 200 200" width="185" height="185" style={{ display:"block", margin:"0 auto" }}>
     <line x1="10" y1="110" x2="186" y2="110" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="190,110 182,106 182,114" fill={_axisBlue} />
     <line x1="80" y1="190" x2="80" y2="12" stroke={_axisBlue} strokeWidth="1.5" />
     <polygon points="80,8 76,16 84,16" fill={_axisBlue} />
-    <text x="188" y="115" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">X</text>
-    <text x="83" y="10" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic">Y</text>
-    <text x="66" y="122" fill="white" fontSize="9" fontFamily="sans-serif">0</text>
+    <text x="188" y="116" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">X</text>
+    <text x="83" y="11" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic">Y</text>
+    <text x="63" y="124" fill="white" fontSize="13" fontFamily="sans-serif">0</text>
     <line x1="77" y1="65" x2="83" y2="65" stroke={_axisBlue} strokeWidth="1" />
-    <text x="84" y="69" fill="white" fontSize="9" fontFamily="sans-serif">3</text>
+    <text x="84" y="70" fill="white" fontSize="13" fontFamily="sans-serif">3</text>
     <line x1="140" y1="107" x2="140" y2="113" stroke={_axisBlue} strokeWidth="1" />
-    <text x="135" y="124" fill="white" fontSize="9" fontFamily="sans-serif">4</text>
+    <text x="134" y="127" fill="white" fontSize="13" fontFamily="sans-serif">4</text>
     {/* Line 1: (80,65)=(0,3) → (140,110)=(4,0), SVG slope 3/4. Extended (10,13)→(185,144) */}
     <line x1="10" y1="13" x2="185" y2="144" stroke={_lineYellow} strokeWidth="2" />
     <polygon points="10,13 20,15 17,22" fill={_lineYellow} />
@@ -761,7 +761,7 @@ const GrafikSoal21 = () => (
     <polygon points="177,61 169,68 164,63" fill={_lineYellow} />
     {/* Right angle at (140,110) — along line1 dir (0.8,0.6) and lineB dir (0.6,-0.8) */}
     <polyline points="146,115 151,109 145,104" fill="none" stroke="white" strokeWidth="1.2" />
-    <text x="179" y="57" fill="white" fontSize="11" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">b</text>
+    <text x="179" y="55" fill="white" fontSize="14" fontFamily="sans-serif" fontStyle="italic" fontWeight="bold">b</text>
   </svg>
 );
 
