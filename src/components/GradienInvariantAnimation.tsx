@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const W = 268, H = 182;
 const OX = 24, OY = 155;
-const SC = 20;
+const SC = 18;
 const gx = (x: number) => OX + x * SC;
 const gy = (y: number) => OY - y * SC;
 
@@ -48,9 +48,9 @@ function TriDraw({ tri, isNeg }: { tri: Tri; isNeg: boolean }) {
       <circle cx={cx1} cy={cy1} r="3.5" fill={c} />
       <circle cx={cx2} cy={cy2} r="3.5" fill={c} />
       <text x={(cx1+cX)/2} y={cY + (isNeg ? -7 : 13)}
-        textAnchor="middle" fontSize="9" fontWeight="bold" fill={c}>{tri.datar}</text>
+        textAnchor="middle" fontSize="9" fontWeight="bold" fill="#facc15">{tri.datar}</text>
       <text x={cX+7} y={(cY+cy2)/2+3.5}
-        fontSize="9" fontWeight="bold" fill={c}>{tri.tegak}</text>
+        fontSize="9" fontWeight="bold" fill="#facc15">{tri.tegak}</text>
     </g>
   );
 }
@@ -64,7 +64,7 @@ export default function GradienInvariantAnimation() {
   const switchMode = (m: "pos" | "neg") => { setMode(m); setStep(0); };
 
   const lx1 = 0, ly1 = mode === "pos" ? 0 : 5;
-  const lx2 = mode === "pos" ? 8.8 : 7.5, ly2 = mode === "pos" ? 8.8*(2/3) : 0;
+  const lx2 = mode === "pos" ? 8 : 7.5, ly2 = mode === "pos" ? 8*(2/3) : 0;
 
   const btnLabels = ["Tampilkan Segitiga 1", "Tampilkan Segitiga 2", "Tampilkan Segitiga 3"];
 
