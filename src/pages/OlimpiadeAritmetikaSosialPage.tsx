@@ -215,7 +215,29 @@ const latihanDasar = [
       <text x="367" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
     </svg>
   ) },
-  { no: 10, soal: "Perhatikan tabel berikut!\nJenis | Harga | Disc\nTas | Rp. 80.000,00 | 15%\nSendal | Rp 50.000,00 | 25%\nSepatu | Rp 120.000,00 | 20%\nJika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"] },
+  { no: 10, soal: "Perhatikan tabel berikut! Jika Rani akan membeli 3 tas, 2 sendal dan 1 sepatu, maka uang yang harus dibayarkan adalah ...", options: ["A. Rp.360.000,00", "B. Rp.365.000,00", "C. Rp.370.000,00", "D. Rp.375.000,00"], svgQuestion: (
+    <svg viewBox="0 0 300 86" width="100%" style={{maxWidth:"300px"}} className="my-2 block">
+      <rect x="0.5" y="0.5" width="299" height="85" fill="none" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="0" y1="22" x2="300" y2="22" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="0" y1="44" x2="300" y2="44" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="0" y1="65" x2="300" y2="65" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="75" y1="0" x2="75" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <line x1="210" y1="0" x2="210" y2="86" stroke="#67e8f9" strokeWidth="1"/>
+      <rect x="1" y="1" width="299" height="21" fill="rgba(103,232,249,0.18)"/>
+      <text x="37" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Jenis</text>
+      <text x="142" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Harga</text>
+      <text x="254" y="15" fill="#67e8f9" fontSize="10" fontWeight="bold" textAnchor="middle">Disc</text>
+      <text x="37" y="37" fill="#facc15" fontSize="9" textAnchor="middle">Tas</text>
+      <text x="142" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">Rp. 80.000,00</text>
+      <text x="254" y="37" fill="#ffffff" fontSize="9" textAnchor="middle">15%</text>
+      <text x="37" y="58" fill="#facc15" fontSize="9" textAnchor="middle">Sendal</text>
+      <text x="142" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 50.000,00</text>
+      <text x="254" y="58" fill="#ffffff" fontSize="9" textAnchor="middle">25%</text>
+      <text x="37" y="79" fill="#facc15" fontSize="9" textAnchor="middle">Sepatu</text>
+      <text x="142" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">Rp 120.000,00</text>
+      <text x="254" y="79" fill="#ffffff" fontSize="9" textAnchor="middle">20%</text>
+    </svg>
+  ) },
   { no: 11, soal: "Seorang pedagang membeli satu karung beras dengan Bruto 50 kg dan Tara 2%. Harga pembelian karung beras tersebut adalah Rp5.000,00. Pedagang itu kemudian menjual beras tersebut secara eceran dengan harga Rp12.000,00 per kg (netto).\nBerapakah total uang yang diperoleh pedagang tersebut dari penjualan satu karung beras?", options: ["A. Rp600.000,00", "B. Rp588.000,00", "C. Rp583.000,00", "D. Rp88.000,00"] },
   { no: 12, soal: "Seorang pembeli ingin mendapatkan harga beras (netto) yang paling murah. Ia membandingkan dua penawaran:\n• Toko A: Menjual 1 karung dengan Bruto 100 kg, Tara 2%, seharga Rp1.000.000,00.\n• Toko B: Menjual 1 karung dengan Bruto 100 kg, Tara 3%, seharga Rp990.000,00.\nDi toko manakah pembeli tersebut seharusnya berbelanja untuk mendapatkan harga per kg netto termurah?", options: ["A. Toko A, karena harga per kg netto sekitar Rp10.204", "B. Toko B, karena harga per kg netto sekitar Rp10.206", "C. Toko B, karena harga karungnya lebih murah (Rp990.000)", "D. Sama saja, karena brutonya sama-sama 100 kg"] },
   { no: 13, soal: "Seorang penjual mendapat keuntungan total Rp100.000,00 setelah berhasil menjual habis satu peti buah. Ia menjual buah tersebut dengan harga Rp15.000,00 per kg (netto). Peti buah yang ia beli memiliki Bruto 60 kg dan Tara (berat peti) 2 kg.\nBerapakah harga beli (modal) peti buah tersebut pada awalnya?", options: ["A. Rp900.000,00", "B. Rp870.000,00", "C. Rp800.000,00", "D. Rp770.000,00"] },
