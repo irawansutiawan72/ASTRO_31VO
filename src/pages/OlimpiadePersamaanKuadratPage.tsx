@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -72,7 +72,27 @@ $x^2 - (\\alpha + \\beta)x + (\\alpha \\cdot \\beta) = 0$`
   ]
 };
 
-const latihanDasar = [
+const SvgSegitiga28 = () => (
+  <svg viewBox="0 0 180 170" width="160" height="150" className="my-3 mx-auto block">
+    <polygon points="20,15 20,140 150,140" fill="none" stroke="white" strokeWidth="2" />
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="white" strokeWidth="1.5" />
+    <text x="10" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="85" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="105" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+  </svg>
+);
+
+const SvgSegitiga30 = () => (
+  <svg viewBox="0 0 180 170" width="160" height="150" className="my-3 mx-auto block">
+    <polygon points="160,15 30,140 160,140" fill="none" stroke="white" strokeWidth="2" />
+    <rect x="140" y="120" width="20" height="20" fill="none" stroke="white" strokeWidth="1.5" />
+    <text x="170" y="82" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x−5</text>
+    <text x="95" y="158" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+2</text>
+    <text x="75" y="68" fill="white" fontSize="13" textAnchor="middle" fontStyle="italic">x+3</text>
+  </svg>
+);
+
+const latihanDasar: { no: number; soal: string; options: string[]; svgImage?: ReactNode }[] = [
   { no: 1, soal: "Jika bentuk umum dari persamaan $x^2 - 4 = 3(x - 2)$ adalah $ax^2 + bx + c = 0$, maka nilai a, b dan c berturut-turut adalah ...", options: ["A. 1, -3, 2", "B. 1, -2, 3", "C. 1, 3, -2", "D. 1, -3, -10"] },
   { no: 2, soal: "Penyelesaian dari persamaan $6y^2 - 12y = 0$ adalah ...", options: ["A. $x = -2$ atau $x = 6$", "B. $x = 0$ atau $x = 2$", "C. $x = 0$ atau $x = -2$", "D. $x = 0$ atau $x = 6$"] },
   { no: 3, soal: "Penyelesaian dari $(2x - 5)^2 - 81 = 0$ adalah ...", options: ["A. $x = -7$ atau $x = -2$", "B. $x = 7$ atau $x = -2$", "C. $x = -7$ atau $x = 2$", "D. $x = 7$ atau $x = 2$"] },
@@ -100,9 +120,9 @@ const latihanDasar = [
   { no: 25, soal: "Jika p dan q adalah akar-akar persamaan $x^2 - 5x - 1 = 0$, maka persamaan kuadrat baru yang akar-akarnya $2p + 1$ dan $2q + 1$ adalah ...", options: ["A. $x^2 + 10x + 11 = 0$", "B. $x^2 - 10x + 7 = 0$", "C. $x^2 - 12x + 7 = 0$", "D. $x^2 - 12x - 7 = 0$"] },
   { no: 26, soal: "Pak Musa mempunyai kebun berbentuk persegi panjang dengan luas 192 m². Selisih panjang dan lebarnya adalah 4 m. Apabila disekeliling kebun dibuat jalan dengan lebar 2 m, maka luas jalan tersebut adalah ... m².", options: ["A. 96", "B. 128", "C. 144", "D. 156"] },
   { no: 27, soal: "Diketahui sebidang tanah berbentuk persegi panjang luasnya 72 m². Jika panjangnya tiga kali lebarnya, maka panjang diagonal bidang tersebut adalah ... m.", options: ["A. $6\\sqrt{6}$", "B. $4\\sqrt{15}$", "C. $4\\sqrt{30}$", "D. $6\\sqrt{15}$"] },
-  { no: 28, soal: "Perhatikan gambar berikut: Gambar berikut menunjukkan segitiga siku-siku dengan panjang sisi $(x - 5)$ cm, $(x + 2)$ cm, dan $(x + 3)$ cm. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 60 cm²", "C. 32,5 cm²", "D. 78 cm²"] },
+  { no: 28, soal: "Perhatikan gambar segitiga siku-siku berikut. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 60 cm²", "C. 32,5 cm²", "D. 78 cm²"], svgImage: <SvgSegitiga28 /> },
   { no: 29, soal: "Dua bilangan cacah genap berurutan adalah p dan q. Jika $pq = 168$, maka nilai $(p + q)^2$ = ...", options: ["A. 324", "B. 676", "C. 484", "D. 900"] },
-  { no: 30, soal: "Perhatikan gambar segitiga siku-siku berikut. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 32,5 cm²", "C. 60 cm²", "D. 78 cm²"] },
+  { no: 30, soal: "Perhatikan gambar segitiga siku-siku berikut. Luas segitiga tersebut adalah ...", options: ["A. 30 cm²", "B. 32,5 cm²", "C. 60 cm²", "D. 78 cm²"], svgImage: <SvgSegitiga30 /> },
 ];
 
 const latihanOlimpiade = [
@@ -211,6 +231,11 @@ const OlimpiadePersamaanKuadratPage = () => {
                 <div className="font-body text-sm text-white mb-3 whitespace-pre-wrap">
                   <span className="text-accent font-bold">{soal.no}.</span> {renderWithLatex(soal.soal)}
                 </div>
+                {soal.svgImage && (
+                  <div className="flex justify-center my-2">
+                    {soal.svgImage}
+                  </div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
