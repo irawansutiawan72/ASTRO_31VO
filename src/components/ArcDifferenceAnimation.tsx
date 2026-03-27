@@ -73,6 +73,18 @@ const patterns: PatternConfig[] = [
     note: "Beda: +2, +3, +4, +5, +6 → bilangan asli!",
   },
   {
+    label: "Segitiga Pascal",
+    color: "text-pink-200",
+    borderColor: "border-pink-500/60",
+    arcColor: "#f472b6",
+    labelColor: "#fbcfe8",
+    bgColor: "bg-pink-900/40",
+    terms: [1, 2, 4, 8, 16, 32],
+    getDifferences: (t) => t.slice(1).map((v, i) => v - t[i]),
+    diffLabel: "Beda selalu ×2 (berlipat ganda)",
+    note: "Beda: +1, +2, +4, +8, +16 → jumlah baris ke-n = 2^(n-1)!",
+  },
+  {
     label: "Pola Fibonacci",
     color: "text-teal-200",
     borderColor: "border-teal-500/60",
@@ -259,7 +271,7 @@ export default function ArcDifferenceAnimation() {
             arcColor={pattern.arcColor}
             labelColor={pattern.labelColor}
             animate={true}
-            isFibonacci={selected === 5}
+            isFibonacci={selected === 6}
           />
         </div>
 
