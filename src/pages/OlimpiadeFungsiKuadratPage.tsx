@@ -271,20 +271,17 @@ const q16Svg = (variant: 'A'|'B'|'C'|'D'): ReactNode => {
 };
 
 const q27Svg = (): ReactNode => {
-  const tc="#ffffff", sc="rgba(255,255,255,0.55)";
+  const tc="#ffffff", yc="#facc15", fc="#3b82f6";
+  const bott=84, lx=48, lw=86, lh=52, lw2=72, lh2=70;
+  const ly=bott-lh, rx=lx+lw, ry=bott-lh2;
   return (
-    <svg viewBox="0 0 205 92" width="100%" style={{maxWidth:"205px"}} className="mt-2 block">
-      <defs>
-        <pattern id="hatch27" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="8" stroke="rgba(255,255,255,0.18)" strokeWidth="1"/>
-        </pattern>
-      </defs>
-      <rect x="12" y="22" width="88" height="58" fill="url(#hatch27)" stroke={sc} strokeWidth="1.2"/>
-      <rect x="108" y="14" width="76" height="66" fill="url(#hatch27)" stroke={sc} strokeWidth="1.2"/>
-      <text x="56" y="54" fill={tc} fontSize="9" textAnchor="middle">(7 - x)</text>
-      <text x="9" y="54" fill={tc} fontSize="9" textAnchor="end">(x + 1)</text>
-      <text x="146" y="10" fill={tc} fontSize="9" textAnchor="middle">5 cm</text>
-      <text x="188" y="50" fill={tc} fontSize="9" textAnchor="start">5 cm</text>
+    <svg viewBox="0 0 242 95" width="100%" style={{maxWidth:"242px"}} className="mt-2 block">
+      <rect x={lx} y={ly} width={lw} height={lh} fill={fc} stroke={yc} strokeWidth="1.5"/>
+      <rect x={rx} y={ry} width={lw2} height={lh2} fill={fc} stroke={yc} strokeWidth="1.5"/>
+      <text x={lx+lw/2} y={ly+lh/2+4} fill={tc} fontSize="9" textAnchor="middle">(7 - x)</text>
+      <text x={lx-4} y={ly+lh/2+4} fill={tc} fontSize="9" textAnchor="end">(x + 1)</text>
+      <text x={rx+lw2/2} y={ry-4} fill={tc} fontSize="9" textAnchor="middle">5 cm</text>
+      <text x={rx+lw2+4} y={ry+lh2/2+4} fill={tc} fontSize="9" textAnchor="start">5 cm</text>
     </svg>
   );
 };
