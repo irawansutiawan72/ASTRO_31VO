@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Sparkles } from "lucide-react";
+import { BookOpen, ChevronDown, ChevronUp, Lightbulb, Target, Sparkles, Activity } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import ArcDifferenceAnimation from "@/components/ArcDifferenceAnimation";
 
 const PolaKhususPage = () => {
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<string[]>([
-    "intro", "katalog", "contoh1", "contoh2", "contoh3", "rangkuman",
+    "intro", "katalog", "animasi", "contoh1", "contoh2", "contoh3", "rangkuman",
   ]);
 
   const toggleSection = (section: string) => {
@@ -246,6 +247,19 @@ const PolaKhususPage = () => {
                   <p className="font-body text-xs text-white/60 mt-1">🌿 Muncul di alam: kelopak bunga, cangkang nautilus, susunan biji bunga matahari!</p>
                 </div>
 
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI BUSUR BEDA */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <SectionHeader id="animasi" icon={<Activity className="w-5 h-5" />} iconColor="text-cyan-400" title="🌀 Animasi Busur Beda — Visualisasi Selisih Setiap Pola" />
+            {expandedSections.includes("animasi") && (
+              <div className="px-5 pb-5 space-y-3">
+                <p className="font-body text-sm text-white/70 leading-relaxed">
+                  Pilih sebuah pola di bawah lalu perhatikan <strong className="text-cyan-300">busur melengkung</strong> yang menunjukkan <strong className="text-cyan-300">beda (selisih)</strong> antara dua suku yang berurutan. Busur muncul satu per satu dari kiri ke kanan — amati polanya!
+                </p>
+                <ArcDifferenceAnimation />
               </div>
             )}
           </div>
