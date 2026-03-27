@@ -278,7 +278,7 @@ const q27Svg = (): ReactNode => {
     <svg viewBox="0 0 242 95" width="100%" style={{maxWidth:"242px"}} className="mt-2 block">
       <rect x={lx} y={ly} width={lw} height={lh} fill={fc} stroke={yc} strokeWidth="1.5"/>
       <rect x={rx} y={ry} width={lw2} height={lh2} fill={fc} stroke={yc} strokeWidth="1.5"/>
-      <text x={lx+lw/2} y={ly+lh/2+4} fill={tc} fontSize="9" textAnchor="middle">(7 - x)</text>
+      <text x={lx+lw/2} y={ly-4} fill={tc} fontSize="9" textAnchor="middle">(7 - x)</text>
       <text x={lx-4} y={ly+lh/2+4} fill={tc} fontSize="9" textAnchor="end">(x + 1)</text>
       <text x={rx+lw2/2} y={ry-4} fill={tc} fontSize="9" textAnchor="middle">5 cm</text>
       <text x={rx+lw2+4} y={ry+lh2/2+4} fill={tc} fontSize="9" textAnchor="start">5 cm</text>
