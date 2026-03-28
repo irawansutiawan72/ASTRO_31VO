@@ -123,6 +123,280 @@ Misalkan kita ingin menentukan apakah 137 prima.
   ]
 };
 
+// ─── Rich Materi Components ───────────────────────────────────────────────
+
+const MateriA = () => {
+  const items = [
+    { name: "Bilangan Bulat",         sym: "ℤ",  ex: "..., −2, −1, 0, 1, 2, ...",   cls: "from-blue-500/20 to-blue-700/10 border-blue-500/40 text-blue-300" },
+    { name: "Bulat Negatif",          sym: "ℤ⁻", ex: "..., −3, −2, −1",             cls: "from-red-500/20 to-red-700/10 border-red-500/40 text-red-300" },
+    { name: "Bilangan Cacah",         sym: "W",  ex: "0, 1, 2, 3, 4, ...",          cls: "from-green-500/20 to-green-700/10 border-green-500/40 text-green-300" },
+    { name: "Bilangan Asli",          sym: "ℕ",  ex: "1, 2, 3, 4, 5, ...",          cls: "from-emerald-500/20 to-emerald-700/10 border-emerald-500/40 text-emerald-300" },
+    { name: "Bilangan Ganjil",        sym: "G",  ex: "1, 3, 5, 7, 9, ...",          cls: "from-purple-500/20 to-purple-700/10 border-purple-500/40 text-purple-300" },
+    { name: "Bilangan Genap",         sym: "Gp", ex: "2, 4, 6, 8, 10, ...",         cls: "from-pink-500/20 to-pink-700/10 border-pink-500/40 text-pink-300" },
+    { name: "Bilangan Prima",         sym: "P",  ex: "2, 3, 5, 7, 11, ...",         cls: "from-yellow-500/20 to-yellow-700/10 border-yellow-500/40 text-yellow-300" },
+    { name: "Bilangan Kuadrat",       sym: "n²", ex: "1, 4, 9, 16, 25, ...",        cls: "from-orange-500/20 to-orange-700/10 border-orange-500/40 text-orange-300" },
+    { name: "Bilangan Kubik",         sym: "n³", ex: "1, 8, 27, 64, 125, ...",      cls: "from-cyan-500/20 to-cyan-700/10 border-cyan-500/40 text-cyan-300" },
+    { name: "Bilangan Komposit",      sym: "K",  ex: "4, 6, 8, 9, 10, ...",         cls: "from-slate-500/20 to-slate-700/10 border-slate-500/40 text-slate-300" },
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-2 mt-2">
+      {items.map((item, i) => {
+        const [from, to, border, text] = item.cls.split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 bg-gradient-to-br ${from} ${to} ${border}`}>
+            <div className="flex items-center gap-2 mb-1">
+              <span className={`text-base font-bold font-mono ${text}`}>{item.sym}</span>
+              <span className={`text-xs font-semibold leading-tight ${text}`}>{item.name}</span>
+            </div>
+            <div className="text-xs text-white/55 font-mono tracking-tight">{item.ex}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriB = () => {
+  const steps = [
+    { sym: "(  )", label: "Tanda Kurung",   sub: "Kerjakan yang di dalam kurung dulu",  cls: "text-yellow-300 bg-yellow-400/15 border-yellow-400/50" },
+    { sym: "xⁿ √",label: "Pangkat / Akar", sub: "Operasi pangkat atau akar",           cls: "text-cyan-300 bg-cyan-400/15 border-cyan-400/50" },
+    { sym: "× ÷", label: "Kali / Bagi",    sub: "Kerjakan dari kiri ke kanan",         cls: "text-green-300 bg-green-400/15 border-green-400/50" },
+    { sym: "+ −", label: "Tambah / Kurang",sub: "Kerjakan dari kiri ke kanan",         cls: "text-pink-300 bg-pink-400/15 border-pink-400/50" },
+  ];
+  return (
+    <div className="mt-2 space-y-2">
+      <p className="text-xs text-white/50 mb-3 text-center italic">Ingat singkatan: <span className="text-white/80 font-semibold">Ka – Pa – Ka – Ta</span></p>
+      {steps.map((s, i) => {
+        const [tc, bg, bc] = s.cls.split(' ');
+        return (
+          <div key={i} className={`flex items-center gap-3 p-3 rounded-xl border ${bg} ${bc}`}>
+            <div className={`flex-shrink-0 w-8 h-8 rounded-full border ${bc} flex items-center justify-center text-xs font-bold ${tc}`}>{i + 1}</div>
+            <div className={`text-base font-mono font-bold w-12 text-center ${tc}`}>{s.sym}</div>
+            <div>
+              <div className={`text-sm font-semibold ${tc}`}>{s.label}</div>
+              <div className="text-xs text-white/45">{s.sub}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriC = () => {
+  const groups = [
+    {
+      name: "Komutatif", desc: "Urutan bilangan tidak mempengaruhi hasil",
+      cls: "text-blue-300 border-blue-400/40 bg-blue-400/10",
+      formulas: ["a + b = b + a", "a \\times b = b \\times a"],
+    },
+    {
+      name: "Asosiatif", desc: "Pengelompokan tidak mempengaruhi hasil",
+      cls: "text-green-300 border-green-400/40 bg-green-400/10",
+      formulas: ["(a + b) + c = a + (b + c)", "(a \\times b) \\times c = a \\times (b \\times c)"],
+    },
+    {
+      name: "Distributif", desc: "Perkalian terhadap penjumlahan / pengurangan",
+      cls: "text-orange-300 border-orange-400/40 bg-orange-400/10",
+      formulas: ["a \\times (b + c) = (a \\times b) + (a \\times c)", "a \\times (b - c) = (a \\times b) - (a \\times c)"],
+    },
+  ];
+  return (
+    <div className="mt-2 space-y-3">
+      {groups.map((g, i) => {
+        const [tc, bc, bgc] = g.cls.split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 ${bc} ${bgc}`}>
+            <div className={`text-sm font-bold ${tc}`}>{g.name}</div>
+            <div className="text-xs text-white/45 mb-2">{g.desc}</div>
+            <div className="space-y-1">
+              {g.formulas.map((f, j) => (
+                <div key={j} className={`px-3 py-2 rounded-lg bg-card/50 border ${bc} text-sm`}>
+                  <InlineMath math={f} />
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriD = () => {
+  const ex1 = [
+    { num: "7",         d: 1 }, { num: "42",        d: 2 },
+    { num: "159",       d: 3 }, { num: "1.234.567", d: 7 },
+  ];
+  const ex2 = [
+    { num: "7",   calc: "7",         res: "7" },
+    { num: "42",  calc: "4 + 2",     res: "6" },
+    { num: "159", calc: "1 + 5 + 9", res: "15" },
+  ];
+  return (
+    <div className="mt-2 space-y-4">
+      <div>
+        <div className="text-xs font-bold text-cyan-300 mb-2">① Banyak Digit</div>
+        <div className="grid grid-cols-2 gap-2">
+          {ex1.map((e, i) => (
+            <div key={i} className="flex items-center justify-between bg-cyan-400/10 border border-cyan-400/30 rounded-lg px-3 py-2">
+              <span className="text-sm font-mono font-bold text-white">{e.num}</span>
+              <span className="text-xs font-semibold text-cyan-300">{e.d} digit</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div className="text-xs font-bold text-yellow-300 mb-2">② Jumlah Digit</div>
+        <div className="space-y-2">
+          {ex2.map((e, i) => (
+            <div key={i} className="flex items-center gap-2 bg-yellow-400/10 border border-yellow-400/30 rounded-lg px-3 py-2">
+              <span className="text-sm font-mono font-bold text-white w-14">{e.num}</span>
+              <span className="text-white/40 text-xs">→</span>
+              <span className="text-xs text-white/70">{e.calc}</span>
+              <span className="text-white/40 text-xs">=</span>
+              <span className="text-sm font-bold text-yellow-300 ml-auto">{e.res}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MateriE = () => {
+  const tables = [
+    { op: "Penjumlahan (+)", rows: [["Ganjil + Ganjil","Genap"],["Ganjil + Genap","Ganjil"],["Genap + Genap","Genap"]], hue: "purple" },
+    { op: "Pengurangan (−)", rows: [["Ganjil − Ganjil","Genap"],["Ganjil − Genap","Ganjil"],["Genap − Genap","Genap"]], hue: "indigo" },
+    { op: "Perkalian (×)",   rows: [["Ganjil × Ganjil","Ganjil"],["Ganjil × Genap","Genap"],["Genap × Genap","Genap"]], hue: "pink" },
+  ];
+  const hue: Record<string,string> = {
+    purple: "text-purple-300 border-purple-400/30 bg-purple-400/10",
+    indigo: "text-indigo-300 border-indigo-400/30 bg-indigo-400/10",
+    pink:   "text-pink-300 border-pink-400/30 bg-pink-400/10",
+  };
+  const resultColor = (r: string) => r === "Genap" ? "text-blue-300" : "text-orange-300";
+  return (
+    <div className="mt-2 space-y-3">
+      {tables.map((t, i) => {
+        const [tc, bc, bgc] = hue[t.hue].split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 ${bc} ${bgc}`}>
+            <div className={`text-xs font-bold mb-2 ${tc}`}>{t.op}</div>
+            <div className="space-y-1">
+              {t.rows.map((row, j) => (
+                <div key={j} className="flex items-center justify-between bg-card/40 rounded-lg px-3 py-2">
+                  <span className="text-xs text-white/75">{row[0]}</span>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full bg-card/60 ${resultColor(row[1])}`}>= {row[1]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriF = () => {
+  const digits = [
+    { val: "a", place: "×1000", cls: "text-yellow-300 border-yellow-400/50 bg-yellow-400/15" },
+    { val: "b", place: "×100",  cls: "text-cyan-300 border-cyan-400/50 bg-cyan-400/15" },
+    { val: "c", place: "×10",   cls: "text-green-300 border-green-400/50 bg-green-400/15" },
+    { val: "d", place: "×1",    cls: "text-pink-300 border-pink-400/50 bg-pink-400/15" },
+  ];
+  return (
+    <div className="mt-2">
+      <p className="text-xs text-white/55 mb-3 text-center">Setiap bilangan 4 digit dapat diuraikan berdasarkan nilai tempat:</p>
+      <div className="flex items-center justify-center gap-2 flex-wrap mb-4">
+        {digits.map((d, i) => {
+          const [tc, bc, bgc] = d.cls.split(' ');
+          return (
+            <div key={i} className="flex items-center gap-2">
+              {i > 0 && <span className="text-white/50 text-lg font-bold">+</span>}
+              <div className={`flex flex-col items-center border rounded-xl px-4 py-2 ${bc} ${bgc}`}>
+                <span className={`text-xl font-bold font-mono ${tc}`}>{d.val}</span>
+                <span className={`text-xs font-semibold ${tc}`}>{d.place}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="text-center mb-3">
+        <div className="inline-block bg-card/50 border border-white/15 rounded-xl px-4 py-2">
+          <BlockMath math="\overline{abcd} = 1000a + 100b + 10c + d" />
+        </div>
+      </div>
+      <div className="bg-card/40 border border-white/10 rounded-xl p-3">
+        <p className="text-xs text-white/50 text-center mb-2">Contoh:</p>
+        <div className="flex items-center justify-center gap-2 flex-wrap text-sm">
+          {[["2","yellow"],["3","cyan"],["4","green"],["5","pink"]].map(([v,c],i) => (
+            <div key={i} className="flex items-center gap-1">
+              {i > 0 && <span className="text-white/40">+</span>}
+              <span className={`font-bold text-${c}-300`}>{v}</span>
+              <span className="text-white/40 text-xs">×{[1000,100,10,1][i]}</span>
+            </div>
+          ))}
+          <span className="text-white/40">=</span>
+          <span className="font-bold text-white">2345</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MateriG = () => {
+  const methods = [
+    {
+      name: "Metode Pembagian (Trial Division)",
+      cls: "text-yellow-300 border-yellow-400/40 bg-yellow-400/10",
+      steps: ["Hitung akar kuadrat dari bilangan yang diuji","Bagi dengan setiap bilangan bulat dari 2 hingga akar kuadrat","Jika ada yang membagi habis → bukan prima","Jika tidak ada yang membagi habis → prima ✓"],
+    },
+    {
+      name: "Metode Uji Pembagi Prima",
+      cls: "text-cyan-300 border-cyan-400/40 bg-cyan-400/10",
+      steps: ["Hitung akar kuadrat dari bilangan yang diuji","Bagi hanya dengan bilangan prima sampai akar kuadrat","Jika ada yang membagi habis → bukan prima","Jika tidak ada → prima ✓ (lebih efisien)"],
+    },
+  ];
+  return (
+    <div className="mt-2 space-y-3">
+      {methods.map((m, i) => {
+        const [tc, bc, bgc] = m.cls.split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 ${bc} ${bgc}`}>
+            <div className={`text-xs font-bold mb-2 ${tc}`}>{m.name}</div>
+            <div className="space-y-1">
+              {m.steps.map((s, j) => (
+                <div key={j} className="flex items-start gap-2">
+                  <span className={`shrink-0 text-xs font-bold ${tc}`}>{j+1}.</span>
+                  <span className="text-xs text-white/65">{s}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+      <div className="bg-card/50 border border-white/10 rounded-xl p-3">
+        <div className="text-xs font-bold text-white/80 mb-2">Contoh: Apakah 137 prima?</div>
+        <div className="text-xs text-white/55 mb-2">Akar kuadrat 137 ≈ 11,7 → cek pembagi sampai 11</div>
+        <div className="grid grid-cols-2 gap-1 text-xs">
+          {["137 ÷ 2 = 68{,}5","137 ÷ 3 = 45{,}67","137 ÷ 5 = 27{,}4","137 ÷ 7 = 19{,}57","137 ÷ 11 = 12{,}45"].map((f,i) => (
+            <div key={i} className="flex items-center gap-1 bg-card/40 rounded-lg px-2 py-1">
+              <InlineMath math={f} />
+              <span className="text-red-400 ml-auto">✗</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 text-xs font-semibold text-green-400 text-center">→ 137 adalah bilangan prima ✓</div>
+      </div>
+    </div>
+  );
+};
+
+const MATERI_COMPONENTS = [<MateriA/>, <MateriB/>, <MateriC/>, <MateriD/>, <MateriE/>, <MateriF/>, <MateriG/>];
+
+// ──────────────────────────────────────────────────────────────────────────────
+
 interface LatihanSoal {
   no: number;
   soal: string;
@@ -706,25 +980,39 @@ const OlimpiadeBilanganBulatPage = () => {
         {activeTab === "materi" && (
           <div className="space-y-3 animate-slide-up">
             {materiSection.sections.map((section, idx) => (
-              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+              <div
+                key={idx}
+                className="backdrop-blur border rounded-xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.75) 0%, rgba(15,23,42,0.85) 100%)",
+                  borderColor: expandedSections.includes(idx) ? "rgba(251,191,36,0.4)" : "rgba(255,255,255,0.1)",
+                  boxShadow: expandedSections.includes(idx)
+                    ? "0 0 24px rgba(251,191,36,0.08), inset 0 1px 0 rgba(255,255,255,0.05)"
+                    : "inset 0 1px 0 rgba(255,255,255,0.04)",
+                }}
+              >
                 <button
                   onClick={() => toggleSection(idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left group"
                 >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
-                  {expandedSections.includes(idx) ? (
-                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
-                  )}
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold"
+                      style={{ background: "rgba(251,191,36,0.15)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.35)" }}
+                    >
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="font-display text-sm text-accent font-bold group-hover:text-yellow-300 transition-colors">
+                      {section.heading}
+                    </span>
+                  </div>
+                  {expandedSections.includes(idx)
+                    ? <ChevronUp className="w-4 h-4 text-accent shrink-0" />
+                    : <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
-                    </div>
+                  <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
+                    {MATERI_COMPONENTS[idx]}
                   </div>
                 )}
               </div>
