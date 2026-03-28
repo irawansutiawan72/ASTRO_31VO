@@ -61,42 +61,42 @@ const SudutPosNegSVG = () => (
   <svg viewBox="0 0 340 195" className="w-full max-w-md mx-auto" style={{ background: "transparent" }}>
     <defs>
       <marker id="ah-gsv" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#F0C040" />
+        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#ffffff" />
       </marker>
     </defs>
 
     {/* ── LEFT: Sudut Positif ── */}
     {/* OA arm → right */}
-    <line x1="80" y1="120" x2="150" y2="120" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="80" y1="120" x2="150" y2="120" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* OB arm → upper-left (130°) */}
-    <line x1="80" y1="120" x2="40" y2="72" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="80" y1="120" x2="40" y2="72" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CCW from 0° to 130°: sweep-flag=0 */}
-    <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#ffffff" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
     {/* Labels */}
-    <text x="74" y="136" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
-    <text x="152" y="116" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
-    <text x="28"  y="72"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
-    <text x="95"  y="108" fill="#F0C040" fontSize="12" fontFamily="serif" fontStyle="italic">θ</text>
-    <text x="80"  y="155" fill="#F0C040" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Positif (+)</text>
-    <text x="80"  y="170" fill="#F0C040" fontSize="8.5" textAnchor="middle" opacity="0.75">berlawanan arah jarum jam</text>
+    <text x="74" y="136" fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
+    <text x="152" y="116" fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="28"  y="72"  fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
+    <text x="95"  y="108" fill="#38bdf8" fontSize="12" fontFamily="serif" fontStyle="italic">θ</text>
+    <text x="80"  y="155" fill="#38bdf8" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Positif (+)</text>
+    <text x="80"  y="170" fill="#38bdf8" fontSize="8.5" textAnchor="middle" opacity="0.85">berlawanan arah jarum jam</text>
 
     {/* Divider */}
-    <line x1="170" y1="10" x2="170" y2="185" stroke="#F0C040" strokeWidth="0.5" strokeDasharray="4,4" opacity="0.35" />
+    <line x1="170" y1="10" x2="170" y2="185" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="4,4" opacity="0.35" />
 
     {/* ── RIGHT: Sudut Negatif ── */}
     {/* OA arm → right */}
-    <line x1="250" y1="80" x2="320" y2="80" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="250" y1="80" x2="320" y2="80" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* OB arm → lower-left (-130° = 230°) */}
-    <line x1="250" y1="80" x2="210" y2="128" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    <line x1="250" y1="80" x2="210" y2="128" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CW from 0° to -130°: sweep-flag=1 */}
-    <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#ffffff" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
     {/* Labels */}
-    <text x="244" y="96"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
-    <text x="322" y="76"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
-    <text x="198" y="132" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
-    <text x="262" y="100" fill="#F0C040" fontSize="12" fontFamily="serif" fontStyle="italic">-θ</text>
-    <text x="250" y="155" fill="#F0C040" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Negatif (-)</text>
-    <text x="250" y="170" fill="#F0C040" fontSize="8.5" textAnchor="middle" opacity="0.75">searah arah jarum jam</text>
+    <text x="244" y="96"  fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
+    <text x="322" y="76"  fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="198" y="132" fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
+    <text x="262" y="100" fill="#38bdf8" fontSize="12" fontFamily="serif" fontStyle="italic">-θ</text>
+    <text x="250" y="155" fill="#38bdf8" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Negatif (-)</text>
+    <text x="250" y="170" fill="#38bdf8" fontSize="8.5" textAnchor="middle" opacity="0.85">searah arah jarum jam</text>
   </svg>
 );
 
