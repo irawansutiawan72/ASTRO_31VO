@@ -466,16 +466,21 @@ const JaringSegiempatSVG = () => (
    JARING-JARING PRISMA SEGILIMA (pentagon)
 ───────────────────────────────────────────────────────────── */
 const JaringSegilimaSVG = () => {
-  const penta = (cx: number, cy: number, r: number) =>
+  // penta: regular pentagon centered at (cx,cy), circumradius r, starting angle startDeg
+  const penta = (cx: number, cy: number, r: number, startDeg: number) =>
     Array.from({ length: 5 }, (_, i) => {
-      const angle = ((-90 + i * 72) * Math.PI) / 180;
-      return `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`;
+      const angle = ((startDeg + i * 72) * Math.PI) / 180;
+      return `${(cx + r * Math.cos(angle)).toFixed(2)},${(cy + r * Math.sin(angle)).toFixed(2)}`;
     }).join(" ");
 
   const sw = 50, rh = 50;
   const startX = 55;
-  const oy = 100;
-  const pr = 26;
+  const oy = 100;           // rect top y
+  const rectBottomY = oy + rh; // = 150  (rect bottom y)
+  const pr = 26;            // pentagon circumradius
+
+  // sin(54°) ≈ 0.809 — used to position the flat edge of the pentagon flush with the rect edge
+  const sin54 = 0.8090;
 
   const rects = [
     { x: startX,           fill: "#3b82f6", label: "SISI 1" },
@@ -485,9 +490,19 @@ const JaringSegilimaSVG = () => {
     { x: startX + 4 * sw,  fill: "#ec4899", label: "SISI 5" },
   ];
 
-  const midX = startX + 2 * sw + sw / 2;
-  const alasCY = oy + rh + pr + 4;
-  const tutupCY = oy - pr - 4;
+  const midX = startX + 2 * sw + sw / 2; // center of rect 3 = 180
+
+  // ALAS (below rect 3): flat edge at TOP connecting to rect bottom (y=150)
+  // Flat-top config → start at -54°. Top two vertices are at -54° and 234°,
+  // both at y = cy - pr*sin54. Set that = rectBottomY → cy = rectBottomY + pr*sin54
+  const alasCY = rectBottomY + pr * sin54;           // ≈ 171.0
+  const alasStart = -54;                             // flat-top (flat edge faces upward)
+
+  // TUTUP (above rect 3): flat edge at BOTTOM connecting to rect top (y=100)
+  // Point-top config → start at -90°. Bottom two vertices are at 54° and 126°,
+  // both at y = cy + pr*sin54. Set that = oy → cy = oy - pr*sin54
+  const tutupCY = oy - pr * sin54;                   // ≈ 79.0
+  const tutupStart = -90;                            // point-top (flat edge faces downward)
 
   return (
     <svg viewBox="0 0 370 255" className="w-full max-w-sm mx-auto my-2"
@@ -506,10 +521,10 @@ const JaringSegilimaSVG = () => {
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
       </defs>
-      {/* 5 rectangular side faces */}
+      {/* 5 rectangular side faces — connected strip */}
       {rects.map((r, i) => (
         <g key={i}>
-          <rect x={r.x} y={oy} width={sw} height={rh} fill={r.fill} fillOpacity={0.88} rx={3}
+          <rect x={r.x} y={oy} width={sw} height={rh} fill={r.fill} fillOpacity={0.88}
             stroke="white" strokeWidth={1.5} className="jsg-a"/>
           <text x={r.x + sw / 2} y={oy + rh / 2 - 4} fill="white" fontSize={6.5}
             fontFamily="monospace" fontWeight="bold" textAnchor="middle">{r.label}</text>
@@ -517,13 +532,13 @@ const JaringSegilimaSVG = () => {
             fontFamily="monospace" textAnchor="middle">a×t</text>
         </g>
       ))}
-      {/* ALAS pentagon below rect 3 (middle) */}
-      <polygon points={penta(midX, alasCY, pr)} fill="#ef4444" fillOpacity={0.88}
+      {/* ALAS pentagon — flat top flush with rect 3 bottom edge */}
+      <polygon points={penta(midX, alasCY, pr, alasStart)} fill="#ef4444" fillOpacity={0.88}
         stroke="white" strokeWidth={1.5} className="jsg-b"/>
-      <text x={midX} y={alasCY + 4} fill="white" fontSize={7}
+      <text x={midX} y={alasCY + 6} fill="white" fontSize={7}
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
-      {/* TUTUP pentagon above rect 3 (middle) */}
-      <polygon points={penta(midX, tutupCY, pr)} fill="#eab308" fillOpacity={0.88}
+      {/* TUTUP pentagon — flat bottom flush with rect 3 top edge */}
+      <polygon points={penta(midX, tutupCY, pr, tutupStart)} fill="#eab308" fillOpacity={0.88}
         stroke="white" strokeWidth={1.5} className="jsg-c"/>
       <text x={midX} y={tutupCY + 4} fill="white" fontSize={7}
         fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
@@ -531,7 +546,7 @@ const JaringSegilimaSVG = () => {
       <text x={startX + sw / 2} y={oy - 5} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">a</text>
       <text x={startX - 10} y={oy + rh / 2 + 4} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
       {/* Formula */}
-      <text x="185" y="240" fill="#e0e7ff" fontSize={10} fontFamily="monospace" fontWeight="bold"
+      <text x="185" y="243" fill="#e0e7ff" fontSize={10} fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#jsgBloom)">L = 2×L△₅ + 5a×t</text>
     </svg>
   );
