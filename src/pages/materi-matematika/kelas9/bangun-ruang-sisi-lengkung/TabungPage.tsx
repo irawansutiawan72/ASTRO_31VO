@@ -112,10 +112,9 @@ const InteractiveCylinder3D = () => {
                     width: w + 1,
                     height: H_CYL,
                     background: `hsl(48, 98%, ${light}%)`,
-                    borderLeft: "1px solid rgba(255,255,255,0.12)",
+                    borderLeft: "1px solid rgba(200,160,0,0.25)",
                     transform: `translateX(-50%) translateX(${x}px) translateZ(${z}px) rotateY(${(angle * 180 / Math.PI) + 90}deg)`,
                     transformOrigin: "center center",
-                    backfaceVisibility: "hidden",
                   }}
                 />
               );
