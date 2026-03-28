@@ -762,25 +762,8 @@ const volExamples: Ex[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   ACCORDION + EXAMPLE CARD COMPONENTS
+   EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
-const AccordionSection = ({ sec, idx }: { sec: Sec; idx: number }) => {
-  const [open, setOpen] = useState(idx === 0);
-  return (
-    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-      <button onClick={() => { playPopSound(); setOpen(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/5 transition-colors cursor-pointer">
-        <span className="flex items-center gap-3">
-          <span className="text-xl">{sec.icon}</span>
-          <span className="font-display text-sm font-semibold text-white">{sec.title}</span>
-        </span>
-        {open ? <ChevronUp className="w-4 h-4 text-primary shrink-0"/> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0"/>}
-      </button>
-      {open && <div className="px-5 pb-5 border-t border-border/50"><div className="pt-4">{sec.content}</div></div>}
-    </div>
-  );
-};
-
 const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
   const [show, setShow] = useState(false);
   return (
@@ -804,55 +787,134 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 };
 
 /* ─────────────────────────────────────────────────────────────
-   MAIN PAGE
+   MAIN PAGE — SLIDE LAYOUT
 ───────────────────────────────────────────────────────────── */
 const TabungPage = () => {
   const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: "Pengantar",
+      icon: "🎯",
+      content: (
+        <div className="space-y-4 font-body">
+          <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
+            <p>
+              Dari kaleng minuman di kulkas hingga tangki air di atap rumah — semua itu berbentuk{" "}
+              <strong className="text-cyan-300">tabung</strong>! Di sini kamu akan mempelajari semua
+              tentang tabung: unsur-unsurnya, cara membuka jaring-jaringnya, serta menghitung{" "}
+              <strong className="text-orange-300">luas permukaan</strong> dan{" "}
+              <strong className="text-blue-300">volume</strong>-nya secara lengkap.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {[
+              { icon: "⭕", label: "2 Sisi Lingkaran", color: "text-cyan-300" },
+              { icon: "🌀", label: "1 Selimut Lengkung", color: "text-orange-300" },
+              { icon: "📏", label: "Jari-jari (r)", color: "text-yellow-300" },
+              { icon: "📐", label: "Tinggi (t)", color: "text-green-300" },
+              { icon: "🎨", label: "L = 2πr² + 2πrt", color: "text-blue-300" },
+              { icon: "📦", label: "V = πr²t", color: "text-violet-300" },
+            ].map(({ icon, label, color }) => (
+              <div key={label} className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 flex flex-col items-center gap-1">
+                <span className="text-2xl">{icon}</span>
+                <span className={`text-xs font-semibold font-body text-center ${color}`}>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+    ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    {
+      title: "Contoh Soal — Luas Permukaan",
+      icon: "🎨",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+        </div>
+      ),
+    },
+    {
+      title: "Contoh Soal — Volume",
+      icon: "📦",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
+        </div>
+      ),
+    },
+  ];
+
+  const totalSlides = slides.length;
+  const slide = slides[currentSlide];
+
+  const goNext = () => { playPopSound(); setCurrentSlide(v => Math.min(v + 1, totalSlides - 1)); };
+  const goPrev = () => { playPopSound(); setCurrentSlide(v => Math.max(v - 1, 0)); };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
       <PageNavigation />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
+
         <Database className="w-10 h-10 text-primary mx-auto mb-3" />
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           TABUNG
         </h1>
-        <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
 
-        <div className="bg-card/60 border border-border rounded-xl p-4 mb-6 text-sm font-body text-white/75 leading-relaxed">
-          <p>
-            Dari kaleng minuman di kulkas hingga tangki air di atap rumah — semua itu berbentuk{" "}
-            <strong className="text-cyan-300">tabung</strong>! Di sini kamu akan mempelajari semua
-            tentang tabung: unsur-unsurnya, cara membuka jaring-jaringnya, serta menghitung{" "}
-            <strong className="text-orange-300">luas permukaan</strong> dan{" "}
-            <strong className="text-blue-300">volume</strong>-nya secara lengkap.
-          </p>
+        <div className="flex items-center justify-center gap-1.5 mb-5 flex-wrap">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { playPopSound(); setCurrentSlide(i); }}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${
+                i === currentSlide
+                  ? "w-6 h-2.5 bg-primary"
+                  : "w-2.5 h-2.5 bg-slate-600 hover:bg-slate-400"
+              }`}
+            />
+          ))}
         </div>
 
-        {/* Sections */}
-        <div className="flex flex-col gap-3 mb-8">
-          {sections.map((sec, i) => <AccordionSection key={sec.title} sec={sec} idx={i} />)}
-        </div>
-
-        {/* Contoh soal luas */}
-        <div className="mb-6">
-          <h3 className="font-display text-sm font-bold text-orange-300 text-center mb-1">🎨 Contoh Soal — LUAS PERMUKAAN</h3>
-          <p className="text-white/40 text-xs text-center mb-4 font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          <div className="flex flex-col gap-4">
-            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-2xl overflow-hidden mb-5">
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50 bg-slate-800/40">
+            <span className="text-2xl">{slide.icon}</span>
+            <div className="flex-1 min-w-0">
+              <p className="text-white/40 text-[10px] font-body uppercase tracking-widest">
+                Slide {currentSlide + 1} / {totalSlides}
+              </p>
+              <h2 className="font-display text-sm font-bold text-white">{slide.title}</h2>
+            </div>
+          </div>
+          <div className="px-5 py-5">
+            {slide.content}
           </div>
         </div>
 
-        {/* Contoh soal volume */}
-        <div className="mb-4">
-          <h3 className="font-display text-sm font-bold text-blue-300 text-center mb-1">📦 Contoh Soal — VOLUME</h3>
-          <p className="text-white/40 text-xs text-center mb-4 font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          <div className="flex flex-col gap-4">
-            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOLUME"/>)}
-          </div>
+        <div className="flex items-center justify-between gap-3 mb-8">
+          <button
+            onClick={goPrev}
+            disabled={currentSlide === 0}
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-slate-800/60 border border-slate-600 text-white/70 rounded-xl hover:bg-slate-700/60 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            ← Sebelumnya
+          </button>
+          <span className="text-white/30 text-xs font-body">{currentSlide + 1} / {totalSlides}</span>
+          <button
+            onClick={goNext}
+            disabled={currentSlide === totalSlides - 1}
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold font-body bg-primary/20 border border-primary/50 text-primary rounded-xl hover:bg-primary/30 transition-colors cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Selanjutnya →
+          </button>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="text-center">
           <button onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body">
             ← Kembali ke Bangun Ruang Sisi Lengkung
