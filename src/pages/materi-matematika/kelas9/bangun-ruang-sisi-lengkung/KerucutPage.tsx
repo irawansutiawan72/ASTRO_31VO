@@ -363,266 +363,295 @@ const VolumeKerucutSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
-   CONE NET ANIMATION — kerucut dibongkar menjadi jaring-jaring
-   Layout (viewBox 0 0 400 310):
-     Sector (selimut): apex at (200,25), s=120, half-angle=78° from vertical
-       Path: M 200,25 L 83,50 A 120,120 0 0,1 317,50 Z
-       Arc spans 156°, bottom of arc at (200,145)
-     Alas circle: cx=200 cy=220 r=52
-   Assembled state transforms (transformBox:fill-box, transformOrigin as noted):
-     Sector  → "translateY(45px) scaleX(0.025)"  origin="top center" (=apex 200,25)
-     Alas    → "translateY(65px) scaleX(1.288) scaleY(0.346)"        (assembled: cy=285 ellipse rx=67 ry=18)
+   CONE NET ANIMATION — slow-motion canvas peeling animation
+   Geometry: r=55, h=120, s≈132, sector angle≈150°
+   N=60 triangular strips peel in a wave from left→right
 ───────────────────────────────────────────────────────────── */
 const ConeNetAnimation = () => {
-  const [phase, setPhase] = useState(0);   // 0=assembled, 1=alas open, 2=full net
-  const [seqStep, setSeqStep] = useState(-1); // 0=alas next, 1=selimut next
-  const [isAnimating, setIsAnimating] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animFrameRef = useRef<number>(0);
+  const startTimeRef = useRef<number>(0);
+  const [animState, setAnimState] = useState<'idle' | 'playing' | 'done'>('idle');
 
-  const TRANS    = "transform 1.35s cubic-bezier(0.4,0,0.2,1)";
-  const TRANS_OP = "opacity 0.65s ease";
+  const DURATION = 4500;
 
-  const SECTOR_ASM = "translateY(45px) scaleX(0.025)";
-  const ALAS_ASM   = "translateY(65px) scaleX(1.288) scaleY(0.346)";
+  const r = 55, hh = 120;
+  const s = Math.sqrt(r * r + hh * hh);
+  const THETA = (2 * Math.PI * r) / s;
+  const N = 60;
+  const CX = 200, APEX_Y = 42;
+  const BASE_Y = APEX_Y + hh;
+  const RY = 22;
+  const SECTOR_START_ANGLE = Math.PI / 2 - THETA / 2;
+  const ALAS_CY = APEX_Y + s + 28 + r;
 
-  const sectorT = phase >= 2 ? "" : SECTOR_ASM;
-  const alasT   = phase >= 1 ? "" : ALAS_ASM;
+  const drawFrame = useCallback((t: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  const isAllOpen   = phase === 2;
-  const isAllClosed = phase === 0;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const lockAnim = () => {
-    setIsAnimating(true);
-    setTimeout(() => setIsAnimating(false), 1600);
-  };
+    const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+    const easeIO = (x: number) =>
+      x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    const clamp = (x: number) => Math.max(0, Math.min(1, x));
 
-  const openNextSeq = () => {
-    if (isAnimating || seqStep < 0 || seqStep > 1) return;
-    playPopSound();
-    lockAnim();
-    setPhase(seqStep + 1);
-    setSeqStep(seqStep < 1 ? seqStep + 1 : -1);
-  };
+    const grd = ctx.createRadialGradient(CX, APEX_Y, 4, CX, APEX_Y + hh / 2, 200);
+    grd.addColorStop(0, 'rgba(6,182,212,0.07)');
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const bongkarBertahap = () => {
-    if (isAnimating) return;
-    playPopSound();
-    setPhase(0);
-    setSeqStep(0);
-  };
+    type SD = { ax: number; ay: number; lx: number; ly: number; rx: number; ry: number; alpha: number; hue: number; lum: number; isFront: boolean; easeT: number; };
+    const strips: SD[] = [];
 
-  const bongkarSemua = () => {
-    if (isAnimating || isAllOpen) return;
-    playPopSound();
-    lockAnim();
-    setPhase(2);
-    setSeqStep(-1);
-  };
+    for (let i = 0; i < N; i++) {
+      const a0 = (2 * Math.PI * i) / N;
+      const a1 = (2 * Math.PI * (i + 1)) / N;
+      const aMid = (a0 + a1) / 2;
 
-  const satukanKembali = () => {
-    if (isAnimating || isAllClosed) return;
-    playPopSound();
-    lockAnim();
-    setPhase(0);
-    setSeqStep(-1);
-  };
+      const lx3 = CX + r * Math.cos(a0);
+      const ly3 = BASE_Y + RY * Math.sin(a0);
+      const rx3 = CX + r * Math.cos(a1);
+      const ry3 = BASE_Y + RY * Math.sin(a1);
 
-  const op = (cond: boolean): React.CSSProperties => ({
-    opacity: cond ? 1 : 0,
-    transition: TRANS_OP,
-  });
+      const f0 = SECTOR_START_ANGLE + (THETA * i) / N;
+      const f1 = SECTOR_START_ANGLE + (THETA * (i + 1)) / N;
+      const lxF = CX + s * Math.cos(f0);
+      const lyF = APEX_Y + s * Math.sin(f0);
+      const rxF = CX + s * Math.cos(f1);
+      const ryF = APEX_Y + s * Math.sin(f1);
 
-  const gStyle = (t: string, origin = "center center"): React.CSSProperties => ({
-    transform: t,
-    transition: TRANS,
-    transformBox: "fill-box" as const,
-    transformOrigin: origin,
-  });
+      const tStart = (i / N) * 0.5;
+      const rawT = clamp((t - tStart) / 0.5);
+      const easeT = easeIO(rawT);
 
-  // Assembled cone triangle (fades out as animation proceeds)
-  const coneTriOp = phase === 0 ? 1 : phase === 1 ? 0.28 : 0;
+      const lxI = lerp(lx3, lxF, easeT);
+      const lyI = lerp(ly3, lyF, easeT);
+      const rxI = lerp(rx3, rxF, easeT);
+      const ryI = lerp(ry3, ryF, easeT);
+
+      const brightness = 0.25 + 0.75 * ((1 + Math.cos(aMid - Math.PI / 6)) / 2);
+      const isFront = Math.sin(aMid) <= 0;
+      const hue = 188 + (i / N) * 22;
+      const baseLum = 22 + brightness * 30;
+      const flatLum = 36;
+
+      let alpha: number;
+      if (easeT > 0.05) alpha = 0.9;
+      else if (isFront) alpha = 0.88;
+      else alpha = 0.07;
+
+      strips.push({ ax: CX, ay: APEX_Y, lx: lxI, ly: lyI, rx: rxI, ry: ryI, alpha, hue, lum: lerp(baseLum, flatLum, easeT), isFront, easeT });
+    }
+
+    const drawS = (sd: SD) => {
+      ctx.beginPath();
+      ctx.moveTo(sd.ax, sd.ay);
+      ctx.lineTo(sd.lx, sd.ly);
+      ctx.lineTo(sd.rx, sd.ry);
+      ctx.closePath();
+      ctx.fillStyle = `hsla(${sd.hue},78%,${sd.lum}%,${sd.alpha})`;
+      ctx.strokeStyle = `hsla(${sd.hue},78%,${Math.min(70, sd.lum + 20)}%,${sd.alpha * 0.35})`;
+      ctx.lineWidth = 0.5;
+      ctx.fill();
+      ctx.stroke();
+    };
+
+    strips.filter(sd => !sd.isFront && sd.easeT < 0.05).forEach(drawS);
+    strips.filter(sd => sd.isFront || sd.easeT >= 0.05).forEach(drawS);
+
+    if (t < 0.18) {
+      const ca = 1 - t / 0.18;
+      ctx.strokeStyle = `rgba(250,204,21,${ca * 0.92})`;
+      ctx.lineWidth = 2.2;
+      ctx.setLineDash([5, 3]);
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = '#facc15';
+      ctx.beginPath();
+      ctx.moveTo(CX, APEX_Y);
+      ctx.lineTo(CX + r, BASE_Y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = `rgba(250,204,21,${ca * 0.85})`;
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('← garis potong', CX + r + 4, BASE_Y - 10);
+    }
+
+    if (t < 0.65) {
+      const ea = t < 0.3 ? 1 : 1 - clamp((t - 0.3) / 0.35);
+      ctx.beginPath();
+      ctx.ellipse(CX, BASE_Y, r, RY, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(99,102,241,${0.32 * ea})`;
+      ctx.strokeStyle = `rgba(165,180,252,${ea * 0.82})`;
+      ctx.lineWidth = 1.8;
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    if (t > 0.58) {
+      const alasRaw = clamp((t - 0.58) / 0.42);
+      const alasT = easeIO(alasRaw);
+      const alasY = lerp(BASE_Y, ALAS_CY, alasT);
+      const alasRY2 = lerp(RY, r, alasT);
+
+      ctx.beginPath();
+      ctx.ellipse(CX, alasY, r, alasRY2, 0, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(99,102,241,0.30)';
+      ctx.strokeStyle = `rgba(165,180,252,${0.45 + alasT * 0.55})`;
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
+
+      if (alasT > 0.45) {
+        const la = clamp((alasT - 0.45) / 0.55);
+        ctx.fillStyle = `rgba(165,180,252,${la})`;
+        ctx.font = 'bold 11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('ALAS', CX, alasY + 4);
+        if (la > 0.35) {
+          const la2 = (la - 0.35) / 0.65;
+          ctx.strokeStyle = `rgba(251,191,36,${la2})`;
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(CX, alasY);
+          ctx.lineTo(CX + r, alasY);
+          ctx.stroke();
+          ctx.fillStyle = `rgba(251,191,36,${la2})`;
+          ctx.font = 'bold 10px monospace';
+          ctx.fillText('r', CX + r / 2, alasY - 5);
+        }
+      }
+    }
+
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = '#facc15';
+    ctx.beginPath();
+    ctx.arc(CX, APEX_Y, 5.5, 0, 2 * Math.PI);
+    ctx.fillStyle = '#facc15';
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    if (t > 0.80) {
+      const la = clamp((t - 0.80) / 0.20);
+
+      ctx.fillStyle = `rgba(250,204,21,${la})`;
+      ctx.font = 'bold 9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('T (puncak)', CX + 9, APEX_Y + 4);
+
+      ctx.fillStyle = `rgba(34,211,238,${la})`;
+      ctx.font = 'bold 12px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('SELIMUT', CX, APEX_Y + s / 2 + 8);
+      ctx.fillStyle = `rgba(148,163,184,${la * 0.8})`;
+      ctx.font = '8px monospace';
+      ctx.fillText('juring lingkaran (r = s)', CX, APEX_Y + s / 2 + 22);
+
+      const midS = s * 0.47;
+      ctx.fillStyle = `rgba(250,204,21,${la})`;
+      ctx.font = 'bold 11px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('s', CX + midS * Math.cos(SECTOR_START_ANGLE) - 10, APEX_Y + midS * Math.sin(SECTOR_START_ANGLE));
+
+      ctx.fillStyle = `rgba(103,232,249,${la})`;
+      ctx.font = '9px monospace';
+      ctx.fillText('busur = 2πr', CX, APEX_Y + s + 14);
+      ctx.fillStyle = `rgba(148,163,184,${la * 0.75})`;
+      ctx.font = '8px monospace';
+      ctx.fillText(`sudut juring = (r/s)×360° ≈ ${Math.round((r / s) * 360)}°`, CX, APEX_Y + s + 26);
+
+      ctx.fillStyle = `rgba(251,191,36,${la})`;
+      ctx.font = 'bold 10px monospace';
+      ctx.fillText('✓ Jaring-jaring = ALAS + SELIMUT', CX, canvas.height - 8);
+    }
+
+    if (t > 0 && t < 1) {
+      const barY = canvas.height - 5;
+      ctx.fillStyle = 'rgba(71,85,105,0.45)';
+      ctx.fillRect(10, barY, canvas.width - 20, 3);
+      ctx.fillStyle = 'rgba(34,211,238,0.88)';
+      ctx.fillRect(10, barY, (canvas.width - 20) * t, 3);
+    }
+  }, [CX, APEX_Y, BASE_Y, RY, ALAS_CY, N, r, hh, s, THETA, SECTOR_START_ANGLE]);
+
+  useEffect(() => {
+    drawFrame(0);
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, [drawFrame]);
+
+  const startAnimation = useCallback(() => {
+    if (animState === 'playing') return;
+    cancelAnimationFrame(animFrameRef.current);
+    setAnimState('playing');
+    startTimeRef.current = performance.now();
+    const loop = (now: number) => {
+      const t = Math.min(1, (now - startTimeRef.current) / DURATION);
+      drawFrame(t);
+      if (t < 1) animFrameRef.current = requestAnimationFrame(loop);
+      else setAnimState('done');
+    };
+    animFrameRef.current = requestAnimationFrame(loop);
+  }, [animState, drawFrame, DURATION]);
+
+  const resetAnimation = useCallback(() => {
+    cancelAnimationFrame(animFrameRef.current);
+    setAnimState('idle');
+    drawFrame(0);
+  }, [drawFrame]);
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
       <p className="text-white/60 text-xs text-center font-body">
-        Saksikan kerucut dibongkar bertahap menjadi jaring-jaringnya
+        Animasi <span className="text-cyan-300 font-bold">slow motion</span> — kerucut dikupas lembaran demi lembaran menjadi jaring-jaringnya
       </p>
 
-      <div className="mx-auto select-none" style={{ maxWidth: 420 }}>
-        <svg viewBox="0 0 400 315" width="100%" style={{ overflow: "visible" }}>
-          <defs>
-            <style>{`
-              @keyframes conePulse {
-                0%,100% { opacity:1; }
-                50%      { opacity:0.3; }
-              }
-              .cone-pulse { animation: conePulse 1.1s ease-in-out infinite; }
-            `}</style>
-          </defs>
-
-          {/* ── ASSEMBLED CONE BODY (triangle silhouette — fades out) ── */}
-          <path
-            d="M 200,70 L 133,285 L 267,285 Z"
-            fill="rgba(6,182,212,0.18)" stroke="#22d3ee" strokeWidth="1.5"
-            style={{ opacity: coneTriOp, transition: "opacity 0.8s ease" }}
-          />
-          {/* Height axis dashes */}
-          <line x1="200" y1="70" x2="200" y2="285"
-            stroke="#f97316" strokeWidth="1.5" strokeDasharray="7,4"
-            style={{ opacity: coneTriOp * 0.9, transition: "opacity 0.8s ease" }}
-          />
-          {/* Apex dot in assembled state */}
-          <circle cx="200" cy="70" r="5" fill="#facc15"
-            style={op(phase === 0)} />
-          <text x="211" y="74" fill="#facc15" fontSize="9" fontFamily="monospace"
-            style={op(phase === 0)}>T (puncak)</text>
-          {/* Height label in assembled state */}
-          <text x="208" y="185" fill="#f97316" fontSize="10" fontFamily="monospace" fontWeight="700"
-            style={op(phase === 0)}>t</text>
-          {/* Slant line in assembled state */}
-          <line x1="200" y1="70" x2="267" y2="285" stroke="#f87171" strokeWidth="1.5" strokeDasharray="5,3"
-            style={{ opacity: coneTriOp * 0.8, transition: "opacity 0.8s ease" }} />
-          <text x="238" y="175" fill="#f87171" fontSize="10" fontFamily="monospace" fontWeight="700"
-            style={{ opacity: coneTriOp * 0.8, transition: "opacity 0.8s ease" }}>s</text>
-
-          {/* ── ALAS (base circle) — assembled: ellipse at (200,285); net: circle at (200,220) ── */}
-          <g
-            style={gStyle(alasT)}
-            onClick={() => seqStep === 0 && !isAnimating && openNextSeq()}
-          >
-            <circle cx="200" cy="220" r="52"
-              fill="rgba(99,102,241,0.28)" stroke="#a5b4fc" strokeWidth="2.5" />
-            {seqStep === 0 && (
-              <circle cx="200" cy="220" r="52"
-                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5"
-                className="cone-pulse" style={{ cursor: "pointer" }} />
-            )}
-            {/* Net labels (visible when open) */}
-            <text x="200" y="216" textAnchor="middle" fill="#a5b4fc" fontSize="11"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>ALAS</text>
-            <text x="200" y="232" textAnchor="middle" fill="#c7d2fe" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>lingkaran (r)</text>
-            <circle cx="200" cy="220" r="3" fill="#f59e0b"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }} />
-            <line x1="200" y1="220" x2="248" y2="220" stroke="#f59e0b" strokeWidth="2"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }} />
-            <text x="226" y="217" textAnchor="middle" fill="#f59e0b" fontSize="10"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 1 ? 1 : 0, transition: TRANS_OP }}>r</text>
-          </g>
-
-          {/* ── SELIMUT (sector) — assembled: collapsed at apex; net: full sector ── */}
-          <g
-            style={gStyle(sectorT, "top center")}
-            onClick={() => seqStep === 1 && !isAnimating && openNextSeq()}
-          >
-            {/* Sector shape — path apex=(200,25), arc from (83,50) to (317,50) ── */}
-            <path
-              d="M 200,25 L 83,50 A 120,120 0 0,1 317,50 Z"
-              fill="rgba(6,182,212,0.28)" stroke="#22d3ee" strokeWidth="2.5" />
-            {seqStep === 1 && (
-              <path
-                d="M 200,25 L 83,50 A 120,120 0 0,1 317,50 Z"
-                fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="2.5"
-                className="cone-pulse" style={{ cursor: "pointer" }} />
-            )}
-            {/* Net labels */}
-            <text x="200" y="92" textAnchor="middle" fill="#22d3ee" fontSize="12"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>SELIMUT</text>
-            <text x="200" y="108" textAnchor="middle" fill="#94a3b8" fontSize="10"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>juring lingkaran (r = s)</text>
-            {/* Left slant edge label */}
-            <line x1="200" y1="25" x2="83" y2="50" stroke="#22d3ee" strokeWidth="1.2"
-              strokeDasharray="5,3"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }} />
-            <text x="134" y="32" textAnchor="middle" fill="#facc15" fontSize="10"
-              fontFamily="monospace" fontWeight="700"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>s</text>
-            {/* Arc annotation */}
-            <text x="200" y="158" textAnchor="middle" fill="#67e8f9" fontSize="9"
-              fontFamily="monospace"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>busur = 2πr</text>
-            {/* Apex dot */}
-            <circle cx="200" cy="25" r="4" fill="#facc15"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }} />
-            <text x="211" y="29" fill="#facc15" fontSize="9" fontFamily="monospace"
-              style={{ opacity: phase >= 2 ? 1 : 0, transition: TRANS_OP }}>T</text>
-          </g>
-
-          {/* ── Wide click target for collapsed selimut in seq mode ── */}
-          {seqStep === 1 && (
-            <rect x="168" y="62" width="64" height="130"
-              fill="rgba(6,182,212,0.06)" stroke="#22d3ee" strokeDasharray="4,3" strokeWidth="1.5" rx="4"
-              onClick={() => !isAnimating && openNextSeq()}
-              style={{ cursor: "pointer" }} />
-          )}
-
-          {/* ── Connecting dash: sector arc bottom → alas top ── */}
-          <line x1="200" y1="148" x2="200" y2="165"
-            stroke="#a5b4fc" strokeWidth="1.5" strokeDasharray="3,2"
-            style={op(phase >= 2)} />
-
-          {/* ── Sector angle dimension (outside group) ── */}
-          <g style={op(phase >= 2)}>
-            <text x="200" y="303" textAnchor="middle" fill="#94a3b8" fontSize="9"
-              fontFamily="monospace">
-              sudut juring = (r ÷ s) × 360°
-            </text>
-          </g>
-
-          {/* ── Bottom labels ── */}
-          <text x="200" y="312" textAnchor="middle" fill="#fbbf24" fontSize="10"
-            fontFamily="monospace" fontWeight="700"
-            style={op(isAllOpen)}>
-            ✓ Jaring-jaring = Alas (lingkaran) + Selimut (juring)
-          </text>
-          {seqStep >= 0 && (
-            <text x="200" y="312" textAnchor="middle" fill="#fbbf24" fontSize="10"
-              fontFamily="monospace" onClick={openNextSeq}
-              style={{ cursor: "pointer" }}>
-              {seqStep === 0
-                ? "▶ Klik alas (biru) untuk membuka"
-                : "▶ Klik kotak cyan / tombol ini untuk membuka selimut"}
-            </text>
-          )}
-        </svg>
+      <div style={{ maxWidth: 400, margin: '0 auto' }}>
+        <canvas
+          ref={canvasRef}
+          width={400}
+          height={330}
+          style={{ width: '100%', display: 'block', borderRadius: 10 }}
+        />
       </div>
 
-      {/* Controls */}
       <div className="flex flex-wrap gap-2 justify-center">
-        <button onClick={bongkarBertahap} disabled={isAnimating}
-          className="px-3 py-1.5 text-xs font-bold bg-cyan-900/60 border border-cyan-600 text-cyan-300 rounded-lg hover:bg-cyan-800/60 transition-colors cursor-pointer font-body disabled:opacity-40">
-          ▶ Bongkar Bertahap
+        <button
+          onClick={startAnimation}
+          disabled={animState === 'playing'}
+          className="px-4 py-2 text-sm font-bold bg-cyan-700/60 border border-cyan-500 text-cyan-200 rounded-lg hover:bg-cyan-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
+        >
+          {animState === 'idle' ? '▶ Mulai Animasi' : animState === 'playing' ? '⏳ Mengupas...' : '▶ Putar Ulang'}
         </button>
-        <button onClick={bongkarSemua} disabled={isAnimating || isAllOpen}
-          className="px-3 py-1.5 text-xs font-bold bg-orange-900/60 border border-orange-600 text-orange-300 rounded-lg hover:bg-orange-800/60 transition-colors cursor-pointer font-body disabled:opacity-40">
-          ⊞ Bongkar Semua
-        </button>
-        <button onClick={satukanKembali} disabled={isAnimating || isAllClosed}
-          className="px-3 py-1.5 text-xs font-bold bg-violet-900/60 border border-violet-600 text-violet-300 rounded-lg hover:bg-violet-800/60 transition-colors cursor-pointer font-body disabled:opacity-40">
-          ⊟ Satukan Kembali
+        <button
+          onClick={resetAnimation}
+          disabled={animState === 'idle'}
+          className="px-4 py-2 text-sm font-bold bg-slate-700/60 border border-slate-500 text-slate-200 rounded-lg hover:bg-slate-600/60 transition-colors cursor-pointer font-body disabled:opacity-40"
+        >
+          ↺ Reset
         </button>
       </div>
 
-      {/* Legend */}
-      <div className="flex flex-wrap gap-2 justify-center text-[10px] font-body">
+      <div className="flex flex-wrap gap-3 justify-center text-[10px] font-body">
         {[
-          { color: "#22d3ee", circle: false, label: "Selimut (juring)" },
-          { color: "#a5b4fc", circle: true,  label: "Alas (lingkaran)" },
-          { color: "#facc15", circle: true,  label: "Puncak (T)" },
-        ].map(({ color, circle, label }) => (
-          <div key={label} className="flex items-center gap-1">
-            <div className={`w-3 h-3 ${circle ? "rounded-full" : "rounded-sm"}`}
-              style={{ background: color }} />
+          { color: '#22d3ee', label: 'Selimut (juring)' },
+          { color: '#a5b4fc', label: 'Alas (lingkaran)' },
+          { color: '#facc15', label: 'Puncak T' },
+        ].map(({ color, label }) => (
+          <span key={label} className="flex items-center gap-1">
+            <span className="w-3 h-3 rounded-sm inline-block" style={{ background: color }} />
             <span className="text-white/50">{label}</span>
-          </div>
+          </span>
         ))}
       </div>
+
       <p className="text-white/25 text-[9px] text-center font-body">
-        Jaring-jaring kerucut = 1 selimut (juring, r=s) + 1 alas (lingkaran, r=r)
+        Jaring-jaring kerucut: 1 selimut (juring, r_juring = s) + 1 alas (lingkaran, r_lingkaran = r)
       </p>
     </div>
   );
@@ -748,7 +777,7 @@ const sections: Sec[] = [
             <p className="text-indigo-200 text-xs">Keliling = <InlineMath math="2\pi r" /></p>
           </div>
         </div>
-        <InteractiveCone3D />
+        <ConeNetAnimation />
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-slate-300 space-y-1">
           <p>🔑 <strong className="text-white">Hubungan penting:</strong> Arc selimut = Keliling alas</p>
           <p>Arc juring = <InlineMath math="2\pi r" /> → Sudut juring = <InlineMath math="\dfrac{r}{s} \times 360°" /></p>
