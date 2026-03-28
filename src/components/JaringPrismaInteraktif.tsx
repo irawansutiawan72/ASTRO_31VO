@@ -14,7 +14,7 @@ const rotYv = (v: V3, a: number): V3 => [
   v[1],
   -v[0] * Math.sin(a) + v[2] * Math.cos(a),
 ];
-const project = (v: V3, fov = 500, scale = 1.7): V2 => {
+const project = (v: V3, fov = 500, scale = 1.6): V2 => {
   const tz = v[2] + fov;
   return [(v[0] * fov * scale) / tz, (v[1] * fov * scale) / tz];
 };
@@ -45,7 +45,7 @@ function ngonFromEdge(
 }
 
 const RECT_COLORS = ["#3b82f6", "#8b5cf6", "#22c55e", "#f97316", "#ec4899"];
-const R3D = 38, H3D = 70, SVG_CX = 170, SVG_CY = 118;
+const R3D = 38, H3D = 70, SVG_CX = 200, SVG_CY = 160;
 
 function makeConfig(n: number) {
   const a    = 2 * R3D * Math.sin(Math.PI / n);
@@ -364,7 +364,7 @@ export default function JaringPrismaInteraktif() {
         onMouseDown={onMouseDown}
         onTouchStart={onTouchStart}
       >
-        <svg viewBox="0 0 340 245" className="w-full" style={{ maxHeight: 265 }}>
+        <svg viewBox="0 0 400 340" className="w-full" style={{ maxHeight: 360 }}>
 
           {/* Faces — back to front */}
           {renderedFaces.map((f, fi) => {
@@ -419,19 +419,19 @@ export default function JaringPrismaInteraktif() {
 
           {/* Status text */}
           {isAssembled && (
-            <text x="170" y="237" textAnchor="middle" fontSize="8"
+            <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#64748b" fontFamily="monospace">
               Drag untuk memutar · tekan Bongkar untuk melihat jaring-jaring
             </text>
           )}
           {isFlatNet && (
-            <text x="170" y="237" textAnchor="middle" fontSize="8"
+            <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#facc15" fontFamily="monospace">
               Jaring-jaring Prisma {cfg.label.toLowerCase()} — {activeN + 2} bidang
             </text>
           )}
           {!isAssembled && !isFlatNet && (
-            <text x="170" y="237" textAnchor="middle" fontSize="8"
+            <text x="200" y="334" textAnchor="middle" fontSize="8"
               fill="#a78bfa" fontFamily="monospace">
               {progress < 0.5 ? "Membongkar…" : "Menyatukan…"}
             </text>
