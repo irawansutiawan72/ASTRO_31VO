@@ -664,6 +664,145 @@ const materiSections = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SVG SOAL LATIHAN DASAR
+// ─────────────────────────────────────────────────────────────────────────────
+
+const DiagramBarChartPermen = () => {
+  const data = [
+    { label: "merah", value: 6 },
+    { label: "oranye", value: 5 },
+    { label: "kuning", value: 3 },
+    { label: "hijau", value: 3 },
+    { label: "biru", value: 2 },
+    { label: "merah\nmuda", value: 4 },
+    { label: "ungu", value: 2 },
+    { label: "coklat", value: 5 },
+  ];
+  const chartLeft = 36, chartRight = 470, chartTop = 10, chartBottom = 150;
+  const chartH = chartBottom - chartTop;
+  const maxVal = 7;
+  const barCount = data.length;
+  const totalW = chartRight - chartLeft;
+  const barW = (totalW / barCount) * 0.55;
+  const gap = totalW / barCount;
+  return (
+    <svg viewBox="0 0 490 195" className="w-full max-w-lg mx-auto my-3 rounded-lg" aria-label="Diagram Batang Warna Permen">
+      <rect x="0" y="0" width="490" height="195" rx="8" fill="#0f172a" opacity="0.6"/>
+      {[0,1,2,3,4,5,6,7].map(v => {
+        const y = chartBottom - (v / maxVal) * chartH;
+        return (
+          <g key={v}>
+            <line x1={chartLeft} y1={y} x2={chartRight} y2={y} stroke="#334155" strokeWidth="0.8"/>
+            <text x={chartLeft - 4} y={y + 4} textAnchor="end" fill="#94a3b8" fontSize="10">{v}</text>
+          </g>
+        );
+      })}
+      <line x1={chartLeft} y1={chartTop} x2={chartLeft} y2={chartBottom} stroke="#64748b" strokeWidth="1"/>
+      <line x1={chartLeft} y1={chartBottom} x2={chartRight} y2={chartBottom} stroke="#64748b" strokeWidth="1"/>
+      {data.map((d, i) => {
+        const barH = (d.value / maxVal) * chartH;
+        const x = chartLeft + i * gap + (gap - barW) / 2;
+        const y = chartBottom - barH;
+        const labelLines = d.label.split('\n');
+        return (
+          <g key={i}>
+            <rect x={x} y={y} width={barW} height={barH} fill="#4472c4" rx="2"/>
+            {labelLines.map((line, li) => (
+              <text key={li} x={x + barW / 2} y={chartBottom + 14 + li * 12} textAnchor="middle" fill="#cbd5e1" fontSize="9.5">{line}</text>
+            ))}
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const DiagramBracketJuara = () => (
+  <svg viewBox="0 0 480 190" className="w-full max-w-lg mx-auto my-3 rounded-lg" aria-label="Diagram Bracket Juara">
+    <rect x="0" y="0" width="480" height="190" rx="8" fill="#0f172a" opacity="0.6"/>
+    <defs>
+      <marker id="arrowB" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L6,3 z" fill="#64748b"/>
+      </marker>
+    </defs>
+    <rect x="190" y="8" width="100" height="26" fill="#1e293b" stroke="#e2e8f0" strokeWidth="1.5" rx="3"/>
+    <text x="240" y="26" textAnchor="middle" fill="#f1f5f9" fontSize="12" fontWeight="bold">JUARA</text>
+    <line x1="240" y1="34" x2="120" y2="70" stroke="#64748b" strokeWidth="1.2" markerEnd="url(#arrowB)"/>
+    <line x1="240" y1="34" x2="240" y2="70" stroke="#64748b" strokeWidth="1.2" markerEnd="url(#arrowB)"/>
+    <line x1="240" y1="34" x2="310" y2="70" stroke="#64748b" strokeWidth="1.2" markerEnd="url(#arrowB)"/>
+    <line x1="240" y1="34" x2="380" y2="70" stroke="#64748b" strokeWidth="1.2" markerEnd="url(#arrowB)"/>
+    {[
+      { x: 70, label: "A", lx: 44 }, { x: 70, label: "B", lx: 100 },
+      { x: 195, label: "C", lx: 169 }, { x: 195, label: "D", lx: 225 },
+      { x: 265, label: "E", lx: 239 }, { x: 265, label: "F", lx: 295 },
+      { x: 335, label: "G", lx: 309 }, { x: 335, label: "H", lx: 365 },
+    ].map((_, i) => null)}
+    {[
+      { cx: 120, teams: ["A","B"] },
+      { cx: 240, teams: ["C","D"] },
+      { cx: 310, teams: ["E","F"] },
+      { cx: 380, teams: ["G","H"] },
+    ].map((group) => {
+      const lx = group.cx - 38, rx = group.cx + 8;
+      return (
+        <g key={group.cx}>
+          {group.teams.map((t, ti) => {
+            const bx = ti === 0 ? lx - 18 : rx - 18;
+            return (
+              <g key={t}>
+                <line x1={group.cx} y1={76} x2={bx + 18} y2={130} stroke="#64748b" strokeWidth="1.2" markerEnd="url(#arrowB)"/>
+                <rect x={bx} y={135} width="36" height="26" fill="#1e293b" stroke="#e2e8f0" strokeWidth="1.2" rx="3"/>
+                <text x={bx + 18} y={153} textAnchor="middle" fill="#f1f5f9" fontSize="12" fontWeight="bold">{t}</text>
+              </g>
+            );
+          })}
+        </g>
+      );
+    })}
+  </svg>
+);
+
+const DiagramKotakKartu = () => {
+  const cards = [
+    { num: "1", x: 28, y: 52, fill: "#ef4444" },
+    { num: "3", x: 62, y: 38, fill: "#f97316" },
+    { num: "5", x: 96, y: 52, fill: "#eab308" },
+    { num: "13", x: 38, y: 88, fill: "#22c55e" },
+    { num: "15", x: 76, y: 78, fill: "#3b82f6" },
+    { num: "20", x: 114, y: 86, fill: "#a855f7" },
+    { num: "22", x: 56, y: 118, fill: "#ec4899" },
+  ];
+  return (
+    <svg viewBox="0 0 280 170" className="w-full max-w-xs mx-auto my-3 rounded-lg" aria-label="Kotak Kartu Bernomor">
+      <rect x="0" y="0" width="280" height="170" rx="8" fill="#0f172a" opacity="0.6"/>
+      <rect x="10" y="30" width="160" height="125" rx="6" fill="#92400e" stroke="#d97706" strokeWidth="2"/>
+      <rect x="10" y="30" width="160" height="20" rx="6" fill="#b45309" stroke="#d97706" strokeWidth="2"/>
+      <rect x="10" y="40" width="160" height="10" fill="#b45309"/>
+      {cards.map((c) => (
+        <g key={c.num}>
+          <rect x={c.x} y={c.y} width="30" height="32" rx="3" fill={c.fill} stroke="white" strokeWidth="1"/>
+          <text x={c.x + 15} y={c.y + 21} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{c.num}</text>
+        </g>
+      ))}
+      <rect x="195" y="65" width="72" height="75" rx="4" fill="#fef3c7" stroke="#d97706" strokeWidth="1.5"/>
+      <line x1="231" y1="65" x2="231" y2="140" stroke="#d97706" strokeWidth="1.5"/>
+      <rect x="205" y="55" width="52" height="18" rx="3" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5"/>
+      <text x="231" y="68" textAnchor="middle" fill="#78350f" fontSize="9" fontWeight="bold">HADIAH</text>
+      <line x1="222" y1="55" x2="222" y2="65" stroke="#ef4444" strokeWidth="2"/>
+      <line x1="240" y1="55" x2="240" y2="65" stroke="#ef4444" strokeWidth="2"/>
+      <path d="M222 55 Q231 45 240 55" fill="none" stroke="#ef4444" strokeWidth="2"/>
+      <circle cx="231" cy="55" r="3" fill="#ef4444"/>
+    </svg>
+  );
+};
+
+const latihanDasarSVG: Record<number, JSX.Element> = {
+  21: <DiagramBarChartPermen />,
+  34: <DiagramBracketJuara />,
+  38: <DiagramKotakKartu />,
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // LATIHAN DASAR (20 soal)
 // ─────────────────────────────────────────────────────────────────────────────
 const latihanDasar = [
@@ -844,6 +983,11 @@ export default function OlimpiadePeluangPage() {
                           return <><span className="text-yellow-400 font-semibold">{header}</span>{'\n'}{renderWithLatex(body)}</>;
                         })()}
                       </p>
+                      {latihanDasarSVG[q.no] && (
+                        <div className="my-2">
+                          {latihanDasarSVG[q.no]}
+                        </div>
+                      )}
                       {q.options.length > 0 && (
                         <div className="grid grid-cols-2 gap-1">
                           {q.options.map((opt, j) => (
