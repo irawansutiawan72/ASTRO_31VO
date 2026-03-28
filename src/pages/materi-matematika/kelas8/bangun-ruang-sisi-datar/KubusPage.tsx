@@ -38,31 +38,67 @@ const SimpleRotatableCube = () => {
   const [rotX, setRotX] = useState(-22);
   const [rotY, setRotY] = useState(35);
   const [isDragging, setIsDragging] = useState(false);
-  const dragRef = useRef({ sx: 0, sy: 0, bx: -22, by: 35 });
 
+  const dragRef      = useRef({ sx: 0, sy: 0, bx: -22, by: 35 });
+  const isDragRef    = useRef(false);
+  const rafRef       = useRef<number | null>(null);
+  const tickRef      = useRef(0);
+  const rotYRef      = useRef(35);
+
+  /* ── Auto-rotation: horizontal spin + vertical oscillation ── */
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragRef.current) {
+        tickRef.current += 1;
+        rotYRef.current  += 0.22;                                   // slow left→right spin
+        const rx = -18 + Math.sin(tickRef.current * 0.012) * 22;   // top↔bottom oscillation
+        setRotY(rotYRef.current);
+        setRotX(rx);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  /* ── Drag handlers ── */
   const onMouseDown = (e: React.MouseEvent) => {
+    isDragRef.current = true;
     setIsDragging(true);
     dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
   };
   const onMouseMove = useCallback((e: MouseEvent) => {
-    if (!isDragging) return;
-    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55);
-  }, [isDragging]);
-  const onMouseUp = useCallback(() => setIsDragging(false), []);
+    if (!isDragRef.current) return;
+    const newY = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
+    const newX = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = newY;
+    setRotY(newY);
+    setRotX(newX);
+  }, []);
+  const onMouseUp = useCallback(() => {
+    isDragRef.current = false;
+    setIsDragging(false);
+  }, []);
 
   const onTouchStart = (e: React.TouchEvent) => {
     const t = e.touches[0];
+    isDragRef.current = true;
     setIsDragging(true);
     dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
   };
   const onTouchMove = useCallback((e: TouchEvent) => {
-    if (!isDragging) return;
+    if (!isDragRef.current) return;
     const t = e.touches[0];
-    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55);
-    setRotX(dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55);
-  }, [isDragging]);
-  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+    const newY = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
+    const newX = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = newY;
+    setRotY(newY);
+    setRotX(newX);
+  }, []);
+  const onTouchEnd = useCallback(() => {
+    isDragRef.current = false;
+    setIsDragging(false);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("mousemove", onMouseMove);
@@ -85,7 +121,7 @@ const SimpleRotatableCube = () => {
       onTouchStart={onTouchStart}
     >
       <p className="text-center text-white/40 font-body mb-1" style={{ fontSize: 9 }}>
-        Drag untuk memutar kubus
+        Berputar otomatis · Drag untuk memutar sendiri
       </p>
       <div
         className="mx-auto flex items-center justify-center overflow-visible"
@@ -98,7 +134,6 @@ const SimpleRotatableCube = () => {
             position: "relative",
             transformStyle: "preserve-3d",
             transform: `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
-            transition: isDragging ? "none" : "transform 0.4s ease",
           }}
         >
           {(Object.keys(SIMPLE_FACE_TRANSFORMS) as FName[]).map(face => (
