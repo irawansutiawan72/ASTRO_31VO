@@ -779,6 +779,175 @@ const VolumeSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
+   VOLUME KUBUS — animated water-fill visualization
+───────────────────────────────────────────────────────────── */
+type V2k = [number, number];
+
+const WaterKubusAnimation = () => {
+  const [fill, setFill] = useState(0);
+
+  useEffect(() => {
+    const FILL_MS    = 3200;
+    const HOLD_FULL  = 900;
+    const EMPTY_MS   = 2000;
+    const HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Cube in oblique projection — all sides equal (s)
+  const FL:   V2k = [62, 178];
+  const FR:   V2k = [162, 178];
+  const Hpx   = 100;
+  const dx = 30, dy = -22;
+
+  const BkL:  V2k = [FL[0] + dx,  FL[1] + dy];
+  const BkR:  V2k = [FR[0] + dx,  FR[1] + dy];
+  const FTL:  V2k = [FL[0],       FL[1] - Hpx];
+  const FTR:  V2k = [FR[0],       FR[1] - Hpx];
+  const BkTL: V2k = [BkL[0],     BkL[1] - Hpx];
+  const BkTR: V2k = [BkR[0],     BkR[1] - Hpx];
+
+  const lerp = (a: V2k, b: V2k, t: number): V2k => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  const p  = (v: V2k) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`;
+  const pp = (...vs: V2k[]) => vs.map(p).join(" ");
+
+  const WFL  = lerp(FL,  FTL,  fill);
+  const WFR  = lerp(FR,  FTR,  fill);
+  const WBkL = lerp(BkL, BkTL, fill);
+  const WBkR = lerp(BkR, BkTR, fill);
+
+  const pct     = Math.round(fill * 100);
+  const isEmpty = fill < 0.005;
+  const isFull  = fill > 0.995;
+
+  const barX = 202, barY = FTL[1], barW = 13, barH = Hpx;
+  const filledH = barH * fill;
+
+  return (
+    <svg viewBox="0 0 280 215" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi kubus diisi air">
+      <defs>
+        <filter id="wBloomK">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      {/* Hidden back edges (dashed) */}
+      <line x1={BkL[0]} y1={BkL[1]} x2={BkTL[0]} y2={BkTL[1]}
+        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+      <line x1={FL[0]} y1={FL[1]} x2={BkL[0]} y2={BkL[1]}
+        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+      <line x1={FTL[0]} y1={FTL[1]} x2={BkTL[0]} y2={BkTL[1]}
+        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+      <line x1={BkTL[0]} y1={BkTL[1]} x2={BkTR[0]} y2={BkTR[1]}
+        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+
+      {/* Ghost shell (right + front faces above water) */}
+      <polygon points={pp(FR, BkR, BkTR, FTR)}
+        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+      <polygon points={pp(FL, FR, FTR, FTL)}
+        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+
+      {/* WATER */}
+      {!isEmpty && (
+        <>
+          {/* Floor */}
+          <polygon points={pp(FL, FR, BkR, BkL)}
+            fill="#1e3a8a" fillOpacity={0.90}/>
+          {/* Right face water band */}
+          <polygon points={pp(FR, BkR, WBkR, WFR)}
+            fill="#1d4ed8" fillOpacity={0.80}/>
+          {/* Front face water band */}
+          <polygon points={pp(FL, FR, WFR, WFL)}
+            fill="#2563eb" fillOpacity={0.90}/>
+          {/* Water surface (parallelogram) */}
+          {!isFull && (
+            <polygon points={pp(WFL, WFR, WBkR, WBkL)}
+              fill="#7dd3fc" fillOpacity={0.50}
+              style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}/>
+          )}
+          {!isFull && (
+            <line x1={WFL[0]} y1={WFL[1]} x2={WFR[0]} y2={WFR[1]}
+              stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+          )}
+        </>
+      )}
+
+      {/* Cube wireframe */}
+      <polygon points={pp(FL, FR, FTR, FTL)}
+        fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
+      <polygon points={pp(FR, BkR, BkTR, FTR)}
+        fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
+      {/* Top face */}
+      <polygon points={pp(FTL, FTR, BkTR, BkTL)}
+        fill="#0f172a" fillOpacity={isFull ? 0.7 : 0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+
+      {/* Dimension "s" labels on three visible edges */}
+      {/* Front bottom edge */}
+      <text x={(FL[0] + FR[0]) / 2} y={FL[1] + 12}
+        fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
+      {/* Left vertical edge */}
+      <text x={FL[0] - 13} y={(FL[1] + FTL[1]) / 2 + 4}
+        fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
+      <line x1={FL[0] - 7} y1={FL[1]} x2={FL[0] - 7} y2={FTL[1]}
+        stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
+      {/* Top-right depth edge */}
+      <text x={(FTR[0] + BkTR[0]) / 2 + 4} y={(FTR[1] + BkTR[1]) / 2 - 6}
+        fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
+
+      {/* ALAS / TUTUP labels */}
+      <text x={(FL[0] + FR[0]) / 2} y={FL[1] + 24}
+        fill="#4ade80" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS (s²)</text>
+      <text x={(FTL[0] + FTR[0]) / 2} y={FTL[1] - 6}
+        fill="#c4b5fd" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
+
+      {/* Progress bar */}
+      <rect x={barX} y={barY} width={barW} height={barH}
+        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+      {!isEmpty && (
+        <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
+          fill="#2563eb" fillOpacity={0.88} rx="3"/>
+      )}
+      <text x={barX + barW / 2} y={barY - 5}
+        fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX + barW / 2} y={barY + barH + 12}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {pct}%
+      </text>
+
+      {/* Status + Formula */}
+      <text x="118" y="198"
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+        filter="url(#wBloomK)">
+        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+      </text>
+      <text x="118" y="212"
+        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#wBloomK)">
+        V = s³
+      </text>
+    </svg>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    SECTIONS
 ───────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
@@ -986,7 +1155,15 @@ const sections: Sec[] = [
           <strong className="text-blue-300">Volume kubus</strong> menyatakan seberapa besar "isi" atau "ruang" yang ditempati kubus.
           Bayangkan kubus terdiri dari lapisan-lapisan kecil berbentuk kubus satuan yang disusun rapat:
         </p>
-        <VolumeSVG />
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
+          <p className="text-cyan-300 text-xs font-semibold font-body text-center">
+            🌊 Kubus diisi air — dari kosong hingga penuh
+          </p>
+          <WaterKubusAnimation />
+          <p className="text-white/45 text-[10px] font-body text-center">
+            Persentase menunjukkan proporsi volume terisi terhadap volume total
+          </p>
+        </div>
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-2">
           <p className="text-blue-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
