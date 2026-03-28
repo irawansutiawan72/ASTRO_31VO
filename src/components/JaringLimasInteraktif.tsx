@@ -89,8 +89,10 @@ export default function JaringLimasInteraktif() {
   const { inR, slantH, foldAngle, label } = cfg;
 
   /* Base polygon vertices — centered vertically so apex ↔ base center spans ±H/2 */
+  /* For n=4: rotate by -π/4 so face midpoints align with N/E/S/W (not diagonals) */
   const baseVerts: V3[] = Array.from({ length: activeN }, (_, k) => {
-    const angle = (2 * Math.PI * k / activeN) - Math.PI / 2; // start at "front"
+    const offset = activeN === 4 ? -Math.PI / 4 : 0;
+    const angle = (2 * Math.PI * k / activeN) - Math.PI / 2 + offset;
     return [R3D * Math.cos(angle), H_PYR / 2, R3D * Math.sin(angle)] as V3;
   });
 
