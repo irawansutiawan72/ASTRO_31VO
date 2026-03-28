@@ -191,7 +191,7 @@ const RotatingGabungan3D = ({
       style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}
     >
-      <span className="text-white/70 font-body font-semibold text-center leading-tight mb-1" style={{ fontSize:9 }}>{label}</span>
+      <span className="text-white/85 font-body font-bold text-center leading-tight mb-1" style={{ fontSize:13 }}>{label}</span>
       <svg viewBox="0 0 170 200" style={{ width:"100%", maxWidth:220, overflow:"visible" }}>
         {sorted.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
