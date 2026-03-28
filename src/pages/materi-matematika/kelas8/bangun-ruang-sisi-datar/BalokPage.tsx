@@ -8,6 +8,147 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
+   SVG 3D MATH UTILITIES
+───────────────────────────────────────────────────────────── */
+type V3 = [number, number, number];
+type V2 = [number, number];
+const bRotX = (v: V3, a: number): V3 => [v[0], v[1]*Math.cos(a)-v[2]*Math.sin(a), v[1]*Math.sin(a)+v[2]*Math.cos(a)];
+const bRotY = (v: V3, a: number): V3 => [v[0]*Math.cos(a)+v[2]*Math.sin(a), v[1], -v[0]*Math.sin(a)+v[2]*Math.cos(a)];
+const bProj = (v: V3, fov=480, s=1.6): V2 => { const tz=v[2]+fov; return [(v[0]*fov*s)/tz,(v[1]*fov*s)/tz]; };
+const bCross = (ax:number,ay:number,bx:number,by:number) => ax*by-ay*bx;
+
+/* ─────────────────────────────────────────────────────────────
+   SIMPLE AUTO-ROTATING BALOK — slide 1 hero shape
+───────────────────────────────────────────────────────────── */
+const SimpleRotatingBalok = () => {
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(35);
+  const [isDragging, setIsDragging] = useState(false);
+  const isDragRef = useRef(false);
+  const dragRef   = useRef({ sx: 0, sy: 0, bx: -22, by: 35 });
+  const tickRef   = useRef(0);
+  const rotYRef   = useRef(35);
+  const rafRef    = useRef<number | null>(null);
+
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragRef.current) {
+        tickRef.current += 1;
+        rotYRef.current += 0.22;
+        const rx = -18 + Math.sin(tickRef.current * 0.012) * 20;
+        setRotY(rotYRef.current);
+        setRotX(rx);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragRef.current) return;
+    const ny = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onMouseUp = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]; isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragRef.current) return;
+    const t = e.touches[0];
+    const ny = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onTouchEnd = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const pw = 55, th = 36, ld = 40;
+  const hw = pw/2, hh = th/2, hd = ld/2;
+  const rawVerts: V3[] = [
+    [-hw,-hh,+hd],[+hw,-hh,+hd],[+hw,+hh,+hd],[-hw,+hh,+hd],
+    [-hw,-hh,-hd],[+hw,-hh,-hd],[+hw,+hh,-hd],[-hw,+hh,-hd],
+  ];
+  const faceDefs = [
+    { idx:[0,1,2,3], color:"#3b82f6", label:"DEPAN" },
+    { idx:[5,4,7,6], color:"#8b5cf6", label:"BELAKANG" },
+    { idx:[4,0,3,7], color:"#22c55e", label:"KIRI" },
+    { idx:[1,5,6,2], color:"#f97316", label:"KANAN" },
+    { idx:[4,5,1,0], color:"#eab308", label:"ATAS" },
+    { idx:[3,2,6,7], color:"#ef4444", label:"BAWAH" },
+  ];
+  const rx = (rotX * Math.PI) / 180;
+  const ry = (rotY * Math.PI) / 180;
+  const tfVerts = rawVerts.map(v => bRotX(bRotY(v, ry), rx));
+  const pverts: V2[] = tfVerts.map(v => bProj(v));
+  const facesWithDepth = faceDefs.map(f => {
+    const avgZ = f.idx.reduce((s,i) => s+tfVerts[i][2],0)/f.idx.length;
+    const pts2d = f.idx.map(i => pverts[i]);
+    const area = bCross(pts2d[1][0]-pts2d[0][0],pts2d[1][1]-pts2d[0][1],pts2d[pts2d.length-1][0]-pts2d[0][0],pts2d[pts2d.length-1][1]-pts2d[0][1]);
+    return { ...f, avgZ, pts2d, visible: area < 0 };
+  }).sort((a,b) => b.avgZ - a.avgZ);
+  const cx = 140, cy = 110;
+
+  return (
+    <div
+      className="bg-slate-900/70 border border-slate-700/50 rounded-xl select-none"
+      style={{ padding: "10px 0 8px", cursor: isDragging ? "grabbing" : "grab" }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+    >
+      <p className="text-center text-white/40 font-body mb-1" style={{ fontSize: 9 }}>
+        Berputar otomatis · Drag untuk memutar sendiri
+      </p>
+      <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-1" style={{ display:"block", overflow:"visible" }}>
+        {facesWithDepth.filter(f => f.visible).map((f, i) => {
+          const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
+          const mx  = f.pts2d.reduce((s,p) => s+p[0],0)/f.pts2d.length;
+          const my  = f.pts2d.reduce((s,p) => s+p[1],0)/f.pts2d.length;
+          return (
+            <g key={i}>
+              <polygon points={pts} fill={f.color} fillOpacity={0.88}
+                stroke="rgba(255,255,255,0.4)" strokeWidth={1.5} strokeLinejoin="round"/>
+              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={8} fontFamily="monospace"
+                fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
+                style={{ pointerEvents:"none" }}>
+                {f.label}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+      <div className="flex flex-wrap gap-1.5 justify-center mt-1">
+        {faceDefs.map(f => (
+          <div key={f.label} className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-sm" style={{ background: f.color }}/>
+            <span className="text-white/45 font-body" style={{ fontSize:9 }}>{f.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D BALOK — hinge-based folding, back = tumpuan
 ───────────────────────────────────────────────────────────── */
 type FName = "front" | "back" | "left" | "right" | "top" | "bottom";
@@ -1282,6 +1423,7 @@ const slides: Slide[] = [
     title: "Pengantar",
     content: (
       <div className="text-sm font-body text-white/75 leading-relaxed space-y-3">
+        <SimpleRotatingBalok />
         <p>
           Dari kotak sepatu hingga lemari, kulkas, dan aquarium — balok ada di mana-mana dalam kehidupan kita!
           Pelajari semua tentang <strong className="text-cyan-300">balok</strong> — mulai dari unsur-unsurnya,

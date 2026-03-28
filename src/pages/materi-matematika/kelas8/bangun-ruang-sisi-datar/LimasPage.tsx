@@ -9,6 +9,161 @@ import { playPopSound } from "@/hooks/useAudio";
 import JaringLimasInteraktif from "@/components/JaringLimasInteraktif";
 
 /* ─────────────────────────────────────────────────────────────
+   SVG 3D MATH UTILITIES
+───────────────────────────────────────────────────────────── */
+type LV3 = [number, number, number];
+type LV2 = [number, number];
+const lRotX = (v: LV3, a: number): LV3 => [v[0], v[1]*Math.cos(a)-v[2]*Math.sin(a), v[1]*Math.sin(a)+v[2]*Math.cos(a)];
+const lRotY = (v: LV3, a: number): LV3 => [v[0]*Math.cos(a)+v[2]*Math.sin(a), v[1], -v[0]*Math.sin(a)+v[2]*Math.cos(a)];
+const lProj = (v: LV3, fov=380, s=1.3): LV2 => { const tz=v[2]+fov; return [(v[0]*fov*s)/tz,(v[1]*fov*s)/tz]; };
+const lCross = (ax:number,ay:number,bx:number,by:number) => ax*by-ay*bx;
+
+const makeLimasVerts = (n: number, r: number, h: number): LV3[] => {
+  const verts: LV3[] = [];
+  for (let i = 0; i < n; i++) {
+    const a = (2 * Math.PI * i) / n - Math.PI / 2;
+    verts.push([r * Math.cos(a), h * 0.55, r * Math.sin(a)]);
+  }
+  verts.push([0, -h * 0.45, 0]);
+  return verts;
+};
+const makeLimasFaces = (n: number) => {
+  const palette = ["#3b82f6","#ef4444","#eab308","#22c55e","#f97316","#ec4899","#06b6d4","#a78bfa"];
+  const apexIdx = n;
+  const faces: { idx: number[]; color: string; label: string }[] = [];
+  faces.push({ idx: Array.from({length:n},(_,i)=>i), color:palette[0], label:"ALAS" });
+  for (let i = 0; i < n; i++) {
+    const j = (i+1)%n;
+    faces.push({ idx:[i,j,apexIdx], color:palette[(i+1)%palette.length], label:`Δ${i+1}` });
+  }
+  return faces;
+};
+
+const RotatingLimas3D = ({ n, label, r = 40, h = 65 }: { n: number; label: string; r?: number; h?: number }) => {
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(n * 40);
+  const [isDragging, setIsDragging] = useState(false);
+  const isDragRef = useRef(false);
+  const dragRef   = useRef({ sx:0, sy:0, bx:-22, by: n*40 });
+  const tickRef   = useRef(n * 30);
+  const rotYRef   = useRef(n * 40);
+  const rafRef    = useRef<number|null>(null);
+
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragRef.current) {
+        tickRef.current += 1;
+        rotYRef.current += 0.20;
+        const rx = -18 + Math.sin(tickRef.current * 0.013) * 18;
+        setRotY(rotYRef.current);
+        setRotX(rx);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragRef.current) return;
+    const ny = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onMouseUp = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]; isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((ev: TouchEvent) => {
+    if (!isDragRef.current) return;
+    const t = ev.touches[0];
+    const ny = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onTouchEnd = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const rx = (rotX * Math.PI) / 180;
+  const ry = (rotY * Math.PI) / 180;
+  const rawVerts = makeLimasVerts(n, r, h);
+  const faceDefs = makeLimasFaces(n);
+  const tfVerts = rawVerts.map(v => lRotX(lRotY(v, ry), rx));
+  const pverts: LV2[] = tfVerts.map(v => lProj(v));
+  const facesWithDepth = faceDefs.map(f => {
+    const avgZ = f.idx.reduce((s,i)=>s+tfVerts[i][2],0)/f.idx.length;
+    const pts2d = f.idx.map(i => pverts[i]);
+    const area = lCross(pts2d[1][0]-pts2d[0][0],pts2d[1][1]-pts2d[0][1],pts2d[pts2d.length-1][0]-pts2d[0][0],pts2d[pts2d.length-1][1]-pts2d[0][1]);
+    return { ...f, avgZ, pts2d, visible: area < 0 };
+  }).sort((a,b) => b.avgZ - a.avgZ);
+  const cx = 85, cy = 88;
+
+  return (
+    <div
+      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
+      onMouseDown={onMouseDown} onTouchStart={onTouchStart}
+    >
+      <span className="text-white/70 font-body font-semibold mb-1" style={{ fontSize:10 }}>{label}</span>
+      <svg viewBox="0 0 170 176" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
+        {facesWithDepth.filter(f => f.visible).map((f, i) => {
+          const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
+          const mx  = f.pts2d.reduce((s,p)=>s+p[0],0)/f.pts2d.length;
+          const my  = f.pts2d.reduce((s,p)=>s+p[1],0)/f.pts2d.length;
+          return (
+            <g key={i}>
+              <polygon points={pts} fill={f.color} fillOpacity={0.88}
+                stroke="rgba(255,255,255,0.35)" strokeWidth={1.2} strokeLinejoin="round"/>
+              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={7} fontFamily="monospace"
+                fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
+                style={{ pointerEvents:"none" }}>{f.label}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
+
+const ThreeLimas = () => (
+  <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
+    <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>
+      Berputar otomatis · Drag untuk memutar sendiri
+    </p>
+    <div className="flex gap-2">
+      <RotatingLimas3D n={3} label="Limas Segitiga" r={38} h={65}/>
+      <RotatingLimas3D n={4} label="Limas Segiempat" r={36} h={65}/>
+      <RotatingLimas3D n={5} label="Limas Segilima" r={34} h={65}/>
+    </div>
+    <div className="flex flex-wrap gap-x-3 gap-y-0.5 justify-center">
+      {[["#3b82f6","ALAS"],["#ef4444","SISI Δ"]].map(([c,l])=>(
+        <div key={l} className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
+          <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────────
    INTERACTIVE LIMAS 3D — drag to rotate, click net button
 ───────────────────────────────────────────────────────────── */
 const InteractiveLimas = () => {
@@ -1122,6 +1277,7 @@ const slides: Slide[] = [
     title: "Pengantar",
     content: (
       <div className="space-y-4 text-sm font-body text-white/75 leading-relaxed">
+        <ThreeLimas />
         <p>
           Dari piramida Mesir kuno hingga atap rumah yang runcing, bentuk{" "}
           <strong className="text-violet-300">limas</strong> ada di mana-mana! Pelajari semua tentang
@@ -1129,7 +1285,6 @@ const slides: Slide[] = [
           <strong className="text-yellow-300">luas permukaan</strong> dan{" "}
           <strong className="text-green-300">volume</strong>-nya.
         </p>
-        <InteractiveLimas />
       </div>
     ),
   },

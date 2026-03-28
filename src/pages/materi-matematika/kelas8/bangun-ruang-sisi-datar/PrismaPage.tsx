@@ -191,6 +191,157 @@ const InteractivePrisma3D = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   AUTO-ROTATING PRISMA 3D — slide 1 hero (3 types)
+───────────────────────────────────────────────────────────── */
+const makePrismaVerts = (n: number, r: number, h: number): V3[] => {
+  const verts: V3[] = [];
+  for (let i = 0; i < n; i++) {
+    const a = (2 * Math.PI * i) / n - Math.PI / 2;
+    verts.push([r * Math.cos(a), h / 2, r * Math.sin(a)]);
+  }
+  for (let i = 0; i < n; i++) {
+    const a = (2 * Math.PI * i) / n - Math.PI / 2;
+    verts.push([r * Math.cos(a), -h / 2, r * Math.sin(a)]);
+  }
+  return verts;
+};
+const makePrismaFaces = (n: number) => {
+  const palette = ["#ef4444","#eab308","#3b82f6","#22c55e","#f97316","#ec4899","#06b6d4","#a78bfa"];
+  const faces: { idx: number[]; color: string; label: string }[] = [];
+  faces.push({ idx: Array.from({length:n},(_,i)=>i), color:palette[0], label:"ALAS" });
+  faces.push({ idx: Array.from({length:n},(_,i)=>n+(n-1-i)), color:palette[1], label:"TUTUP" });
+  for (let i = 0; i < n; i++) {
+    const j = (i+1)%n;
+    faces.push({ idx:[i,j,n+j,n+i], color:palette[(i+2)%palette.length], label:`S${i+1}` });
+  }
+  return faces;
+};
+
+const RotatingPrisma3D = ({ n, label, r = 38, h = 60 }: { n: number; label: string; r?: number; h?: number }) => {
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(n * 30);
+  const [isDragging, setIsDragging] = useState(false);
+  const isDragRef = useRef(false);
+  const dragRef   = useRef({ sx:0, sy:0, bx:-22, by: n*30 });
+  const tickRef   = useRef(n * 20);
+  const rotYRef   = useRef(n * 30);
+  const rafRef    = useRef<number|null>(null);
+
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragRef.current) {
+        tickRef.current += 1;
+        rotYRef.current += 0.20;
+        const rx = -18 + Math.sin(tickRef.current * 0.013) * 18;
+        setRotY(rotYRef.current);
+        setRotX(rx);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, []);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragRef.current) return;
+    const ny = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onMouseUp = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]; isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((ev: TouchEvent) => {
+    if (!isDragRef.current) return;
+    const t = ev.touches[0];
+    const ny = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onTouchEnd = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const rx = (rotX * Math.PI) / 180;
+  const ry = (rotY * Math.PI) / 180;
+  const rawVerts = makePrismaVerts(n, r, h);
+  const faceDefs = makePrismaFaces(n);
+  const tfVerts = rawVerts.map(v => rotXv(rotYv(v, ry), rx));
+  const pverts: V2[] = tfVerts.map(v => project(v, 380, 1.3));
+  const facesWithDepth = faceDefs.map(f => {
+    const avgZ = f.idx.reduce((s,i)=>s+tfVerts[i][2],0)/f.idx.length;
+    const pts2d = f.idx.map(i => pverts[i]);
+    const area = cross2d(pts2d[1][0]-pts2d[0][0],pts2d[1][1]-pts2d[0][1],pts2d[pts2d.length-1][0]-pts2d[0][0],pts2d[pts2d.length-1][1]-pts2d[0][1]);
+    return { ...f, avgZ, pts2d, visible: area < 0 };
+  }).sort((a,b) => b.avgZ - a.avgZ);
+  const cx = 85, cy = 90;
+
+  return (
+    <div
+      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
+      onMouseDown={onMouseDown} onTouchStart={onTouchStart}
+    >
+      <span className="text-white/70 font-body font-semibold mb-1" style={{ fontSize:10 }}>{label}</span>
+      <svg viewBox="0 0 170 180" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
+        {facesWithDepth.filter(f => f.visible).map((f, i) => {
+          const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
+          const mx  = f.pts2d.reduce((s,p)=>s+p[0],0)/f.pts2d.length;
+          const my  = f.pts2d.reduce((s,p)=>s+p[1],0)/f.pts2d.length;
+          return (
+            <g key={i}>
+              <polygon points={pts} fill={f.color} fillOpacity={0.88}
+                stroke="rgba(255,255,255,0.35)" strokeWidth={1.2} strokeLinejoin="round"/>
+              <text x={cx+mx} y={cy+my+3} fill="white" fontSize={7} fontFamily="monospace"
+                fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
+                style={{ pointerEvents:"none" }}>{f.label}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
+
+const ThreePrismas = () => (
+  <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
+    <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>
+      Berputar otomatis · Drag untuk memutar sendiri
+    </p>
+    <div className="flex gap-2">
+      <RotatingPrisma3D n={3} label="Prisma Segitiga" r={38} h={60}/>
+      <RotatingPrisma3D n={4} label="Prisma Segiempat" r={34} h={58}/>
+      <RotatingPrisma3D n={5} label="Prisma Segilima" r={34} h={56}/>
+    </div>
+    <div className="flex flex-wrap gap-x-3 gap-y-0.5 justify-center">
+      {[["#ef4444","ALAS"],["#eab308","TUTUP"],["#3b82f6","SISI"]].map(([c,l])=>(
+        <div key={l} className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
+          <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────────
    JARING-JARING PRISMA SVG
 ───────────────────────────────────────────────────────────── */
 // Shared inner component for both interactive and static use
@@ -1605,6 +1756,7 @@ const slides: Slide[] = [
     title: "Pengantar",
     content: (
       <div className="text-sm font-body text-white/75 leading-relaxed space-y-3">
+        <ThreePrismas />
         <p>
           Dari kemasan cokelat batang hingga atap rumah berbentuk segitiga — prisma ada di mana-mana!
           Pelajari semua tentang <strong className="text-cyan-300">prisma</strong> — mulai dari unsur-unsurnya,
