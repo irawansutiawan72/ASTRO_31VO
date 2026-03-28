@@ -72,13 +72,13 @@ function getSchedule(k: number, n: number): [number, number] {
 /* ── Main component ── */
 export default function JaringLimasInteraktif() {
   const [activeN,     setActiveN]     = useState(4);
-  const [rotX,        setRotX]        = useState(-26);
-  const [rotY,        setRotY]        = useState(32);
+  const [rotX,        setRotX]        = useState(-20);
+  const [rotY,        setRotY]        = useState(0);
   const [progress,    setProgress]    = useState(0);   // 0 = assembled, 1 = flat net
   const [isAnimating, setIsAnimating] = useState(false);
   const [isDragging,  setIsDragging]  = useState(false);
 
-  const dragRef     = useRef({ sx: 0, sy: 0, bx: -26, by: 32 });
+  const dragRef     = useRef({ sx: 0, sy: 0, bx: -20, by: 0 });
   const animRef     = useRef<number | null>(null);
   const progressRef = useRef(0);
 
@@ -232,7 +232,7 @@ export default function JaringLimasInteraktif() {
   useEffect(() => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     setProgress(0); progressRef.current = 0;
-    setRotX(-26); setRotY(32);
+    setRotX(-20); setRotY(0);
     setIsAnimating(false);
   }, [activeN]);
 
@@ -357,7 +357,7 @@ export default function JaringLimasInteraktif() {
           📤 Bongkar
         </button>
         <button
-          onClick={() => { setRotX(-26); setRotY(32); }}
+          onClick={() => { setRotX(-20); setRotY(0); }}
           disabled={!isAssembled || isAnimating}
           className="text-xs font-bold py-1.5 px-3 rounded-lg border border-slate-600 text-slate-400 transition-all duration-200 font-body"
           style={{ opacity: (!isAssembled || isAnimating) ? 0.35 : 1 }}>
