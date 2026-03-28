@@ -902,6 +902,224 @@ const examples: Ex[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
+   RUSUK GABUNGAN SVG
+───────────────────────────────────────────────────────────── */
+const RusukGabunganSVG = () => (
+  <svg viewBox="0 0 320 210" className="w-full max-w-xs mx-auto">
+    <defs>
+      <style>{`
+        @keyframes rgPulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+        .rg-shared{animation:rgPulse 1.8s ease-in-out infinite;}
+        .rg-limas{animation:rgPulse 1.8s ease-in-out infinite 0.6s;}
+      `}</style>
+    </defs>
+    {/* Balok body */}
+    <polygon points="50,165 150,165 150,105 50,105" fill="#6366f1" fillOpacity="0.25" stroke="none"/>
+    <polygon points="150,165 175,142 175,82 150,105" fill="#4f46e5" fillOpacity="0.18" stroke="none"/>
+    <polygon points="50,105 150,105 175,82 75,82" fill="#818cf8" fillOpacity="0.22" stroke="none"/>
+    {/* Balok edges - bottom 4 */}
+    <line x1="50" y1="165" x2="150" y2="165" stroke="#818cf8" strokeWidth="2"/>
+    <line x1="150" y1="165" x2="175" y2="142" stroke="#818cf8" strokeWidth="2"/>
+    <line x1="50" y1="165" x2="75" y2="142" stroke="#818cf8" strokeWidth="1.5" strokeDasharray="5,3" strokeOpacity="0.5"/>
+    <line x1="75" y1="142" x2="175" y2="142" stroke="#818cf8" strokeWidth="1.5" strokeDasharray="5,3" strokeOpacity="0.5"/>
+    {/* Balok vertical edges - 4 */}
+    <line x1="50" y1="165" x2="50" y2="105" stroke="#818cf8" strokeWidth="2"/>
+    <line x1="150" y1="165" x2="150" y2="105" stroke="#818cf8" strokeWidth="2"/>
+    <line x1="175" y1="142" x2="175" y2="82" stroke="#818cf8" strokeWidth="2"/>
+    <line x1="75" y1="142" x2="75" y2="82" stroke="#818cf8" strokeWidth="1.5" strokeDasharray="5,3" strokeOpacity="0.5"/>
+    {/* Shared edges (top of balok = base of limas) - highlighted */}
+    <line x1="50" y1="105" x2="150" y2="105" stroke="#facc15" strokeWidth="2.5" className="rg-shared"/>
+    <line x1="150" y1="105" x2="175" y2="82" stroke="#facc15" strokeWidth="2.5" className="rg-shared"/>
+    <line x1="50" y1="105" x2="75" y2="82" stroke="#facc15" strokeWidth="2" strokeDasharray="5,3" className="rg-shared"/>
+    <line x1="75" y1="82" x2="175" y2="82" stroke="#facc15" strokeWidth="2.5" className="rg-shared"/>
+    {/* Limas lateral edges - 4 */}
+    <line x1="112" y1="35" x2="50" y2="105" stroke="#f43f5e" strokeWidth="2" className="rg-limas"/>
+    <line x1="112" y1="35" x2="150" y2="105" stroke="#f43f5e" strokeWidth="2" className="rg-limas"/>
+    <line x1="112" y1="35" x2="175" y2="82" stroke="#f43f5e" strokeWidth="2" className="rg-limas"/>
+    <line x1="112" y1="35" x2="75" y2="82" stroke="#f43f5e" strokeWidth="1.5" strokeDasharray="5,3" strokeOpacity="0.7" className="rg-limas"/>
+    {/* Apex dot */}
+    <circle cx="112" cy="35" r="4" fill="#fb7185"/>
+    {/* Vertices dots */}
+    {[[50,165],[150,165],[50,105],[150,105],[175,82],[175,142]].map(([x,y],i)=>(
+      <circle key={i} cx={x} cy={y} r="3.5" fill="#818cf8"/>
+    ))}
+    <circle cx="75" cy="82" r="3.5" fill="#818cf8" opacity="0.5"/>
+    <circle cx="75" cy="142" r="3.5" fill="#818cf8" opacity="0.5"/>
+    {/* Legend */}
+    <line x1="195" y1="80" x2="215" y2="80" stroke="#818cf8" strokeWidth="2"/>
+    <text x="220" y="84" fill="#818cf8" fontSize="9" fontFamily="monospace">Rusuk Balok (12)</text>
+    <line x1="195" y1="98" x2="215" y2="98" stroke="#facc15" strokeWidth="2.5"/>
+    <text x="220" y="102" fill="#facc15" fontSize="9" fontFamily="monospace">Rusuk Bersama (4)</text>
+    <line x1="195" y1="116" x2="215" y2="116" stroke="#f43f5e" strokeWidth="2"/>
+    <text x="220" y="120" fill="#f43f5e" fontSize="9" fontFamily="monospace">Rusuk Limas (4+4=8)</text>
+    <text x="160" y="195" fill="#94a3b8" fontSize="8" textAnchor="middle">Total rusuk gabungan = 12 + 8 − 4 = 16</text>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────────────────────
+   JARING-JARING GABUNGAN INTERAKTIF (Balok + Limas)
+───────────────────────────────────────────────────────────── */
+const JaringGabunganInteraktif = () => {
+  const [progress, setProgress] = useState(0);
+  const [isNet, setIsNet]       = useState(false);
+  const animRef    = useRef<number | null>(null);
+  const progressRef = useRef(0);
+
+  useEffect(() => { progressRef.current = progress; }, [progress]);
+  useEffect(() => () => { if (animRef.current) cancelAnimationFrame(animRef.current); }, []);
+
+  const animateTo = (target: number) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const startP = progressRef.current;
+    const startT = performance.now();
+    const dur = 700;
+    const tick = (now: number) => {
+      const raw  = Math.min((now - startT) / dur, 1);
+      const ease = raw < 0.5 ? 2 * raw * raw : -1 + (4 - 2 * raw) * raw;
+      const p    = startP + (target - startP) * ease;
+      setProgress(p);
+      progressRef.current = p;
+      if (raw < 1) { animRef.current = requestAnimationFrame(tick); }
+      else { setProgress(target); progressRef.current = target; setIsNet(target > 0.5); }
+    };
+    animRef.current = requestAnimationFrame(tick);
+  };
+
+  /* 3D assembled view — fixed angle */
+  const RX = -22 * Math.PI / 180;
+  const RY =  35 * Math.PI / 180;
+  const tfV = blVerts.map(v => gRotX(gRotY(v, RY), RX));
+  const pV  = tfV.map(v => gProj(v, 380, 1.35));
+  const cx3 = 200, cy3 = 148;
+  const sorted3 = blFaces.map(f => {
+    const avgZ  = f.idx.reduce((s, i) => s + tfV[i][2], 0) / f.idx.length;
+    const pts2d = f.idx.map(i => pV[i]);
+    return { ...f, avgZ, pts2d };
+  }).sort((a, b) => b.avgZ - a.avgZ);
+
+  /* 2D net face definitions — Balok+Limas segiempat */
+  type NetFace = { pts: [number,number][]; color: string; label: string; isShared?: boolean };
+  const netFaces: NetFace[] = [
+    /* ── SharedFace (alas limas = tutup balok) ── */
+    { pts:[[165,73],[235,73],[235,121],[165,121]], color:"#ef4444", label:"✗ Bidang Beririsan", isShared:true },
+    /* ── 4 Limas triangles ── */
+    { pts:[[165,73],[235,73],[200,37]],            color:"#f59e0b", label:"Δ Limas 1" },
+    { pts:[[235,73],[235,121],[271,97]],           color:"#fbbf24", label:"Δ Limas 2" },
+    { pts:[[165,73],[165,121],[129,97]],           color:"#d97706", label:"Δ Limas 3" },
+    { pts:[[165,121],[235,121],[200,157]],         color:"#f97316", label:"Δ Limas 4" },
+    /* ── 5 Balok faces (no top) ── */
+    { pts:[[165,174],[235,174],[235,216],[165,216]], color:"#4f46e5", label:"Belakang" },
+    { pts:[[165,216],[235,216],[235,258],[165,258]], color:"#6366f1", label:"Depan" },
+    { pts:[[165,258],[235,258],[235,306],[165,306]], color:"#312e81", label:"Alas" },
+    { pts:[[235,216],[283,216],[283,258],[235,258]], color:"#818cf8", label:"Kanan" },
+    { pts:[[117,216],[165,216],[165,258],[117,258]], color:"#818cf8", label:"Kiri" },
+  ];
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700/50 rounded-xl p-3 space-y-2">
+      <div className="relative" style={{ height: 305 }}>
+        {/* 3D assembled view */}
+        <svg viewBox="0 0 400 305" style={{
+          position:"absolute", top:0, left:0, width:"100%", height:"100%",
+          opacity: 1 - progress,
+          pointerEvents: progress > 0.4 ? "none" : "auto",
+        }}>
+          {sorted3.map((f, i) => {
+            const pts = f.pts2d.map(([x, y]) => `${cx3+x},${cy3+y}`).join(" ");
+            const mx  = f.pts2d.reduce((s, p) => s + p[0], 0) / f.pts2d.length;
+            const my  = f.pts2d.reduce((s, p) => s + p[1], 0) / f.pts2d.length;
+            return (
+              <g key={i}>
+                <polygon points={pts} fill={f.color} fillOpacity={0.88}
+                  stroke="rgba(255,255,255,0.5)" strokeWidth={1.3} strokeLinejoin="round"/>
+                {f.label && (
+                  <text x={cx3+mx} y={cy3+my+3} fill="white" fontSize={8}
+                    fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+                    dominantBaseline="middle" style={{ pointerEvents:"none" }}>{f.label}</text>
+                )}
+              </g>
+            );
+          })}
+          <text x="200" y="298" textAnchor="middle" fontSize="8" fill="#64748b" fontFamily="monospace">
+            Model 3D Balok + Limas · tekan Bongkar untuk jaring-jaring
+          </text>
+        </svg>
+
+        {/* 2D net view */}
+        <svg viewBox="0 0 400 320" style={{
+          position:"absolute", top:0, left:0, width:"100%", height:"100%",
+          opacity: progress,
+          pointerEvents: progress < 0.6 ? "none" : "auto",
+        }}>
+          {/* Section labels */}
+          <text x="80" y="97" fontSize="9" fill="#a78bfa" fontFamily="monospace" fontWeight="bold">▲ LIMAS</text>
+          <line x1="80" y1="165" x2="320" y2="165" stroke="#334155" strokeWidth="1.2" strokeDasharray="6,4"/>
+          <text x="80" y="188" fontSize="9" fill="#6366f1" fontFamily="monospace" fontWeight="bold">▬ BALOK</text>
+          {netFaces.map((f, i) => {
+            const pts = f.pts.map(([x, y]) => `${x},${y}`).join(" ");
+            const mx  = f.pts.reduce((s, p) => s + p[0], 0) / f.pts.length;
+            const my  = f.pts.reduce((s, p) => s + p[1], 0) / f.pts.length;
+            return (
+              <g key={i}>
+                <polygon points={pts}
+                  fill={f.color} fillOpacity={f.isShared ? 0.22 : 0.82}
+                  stroke={f.isShared ? "#ef4444" : "rgba(255,255,255,0.55)"}
+                  strokeWidth={f.isShared ? 2 : 1.2}
+                  strokeDasharray={f.isShared ? "5,3" : undefined}/>
+                {f.isShared && (
+                  <>
+                    <line x1={f.pts[0][0]} y1={f.pts[0][1]} x2={f.pts[2][0]} y2={f.pts[2][1]}
+                      stroke="#ef4444" strokeWidth={2} opacity={0.65}/>
+                    <line x1={f.pts[1][0]} y1={f.pts[1][1]} x2={f.pts[3][0]} y2={f.pts[3][1]}
+                      stroke="#ef4444" strokeWidth={2} opacity={0.65}/>
+                  </>
+                )}
+                <text x={mx} y={my + 4} fill={f.isShared ? "#fca5a5" : "white"}
+                  fontSize={f.isShared ? 6 : 7.5} fontFamily="monospace" fontWeight="bold"
+                  textAnchor="middle" dominantBaseline="middle" style={{ pointerEvents:"none" }}>
+                  {f.label}
+                </text>
+              </g>
+            );
+          })}
+          <text x="200" y="316" textAnchor="middle" fontSize="8" fill="#facc15" fontFamily="monospace">
+            9 bidang terlihat: 4 segitiga limas + 5 sisi balok (alas beririsan ✗)
+          </text>
+        </svg>
+      </div>
+
+      {/* Button */}
+      <div className="flex gap-2 justify-center">
+        <button
+          onClick={() => animateTo(isNet ? 0 : 1)}
+          className="text-xs font-bold py-2 px-5 rounded-lg border font-body transition-all duration-200"
+          style={{
+            borderColor: isNet ? "#22c55e" : "#f97316",
+            color: isNet ? "#22c55e" : "#f97316",
+            backgroundColor: "transparent",
+          }}>
+          {isNet ? "🔄 Rakit Kembali" : "📤 Bongkar Jaring-jaring"}
+        </button>
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-x-3 gap-y-1 justify-center">
+        {[
+          { c:"#f59e0b", l:"4 Segitiga Limas" },
+          { c:"#6366f1", l:"5 Sisi Balok (tanpa tutup)" },
+          { c:"#ef4444", l:"Bidang Beririsan ✗" },
+        ].map(({c,l}) => (
+          <div key={l} className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
+            <span className="text-white/55 font-body" style={{ fontSize:9 }}>{l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    SLIDES DATA
 ───────────────────────────────────────────────────────────── */
 type Slide = { icon: string; title: string; content: React.ReactNode };
@@ -920,12 +1138,146 @@ const slides: Slide[] = [
         <ThreeGabungan3D />
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
           <p className="text-cyan-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
-          <p>• Konsep volume bangun gabungan</p>
-          <p>• Konsep luas permukaan bangun gabungan</p>
+          <p>• Rusuk &amp; titik sudut gabungan</p>
+          <p>• Luas permukaan gabungan + jaring-jaring interaktif</p>
+          <p>• Volume gabungan</p>
           <p>• Contoh: Balok + Limas</p>
           <p>• Contoh: Kubus/Balok + Prisma (Rumah)</p>
           <p>• Contoh: Gabungan dua balok</p>
           <p>• Contoh soal bertingkat</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── NEW: Rusuk Gabungan ── */
+  {
+    icon: "📐",
+    title: "Rusuk & Titik Sudut Gabungan",
+    content: (
+      <div className="space-y-3 text-sm font-body text-white/85">
+        <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs space-y-1">
+          <p className="text-violet-300 font-semibold">💡 Konsep Dasar:</p>
+          <p className="text-white/75">Ketika dua bangun digabung, <strong className="text-yellow-300">rusuk &amp; titik sudut yang berhimpit dihitung sekali</strong>. Rusuk yang menempel di dalam (beririsan) tidak termasuk rusuk luar.</p>
+        </div>
+        <RusukGabunganSVG />
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-cyan-300 font-semibold">Contoh: Balok + Limas Segiempat</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-center text-[10px] border-collapse">
+              <thead>
+                <tr>
+                  <th className="border border-slate-600 px-2 py-1 text-white/60">Bangun</th>
+                  <th className="border border-slate-600 px-2 py-1 text-indigo-300">Rusuk</th>
+                  <th className="border border-slate-600 px-2 py-1 text-emerald-300">Titik Sudut</th>
+                  <th className="border border-slate-600 px-2 py-1 text-orange-300">Sisi Luar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-slate-600 px-2 py-1">Balok</td>
+                  <td className="border border-slate-600 px-2 py-1 text-indigo-300">12</td>
+                  <td className="border border-slate-600 px-2 py-1 text-emerald-300">8</td>
+                  <td className="border border-slate-600 px-2 py-1 text-orange-300">6</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-600 px-2 py-1">Limas Segiempat</td>
+                  <td className="border border-slate-600 px-2 py-1 text-indigo-300">8</td>
+                  <td className="border border-slate-600 px-2 py-1 text-emerald-300">5</td>
+                  <td className="border border-slate-600 px-2 py-1 text-orange-300">5</td>
+                </tr>
+                <tr className="bg-slate-700/40">
+                  <td className="border border-slate-600 px-2 py-1 text-yellow-300 font-bold">Rusuk bersama</td>
+                  <td className="border border-slate-600 px-2 py-1 text-yellow-300">−4</td>
+                  <td className="border border-slate-600 px-2 py-1 text-yellow-300">−4</td>
+                  <td className="border border-slate-600 px-2 py-1 text-yellow-300">−2</td>
+                </tr>
+                <tr className="bg-cyan-950/40">
+                  <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">Gabungan</td>
+                  <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">16</td>
+                  <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">9</td>
+                  <td className="border border-slate-600 px-2 py-1 text-cyan-300 font-bold">9</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs text-yellow-200 space-y-1">
+          <p className="font-semibold">📏 Rumus Umum:</p>
+          <p><strong className="text-cyan-300">Rusuk gabungan</strong> = Rusuk A + Rusuk B − Rusuk bersama</p>
+          <p><strong className="text-cyan-300">Titik sudut gabungan</strong> = Titik A + Titik B − Titik bersama</p>
+          <p><strong className="text-cyan-300">Sisi luar</strong> = Sisi A + Sisi B − 2 × bidang beririsan</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── NEW: Luas Permukaan + Jaring-jaring ── */
+  {
+    icon: "🔲",
+    title: "Luas Permukaan & Jaring-jaring",
+    content: (
+      <div className="space-y-3 text-sm font-body text-white/85">
+        <div className="bg-violet-950/50 border border-violet-700/40 rounded-lg p-3 text-xs">
+          <p className="text-violet-300 font-semibold mb-1">⚠️ Aturan Utama:</p>
+          <p className="text-white/75">Bidang yang <strong className="text-red-400">beririsan (saling menempel)</strong> antara dua bangun <strong className="text-red-400">TIDAK dihitung</strong> dalam luas permukaan gabungan.</p>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-cyan-300 font-semibold">Rumus Luas Permukaan Gabungan:</p>
+          <BlockMath math="L_{\text{gab}} = (L_A - L_{\text{beririsan}}) + (L_B - L_{\text{beririsan}})" />
+          <p className="text-white/55">Setiap bangun dikurangi bidang yang menempel sebelum dijumlahkan.</p>
+        </div>
+        <p className="text-white/55 text-xs text-center">Tekan tombol untuk membongkar jaring-jaring Balok + Limas!</p>
+        <JaringGabunganInteraktif />
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-1">
+          <p className="text-orange-300 font-semibold">Contoh Balok (p×l×t₁) + Limas segiempat (tinggi t₂):</p>
+          <BlockMath math="L = \underbrace{(p \cdot l + 2pl' + 2ll')}_{\text{balok tanpa tutup}} + \underbrace{4 \cdot L_{\triangle}}_{\text{selimut limas}}" />
+          <p className="text-white/50">Alas limas = tutup balok → bidang beririsan, tidak dihitung dua kali!</p>
+        </div>
+      </div>
+    ),
+  },
+  /* ── NEW: Volume Gabungan (enhanced) ── */
+  {
+    icon: "📦",
+    title: "Volume Gabungan",
+    content: (
+      <div className="space-y-3 text-sm font-body text-white/85">
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-cyan-300 font-semibold">💡 Prinsip Utama:</p>
+          <p className="text-white/75">Volume bangun gabungan = <strong className="text-yellow-300">jumlah volume semua bagian</strong>. Tidak ada yang dikurangi karena volume adalah isi ruang, bukan permukaan.</p>
+          <BlockMath math="V_{\text{gabungan}} = V_1 + V_2 + V_3 + \ldots" />
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-3">
+          <p className="text-cyan-300 font-semibold">Rumus kombinasi populer:</p>
+          <div className="space-y-2">
+            <div className="flex items-start gap-2 bg-indigo-950/40 rounded p-2">
+              <span className="text-indigo-300 font-bold text-[11px] min-w-fit">Balok + Limas:</span>
+              <BlockMath math="V = p \cdot l \cdot t_1 + \tfrac{1}{3} \cdot p \cdot l \cdot t_2" />
+            </div>
+            <div className="flex items-start gap-2 bg-amber-950/40 rounded p-2">
+              <span className="text-amber-300 font-bold text-[11px] min-w-fit">Kubus + Prisma △:</span>
+              <BlockMath math="V = s^3 + L_{\triangle} \cdot t_{\text{prisma}}" />
+            </div>
+            <div className="flex items-start gap-2 bg-emerald-950/40 rounded p-2">
+              <span className="text-emerald-300 font-bold text-[11px] min-w-fit">2 Balok:</span>
+              <BlockMath math="V = p_1 l_1 t_1 + p_2 l_2 t_2" />
+            </div>
+            <div className="flex items-start gap-2 bg-rose-950/40 rounded p-2">
+              <span className="text-rose-300 font-bold text-[11px] min-w-fit">Balok dikurangi:</span>
+              <BlockMath math="V = V_{\text{besar}} - V_{\text{yang dipotong}}" />
+            </div>
+          </div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-yellow-300 font-semibold">🔢 Langkah-langkah Menghitung:</p>
+          <p className="text-white/75">1. <strong className="text-cyan-300">Identifikasi</strong> setiap bangun dasar penyusun</p>
+          <p className="text-white/75">2. <strong className="text-cyan-300">Tentukan dimensi</strong> masing-masing bangun</p>
+          <p className="text-white/75">3. <strong className="text-cyan-300">Hitung volume</strong> tiap bangun secara terpisah</p>
+          <p className="text-white/75">4. <strong className="text-cyan-300">Jumlahkan</strong> semua volume</p>
+        </div>
+        <div className="bg-yellow-950/40 border border-yellow-700/30 rounded-lg p-3 text-xs text-yellow-200 space-y-1">
+          <p className="font-semibold">⚠️ Perhatian:</p>
+          <p>Pastikan satuan semua dimensi sama (cm semua, atau m semua) sebelum menghitung!</p>
+          <p>Identifikasi <strong className="text-yellow-300">batas antara dua bangun</strong> dengan tepat agar dimensi tidak salah.</p>
         </div>
       </div>
     ),
