@@ -102,7 +102,7 @@ const InteractiveCylinder3D = () => {
               const x = Math.cos(angle) * R;
               const z = Math.sin(angle) * R;
               const w = 2 * Math.PI * R / SEGMENTS;
-              const hue = Math.floor((i / SEGMENTS) * 40) + 190;
+              const light = Math.round(42 + Math.abs(Math.cos(angle)) * 22);
               return (
                 <div
                   key={i}
@@ -111,8 +111,8 @@ const InteractiveCylinder3D = () => {
                     top: 0, left: "50%",
                     width: w + 1,
                     height: H_CYL,
-                    background: `hsla(${hue}, 70%, 55%, 0.88)`,
-                    borderLeft: "1px solid rgba(255,255,255,0.08)",
+                    background: `hsl(48, 98%, ${light}%)`,
+                    borderLeft: "1px solid rgba(255,255,255,0.12)",
                     transform: `translateX(-50%) translateX(${x}px) translateZ(${z}px) rotateY(${(angle * 180 / Math.PI) + 90}deg)`,
                     transformOrigin: "center center",
                     backfaceVisibility: "hidden",
