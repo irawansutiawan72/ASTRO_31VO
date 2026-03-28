@@ -9,8 +9,11 @@ const bukuRefs = [
   "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VII Semester 1. Jakarta: Erlangga.",
   "Adinawan, M. C. 2017. Matematika Untuk SMP/MTs Kelas VIII Semester 2. Jakarta: Erlangga.",
   "B.K. Noormandiri. 2018. Matematika untuk SMA/MA Kelas XII Kelompok Wajib. Jakarta: Erlangga.",
+  "Raharjo, M. 2018. Matematika 1 Untuk SMP/MTs Kelas VII. Jakarta: Erlangga.",
   "Raharjo, M dan Setiawan, A. 2019. Matematik 2 untuk SMP/MTS Kelas VIII. Jakarta: Erlangga.",
   "Sukino. 2020. The Great Matematika untuk Siswa SMP-MTs Kelas IX. Kab. Bandung: Srikandi Empat Widya Utama.",
+  "MKKS SMP/MTs DIY. 2025. Naskah Pemantapan dan Persiapan Tes Kemampuan Akademik (TKA) MKKS SMP/MTs DIY Tahun Pelajaran 2025/2026 Paket A.",
+  "Pemerintah Kota Yogyakarta Dinas Pendidikan. 2025. Naskah Persiapan Pemantapan Tes Kemampuan Akademik (TKA) Kota Yogyakarta Tahap 1 Tahun Pelajaran 2025/2026.",
 ];
 
 const internetRefs = [
