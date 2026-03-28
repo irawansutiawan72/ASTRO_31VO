@@ -63,6 +63,9 @@ const SudutPosNegSVG = () => (
       <marker id="ah-gsv" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
         <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#ffffff" />
       </marker>
+      <marker id="ah-gsv-yellow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#F0C040" />
+      </marker>
     </defs>
 
     {/* ── LEFT: Sudut Positif ── */}
@@ -71,7 +74,7 @@ const SudutPosNegSVG = () => (
     {/* OB arm → upper-left (130°) */}
     <line x1="80" y1="120" x2="40" y2="72" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CCW from 0° to 130°: sweep-flag=0 */}
-    <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#ffffff" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv-yellow)" />
     {/* Labels */}
     <text x="74" y="136" fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
     <text x="152" y="116" fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
@@ -89,7 +92,7 @@ const SudutPosNegSVG = () => (
     {/* OB arm → lower-left (-130° = 230°) */}
     <line x1="250" y1="80" x2="210" y2="128" stroke="#ffffff" strokeWidth="2" markerEnd="url(#ah-gsv)" />
     {/* Arc CW from 0° to -130°: sweep-flag=1 */}
-    <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#ffffff" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv-yellow)" />
     {/* Labels */}
     <text x="244" y="96"  fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
     <text x="322" y="76"  fill="#38bdf8" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
