@@ -717,58 +717,9 @@ const DiagramBarChartPermen = () => {
   );
 };
 
-const DiagramBracketJuara = () => {
-  const Y = "#fbbf24";
-  const sw = 1.8;
-  const teams = [
-    { label: "A", cx: 30 }, { label: "B", cx: 82 },
-    { label: "C", cx: 134 }, { label: "D", cx: 186 },
-    { label: "E", cx: 324 }, { label: "F", cx: 376 },
-    { label: "G", cx: 428 }, { label: "H", cx: 480 },
-  ];
-  const l3y = 175, l2y = 130, l1y = 85, juaraBottomY = 44;
-  const l3pairs = [[30,82],[134,186],[324,376],[428,480]];
-  const l2pairs = [[56,160],[350,454]];
-  return (
-    <svg viewBox="0 0 510 270" className="w-full max-w-lg mx-auto my-3 rounded-lg" aria-label="Diagram Bracket Juara">
-      <rect x="0" y="0" width="510" height="270" rx="8" fill="#0f172a" opacity="0.75"/>
-      <defs>
-        <marker id="arrowBJ" markerWidth="10" markerHeight="8" refX="5" refY="7" orient="auto">
-          <polyline points="1,1 5,7 9,1" fill="none" stroke={Y} strokeWidth="1.5" strokeLinejoin="round"/>
-        </marker>
-      </defs>
-      <rect x="205" y="12" width="100" height="32" fill="none" stroke={Y} strokeWidth={sw} rx="2"/>
-      <text x="255" y="34" textAnchor="middle" fill={Y} fontSize="14" fontWeight="bold" fontStyle="italic">JUARA</text>
-      <line x1="255" y1={juaraBottomY} x2="255" y2={l1y} stroke={Y} strokeWidth={sw}/>
-      <line x1={l2pairs[0][0]} y1={l1y} x2={l2pairs[1][1]} y2={l1y} stroke={Y} strokeWidth={sw}/>
-      {l2pairs.map(([lx, rx]) => {
-        const cx = (lx + rx) / 2;
-        return (
-          <g key={cx}>
-            <line x1={cx} y1={l1y} x2={cx} y2={l2y} stroke={Y} strokeWidth={sw} markerEnd="url(#arrowBJ)"/>
-            <line x1={lx} y1={l2y} x2={rx} y2={l2y} stroke={Y} strokeWidth={sw}/>
-          </g>
-        );
-      })}
-      {l3pairs.map(([lx, rx]) => {
-        const cx = (lx + rx) / 2;
-        return (
-          <g key={cx}>
-            <line x1={cx} y1={l2y} x2={cx} y2={l3y} stroke={Y} strokeWidth={sw} markerEnd="url(#arrowBJ)"/>
-            <line x1={lx} y1={l3y} x2={rx} y2={l3y} stroke={Y} strokeWidth={sw}/>
-          </g>
-        );
-      })}
-      {teams.map(({ label, cx }) => (
-        <g key={label}>
-          <line x1={cx} y1={l3y} x2={cx} y2={205} stroke={Y} strokeWidth={sw} markerEnd="url(#arrowBJ)"/>
-          <rect x={cx - 18} y={205} width="36" height="34" fill="none" stroke={Y} strokeWidth={sw} rx="2"/>
-          <text x={cx} y={228} textAnchor="middle" fill={Y} fontSize="14" fontWeight="bold" fontStyle="italic">{label}</text>
-        </g>
-      ))}
-    </svg>
-  );
-};
+const DiagramBracketJuara = () => (
+  <img src="/no_34.png" alt="Diagram Bracket Juara" className="w-full max-w-lg mx-auto my-3 block rounded-lg"/>
+);
 
 const DiagramKotakKartu = () => {
   const cards = [
