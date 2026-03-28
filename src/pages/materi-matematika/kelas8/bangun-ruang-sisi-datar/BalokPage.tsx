@@ -755,7 +755,7 @@ const WaterBalokAnimation = () => {
   const filledH = barH * fill;
 
   return (
-    <svg viewBox="0 0 258 210" className="w-full max-w-sm mx-auto my-2"
+    <svg viewBox="0 62 258 148" className="w-full max-w-sm mx-auto"
       aria-label="Animasi balok diisi air">
       <defs>
         <filter id="wBloomB">
@@ -1014,12 +1014,12 @@ const sections: Sec[] = [
           <strong className="text-green-300">Volume balok</strong> menyatakan seberapa besar "isi" atau "ruang" yang ditempati balok.
           Volume = Luas alas × tinggi.
         </p>
-        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
-          <p className="text-cyan-300 text-xs font-semibold font-body text-center">
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl px-3 pt-2 pb-3">
+          <p className="text-cyan-300 text-xs font-semibold font-body text-center mb-1">
             🌊 Balok diisi air — dari kosong hingga penuh
           </p>
           <WaterBalokAnimation />
-          <p className="text-white/45 text-[10px] font-body text-center">
+          <p className="text-white/45 text-[10px] font-body text-center mt-1">
             Persentase menunjukkan proporsi volume terisi terhadap volume total
           </p>
         </div>
