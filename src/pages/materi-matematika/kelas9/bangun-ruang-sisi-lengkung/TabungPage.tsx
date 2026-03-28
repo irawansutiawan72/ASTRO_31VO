@@ -8,11 +8,31 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
-   INTERACTIVE 3D CYLINDER — CSS 3D transform with drag rotation
+   INTERACTIVE 3D CYLINDER — SVG painter's algorithm (solid, no gaps)
 ───────────────────────────────────────────────────────────── */
-const SEGMENTS = 24;
-const R = 60;
-const H_CYL = 100;
+const CYL_SEGS = 48;
+const CYL_R = 65;
+const CYL_H = 130;
+const CYL_PD = 500;
+const CYL_W = 320;
+const CYL_H_SVG = 300;
+const CYL_CX = CYL_W / 2;
+const CYL_CY = CYL_H_SVG / 2;
+
+function cylRotPt(x: number, y: number, z: number, rx: number, ry: number) {
+  const rxa = (rx * Math.PI) / 180;
+  const rya = (ry * Math.PI) / 180;
+  const x1 = x * Math.cos(rya) + z * Math.sin(rya);
+  const z1 = -x * Math.sin(rya) + z * Math.cos(rya);
+  const y2 = y * Math.cos(rxa) - z1 * Math.sin(rxa);
+  const z2 = y * Math.sin(rxa) + z1 * Math.cos(rxa);
+  return { x: x1, y: y2, z: z2 };
+}
+
+function cylProj(p: { x: number; y: number; z: number }) {
+  const s = CYL_PD / (CYL_PD + p.z + 100);
+  return { x: CYL_CX + p.x * s, y: CYL_CY + p.y * s };
+}
 
 const InteractiveCylinder3D = () => {
   const [rotX, setRotX] = useState(-25);
@@ -70,8 +90,62 @@ const InteractiveCylinder3D = () => {
     return () => cancelAnimationFrame(frameId);
   }, [isDragging, showNet]);
 
-  const segAngle = (2 * Math.PI) / SEGMENTS;
-  const segments = Array.from({ length: SEGMENTS }, (_, i) => i);
+  const topVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, -CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
+  });
+  const botVerts3D = Array.from({ length: CYL_SEGS }, (_, i) => {
+    const a = (2 * Math.PI * i) / CYL_SEGS;
+    return cylRotPt(Math.cos(a) * CYL_R, CYL_H / 2, Math.sin(a) * CYL_R, rotX, rotY);
+  });
+  const topVerts2D = topVerts3D.map(cylProj);
+  const botVerts2D = botVerts3D.map(cylProj);
+
+  type Face = { avgZ: number; points: string; fill: string; stroke: string };
+  const faces: Face[] = [];
+
+  for (let i = 0; i < CYL_SEGS; i++) {
+    const ni = (i + 1) % CYL_SEGS;
+    const t0 = topVerts3D[i], t1 = topVerts3D[ni];
+    const b0 = botVerts3D[i], b1 = botVerts3D[ni];
+    const p_t0 = topVerts2D[i], p_t1 = topVerts2D[ni];
+    const p_b0 = botVerts2D[i], p_b1 = botVerts2D[ni];
+    const avgZ = (t0.z + t1.z + b0.z + b1.z) / 4;
+    const midAngle = (2 * Math.PI * (i + 0.5)) / CYL_SEGS;
+    const nx = Math.cos(midAngle), nz = Math.sin(midAngle);
+    const rotNx = nx * Math.cos((rotY * Math.PI) / 180) + nz * Math.sin((rotY * Math.PI) / 180);
+    const lightness = Math.round(44 + rotNx * 22);
+    const visible = rotNx > -0.15;
+    faces.push({
+      avgZ,
+      points: `${p_t0.x},${p_t0.y} ${p_t1.x},${p_t1.y} ${p_b1.x},${p_b1.y} ${p_b0.x},${p_b0.y}`,
+      fill: visible ? `hsl(48,98%,${lightness}%)` : `hsl(48,60%,28%)`,
+      stroke: "rgba(180,130,0,0.3)",
+    });
+  }
+
+  const topCapAvgZ = topVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const botCapAvgZ = botVerts3D.reduce((s, v) => s + v.z, 0) / CYL_SEGS;
+  const topCapCenter3D = cylRotPt(0, -CYL_H / 2, 0, rotX, rotY);
+  const botCapCenter3D = cylRotPt(0, CYL_H / 2, 0, rotX, rotY);
+
+  faces.push({
+    avgZ: topCapAvgZ,
+    points: topVerts2D.map(p => `${p.x},${p.y}`).join(" "),
+    fill: topCapCenter3D.y < botCapCenter3D.y ? "#22d3ee" : "#0e7490",
+    stroke: "#67e8f9",
+  });
+  faces.push({
+    avgZ: botCapAvgZ,
+    points: botVerts2D.map(p => `${p.x},${p.y}`).join(" "),
+    fill: botCapCenter3D.y > topCapCenter3D.y ? "#4ade80" : "#166534",
+    stroke: "#86efac",
+  });
+
+  faces.sort((a, b) => b.avgZ - a.avgZ);
+
+  const topCenter2D = cylProj(topCapCenter3D);
+  const botCenter2D = cylProj(botCapCenter3D);
 
   return (
     <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-4 space-y-4">
@@ -80,87 +154,19 @@ const InteractiveCylinder3D = () => {
       </p>
 
       {!showNet ? (
-        <div
-          className="relative mx-auto flex items-center justify-center select-none overflow-visible"
-          style={{ width: "100%", height: 320, cursor: isDragging ? "grabbing" : "grab" }}
+        <svg
+          viewBox={`0 0 ${CYL_W} ${CYL_H_SVG}`}
+          width="100%"
+          style={{ maxWidth: CYL_W, display: "block", margin: "0 auto", cursor: isDragging ? "grabbing" : "grab" }}
           onMouseDown={onMouseDown}
           onTouchStart={onTouchStart}
         >
-          <div
-            style={{
-              position: "relative",
-              width: R * 2,
-              height: H_CYL,
-              transformStyle: "preserve-3d",
-              transform: `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
-              transition: isDragging ? "none" : "transform 0.4s ease",
-            }}
-          >
-            {/* Side panels */}
-            {segments.map(i => {
-              const angle = i * segAngle;
-              const x = Math.cos(angle) * R;
-              const z = Math.sin(angle) * R;
-              const w = 2 * Math.PI * R / SEGMENTS;
-              const light = Math.round(42 + Math.abs(Math.cos(angle)) * 22);
-              return (
-                <div
-                  key={i}
-                  style={{
-                    position: "absolute",
-                    top: 0, left: "50%",
-                    width: w + 1,
-                    height: H_CYL,
-                    background: `hsl(48, 98%, ${light}%)`,
-                    borderLeft: "1px solid rgba(200,160,0,0.25)",
-                    transform: `translateX(-50%) translateX(${x}px) translateZ(${z}px) rotateY(${(angle * 180 / Math.PI) + 90}deg)`,
-                    transformOrigin: "center center",
-                  }}
-                />
-              );
-            })}
-
-            {/* Top cap */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0, left: "50%",
-                width: R * 2,
-                height: R * 2,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, #67e8f9 0%, #0891b2 70%, #164e63 100%)",
-                transform: `translateX(-50%) translateY(-${R}px) rotateX(90deg)`,
-                boxShadow: "0 0 20px rgba(103,232,249,0.5)",
-                border: "2px solid rgba(255,255,255,0.4)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 11, fontWeight: 700, fontFamily: "monospace", transform: "rotateX(-90deg)" }}>
-                TUTUP ATAS (r)
-              </span>
-            </div>
-
-            {/* Bottom cap */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0, left: "50%",
-                width: R * 2,
-                height: R * 2,
-                borderRadius: "50%",
-                background: "radial-gradient(circle, #86efac 0%, #16a34a 70%, #14532d 100%)",
-                transform: `translateX(-50%) translateY(${R}px) rotateX(-90deg)`,
-                boxShadow: "0 0 15px rgba(134,239,172,0.4)",
-                border: "2px solid rgba(255,255,255,0.3)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}
-            >
-              <span style={{ color: "rgba(255,255,255,0.9)", fontSize: 11, fontWeight: 700, fontFamily: "monospace", transform: "rotateX(90deg)" }}>
-                TUTUP BAWAH (r)
-              </span>
-            </div>
-          </div>
-        </div>
+          {faces.map((f, i) => (
+            <polygon key={i} points={f.points} fill={f.fill} stroke={f.stroke} strokeWidth="0.5" />
+          ))}
+          <text x={topCenter2D.x} y={topCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP ATAS (r)</text>
+          <text x={botCenter2D.x} y={botCenter2D.y + 4} fill="#fff" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP BAWAH (r)</text>
+        </svg>
       ) : (
         /* Jaring-jaring tabung */
         <div className="flex items-center justify-center py-4">
