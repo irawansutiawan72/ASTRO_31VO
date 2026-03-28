@@ -6,6 +6,7 @@ import { Triangle, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
+import JaringLimasInteraktif from "@/components/JaringLimasInteraktif";
 
 /* ─────────────────────────────────────────────────────────────
    INTERACTIVE LIMAS 3D — drag to rotate, click net button
@@ -764,14 +765,14 @@ const sections: Sec[] = [
     icon: "📐",
     content: (
       <div className="space-y-4 font-body">
-        <p className="text-white/65 text-xs">Jaring-jaring adalah rangkaian bidang datar yang jika dilipat membentuk sebuah limas.</p>
-        <NetLimasGallery />
-        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-white/70 space-y-1">
-          <p className="text-white/85 font-semibold">Ciri jaring-jaring limas segiempat yang benar:</p>
-          <p>✓ Terdapat tepat <strong className="text-blue-300">1 segi-empat</strong> sebagai alas</p>
-          <p>✓ Terdapat tepat <strong className="text-purple-300">4 segitiga</strong> sebagai sisi tegak</p>
-          <p>✓ Setiap segitiga terhubung ke salah satu rusuk alas</p>
-          <p>✓ Semua segitiga bertemu di satu titik puncak saat dilipat</p>
+        <p className="text-white/65 text-xs">Jaring-jaring adalah rangkaian bidang datar yang jika dilipat membentuk sebuah limas. Pilih jenis limas lalu tekan <strong className="text-orange-300">Bongkar</strong> untuk melihat animasinya!</p>
+        <JaringLimasInteraktif />
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 text-xs text-white/70 space-y-1.5">
+          <p className="text-white/85 font-semibold">Susunan bidang pada jaring-jaring limas:</p>
+          <p>✓ <strong className="text-blue-300">Limas Segitiga</strong> — 1 alas segitiga + 3 sisi segitiga = <span className="text-yellow-300">4 bidang</span></p>
+          <p>✓ <strong className="text-purple-300">Limas Segiempat</strong> — 1 alas persegi + 4 sisi segitiga = <span className="text-yellow-300">5 bidang</span></p>
+          <p>✓ <strong className="text-green-300">Limas Segilima</strong> — 1 alas segilima + 5 sisi segitiga = <span className="text-yellow-300">6 bidang</span></p>
+          <p className="text-white/50 pt-0.5">Semua segitiga sisi terhubung ke satu rusuk alas dan bertemu di titik puncak saat dilipat.</p>
         </div>
       </div>
     ),
