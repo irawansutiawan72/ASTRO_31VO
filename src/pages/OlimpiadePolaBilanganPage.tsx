@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -228,6 +228,137 @@ const latihanOlimpiade = [
   { no: 37, soal: "OSN Matematika 2025 Tingkat Kota\nBilangan segilima ke-n adalah banyaknya titik yang membentuk n segilima. Bilangan segilima ke-0 adalah 1, bilangan segilima ke-1 adalah 5, bilangan segilima ke-2 adalah 12, dan bilangan segilima ke-3 adalah 22. Bilangan segilima yang paling dekat dengan 2025 adalah bilangan segilima ke-...", options: ["A. 30", "B. 33", "C. 36", "D. 39"] },
 ];
 
+const dotColor = "#5b9ec9";
+const dotR = 5;
+const sp = 14;
+
+const PolaPersegiSVG = () => {
+  const patterns = [
+    { n: 1, label: "1" },
+    { n: 2, label: "4" },
+    { n: 3, label: "9" },
+    { n: 4, label: "16" },
+    { n: 5, label: "25" },
+  ];
+  const gap = 18;
+  let curX = 10;
+  const positions: number[] = [];
+  for (const p of patterns) {
+    positions.push(curX);
+    curX += p.n * sp + gap;
+  }
+  const maxH = patterns[patterns.length - 1].n * sp;
+  const totalW = curX - gap + 10;
+  const svgH = maxH + 44;
+  return (
+    <svg width={totalW} height={svgH}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const h = p.n * sp;
+        const offsetY = 10 + maxH - h;
+        const dots: ReactNode[] = [];
+        for (let r = 0; r < p.n; r++) {
+          for (let c = 0; c < p.n; c++) {
+            dots.push(<circle key={`${r}-${c}`} cx={x + c * sp + dotR} cy={offsetY + r * sp + dotR} r={dotR} fill={dotColor} />);
+          }
+        }
+        return (
+          <g key={i}>
+            {dots}
+            <text x={x + (p.n * sp) / 2} y={10 + maxH + 22} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">{p.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const PolaPersegiPanjangSVG = () => {
+  const patterns = [
+    { rows: 1, cols: 2, label: "2" },
+    { rows: 2, cols: 3, label: "6" },
+    { rows: 3, cols: 4, label: "12" },
+    { rows: 4, cols: 5, label: "20" },
+  ];
+  const gap = 18;
+  let curX = 10;
+  const positions: number[] = [];
+  for (const p of patterns) {
+    positions.push(curX);
+    curX += p.cols * sp + gap;
+  }
+  const maxH = patterns[patterns.length - 1].rows * sp;
+  const totalW = curX - gap + 10;
+  const svgH = maxH + 44;
+  return (
+    <svg width={totalW} height={svgH}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const h = p.rows * sp;
+        const offsetY = 10 + maxH - h;
+        const dots: ReactNode[] = [];
+        for (let r = 0; r < p.rows; r++) {
+          for (let c = 0; c < p.cols; c++) {
+            dots.push(<circle key={`${r}-${c}`} cx={x + c * sp + dotR} cy={offsetY + r * sp + dotR} r={dotR} fill={dotColor} />);
+          }
+        }
+        return (
+          <g key={i}>
+            {dots}
+            <text x={x + (p.cols * sp) / 2} y={10 + maxH + 22} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">{p.label}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+const PolaSegitigaSVG = () => {
+  const patterns = [
+    { rows: 1, label: "1" },
+    { rows: 2, label: "3" },
+    { rows: 3, label: "6" },
+    { rows: 4, label: "10" },
+    { rows: 5, label: "15" },
+  ];
+  const gap = 18;
+  let curX = 10;
+  const positions: number[] = [];
+  for (const p of patterns) {
+    positions.push(curX);
+    curX += p.rows * sp + gap;
+  }
+  const maxH = patterns[patterns.length - 1].rows * sp;
+  const totalW = curX - gap + 30;
+  const svgH = maxH + 44;
+  return (
+    <svg width={totalW} height={svgH}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const bboxW = p.rows * sp;
+        const h = p.rows * sp;
+        const offsetY = 10 + maxH - h;
+        const dots: ReactNode[] = [];
+        for (let r = 0; r < p.rows; r++) {
+          const numDots = r + 1;
+          const rowW = numDots * sp;
+          const rowOffsetX = (bboxW - rowW) / 2;
+          for (let c = 0; c < numDots; c++) {
+            dots.push(<circle key={`${r}-${c}`} cx={x + rowOffsetX + c * sp + dotR} cy={offsetY + r * sp + dotR} r={dotR} fill={dotColor} />);
+          }
+        }
+        return (
+          <g key={i}>
+            {dots}
+            <text x={x + bboxW / 2} y={10 + maxH + 22} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">{p.label}</text>
+          </g>
+        );
+      })}
+      <text x={curX - gap + 8} y={10 + maxH / 2 + dotR} fill="#ffffff99" fontSize="16" fontFamily="sans-serif">...</text>
+    </svg>
+  );
+};
+
 const OlimpiadePolaBilanganPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
@@ -290,11 +421,31 @@ const OlimpiadePolaBilanganPage = () => {
                 </button>
                 {expandedSections.includes(idx) && (
                   <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
-                      {section.content.split('\n').map((line, i) => (
-                        <div key={i} className="mb-1">{renderWithLatex(line)}</div>
-                      ))}
-                    </div>
+                    {idx === 3 ? (
+                      <div className="font-body text-sm text-white/80 leading-relaxed space-y-4">
+                        <div>
+                          <div className="mb-1 font-semibold">1. Pola Bilangan Persegi</div>
+                          <div className="mb-2">{renderWithLatex("$U_n = n^2$")}</div>
+                          <div className="overflow-x-auto"><PolaPersegiSVG /></div>
+                        </div>
+                        <div>
+                          <div className="mb-1 font-semibold">2. Pola Bilangan Persegi Panjang</div>
+                          <div className="mb-2">{renderWithLatex("$U_n = n(n+1)$")}</div>
+                          <div className="overflow-x-auto"><PolaPersegiPanjangSVG /></div>
+                        </div>
+                        <div>
+                          <div className="mb-1 font-semibold">3. Pola Bilangan Segitiga</div>
+                          <div className="mb-2">{renderWithLatex("$U_n = \\frac{n(n+1)}{2}$")}</div>
+                          <div className="overflow-x-auto"><PolaSegitigaSVG /></div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed">
+                        {section.content.split('\n').map((line, i) => (
+                          <div key={i} className="mb-1">{renderWithLatex(line)}</div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
