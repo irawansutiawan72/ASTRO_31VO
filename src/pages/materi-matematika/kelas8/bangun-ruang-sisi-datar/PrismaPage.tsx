@@ -403,6 +403,202 @@ const LuasPrismaSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
+   JARING-JARING PRISMA SEGIEMPAT (persegi panjang)
+───────────────────────────────────────────────────────────── */
+const JaringSegiempatSVG = () => (
+  <svg viewBox="0 0 340 240" className="w-full max-w-sm mx-auto my-2"
+    aria-label="Jaring-jaring prisma segiempat — luas permukaan">
+    <defs>
+      <style>{`
+        @keyframes jsq-a{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #818cf8);}50%{fill-opacity:0.3;filter:none;}}
+        @keyframes jsq-b{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.3;filter:none;}}
+        @keyframes jsq-c{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #facc15);}50%{fill-opacity:0.3;filter:none;}}
+        .jsq-a{animation:jsq-a 2.2s ease-in-out infinite;}
+        .jsq-b{animation:jsq-b 2.2s ease-in-out infinite 0.6s;}
+        .jsq-c{animation:jsq-c 2.2s ease-in-out infinite 1.2s;}
+      `}</style>
+      <filter id="jsqBloom">
+        <feGaussianBlur stdDeviation="2.5" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    {/* 4 rectangular side faces in a row */}
+    {/* r1: KIRI (l×t) */}
+    <rect x={50} y={95} width={45} height={50} fill="#3b82f6" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-a"/>
+    <text x={72.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KIRI</text>
+    <text x={72.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
+    {/* r2: DEPAN (p×t) */}
+    <rect x={95} y={95} width={65} height={50} fill="#8b5cf6" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-a"/>
+    <text x={127.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">DEPAN</text>
+    <text x={127.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
+    {/* r3: KANAN (l×t) */}
+    <rect x={160} y={95} width={45} height={50} fill="#22c55e" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-a"/>
+    <text x={182.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">KANAN</text>
+    <text x={182.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">l×t</text>
+    {/* r4: BELAKANG (p×t) */}
+    <rect x={205} y={95} width={65} height={50} fill="#f97316" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-a"/>
+    <text x={237.5} y={117} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">BELAKANG</text>
+    <text x={237.5} y={127} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×t</text>
+    {/* ALAS (p×l) below r2 */}
+    <rect x={95} y={145} width={65} height={45} fill="#ef4444" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-b"/>
+    <text x={127.5} y={164} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+    <text x={127.5} y={174} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
+    {/* TUTUP (p×l) above r2 */}
+    <rect x={95} y={50} width={65} height={45} fill="#eab308" fillOpacity={0.88} rx={3}
+      stroke="white" strokeWidth={1.5} className="jsq-c"/>
+    <text x={127.5} y={69} fill="white" fontSize={7} fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
+    <text x={127.5} y={79} fill="white" fontSize={6.5} fontFamily="monospace" textAnchor="middle">p×l</text>
+    {/* Dimension labels */}
+    <text x={127.5} y={87} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">p</text>
+    <text x={43} y={121} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
+    {/* Formula */}
+    <text x="170" y="218" fill="#e0e7ff" fontSize={11} fontFamily="monospace" fontWeight="bold"
+      textAnchor="middle" filter="url(#jsqBloom)">L = 2(pl) + 2(p+l)×t</text>
+  </svg>
+);
+
+/* ─────────────────────────────────────────────────────────────
+   JARING-JARING PRISMA SEGILIMA (pentagon)
+───────────────────────────────────────────────────────────── */
+const JaringSegilimaSVG = () => {
+  const penta = (cx: number, cy: number, r: number) =>
+    Array.from({ length: 5 }, (_, i) => {
+      const angle = ((-90 + i * 72) * Math.PI) / 180;
+      return `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`;
+    }).join(" ");
+
+  const sw = 50, rh = 50;
+  const startX = 55;
+  const oy = 100;
+  const pr = 26;
+
+  const rects = [
+    { x: startX,           fill: "#3b82f6", label: "SISI 1" },
+    { x: startX + sw,      fill: "#8b5cf6", label: "SISI 2" },
+    { x: startX + 2 * sw,  fill: "#22c55e", label: "SISI 3" },
+    { x: startX + 3 * sw,  fill: "#f97316", label: "SISI 4" },
+    { x: startX + 4 * sw,  fill: "#ec4899", label: "SISI 5" },
+  ];
+
+  const midX = startX + 2 * sw + sw / 2;
+  const alasCY = oy + rh + pr + 4;
+  const tutupCY = oy - pr - 4;
+
+  return (
+    <svg viewBox="0 0 370 255" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Jaring-jaring prisma segilima — luas permukaan">
+      <defs>
+        <style>{`
+          @keyframes jsg-a{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #818cf8);}50%{fill-opacity:0.3;filter:none;}}
+          @keyframes jsg-b{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.3;filter:none;}}
+          @keyframes jsg-c{0%,100%{fill-opacity:0.9;filter:drop-shadow(0 0 10px #facc15);}50%{fill-opacity:0.3;filter:none;}}
+          .jsg-a{animation:jsg-a 2.2s ease-in-out infinite;}
+          .jsg-b{animation:jsg-b 2.2s ease-in-out infinite 0.6s;}
+          .jsg-c{animation:jsg-c 2.2s ease-in-out infinite 1.2s;}
+        `}</style>
+        <filter id="jsgBloom">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      {/* 5 rectangular side faces */}
+      {rects.map((r, i) => (
+        <g key={i}>
+          <rect x={r.x} y={oy} width={sw} height={rh} fill={r.fill} fillOpacity={0.88} rx={3}
+            stroke="white" strokeWidth={1.5} className="jsg-a"/>
+          <text x={r.x + sw / 2} y={oy + rh / 2 - 4} fill="white" fontSize={6.5}
+            fontFamily="monospace" fontWeight="bold" textAnchor="middle">{r.label}</text>
+          <text x={r.x + sw / 2} y={oy + rh / 2 + 7} fill="white" fontSize={6}
+            fontFamily="monospace" textAnchor="middle">a×t</text>
+        </g>
+      ))}
+      {/* ALAS pentagon below rect 3 (middle) */}
+      <polygon points={penta(midX, alasCY, pr)} fill="#ef4444" fillOpacity={0.88}
+        stroke="white" strokeWidth={1.5} className="jsg-b"/>
+      <text x={midX} y={alasCY + 4} fill="white" fontSize={7}
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS</text>
+      {/* TUTUP pentagon above rect 3 (middle) */}
+      <polygon points={penta(midX, tutupCY, pr)} fill="#eab308" fillOpacity={0.88}
+        stroke="white" strokeWidth={1.5} className="jsg-c"/>
+      <text x={midX} y={tutupCY + 4} fill="white" fontSize={7}
+        fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP</text>
+      {/* Dimension labels */}
+      <text x={startX + sw / 2} y={oy - 5} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">a</text>
+      <text x={startX - 10} y={oy + rh / 2 + 4} fill="#94a3b8" fontSize={8} fontFamily="monospace" textAnchor="middle">t</text>
+      {/* Formula */}
+      <text x="185" y="240" fill="#e0e7ff" fontSize={10} fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#jsgBloom)">L = 2×L△₅ + 5a×t</text>
+    </svg>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   LUAS PERMUKAAN — tab selector (3 jenis prisma)
+───────────────────────────────────────────────────────────── */
+const JaringTabSelector = () => {
+  const [tab, setTab] = useState<"segitiga" | "segiempat" | "segilima">("segitiga");
+  const tabs = [
+    { id: "segitiga", label: "Segitiga" },
+    { id: "segiempat", label: "Segiempat" },
+    { id: "segilima", label: "Segilima" },
+  ] as const;
+  return (
+    <div className="space-y-3">
+      <div className="flex rounded-lg overflow-hidden border border-slate-600 w-full">
+        {tabs.map(t => (
+          <button key={t.id}
+            onClick={() => { playPopSound(); setTab(t.id); }}
+            className={`flex-1 py-1.5 text-xs font-bold font-body transition-colors cursor-pointer
+              ${tab === t.id
+                ? "bg-cyan-800/80 text-cyan-200 border-b-2 border-cyan-400"
+                : "bg-slate-800/60 text-white/50 hover:text-white/80 hover:bg-slate-700/60"}`}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {tab === "segitiga" && (
+        <div>
+          <LuasPrismaSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segitiga:</p>
+            <p>• Luas alas/tutup: <span className="text-yellow-300">L△ = ½ × a × t△</span></p>
+            <p>• Keliling alas: <span className="text-yellow-300">K = a + b + c</span></p>
+            <p className="text-white/90 font-semibold font-mono">L = 2×L△ + (a+b+c)×t</p>
+          </div>
+        </div>
+      )}
+      {tab === "segiempat" && (
+        <div>
+          <JaringSegiempatSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segiempat (Balok):</p>
+            <p>• Luas alas/tutup: <span className="text-yellow-300">L□ = p × l</span></p>
+            <p>• Keliling alas: <span className="text-yellow-300">K = 2(p + l)</span></p>
+            <p className="text-white/90 font-semibold font-mono">L = 2(pl) + 2(p+l)×t</p>
+          </div>
+        </div>
+      )}
+      {tab === "segilima" && (
+        <div>
+          <JaringSegilimaSVG />
+          <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-3 space-y-2 text-xs text-white/70">
+            <p className="text-cyan-300 font-semibold">📐 Rumus — Prisma Segilima (alas sama sisi a):</p>
+            <p>• Luas segi-5: <span className="text-yellow-300">L△₅ = ½ × keliling × apotema</span></p>
+            <p>• Keliling alas: <span className="text-yellow-300">K = 5 × a</span></p>
+            <p className="text-white/90 font-semibold font-mono">L = 2×L△₅ + 5a×t</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    VOLUME PRISMA — oblique 3D triangular prism
 ───────────────────────────────────────────────────────────── */
 const VolumePrismaSVG = () => {
@@ -610,22 +806,19 @@ const sections: Sec[] = [
           <strong className="text-blue-300">Luas permukaan prisma</strong> adalah jumlah luas seluruh sisi yang membungkus prisma
           — dua sisi alas/tutup ditambah seluruh sisi tegak (selimut).
         </p>
-        <LuasPrismaSVG />
-        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-3">
+        <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
           <div className="bg-slate-900/60 rounded p-3 space-y-2">
             <BlockMath math="L = 2 \times L_{\text{alas}} + L_{\text{selimut}}" />
-            <BlockMath math="L_{\text{selimut}} = \text{Keliling alas} \times t = (a + b + c) \times t" />
-            <BlockMath math="L = 2 \times L_{\triangle} + (a + b + c) \times t" />
-          </div>
-          <p className="text-xs text-white/70">Untuk prisma dengan alas <strong className="text-cyan-300">segitiga sama sisi</strong> (sisi = a):</p>
-          <div className="bg-slate-900/60 rounded p-2 text-xs">
-            <BlockMath math="L = 2 \times \frac{1}{2}at_{\triangle} + 3a \times t = at_{\triangle} + 3at" />
+            <BlockMath math="L_{\text{selimut}} = \text{Keliling alas} \times t" />
           </div>
         </div>
+        <p className="text-xs text-white/60 text-center">Pilih jenis prisma untuk melihat jaring-jaringnya:</p>
+        <JaringTabSelector />
         <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p>🚀 <strong>Kunci:</strong> Luas selimut = Luas jaring-jaring persegi panjangnya = Keliling alas × tinggi prism</p>
-          <p>• Untuk prisma segiempat: L = 2(pl) + (2p+2l)×t</p>
-          <p>• Untuk prisma segitiga siku-siku dengan sisi a, b, c: L = 2(½ab) + (a+b+c)×t</p>
+          <p>🚀 <strong>Kunci:</strong> Luas selimut = Keliling alas × tinggi prisma (t)</p>
+          <p>• Prisma segitiga: <span className="text-yellow-300">L = 2×L△ + (a+b+c)×t</span></p>
+          <p>• Prisma segiempat: <span className="text-yellow-300">L = 2(pl) + 2(p+l)×t</span></p>
+          <p>• Prisma segilima: <span className="text-yellow-300">L = 2×L△₅ + 5a×t</span></p>
         </div>
       </div>
     ),
