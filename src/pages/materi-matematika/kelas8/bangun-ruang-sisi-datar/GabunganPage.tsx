@@ -8,6 +8,238 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
+   SVG 3D MATH UTILITIES
+───────────────────────────────────────────────────────────── */
+type GV3 = [number, number, number];
+type GV2 = [number, number];
+const gRotX = (v: GV3, a: number): GV3 => [v[0], v[1]*Math.cos(a)-v[2]*Math.sin(a), v[1]*Math.sin(a)+v[2]*Math.cos(a)];
+const gRotY = (v: GV3, a: number): GV3 => [v[0]*Math.cos(a)+v[2]*Math.sin(a), v[1], -v[0]*Math.sin(a)+v[2]*Math.cos(a)];
+const gProj = (v: GV3, fov=420, s=1.1): GV2 => { const tz=v[2]+fov; return [(v[0]*fov*s)/tz,(v[1]*fov*s)/tz]; };
+
+/* ── shape data factories ── */
+interface GFace { idx: number[]; color: string; label: string; }
+
+// BALOK + LIMAS: box (blue-indigo) with pyramid on top (rose)
+function makeBalokLimasData(p: number, l: number, tb: number, tl: number) {
+  const hy = (tb + tl) / 2;
+  const ytop = -hy + tl;   // y at top of balok / base of limas
+  const ybot = hy;          // y at bottom of balok
+  const hp = p/2, hl = l/2;
+  const verts: GV3[] = [
+    [-hp, ytop, +hl], [+hp, ytop, +hl], [+hp, ybot, +hl], [-hp, ybot, +hl], // front face 0-3
+    [-hp, ytop, -hl], [+hp, ytop, -hl], [+hp, ybot, -hl], [-hp, ybot, -hl], // back  face 4-7
+    [  0,  -hy,   0],                                                          // apex  V8
+  ];
+  const faces: GFace[] = [
+    { idx:[0,1,2,3], color:"#6366f1", label:"BALOK" },
+    { idx:[5,4,7,6], color:"#4f46e5", label:"" },
+    { idx:[4,0,3,7], color:"#818cf8", label:"" },
+    { idx:[1,5,6,2], color:"#6366f1", label:"" },
+    { idx:[3,2,6,7], color:"#312e81", label:"" },
+    { idx:[0,1,8],   color:"#f43f5e", label:"LIMAS" },
+    { idx:[1,5,8],   color:"#fb7185", label:"" },
+    { idx:[5,4,8],   color:"#e11d48", label:"" },
+    { idx:[4,0,8],   color:"#fda4af", label:"" },
+  ];
+  return { verts, faces };
+}
+
+// KUBUS + LIMAS: cube (sky-blue) with pyramid on top (amber)
+function makeKubusLimasData(s: number, tl: number) {
+  const p = s, l = s, tb = s;
+  const hy = (tb + tl) / 2;
+  const ytop = -hy + tl;
+  const ybot = hy;
+  const hp = p/2, hl = l/2;
+  const verts: GV3[] = [
+    [-hp, ytop, +hl], [+hp, ytop, +hl], [+hp, ybot, +hl], [-hp, ybot, +hl],
+    [-hp, ytop, -hl], [+hp, ytop, -hl], [+hp, ybot, -hl], [-hp, ybot, -hl],
+    [  0,  -hy,   0],
+  ];
+  const faces: GFace[] = [
+    { idx:[0,1,2,3], color:"#0ea5e9", label:"KUBUS" },
+    { idx:[5,4,7,6], color:"#0284c7", label:"" },
+    { idx:[4,0,3,7], color:"#38bdf8", label:"" },
+    { idx:[1,5,6,2], color:"#0ea5e9", label:"" },
+    { idx:[3,2,6,7], color:"#075985", label:"" },
+    { idx:[0,1,8],   color:"#f59e0b", label:"LIMAS" },
+    { idx:[1,5,8],   color:"#fbbf24", label:"" },
+    { idx:[5,4,8],   color:"#d97706", label:"" },
+    { idx:[4,0,8],   color:"#fcd34d", label:"" },
+  ];
+  return { verts, faces };
+}
+
+// BALOK BESAR + BALOK KECIL: large box (indigo) with small box (emerald) on top, centered
+function makeDuaBalokData(pb: number, l: number, tb: number, ps: number, ts: number) {
+  const hy = (tb + ts) / 2;
+  const yj  = -hy + ts;   // junction: top of large / bottom of small
+  const ybot = hy;
+  const ytop = -hy;
+  const hb = pb/2, hs = ps/2, hl = l/2;
+  const verts: GV3[] = [
+    // Large balok V0-V7
+    [-hb, yj,   +hl], [+hb, yj,   +hl], [+hb, ybot, +hl], [-hb, ybot, +hl],
+    [-hb, yj,   -hl], [+hb, yj,   -hl], [+hb, ybot, -hl], [-hb, ybot, -hl],
+    // Small balok V8-V15
+    [-hs, ytop, +hl], [+hs, ytop, +hl], [+hs, yj,   +hl], [-hs, yj,   +hl],
+    [-hs, ytop, -hl], [+hs, ytop, -hl], [+hs, yj,   -hl], [-hs, yj,   -hl],
+  ];
+  const faces: GFace[] = [
+    // Large balok (indigo) — no top face (hidden under small balok)
+    { idx:[0,1,2,3], color:"#6366f1", label:"BALOK\nBESAR" },
+    { idx:[5,4,7,6], color:"#4f46e5", label:"" },
+    { idx:[4,0,3,7], color:"#818cf8", label:"" },
+    { idx:[1,5,6,2], color:"#6366f1", label:"" },
+    { idx:[3,2,6,7], color:"#312e81", label:"" },
+    // Ledge: exposed top of large balok on left & right of small balok
+    { idx:[4,0,11,15], color:"#818cf8", label:"" },  // left ledge
+    { idx:[1,5,14,10], color:"#818cf8", label:"" },  // right ledge
+    // Small balok (emerald) — no bottom face
+    { idx:[8,9,10,11],  color:"#10b981", label:"BALOK\nKECIL" },
+    { idx:[13,12,15,14],color:"#059669", label:"" },
+    { idx:[12,8,11,15], color:"#34d399", label:"" },
+    { idx:[9,13,14,10], color:"#10b981", label:"" },
+    { idx:[8,9,13,12],  color:"#6ee7b7", label:"" },
+  ];
+  return { verts, faces };
+}
+
+/* ── generic auto-rotating combined shape component ── */
+const RotatingGabungan3D = ({
+  verts, faces, label, initRy = 35, speed = 0.20,
+}: {
+  verts: GV3[]; faces: GFace[]; label: string; initRy?: number; speed?: number;
+}) => {
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(initRy);
+  const [isDragging, setIsDragging] = useState(false);
+  const isDragRef = useRef(false);
+  const dragRef   = useRef({ sx:0, sy:0, bx:-22, by: initRy });
+  const tickRef   = useRef(initRy * 4);
+  const rotYRef   = useRef(initRy);
+  const rafRef    = useRef<number|null>(null);
+
+  useEffect(() => {
+    const animate = () => {
+      if (!isDragRef.current) {
+        tickRef.current += 1;
+        rotYRef.current += speed;
+        const rx = -18 + Math.sin(tickRef.current * 0.011) * 16;
+        setRotY(rotYRef.current);
+        setRotX(rx);
+      }
+      rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [speed]);
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragRef.current) return;
+    const ny = dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onMouseUp = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0]; isDragRef.current = true; setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((ev: TouchEvent) => {
+    if (!isDragRef.current) return;
+    const t = ev.touches[0];
+    const ny = dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55;
+    const nx = dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55;
+    rotYRef.current = ny; setRotY(ny); setRotX(nx);
+  }, []);
+  const onTouchEnd = useCallback(() => { isDragRef.current = false; setIsDragging(false); }, []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  const rx = (rotX * Math.PI) / 180;
+  const ry = (rotY * Math.PI) / 180;
+  const tfVerts = verts.map(v => gRotX(gRotY(v, ry), rx));
+  const pverts: GV2[] = tfVerts.map(v => gProj(v));
+
+  const sorted = faces.map(f => {
+    const avgZ = f.idx.reduce((s,i)=>s+tfVerts[i][2],0)/f.idx.length;
+    const pts2d = f.idx.map(i => pverts[i]);
+    return { ...f, avgZ, pts2d };
+  }).sort((a,b) => b.avgZ - a.avgZ);
+
+  const cx = 85, cy = 100;
+
+  return (
+    <div
+      className="flex flex-col items-center bg-slate-900/60 border border-slate-700/50 rounded-xl py-2 px-1 select-none"
+      style={{ cursor: isDragging ? "grabbing" : "grab", flex:1, minWidth:0 }}
+      onMouseDown={onMouseDown} onTouchStart={onTouchStart}
+    >
+      <span className="text-white/70 font-body font-semibold text-center leading-tight mb-1" style={{ fontSize:9 }}>{label}</span>
+      <svg viewBox="0 0 170 200" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
+        {sorted.map((f, i) => {
+          const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
+          const mx  = f.pts2d.reduce((s,p)=>s+p[0],0)/f.pts2d.length;
+          const my  = f.pts2d.reduce((s,p)=>s+p[1],0)/f.pts2d.length;
+          return (
+            <g key={i}>
+              <polygon points={pts} fill={f.color} fillOpacity={1}
+                stroke="rgba(255,255,255,0.45)" strokeWidth={1.1} strokeLinejoin="round"/>
+              {f.label && (
+                <text x={cx+mx} y={cy+my+3} fill="white" fontSize={6.5} fontFamily="monospace"
+                  fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
+                  style={{ pointerEvents:"none" }}>{f.label}</text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
+
+const { verts: blVerts, faces: blFaces } = makeBalokLimasData(50, 35, 32, 28);
+const { verts: klVerts, faces: klFaces } = makeKubusLimasData(40, 30);
+const { verts: dbVerts, faces: dbFaces } = makeDuaBalokData(54, 36, 30, 34, 22);
+
+const ThreeGabungan3D = () => (
+  <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
+    <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>
+      Berputar otomatis · Drag untuk memutar sendiri
+    </p>
+    <div className="flex gap-2">
+      <RotatingGabungan3D verts={blVerts} faces={blFaces} label="Balok + Limas" initRy={35}/>
+      <RotatingGabungan3D verts={klVerts} faces={klFaces} label="Kubus + Limas" initRy={55}/>
+      <RotatingGabungan3D verts={dbVerts} faces={dbFaces} label="Balok Besar + Balok Kecil" initRy={42}/>
+    </div>
+    <div className="flex flex-wrap gap-x-3 gap-y-0.5 justify-center">
+      {[["#6366f1","Balok"],["#f43f5e","Limas"],["#0ea5e9","Kubus"],["#f59e0b","Limas (kubus)"],["#10b981","Balok Kecil"]].map(([c,l])=>(
+        <div key={l} className="flex items-center gap-1">
+          <div className="w-2.5 h-2.5 rounded-sm" style={{ background:c }}/>
+          <span className="text-white/45 font-body" style={{ fontSize:9 }}>{l}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────────
    SHARED DRAG HOOK
 ───────────────────────────────────────────────────────────── */
 function useDrag3D(initRx: number, initRy: number) {
