@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
-import { Layers, ChevronDown, ChevronUp } from "lucide-react";
+import { Layers, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
@@ -514,24 +514,8 @@ const volExamples: Ex[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   ACCORDION + EXAMPLE CARD COMPONENTS
+   EXAMPLE CARD COMPONENT
 ───────────────────────────────────────────────────────────── */
-const AccordionSection = ({ sec, idx }: { sec: Sec; idx: number }) => {
-  const [open, setOpen] = useState(idx === 0);
-  return (
-    <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
-      <button onClick={() => { playPopSound(); setOpen(v => !v); }}
-        className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white/5 transition-colors cursor-pointer">
-        <span className="flex items-center gap-3">
-          <span className="text-xl">{sec.icon}</span>
-          <span className="font-display text-sm font-semibold text-white">{sec.title}</span>
-        </span>
-        {open ? <ChevronUp className="w-4 h-4 text-primary shrink-0"/> : <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0"/>}
-      </button>
-      {open && <div className="px-5 pb-5 border-t border-border/50"><div className="pt-4">{sec.content}</div></div>}
-    </div>
-  );
-};
 
 const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string }) => {
   const [show, setShow] = useState(false);
@@ -560,6 +544,57 @@ const ExampleCard = ({ ex, idx, prefix }: { ex: Ex; idx: number; prefix: string 
 ───────────────────────────────────────────────────────────── */
 const GabunganPage = () => {
   const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      title: "Pengantar: Bangun Gabungan",
+      icon: "🧩",
+      content: (
+        <div className="space-y-4 font-body">
+          <p className="text-white/80 text-sm leading-relaxed">
+            Silo penyimpanan padi, kapsul roket, atau es krim cone — semua adalah contoh{" "}
+            <strong className="text-cyan-300">bangun gabungan</strong> dalam kehidupan nyata! Di sini kamu akan belajar
+            cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
+            <strong className="text-blue-300">volume</strong> ketika dua atau lebih bangun sisi lengkung digabungkan menjadi satu.
+          </p>
+          <CompositeShapeViewer />
+        </div>
+      ),
+    },
+    ...sections.map(sec => ({ title: sec.title, icon: sec.icon, content: sec.content })),
+    {
+      title: "Contoh Soal — Luas Permukaan Gabungan",
+      icon: "🎨",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <div className="flex flex-col gap-4">
+            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Contoh Soal — Volume Gabungan",
+      icon: "📦",
+      content: (
+        <div className="space-y-4">
+          <p className="text-white/40 text-xs text-center font-body">Latihan bertingkat dari mudah hingga sulit</p>
+          <div className="flex flex-col gap-4">
+            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOL"/>)}
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const total = slides.length;
+  const slide = slides[currentSlide];
+
+  const goPrev = () => { playPopSound(); setCurrentSlide(i => Math.max(0, i - 1)); };
+  const goNext = () => { playPopSound(); setCurrentSlide(i => Math.min(total - 1, i + 1)); };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
@@ -569,38 +604,45 @@ const GabunganPage = () => {
         <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
           BANGUN RUANG SISI LENGKUNG GABUNGAN
         </h1>
-        <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
+        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 9 · Bangun Ruang Sisi Lengkung</p>
 
-        <div className="bg-card/60 border border-border rounded-xl p-4 mb-6 text-sm font-body text-white/75 leading-relaxed">
-          <p>
-            Silo penyimpanan padi, kapsul roket, atau es krim cone — semua adalah contoh{" "}
-            <strong className="text-cyan-300">bangun gabungan</strong> dalam kehidupan nyata! Di sini kamu akan belajar
-            cara menghitung <strong className="text-orange-300">luas permukaan</strong> dan{" "}
-            <strong className="text-blue-300">volume</strong> ketika dua atau lebih bangun sisi lengkung digabungkan menjadi satu.
-          </p>
+        <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { playPopSound(); setCurrentSlide(i); }}
+              className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${i === currentSlide ? "bg-primary scale-125" : "bg-white/20 hover:bg-white/40"}`}
+            />
+          ))}
         </div>
 
-        <div className="flex flex-col gap-3 mb-8">
-          {sections.map((sec, i) => <AccordionSection key={sec.title} sec={sec} idx={i} />)}
-        </div>
-
-        <div className="mb-6">
-          <h3 className="font-display text-sm font-bold text-orange-300 text-center mb-1">🎨 Contoh Soal — LUAS PERMUKAAN GABUNGAN</h3>
-          <p className="text-white/40 text-xs text-center mb-4 font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          <div className="flex flex-col gap-4">
-            {luasExamples.map((ex, i) => <ExampleCard key={`l${i}`} ex={ex} idx={i} prefix="LUAS"/>)}
+        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-6">
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-border/50">
+            <span className="text-2xl">{slide.icon}</span>
+            <h2 className="font-display text-sm font-semibold text-white">{slide.title}</h2>
+            <span className="ml-auto text-xs text-white/30 font-body">{currentSlide + 1}/{total}</span>
           </div>
+          <div className="px-5 py-5">{slide.content}</div>
         </div>
 
-        <div className="mb-4">
-          <h3 className="font-display text-sm font-bold text-blue-300 text-center mb-1">📦 Contoh Soal — VOLUME GABUNGAN</h3>
-          <p className="text-white/40 text-xs text-center mb-4 font-body">Latihan bertingkat dari mudah hingga sulit</p>
-          <div className="flex flex-col gap-4">
-            {volExamples.map((ex, i) => <ExampleCard key={`v${i}`} ex={ex} idx={i} prefix="VOL"/>)}
-          </div>
+        <div className="flex items-center justify-between gap-4 mb-8">
+          <button
+            onClick={goPrev}
+            disabled={currentSlide === 0}
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
+          >
+            <ChevronLeft className="w-4 h-4" /> Sebelumnya
+          </button>
+          <button
+            onClick={goNext}
+            disabled={currentSlide === total - 1}
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-body border border-border rounded-lg disabled:opacity-30 hover:bg-white/5 transition-colors cursor-pointer disabled:cursor-default"
+          >
+            Selanjutnya <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="text-center">
           <button
             onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-9/bangun-ruang-sisi-lengkung"); }}
             className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
