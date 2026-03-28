@@ -304,6 +304,160 @@ const SelimutAnimSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
+   VOLUME TABUNG — animated water-fill visualization
+───────────────────────────────────────────────────────────── */
+const WaterTabungAnimation = () => {
+  const [fill, setFill] = useState(0);
+  const [wave, setWave] = useState(0);
+
+  useEffect(() => {
+    const FILL_MS    = 3200;
+    const HOLD_FULL  = 900;
+    const EMPTY_MS   = 2000;
+    const HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      setWave(Math.sin(now * 0.005) * 2.5);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const CX = 112, RX = 64, RY = 17;
+  const CY_TOP = 50, CY_BOT = 175;
+  const CYL_H_PX = CY_BOT - CY_TOP;
+
+  const waterY      = CY_BOT - fill * CYL_H_PX;
+  const pct         = Math.round(fill * 100);
+  const isEmpty     = fill < 0.005;
+  const isFull      = fill > 0.995;
+  const showSurface = !isEmpty && !isFull;
+  const waveOffset  = showSurface ? wave : 0;
+
+  const barX = 200, barY = CY_TOP, barW = 13, barH = CYL_H_PX;
+  const filledH = barH * fill;
+
+  return (
+    <svg viewBox="0 0 280 215" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi tabung diisi air">
+      <defs>
+        <filter id="wBloomT">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <clipPath id="cylBodyClip">
+          <rect x={CX - RX} y={CY_TOP} width={RX * 2} height={CYL_H_PX} />
+        </clipPath>
+      </defs>
+
+      {/* ── Bottom cap (floor) ── */}
+      <ellipse
+        cx={CX} cy={CY_BOT} rx={RX} ry={RY}
+        fill={isEmpty ? "#0f172a" : "#1e3a8a"}
+        stroke="#0891b2" strokeWidth="2"
+      />
+
+      {/* ── Water body ── */}
+      {!isEmpty && (
+        <rect
+          x={CX - RX} y={waterY}
+          width={RX * 2} height={CY_BOT - waterY}
+          fill="#1d4ed8" fillOpacity={0.85}
+          clipPath="url(#cylBodyClip)"
+        />
+      )}
+
+      {/* ── Water surface ellipse with subtle wave ── */}
+      {showSurface && (
+        <>
+          <ellipse
+            cx={CX} cy={waterY + waveOffset} rx={RX} ry={RY}
+            fill="#7dd3fc" fillOpacity={0.45}
+          />
+          <ellipse
+            cx={CX} cy={waterY + waveOffset} rx={RX} ry={RY}
+            fill="none" stroke="#bae6fd" strokeWidth="2"
+            strokeDasharray="6,3" opacity={0.85}
+          />
+        </>
+      )}
+
+      {/* ── Cylinder side lines ── */}
+      <line x1={CX - RX} y1={CY_TOP} x2={CX - RX} y2={CY_BOT} stroke="#0891b2" strokeWidth="2" />
+      <line x1={CX + RX} y1={CY_TOP} x2={CX + RX} y2={CY_BOT} stroke="#0891b2" strokeWidth="2" />
+
+      {/* ── Top cap ── */}
+      <ellipse
+        cx={CX} cy={CY_TOP} rx={RX} ry={RY}
+        fill={isFull ? "#1d4ed8" : "#0f172a"}
+        fillOpacity={isFull ? 0.85 : 0.35}
+        stroke="#67e8f9" strokeWidth="2"
+      />
+
+      {/* ── r dimension on top cap ── */}
+      <line x1={CX} y1={CY_TOP} x2={CX + RX} y2={CY_TOP}
+        stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3,2" opacity="0.85"/>
+      <circle cx={CX} cy={CY_TOP} r="3" fill="#f59e0b" />
+      <circle cx={CX + RX} cy={CY_TOP} r="3" fill="#f59e0b" />
+      <text x={CX + RX / 2} y={CY_TOP - 6}
+        fill="#f59e0b" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+      {/* ── t dimension on left side ── */}
+      <line x1={CX - RX - 13} y1={CY_TOP} x2={CX - RX - 13} y2={CY_BOT}
+        stroke="#22c55e" strokeWidth="1.5" />
+      <line x1={CX - RX - 8} y1={CY_TOP} x2={CX - RX - 18} y2={CY_TOP}
+        stroke="#22c55e" strokeWidth="1.5" />
+      <line x1={CX - RX - 8} y1={CY_BOT} x2={CX - RX - 18} y2={CY_BOT}
+        stroke="#22c55e" strokeWidth="1.5" />
+      <text x={CX - RX - 28} y={(CY_TOP + CY_BOT) / 2 + 4}
+        fill="#22c55e" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
+
+      {/* ── TUTUP label above top cap ── */}
+      <text x={CX} y={CY_TOP - RY - 5}
+        fill="#a5f3fc" fontSize="8" fontFamily="monospace" fontWeight="bold" textAnchor="middle">TUTUP (πr²)</text>
+
+      {/* ── Progress bar ── */}
+      <rect x={barX} y={barY} width={barW} height={barH}
+        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+      {!isEmpty && (
+        <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
+          fill="#2563eb" fillOpacity={0.88} rx="3"/>
+      )}
+      <text x={barX + barW / 2} y={barY - 5}
+        fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX + barW / 2} y={barY + barH + 12}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {pct}%
+      </text>
+
+      {/* ── Status + Formula ── */}
+      <text x={CX} y={198}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+        filter="url(#wBloomT)">
+        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+      </text>
+      <text x={CX} y={212}
+        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#wBloomT)">
+        V = πr²t
+      </text>
+    </svg>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    CYLINDER NET ANIMATION — tabung dibongkar menjadi jaring-jaring
    Layout (viewBox 0 0 400 385):
      Top circle  : cx=200 cy=60  r=52  (net)  → assembled at cy=120, ellipse rx=70 ry=18
@@ -827,6 +981,16 @@ const sections: Sec[] = [
           Volume tabung adalah <strong>seberapa banyak isi</strong> yang bisa ditampung di dalamnya —
           bayangkan berapa liter air yang masuk ke dalam kaleng!
         </p>
+
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
+          <p className="text-cyan-300 text-xs font-semibold font-body text-center">
+            🌊 Tabung diisi air — dari kosong hingga penuh
+          </p>
+          <WaterTabungAnimation />
+          <p className="text-white/45 text-[10px] font-body text-center">
+            Persentase menunjukkan proporsi volume terisi terhadap volume total
+          </p>
+        </div>
 
         <div className="bg-blue-950/50 border border-blue-700/40 rounded-lg p-4 space-y-3">
           <p className="text-blue-300 font-bold text-sm">💡 Ide Dasar:</p>
