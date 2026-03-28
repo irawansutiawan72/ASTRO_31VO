@@ -385,6 +385,269 @@ const NetLimasGallery = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
+   WATER LIMAS ANIMATION
+───────────────────────────────────────────────────────────── */
+type V2L = [number, number];
+type LimasWaterType = "segitiga" | "segiempat" | "segilima";
+
+const WaterLimasAnimation = () => {
+  const [fill, setFill] = useState(0);
+  const [limasType, setLimasType] = useState<LimasWaterType>("segiempat");
+
+  useEffect(() => {
+    const FILL_MS = 3200, HOLD_FULL = 900, EMPTY_MS = 2000, HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const lerp2 = (a: V2L, b: V2L, t: number): V2L => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+  const pt  = (v: V2L) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`;
+  const pts = (...vs: V2L[]) => vs.map(pt).join(" ");
+
+  const pct     = Math.round(fill * 100);
+  const isEmpty = fill < 0.005;
+  const isFull  = fill > 0.995;
+  const statusColor = isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc";
+  const statusText  = isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`;
+
+  const BarWidget = ({ barX, barY, barH }: { barX: number; barY: number; barH: number }) => {
+    const barW = 12;
+    const filledH = barH * fill;
+    return (
+      <>
+        <rect x={barX} y={barY} width={barW} height={barH} fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+        {!isEmpty && (
+          <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH} fill="#2563eb" fillOpacity={0.88} rx="3"/>
+        )}
+        <text x={barX + barW / 2} y={barY - 5}  fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+        <text x={barX + barW / 2} y={barY + barH + 12} fill={statusColor} fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">{pct}%</text>
+      </>
+    );
+  };
+
+  /* ── LIMAS SEGIEMPAT ── */
+  const renderSegiempat = () => {
+    const FL:  V2L = [50, 184];
+    const FR:  V2L = [164, 184];
+    const dx = 28, dy = -18;
+    const BkL: V2L = [FL[0] + dx, FL[1] + dy];
+    const BkR: V2L = [FR[0] + dx, FR[1] + dy];
+    const apex: V2L = [121, 70];
+
+    const WFL  = lerp2(FL,  apex, fill);
+    const WFR  = lerp2(FR,  apex, fill);
+    const WBkR = lerp2(BkR, apex, fill);
+    const WBkL = lerp2(BkL, apex, fill);
+
+    return (
+      <>
+        {/* hidden back edges */}
+        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={FL[0]}  y1={FL[1]}  x2={BkL[0]}  y2={BkL[1]}  stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        {/* ghost shell */}
+        <polygon points={pts(FR, BkR, apex)}    fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        <polygon points={pts(FL, FR, apex)}     fill="#0f172a" fillOpacity={0.10} stroke="#334155" strokeWidth="0.8"/>
+        {/* water */}
+        {!isEmpty && (
+          <>
+            <polygon points={pts(FL, FR, BkR, BkL)}   fill="#1e3a8a" fillOpacity={0.90}/>
+            <polygon points={pts(FR, BkR, WBkR, WFR)} fill="#1d4ed8" fillOpacity={0.80}/>
+            <polygon points={pts(FL, FR, WFR, WFL)}   fill="#2563eb" fillOpacity={0.90}/>
+            {!isFull && (
+              <polygon points={pts(WFL, WFR, WBkR, WBkL)} fill="#7dd3fc" fillOpacity={0.50}
+                style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}/>
+            )}
+            {!isFull && (
+              <line x1={WFL[0]} y1={WFL[1]} x2={WFR[0]} y2={WFR[1]}
+                stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+            )}
+          </>
+        )}
+        {/* wireframe */}
+        <line x1={FL[0]}  y1={FL[1]}  x2={FR[0]}   y2={FR[1]}   stroke="#93c5fd" strokeWidth="2"/>
+        <line x1={FR[0]}  y1={FR[1]}  x2={BkR[0]}  y2={BkR[1]}  stroke="#a5b4fc" strokeWidth="1.8"/>
+        <line x1={FL[0]}  y1={FL[1]}  x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={FR[0]}  y1={FR[1]}  x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={BkR[0]} y1={BkR[1]} x2={apex[0]} y2={apex[1]} stroke="#a5b4fc" strokeWidth="1.6"/>
+        {/* labels */}
+        <text x={(FL[0]+FR[0])/2}   y={FL[1]+13}  fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">s</text>
+        <text x={(FL[0]+FR[0])/2}   y={FL[1]+24}  fill="#4ade80" fontSize="8"  fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS (s²)</text>
+        <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
+        <BarWidget barX={205} barY={70} barH={114}/>
+        <text x="120" y="200" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
+        <text x="120" y="214" fill="#e0e7ff"  fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × s² × t</text>
+      </>
+    );
+  };
+
+  /* ── LIMAS SEGITIGA ── */
+  const renderSegitiga = () => {
+    const FV:  V2L = [112, 184];
+    const BkL: V2L = [58,  156];
+    const BkR: V2L = [170, 156];
+    const apex: V2L = [112, 70];
+
+    const WFV  = lerp2(FV,  apex, fill);
+    const WBkL = lerp2(BkL, apex, fill);
+    const WBkR = lerp2(BkR, apex, fill);
+
+    return (
+      <>
+        {/* hidden back edge */}
+        <line x1={BkL[0]} y1={BkL[1]} x2={FV[0]}   y2={FV[1]}   stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        {/* ghost shell */}
+        <polygon points={pts(FV, BkR, apex)}  fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        {/* water */}
+        {!isEmpty && (
+          <>
+            <polygon points={pts(FV, BkL, BkR)}         fill="#1e3a8a" fillOpacity={0.90}/>
+            <polygon points={pts(FV, BkR, WBkR, WFV)}   fill="#1d4ed8" fillOpacity={0.80}/>
+            <polygon points={pts(FV, BkL, WBkL, WFV)}   fill="#2563eb" fillOpacity={0.70}/>
+            {!isFull && (
+              <polygon points={pts(WFV, WBkL, WBkR)} fill="#7dd3fc" fillOpacity={0.50}
+                style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}/>
+            )}
+            {!isFull && (
+              <>
+                <line x1={WFV[0]} y1={WFV[1]} x2={WBkR[0]} y2={WBkR[1]} stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+                <line x1={WFV[0]} y1={WFV[1]} x2={WBkL[0]} y2={WBkL[1]} stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+              </>
+            )}
+          </>
+        )}
+        {/* wireframe */}
+        <line x1={FV[0]}  y1={FV[1]}  x2={BkR[0]}  y2={BkR[1]}  stroke="#93c5fd" strokeWidth="2"/>
+        <line x1={BkR[0]} y1={BkR[1]} x2={BkL[0]}  y2={BkL[1]}  stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={FV[0]}  y1={FV[1]}  x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={BkR[0]} y1={BkR[1]} x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={BkL[0]} y1={BkL[1]} x2={apex[0]} y2={apex[1]} stroke="#a5b4fc" strokeWidth="1.4" strokeDasharray="4,3"/>
+        {/* labels */}
+        <text x={(BkL[0]+BkR[0])/2} y={BkL[1]+18}  fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">a</text>
+        <text x={(BkL[0]+BkR[0])/2} y={BkL[1]+29}  fill="#4ade80" fontSize="8"  fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS (½at₀)</text>
+        <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
+        <BarWidget barX={205} barY={70} barH={114}/>
+        <text x="112" y="200" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
+        <text x="112" y="214" fill="#e0e7ff"  fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅙ × a × t₀ × t</text>
+      </>
+    );
+  };
+
+  /* ── LIMAS SEGILIMA ── */
+  const renderSegilima = () => {
+    const P1: V2L = [112, 186];
+    const P2: V2L = [163, 171];
+    const P3: V2L = [148, 150];
+    const P4: V2L = [76,  150];
+    const P5: V2L = [61,  171];
+    const apex: V2L = [112, 68];
+
+    const WP1 = lerp2(P1, apex, fill);
+    const WP2 = lerp2(P2, apex, fill);
+    const WP3 = lerp2(P3, apex, fill);
+    const WP4 = lerp2(P4, apex, fill);
+    const WP5 = lerp2(P5, apex, fill);
+
+    return (
+      <>
+        {/* hidden back edges */}
+        <line x1={P4[0]} y1={P4[1]} x2={P3[0]}   y2={P3[1]}   stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={P4[0]} y1={P4[1]} x2={P5[0]}   y2={P5[1]}   stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        <line x1={P4[0]} y1={P4[1]} x2={apex[0]} y2={apex[1]} stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+        {/* ghost shell */}
+        <polygon points={pts(P1, P2, apex)} fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
+        <polygon points={pts(P2, P3, apex)} fill="#0f172a" fillOpacity={0.12} stroke="#334155" strokeWidth="0.8"/>
+        {/* water */}
+        {!isEmpty && (
+          <>
+            <polygon points={pts(P1, P2, P3, P4, P5)}    fill="#1e3a8a" fillOpacity={0.90}/>
+            <polygon points={pts(P2, P3, WP3, WP2)}      fill="#1d4ed8" fillOpacity={0.75}/>
+            <polygon points={pts(P1, P2, WP2, WP1)}      fill="#2563eb" fillOpacity={0.82}/>
+            <polygon points={pts(P5, P1, WP1, WP5)}      fill="#2563eb" fillOpacity={0.75}/>
+            {!isFull && (
+              <polygon points={pts(WP1, WP2, WP3, WP4, WP5)} fill="#7dd3fc" fillOpacity={0.50}
+                style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}/>
+            )}
+            {!isFull && (
+              <>
+                <line x1={WP5[0]} y1={WP5[1]} x2={WP1[0]} y2={WP1[1]} stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+                <line x1={WP1[0]} y1={WP1[1]} x2={WP2[0]} y2={WP2[1]} stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
+              </>
+            )}
+          </>
+        )}
+        {/* wireframe */}
+        <line x1={P1[0]} y1={P1[1]} x2={P2[0]}   y2={P2[1]}   stroke="#93c5fd" strokeWidth="2"/>
+        <line x1={P2[0]} y1={P2[1]} x2={P3[0]}   y2={P3[1]}   stroke="#a5b4fc" strokeWidth="1.8"/>
+        <line x1={P5[0]} y1={P5[1]} x2={P1[0]}   y2={P1[1]}   stroke="#93c5fd" strokeWidth="2"/>
+        <line x1={P1[0]} y1={P1[1]} x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        <line x1={P2[0]} y1={P2[1]} x2={apex[0]} y2={apex[1]} stroke="#a5b4fc" strokeWidth="1.6"/>
+        <line x1={P3[0]} y1={P3[1]} x2={apex[0]} y2={apex[1]} stroke="#a5b4fc" strokeWidth="1.4"/>
+        <line x1={P5[0]} y1={P5[1]} x2={apex[0]} y2={apex[1]} stroke="#93c5fd" strokeWidth="1.8"/>
+        {/* labels */}
+        <text x={(P1[0]+P2[0])/2+5} y={(P1[1]+P2[1])/2+6} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">a</text>
+        <text x="112" y={186+20}   fill="#4ade80" fontSize="8"  fontFamily="monospace" fontWeight="bold" textAnchor="middle">ALAS (segi-5)</text>
+        <text x={apex[0]} y={apex[1]-8} fill="#fbbf24" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">T</text>
+        <BarWidget barX={205} barY={68} barH={118}/>
+        <text x="112" y="202" fill={statusColor} fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">{statusText}</text>
+        <text x="112" y="216" fill="#e0e7ff"  fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle" filter="url(#wBloomLimas)">V = ⅓ × L_alas × t</text>
+      </>
+    );
+  };
+
+  const tabs: { key: LimasWaterType; label: string }[] = [
+    { key: "segitiga",  label: "△ Segitiga"  },
+    { key: "segiempat", label: "□ Segiempat" },
+    { key: "segilima",  label: "⬠ Segilima"  },
+  ];
+
+  return (
+    <div className="space-y-2">
+      <div className="flex gap-1 bg-slate-800/60 rounded-lg p-1">
+        {tabs.map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setLimasType(key)}
+            className={`flex-1 text-xs py-1.5 px-1 rounded-md font-semibold transition-all font-body ${
+              limasType === key
+                ? "bg-blue-600 text-white shadow"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <svg viewBox="0 0 280 225" className="w-full max-w-sm mx-auto my-1"
+        aria-label="Animasi limas diisi air">
+        <defs>
+          <filter id="wBloomLimas">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        {limasType === "segitiga"  && renderSegitiga()}
+        {limasType === "segiempat" && renderSegiempat()}
+        {limasType === "segilima"  && renderSegilima()}
+      </svg>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    ACCORDION SECTIONS
 ───────────────────────────────────────────────────────────── */
 type Sec = { title: string; icon: string; content: React.ReactNode };
@@ -561,6 +824,7 @@ const sections: Sec[] = [
     icon: "📦",
     content: (
       <div className="space-y-4 font-body">
+        <WaterLimasAnimation />
         <div className="bg-blue-950/50 border border-blue-700/40 rounded-lg p-3 text-sm text-white/85 leading-relaxed">
           <p>Volume limas = <strong className="text-cyan-300">sepertiga</strong> dari volume prisma dengan alas dan tinggi yang sama.</p>
           <p className="text-xs text-white/50 mt-1">Dapat dibuktikan dengan mengisi limas ke dalam prisma: dibutuhkan 3 limas untuk mengisi 1 prisma.</p>
