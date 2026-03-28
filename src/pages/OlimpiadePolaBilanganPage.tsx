@@ -359,6 +359,185 @@ const PolaSegitigaSVG = () => {
   );
 };
 
+// Soal 27: Persegi satuan in 2-row rectangular grids (2×2, 2×3, 2×4)
+const Soal27SVG = () => {
+  const sq = 18;
+  const gap = 22;
+  const patterns = [{ cols: 2 }, { cols: 3 }, { cols: 4 }];
+  let curX = 8;
+  const positions: number[] = [];
+  for (const p of patterns) { positions.push(curX); curX += p.cols * sq + gap; }
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={2 * sq + 12}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const rects: ReactNode[] = [];
+        for (let r = 0; r < 2; r++)
+          for (let c = 0; c < p.cols; c++)
+            rects.push(<rect key={`${r}-${c}`} x={x + c * sq} y={6 + r * sq} width={sq} height={sq} fill="#5b9ec9" stroke="white" strokeWidth="1.5" rx="1" />);
+        return <g key={i}>{rects}</g>;
+      })}
+    </svg>
+  );
+};
+
+// Soal 28: Circles in bowling-pin triangle (n=1,2,3,4) — triangular numbers
+const Soal28SVG = () => {
+  const r = 7;
+  const sp = 17;
+  const patterns = [1, 2, 3, 4];
+  const gap = 22;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const n of patterns) { positions.push(curX); curX += n * sp + gap; }
+  const maxH = 4 * sp;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 30}>
+      {patterns.map((n, i) => {
+        const x = positions[i];
+        const patW = n * sp;
+        const circles: ReactNode[] = [];
+        for (let row = 0; row < n; row++) {
+          const num = n - row;
+          const rowOffsetX = (patW - num * sp) / 2;
+          const cy = 8 + maxH - (row + 1) * sp + sp / 2;
+          for (let c = 0; c < num; c++)
+            circles.push(<circle key={`${row}-${c}`} cx={x + rowOffsetX + c * sp + sp / 2} cy={cy} r={r} fill="none" stroke="#5b9ec9" strokeWidth="1.5" />);
+        }
+        return (
+          <g key={i}>
+            {circles}
+            <text x={x + patW / 2} y={8 + maxH + 20} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">{n}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+// Soal 29: Equilateral triangles subdivided into n² small triangles (n=1,2,3,4)
+const Soal29SVG = () => {
+  const unit = 20;
+  const HR = Math.sqrt(3) / 2;
+  const patterns = [1, 2, 3, 4];
+  const gap = 22;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const n of patterns) { positions.push(curX); curX += n * unit + gap; }
+  const maxH = Math.round(4 * unit * HR);
+  const totalW = curX - gap + 8;
+
+  const drawSubdivided = (n: number, ox: number, oy: number): ReactNode[] => {
+    const W = n * unit;
+    const H = Math.round(n * unit * HR);
+    const apex = [ox + W / 2, oy];
+    const bl = [ox, oy + H];
+    const br = [ox + W, oy + H];
+    const els: ReactNode[] = [];
+    // Outer triangle
+    els.push(<polygon key="o" points={`${apex[0]},${apex[1]} ${bl[0]},${bl[1]} ${br[0]},${br[1]}`} fill="none" stroke="#ffffffcc" strokeWidth="1.5" />);
+    for (let k = 1; k < n; k++) {
+      // Horizontal lines
+      const lkx = W * (n - k) / (2 * n) + ox, lky = k * H / n + oy;
+      const rkx = W * (n + k) / (2 * n) + ox;
+      els.push(<line key={`h${k}`} x1={lkx} y1={lky} x2={rkx} y2={lky} stroke="#ffffffcc" strokeWidth="1" />);
+      // Left-parallel lines: B_k → R_(n-k)
+      els.push(<line key={`lp${k}`} x1={k * W / n + ox} y1={H + oy} x2={W * (2 * n - k) / (2 * n) + ox} y2={(n - k) * H / n + oy} stroke="#ffffffcc" strokeWidth="1" />);
+      // Right-parallel lines: B_(n-k) → L_k
+      els.push(<line key={`rp${k}`} x1={(n - k) * W / n + ox} y1={H + oy} x2={W * (n - k) / (2 * n) + ox} y2={k * H / n + oy} stroke="#ffffffcc" strokeWidth="1" />);
+    }
+    return els;
+  };
+
+  return (
+    <svg width={totalW} height={maxH + 32}>
+      {patterns.map((n, i) => {
+        const W = n * unit;
+        const H = Math.round(n * unit * HR);
+        const oy = 5 + maxH - H;
+        return (
+          <g key={i}>
+            {drawSubdivided(n, positions[i], oy)}
+            <text x={positions[i] + W / 2} y={5 + maxH + 22} textAnchor="middle" fill="#ffffffcc" fontSize="12" fontFamily="sans-serif">({n})</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
+
+// Soal 30: Dots in n×(n+2) rectangles (n=1..4), U_n = n(n+2), U_10 = 120
+const Soal30SVG = () => {
+  const dotR = 5;
+  const sp = 13;
+  const patterns = [
+    { rows: 1, cols: 3 },
+    { rows: 2, cols: 4 },
+    { rows: 3, cols: 5 },
+    { rows: 4, cols: 6 },
+  ];
+  const gap = 18;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const p of patterns) { positions.push(curX); curX += p.cols * sp + gap; }
+  const maxH = 4 * sp;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 12}>
+      {patterns.map((p, i) => {
+        const x = positions[i];
+        const h = p.rows * sp;
+        const offsetY = 6 + maxH - h;
+        const dots: ReactNode[] = [];
+        for (let r = 0; r < p.rows; r++)
+          for (let c = 0; c < p.cols; c++)
+            dots.push(<circle key={`${r}-${c}`} cx={x + c * sp + dotR} cy={offsetY + r * sp + dotR} r={dotR} fill={dotColor} />);
+        return <g key={i}>{dots}</g>;
+      })}
+    </svg>
+  );
+};
+
+// Soal 31: L-shaped dot patterns (n=1..4), U_n = 2n−1, U_30 = 59
+const Soal31SVG = () => {
+  const dotR = 5;
+  const sp = 14;
+  const patterns = [1, 2, 3, 4];
+  const gap = 22;
+  let curX = 8;
+  const positions: number[] = [];
+  for (const n of patterns) { positions.push(curX); curX += n * sp + gap; }
+  const maxH = 4 * sp;
+  const totalW = curX - gap + 8;
+  return (
+    <svg width={totalW} height={maxH + 12}>
+      {patterns.map((n, i) => {
+        const x = positions[i];
+        const patH = n * sp;
+        const baseY = 6 + maxH;
+        const dots: ReactNode[] = [];
+        // Bottom row: n dots
+        for (let c = 0; c < n; c++)
+          dots.push(<circle key={`b${c}`} cx={x + c * sp + dotR} cy={baseY - dotR} r={dotR} fill={dotColor} />);
+        // Right column: n-1 dots going up (excluding corner already in bottom row)
+        for (let r = 1; r < n; r++)
+          dots.push(<circle key={`rc${r}`} cx={x + (n - 1) * sp + dotR} cy={baseY - r * sp - dotR} r={dotR} fill={dotColor} />);
+        return <g key={i}>{dots}</g>;
+      })}
+    </svg>
+  );
+};
+
+const soalSVGMap: Record<number, ReactNode> = {
+  27: <Soal27SVG />,
+  28: <Soal28SVG />,
+  29: <Soal29SVG />,
+  30: <Soal30SVG />,
+  31: <Soal31SVG />,
+};
+
 const OlimpiadePolaBilanganPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
@@ -466,6 +645,9 @@ const OlimpiadePolaBilanganPage = () => {
                     </span>
                   ))}
                 </div>
+                {soalSVGMap[soal.no] && (
+                  <div className="mb-3 overflow-x-auto">{soalSVGMap[soal.no]}</div>
+                )}
                 {soal.options.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {soal.options.map((opt, j) => (
