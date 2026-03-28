@@ -917,21 +917,7 @@ const slides: Slide[] = [
           dua atau lebih bangun ruang dasar yang digabungkan. Contoh nyata: rumah (kubus + prisma atap),
           tugu (balok + limas), gedung bertingkat (beberapa balok), dan lain-lain.
         </p>
-        <p className="text-white/50 text-xs text-center">Drag setiap model 3D di bawah untuk memutarnya!</p>
-        <div className="grid grid-cols-3 gap-2 mt-2">
-          <div className="flex flex-col gap-1">
-            <InteractiveBalokLimas />
-            <span className="text-[9px] text-white/40 font-body text-center">Balok + Limas</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <InteractiveRumah />
-            <span className="text-[9px] text-white/40 font-body text-center">Kubus + Prisma (Rumah)</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <InteractiveDuaBalok />
-            <span className="text-[9px] text-white/40 font-body text-center">2 Balok (Undakan)</span>
-          </div>
-        </div>
+        <ThreeGabungan3D />
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
           <p className="text-cyan-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
           <p>• Konsep volume bangun gabungan</p>
