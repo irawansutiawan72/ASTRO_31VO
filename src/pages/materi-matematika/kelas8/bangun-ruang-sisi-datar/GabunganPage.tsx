@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -8,7 +8,455 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
-   SVGs — BANGUN RUANG GABUNGAN
+   SHARED DRAG HOOK
+───────────────────────────────────────────────────────────── */
+function useDrag3D(initRx: number, initRy: number) {
+  const [rotX, setRotX] = useState(initRx);
+  const [rotY, setRotY] = useState(initRy);
+  const [isDragging, setIsDragging] = useState(false);
+  const ref = useRef({ sx: 0, sy: 0, bx: initRx, by: initRy });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    ref.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    ref.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setRotY(ref.current.by + (e.clientX - ref.current.sx) * 0.6);
+    setRotX(ref.current.bx - (e.clientY - ref.current.sy) * 0.6);
+  }, [isDragging]);
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    setRotY(ref.current.by + (t.clientX - ref.current.sx) * 0.6);
+    setRotX(ref.current.bx - (t.clientY - ref.current.sy) * 0.6);
+  }, [isDragging]);
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
+  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  return { rotX, rotY, isDragging, onMouseDown, onTouchStart };
+}
+
+/* ─────────────────────────────────────────────────────────────
+   INTERACTIVE 3D — GABUNGAN BALOK + LIMAS
+   A rectangular box (balok) with a pyramid (limas) on top.
+───────────────────────────────────────────────────────────── */
+const InteractiveBalokLimas = () => {
+  const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-28, 38);
+
+  const BW = 100, BD = 55, BH = 52;
+  const LH = 50;
+  const TRANS = "transform 0.4s ease";
+
+  const balokColor = { front: "#6366f1", side: "#4f46e5", top: "#818cf8", bottom: "#3730a3" };
+  const limasColor = "#f43f5e";
+
+  const face = (
+    w: number, h: number, bg: string, opacity: number,
+    transform: string, extra?: React.CSSProperties
+  ) => (
+    <div style={{
+      position: "absolute", width: w, height: h,
+      background: bg, opacity,
+      border: `1.5px solid ${bg}`,
+      borderRadius: 2,
+      transformStyle: "preserve-3d",
+      transform,
+      backfaceVisibility: "hidden",
+      ...extra,
+    }} />
+  );
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
+      <p className="text-white/50 text-[10px] text-center font-body">Drag untuk memutar 🔄</p>
+      <div
+        className="relative mx-auto select-none overflow-visible flex items-center justify-center"
+        style={{ height: 200, cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        <div style={{
+          width: BW, height: BH + LH,
+          position: "relative",
+          transformStyle: "preserve-3d",
+          transform: `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+          transition: isDragging ? "none" : TRANS,
+        }}>
+          {/* ── BALOK FACES ── */}
+          {/* Front */}
+          {face(BW, BH, balokColor.front, 0.7, `translateZ(${BD / 2}px) translateY(${LH}px)`)}
+          {/* Back */}
+          {face(BW, BH, balokColor.side, 0.45, `rotateY(180deg) translateZ(${BD / 2}px) translateY(${LH}px)`)}
+          {/* Right */}
+          <div style={{
+            position: "absolute", width: BD, height: BH,
+            left: BW, top: LH,
+            background: balokColor.side,
+            opacity: 0.55,
+            border: `1.5px solid ${balokColor.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "0 50%",
+            transform: "rotateY(90deg)",
+          }} />
+          {/* Left */}
+          <div style={{
+            position: "absolute", width: BD, height: BH,
+            left: 0, top: LH,
+            background: balokColor.side,
+            opacity: 0.4,
+            border: `1.5px solid ${balokColor.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "0 50%",
+            transform: "rotateY(-90deg)",
+          }} />
+          {/* Bottom */}
+          <div style={{
+            position: "absolute", width: BW, height: BD,
+            left: 0, top: BH + LH,
+            background: balokColor.bottom,
+            opacity: 0.35,
+            border: `1.5px solid ${balokColor.bottom}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "50% 0",
+            transform: "rotateX(90deg)",
+          }} />
+          {/* Top of balok (= base of limas, hidden inside) */}
+          <div style={{
+            position: "absolute", width: BW, height: BD,
+            left: 0, top: LH,
+            background: balokColor.top,
+            opacity: 0.3,
+            border: `1.5px solid ${balokColor.top}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "50% 0",
+            transform: "rotateX(-90deg)",
+          }} />
+
+          {/* ── LIMAS FACES (apex at center-top, base = BW × BD) ── */}
+          {/* Front triangle */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: BW / 2, top: 0,
+            borderLeft: `${BW / 2}px solid transparent`,
+            borderRight: `${BW / 2}px solid transparent`,
+            borderBottom: `${LH}px solid ${limasColor}`,
+            opacity: 0.75,
+            transform: `rotateX(-90deg) translateZ(${BD / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+          {/* Back triangle */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: BW / 2, top: 0,
+            borderLeft: `${BW / 2}px solid transparent`,
+            borderRight: `${BW / 2}px solid transparent`,
+            borderBottom: `${LH}px solid ${limasColor}`,
+            opacity: 0.45,
+            transform: `rotateY(180deg) rotateX(-90deg) translateZ(${BD / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+          {/* Right triangle */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: BW / 2, top: 0,
+            borderLeft: `${BD / 2}px solid transparent`,
+            borderRight: `${BD / 2}px solid transparent`,
+            borderBottom: `${LH}px solid #fb7185`,
+            opacity: 0.6,
+            transform: `rotateY(90deg) rotateX(-90deg) translateZ(${BW / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+          {/* Left triangle */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: BW / 2, top: 0,
+            borderLeft: `${BD / 2}px solid transparent`,
+            borderRight: `${BD / 2}px solid transparent`,
+            borderBottom: `${LH}px solid #fb7185`,
+            opacity: 0.5,
+            transform: `rotateY(-90deg) rotateX(-90deg) translateZ(${BW / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {[
+          { label: "Balok", color: "#6366f1" },
+          { label: "Limas", color: "#f43f5e" },
+        ].map(({ label, color }) => (
+          <div key={label} className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-sm" style={{ background: color }} />
+            <span className="text-white/50 text-[9px] font-body">{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   INTERACTIVE 3D — GABUNGAN KUBUS + PRISMA (RUMAH)
+   A cube (kubus) base with a triangular prism roof (prisma).
+───────────────────────────────────────────────────────────── */
+const InteractiveRumah = () => {
+  const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-25, 42);
+
+  const S = 72;
+  const PH = 44;
+  const TRANS = "transform 0.4s ease";
+  const kubus = { front: "#6366f1", side: "#4f46e5", top: "#818cf8" };
+  const atap = { front: "#f59e0b", side: "#d97706" };
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
+      <p className="text-white/50 text-[10px] text-center font-body">Drag untuk memutar 🔄</p>
+      <div
+        className="relative mx-auto select-none overflow-visible flex items-center justify-center"
+        style={{ height: 200, cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        <div style={{
+          width: S, height: S + PH,
+          position: "relative",
+          transformStyle: "preserve-3d",
+          transform: `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+          transition: isDragging ? "none" : TRANS,
+        }}>
+          {/* ── KUBUS FACES ── */}
+          {/* Front */}
+          <div style={{
+            position: "absolute", width: S, height: S, left: 0, top: PH,
+            background: kubus.front, opacity: 0.7, border: `1.5px solid ${kubus.front}`,
+            transformStyle: "preserve-3d",
+            transform: `translateZ(${S / 2}px)`,
+          }} />
+          {/* Back */}
+          <div style={{
+            position: "absolute", width: S, height: S, left: 0, top: PH,
+            background: kubus.side, opacity: 0.4, border: `1.5px solid ${kubus.side}`,
+            transformStyle: "preserve-3d",
+            transform: `rotateY(180deg) translateZ(${S / 2}px)`,
+          }} />
+          {/* Right */}
+          <div style={{
+            position: "absolute", width: S, height: S, left: S, top: PH,
+            background: kubus.side, opacity: 0.55, border: `1.5px solid ${kubus.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "0 50%",
+            transform: "rotateY(90deg)",
+          }} />
+          {/* Left */}
+          <div style={{
+            position: "absolute", width: S, height: S, left: 0, top: PH,
+            background: kubus.side, opacity: 0.4, border: `1.5px solid ${kubus.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "0 50%",
+            transform: "rotateY(-90deg)",
+          }} />
+          {/* Bottom */}
+          <div style={{
+            position: "absolute", width: S, height: S, left: 0, top: S + PH,
+            background: kubus.side, opacity: 0.3, border: `1.5px solid ${kubus.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "50% 0",
+            transform: "rotateX(90deg)",
+          }} />
+
+          {/* ── ATAP PRISMA SEGITIGA ── */}
+          {/* Front triangle (gable) */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: S / 2, top: 0,
+            borderLeft: `${S / 2}px solid transparent`,
+            borderRight: `${S / 2}px solid transparent`,
+            borderBottom: `${PH}px solid ${atap.front}`,
+            opacity: 0.85,
+            transform: `translateZ(${S / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+          {/* Back triangle (gable) */}
+          <div style={{
+            position: "absolute",
+            width: 0, height: 0,
+            left: S / 2, top: 0,
+            borderLeft: `${S / 2}px solid transparent`,
+            borderRight: `${S / 2}px solid transparent`,
+            borderBottom: `${PH}px solid ${atap.front}`,
+            opacity: 0.45,
+            transform: `rotateY(180deg) translateZ(${S / 2}px)`,
+            transformOrigin: "50% 100%",
+            transformStyle: "preserve-3d",
+          }} />
+          {/* Right roof slope */}
+          <div style={{
+            position: "absolute",
+            width: S, height: Math.sqrt((S / 2) * (S / 2) + PH * PH),
+            left: 0, top: 0,
+            background: atap.side, opacity: 0.7,
+            border: `1.5px solid ${atap.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "100% 100%",
+            transform: `rotateY(90deg) translateZ(${S / 2}px) rotateX(${-Math.atan2(PH, S / 2) * 180 / Math.PI}deg)`,
+          }} />
+          {/* Left roof slope */}
+          <div style={{
+            position: "absolute",
+            width: S, height: Math.sqrt((S / 2) * (S / 2) + PH * PH),
+            left: 0, top: 0,
+            background: atap.side, opacity: 0.55,
+            border: `1.5px solid ${atap.side}`,
+            transformStyle: "preserve-3d",
+            transformOrigin: "0% 100%",
+            transform: `rotateY(-90deg) rotateX(${-Math.atan2(PH, S / 2) * 180 / Math.PI}deg)`,
+          }} />
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {[
+          { label: "Kubus", color: "#6366f1" },
+          { label: "Atap Prisma", color: "#f59e0b" },
+        ].map(({ label, color }) => (
+          <div key={label} className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-sm" style={{ background: color }} />
+            <span className="text-white/50 text-[9px] font-body">{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   INTERACTIVE 3D — GABUNGAN 2 BALOK (UNDAKAN / L-SHAPE)
+   A large box (balok besar) with a smaller box (balok kecil)
+   placed on top of one side.
+───────────────────────────────────────────────────────────── */
+const InteractiveDuaBalok = () => {
+  const { rotX, rotY, isDragging, onMouseDown, onTouchStart } = useDrag3D(-22, 35);
+  const TRANS = "transform 0.4s ease";
+
+  const BW = 88, BD = 46, BH = 50;
+  const SW = 50, SH = 40;
+
+  const c1 = { f: "#6366f1", s: "#4f46e5", t: "#818cf8", b: "#3730a3" };
+  const c2 = { f: "#f43f5e", s: "#e11d48", t: "#fb7185", b: "#9f1239" };
+
+  const box = (
+    w: number, h: number, d: number,
+    offsetX: number, offsetY: number,
+    color: typeof c1
+  ) => (
+    <>
+      {/* Front */}
+      <div style={{
+        position: "absolute", width: w, height: h, left: offsetX, top: offsetY,
+        background: color.f, opacity: 0.7, border: `1.5px solid ${color.f}`,
+        transformStyle: "preserve-3d", transform: `translateZ(${d / 2}px)`,
+      }} />
+      {/* Back */}
+      <div style={{
+        position: "absolute", width: w, height: h, left: offsetX, top: offsetY,
+        background: color.s, opacity: 0.4, border: `1.5px solid ${color.s}`,
+        transformStyle: "preserve-3d", transform: `rotateY(180deg) translateZ(${d / 2}px)`,
+      }} />
+      {/* Right */}
+      <div style={{
+        position: "absolute", width: d, height: h, left: offsetX + w, top: offsetY,
+        background: color.s, opacity: 0.55, border: `1.5px solid ${color.s}`,
+        transformStyle: "preserve-3d", transformOrigin: "0 50%",
+        transform: "rotateY(90deg)",
+      }} />
+      {/* Left */}
+      <div style={{
+        position: "absolute", width: d, height: h, left: offsetX, top: offsetY,
+        background: color.s, opacity: 0.4, border: `1.5px solid ${color.s}`,
+        transformStyle: "preserve-3d", transformOrigin: "0 50%",
+        transform: "rotateY(-90deg)",
+      }} />
+      {/* Top */}
+      <div style={{
+        position: "absolute", width: w, height: d, left: offsetX, top: offsetY,
+        background: color.t, opacity: 0.55, border: `1.5px solid ${color.t}`,
+        transformStyle: "preserve-3d", transformOrigin: "50% 0",
+        transform: "rotateX(-90deg)",
+      }} />
+      {/* Bottom */}
+      <div style={{
+        position: "absolute", width: w, height: d, left: offsetX, top: offsetY + h,
+        background: color.b, opacity: 0.3, border: `1.5px solid ${color.b}`,
+        transformStyle: "preserve-3d", transformOrigin: "50% 0",
+        transform: "rotateX(90deg)",
+      }} />
+    </>
+  );
+
+  return (
+    <div className="bg-slate-900/80 border border-slate-700 rounded-xl p-3 space-y-3">
+      <p className="text-white/50 text-[10px] text-center font-body">Drag untuk memutar 🔄</p>
+      <div
+        className="relative mx-auto select-none overflow-visible flex items-center justify-center"
+        style={{ height: 200, cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMouseDown}
+        onTouchStart={onTouchStart}
+      >
+        <div style={{
+          width: BW, height: BH + SH,
+          position: "relative",
+          transformStyle: "preserve-3d",
+          transform: `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+          transition: isDragging ? "none" : TRANS,
+        }}>
+          {box(BW, BH, BD, 0, SH, c1)}
+          {box(SW, SH, BD, 0, 0, c2)}
+        </div>
+      </div>
+      <div className="flex flex-wrap gap-1.5 justify-center">
+        {[
+          { label: "Balok Besar", color: "#6366f1" },
+          { label: "Balok Kecil", color: "#f43f5e" },
+        ].map(({ label, color }) => (
+          <div key={label} className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rounded-sm" style={{ background: color }} />
+            <span className="text-white/50 text-[9px] font-body">{label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
+   SVGs — BANGUN RUANG GABUNGAN (used in later slides)
 ───────────────────────────────────────────────────────────── */
 const BalokLimasSVG = () => (
   <svg width="210" height="185" viewBox="0 0 210 185" className="mx-auto">
@@ -237,17 +685,20 @@ const slides: Slide[] = [
           dua atau lebih bangun ruang dasar yang digabungkan. Contoh nyata: rumah (kubus + prisma atap),
           tugu (balok + limas), gedung bertingkat (beberapa balok), dan lain-lain.
         </p>
-        <div className="grid grid-cols-3 gap-2 mt-3">
-          {[
-            { svg: <BalokLimasSVG />, label: "Balok + Limas" },
-            { svg: <KubusPrismaSVG />, label: "Kubus + Prisma" },
-            { svg: <DuaBalokSVG />, label: "2 Balok" },
-          ].map(({ svg, label }, i) => (
-            <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-lg p-2 flex flex-col items-center gap-1">
-              <div className="w-full">{svg}</div>
-              <span className="text-[9px] text-white/50 font-body text-center">{label}</span>
-            </div>
-          ))}
+        <p className="text-white/50 text-xs text-center">Drag setiap model 3D di bawah untuk memutarnya!</p>
+        <div className="grid grid-cols-3 gap-2 mt-2">
+          <div className="flex flex-col gap-1">
+            <InteractiveBalokLimas />
+            <span className="text-[9px] text-white/40 font-body text-center">Balok + Limas</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <InteractiveRumah />
+            <span className="text-[9px] text-white/40 font-body text-center">Kubus + Prisma (Rumah)</span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <InteractiveDuaBalok />
+            <span className="text-[9px] text-white/40 font-body text-center">2 Balok (Undakan)</span>
+          </div>
         </div>
         <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs text-white/60 space-y-1">
           <p className="text-cyan-300 font-semibold mb-1">📋 Materi dalam bab ini:</p>
@@ -383,34 +834,23 @@ const slides: Slide[] = [
     title: "Kesimpulan & Strategi",
     content: (
       <div className="space-y-3 font-body text-sm">
-        <div className="overflow-x-auto rounded-lg border border-slate-700">
-          <table className="w-full text-xs text-center">
-            <thead><tr className="bg-slate-800">
-              <th className="px-2 py-2 text-cyan-300 border-r border-slate-700 text-left">Bangun</th>
-              <th className="px-2 py-2 text-cyan-300 border-r border-slate-700">Volume</th>
-              <th className="px-2 py-2 text-cyan-300">L. Permukaan</th>
-            </tr></thead>
-            <tbody>
-              {[
-                ["Balok + Limas", "V_B + V_L", "L_alas + 4L_sisi + 4L△"],
-                ["Kubus + Prisma △", "V_K + V_P", "4L_sisi + 2L△ + 2L_miring + L_alas"],
-                ["Dua Balok", "V₁ + V₂", "Semua sisi terlihat"],
-                ["Balok − Limas", "V_B − V_L", "Permukaan luar + lubang"],
-              ].map(([b, v, l], i) => (
-                <tr key={i} className={`border-t border-slate-700 ${i % 2 === 0 ? "bg-slate-900/40" : "bg-slate-800/30"}`}>
-                  <td className="px-2 py-2 text-white/85 font-semibold border-r border-slate-700 text-left text-[10px]">{b}</td>
-                  <td className="px-2 py-2 text-yellow-300 font-mono border-r border-slate-700 text-[10px]">{v}</td>
-                  <td className="px-2 py-2 text-blue-300 text-left text-[10px]">{l}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 space-y-2 text-xs">
+          <p className="text-cyan-300 font-semibold text-sm">🎯 Strategi Menyelesaikan Soal Bangun Gabungan</p>
+          <p className="text-white/75">1. <strong className="text-yellow-300">Identifikasi</strong> setiap bangun penyusun</p>
+          <p className="text-white/75">2. <strong className="text-yellow-300">Catat dimensi</strong> masing-masing bangun</p>
+          <p className="text-white/75">3. <strong className="text-yellow-300">Tentukan</strong> bidang yang bersentuhan (untuk luas permukaan)</p>
+          <p className="text-white/75">4. <strong className="text-yellow-300">Hitung</strong> volume/luas masing-masing</p>
+          <p className="text-white/75">5. <strong className="text-yellow-300">Jumlahkan</strong> (volume) atau <strong className="text-yellow-300">identifikasi bidang terlihat</strong> (luas permukaan)</p>
         </div>
-        <div className="bg-cyan-950/50 border border-cyan-700/40 rounded-lg p-3 text-xs text-cyan-200 space-y-1">
-          <p className="text-cyan-300 font-semibold">🎯 Strategi 3 Langkah:</p>
-          <p>1. <strong className="text-yellow-300">Identifikasi</strong> semua bangun penyusun dan dimensinya</p>
-          <p>2. <strong className="text-yellow-300">Hitung</strong> volume/luas masing-masing bagian</p>
-          <p>3. <strong className="text-yellow-300">Gabungkan</strong> dengan benar (ingat bidang yang tidak dihitung!)</p>
+        <div className="bg-slate-800/60 border border-slate-700 rounded-lg p-3 text-xs space-y-2">
+          <p className="text-violet-300 font-semibold">📌 Rumus Ringkas:</p>
+          <BlockMath math="V_{\text{gab}} = \sum V_i" />
+          <BlockMath math="L_{\text{gab}} = \sum L_{\text{terlihat}}" />
+        </div>
+        <div className="bg-green-950/40 border border-green-700/30 rounded-lg p-3 text-xs text-green-200">
+          <p className="font-semibold mb-1">✅ Ingat selalu:</p>
+          <p>Untuk <strong>volume</strong>: tambahkan semua volume</p>
+          <p>Untuk <strong>luas permukaan</strong>: jangan hitung bidang sambungan!</p>
         </div>
       </div>
     ),
@@ -419,7 +859,7 @@ const slides: Slide[] = [
     icon: "📝",
     title: "Contoh Soal Bertingkat",
     content: (
-      <div className="flex flex-col gap-3">
+      <div className="space-y-4 font-body">
         {examples.map((ex, i) => <ExampleCard key={i} ex={ex} idx={i} />)}
       </div>
     ),
@@ -427,89 +867,61 @@ const slides: Slide[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   MAIN PAGE
+   PAGE COMPONENT
 ───────────────────────────────────────────────────────────── */
-const GabunganPage = () => {
+export default function GabunganPage() {
   const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [slide, setSlide] = useState(0);
   const total = slides.length;
 
-  const goNext = () => { playPopSound(); setCurrentSlide(s => Math.min(s + 1, total - 1)); };
-  const goPrev = () => { playPopSound(); setCurrentSlide(s => Math.max(s - 1, 0)); };
-
-  const slide = slides[currentSlide];
-
   return (
-    <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
+    <div className="relative min-h-screen bg-background text-foreground overflow-hidden">
       <Starfield />
-      <PageNavigation />
-      <div className="relative z-10 max-w-3xl w-full px-4 py-10">
-
-        <Layers className="w-10 h-10 text-primary mx-auto mb-3" />
-        <h1 className="font-display text-lg md:text-2xl font-bold text-primary text-glow-cyan mb-1 text-center">
-          BANGUN RUANG GABUNGAN
-        </h1>
-        <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
-
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { playPopSound(); setCurrentSlide(i); }}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                i === currentSlide
-                  ? "w-6 h-2.5 bg-primary"
-                  : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Slide card */}
-        <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden mb-4">
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 bg-white/5">
-            <span className="flex items-center gap-2">
-              <span className="text-lg">{slide.icon}</span>
-              <span className="font-display text-sm font-semibold text-white">{slide.title}</span>
-            </span>
-            <span className="text-xs text-muted-foreground font-body">{currentSlide + 1} / {total}</span>
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Header */}
+        <header className="px-4 pt-6 pb-2 flex items-center gap-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 rounded-full bg-card/60 border border-border hover:bg-card transition-colors cursor-pointer"
+          >
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="p-2 rounded-xl bg-violet-500/20 border border-violet-500/30">
+              <Layers className="w-5 h-5 text-violet-400" />
+            </div>
+            <div>
+              <h1 className="text-base font-bold font-display text-white leading-tight">Bangun Ruang Gabungan</h1>
+              <p className="text-xs text-muted-foreground font-body">Kelas 8 · Bangun Ruang Sisi Datar</p>
+            </div>
           </div>
-          <div className="px-5 py-5">{slide.content}</div>
-        </div>
+        </header>
 
-        {/* Navigation buttons */}
-        <div className="flex items-center justify-between gap-3 mb-6">
-          <button
-            onClick={goPrev}
-            disabled={currentSlide === 0}
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold font-display
-              text-white/70 hover:text-white hover:border-primary/60 hover:bg-primary/10
-              disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
-          >
-            ← Sebelumnya
-          </button>
-          <button
-            onClick={goNext}
-            disabled={currentSlide === total - 1}
-            className="flex-1 py-2.5 rounded-lg border border-primary/60 bg-primary/15 text-sm font-semibold font-display
-              text-primary hover:bg-primary/25 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
-          >
-            Selanjutnya →
-          </button>
-        </div>
+        {/* Slide area */}
+        <main className="flex-1 px-4 py-3 flex flex-col gap-3">
+          {/* Slide card */}
+          <div className="bg-card/70 border border-border rounded-2xl overflow-hidden shadow-xl">
+            <div className="px-5 py-3 border-b border-border/50 flex items-center gap-2 bg-slate-800/60">
+              <span className="text-xl">{slides[slide].icon}</span>
+              <h2 className="text-sm font-bold font-display text-white">{slides[slide].title}</h2>
+              <span className="ml-auto text-xs text-muted-foreground font-body">{slide + 1}/{total}</span>
+            </div>
+            <div className="px-5 py-4 overflow-y-auto max-h-[60vh]">
+              {slides[slide].content}
+            </div>
+          </div>
 
-        <div className="mt-2 text-center">
-          <button
-            onClick={() => { playPopSound(); navigate("/materi-matematika/kelas-8/bangun-ruang-sisi-datar"); }}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer font-body"
-          >
-            ← Kembali ke Bangun Ruang Sisi Datar
-          </button>
-        </div>
+          {/* Navigation */}
+          <PageNavigation
+            current={slide}
+            total={total}
+            onPrev={() => { playPopSound(); setSlide(s => Math.max(0, s - 1)); }}
+            onNext={() => { playPopSound(); setSlide(s => Math.min(total - 1, s + 1)); }}
+          />
+        </main>
       </div>
     </div>
   );
-};
-
-export default GabunganPage;
+}
