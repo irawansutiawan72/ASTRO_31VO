@@ -755,7 +755,7 @@ const WaterBalokAnimation = () => {
   const filledH = barH * fill;
 
   return (
-    <svg viewBox="0 62 258 148" className="w-full max-w-sm mx-auto"
+    <svg viewBox="0 62 258 178" className="w-full max-w-sm mx-auto"
       aria-label="Animasi balok diisi air">
       <defs>
         <filter id="wBloomB">
@@ -849,13 +849,13 @@ const WaterBalokAnimation = () => {
       </text>
 
       {/* Status + Formula */}
-      <text x="113" y="195"
+      <text x="113" y="215"
         fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
         fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
         filter="url(#wBloomB)">
         {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
       </text>
-      <text x="113" y="208"
+      <text x="113" y="230"
         fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloomB)">
         V = p × l × t
