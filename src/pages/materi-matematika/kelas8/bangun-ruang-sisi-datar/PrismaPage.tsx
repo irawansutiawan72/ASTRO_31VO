@@ -620,9 +620,9 @@ const WaterPrismaAnimation = () => {
   const [fill, setFill] = useState(0);
 
   useEffect(() => {
-    const FILL_MS   = 3200;
-    const HOLD_FULL = 900;
-    const EMPTY_MS  = 2000;
+    const FILL_MS    = 3200;
+    const HOLD_FULL  = 900;
+    const EMPTY_MS   = 2000;
     const HOLD_EMPTY = 500;
     const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
     const start = performance.now();
@@ -641,145 +641,151 @@ const WaterPrismaAnimation = () => {
     return () => cancelAnimationFrame(raf);
   }, []);
 
-  // Oblique prism geometry (same orientation as original VolumePrismaSVG)
-  const fBL: V2 = [28, 168];   // front bottom-left
-  const fBR: V2 = [108, 168];  // front bottom-right
-  const fAP: V2 = [68, 98];    // front apex
-  const dx = 118, dy = -40;
-  const bBL: V2 = [fBL[0]+dx, fBL[1]+dy];
-  const bBR: V2 = [fBR[0]+dx, fBR[1]+dy];
-  const bAP: V2 = [fAP[0]+dx, fAP[1]+dy];
+  /* ── Upright prism geometry (standing on triangular base) ──
+     Bottom triangle = ALAS at the bottom
+     Top triangle    = TUTUP at the top
+     Rectangular faces go vertically
+     Oblique depth: back vertex recedes to the upper-right
+  */
+  const BL: V2 = [68,  182];  // bottom-left  (front-left of ALAS)
+  const BR: V2 = [178, 182];  // bottom-right (front-right of ALAS)
+  const BB: V2 = [123, 152];  // bottom-back  (back vertex of ALAS, oblique depth)
+  const H = 108;              // prism height in screen pixels
+  const TL: V2 = [BL[0], BL[1] - H];   // top-left  = [68,  74]
+  const TR: V2 = [BR[0], BR[1] - H];   // top-right = [178, 74]
+  const TB: V2 = [BB[0], BB[1] - H];   // top-back  = [123, 44]
 
-  // Linear interpolation helper
   const lerp = (a: V2, b: V2, t: number): V2 => [
     a[0] + (b[0] - a[0]) * t,
     a[1] + (b[1] - a[1]) * t,
   ];
-  const p = (v: V2) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`;
+  const p  = (v: V2) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`;
   const pp = (...vs: V2[]) => vs.map(p).join(" ");
 
-  // Water surface vertices at current fill fraction
-  const fWL = lerp(fBL, fAP, fill);
-  const fWR = lerp(fBR, fAP, fill);
-  const bWL = lerp(bBL, bAP, fill);
-  const bWR = lerp(bBR, bAP, fill);
+  // Water surface vertices rising from bottom to top
+  const WL = lerp(BL, TL, fill);
+  const WR = lerp(BR, TR, fill);
+  const WB = lerp(BB, TB, fill);
 
-  const pct = Math.round(fill * 100);
-  const isEmpty  = fill < 0.005;
-  const isFull   = fill > 0.995;
+  const pct     = Math.round(fill * 100);
+  const isEmpty = fill < 0.005;
+  const isFull  = fill > 0.995;
 
-  // Progress bar geometry
-  const barX = 244, barY = 98, barW = 14, barH = 70;
+  // Progress bar — sits right beside the prism
+  const barX = 194, barY = TL[1], barW = 13, barH = H;
   const filledH = barH * fill;
 
   return (
-    <svg viewBox="0 0 280 225" className="w-full max-w-sm mx-auto my-2"
-      aria-label="Animasi prisma segitiga diisi air">
+    <svg viewBox="0 0 280 220" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi prisma segitiga berdiri diisi air">
       <defs>
         <filter id="wBloom">
           <feGaussianBlur stdDeviation="2.5" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
-        <filter id="wGlow">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-        {/* Clip to prism interior so water never spills outside */}
-        <clipPath id="prismInterior">
-          <polygon points={pp(fBL, fBR, fAP)}/>
-          <polygon points={pp(fBL, fBR, bBR, bBL)}/>
-          <polygon points={pp(fBR, fAP, bAP, bBR)}/>
-          <polygon points={pp(fAP, bAP, bBR, fBR)}/>
-        </clipPath>
       </defs>
 
-      {/* ── Hidden back edge (dashed) ── */}
-      <line x1={bBL[0]} y1={bBL[1]} x2={bAP[0]} y2={bAP[1]}
+      {/* ── Hidden back vertical edge (dashed) ── */}
+      <line x1={BB[0]} y1={BB[1]} x2={TB[0]} y2={TB[1]}
         stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+      {/* Hidden bottom back edges (dashed) */}
+      <line x1={BL[0]} y1={BL[1]} x2={BB[0]} y2={BB[1]}
+        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
+      <line x1={BR[0]} y1={BR[1]} x2={BB[0]} y2={BB[1]}
+        stroke="#334155" strokeWidth="1.1" strokeDasharray="4,3"/>
 
-      {/* ── Prism ghost shell (transparent, always visible) ── */}
-      <polygon points={pp(fBL, fBR, bBR, bBL)}
-        fill="#0f172a" fillOpacity={0.25} stroke="#334155" strokeWidth="1"/>
-      <polygon points={pp(fBR, fAP, bAP, bBR)}
-        fill="#0f172a" fillOpacity={0.18} stroke="#334155" strokeWidth="1"/>
-      <polygon points={pp(fBL, fBR, fAP)}
-        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="1"/>
+      {/* ── Ghost shell: prism faces above water (always drawn, semi-transparent) ── */}
+      {/* Right face */}
+      <polygon points={pp(BR, BB, TB, TR)}
+        fill="#0f172a" fillOpacity={0.22} stroke="#334155" strokeWidth="0.8"/>
+      {/* Front face */}
+      <polygon points={pp(BL, BR, TR, TL)}
+        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="0.8"/>
 
-      {/* ── WATER (painter order: back → front) ── */}
+      {/* ── WATER (painter: back → front) ── */}
       {!isEmpty && (
         <>
-          {/* Bottom face (floor) — always fully covered */}
-          <polygon points={pp(fBL, fBR, bBR, bBL)}
-            fill="#1e40af" fillOpacity={0.82}/>
+          {/* ALAS floor — always fully blue */}
+          <polygon points={pp(BL, BR, BB)}
+            fill="#1e3a8a" fillOpacity={0.90}/>
 
-          {/* Right face water (visible back-right rectangular band) */}
-          <polygon points={pp(fBR, bBR, bWR, fWR)}
-            fill="#1d4ed8" fillOpacity={0.78}/>
+          {/* Right face water band */}
+          <polygon points={pp(BR, BB, WB, WR)}
+            fill="#1d4ed8" fillOpacity={0.80}/>
 
-          {/* Front face water (visible front trapezoid) */}
-          <polygon points={pp(fBL, fBR, fWR, fWL)}
-            fill="#2563eb" fillOpacity={0.88}/>
+          {/* Front face water band */}
+          <polygon points={pp(BL, BR, WR, WL)}
+            fill="#2563eb" fillOpacity={0.90}/>
 
-          {/* Water surface (horizontal parallelogram) — shimmer */}
+          {/* Water surface (triangular ripple) */}
           {!isFull && (
-            <polygon points={pp(fWL, fWR, bWR, bWL)}
-              fill="#7dd3fc" fillOpacity={0.45}
-              style={{ filter: "drop-shadow(0 0 6px #38bdf8)" }}/>
+            <polygon points={pp(WL, WR, WB)}
+              fill="#7dd3fc" fillOpacity={0.50}
+              style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}/>
           )}
 
-          {/* Water surface ripple line on front face */}
+          {/* Ripple line at water surface on front face */}
           {!isFull && (
-            <line x1={fWL[0]} y1={fWL[1]} x2={fWR[0]} y2={fWR[1]}
-              stroke="#bae6fd" strokeWidth={1.8} strokeDasharray="5,3" strokeOpacity={0.8}/>
+            <line x1={WL[0]} y1={WL[1]} x2={WR[0]} y2={WR[1]}
+              stroke="#bae6fd" strokeWidth={2} strokeDasharray="6,3" strokeOpacity={0.85}/>
           )}
         </>
       )}
 
-      {/* ── Prism outline (solid edges on top of water) ── */}
-      {/* Front triangle */}
-      <polyline points={pp(fBL, fBR, fAP, fBL)}
+      {/* ── Prism wireframe (solid edges, drawn over water) ── */}
+      {/* Front face outline */}
+      <polygon points={pp(BL, BR, TR, TL)}
         fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
-      {/* Depth edges */}
-      <line x1={fAP[0]} y1={fAP[1]} x2={bAP[0]} y2={bAP[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
-      <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="1.8"/>
-      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#4ade80" strokeWidth="1.8"/>
-      {/* Back triangle visible edges */}
-      <polyline points={pp(bBL, bBR, bAP)}
-        fill="none" stroke="#e0e7ff" strokeWidth="1.8" strokeLinejoin="round"/>
+      {/* Right face outline */}
+      <polygon points={pp(BR, BB, TB, TR)}
+        fill="none" stroke="#a5b4fc" strokeWidth="1.8" strokeLinejoin="round"/>
+      {/* TUTUP top triangle */}
+      <polygon points={pp(TL, TR, TB)}
+        fill="#0f172a" fillOpacity={isFull ? 0.7 : 0.2} stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Top back edges */}
+      <line x1={TL[0]} y1={TL[1]} x2={TB[0]} y2={TB[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
+      <line x1={TR[0]} y1={TR[1]} x2={TB[0]} y2={TB[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
 
-      {/* ── Dimension labels ── */}
-      <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+14}
-        fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">a</text>
-      <text x={fBL[0]-13} y={(fBL[1]+fAP[1])/2+4}
-        fill="#93c5fd" fontSize="9" fontFamily="monospace" fontWeight="bold">t△</text>
-      <text x={fBR[0]+dx/2+6} y={fBR[1]+dy/2+2}
-        fill="#c4b5fd" fontSize="9" fontFamily="monospace" fontWeight="bold">t</text>
+      {/* ── Labels ── */}
+      {/* ALAS label */}
+      <text x={(BL[0]+BR[0])/2} y={BL[1]+13}
+        fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        ALAS (L△)
+      </text>
+      {/* TUTUP label */}
+      <text x={(TL[0]+TR[0])/2} y={TL[1]-7}
+        fill="#c4b5fd" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        TUTUP
+      </text>
+      {/* Height label (t) — left side */}
+      <text x={BL[0]-14} y={(BL[1]+TL[1])/2+4}
+        fill="#fbbf24" fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
+      <line x1={BL[0]-8} y1={BL[1]} x2={BL[0]-8} y2={TL[1]}
+        stroke="#fbbf24" strokeWidth="1" strokeDasharray="3,2" strokeOpacity={0.6}/>
 
       {/* ── Progress bar ── */}
       <rect x={barX} y={barY} width={barW} height={barH}
         fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
       {!isEmpty && (
         <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
-          fill="#2563eb" fillOpacity={0.85} rx="3"/>
+          fill="#2563eb" fillOpacity={0.88} rx="3"/>
       )}
       <text x={barX + barW/2} y={barY - 6}
         fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
       <text x={barX + barW/2} y={barY + barH + 12}
-        fill={isFull ? "#4ade80" : isEmpty ? "#94a3b8" : "#7dd3fc"}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
         fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
         {pct}%
       </text>
 
-      {/* ── Status label ── */}
-      <text x="134" y="195"
+      {/* ── Status + Formula ── */}
+      <text x="122" y="203"
         fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
         fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
         filter="url(#wBloom)">
         {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
       </text>
-
-      {/* ── Formula ── */}
-      <text x="134" y="212"
+      <text x="122" y="217"
         fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
         textAnchor="middle" filter="url(#wBloom)">
         V = L△ × t
