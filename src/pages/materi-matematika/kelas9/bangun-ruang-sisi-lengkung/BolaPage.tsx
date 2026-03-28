@@ -308,6 +308,174 @@ const VolumeBolaSVG = () => (
   </svg>
 );
 
+/* ─────────────────────────────────────────────────────────────
+   VOLUME BOLA — animated water-fill visualization
+───────────────────────────────────────────────────────────── */
+const WaterBolaAnimation = () => {
+  const [fill, setFill] = useState(0);
+  const [wave, setWave] = useState(0);
+
+  useEffect(() => {
+    const FILL_MS    = 3600;
+    const HOLD_FULL  = 900;
+    const EMPTY_MS   = 2200;
+    const HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      setWave(Math.sin(now * 0.004) * 2.8);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const CX = 110;
+  const CY = 110;
+  const R  = 80;
+
+  const isEmpty     = fill < 0.005;
+  const isFull      = fill > 0.995;
+  const showSurface = !isEmpty && !isFull;
+
+  // Water surface position (SVG y increases downward)
+  const waterSurfaceY  = CY + R * (1 - 2 * fill);
+  // Radius of circular cross-section at that height
+  const wsr2 = 1 - (1 - 2 * fill) ** 2;
+  const waterSurfaceRx = R * Math.sqrt(Math.max(0, wsr2));
+  const waterSurfaceRy = waterSurfaceRx * 0.22;
+  const waveOffset     = showSurface ? wave : 0;
+
+  const pct = Math.round(fill * 100);
+
+  const barX = 208, barY = CY - R, barW = 13, barH = 2 * R;
+  const filledH = barH * fill;
+
+  return (
+    <svg viewBox="0 0 280 235" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi bola diisi air">
+      <defs>
+        <clipPath id="sphereClipWater">
+          <circle cx={CX} cy={CY} r={R}/>
+        </clipPath>
+        <radialGradient id="waterBolaGrad" cx="38%" cy="32%" r="65%">
+          <stop offset="0%"   stopColor="#38bdf8" stopOpacity="0.9"/>
+          <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.95"/>
+        </radialGradient>
+        <radialGradient id="sphereShellGrad" cx="32%" cy="28%" r="65%">
+          <stop offset="0%"   stopColor="#a78bfa" stopOpacity="0.18"/>
+          <stop offset="100%" stopColor="#4c1d95" stopOpacity="0.08"/>
+        </radialGradient>
+        <radialGradient id="sphereShineW" cx="28%" cy="24%" r="32%">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.28"/>
+          <stop offset="100%" stopColor="white" stopOpacity="0"/>
+        </radialGradient>
+        <filter id="wBloomB">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      {/* ── Sphere shell (dark bg) ── */}
+      <circle cx={CX} cy={CY} r={R} fill="url(#sphereShellGrad)" stroke="none"/>
+
+      {/* ── Water body clipped to sphere ── */}
+      <g clipPath="url(#sphereClipWater)">
+        {!isEmpty && (
+          <rect
+            x={CX - R - 2}
+            y={waterSurfaceY + waveOffset}
+            width={(R + 2) * 2}
+            height={CY + R - waterSurfaceY + 4}
+            fill="url(#waterBolaGrad)"
+          />
+        )}
+
+        {/* ── Water surface ellipse (wave) ── */}
+        {showSurface && (
+          <>
+            <ellipse
+              cx={CX}
+              cy={waterSurfaceY + waveOffset}
+              rx={waterSurfaceRx}
+              ry={waterSurfaceRy + 1}
+              fill="#7dd3fc"
+              fillOpacity={0.5}
+            />
+            <ellipse
+              cx={CX}
+              cy={waterSurfaceY + waveOffset}
+              rx={waterSurfaceRx}
+              ry={waterSurfaceRy + 1}
+              fill="none"
+              stroke="#bae6fd"
+              strokeWidth="1.6"
+              strokeDasharray="5,3"
+              opacity={0.85}
+            />
+          </>
+        )}
+      </g>
+
+      {/* ── Sphere outline on top ── */}
+      <circle cx={CX} cy={CY} r={R} fill="none" stroke="#a78bfa" strokeWidth="2.5"/>
+
+      {/* ── Equator dashed line (perspective) ── */}
+      <ellipse cx={CX} cy={CY} rx={R} ry={R * 0.22}
+        fill="none" stroke="#c4b5fd" strokeWidth="1.2"
+        strokeDasharray="5,4" opacity="0.55"/>
+
+      {/* ── Sphere shine ── */}
+      <circle cx={CX} cy={CY} r={R} fill="url(#sphereShineW)"/>
+
+      {/* ── r dimension label ── */}
+      <line x1={CX} y1={CY} x2={CX + R} y2={CY}
+        stroke="#facc15" strokeWidth="1.5" strokeDasharray="3,2" opacity="0.9"/>
+      <circle cx={CX}     cy={CY} r="3" fill="#facc15"/>
+      <circle cx={CX + R} cy={CY} r="3" fill="#facc15"/>
+      <text x={CX + R / 2} y={CY + 14}
+        fill="#facc15" fontSize="11" fontFamily="monospace"
+        fontWeight="bold" textAnchor="middle">r</text>
+
+      {/* ── Progress bar ── */}
+      <rect x={barX} y={barY} width={barW} height={barH}
+        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+      {!isEmpty && (
+        <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
+          fill="#2563eb" fillOpacity={0.88} rx="3"/>
+      )}
+      <text x={barX + barW / 2} y={barY - 5}
+        fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX + barW / 2} y={barY + barH + 12}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {pct}%
+      </text>
+
+      {/* ── Status + Formula ── */}
+      <text x={CX} y={CY + R + 22}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+        filter="url(#wBloomB)">
+        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+      </text>
+      <text x={CX} y={CY + R + 38}
+        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#wBloomB)">
+        V = ⁴⁄₃πr³
+      </text>
+    </svg>
+  );
+};
+
 const SeparasiBolaSegitigaSVG = () => (
   <svg viewBox="0 0 300 200" className="w-full max-w-sm mx-auto my-2" aria-label="Separasi bola menjadi 4/3 kerucut">
     <defs>
@@ -480,6 +648,11 @@ const sections: Sec[] = [
           Rumus volume bola pertama kali ditemukan oleh <strong className="text-yellow-300">Archimedes</strong> dari Yunani kuno!
         </p>
         <VolumeBolaSVG />
+        <div className="bg-slate-900/70 border border-violet-700/40 rounded-xl p-3">
+          <p className="text-violet-300 font-semibold text-xs text-center mb-2 font-body">💧 Animasi Pengisian Air — Bola</p>
+          <WaterBolaAnimation />
+          <p className="text-white/45 text-[10px] text-center font-body mt-1">Bayangkan bola transparan diisi air dari bawah — volumenya adalah <strong className="text-violet-300">⁴⁄₃πr³</strong></p>
+        </div>
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-3">
           <p className="text-blue-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
