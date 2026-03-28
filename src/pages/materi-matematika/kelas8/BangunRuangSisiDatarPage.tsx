@@ -6,7 +6,6 @@ const subtopics = [
   { label: "PRISMA", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/prisma", icon: "🔷" },
   { label: "LIMAS", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/limas", icon: "🔺" },
   { label: "BANGUN RUANG SISI DATAR GABUNGAN", path: "/materi-matematika/kelas-8/bangun-ruang-sisi-datar/gabungan", icon: "🔗" },
-  { label: "MASALAH KONTEKSTUAL YANG BERKAITAN DENGAN BANGUN RUANG SISI DATAR", path: "/coming-soon", icon: "🏗️" },
 ];
 
 const BangunRuangSisiDatarPage = () => (
