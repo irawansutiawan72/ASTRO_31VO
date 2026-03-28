@@ -7,6 +7,7 @@ import { BlockMath, InlineMath } from "react-katex";
 import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 import PythagorasDiscoveryAnimation from "@/components/PythagorasDiscoveryAnimation";
+import PythagorasRearrangementAnimation from "@/components/PythagorasRearrangementAnimation";
 
 /* ── SVG: Visual proof — four identical right triangles rearranged inside a square ── */
 const PembuktianSVG = () => (
@@ -96,7 +97,7 @@ const SegitigaSikuSVG = () => (
 
 const PembuktianPage = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string[]>(["intro", "animasi", "pembuktian", "contoh1", "contoh2", "contoh3", "rangkuman"]);
+  const [open, setOpen] = useState<string[]>(["intro", "animasi", "rearrangement", "pembuktian", "contoh1", "contoh2", "contoh3", "rangkuman"]);
 
   const toggle = (id: string) => {
     playPopSound();
@@ -175,6 +176,21 @@ const PembuktianPage = () => {
                   </p>
                 </div>
                 <PythagorasDiscoveryAnimation />
+              </div>
+            )}
+          </div>
+
+          {/* ANIMASI REARRANGEMENT */}
+          <div className="bg-card/80 backdrop-blur border border-violet-500/40 rounded-xl overflow-hidden">
+            <SectionHeader id="rearrangement" icon={<Target className="w-5 h-5"/>} iconColor="text-violet-400" title="🔀 Animasi: Metode Penyusunan Ulang (Rearrangement)"/>
+            {open.includes("rearrangement") && (
+              <div className="px-4 pb-5 space-y-3">
+                <div className="bg-violet-900/30 border border-violet-500/20 rounded-lg p-3">
+                  <p className="font-body text-sm text-violet-200 leading-relaxed">
+                    🔬 Bukti paling elegan! Empat segitiga siku-siku yang sama disusun di dalam persegi besar <InlineMath math="(a+b)^2"/>. Dengan <strong className="text-yellow-300">menggeser posisi keempat segitiga</strong>, terlihat bahwa ruang kosong berubah dari <strong className="text-yellow-300">c²</strong> menjadi <strong className="text-cyan-300">a² + b²</strong> — membuktikan teorema secara visual!
+                  </p>
+                </div>
+                <PythagorasRearrangementAnimation />
               </div>
             )}
           </div>
