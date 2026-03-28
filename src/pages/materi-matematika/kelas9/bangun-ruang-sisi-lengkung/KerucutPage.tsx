@@ -77,6 +77,19 @@ const InteractiveCone3D = () => {
     };
   }, [onMM, onMU, onTM, onTE]);
 
+  useEffect(() => {
+    if (isDragging || showNet) return;
+    let frameId: number;
+    let lastTs = 0;
+    const animate = (ts: number) => {
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.028);
+      lastTs = ts;
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging, showNet]);
+
   const apex3D = rotPt(0, -CH / 2, 0, rotX, rotY);
   const apex2D = proj(apex3D);
 
@@ -381,6 +394,7 @@ const sections: Sec[] = [
           💡 <strong>Kerucut vs Tabung:</strong> Keduanya punya alas lingkaran, tapi tabung punya dua alas dan tinggi seragam,
           sedangkan kerucut hanya punya satu alas dan meruncing ke atas!
         </blockquote>
+        <InteractiveCone3D />
       </div>
     ),
   },
@@ -913,6 +927,7 @@ const KerucutPage = () => {
               </div>
             ))}
           </div>
+          <InteractiveCone3D />
         </div>
       ),
     },

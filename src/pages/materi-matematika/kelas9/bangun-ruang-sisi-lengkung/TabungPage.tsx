@@ -57,6 +57,19 @@ const InteractiveCylinder3D = () => {
     };
   }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
 
+  useEffect(() => {
+    if (isDragging || showNet) return;
+    let frameId: number;
+    let lastTs = 0;
+    const animate = (ts: number) => {
+      if (lastTs) setRotY(prev => prev + (ts - lastTs) * 0.025);
+      lastTs = ts;
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging, showNet]);
+
   const segAngle = (2 * Math.PI) / SEGMENTS;
   const segments = Array.from({ length: SEGMENTS }, (_, i) => i);
 
@@ -823,6 +836,7 @@ const TabungPage = () => {
               </div>
             ))}
           </div>
+          <InteractiveCylinder3D />
         </div>
       ),
     },

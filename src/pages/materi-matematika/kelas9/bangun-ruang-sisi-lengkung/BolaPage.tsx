@@ -53,6 +53,19 @@ const InteractiveSphere3D = () => {
     };
   }, [onMM, onMU, onTM, onTE]);
 
+  useEffect(() => {
+    if (isDragging) return;
+    let frameId: number;
+    let lastTs = 0;
+    const animate = (ts: number) => {
+      if (lastTs) setSpinY(prev => prev + (ts - lastTs) * 0.03);
+      lastTs = ts;
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isDragging]);
+
   const cx = SVG_W / 2;
   const cy = SVG_H / 2;
 
@@ -770,6 +783,7 @@ const BolaPage = () => {
             <strong className="text-blue-300">volume</strong>-nya menggunakan rumus penemuan Archimedes yang legendaris.
           </p>
         </div>
+        <InteractiveSphere3D />
 
         <div className="flex flex-col gap-3 mb-8">
           {sections.map((sec, i) => <AccordionSection key={sec.title} sec={sec} idx={i} />)}
