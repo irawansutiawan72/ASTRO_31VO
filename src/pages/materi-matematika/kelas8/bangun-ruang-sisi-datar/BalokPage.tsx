@@ -119,14 +119,14 @@ const SimpleRotatingBalok = () => {
         Berputar otomatis · Drag untuk memutar sendiri
       </p>
       <svg viewBox="0 0 280 220" className="w-full max-w-xs mx-auto my-1" style={{ display:"block", overflow:"visible" }}>
-        {facesWithDepth.filter(f => f.visible).map((f, i) => {
+        {facesWithDepth.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
           const mx  = f.pts2d.reduce((s,p) => s+p[0],0)/f.pts2d.length;
           const my  = f.pts2d.reduce((s,p) => s+p[1],0)/f.pts2d.length;
           return (
             <g key={i}>
-              <polygon points={pts} fill={f.color} fillOpacity={0.88}
-                stroke="rgba(255,255,255,0.4)" strokeWidth={1.5} strokeLinejoin="round"/>
+              <polygon points={pts} fill={f.color} fillOpacity={1}
+                stroke="rgba(255,255,255,0.5)" strokeWidth={1.5} strokeLinejoin="round"/>
               <text x={cx+mx} y={cy+my+3} fill="white" fontSize={8} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>

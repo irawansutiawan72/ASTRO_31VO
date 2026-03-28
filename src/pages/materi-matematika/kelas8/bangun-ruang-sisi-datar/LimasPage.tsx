@@ -123,14 +123,14 @@ const RotatingLimas3D = ({ n, label, r = 40, h = 65 }: { n: number; label: strin
     >
       <span className="text-white/70 font-body font-semibold mb-1" style={{ fontSize:10 }}>{label}</span>
       <svg viewBox="0 0 170 176" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
-        {facesWithDepth.filter(f => f.visible).map((f, i) => {
+        {facesWithDepth.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
           const mx  = f.pts2d.reduce((s,p)=>s+p[0],0)/f.pts2d.length;
           const my  = f.pts2d.reduce((s,p)=>s+p[1],0)/f.pts2d.length;
           return (
             <g key={i}>
-              <polygon points={pts} fill={f.color} fillOpacity={0.88}
-                stroke="rgba(255,255,255,0.35)" strokeWidth={1.2} strokeLinejoin="round"/>
+              <polygon points={pts} fill={f.color} fillOpacity={1}
+                stroke="rgba(255,255,255,0.5)" strokeWidth={1.2} strokeLinejoin="round"/>
               <text x={cx+mx} y={cy+my+3} fill="white" fontSize={7} fontFamily="monospace"
                 fontWeight="bold" textAnchor="middle" dominantBaseline="middle"
                 style={{ pointerEvents:"none" }}>{f.label}</text>
