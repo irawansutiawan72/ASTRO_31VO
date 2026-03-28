@@ -220,7 +220,7 @@ const { verts: dbVerts, faces: dbFaces } = makeDuaBalokData(70, 48, 40, 46, 30);
 
 const ThreeGabungan3D = () => (
   <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
-    <p className="text-center text-white/40 font-body" style={{ fontSize:9 }}>
+    <p className="text-center text-yellow-300 font-body font-semibold" style={{ fontSize:13 }}>
       Berputar otomatis · Drag untuk memutar sendiri
     </p>
     <div className="flex gap-2">
