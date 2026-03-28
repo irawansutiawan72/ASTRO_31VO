@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
@@ -7,7 +7,6 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-import gambar1 from "@/assets/Gambar_1_pengukuran_sudut_positif_dan_sudut_negatif_1773289476312.png";
 import gambar2 from "@/assets/Gambar_2_Sudut_Bersebelahan_1773289476314.png";
 import gambar3 from "@/assets/Gambar_3_Jumlah_Sudut_Dalam_1_Putaran_1773289476316.png";
 import gambar4 from "@/assets/Gambar_4_Sudut_Saling_Berpelurus_1773289476316.png";
@@ -58,6 +57,49 @@ const renderWithLatex = (text: string) => {
   });
 };
 
+const SudutPosNegSVG = () => (
+  <svg viewBox="0 0 340 195" className="w-full max-w-md mx-auto" style={{ background: "transparent" }}>
+    <defs>
+      <marker id="ah-gsv" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+        <path d="M 0 0 L 6 3.5 L 0 7 Z" fill="#F0C040" />
+      </marker>
+    </defs>
+
+    {/* ── LEFT: Sudut Positif ── */}
+    {/* OA arm → right */}
+    <line x1="80" y1="120" x2="150" y2="120" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    {/* OB arm → upper-left (130°) */}
+    <line x1="80" y1="120" x2="40" y2="72" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    {/* Arc CCW from 0° to 130°: sweep-flag=0 */}
+    <path d="M 116,120 A 36,36 0 0,0 56.9,92.4" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    {/* Labels */}
+    <text x="74" y="136" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
+    <text x="152" y="116" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="28"  y="72"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
+    <text x="95"  y="108" fill="#F0C040" fontSize="12" fontFamily="serif" fontStyle="italic">θ</text>
+    <text x="80"  y="155" fill="#F0C040" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Positif (+)</text>
+    <text x="80"  y="170" fill="#F0C040" fontSize="8.5" textAnchor="middle" opacity="0.75">berlawanan arah jarum jam</text>
+
+    {/* Divider */}
+    <line x1="170" y1="10" x2="170" y2="185" stroke="#F0C040" strokeWidth="0.5" strokeDasharray="4,4" opacity="0.35" />
+
+    {/* ── RIGHT: Sudut Negatif ── */}
+    {/* OA arm → right */}
+    <line x1="250" y1="80" x2="320" y2="80" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    {/* OB arm → lower-left (-130° = 230°) */}
+    <line x1="250" y1="80" x2="210" y2="128" stroke="#F0C040" strokeWidth="2" markerEnd="url(#ah-gsv)" />
+    {/* Arc CW from 0° to -130°: sweep-flag=1 */}
+    <path d="M 286,80 A 36,36 0 0,1 226.9,107.6" fill="none" stroke="#F0C040" strokeWidth="1.8" markerEnd="url(#ah-gsv)" />
+    {/* Labels */}
+    <text x="244" y="96"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">O</text>
+    <text x="322" y="76"  fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">A</text>
+    <text x="198" y="132" fill="#F0C040" fontSize="13" fontFamily="serif" fontStyle="italic">B</text>
+    <text x="262" y="100" fill="#F0C040" fontSize="12" fontFamily="serif" fontStyle="italic">-θ</text>
+    <text x="250" y="155" fill="#F0C040" fontSize="11" fontFamily="sans-serif" fontWeight="bold" textAnchor="middle">Sudut Negatif (-)</text>
+    <text x="250" y="170" fill="#F0C040" fontSize="8.5" textAnchor="middle" opacity="0.75">searah arah jarum jam</text>
+  </svg>
+);
+
 const MateriImage = ({ src, caption }: { src: string; caption: string }) => (
   <div className="my-3 flex flex-col items-center">
     <img src={src} alt={caption} className="max-w-full rounded-lg border border-border/40 bg-white/5" />
@@ -71,6 +113,10 @@ type SectionContent = {
 } | {
   type: "image";
   src: string;
+  caption: string;
+} | {
+  type: "svg";
+  component: ReactNode;
   caption: string;
 };
 
@@ -96,7 +142,7 @@ const materiSections: MateriSection[] = [
         type: "text",
         value: `Ruas garis OA diputar terhadap titik O ke garis OB sehingga diperoleh sudut AOB dan dapat ditulis dengan $\\angle AOB$.`
       },
-      { type: "image", src: gambar1, caption: "Gambar 1: Pengukuran Sudut Positif dan Sudut Negatif" },
+      { type: "svg", component: <SudutPosNegSVG />, caption: "Gambar 1: Pengukuran Sudut Positif dan Sudut Negatif" },
       {
         type: "text",
         value: `Untuk mengukur sudut dilakukan berlawanan dengan arah jarum jam yang disebut dengan sudut positif, sedangkan jika pengukuran dilakukan searah jarum jam maka dituliskan sudut negatif.
@@ -592,6 +638,14 @@ const OlimpiadeGarisSudutPage = () => {
                     {section.items.map((item, i) => {
                       if (item.type === "image") {
                         return <MateriImage key={i} src={item.src} caption={item.caption} />;
+                      }
+                      if (item.type === "svg") {
+                        return (
+                          <div key={i} className="my-3 flex flex-col items-center">
+                            {item.component}
+                            <p className="text-xs text-white/40 mt-1 italic">{item.caption}</p>
+                          </div>
+                        );
                       }
                       return (
                         <div key={i} className="font-body text-sm text-white/80 whitespace-pre-wrap leading-relaxed mb-2">
