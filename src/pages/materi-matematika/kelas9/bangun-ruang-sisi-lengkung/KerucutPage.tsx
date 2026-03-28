@@ -383,7 +383,8 @@ const ConeNetAnimation = () => {
   const BASE_Y = APEX_Y + hh;
   const RY = 22;
   const SECTOR_START_ANGLE = Math.PI / 2 - THETA / 2;
-  const ALAS_CY = APEX_Y + s + 28 + r;
+  // Alas tangent to arc bottom (no gap — menyatu dengan selimut)
+  const ALAS_CY = APEX_Y + s + r;
 
   const drawFrame = useCallback((t: number) => {
     const canvas = canvasRef.current;
@@ -397,6 +398,11 @@ const ConeNetAnimation = () => {
     const easeIO = (x: number) =>
       x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     const clamp = (x: number) => Math.max(0, Math.min(1, x));
+
+    // Label x anchor (right-side labels)
+    const LX = 258;
+    // Yellow label color helper
+    const ylw = (a: number) => `rgba(250,204,21,${a})`;
 
     const grd = ctx.createRadialGradient(CX, APEX_Y, 4, CX, APEX_Y + hh / 2, 200);
     grd.addColorStop(0, 'rgba(6,182,212,0.07)');
@@ -463,9 +469,10 @@ const ConeNetAnimation = () => {
     strips.filter(sd => !sd.isFront && sd.easeT < 0.05).forEach(drawS);
     strips.filter(sd => sd.isFront || sd.easeT >= 0.05).forEach(drawS);
 
+    // Cut line flash at start
     if (t < 0.18) {
       const ca = 1 - t / 0.18;
-      ctx.strokeStyle = `rgba(250,204,21,${ca * 0.92})`;
+      ctx.strokeStyle = ylw(ca * 0.92);
       ctx.lineWidth = 2.2;
       ctx.setLineDash([5, 3]);
       ctx.shadowBlur = 10;
@@ -476,13 +483,13 @@ const ConeNetAnimation = () => {
       ctx.stroke();
       ctx.setLineDash([]);
       ctx.shadowBlur = 0;
-
-      ctx.fillStyle = `rgba(250,204,21,${ca * 0.85})`;
+      ctx.fillStyle = ylw(ca * 0.85);
       ctx.font = 'bold 9px monospace';
       ctx.textAlign = 'left';
       ctx.fillText('← garis potong', CX + r + 4, BASE_Y - 10);
     }
 
+    // Assembled base ellipse (fades out as peeling starts)
     if (t < 0.65) {
       const ea = t < 0.3 ? 1 : 1 - clamp((t - 0.3) / 0.35);
       ctx.beginPath();
@@ -494,6 +501,7 @@ const ConeNetAnimation = () => {
       ctx.stroke();
     }
 
+    // Alas — transitions from ellipse at BASE_Y to circle at ALAS_CY (tangent, menyatu)
     if (t > 0.58) {
       const alasRaw = clamp((t - 0.58) / 0.42);
       const alasT = easeIO(alasRaw);
@@ -508,27 +516,35 @@ const ConeNetAnimation = () => {
       ctx.fill();
       ctx.stroke();
 
-      if (alasT > 0.45) {
-        const la = clamp((alasT - 0.45) / 0.55);
-        ctx.fillStyle = `rgba(165,180,252,${la})`;
+      // Alas label — right side, yellow
+      if (alasT > 0.5) {
+        const la = clamp((alasT - 0.5) / 0.5);
+        // "ALAS" to the right of the circle
+        ctx.fillStyle = ylw(la);
         ctx.font = 'bold 11px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('ALAS', CX, alasY + 4);
-        if (la > 0.35) {
-          const la2 = (la - 0.35) / 0.65;
-          ctx.strokeStyle = `rgba(251,191,36,${la2})`;
-          ctx.lineWidth = 1.8;
+        ctx.textAlign = 'left';
+        ctx.fillText('ALAS', CX + r + 12, alasY - 5);
+        ctx.fillStyle = ylw(la * 0.8);
+        ctx.font = '8px monospace';
+        ctx.fillText('lingkaran (r)', CX + r + 12, alasY + 8);
+        // r radius line
+        if (la > 0.3) {
+          const la2 = clamp((la - 0.3) / 0.7);
+          ctx.strokeStyle = ylw(la2 * 0.9);
+          ctx.lineWidth = 1.5;
           ctx.beginPath();
           ctx.moveTo(CX, alasY);
           ctx.lineTo(CX + r, alasY);
           ctx.stroke();
-          ctx.fillStyle = `rgba(251,191,36,${la2})`;
+          ctx.fillStyle = ylw(la2);
           ctx.font = 'bold 10px monospace';
-          ctx.fillText('r', CX + r / 2, alasY - 5);
+          ctx.textAlign = 'center';
+          ctx.fillText('r', CX + r / 2, alasY - 4);
         }
       }
     }
 
+    // Apex dot
     ctx.shadowBlur = 14;
     ctx.shadowColor = '#facc15';
     ctx.beginPath();
@@ -537,40 +553,43 @@ const ConeNetAnimation = () => {
     ctx.fill();
     ctx.shadowBlur = 0;
 
+    // Labels — all right-side, all yellow
     if (t > 0.80) {
       const la = clamp((t - 0.80) / 0.20);
 
-      ctx.fillStyle = `rgba(250,204,21,${la})`;
+      // Apex label (right of dot)
+      ctx.fillStyle = ylw(la);
       ctx.font = 'bold 9px monospace';
       ctx.textAlign = 'left';
       ctx.fillText('T (puncak)', CX + 9, APEX_Y + 4);
 
-      ctx.fillStyle = `rgba(34,211,238,${la})`;
-      ctx.font = 'bold 12px monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText('SELIMUT', CX, APEX_Y + s / 2 + 8);
-      ctx.fillStyle = `rgba(148,163,184,${la * 0.8})`;
-      ctx.font = '8px monospace';
-      ctx.fillText('juring lingkaran (r = s)', CX, APEX_Y + s / 2 + 22);
-
+      // "s" slant-edge label (on left edge of sector, already upper-right)
       const midS = s * 0.47;
-      ctx.fillStyle = `rgba(250,204,21,${la})`;
+      ctx.fillStyle = ylw(la);
       ctx.font = 'bold 11px monospace';
       ctx.textAlign = 'center';
       ctx.fillText('s', CX + midS * Math.cos(SECTOR_START_ANGLE) - 10, APEX_Y + midS * Math.sin(SECTOR_START_ANGLE));
 
-      ctx.fillStyle = `rgba(103,232,249,${la})`;
-      ctx.font = '9px monospace';
-      ctx.fillText('busur = 2πr', CX, APEX_Y + s + 14);
-      ctx.fillStyle = `rgba(148,163,184,${la * 0.75})`;
+      // Right-side block: SELIMUT info
+      ctx.textAlign = 'left';
+      ctx.fillStyle = ylw(la);
+      ctx.font = 'bold 12px monospace';
+      ctx.fillText('SELIMUT', LX, APEX_Y + s / 2 - 8);
+      ctx.fillStyle = ylw(la * 0.85);
       ctx.font = '8px monospace';
-      ctx.fillText(`sudut juring = (r/s)×360° ≈ ${Math.round((r / s) * 360)}°`, CX, APEX_Y + s + 26);
+      ctx.fillText('juring lingkaran', LX, APEX_Y + s / 2 + 6);
+      ctx.fillText('r_juring = s', LX, APEX_Y + s / 2 + 18);
+      ctx.fillText(`busur = 2πr`, LX, APEX_Y + s / 2 + 30);
+      ctx.fillText(`sudut ≈ ${Math.round((r / s) * 360)}°`, LX, APEX_Y + s / 2 + 42);
 
-      ctx.fillStyle = `rgba(251,191,36,${la})`;
+      // Final success text — centered, yellow
+      ctx.textAlign = 'center';
+      ctx.fillStyle = ylw(la);
       ctx.font = 'bold 10px monospace';
-      ctx.fillText('✓ Jaring-jaring = ALAS + SELIMUT', CX, canvas.height - 8);
+      ctx.fillText('✓ Jaring-jaring = SELIMUT + ALAS (menyatu)', CX, canvas.height - 8);
     }
 
+    // Progress bar
     if (t > 0 && t < 1) {
       const barY = canvas.height - 5;
       ctx.fillStyle = 'rgba(71,85,105,0.45)';
@@ -615,7 +634,7 @@ const ConeNetAnimation = () => {
         <canvas
           ref={canvasRef}
           width={400}
-          height={330}
+          height={300}
           style={{ width: '100%', display: 'block', borderRadius: 10 }}
         />
       </div>
