@@ -8,6 +8,136 @@ import "katex/dist/katex.min.css";
 import { playPopSound } from "@/hooks/useAudio";
 
 /* ─────────────────────────────────────────────────────────────
+   SIMPLE ROTATABLE CUBE — drag to rotate, no unfolding
+───────────────────────────────────────────────────────────── */
+const CUBE_S = 90;
+const CUBE_H = CUBE_S / 2;
+
+const SIMPLE_FACE_COLORS: Record<FName, string> = {
+  front:  "#3b82f6",
+  back:   "#8b5cf6",
+  left:   "#22c55e",
+  right:  "#f97316",
+  top:    "#eab308",
+  bottom: "#ef4444",
+};
+const SIMPLE_FACE_LABELS: Record<FName, string> = {
+  front: "DEPAN", back: "BELAKANG", left: "KIRI",
+  right: "KANAN", top: "ATAS", bottom: "BAWAH",
+};
+const SIMPLE_FACE_TRANSFORMS: Record<FName, string> = {
+  front:  `translateZ(${CUBE_H}px)`,
+  back:   `rotateY(180deg) translateZ(${CUBE_H}px)`,
+  left:   `rotateY(-90deg) translateZ(${CUBE_H}px)`,
+  right:  `rotateY(90deg) translateZ(${CUBE_H}px)`,
+  top:    `rotateX(90deg) translateZ(${CUBE_H}px)`,
+  bottom: `rotateX(-90deg) translateZ(${CUBE_H}px)`,
+};
+
+const SimpleRotatableCube = () => {
+  const [rotX, setRotX] = useState(-22);
+  const [rotY, setRotY] = useState(35);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragRef = useRef({ sx: 0, sy: 0, bx: -22, by: 35 });
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: rotX, by: rotY };
+  };
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    if (!isDragging) return;
+    setRotY(dragRef.current.by + (e.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx - (e.clientY - dragRef.current.sy) * 0.55);
+  }, [isDragging]);
+  const onMouseUp = useCallback(() => setIsDragging(false), []);
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    setIsDragging(true);
+    dragRef.current = { sx: t.clientX, sy: t.clientY, bx: rotX, by: rotY };
+  };
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    if (!isDragging) return;
+    const t = e.touches[0];
+    setRotY(dragRef.current.by + (t.clientX - dragRef.current.sx) * 0.55);
+    setRotX(dragRef.current.bx - (t.clientY - dragRef.current.sy) * 0.55);
+  }, [isDragging]);
+  const onTouchEnd = useCallback(() => setIsDragging(false), []);
+
+  useEffect(() => {
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [onMouseMove, onMouseUp, onTouchMove, onTouchEnd]);
+
+  return (
+    <div
+      className="bg-slate-900/70 border border-slate-700/50 rounded-xl select-none"
+      style={{ padding: "12px 0 8px", cursor: isDragging ? "grabbing" : "grab" }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+    >
+      <p className="text-center text-white/40 font-body mb-1" style={{ fontSize: 9 }}>
+        Drag untuk memutar kubus
+      </p>
+      <div
+        className="mx-auto flex items-center justify-center overflow-visible"
+        style={{ width: CUBE_S, height: CUBE_S, margin: "0 auto", marginTop: 28, marginBottom: 28 }}
+      >
+        <div
+          style={{
+            width: CUBE_S,
+            height: CUBE_S,
+            position: "relative",
+            transformStyle: "preserve-3d",
+            transform: `perspective(700px) rotateX(${rotX}deg) rotateY(${rotY}deg)`,
+            transition: isDragging ? "none" : "transform 0.4s ease",
+          }}
+        >
+          {(Object.keys(SIMPLE_FACE_TRANSFORMS) as FName[]).map(face => (
+            <div
+              key={face}
+              style={{
+                position: "absolute",
+                width: CUBE_S,
+                height: CUBE_S,
+                transform: SIMPLE_FACE_TRANSFORMS[face],
+                background: SIMPLE_FACE_COLORS[face],
+                opacity: 0.92,
+                border: "2px solid rgba(255,255,255,0.35)",
+                borderRadius: 6,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: `inset 0 0 18px rgba(0,0,0,0.25)`,
+              }}
+            >
+              <span style={{
+                color: "#fff",
+                fontSize: 8,
+                fontWeight: 700,
+                letterSpacing: 1,
+                fontFamily: "monospace",
+                textShadow: "0 1px 3px rgba(0,0,0,0.5)",
+              }}>
+                {SIMPLE_FACE_LABELS[face]}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    INTERACTIVE 3D CUBE — pivot/hinge-based folding, back = tumpuan
 ───────────────────────────────────────────────────────────── */
 type FName = "front" | "back" | "left" | "right" | "top" | "bottom";
@@ -1420,6 +1550,7 @@ const KubusPage = () => {
       icon: "🎯",
       content: (
         <div className="space-y-4 font-body">
+          <SimpleRotatableCube />
           <div className="bg-card/60 border border-border rounded-xl p-4 text-sm text-white/75 leading-relaxed">
             <p>
               Dari kotak pembungkus kado hingga dadu permainan, kubus ada di mana-mana! Pelajari semua tentang
