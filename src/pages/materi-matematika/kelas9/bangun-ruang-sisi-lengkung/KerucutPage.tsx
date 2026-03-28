@@ -363,6 +363,159 @@ const VolumeKerucutSVG = () => (
 );
 
 /* ─────────────────────────────────────────────────────────────
+   VOLUME KERUCUT — animated water-fill visualization
+───────────────────────────────────────────────────────────── */
+const WaterKerucutAnimation = () => {
+  const [fill, setFill] = useState(0);
+  const [wave, setWave] = useState(0);
+
+  useEffect(() => {
+    const FILL_MS    = 3200;
+    const HOLD_FULL  = 900;
+    const EMPTY_MS   = 2000;
+    const HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      setWave(Math.sin(now * 0.005) * 2.5);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const CX = 112, RX = 68, RY = 16;
+  const CY_APEX = 38, CY_BOT = 175;
+  const CYL_H_PX = CY_BOT - CY_APEX;
+
+  const waterY      = CY_BOT - fill * CYL_H_PX;
+  const waterRx     = RX * (waterY - CY_APEX) / CYL_H_PX;
+  const waterRy     = RY * (waterY - CY_APEX) / CYL_H_PX;
+  const pct         = Math.round(fill * 100);
+  const isEmpty     = fill < 0.005;
+  const isFull      = fill > 0.995;
+  const showSurface = !isEmpty && !isFull;
+  const waveOffset  = showSurface ? wave : 0;
+
+  const barX = 200, barY = CY_APEX, barW = 13, barH = CYL_H_PX;
+  const filledH = barH * fill;
+
+  return (
+    <svg viewBox="0 0 280 215" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi kerucut diisi air">
+      <defs>
+        <filter id="wBloomC">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      {/* ── Ghost cone shell (dark background) ── */}
+      <polygon
+        points={`${CX},${CY_APEX} ${CX - RX},${CY_BOT} ${CX + RX},${CY_BOT}`}
+        fill="#0f172a" fillOpacity={0.20}
+        stroke="none"
+      />
+
+      {/* ── Bottom cap (floor) ── */}
+      <ellipse
+        cx={CX} cy={CY_BOT} rx={RX} ry={RY}
+        fill={isEmpty ? "#0f172a" : "#1e3a8a"}
+        stroke="none"
+      />
+
+      {/* ── Water body (trapezoid from base up to water surface) ── */}
+      {!isEmpty && (
+        <polygon
+          points={`${CX - RX},${CY_BOT} ${CX + RX},${CY_BOT} ${CX + waterRx},${waterY} ${CX - waterRx},${waterY}`}
+          fill="#1d4ed8" fillOpacity={0.85}
+        />
+      )}
+
+      {/* ── Water surface ellipse with subtle wave ── */}
+      {showSurface && (
+        <>
+          <ellipse
+            cx={CX} cy={waterY + waveOffset} rx={waterRx} ry={waterRy}
+            fill="#7dd3fc" fillOpacity={0.45}
+          />
+          <ellipse
+            cx={CX} cy={waterY + waveOffset} rx={waterRx} ry={waterRy}
+            fill="none" stroke="#bae6fd" strokeWidth="1.8"
+            strokeDasharray="5,3" opacity={0.85}
+          />
+        </>
+      )}
+
+      {/* ── Cone outline rendered on top of water ── */}
+      <line x1={CX} y1={CY_APEX} x2={CX - RX} y2={CY_BOT}
+        stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round" />
+      <line x1={CX} y1={CY_APEX} x2={CX + RX} y2={CY_BOT}
+        stroke="#7c3aed" strokeWidth="2.5" strokeLinecap="round" />
+      <ellipse
+        cx={CX} cy={CY_BOT} rx={RX} ry={RY}
+        fill="none" stroke="#a855f7" strokeWidth="2"
+      />
+      <circle cx={CX} cy={CY_APEX} r="3.5" fill="#c4b5fd" />
+
+      {/* ── r dimension label ── */}
+      <line x1={CX} y1={CY_BOT} x2={CX + RX} y2={CY_BOT}
+        stroke="#4ade80" strokeWidth="1.5" strokeDasharray="3,2" opacity="0.85" />
+      <circle cx={CX} cy={CY_BOT} r="2.5" fill="#4ade80" />
+      <circle cx={CX + RX} cy={CY_BOT} r="2.5" fill="#4ade80" />
+      <text x={CX + RX / 2} y={CY_BOT + 12}
+        fill="#4ade80" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">r</text>
+
+      {/* ── t dimension label ── */}
+      <line x1={CX - RX - 13} y1={CY_APEX} x2={CX - RX - 13} y2={CY_BOT}
+        stroke="#f97316" strokeWidth="1.5" />
+      <line x1={CX - RX - 8} y1={CY_APEX} x2={CX - RX - 18} y2={CY_APEX}
+        stroke="#f97316" strokeWidth="1.5" />
+      <line x1={CX - RX - 8} y1={CY_BOT} x2={CX - RX - 18} y2={CY_BOT}
+        stroke="#f97316" strokeWidth="1.5" />
+      <text x={CX - RX - 28} y={(CY_APEX + CY_BOT) / 2 + 4}
+        fill="#f97316" fontSize="11" fontFamily="monospace" fontWeight="bold" textAnchor="middle">t</text>
+
+      {/* ── Progress bar ── */}
+      <rect x={barX} y={barY} width={barW} height={barH}
+        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3" />
+      {!isEmpty && (
+        <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
+          fill="#2563eb" fillOpacity={0.88} rx="3" />
+      )}
+      <text x={barX + barW / 2} y={barY - 5}
+        fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX + barW / 2} y={barY + barH + 12}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {pct}%
+      </text>
+
+      {/* ── Status + Formula ── */}
+      <text x={CX} y={198}
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+        filter="url(#wBloomC)">
+        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+      </text>
+      <text x={CX} y={212}
+        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#wBloomC)">
+        V = ⅓πr²t
+      </text>
+    </svg>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────
    CONE NET ANIMATION — slow-motion canvas peeling animation
    Geometry: r=55, h=120, s≈132, sector angle≈150°
    N=60 triangular strips peel in a wave from left→right
@@ -872,7 +1025,17 @@ const sections: Sec[] = [
           <strong className="text-blue-300">Volume kerucut</strong> adalah besar ruang yang ditempati kerucut.
           Fakta menarik: volume kerucut tepat <strong className="text-yellow-300">⅓ dari volume tabung</strong> yang memiliki alas dan tinggi yang sama!
         </p>
-        <VolumeKerucutSVG />
+
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
+          <p className="text-cyan-300 text-xs font-semibold font-body text-center">
+            🌊 Kerucut diisi air — dari kosong hingga penuh
+          </p>
+          <WaterKerucutAnimation />
+          <p className="text-white/45 text-[10px] font-body text-center">
+            Persentase menunjukkan proporsi volume terisi terhadap volume total
+          </p>
+        </div>
+
         <div className="bg-blue-950/60 border border-blue-700/50 rounded-lg p-4 space-y-3">
           <p className="text-blue-300 font-semibold">📌 Penurunan Rumus:</p>
           <div className="text-xs text-white/70 space-y-1">
