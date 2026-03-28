@@ -614,75 +614,176 @@ const JaringTabSelector = () => {
 };
 
 /* ─────────────────────────────────────────────────────────────
-   VOLUME PRISMA — oblique 3D triangular prism
+   VOLUME PRISMA — animated water-fill visualization
 ───────────────────────────────────────────────────────────── */
-const VolumePrismaSVG = () => {
-  /*
-   * Oblique projection of a triangular prism (clearly elongated/deep):
-   * Front triangular face on the LEFT, prism extends to the right-back
-   * Triangle: equilateral-like, points up
-   * Prism depth (panjang): extends to the right
-   */
-  const dx = 120, dy = -40; // depth direction vector (right-back)
-  // Front triangle vertices
-  const fBL: V2 = [28, 170];  // front bottom-left
-  const fBR: V2 = [108, 170]; // front bottom-right
-  const fAP: V2 = [68, 100];  // front apex (top)
-  // Back triangle vertices = front + (dx, dy)
+const WaterPrismaAnimation = () => {
+  const [fill, setFill] = useState(0);
+
+  useEffect(() => {
+    const FILL_MS   = 3200;
+    const HOLD_FULL = 900;
+    const EMPTY_MS  = 2000;
+    const HOLD_EMPTY = 500;
+    const TOTAL = FILL_MS + HOLD_FULL + EMPTY_MS + HOLD_EMPTY;
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const t = (now - start) % TOTAL;
+      let f: number;
+      if (t < FILL_MS)                              f = t / FILL_MS;
+      else if (t < FILL_MS + HOLD_FULL)             f = 1;
+      else if (t < FILL_MS + HOLD_FULL + EMPTY_MS)  f = 1 - (t - FILL_MS - HOLD_FULL) / EMPTY_MS;
+      else                                           f = 0;
+      setFill(f);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  // Oblique prism geometry (same orientation as original VolumePrismaSVG)
+  const fBL: V2 = [28, 168];   // front bottom-left
+  const fBR: V2 = [108, 168];  // front bottom-right
+  const fAP: V2 = [68, 98];    // front apex
+  const dx = 118, dy = -40;
   const bBL: V2 = [fBL[0]+dx, fBL[1]+dy];
   const bBR: V2 = [fBR[0]+dx, fBR[1]+dy];
   const bAP: V2 = [fAP[0]+dx, fAP[1]+dy];
-  const pt = (a: V2) => `${a[0]},${a[1]}`;
+
+  // Linear interpolation helper
+  const lerp = (a: V2, b: V2, t: number): V2 => [
+    a[0] + (b[0] - a[0]) * t,
+    a[1] + (b[1] - a[1]) * t,
+  ];
+  const p = (v: V2) => `${v[0].toFixed(1)},${v[1].toFixed(1)}`;
+  const pp = (...vs: V2[]) => vs.map(p).join(" ");
+
+  // Water surface vertices at current fill fraction
+  const fWL = lerp(fBL, fAP, fill);
+  const fWR = lerp(fBR, fAP, fill);
+  const bWL = lerp(bBL, bAP, fill);
+  const bWR = lerp(bBR, bAP, fill);
+
+  const pct = Math.round(fill * 100);
+  const isEmpty  = fill < 0.005;
+  const isFull   = fill > 0.995;
+
+  // Progress bar geometry
+  const barX = 244, barY = 98, barW = 14, barH = 70;
+  const filledH = barH * fill;
+
   return (
-    <svg viewBox="0 0 280 210" className="w-full max-w-sm mx-auto my-2"
-      aria-label="Volume prisma segitiga — bersinar">
+    <svg viewBox="0 0 280 225" className="w-full max-w-sm mx-auto my-2"
+      aria-label="Animasi prisma segitiga diisi air">
       <defs>
-        <style>{`
-          @keyframes vpFront{0%,100%{fill-opacity:0.88;filter:drop-shadow(0 0 12px #60a5fa);}50%{fill-opacity:0.5;filter:drop-shadow(0 0 3px #1d4ed8);}}
-          @keyframes vpTop{0%,100%{fill-opacity:0.92;filter:drop-shadow(0 0 14px #a78bfa);}50%{fill-opacity:0.55;filter:drop-shadow(0 0 4px #7c3aed);}}
-          @keyframes vpBottom{0%,100%{fill-opacity:0.82;filter:drop-shadow(0 0 10px #4ade80);}50%{fill-opacity:0.4;filter:none;}}
-          @keyframes vpEdge{0%,100%{stroke-opacity:1;filter:drop-shadow(0 0 5px #e0e7ff);}50%{stroke-opacity:0.3;filter:none;}}
-          @keyframes vpLbl{0%,100%{opacity:1;}50%{opacity:0.5;}}
-          .vp-front{animation:vpFront 2.6s ease-in-out infinite;}
-          .vp-top{animation:vpTop 2.6s ease-in-out infinite 0.55s;}
-          .vp-bottom{animation:vpBottom 2.6s ease-in-out infinite 1.1s;}
-          .vp-edge{animation:vpEdge 2.6s ease-in-out infinite;}
-          .vp-lbl{animation:vpLbl 2.6s ease-in-out infinite;}
-        `}</style>
-        <filter id="vpBloom">
-          <feGaussianBlur stdDeviation="3" result="b"/>
+        <filter id="wBloom">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
           <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
         </filter>
+        <filter id="wGlow">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        {/* Clip to prism interior so water never spills outside */}
+        <clipPath id="prismInterior">
+          <polygon points={pp(fBL, fBR, fAP)}/>
+          <polygon points={pp(fBL, fBR, bBR, bBL)}/>
+          <polygon points={pp(fBR, fAP, bAP, bBR)}/>
+          <polygon points={pp(fAP, bAP, bBR, fBR)}/>
+        </clipPath>
       </defs>
-      {/* Front triangular face */}
-      <polygon points={`${pt(fBL)} ${pt(fBR)} ${pt(fAP)}`}
-        fill="#1d4ed8" className="vp-front" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
-      {/* Top rectangular face (apex edge) */}
-      <polygon points={`${pt(fAP)} ${pt(bAP)} ${pt(bBR)} ${pt(fBR)}`}
-        fill="#7c3aed" className="vp-top" stroke="#c4b5fd" strokeWidth="2" strokeLinejoin="round"/>
-      {/* Bottom rectangular face */}
-      <polygon points={`${pt(fBL)} ${pt(fBR)} ${pt(bBR)} ${pt(bBL)}`}
-        fill="#15803d" className="vp-bottom" stroke="#4ade80" strokeWidth="2" strokeLinejoin="round"/>
-      {/* Visible edges */}
-      <polyline points={`${pt(fBL)} ${pt(fBR)} ${pt(fAP)} ${pt(fBL)}`}
-        fill="none" stroke="#93c5fd" strokeWidth="2" className="vp-edge" strokeLinejoin="round"/>
-      <line x1={fAP[0]} y1={fAP[1]} x2={bAP[0]} y2={bAP[1]} stroke="#c4b5fd" strokeWidth="2" className="vp-edge"/>
-      <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="2" className="vp-edge"/>
-      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#4ade80" strokeWidth="2" className="vp-edge"/>
-      <polyline points={`${pt(bBL)} ${pt(bBR)} ${pt(bAP)}`}
-        fill="none" stroke="#e0e7ff" strokeWidth="2" className="vp-edge" strokeLinejoin="round"/>
-      {/* Hidden edges (dashed) */}
-      <line x1={bBL[0]} y1={bBL[1]} x2={bAP[0]} y2={bAP[1]} stroke="#475569" strokeWidth="1.2" strokeDasharray="4,3"/>
-      {/* Labels */}
-      <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+14} fill="#4ade80" fontSize="10"
-        fontFamily="monospace" fontWeight="bold" textAnchor="middle" className="vp-lbl">a (alas △)</text>
-      <text x={fBL[0]-12} y={(fBL[1]+fAP[1])/2+4} fill="#93c5fd" fontSize="10"
-        fontFamily="monospace" fontWeight="bold" className="vp-lbl">t△</text>
-      <text x={fBR[0]+dx/2+8} y={fBR[1]+dy/2+2} fill="#c4b5fd" fontSize="10"
-        fontFamily="monospace" fontWeight="bold" className="vp-lbl">t</text>
-      {/* Formula */}
-      <text x="140" y="202" fill="#e0e7ff" fontSize="13" fontFamily="monospace" fontWeight="bold"
-        textAnchor="middle" filter="url(#vpBloom)" className="vp-lbl">V = L△ × t</text>
+
+      {/* ── Hidden back edge (dashed) ── */}
+      <line x1={bBL[0]} y1={bBL[1]} x2={bAP[0]} y2={bAP[1]}
+        stroke="#334155" strokeWidth="1.2" strokeDasharray="4,3"/>
+
+      {/* ── Prism ghost shell (transparent, always visible) ── */}
+      <polygon points={pp(fBL, fBR, bBR, bBL)}
+        fill="#0f172a" fillOpacity={0.25} stroke="#334155" strokeWidth="1"/>
+      <polygon points={pp(fBR, fAP, bAP, bBR)}
+        fill="#0f172a" fillOpacity={0.18} stroke="#334155" strokeWidth="1"/>
+      <polygon points={pp(fBL, fBR, fAP)}
+        fill="#0f172a" fillOpacity={0.15} stroke="#334155" strokeWidth="1"/>
+
+      {/* ── WATER (painter order: back → front) ── */}
+      {!isEmpty && (
+        <>
+          {/* Bottom face (floor) — always fully covered */}
+          <polygon points={pp(fBL, fBR, bBR, bBL)}
+            fill="#1e40af" fillOpacity={0.82}/>
+
+          {/* Right face water (visible back-right rectangular band) */}
+          <polygon points={pp(fBR, bBR, bWR, fWR)}
+            fill="#1d4ed8" fillOpacity={0.78}/>
+
+          {/* Front face water (visible front trapezoid) */}
+          <polygon points={pp(fBL, fBR, fWR, fWL)}
+            fill="#2563eb" fillOpacity={0.88}/>
+
+          {/* Water surface (horizontal parallelogram) — shimmer */}
+          {!isFull && (
+            <polygon points={pp(fWL, fWR, bWR, bWL)}
+              fill="#7dd3fc" fillOpacity={0.45}
+              style={{ filter: "drop-shadow(0 0 6px #38bdf8)" }}/>
+          )}
+
+          {/* Water surface ripple line on front face */}
+          {!isFull && (
+            <line x1={fWL[0]} y1={fWL[1]} x2={fWR[0]} y2={fWR[1]}
+              stroke="#bae6fd" strokeWidth={1.8} strokeDasharray="5,3" strokeOpacity={0.8}/>
+          )}
+        </>
+      )}
+
+      {/* ── Prism outline (solid edges on top of water) ── */}
+      {/* Front triangle */}
+      <polyline points={pp(fBL, fBR, fAP, fBL)}
+        fill="none" stroke="#93c5fd" strokeWidth="2" strokeLinejoin="round"/>
+      {/* Depth edges */}
+      <line x1={fAP[0]} y1={fAP[1]} x2={bAP[0]} y2={bAP[1]} stroke="#c4b5fd" strokeWidth="1.8"/>
+      <line x1={fBR[0]} y1={fBR[1]} x2={bBR[0]} y2={bBR[1]} stroke="#a5b4fc" strokeWidth="1.8"/>
+      <line x1={fBL[0]} y1={fBL[1]} x2={bBL[0]} y2={bBL[1]} stroke="#4ade80" strokeWidth="1.8"/>
+      {/* Back triangle visible edges */}
+      <polyline points={pp(bBL, bBR, bAP)}
+        fill="none" stroke="#e0e7ff" strokeWidth="1.8" strokeLinejoin="round"/>
+
+      {/* ── Dimension labels ── */}
+      <text x={(fBL[0]+fBR[0])/2} y={fBL[1]+14}
+        fill="#4ade80" fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">a</text>
+      <text x={fBL[0]-13} y={(fBL[1]+fAP[1])/2+4}
+        fill="#93c5fd" fontSize="9" fontFamily="monospace" fontWeight="bold">t△</text>
+      <text x={fBR[0]+dx/2+6} y={fBR[1]+dy/2+2}
+        fill="#c4b5fd" fontSize="9" fontFamily="monospace" fontWeight="bold">t</text>
+
+      {/* ── Progress bar ── */}
+      <rect x={barX} y={barY} width={barW} height={barH}
+        fill="#0f172a" stroke="#334155" strokeWidth="1.2" rx="3"/>
+      {!isEmpty && (
+        <rect x={barX} y={barY + barH - filledH} width={barW} height={filledH}
+          fill="#2563eb" fillOpacity={0.85} rx="3"/>
+      )}
+      <text x={barX + barW/2} y={barY - 6}
+        fill="#94a3b8" fontSize="7" fontFamily="monospace" textAnchor="middle">V%</text>
+      <text x={barX + barW/2} y={barY + barH + 12}
+        fill={isFull ? "#4ade80" : isEmpty ? "#94a3b8" : "#7dd3fc"}
+        fontSize="9" fontFamily="monospace" fontWeight="bold" textAnchor="middle">
+        {pct}%
+      </text>
+
+      {/* ── Status label ── */}
+      <text x="134" y="195"
+        fill={isFull ? "#4ade80" : isEmpty ? "#64748b" : "#7dd3fc"}
+        fontSize="10" fontFamily="monospace" fontWeight="bold" textAnchor="middle"
+        filter="url(#wBloom)">
+        {isFull ? "🌊 Penuh!" : isEmpty ? "⬛ Kosong" : `🔵 Mengisi... ${pct}%`}
+      </text>
+
+      {/* ── Formula ── */}
+      <text x="134" y="212"
+        fill="#e0e7ff" fontSize="12" fontFamily="monospace" fontWeight="bold"
+        textAnchor="middle" filter="url(#wBloom)">
+        V = L△ × t
+      </text>
     </svg>
   );
 };
@@ -847,7 +948,15 @@ const sections: Sec[] = [
           <strong className="text-green-300">Volume prisma</strong> menyatakan seberapa besar "isi" ruang yang ditempati prisma.
           Rumusnya sangat sederhana: luas alas dikalikan tinggi.
         </p>
-        <VolumePrismaSVG />
+        <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-3 space-y-1">
+          <p className="text-cyan-300 text-xs font-semibold font-body text-center">
+            🌊 Prisma segitiga diisi air — dari kosong hingga penuh
+          </p>
+          <WaterPrismaAnimation />
+          <p className="text-white/45 text-[10px] font-body text-center">
+            Persentase menunjukkan proporsi volume terisi terhadap volume total
+          </p>
+        </div>
         <div className="bg-slate-800/60 border border-slate-600/40 rounded-lg p-4 space-y-2">
           <div className="bg-slate-900/60 rounded p-3">
             <BlockMath math="V = L_{\text{alas}} \times t" />
