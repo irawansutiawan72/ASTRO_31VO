@@ -192,7 +192,7 @@ const RotatingGabungan3D = ({
       onMouseDown={onMouseDown} onTouchStart={onTouchStart}
     >
       <span className="text-white/70 font-body font-semibold text-center leading-tight mb-1" style={{ fontSize:9 }}>{label}</span>
-      <svg viewBox="0 0 170 200" style={{ width:"100%", maxWidth:160, overflow:"visible" }}>
+      <svg viewBox="0 0 170 200" style={{ width:"100%", maxWidth:220, overflow:"visible" }}>
         {sorted.map((f, i) => {
           const pts = f.pts2d.map(([x,y]) => `${cx+x},${cy+y}`).join(" ");
           const mx  = f.pts2d.reduce((s,p)=>s+p[0],0)/f.pts2d.length;
@@ -214,9 +214,9 @@ const RotatingGabungan3D = ({
   );
 };
 
-const { verts: blVerts, faces: blFaces } = makeBalokLimasData(50, 35, 32, 28);
-const { verts: klVerts, faces: klFaces } = makeKubusLimasData(40, 30);
-const { verts: dbVerts, faces: dbFaces } = makeDuaBalokData(54, 36, 30, 34, 22);
+const { verts: blVerts, faces: blFaces } = makeBalokLimasData(68, 48, 44, 38);
+const { verts: klVerts, faces: klFaces } = makeKubusLimasData(54, 40);
+const { verts: dbVerts, faces: dbFaces } = makeDuaBalokData(70, 48, 40, 46, 30);
 
 const ThreeGabungan3D = () => (
   <div className="bg-slate-900/70 border border-slate-700/50 rounded-xl p-3 space-y-2">
