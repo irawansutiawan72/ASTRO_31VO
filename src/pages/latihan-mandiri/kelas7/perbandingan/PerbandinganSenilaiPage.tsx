@@ -96,25 +96,6 @@ const PerbandinganSenilaiPage = () => {
           </div>
         </div>
 
-        {/* Game Quiz Section */}
-        <div className="bg-card/80 backdrop-blur border border-purple-500/50 rounded-xl p-6 mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <h2 className="text-lg font-bold text-purple-400 mb-4 font-display">Game Quiz</h2>
-
-          <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
-            {/* Game Quiz 1 */}
-            <div className="border-l-2 border-purple-500/50 pl-4 flex gap-3">
-              <span className="font-semibold text-purple-400 shrink-0">1.</span>
-              <p>Sebuah studio developer game dapat menyelesaikan pembuatan sebuah aplikasi dalam waktu 9 bulan dengan tim yang terdiri dari 210 orang programmer. Jika peluncuran aplikasi tersebut dimajukan sehingga harus selesai dalam waktu 7 bulan saja, berapa banyak programmer yang harus ditambahkan ke dalam tim tersebut?</p>
-            </div>
-
-            {/* Game Quiz 2 */}
-            <div className="border-l-2 border-purple-500/50 pl-4 flex gap-3">
-              <span className="font-semibold text-purple-400 shrink-0">2.</span>
-              <p>Sebuah kolam renang dapat diisi penuh menggunakan Pompa Air A dalam waktu 12 jam. Jika hanya menggunakan Pompa Air B, kolam akan penuh dalam waktu 6 jam. Berapa jam waktu yang dibutuhkan untuk mengisi kolam renang tersebut jika Pompa A dan Pompa B dihidupkan bersama-sama?</p>
-            </div>
-          </div>
-        </div>
-
         <div className="mt-8 text-center">
           <button
             onClick={() => { playPopSound(); navigate("/latihan-mandiri/kelas-7/perbandingan"); }}
