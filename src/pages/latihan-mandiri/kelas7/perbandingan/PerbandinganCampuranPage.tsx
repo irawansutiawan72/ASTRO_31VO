@@ -23,38 +23,38 @@ const PerbandinganCampuranPage = () => {
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">1.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">1.</span>
               <p>Tujuh ekor kambing menghasilkan rumput seluas 7 kali ukuran lapangan sepak bola dalam waktu 7 hari. Waktu yang diperlukan oleh 3 ekor kambing untuk menghabiskan rumput seluas 3 kali ukuran lapangan sepak bola adalah ... hari</p>
             </div>
 
             {/* Soal 2 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">2.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">2.</span>
               <p>Jika 4 orang tukang kayu dapat membuat 12 kursi dalam waktu 3 hari, berapa hari yang dibutuhkan oleh 6 orang tukang kayu untuk membuat 24 kursi?</p>
             </div>
 
             {/* Soal 3 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">3.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">3.</span>
               <p>Sebuah perusahaan konstruksi mengerahkan 12 pekerja untuk menyelesaikan 2 unit rumah dalam waktu 30 hari. Jika perusahaan tersebut ingin menyelesaikan 3 unit rumah serupa dalam waktu 24 hari, berapa banyak pekerja yang harus mereka kerahkan?</p>
             </div>
 
             {/* Soal 4 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">4.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">4.</span>
               <p>Seorang peternak memiliki 40 ekor sapi yang dapat menghabiskan 60 karung pakan dalam waktu 15 hari. Jika peternak tersebut menjual 10 ekor sapinya (tersisa 30 ekor) dan ia hanya memiliki 45 karung pakan, berapa lama (dalam hari) persediaan pakan tersebut akan habis?</p>
             </div>
 
             {/* Soal 5 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">5.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">5.</span>
               <p>Tiga mesin cetak tipe A dapat mencetak 3.000 buku dalam 5 jam. Empat mesin cetak tipe B dapat mencetak 4.800 buku dalam 6 jam. Jika perusahaan menggunakan 2 mesin tipe A dan 3 mesin tipe B secara bersamaan, berapa jam waktu yang dibutuhkan untuk mencetak 8.000 buku?</p>
             </div>
 
             {/* Soal 6 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">6.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">6.</span>
               <p>Sebuah pabrik kain jika memproduksi pesanannya menggunakan 2 mesin tenun modern (kapasitas besar) akan selesai dalam waktu 12 hari, sedangkan jika dikerjakan menggunakan 4 mesin tenun tradisional (kapasitas kecil) selesai dalam waktu 18 hari. Jika pabrik tersebut mengoperasikan 3 mesin tenun modern dan 3 mesin tenun tradisional secara bersamaan, dalam waktu berapa hari pesanan kain tersebut dapat diselesaikan?</p>
             </div>
           </div>

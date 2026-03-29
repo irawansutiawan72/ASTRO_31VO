@@ -23,72 +23,74 @@ const PerbandinganSenilaiPage = () => {
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">1.</p>
-              <p className="mb-2">Di antara pernyataan-pernyataan berikut, tentukan mana yang merupakan perbandingan senilai, perbandingan berbalik nilai, atau bukan keduanya!</p>
-              <ol className="list-[lower-alpha] list-inside space-y-1 ml-2">
-                <li>Kecepatan rata-rata sebuah mobil dengan waktu tempuh untuk mencapai kota tujuan.</li>
-                <li>Jumlah porsi resep kue dengan takaran gram tepung terigu yang dibutuhkan.</li>
-                <li>Usia seseorang dengan ukuran sepatu yang dipakainya.</li>
-                <li>Jarak tempuh sebuah taksi dengan total argo yang harus dibayar penumpang.</li>
-                <li>Jumlah halaman sebuah buku novel dengan waktu yang dibutuhkan untuk membacanya sampai tamat.</li>
-                <li>Banyaknya pompa air yang dihidupkan dengan waktu yang dibutuhkan untuk mengosongkan kolam renang.</li>
-                <li>Jumlah saudara kandung yang dimiliki seorang siswa dengan nilai ujian matematikanya.</li>
-                <li>Debit air yang keluar dari keran dengan volume air yang tertampung di dalam ember pada waktu tertentu.</li>
-              </ol>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">1.</span>
+              <div>
+                <p className="mb-2">Di antara pernyataan-pernyataan berikut, tentukan mana yang merupakan perbandingan senilai, perbandingan berbalik nilai, atau bukan keduanya!</p>
+                <ol className="list-[lower-alpha] list-inside space-y-1 ml-2">
+                  <li>Kecepatan rata-rata sebuah mobil dengan waktu tempuh untuk mencapai kota tujuan.</li>
+                  <li>Jumlah porsi resep kue dengan takaran gram tepung terigu yang dibutuhkan.</li>
+                  <li>Usia seseorang dengan ukuran sepatu yang dipakainya.</li>
+                  <li>Jarak tempuh sebuah taksi dengan total argo yang harus dibayar penumpang.</li>
+                  <li>Jumlah halaman sebuah buku novel dengan waktu yang dibutuhkan untuk membacanya sampai tamat.</li>
+                  <li>Banyaknya pompa air yang dihidupkan dengan waktu yang dibutuhkan untuk mengosongkan kolam renang.</li>
+                  <li>Jumlah saudara kandung yang dimiliki seorang siswa dengan nilai ujian matematikanya.</li>
+                  <li>Debit air yang keluar dari keran dengan volume air yang tertampung di dalam ember pada waktu tertentu.</li>
+                </ol>
+              </div>
             </div>
 
             {/* Soal 2 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">2.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">2.</span>
               <p>Sebuah mobil membutuhkan 4 liter bensin untuk menempuh jarak sejauh 60 km. Jika mobil tersebut diisi dengan 10 liter bensin, tentukan jarak maksimal yang dapat ditempuh oleh mobil tersebut!</p>
             </div>
 
             {/* Soal 3 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">3.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">3.</span>
               <p>Seorang peternak memiliki persediaan makanan ternak yang cukup untuk memberi makan 30 ekor sapi selama 15 hari. Jika peternak tersebut baru saja membeli 15 ekor sapi lagi, berapa hari persediaan makanan tersebut akan habis?</p>
             </div>
 
             {/* Soal 4 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">4.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">4.</span>
               <p>Sebuah mesin cetak foto digital membutuhkan waktu 5 menit untuk mencetak 60 lembar foto beresolusi tinggi. Berapa menit waktu yang diperlukan mesin tersebut jika harus mencetak pesanan sebanyak 84 lembar foto?</p>
             </div>
 
             {/* Soal 5 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">5.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">5.</span>
               <p>Adi dapat menyelesaikan suatu pekerjaan selama 4 jam. Budi dapat menyelesaikan pekerjaan yang sama dalam waktu 6 jam. Jika pekerjaan tersebut dikerjakan adi dan budi bersama sama, maka pekerjaan tersebut akan selesai dalam waktu ...</p>
             </div>
 
             {/* Soal 6 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">6.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">6.</span>
               <p>Suatu perkajaan jika dikerjakan oleh Anto dan Dini dapat diselesaikan dalam waktu 6 jam. Jika pekerjaan itu dikerjakan oleh Dini sendirian akan selesai 5 jam lebih lambat dibandingkan Anto. Pekerjaan itu dapat diselesaikan Anto sendirian dalam waktu ... jam</p>
             </div>
 
             {/* Soal 7 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">7.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">7.</span>
               <p>Persiapan sebuah panggung festival budaya diperkirakan selesai dalam waktu 24 hari jika dikerjakan oleh 6 orang teknisi. Setelah dikerjakan selama 4 hari, pekerjaan terpaksa dihentikan selama 8 hari karena badai. Agar persiapan panggung selesai tepat waktu sesuai rencana awal, berapa banyak tambahan teknisi yang diperlukan?</p>
             </div>
 
             {/* Soal 8 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">8.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">8.</span>
               <p>Sebuah pesanan seragam sekolah dapat diselesaikan oleh 4 orang penjahit dalam waktu 20 hari. Setelah mereka bekerja selama 4 hari, pasokan listrik terputus sehingga pekerjaan terhenti total selama 12 hari. Berapa banyak tambahan penjahit yang dibutuhkan agar pesanan seragam tersebut dapat diselesaikan tepat waktu?</p>
             </div>
 
             {/* Soal 9 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">9.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">9.</span>
               <p>Sebuah tempat penampungan hewan (shelter) memiliki persediaan makanan (dry food) yang cukup untuk 20 ekor kucing peliharaan selama 25 hari. Berapa hari persediaan makanan tersebut akan habis jika shelter tersebut menerima tambahan penghuni sebanyak 5 ekor kucing lagi?</p>
             </div>
 
             {/* Soal 10 */}
-            <div className="border-l-2 border-accent/50 pl-4">
-              <p className="font-semibold text-accent mb-2">10.</p>
+            <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
+              <span className="font-semibold text-accent shrink-0">10.</span>
               <p>Sebuah pesanan katering pernikahan raksasa jika dikerjakan oleh 3 orang Chef utama akan selesai dalam waktu 10 hari, sedangkan jika dikerjakan oleh 8 orang asisten dapur akan selesai dalam waktu 9 hari. Jika pesanan tersebut dikerjakan secara bersama-sama oleh 5 Chef utama dan 6 asisten dapur, dalam waktu berapa hari pesanan katering itu akan selesai?</p>
             </div>
           </div>
@@ -100,14 +102,14 @@ const PerbandinganSenilaiPage = () => {
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Game Quiz 1 */}
-            <div className="border-l-2 border-purple-500/50 pl-4">
-              <p className="font-semibold text-purple-400 mb-2">1.</p>
+            <div className="border-l-2 border-purple-500/50 pl-4 flex gap-3">
+              <span className="font-semibold text-purple-400 shrink-0">1.</span>
               <p>Sebuah studio developer game dapat menyelesaikan pembuatan sebuah aplikasi dalam waktu 9 bulan dengan tim yang terdiri dari 210 orang programmer. Jika peluncuran aplikasi tersebut dimajukan sehingga harus selesai dalam waktu 7 bulan saja, berapa banyak programmer yang harus ditambahkan ke dalam tim tersebut?</p>
             </div>
 
             {/* Game Quiz 2 */}
-            <div className="border-l-2 border-purple-500/50 pl-4">
-              <p className="font-semibold text-purple-400 mb-2">2.</p>
+            <div className="border-l-2 border-purple-500/50 pl-4 flex gap-3">
+              <span className="font-semibold text-purple-400 shrink-0">2.</span>
               <p>Sebuah kolam renang dapat diisi penuh menggunakan Pompa Air A dalam waktu 12 jam. Jika hanya menggunakan Pompa Air B, kolam akan penuh dalam waktu 6 jam. Berapa jam waktu yang dibutuhkan untuk mengisi kolam renang tersebut jika Pompa A dan Pompa B dihidupkan bersama-sama?</p>
             </div>
           </div>
