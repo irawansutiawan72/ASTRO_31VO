@@ -9,7 +9,7 @@ import { InlineMath, BlockMath } from "react-katex";
 
 const PembagianBilanganBulatPage = () => {
   const navigate = useNavigate();
-  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "negatifPositif", "positifNegatif", "negatifNegatif", "pembagianNol", "contoh", "kesimpulan"]);
+  const [expandedSections, setExpandedSections] = useState<string[]>(["intro", "positifPositif", "negatifPositif", "positifNegatif", "negatifNegatif", "pembagianNol", "contoh", "kesimpulan"]);
 
   const toggleSection = (section: string) => {
     playPopSound();
@@ -82,6 +82,55 @@ const PembagianBilanganBulatPage = () => {
                   <p className="font-body text-sm text-yellow-200 leading-relaxed">
                     <strong>Tips!</strong> Operasi kebalikan ini disebut juga <strong>invers perkalian</strong>. Dengan memahami konsep ini, kamu bisa mengecek hasil pembagianmu dengan cara mengalikan kembali!
                   </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Section: Positif dibagi Positif */}
+          <div className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+            <button
+              onClick={() => toggleSection("positifPositif")}
+              className="w-full flex items-center justify-between px-5 py-4 text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Target className="w-5 h-5 text-green-400" />
+                <span className="font-body font-semibold text-white">Positif : Positif = Positif</span>
+              </div>
+              {expandedSections.includes("positifPositif") ? (
+                <ChevronUp className="w-5 h-5 text-primary" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-primary" />
+              )}
+            </button>
+            {expandedSections.includes("positifPositif") && (
+              <div className="px-5 pb-5 space-y-4">
+                <p className="font-body text-sm text-white/80 leading-relaxed">
+                  Pembagian dua bilangan positif menghasilkan bilangan positif. Mari kita buktikan dengan konsep kebalikan perkalian!
+                </p>
+
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-green-300 mb-3">Pembuktian:</p>
+                  <div className="space-y-3">
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <p className="text-white/70 text-xs mb-2"><InlineMath math="12 \div 3 = a" /> artinya <InlineMath math="a \times 3 = 12" /></p>
+                      <p className="text-white/70 text-xs mb-1">Bilangan berapa yang jika dikali 3 hasilnya 12?</p>
+                      <p className="text-green-400 text-sm">Jawab: <InlineMath math="a = 4" /> karena <InlineMath math="4 \times 3 = 12" /></p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded p-3">
+                      <p className="text-white/70 text-xs mb-2"><InlineMath math="30 \div 6 = b" /> artinya <InlineMath math="b \times 6 = 30" /></p>
+                      <p className="text-white/70 text-xs mb-1">Bilangan berapa yang jika dikali 6 hasilnya 30?</p>
+                      <p className="text-green-400 text-sm">Jawab: <InlineMath math="b = 5" /> karena <InlineMath math="5 \times 6 = 30" /></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="font-body text-sm font-semibold text-green-300 mb-2">Kesimpulan:</p>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <BlockMath math="\text{Positif} \div \text{Positif} = \textbf{Positif}" />
+                    <BlockMath math="a \div b = \frac{a}{b}" />
+                  </div>
                 </div>
               </div>
             )}
