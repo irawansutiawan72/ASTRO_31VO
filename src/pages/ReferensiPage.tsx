@@ -12,6 +12,7 @@ const bukuRefs = [
   "Raharjo, M. 2018. Matematika 1 Untuk SMP/MTs Kelas VII. Jakarta: Erlangga.",
   "Raharjo, M dan Setiawan, A. 2019. Matematik 2 untuk SMP/MTS Kelas VIII. Jakarta: Erlangga.",
   "Sukino. 2020. The Great Matematika untuk Siswa SMP-MTs Kelas IX. Kab. Bandung: Srikandi Empat Widya Utama.",
+  "Tim Progresif. 2024. MATEMATIKA 1B SEMESTER 1 untuk SMP/MTs Kelas VII (K-MERDEKA). Jakarta: Erlangga.",
   "MKKS SMP/MTs DIY. 2025. Naskah Pemantapan dan Persiapan Tes Kemampuan Akademik (TKA) MKKS SMP/MTs DIY Tahun Pelajaran 2025/2026 Paket A.",
   "Pemerintah Kota Yogyakarta Dinas Pendidikan. 2025. Naskah Persiapan Pemantapan Tes Kemampuan Akademik (TKA) Kota Yogyakarta Tahap 1 Tahun Pelajaran 2025/2026.",
 ];
@@ -27,6 +28,7 @@ const internetRefs = [
   { label: "youtube.com/watch?v=JrWic2SG_ts", url: "https://www.youtube.com/watch?v=JrWic2SG_ts", akses: "Maret 2026", author: "Saya Bisa.", title: "Operasi Hitung Bilangan Bulat: Perkalian dan Pembagian | Matematika | SayaBisa." },
   { label: "gemini.google.com/app/d3c60af4ffbee066", url: "https://gemini.google.com/app/d3c60af4ffbee066?hl=id", akses: "Maret 2026" },
   { label: "gemini.google.com/app/5eb5a48656083a32", url: "https://gemini.google.com/app/5eb5a48656083a32?hl=id", akses: "Maret 2026" },
+  { label: "Wahyu. 2014. Siap OSN Olimpiade Sains Nasional Matematika SMP 2015. Situbondo : E-book", url: null, akses: "Maret 2026" },
 ];
 
 const ReferensiPage = () => {
