@@ -883,7 +883,7 @@ const DiagramSurveiInvestasi = () => {
 };
 
 const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
-  4:  <DiagramGridPQ />,
+  4:  <img src="/peluang_fix_olimp.png" alt="Diagram Grid P ke Q" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
   10: <DiagramLingkaranAngka />,
   45: <DiagramTabelSMS />,
   70: <DiagramSurveiInvestasi />,
