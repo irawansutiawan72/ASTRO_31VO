@@ -5,10 +5,10 @@ import { playPopSound } from "@/hooks/useAudio";
 import { Scale, ArrowRightLeft, Layers, Map, ChevronRight } from "lucide-react";
 
 const subtopics = [
-  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/latihan-mandiri/kelas-7/perbandingan/umum", soal: 40, icon: Scale, gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", badge: "bg-sky-500/20 text-sky-300 border-sky-400/40", iconBg: "bg-sky-500/20", iconColor: "text-sky-400", leftBar: "from-sky-400 to-blue-500", desc: "Pengertian perbandingan, satuan pembanding, rasio a:b, menyederhanakan rasio" },
-  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/latihan-mandiri/kelas-7/perbandingan/senilai", soal: 40, icon: ArrowRightLeft, gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", badge: "bg-blue-500/20 text-blue-300 border-blue-400/40", iconBg: "bg-blue-500/20", iconColor: "text-blue-400", leftBar: "from-blue-400 to-indigo-500", desc: "Perbandingan senilai (searah) dan berbalik nilai (berbalik), soal kontekstual" },
-  { label: "PERBANDINGAN CAMPURAN", path: "/latihan-mandiri/kelas-7/perbandingan/campuran", soal: 40, icon: Layers, gradient: "from-indigo-900/40 to-violet-900/30", border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-violet-500", desc: "Membagi nilai dalam perbandingan a:b:c, aplikasi pembagian warisan & campuran" },
-  { label: "SKALA", path: "/latihan-mandiri/kelas-7/perbandingan/skala", soal: 40, icon: Map, gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500", desc: "Skala peta, menghitung jarak sebenarnya & jarak pada gambar, soal denah" },
+  { label: "PERBANDINGAN UMUM, SATUAN PEMBANDING DAN RASIO", path: "/latihan-mandiri/kelas-7/perbandingan/umum", soal: 15, icon: Scale, gradient: "from-sky-900/40 to-blue-900/30", border: "border-sky-500/30", badge: "bg-sky-500/20 text-sky-300 border-sky-400/40", iconBg: "bg-sky-500/20", iconColor: "text-sky-400", leftBar: "from-sky-400 to-blue-500", desc: "Pengertian perbandingan, satuan pembanding, rasio a:b, menyederhanakan rasio" },
+  { label: "PERBANDINGAN SENILAI DAN BERBALIK NILAI", path: "/latihan-mandiri/kelas-7/perbandingan/senilai", soal: 12, icon: ArrowRightLeft, gradient: "from-blue-900/40 to-indigo-900/30", border: "border-blue-500/30", badge: "bg-blue-500/20 text-blue-300 border-blue-400/40", iconBg: "bg-blue-500/20", iconColor: "text-blue-400", leftBar: "from-blue-400 to-indigo-500", desc: "Perbandingan senilai (searah) dan berbalik nilai (berbalik), soal kontekstual" },
+  { label: "PERBANDINGAN CAMPURAN", path: "/latihan-mandiri/kelas-7/perbandingan/campuran", soal: 6, icon: Layers, gradient: "from-indigo-900/40 to-violet-900/30", border: "border-indigo-500/30", badge: "bg-indigo-500/20 text-indigo-300 border-indigo-400/40", iconBg: "bg-indigo-500/20", iconColor: "text-indigo-400", leftBar: "from-indigo-400 to-violet-500", desc: "Membagi nilai dalam perbandingan a:b:c, aplikasi pembagian warisan & campuran" },
+  { label: "SKALA", path: "/latihan-mandiri/kelas-7/perbandingan/skala", soal: 10, icon: Map, gradient: "from-violet-900/40 to-purple-900/30", border: "border-violet-500/30", badge: "bg-violet-500/20 text-violet-300 border-violet-400/40", iconBg: "bg-violet-500/20", iconColor: "text-violet-400", leftBar: "from-violet-400 to-purple-500", desc: "Skala peta, menghitung jarak sebenarnya & jarak pada gambar, soal denah" },
 ];
 
 const PerbandinganPage = () => {
@@ -26,7 +26,7 @@ const PerbandinganPage = () => {
           <p className="text-white/50 text-xs text-center font-body mb-1">Kelas 7 · Latihan Mandiri</p>
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-5 py-2 mt-2">
             <span className="text-yellow-400 text-sm">⭐</span>
-            <span className="text-white/70 text-xs font-body">160 Soal Total · UN / TKA / ANBK</span>
+            <span className="text-white/70 text-xs font-body">43 Soal Total · UN / TKA / ANBK</span>
             <span className="text-yellow-400 text-sm">⭐</span>
           </div>
         </div>
