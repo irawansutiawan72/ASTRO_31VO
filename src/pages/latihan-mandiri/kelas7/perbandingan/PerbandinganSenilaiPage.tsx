@@ -20,6 +20,7 @@ const PerbandinganSenilaiPage = () => {
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
           <h2 className="text-lg font-bold text-accent mb-4 font-display">Perbandingan Senilai dan Berbalik Nilai</h2>
+          <p className="text-white/70 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
