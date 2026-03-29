@@ -117,7 +117,8 @@ const formatResult = (value: number, displayMode: DisplayMode): string => {
 };
 
 // Render expression string with proper superscripts for ^(...) notation
-const renderExpression = (expr: string, inExp: boolean, expStr: string): React.ReactNode => {
+// Also handles incomplete exponents at end of string (no closing paren yet)
+const renderExpression = (expr: string): React.ReactNode => {
   const elements: React.ReactNode[] = [];
   let i = 0;
   let currentText = "";
@@ -129,10 +130,10 @@ const renderExpression = (expr: string, inExp: boolean, expStr: string): React.R
         elements.push(<span key={key++}>{currentText}</span>);
         currentText = "";
       }
-      i += 2;
+      i += 2; // skip ^(
       let depth = 1;
       let exponent = "";
-      while (i < expr.length && depth > 0) {
+      while (i < expr.length) {
         if (expr[i] === "(") depth++;
         else if (expr[i] === ")") {
           depth--;
@@ -141,10 +142,11 @@ const renderExpression = (expr: string, inExp: boolean, expStr: string): React.R
         exponent += expr[i];
         i++;
       }
-      i++; // skip closing )
+      if (i < expr.length) i++; // skip closing )
+      // Render as superscript — show ▮ cursor if exponent is still empty
       elements.push(
-        <sup key={key++} className="text-[0.6em] leading-none">
-          {exponent}
+        <sup key={key++} className="text-[0.6em] leading-none text-yellow-200">
+          {exponent || "▮"}
         </sup>
       );
     } else {
@@ -154,14 +156,6 @@ const renderExpression = (expr: string, inExp: boolean, expStr: string): React.R
   }
 
   if (currentText) elements.push(<span key={key++}>{currentText}</span>);
-
-  if (inExp) {
-    elements.push(
-      <sup key={key++} className="text-[0.6em] leading-none text-yellow-300">
-        {expStr || "▮"}
-      </sup>
-    );
-  }
 
   return elements.length > 0 ? <>{elements}</> : <span> </span>;
 };
@@ -483,7 +477,7 @@ const KalkulatorScientificPage = () => {
           >
             {/* Expression */}
             <div className="text-xl text-cyan-300/90 break-all leading-relaxed mb-2 overflow-x-auto tracking-wide">
-              {expression || " "}
+              {expression ? renderExpression(expression) : " "}
             </div>
             {/* Result */}
             <div className="text-4xl text-white font-bold flex items-center justify-end gap-1">
