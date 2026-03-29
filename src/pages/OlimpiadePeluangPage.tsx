@@ -848,10 +848,45 @@ const DiagramTabelSMS = () => {
   );
 };
 
+const DiagramSurveiInvestasi = () => {
+  const cB = 150, cH = 142, maxV = 700;
+  const y = (v: number) => cB - (v / maxV) * cH;
+  const bW = 52, x1 = 98, x2 = 196;
+  const grids = [0, 100, 200, 300, 400, 500, 600, 700];
+  return (
+    <svg viewBox="0 0 295 195" className="w-full max-w-xs mx-auto my-2" aria-label="Diagram Survei Investasi">
+      {grids.map(v => (
+        <g key={v}>
+          <line x1={33} y1={y(v)} x2={268} y2={y(v)} stroke="#374151" strokeWidth="0.5" />
+          <text x={30} y={y(v) + 3} textAnchor="end" fill="#9ca3af" fontSize="7">{v}</text>
+        </g>
+      ))}
+      <line x1={33} y1={cB} x2={268} y2={cB} stroke="#6b7280" strokeWidth="1" />
+      <rect x={x1 - bW / 2} y={y(336)} width={bW} height={(336 / maxV) * cH} fill="#c2410c" />
+      <text x={x1} y={y(168) + 3} textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">336</text>
+      <rect x={x1 - bW / 2} y={y(605)} width={bW} height={(269 / maxV) * cH} fill="#fbbf24" />
+      <text x={x1} y={y(470) + 3} textAnchor="middle" fill="#1c1917" fontSize="8" fontWeight="bold">269</text>
+      <rect x={x2 - bW / 2} y={y(264)} width={bW} height={(264 / maxV) * cH} fill="#c2410c" />
+      <text x={x2} y={y(132) + 3} textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">264</text>
+      <rect x={x2 - bW / 2} y={y(395)} width={bW} height={(131 / maxV) * cH} fill="#fbbf24" />
+      <text x={x2} y={y(329) + 3} textAnchor="middle" fill="#1c1917" fontSize="8" fontWeight="bold">131</text>
+      <text x={x1} y={cB + 11} textAnchor="middle" fill="#d1d5db" fontSize="8">Emas</text>
+      <text x={x2} y={cB + 11} textAnchor="middle" fill="#d1d5db" fontSize="8">Reksadana</text>
+      <text x={150} y={cB + 22} textAnchor="middle" fill="#9ca3af" fontSize="7">Instrumen Investasi Pilihan</text>
+      <rect x={33} y={cB + 30} width={8} height={8} fill="#c2410c" />
+      <text x={43} y={cB + 38} fill="#d1d5db" fontSize="7">Kurang dari Rp4.000.000</text>
+      <rect x={150} y={cB + 30} width={8} height={8} fill="#fbbf24" />
+      <text x={160} y={cB + 38} fill="#d1d5db" fontSize="7">Setidaknya Rp4.000.000</text>
+      <text transform={`rotate(-90)`} x={-82} y={10} textAnchor="middle" fill="#9ca3af" fontSize="7">Banyak Orang</text>
+    </svg>
+  );
+};
+
 const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   4:  <DiagramGridPQ />,
   10: <DiagramLingkaranAngka />,
   45: <DiagramTabelSMS />,
+  70: <DiagramSurveiInvestasi />,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -973,7 +1008,7 @@ const latihanOlimpiade = [
   { no: 67, soal: "OSN Matematika 2021 Tingkat Kota\nMisalkan (p, q, r, s) adalah pasangan 4 bilangan dari himpunan {2, 3, 4, 5} yang tidak harus berbeda sehingga $p \\times q \\times r \\times s$ adalah bilangan ganjil. Banyaknya pasangan bilangan yang memenuhi adalah ...", options: ["A. 48", "B. 64", "C. 96", "D. 128"] },
   { no: 68, soal: "OSN Matematika 2021 Tingkat Kota\nSebuah bilangan bulat yang terdiri atas empat digit akan disusun sedemikian sehingga berupa bilangan genap dengan digit pertama (paling kiri) bernilai genap serta tidak ada angka yang berulang. Banyaknya cara menyusun bilangan tersebut adalah ...", options: ["A. 120", "B. 896", "C. 1120", "D. 5040"] },
   { no: 69, soal: "OSN Matematika 2021 Tingkat Kota\nDi suatu fasilitas kesehatan, empat pasang suami istri sedang mengantri untuk disuntuk vaksin satu per satu. Jika setiap suami menghendaki istrinya untuk disuntuk terlebih dahulu daripada dirinya dan setiap pasang suami istri tidak harus disuntuk berurutan, banyak urutan penyuntukan vaksin berbeda yang mungkin adalah ...", options: ["A. 24", "B. 576", "C. 2520", "D. 40260"] },
-  { no: 70, soal: "OSN Matematika 2021 Tingkat Kota\nDiagram mempresentasikan hasil survei penghasilan dan instrumen investasi pilihan 1000 orang di suatu wilayah. Jika dari 1000 orang tersebut dipilih 1 orang secara acak untuk diwawancarai dan diketahui bahwa orang tersebut memiliki penghasilan kurang dari Rp4.000.000, maka peluang orang tersebut lebih memilih instrumen investasi reksadana adalah ... %", options: ["A. 26", "B. 40", "C. 44", "D. 67"] },
+  { no: 70, soal: "OSN Matematika 2021 Tingkat Kota\nSurvei penghasilan dan instrumen investasi pilihan\n\nDiagram tersebut mempresentasikan hasil survei penghasilan dan instrumen investasi pilihan 1000 orang di suatu wilayah. Jika dari 1000 orang tersebut dipilih 1 orang secara acak untuk diwawancarai dan diketahui bahwa orang tersebut memiliki penghasilan kurang dari Rp4.000.000, maka peluang orang tersebut lebih memilih instrumen investasi reksadana adalah … %", options: ["A. 26", "B. 40", "C. 44", "D. 67"] },
   { no: 71, soal: "OSN Matematika 2021 Tingkat Kota\nBintang menuliskan angka 1, 2, 3, 4, 5, 6, 7 dan 8 di baris pertama tabel. Bintang ingin melakukan hal yang serupa pada baris kedua dengan suatu urutan tertentu. Setiap bilangan pada baris ketiga adalah jumlah dua bilangan di atasnya. Banyaknya cara Bintang mengisi baris kedua sehingga semua bilangan pada baris ketiga merupakan bilangan genap adalah ...", options: ["A. 8", "B. 16", "C. 48", "D. 576"] },
   { no: 72, soal: "OSN Matematika 2022 Tingkat Kota\nPada sebuah ujian yang dilaksanakan secara lisan, digunakan aturan sebagai berikut: sebanyak 30 pertanyaan berbeda dimasukkan secara berpasangan pada 15 kartu. Seorang siswa mengambil satu kartu secara acak. Jika dia menjawab dengan benar kedua pertanyaan pada kartu yang ditarik, dia dinyatakan lulus. Jika dia menjawab dengan benar hanya satu pertanyaan, dia mengambil kartu lain dan guru menentukan mana dari dua pertanyaan pada kartu kedua yang harus dijawab. Jika siswa menjawab benar pertanyaan yang ditentukan, siswa dinyatakan lulus. Pada keadaan lainnya siswa dinyatakan gagal. Jika seorang siswa mengetahui jawaban dari 25 pertanyaan dan tidak tahu jawaban yang benar untuk 5 pertanyaan lainnya, peluang siswa tersebut lulus ujian adalah ...", options: [] },
   { no: 73, soal: "OSN Matematika 2022 Tingkat Kota\nDalam suatu kotak tertutup, terdapat dua buah dadu dengan enam sisi. Dadu pertama memiliki satu sisi bermata 1, satu sisi bermata 2, dua sisi bermata 3, dan dua sisi bermata 5. Dadu kedua memiliki satu sisi bermata 1, satu sisi bermata 2, satu sisi bermata 3, dan tiga sisi bermata 5. Suatu permainan dilakukan dengan mengambil secara acak satu dadu dari dalam kotak, kemudian melemparkan dadu tersebut, mengamati hasilnya, dan memasukkannya kembali ke dalam kotak. Andi main dua kali dan mendapatkan hasil amatan mata 1 pada permainan pertama dan mata 5 pada permainan kedua. Peluang bahwa hanya dadu kedua yang terambil pada kedua permainan yang dilakukan Andi adalah ...", options: ["A. 0,4", "B. 0,3", "C. 0,2", "D. 0,1"] },
