@@ -103,11 +103,28 @@ const ArtiPecahanPage = () => {
                   <p className="font-body text-sm text-white/80 leading-relaxed mb-3">
                     Pecahan berada di antara dua bilangan bulat pada garis bilangan. Misalnya, <InlineMath math="\frac{1}{2}" /> terletak tepat di tengah antara 0 dan 1.
                   </p>
-                  <div className="bg-slate-900/50 rounded p-3 font-mono text-xs text-center overflow-x-auto">
-                    <p className="text-white/60 mb-2">Garis Bilangan:</p>
-                    <p className="text-primary whitespace-nowrap">
-                      {"0 ───┼─── 1/2 ───┼─── 1"}
-                    </p>
+                  <div className="bg-slate-900/50 rounded p-3">
+                    <p className="text-white/60 text-xs text-center mb-3">Garis Bilangan:</p>
+                    <svg viewBox="0 0 320 60" className="w-full max-w-sm mx-auto" aria-label="Garis bilangan pecahan">
+                      {/* Garis utama kuning */}
+                      <line x1="20" y1="30" x2="300" y2="30" stroke="#facc15" strokeWidth="2.5" strokeLinecap="round"/>
+                      {/* Panah kanan */}
+                      <polygon points="300,30 292,25 292,35" fill="#facc15"/>
+                      {/* Tanda titik 0 */}
+                      <line x1="60" y1="22" x2="60" y2="38" stroke="#facc15" strokeWidth="2"/>
+                      <text x="60" y="52" textAnchor="middle" fill="#facc15" fontSize="11" fontFamily="monospace" fontWeight="bold">0</text>
+                      {/* Tanda titik 1/2 */}
+                      <line x1="160" y1="20" x2="160" y2="40" stroke="#67e8f9" strokeWidth="2"/>
+                      <circle cx="160" cy="30" r="4" fill="#67e8f9"/>
+                      <text x="160" y="15" textAnchor="middle" fill="#67e8f9" fontSize="10" fontFamily="monospace" fontWeight="bold">1/2</text>
+                      {/* Tanda titik 1 */}
+                      <line x1="260" y1="22" x2="260" y2="38" stroke="#facc15" strokeWidth="2"/>
+                      <text x="260" y="52" textAnchor="middle" fill="#facc15" fontSize="11" fontFamily="monospace" fontWeight="bold">1</text>
+                      {/* Label jarak kiri */}
+                      <text x="110" y="24" textAnchor="middle" fill="#ffffff60" fontSize="8">← sama →</text>
+                      {/* Label jarak kanan */}
+                      <text x="210" y="24" textAnchor="middle" fill="#ffffff60" fontSize="8">← sama →</text>
+                    </svg>
                   </div>
                 </div>
 
