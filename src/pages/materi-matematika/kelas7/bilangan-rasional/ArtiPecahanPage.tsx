@@ -55,9 +55,19 @@ const ArtiPecahanPage = () => {
                   <p className="font-body text-sm font-semibold text-green-300 mb-2 flex items-center gap-2">
                     <Target className="w-4 h-4" /> Ringkasan Intisari
                   </p>
-                  <p className="font-body text-sm text-white/80 leading-relaxed">
+                  <p className="font-body text-sm text-white/80 leading-relaxed mb-4">
                     <strong className="text-primary">Pecahan</strong> adalah bilangan yang menggambarkan bagian dari suatu keseluruhan. Bayangkan kamu punya sepotong pizza yang dipotong rata menjadi beberapa bagian. Ketika kamu mengambil sebagian dari potongan tersebut, itulah yang disebut pecahan!
                   </p>
+                  <div className="flex flex-col items-center gap-2">
+                    <img
+                      src="/pizza_pecahan.jpg"
+                      alt="Ilustrasi pecahan senilai dengan pizza"
+                      className="w-full rounded-lg object-cover"
+                    />
+                    <p className="font-body text-xs text-white/60 text-center leading-relaxed">
+                      Kelima pizza di atas memiliki ukuran yang sama dan masing-masing menunjukkan bagian yang diarsir (pepperoni). Walaupun penulisannya berbeda (<InlineMath math="\frac{1}{2}, \frac{2}{4}, \frac{3}{6}, \frac{4}{8}, \frac{6}{12}" />), bagian pizza yang diambil tetap sama besar — inilah yang disebut <strong className="text-green-300">Pecahan Senilai</strong>!
+                    </p>
+                  </div>
                 </div>
 
                 <p className="font-body text-sm text-white/80 leading-relaxed">
