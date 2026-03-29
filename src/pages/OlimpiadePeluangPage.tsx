@@ -761,6 +761,12 @@ const latihanDasarSVG: Record<number, JSX.Element> = {
   38: <DiagramKotakKartu />,
 };
 
+const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
+  4:  <img src="/no_4_olimp.png"  alt="Diagram soal no 4"  className="max-w-[180px] mx-auto my-2 block rounded"/>,
+  10: <img src="/no_10_olimp.png" alt="Diagram soal no 10" className="max-w-[180px] mx-auto my-2 block rounded"/>,
+  45: <img src="/no_45_olimp.png" alt="Tabel soal no 45"   className="max-w-xs mx-auto my-2 block rounded"/>,
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 // LATIHAN DASAR (20 soal)
 // ─────────────────────────────────────────────────────────────────────────────
@@ -982,6 +988,11 @@ export default function OlimpiadePeluangPage() {
                           return <><span className="text-yellow-400 font-semibold">{header}</span>{'\n'}{renderWithLatex(body)}</>;
                         })()}
                       </p>
+                      {latihanOlimpiadeSVG[q.no] && (
+                        <div className="my-2">
+                          {latihanOlimpiadeSVG[q.no]}
+                        </div>
+                      )}
                       {q.options.length > 0 && (
                         <div className="grid grid-cols-2 gap-1 sm:grid-cols-3">
                           {q.options.map((opt, j) => (
