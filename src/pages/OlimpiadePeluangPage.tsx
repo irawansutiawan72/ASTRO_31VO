@@ -761,10 +761,97 @@ const latihanDasarSVG: Record<number, JSX.Element> = {
   38: <DiagramKotakKartu />,
 };
 
+const DiagramGridPQ = () => {
+  const cell = 32;
+  const ox = 22, oy = 28;
+  const gridCells = [
+    [0,0],[0,1],
+    [1,0],[1,1],[1,2],[1,3],
+    [2,0],[2,1],[2,2],[2,3],
+  ];
+  return (
+    <svg viewBox="0 0 190 145" className="w-full max-w-[220px] mx-auto my-3 rounded-lg" aria-label="Grid jalan terpendek P ke Q">
+      <rect x="0" y="0" width="190" height="145" rx="8" fill="#0f172a" opacity="0.7"/>
+      <defs>
+        <pattern id="hatchPQ" patternUnits="userSpaceOnUse" width="7" height="7" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#475569" strokeWidth="1.2"/>
+        </pattern>
+      </defs>
+      {gridCells.map(([r,c]) => (
+        <rect key={`${r}-${c}`} x={ox+c*cell} y={oy+r*cell} width={cell} height={cell}
+          fill="url(#hatchPQ)" stroke="#93c5fd" strokeWidth="1.3"/>
+      ))}
+      <text x={ox-5} y={oy-5} fill="#fbbf24" fontSize="13" fontWeight="bold" fontStyle="italic">P</text>
+      <text x={ox+4*cell+4} y={oy+3*cell+12} fill="#fbbf24" fontSize="13" fontWeight="bold" fontStyle="italic">Q</text>
+    </svg>
+  );
+};
+
+const DiagramLingkaranAngka = () => {
+  const r = 17, hSp = 37, vSp = 32, cx = 110;
+  const rows: { y: number; values: number[] }[] = [
+    { y: 28,        values: [8, 8, 8]       },
+    { y: 28+vSp,    values: [8, 0, 0, 8]    },
+    { y: 28+vSp*2,  values: [8, 0, 2, 0, 8] },
+    { y: 28+vSp*3,  values: [8, 0, 0, 8]    },
+    { y: 28+vSp*4,  values: [8, 8, 8]       },
+  ];
+  return (
+    <svg viewBox="0 0 220 210" className="w-full max-w-[240px] mx-auto my-3 rounded-lg" aria-label="Susunan lingkaran angka">
+      <rect x="0" y="0" width="220" height="210" rx="8" fill="#0f172a" opacity="0.7"/>
+      {rows.map(({ y, values }) =>
+        values.map((val, i) => {
+          const n = values.length;
+          const x = cx + (i - (n - 1) / 2) * hSp;
+          return (
+            <g key={`${y}-${i}`}>
+              <circle cx={x} cy={y} r={r} fill="none" stroke="#94a3b8" strokeWidth="1.3"/>
+              <text x={x} y={y + 5} textAnchor="middle" fill="#e2e8f0" fontSize="13" fontWeight="bold">{val}</text>
+            </g>
+          );
+        })
+      )}
+    </svg>
+  );
+};
+
+const DiagramTabelSMS = () => {
+  const data = [
+    { sms: "1 – 10",        pct: "5%"  },
+    { sms: "11 – 20",       pct: "10%" },
+    { sms: "21 – 30",       pct: "15%" },
+    { sms: "31 – 40",       pct: "20%" },
+    { sms: "41 atau lebih", pct: "25%" },
+  ];
+  const col1 = 155, col2 = 90, pad = 12;
+  const hRow = 26, hHead = 30;
+  const W = col1 + col2, H = hHead + data.length * hRow;
+  return (
+    <svg viewBox={`0 0 ${W + pad*2} ${H + pad*2}`} className="w-full max-w-sm mx-auto my-3 rounded-lg" aria-label="Tabel Jumlah SMS">
+      <rect x="0" y="0" width={W + pad*2} height={H + pad*2} rx="8" fill="#0f172a" opacity="0.7"/>
+      <rect x={pad} y={pad} width={W} height={hHead} fill="#1e3a5f" stroke="#60a5fa" strokeWidth="1"/>
+      <text x={pad + col1/2} y={pad + hHead*0.65} textAnchor="middle" fill="#93c5fd" fontSize="12" fontWeight="bold">Jumlah sms</text>
+      <text x={pad + col1 + col2/2} y={pad + hHead*0.65} textAnchor="middle" fill="#93c5fd" fontSize="12" fontWeight="bold">persentase</text>
+      <line x1={pad + col1} y1={pad} x2={pad + col1} y2={pad + H} stroke="#60a5fa" strokeWidth="1"/>
+      {data.map((row, i) => {
+        const y = pad + hHead + i * hRow;
+        return (
+          <g key={i}>
+            <rect x={pad} y={y} width={W} height={hRow} fill={i % 2 === 0 ? "#0f2744" : "#091929"} stroke="#334155" strokeWidth="0.5"/>
+            <text x={pad + col1/2} y={y + hRow*0.65} textAnchor="middle" fill="#e2e8f0" fontSize="11">{row.sms}</text>
+            <text x={pad + col1 + col2/2} y={y + hRow*0.65} textAnchor="middle" fill="#e2e8f0" fontSize="11">{row.pct}</text>
+          </g>
+        );
+      })}
+      <rect x={pad} y={pad} width={W} height={H} fill="none" stroke="#60a5fa" strokeWidth="1"/>
+    </svg>
+  );
+};
+
 const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
-  4:  <img src="/no_4_olimp.png"  alt="Diagram soal no 4"  className="max-w-[180px] mx-auto my-2 block rounded"/>,
-  10: <img src="/no_10_olimp.png" alt="Diagram soal no 10" className="max-w-[180px] mx-auto my-2 block rounded"/>,
-  45: <img src="/no_45_olimp.png" alt="Tabel soal no 45"   className="max-w-xs mx-auto my-2 block rounded"/>,
+  4:  <DiagramGridPQ />,
+  10: <DiagramLingkaranAngka />,
+  45: <DiagramTabelSMS />,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
