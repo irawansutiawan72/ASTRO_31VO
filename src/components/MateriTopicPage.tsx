@@ -38,7 +38,7 @@ const MateriTopicPage = ({ title, emoji, kelas, subtopics, backPath, backLabel }
   return (
     <div className="relative min-h-screen flex flex-col items-center gradient-space overflow-hidden">
       <Starfield />
-      <PageNavigation />
+      <PageNavigation prevPath={backPath} />
       <div className="relative z-10 max-w-3xl w-full px-4 py-10">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-primary/40 flex items-center justify-center mb-4">
