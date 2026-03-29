@@ -177,27 +177,32 @@ const ApotemaDetailSVG = () => (
     <defs>
       <style>{`
         @keyframes drawApo{0%{stroke-dashoffset:70;}100%{stroke-dashoffset:0;}}
-        @keyframes glowApo{0%,100%{filter:drop-shadow(0 0 8px #f43f5e);}50%{filter:drop-shadow(0 0 22px #f43f5e);}}
+        @keyframes glowApoYellow{0%,100%{filter:drop-shadow(0 0 4px rgba(253,224,71,0.45));}50%{filter:drop-shadow(0 0 10px rgba(253,224,71,0.7));}}
         .apo-line{stroke-dasharray:70;animation:drawApo 1.8s ease-in-out infinite;}
-        .apo-glow{animation:glowApo 1.8s ease-in-out infinite;}
+        .apo-glow{animation:glowApoYellow 2.2s ease-in-out infinite;}
       `}</style>
     </defs>
     <circle cx="150" cy="125" r="90" fill="rgba(6,182,212,0.07)" stroke="rgba(6,182,212,0.2)" strokeWidth="2"/>
+    {/* Radii — dashed lines O to A and O to B */}
+    <line x1="150" y1="125" x2="77" y2="82" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" strokeDasharray="5 4" strokeLinecap="round"/>
+    <line x1="150" y1="125" x2="223" y2="82" stroke="rgba(255,255,255,0.45)" strokeWidth="1.5" strokeDasharray="5 4" strokeLinecap="round"/>
+    <text x="100" y="115" fill="rgba(255,255,255,0.4)" fontSize="9" fontFamily="monospace">r</text>
+    <text x="188" y="115" fill="rgba(255,255,255,0.4)" fontSize="9" fontFamily="monospace">r</text>
     {/* Chord — horizontal above center */}
     <line x1="77" y1="82" x2="223" y2="82" stroke="rgba(249,115,22,0.7)" strokeWidth="2.5"/>
     <circle cx="77" cy="82" r="4" fill="#f97316"/>
     <circle cx="223" cy="82" r="4" fill="#f97316"/>
     <text x="58" y="78" fill="#fdba74" fontSize="11" fontFamily="monospace">A</text>
     <text x="228" y="78" fill="#fdba74" fontSize="11" fontFamily="monospace">B</text>
-    {/* Apotema from O perpendicular to chord */}
-    <line x1="150" y1="125" x2="150" y2="82" stroke="#f43f5e" strokeWidth="3" strokeLinecap="round" className="apo-line apo-glow"/>
+    {/* Apotema from O perpendicular to chord — dim yellow glow */}
+    <line x1="150" y1="125" x2="150" y2="82" stroke="#fde047" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.75" className="apo-line apo-glow"/>
     {/* Right angle marker */}
-    <polyline points="142,82 142,90 150,90" fill="none" stroke="#f43f5e" strokeWidth="1.5"/>
+    <polyline points="142,82 142,90 150,90" fill="none" stroke="#fde047" strokeWidth="1.5" strokeOpacity="0.7"/>
     <circle cx="150" cy="125" r="5" fill="#fbbf24"/>
-    <circle cx="150" cy="82" r="4" fill="#f43f5e"/>
+    <circle cx="150" cy="82" r="4" fill="#fde047"/>
     <text x="140" y="118" fill="#fde68a" fontSize="11" fontFamily="monospace">O</text>
-    <text x="154" y="78" fill="#fda4af" fontSize="11" fontFamily="monospace">D</text>
-    <text x="156" y="108" fill="#fda4af" fontSize="12" fontWeight="bold" fontFamily="monospace">OD ⊥ AB</text>
+    <text x="154" y="78" fill="#fef08a" fontSize="11" fontFamily="monospace">D</text>
+    <text x="156" y="108" fill="#fef08a" fontSize="12" fontWeight="bold" fontFamily="monospace">OD ⊥ AB</text>
     <text x="25" y="240" fill="rgba(255,255,255,0.45)" fontSize="10" fontFamily="monospace">Jarak terpendek dari pusat ke tali busur</text>
   </svg>
 );
