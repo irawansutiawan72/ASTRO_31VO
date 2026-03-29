@@ -21,8 +21,7 @@ const PerbandinganUmumPage = () => {
         <p className="text-white/50 text-xs text-center mb-6 font-body">Kelas 7 - Latihan Mandiri - Perbandingan</p>
 
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
-          <h2 className="text-lg font-bold text-accent mb-4 font-display">Latihan Mandiri</h2>
-          <p className="text-white/70 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
+          <p className="text-yellow-400 text-sm mb-6 font-body">Kerjakan soal-soal berikut lengkap dengan caranya</p>
 
           <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
             {/* Soal 1 */}
