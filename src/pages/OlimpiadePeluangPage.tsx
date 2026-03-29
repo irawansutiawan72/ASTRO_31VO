@@ -887,6 +887,7 @@ const latihanOlimpiadeSVG: Record<number, JSX.Element> = {
   10: <DiagramLingkaranAngka />,
   45: <DiagramTabelSMS />,
   70: <DiagramSurveiInvestasi />,
+  87: <img src="/peluang_olimp_87.png" alt="Diagram Soal 87" className="w-full max-w-[280px] mx-auto my-3 rounded-lg" />,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
