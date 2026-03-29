@@ -181,7 +181,7 @@ export default function FractionMultiplicationAnimation() {
 
       {/* SVG Visualization */}
       <div className="px-4">
-        <svg viewBox="0 0 490 195" className="w-full" style={{ maxHeight: 230 }}>
+        <svg viewBox="0 0 490 230" className="w-full" style={{ maxHeight: 260 }}>
 
           {/* Circle 1 */}
           <FractionCircle
@@ -194,11 +194,15 @@ export default function FractionMultiplicationAnimation() {
             {n1}/{d1}
           </text>
 
-          {/* Numerator highlight label */}
-          {step >= 1 && (
-            <text x={CX1} y={CY + R + 32} textAnchor="middle" fill="#e879f9" fontSize="10" fontFamily="serif"
-              style={{ animation: "bounce-num 0.5s ease" }}>
+          {/* Sub-label circle 1 */}
+          {step === 1 && (
+            <text x={CX1} y={CY + R + 33} textAnchor="middle" fill="#e879f9" fontSize="10" fontFamily="serif">
               pembilang: {n1}
+            </text>
+          )}
+          {step === 2 && (
+            <text x={CX1} y={CY + R + 33} textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="serif">
+              penyebut: {d1}
             </text>
           )}
 
@@ -216,11 +220,15 @@ export default function FractionMultiplicationAnimation() {
             {n2}/{d2}
           </text>
 
-          {/* Numerator highlight label step 1 */}
-          {step >= 1 && (
-            <text x={CX2} y={CY + R + 32} textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="serif"
-              style={{ animation: "bounce-num 0.5s ease" }}>
+          {/* Sub-label circle 2 */}
+          {step === 1 && (
+            <text x={CX2} y={CY + R + 33} textAnchor="middle" fill="#e879f9" fontSize="10" fontFamily="serif">
               pembilang: {n2}
+            </text>
+          )}
+          {step === 2 && (
+            <text x={CX2} y={CY + R + 33} textAnchor="middle" fill="#22d3ee" fontSize="10" fontFamily="serif">
+              penyebut: {d2}
             </text>
           )}
 
@@ -241,8 +249,13 @@ export default function FractionMultiplicationAnimation() {
                 glowColor="#a78bfa"
               />
               <text x={CX3} y={CY + R + 18} textAnchor="middle" fill="white" fontSize="12" fontFamily="serif">
-                {resNum}/{resDen}{isSimplified ? ` = ${simplNum}/${simplDen}` : ""}
+                {resNum}/{resDen}
               </text>
+              {isSimplified && (
+                <text x={CX3} y={CY + R + 33} textAnchor="middle" fill="#a78bfa" fontSize="11" fontFamily="serif">
+                  = {simplNum}/{simplDen}
+                </text>
+              )}
             </g>
           ) : (
             <>
@@ -254,8 +267,8 @@ export default function FractionMultiplicationAnimation() {
           {/* Step 1: formula box — numerator multiplication */}
           {step === 1 && (
             <g>
-              <rect x="120" y="158" width="250" height="28" rx="8" fill="rgba(232,121,249,0.15)" stroke="#e879f9" strokeWidth="1"/>
-              <text x="245" y="177" textAnchor="middle" fill="#e879f9" fontSize="12" fontFamily="serif">
+              <rect x="100" y="192" width="290" height="28" rx="8" fill="rgba(232,121,249,0.15)" stroke="#e879f9" strokeWidth="1"/>
+              <text x="245" y="211" textAnchor="middle" fill="#e879f9" fontSize="12" fontFamily="serif">
                 Pembilang: {n1} × {n2} = {n1 * n2}
               </text>
             </g>
@@ -264,8 +277,8 @@ export default function FractionMultiplicationAnimation() {
           {/* Step 2: formula box — denominator multiplication */}
           {step === 2 && (
             <g>
-              <rect x="120" y="158" width="250" height="28" rx="8" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1"/>
-              <text x="245" y="177" textAnchor="middle" fill="#22d3ee" fontSize="12" fontFamily="serif">
+              <rect x="100" y="192" width="290" height="28" rx="8" fill="rgba(34,211,238,0.15)" stroke="#22d3ee" strokeWidth="1"/>
+              <text x="245" y="211" textAnchor="middle" fill="#22d3ee" fontSize="12" fontFamily="serif">
                 Penyebut: {d1} × {d2} = {d1 * d2}
               </text>
             </g>
@@ -274,9 +287,9 @@ export default function FractionMultiplicationAnimation() {
           {/* Step 3: formula box — full result */}
           {step === 3 && (
             <g>
-              <rect x="100" y="158" width="290" height="28" rx="8" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" strokeWidth="1"/>
-              <text x="245" y="177" textAnchor="middle" fill="#a78bfa" fontSize="11" fontFamily="serif">
-                {n1}/{d1} × {n2}/{d2} = ({n1}×{n2})/({d1}×{d2}) = {resNum}/{resDen}{isSimplified ? ` = ${simplNum}/${simplDen}` : ""}
+              <rect x="80" y="192" width="330" height="28" rx="8" fill="rgba(167,139,250,0.15)" stroke="#a78bfa" strokeWidth="1"/>
+              <text x="245" y="211" textAnchor="middle" fill="#a78bfa" fontSize="11" fontFamily="serif">
+                {n1}/{d1} × {n2}/{d2} = {resNum}/{resDen}{isSimplified ? ` = ${simplNum}/${simplDen}` : ""}
               </text>
             </g>
           )}
