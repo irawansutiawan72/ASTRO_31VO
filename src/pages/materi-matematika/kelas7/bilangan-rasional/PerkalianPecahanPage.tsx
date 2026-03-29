@@ -6,6 +6,7 @@ import { playPopSound } from "@/hooks/useAudio";
 import { useState } from "react";
 import { InlineMath, BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
+import FractionMultiplicationAnimation from "@/components/FractionMultiplicationAnimation";
 
 const PerkalianPecahanPage = () => {
   const navigate = useNavigate();
@@ -26,6 +27,11 @@ const PerkalianPecahanPage = () => {
           PERKALIAN PECAHAN
         </h1>
         <p className="text-white/50 text-xs text-center mb-8 font-body">Kelas 7 - Bilangan Rasional</p>
+
+        {/* Animasi Interaktif */}
+        <div className="mb-6 animate-slide-up">
+          <FractionMultiplicationAnimation />
+        </div>
 
         {/* Sub-bab 1: Konsep Dasar Perkalian Pecahan */}
         <div className="mb-6 animate-slide-up">
