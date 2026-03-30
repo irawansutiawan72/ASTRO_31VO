@@ -3,7 +3,23 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
-import imgPicture11 from "@assets/Picture11_1774844542359.png";
+import imgSoalA from "@assets/soal_a_1774844542359.png";
+import imgSoalB from "@assets/soal_b_1774844542359.png";
+import imgSoalC from "@assets/soal_c_1774844542359.png";
+import imgSoalD from "@assets/soal_d_1774844542359.png";
+import imgSoalE from "@assets/soal_e_1774844542359.png";
+import imgSoalF from "@assets/soal_f_1774844542359.png";
+import imgSoalG from "@assets/soal_g_1774844542359.png";
+
+const isianPendek = [
+  { label: "a", img: imgSoalA },
+  { label: "b", img: imgSoalB },
+  { label: "c", img: imgSoalC },
+  { label: "d", img: imgSoalD },
+  { label: "e", img: imgSoalE },
+  { label: "f", img: imgSoalF },
+  { label: "g", img: imgSoalG },
+];
 
 const JumlahSudutPadaSegiBanyakPage = () => {
   const navigate = useNavigate();
@@ -22,8 +38,16 @@ const JumlahSudutPadaSegiBanyakPage = () => {
         {/* Bagian I */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
           <p className="text-accent text-sm font-bold mb-2 font-display">Bagian I — Isian Pendek</p>
-          <p className="text-yellow-400 text-sm mb-4 font-body">Tentukan nilai sudut yang belum diketahui pada bangun datar berikut.</p>
-          <img src={imgPicture11} alt="Soal Isian Pendek" className="w-full max-w-xl mx-auto mt-2" />
+          <p className="text-yellow-400 text-sm mb-6 font-body">Tentukan nilai sudut yang belum diketahui pada bangun datar berikut.</p>
+
+          <div className="space-y-6 text-white/90 font-body text-sm leading-relaxed">
+            {isianPendek.map((soal) => (
+              <div key={soal.label} className="border-l-2 border-accent/50 pl-4 flex gap-3">
+                <span className="font-semibold text-accent shrink-0">{soal.label})</span>
+                <img src={soal.img} alt={`Soal ${soal.label}`} className="max-w-xs w-full" />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bagian II */}
