@@ -13,7 +13,7 @@ const topics = [
   { label: "ARITMETIKA SOSIAL", path: "/materi-matematika/kelas-7/aritmetika-sosial" },
   { label: "GARIS DAN SUDUT", path: "/materi-matematika/kelas-7/garis-dan-sudut" },
   { label: "SEGITIGA DAN SEGIEMPAT", path: "/materi-matematika/kelas-7/segitiga-dan-segiempat" },
-  { label: "HIMPUNAN", path: "/materi-matematika/kelas-7/himpunan" },
+  { label: "HIMPUNAN (PENGAYAAN)", path: "/materi-matematika/kelas-7/himpunan" },
 ];
 
 const MateriMatematikaKelas7Page = () => {

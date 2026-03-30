@@ -13,7 +13,7 @@ const topicsKelas7 = [
   { label: "ARITMETIKA SOSIAL", path: "/latihan-mandiri/kelas-7/aritmetika-sosial" },
   { label: "GARIS DAN SUDUT", path: "/latihan-mandiri/kelas-7/garis-dan-sudut" },
   { label: "SEGITIGA DAN SEGIEMPAT", path: "/latihan-mandiri/kelas-7/segitiga-dan-segiempat" },
-  { label: "HIMPUNAN", path: "/latihan-mandiri/kelas-7/himpunan" },
+  { label: "HIMPUNAN (PENGAYAAN)", path: "/latihan-mandiri/kelas-7/himpunan" },
 ];
 
 const LatihanMandiriKelas7Page = () => {

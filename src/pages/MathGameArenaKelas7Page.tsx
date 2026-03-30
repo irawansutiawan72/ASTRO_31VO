@@ -15,7 +15,7 @@ const topics = [
   { label: "ARITMETIKA SOSIAL", path: "/math-game-arena/kelas-7/aritmetika-sosial" },
   { label: "GARIS DAN SUDUT", path: "/math-game-arena/kelas-7/garis-dan-sudut" },
   { label: "SEGITIGA DAN SEGIEMPAT", path: "/math-game-arena/kelas-7/segitiga-dan-segiempat" },
-  { label: "HIMPUNAN", path: "/math-game-arena/kelas-7/himpunan" },
+  { label: "HIMPUNAN (PENGAYAAN)", path: "/math-game-arena/kelas-7/himpunan" },
 ];
 
 const MathGameArenaKelas7Page = () => {
