@@ -3,6 +3,12 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import imgA from "@assets/a_1774838179561.png";
+import imgB from "@assets/b_1774838179562.png";
+import imgC from "@assets/c_1774838179562.png";
+import imgD from "@assets/d_1774838179563.png";
+import imgE from "@assets/e_1774838179563.png";
+import imgF from "@assets/f_1774838179564.png";
 
 const SudutPelurusPenyikuBertolakPage = () => {
   const navigate = useNavigate();
@@ -27,37 +33,55 @@ const SudutPelurusPenyikuBertolakPage = () => {
             {/* Soal a */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">a)</span>
-              <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 37°. Tentukan nilai x!</p>
+              <div>
+                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 37°. Tentukan nilai x!</p>
+                <img src={imgA} alt="Soal a" className="mt-3 max-w-xs" />
+              </div>
             </div>
 
             {/* Soal b */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">b)</span>
-              <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 127°. Tentukan nilai y!</p>
+              <div>
+                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 127°. Tentukan nilai y!</p>
+                <img src={imgB} alt="Soal b" className="mt-3 max-w-xs" />
+              </div>
             </div>
 
             {/* Soal c */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">c)</span>
-              <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 140°. Tentukan nilai z!</p>
+              <div>
+                <p>Dua sudut terletak pada satu garis lurus (berpelurus). Salah satu sudutnya adalah 140°. Tentukan nilai z!</p>
+                <img src={imgC} alt="Soal c" className="mt-3 max-w-xs" />
+              </div>
             </div>
 
             {/* Soal d */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">d)</span>
-              <p>Sudut a°, 50°, dan 20° terletak pada satu garis lurus. Tentukan nilai a!</p>
+              <div>
+                <p>Sudut a°, 50°, dan 20° terletak pada satu garis lurus. Tentukan nilai a!</p>
+                <img src={imgD} alt="Soal d" className="mt-3 max-w-xs" />
+              </div>
             </div>
 
             {/* Soal e */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">e)</span>
-              <p>Sudut 50° dan sudut b° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai b!</p>
+              <div>
+                <p>Sudut 50° dan sudut b° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai b!</p>
+                <img src={imgE} alt="Soal e" className="mt-3 max-w-xs" />
+              </div>
             </div>
 
             {/* Soal f */}
             <div className="border-l-2 border-accent/50 pl-4 flex gap-3">
               <span className="font-semibold text-accent shrink-0">f)</span>
-              <p>Sudut c° dan sudut 80° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai c!</p>
+              <div>
+                <p>Sudut c° dan sudut 80° saling berpenyiku (membentuk sudut siku-siku). Tentukan nilai c!</p>
+                <img src={imgF} alt="Soal f" className="mt-3 max-w-xs" />
+              </div>
             </div>
           </div>
         </div>
