@@ -3,6 +3,7 @@ import Starfield from "@/components/Starfield";
 import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
+import imgPicture11 from "@assets/Picture11_1774844542359.png";
 
 const JumlahSudutPadaSegiBanyakPage = () => {
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ const JumlahSudutPadaSegiBanyakPage = () => {
         {/* Bagian I */}
         <div className="bg-card/80 backdrop-blur border border-border rounded-xl p-6 mb-6 animate-slide-up">
           <p className="text-accent text-sm font-bold mb-2 font-display">Bagian I — Isian Pendek</p>
-          <p className="text-yellow-400 text-sm mb-4 font-body">Tentukan nilai sudut yang belum diketahui. Kerjakan lengkap dengan caranya!</p>
-          <p className="text-white/50 text-xs font-body italic">(Lihat lembar soal untuk gambar isian pendek)</p>
+          <p className="text-yellow-400 text-sm mb-4 font-body">Tentukan nilai sudut yang belum diketahui pada bangun datar berikut.</p>
+          <img src={imgPicture11} alt="Soal Isian Pendek" className="w-full max-w-xl mx-auto mt-2" />
         </div>
 
         {/* Bagian II */}
