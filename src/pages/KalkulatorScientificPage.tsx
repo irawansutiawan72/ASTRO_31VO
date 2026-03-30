@@ -43,9 +43,20 @@ const toMathJsExpression = (expr: string, angleMode: AngleMode): string => {
   mathExpr = mathExpr.replace(/Ans/g, "0"); // Will be replaced with actual answer
   // Replace log display with mathjs functions
   mathExpr = mathExpr.replace(/log₁₀\(/g, "log10(");
-  mathExpr = mathExpr.replace(/10\^/g, "10^");
+  mathExpr = mathExpr.replace(/10\^\(/g, "10^(");
+  // e^( → exp(  (consume the opening paren to avoid double paren)
+  mathExpr = mathExpr.replace(/e\^\(/g, "exp(");
+  // fallback: bare e^ without paren
   mathExpr = mathExpr.replace(/e\^/g, "exp(");
-  
+
+  // Auto-close any unclosed parentheses (so user doesn't need to close ^ expressions manually)
+  const openCount = (mathExpr.match(/\(/g) || []).length;
+  const closeCount = (mathExpr.match(/\)/g) || []).length;
+  const diff = openCount - closeCount;
+  if (diff > 0) {
+    mathExpr += ")".repeat(diff);
+  }
+
   // Handle angle conversions for trig functions
   if (angleMode === "DEG") {
     // Wrap trig function arguments with degree to radian conversion
