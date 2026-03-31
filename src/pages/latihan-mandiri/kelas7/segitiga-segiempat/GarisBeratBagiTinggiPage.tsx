@@ -45,17 +45,17 @@ const DiagramQ3Q4Q5 = () => (
     <circle cx="155" cy="185" r="3.5" fill="#22d3ee" />
 
     {/* Vertex labels */}
-    <text x="143" y="14" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="4"   y="198" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="294" y="198" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="143" y="14" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="4"   y="198" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="294" y="198" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
 
     {/* Special-point labels */}
-    <text x="158" y="200" fill="#22d3ee"  fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="214" y="90"  fill="#a78bfa"  fontSize="11" fontFamily="monospace" fontWeight="bold">E</text>
-    <text x="110" y="52"  fill="#fb923c"  fontSize="11" fontFamily="monospace" fontWeight="bold">F</text>
+    <text x="158" y="200" fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="214" y="90"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">E</text>
+    <text x="110" y="52"  fill="#ffffff" fontSize="11" fontFamily="monospace" fontWeight="bold">F</text>
 
     {/* Side AB label */}
-    <text x="58"  y="110" fill="#e2e8f0" fontSize="11" fontFamily="monospace">AB</text>
+    <text x="58"  y="110" fill="#ffffff" fontSize="11" fontFamily="monospace">AB</text>
   </svg>
 );
 
@@ -74,10 +74,10 @@ const DiagramQ9 = () => (
     <circle cx="110" cy="175" r="3.5" fill="#fb923c" />
 
     {/* Labels */}
-    <text x="103" y="14" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">P</text>
-    <text x="3"   y="190" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">R</text>
-    <text x="244" y="190" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">S</text>
-    <text x="116" y="185" fill="#fb923c" fontSize="13" fontFamily="monospace" fontWeight="bold">Q</text>
+    <text x="103" y="14" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">P</text>
+    <text x="3"   y="190" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">R</text>
+    <text x="244" y="190" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">S</text>
+    <text x="116" y="185" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">Q</text>
   </svg>
 );
 
