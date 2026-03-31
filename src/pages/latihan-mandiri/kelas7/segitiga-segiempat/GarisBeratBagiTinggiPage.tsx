@@ -5,6 +5,10 @@ import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
 import segitigaImg from "@assets/segitiga_1774935300727.png";
+import optionAImg from "@assets/a_1774935527164.png";
+import optionBImg from "@assets/b_1774935527165.png";
+import optionCImg from "@assets/c_1774935527166.png";
+import optionDImg from "@assets/d_1774935527166.png";
 
 /* ─────────────────────────────────────────────
    SVG DIAGRAMS
@@ -300,36 +304,20 @@ const questions: Question[] = [
     id: 11,
     content: <p>yang merupakan garis bagi pada segitiga ABC adalah</p>,
     options: [
-      <div key="11a">
-        <Q11A />
-      </div>,
-      <div key="11b">
-        <Q11B />
-      </div>,
-      <div key="11c">
-        <Q11C />
-      </div>,
-      <div key="11d">
-        <Q11D />
-      </div>,
+      <img key="11a" src={optionAImg} alt="Opsi A soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="11b" src={optionBImg} alt="Opsi B soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="11c" src={optionCImg} alt="Opsi C soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="11d" src={optionDImg} alt="Opsi D soal 11" className="w-full max-w-xs mx-auto rounded-lg" />,
     ],
   },
   {
     id: 12,
     content: <p>yang merupakan garis berat pada segitiga ABC adalah ...</p>,
     options: [
-      <div key="12a">
-        <Q12A />
-      </div>,
-      <div key="12b">
-        <Q12B />
-      </div>,
-      <div key="12c">
-        <Q12C />
-      </div>,
-      <div key="12d">
-        <Q12D />
-      </div>,
+      <img key="12a" src={optionAImg} alt="Opsi A soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="12b" src={optionBImg} alt="Opsi B soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="12c" src={optionCImg} alt="Opsi C soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
+      <img key="12d" src={optionDImg} alt="Opsi D soal 12" className="w-full max-w-xs mx-auto rounded-lg" />,
     ],
   },
 ];
