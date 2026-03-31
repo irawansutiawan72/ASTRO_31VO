@@ -36,7 +36,7 @@ const bankSoalTopics = [
   { label: "ALJABAR", icon: Variable, path: "/bank-soal/aljabar", ready: true },
   { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/bank-soal/plsv", ready: true },
   { label: "PERBANDINGAN", icon: Percent, path: "/bank-soal/perbandingan", ready: true },
-  { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/coming-soon", ready: false },
+  { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/bank-soal/aritmetika-sosial", ready: true },
   { label: "GARIS DAN SUDUT", icon: Ruler, path: "/coming-soon", ready: false },
   { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/bank-soal/segitiga-dan-segiempat", ready: true },
   { label: "HIMPUNAN", icon: CircleDot, path: "/coming-soon", ready: false },
