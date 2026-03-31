@@ -4,6 +4,7 @@ import PageNavigation from "@/components/PageNavigation";
 import { BookOpen, ChevronLeft } from "lucide-react";
 import { playPopSound } from "@/hooks/useAudio";
 import "katex/dist/katex.min.css";
+import segitigaImg from "@assets/segitiga_1774935300727.png";
 
 /* ─────────────────────────────────────────────
    SVG DIAGRAMS
@@ -232,19 +233,19 @@ const questions: Question[] = [
   },
   {
     id: 3,
-    svgDiagram: <DiagramQ3Q4Q5 />,
+    svgDiagram: <img src={segitigaImg} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
     content: <p>Yang merupakan garis berat adalah …</p>,
     options: ["AD", "CF", "EB", "AB"],
   },
   {
     id: 4,
-    svgDiagram: <DiagramQ3Q4Q5 />,
+    svgDiagram: <img src={segitigaImg} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
     content: <p>Yang merupakan garis bagi adalah …</p>,
     options: ["AD", "CF", "EB", "AB"],
   },
   {
     id: 5,
-    svgDiagram: <DiagramQ3Q4Q5 />,
+    svgDiagram: <img src={segitigaImg} alt="Segitiga ABC dengan garis berat, garis bagi, dan garis tinggi" className="w-full max-w-sm mx-auto my-3 rounded-lg" />,
     content: <p>Yang merupakan garis tinggi adalah …</p>,
     options: ["AD", "CF", "EB", "AB"],
   },
