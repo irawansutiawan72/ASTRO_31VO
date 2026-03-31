@@ -237,6 +237,64 @@ const KelilingSegitigaSegiempatLatihanPage = () => {
               }
             />
 
+            <QuestionCard
+              no={11}
+              question={
+                <p>
+                  Segitiga memiliki sisi <InlineMath math="x" />,{" "}
+                  <InlineMath math="x+2" />, dan <InlineMath math="x+4" />. Jika kelilingnya{" "}
+                  <InlineMath math="24 \text{ cm}" />, berapakah nilai <InlineMath math="x" />?
+                </p>
+              }
+            />
+
+            <QuestionCard
+              no={12}
+              question={
+                <p>
+                  Persegi panjang memiliki lebar <InlineMath math="y" /> dan panjang{" "}
+                  <InlineMath math="2y" />. Jika kelilingnya <InlineMath math="36 \text{ cm}" />,
+                  berapakah nilai <InlineMath math="y" />?
+                </p>
+              }
+            />
+
+            <QuestionCard
+              no={13}
+              question={
+                <p>
+                  Sebuah belah ketupat memiliki sisi <InlineMath math="(2x-1) \text{ cm}" />. Jika
+                  kelilingnya <InlineMath math="44 \text{ cm}" />, berapakah nilai{" "}
+                  <InlineMath math="x" />?
+                </p>
+              }
+            />
+
+            <QuestionCard
+              no={14}
+              question={
+                <p>
+                  Sebuah kebun berbentuk persegi panjang memiliki panjang <InlineMath math="20 \text{ m}" />{" "}
+                  dan lebar <InlineMath math="10 \text{ m}" />. Di sekeliling kebun tersebut akan ditanami
+                  pohon dengan jarak antar pohon <InlineMath math="5 \text{ m}" />. Tentukanlah banyak
+                  pohon yang dibutuhkan.
+                </p>
+              }
+            />
+
+            <QuestionCard
+              no={15}
+              question={
+                <p>
+                  Sebuah taman berbentuk trapesium sama kaki dengan panjang sisi-sisi sejajar
+                  masing-masing <InlineMath math="40 \text{ m}" /> dan <InlineMath math="16 \text{ m}" />.
+                  Jika panjang sisi miring taman tersebut adalah <InlineMath math="15 \text{ m}" />, dan
+                  di sekeliling taman akan dipasang lampu dengan jarak antar tiang adalah{" "}
+                  <InlineMath math="4 \text{ m}" />. Tentukanlah banyak tiang lampu yang dibutuhkan.
+                </p>
+              }
+            />
+
           </div>
         </div>
 
