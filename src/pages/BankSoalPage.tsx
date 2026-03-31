@@ -32,7 +32,7 @@ import { playPopSound } from "@/hooks/useAudio";
 
 const bankSoalTopics = [
   { label: "BILANGAN BULAT", icon: Calculator, path: "/bank-soal/bilangan-bulat", ready: true },
-  { label: "BILANGAN RASIONAL", icon: Sigma, path: "/coming-soon", ready: false },
+  { label: "BILANGAN RASIONAL", icon: Sigma, path: "/bank-soal/bilangan-rasional", ready: true },
   { label: "ALJABAR", icon: Variable, path: "/bank-soal/aljabar", ready: true },
   { label: "PERSAMAAN DAN PERTIDAKSAMAAN LINEAR SATU VARIABEL", icon: Equal, path: "/bank-soal/plsv", ready: true },
   { label: "PERBANDINGAN", icon: Percent, path: "/bank-soal/perbandingan", ready: true },
