@@ -67,6 +67,7 @@ import BankSoalSPLDVPage from "./pages/bank-soal/SPLDVPage";
 import BankSoalPersamaanGarisLurusPage from "./pages/bank-soal/PersamaanGarisLurusPage";
 import BankSoalPeluangPage from "./pages/bank-soal/PeluangPage";
 import BankSoalTeoremaPythagorasPage from "./pages/bank-soal/TeoremaPythagorasPage";
+import BankSoalLingkaranPage from "./pages/bank-soal/LingkaranPage";
 import ChatAIPage from "./pages/ChatAIPage";
 import PengaturanPage from "./pages/PengaturanPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
@@ -711,6 +712,7 @@ const AppInner = () => {
       <Route path="/bank-soal/persamaan-garis-lurus" element={<BankSoalPersamaanGarisLurusPage />} />
       <Route path="/bank-soal/peluang" element={<BankSoalPeluangPage />} />
       <Route path="/bank-soal/teorema-pythagoras" element={<BankSoalTeoremaPythagorasPage />} />
+      <Route path="/bank-soal/lingkaran" element={<BankSoalLingkaranPage />} />
       <Route path="/chat-ai" element={<ChatAIPage />} />
       <Route path="/pengaturan" element={<PengaturanPage />} />
       <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />

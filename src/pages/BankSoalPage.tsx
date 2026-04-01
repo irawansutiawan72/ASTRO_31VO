@@ -46,7 +46,7 @@ const bankSoalTopics = [
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/bank-soal/spldv", ready: true },
   { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/bank-soal/persamaan-garis-lurus", ready: true },
   { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/bank-soal/teorema-pythagoras", ready: true },
-  { label: "LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
+  { label: "LINGKARAN", icon: Circle, path: "/bank-soal/lingkaran", ready: true },
   { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
   { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/coming-soon", ready: false },
   { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/coming-soon", ready: false },
