@@ -1206,18 +1206,6 @@ const latihanOlimpiade: LatihanSoal[] = [
   },
 ];
 
-// Helper function to render text with LaTeX
-const renderWithLatex = (text: string) => {
-  const parts = text.split(/(\$[^$]+\$)/g);
-  return parts.map((part, index) => {
-    if (part.startsWith('$') && part.endsWith('$')) {
-      const latex = part.slice(1, -1);
-      return <InlineMath key={index} math={latex} />;
-    }
-    return <span key={index}>{part}</span>;
-  });
-};
-
 const OlimpiadeBilanganRasionalPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"materi" | "dasar" | "olimpiade">("materi");
