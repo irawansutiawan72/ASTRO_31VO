@@ -45,7 +45,7 @@ const bankSoalTopics = [
   { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/bank-soal/relasi-fungsi", ready: true },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/bank-soal/spldv", ready: true },
   { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/bank-soal/persamaan-garis-lurus", ready: true },
-  { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/coming-soon", ready: false },
+  { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/bank-soal/teorema-pythagoras", ready: true },
   { label: "LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
   { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
   { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/coming-soon", ready: false },
