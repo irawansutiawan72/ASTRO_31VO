@@ -140,6 +140,15 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - `/math-game-arena/kelas-7/aritmetika-sosial/pph` — Pajak Penghasilan (PPh)
 - Shared reusable game component: `src/components/MeteorShootingGame.tsx`
 
+### Bank Soal - SPLDV (100 soal, completed)
+- `/bank-soal/spldv` — Sistem Persamaan Linear Dua Variabel
+  - 35 Mudah (Q1–Q35): konsep dasar, verifikasi solusi, metode substitusi/eliminasi/campuran/grafik, kontekstual
+  - 40 Sedang (Q36–Q75): UN, ANBK, TKA, HOTS, literasi matematika, kontekstual lanjutan
+  - 25 Sulit (Q76–Q100): HOTS, olimpiade, TKA, ANBK, literasi matematika tinggi, sifat-sifat SPLDV
+  - Tipe soal: 94 PG, 4 MCMA (PG Kompleks), 2 Benar/Salah
+  - SVG visual: SPLDVSystemSVG, GrafikSPLDVSVG, SubstitusiSVG, EliminasiSVG, KontekstualSPLDVSVG
+  - File: `src/pages/bank-soal/SPLDVPage.tsx`
+
 ## Notes
 
 - Merge conflicts from Vercel migration were resolved on 2026-03-12

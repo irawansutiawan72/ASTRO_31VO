@@ -63,6 +63,7 @@ import BankSoalAritmetikaSosialPage from "./pages/bank-soal/AritmetikaSosialPage
 import BankSoalPolaBilanganPage from "./pages/bank-soal/PolaBilanganPage";
 import BankSoalRelasiFungsiPage from "./pages/bank-soal/RelasiFungsiPage";
 import BankSoalGarisSudutPage from "./pages/bank-soal/GarisSudutPage";
+import BankSoalSPLDVPage from "./pages/bank-soal/SPLDVPage";
 import ChatAIPage from "./pages/ChatAIPage";
 import PengaturanPage from "./pages/PengaturanPage";
 import TentangAplikasiPage from "./pages/TentangAplikasiPage";
@@ -703,6 +704,7 @@ const AppInner = () => {
       <Route path="/bank-soal/pola-bilangan" element={<BankSoalPolaBilanganPage />} />
       <Route path="/bank-soal/relasi-fungsi" element={<BankSoalRelasiFungsiPage />} />
       <Route path="/bank-soal/garis-sudut" element={<BankSoalGarisSudutPage />} />
+      <Route path="/bank-soal/spldv" element={<BankSoalSPLDVPage />} />
       <Route path="/chat-ai" element={<ChatAIPage />} />
       <Route path="/pengaturan" element={<PengaturanPage />} />
       <Route path="/tentang-aplikasi" element={<TentangAplikasiPage />} />
