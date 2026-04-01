@@ -7,56 +7,213 @@ import { playPopSound } from "@/hooks/useAudio";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 
+// Helper function to render text with LaTeX
+const renderWithLatex = (text: string) => {
+  const parts = text.split(/(\$[^$]+\$)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith('$') && part.endsWith('$')) {
+      const latex = part.slice(1, -1);
+      return <InlineMath key={index} math={latex} />;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
 const materiSection = {
   title: "MATERI - BILANGAN RASIONAL",
   sections: [
-    {
-      heading: "A. Pengertian Bilangan Rasional",
-      contentType: "latex" as const,
-      latexContent: [
-        { type: "text", value: "Bilangan rasional adalah bilangan yang dapat dinyatakan dalam bentuk:" },
-        { type: "block", value: "\\frac{a}{b}, \\text{ dengan } a, b \\in \\mathbb{Z} \\text{ dan } b \\neq 0" },
-        { type: "text", value: "Contoh:" },
-        { type: "text", value: "• " },
-        { type: "inline", value: "\\frac{1}{2}, -\\frac{3}{4}, -\\frac{5}{1}" },
-        { type: "text", value: "• " },
-        { type: "inline", value: "0.75 = \\frac{3}{4}, \\quad 1.\\overline{3} = \\frac{4}{3}" },
-      ]
-    },
-    {
-      heading: "B. Ciri-Ciri Bilangan Rasional",
-      contentType: "latex" as const,
-      latexContent: [
-        { type: "text", value: "• Bisa ditulis sebagai pecahan biasa" },
-        { type: "text", value: "• Desimalnya berhenti (terminating) atau berulang (repeating)" },
-        { type: "text", value: "  - Contoh terminasi: " },
-        { type: "inline", value: "0.25 = \\frac{1}{4}" },
-        { type: "text", value: "  - Contoh desimal berulang: " },
-        { type: "inline", value: "0.\\overline{3} = \\frac{1}{3}" },
-      ]
-    },
-    {
-      heading: "C. Pecahan campuran dan pecahan biasa",
-      contentType: "latex" as const,
-      latexContent: [
-        { type: "block", value: "a\\frac{b}{c} = \\frac{a \\times c + b}{c}" },
-        { type: "block", value: "\\frac{a}{c} + \\frac{b}{c} = \\frac{a+b}{c}" },
-      ]
-    },
-    {
-      heading: "D. Operasi hitung bilangan Rasional",
-      contentType: "latex" as const,
-      latexContent: [
-        { type: "text", value: "1. Penjumlahan / Pengurangan" },
-        { type: "block", value: "\\frac{a}{b} \\pm \\frac{c}{d} = \\frac{ad \\pm bc}{bd}" },
-        { type: "text", value: "2. Perkalian" },
-        { type: "block", value: "\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}" },
-        { type: "text", value: "3. Pembagian" },
-        { type: "block", value: "\\frac{a}{b} : \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{ad}{bc}" },
-      ]
-    },
+    { heading: "A. Pengertian Bilangan Rasional" },
+    { heading: "B. Ciri-Ciri Bilangan Rasional" },
+    { heading: "C. Pecahan Campuran dan Pecahan Biasa" },
+    { heading: "D. Operasi Hitung Bilangan Rasional" },
   ]
 };
+
+// ─── Rich Materi Components ───────────────────────────────────────────────
+
+const MateriA = () => {
+  const examples = [
+    { label: "Pecahan Biasa",   sym: "½",  ex: "\\frac{1}{2},\\ -\\frac{3}{4},\\ -\\frac{5}{1}", cls: "from-cyan-500/20 to-cyan-700/10 border-cyan-500/40 text-cyan-300" },
+    { label: "Desimal Berhenti", sym: "0.75", ex: "0.75 = \\frac{3}{4}", cls: "from-green-500/20 to-green-700/10 border-green-500/40 text-green-300" },
+    { label: "Desimal Berulang", sym: "0.3̄",  ex: "1.\\overline{3} = \\frac{4}{3}", cls: "from-purple-500/20 to-purple-700/10 border-purple-500/40 text-purple-300" },
+    { label: "Bilangan Bulat",  sym: "ℤ",  ex: "-3 = \\frac{-3}{1}", cls: "from-orange-500/20 to-orange-700/10 border-orange-500/40 text-orange-300" },
+  ];
+  return (
+    <div className="mt-2 space-y-3">
+      <div className="bg-card/50 border border-cyan-400/25 rounded-xl p-4 text-center">
+        <p className="text-xs text-white/55 mb-2">Bilangan rasional adalah bilangan yang dapat dinyatakan dalam bentuk:</p>
+        <div className="inline-block bg-card/60 border border-white/15 rounded-xl px-5 py-3 mb-2">
+          <BlockMath math="\frac{a}{b}, \text{ dengan } a, b \in \mathbb{Z} \text{ dan } b \neq 0" />
+        </div>
+        <p className="text-xs text-white/40 italic">a = pembilang (numerator), b = penyebut (denominator), b ≠ 0</p>
+      </div>
+      <p className="text-xs text-white/50 text-center font-semibold uppercase tracking-wide">Contoh Bilangan Rasional</p>
+      <div className="grid grid-cols-2 gap-2">
+        {examples.map((item, i) => {
+          const [from, to, border, text] = item.cls.split(' ');
+          return (
+            <div key={i} className={`rounded-xl border p-3 bg-gradient-to-br ${from} ${to} ${border}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className={`text-base font-bold font-mono ${text}`}>{item.sym}</span>
+                <span className={`text-xs font-semibold leading-tight ${text}`}>{item.label}</span>
+              </div>
+              <div className="text-xs text-white/55 font-mono tracking-tight">
+                <InlineMath math={item.ex} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const MateriB = () => {
+  const ciri = [
+    {
+      sym: "p/q", label: "Ditulis sebagai Pecahan",
+      desc: "Selalu bisa dinyatakan dalam bentuk p/q dengan p, q bilangan bulat dan q ≠ 0",
+      cls: "text-blue-300 bg-blue-400/15 border-blue-400/50",
+    },
+    {
+      sym: "0.25", label: "Desimal Berhenti (Terminating)",
+      desc: "Desimal yang memiliki digit terbatas",
+      cls: "text-green-300 bg-green-400/15 border-green-400/50",
+      ex: "0.25 = \\frac{1}{4}, \\quad 0.5 = \\frac{1}{2}",
+    },
+    {
+      sym: "0.3̄", label: "Desimal Berulang (Repeating)",
+      desc: "Desimal yang memiliki pola digit yang terus berulang",
+      cls: "text-yellow-300 bg-yellow-400/15 border-yellow-400/50",
+      ex: "0.\\overline{3} = \\frac{1}{3}, \\quad 0.\\overline{36} = \\frac{4}{11}",
+    },
+  ];
+  return (
+    <div className="mt-2 space-y-2">
+      {ciri.map((s, i) => {
+        const [tc, bg, bc] = s.cls.split(' ');
+        return (
+          <div key={i} className={`flex flex-col gap-2 p-3 rounded-xl border ${bg} ${bc}`}>
+            <div className="flex items-center gap-3">
+              <div className={`flex-shrink-0 w-8 h-8 rounded-full border ${bc} flex items-center justify-center text-xs font-bold ${tc}`}>{i + 1}</div>
+              <div className={`text-base font-mono font-bold w-14 text-center ${tc}`}>{s.sym}</div>
+              <div>
+                <div className={`text-sm font-semibold ${tc}`}>{s.label}</div>
+                <div className="text-xs text-white/45">{s.desc}</div>
+              </div>
+            </div>
+            {s.ex && (
+              <div className="ml-11 bg-card/40 rounded-lg px-3 py-2 text-xs text-white/70">
+                <InlineMath math={s.ex} />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriC = () => {
+  const formulas = [
+    {
+      name: "Pecahan Campuran → Pecahan Biasa",
+      desc: "Kalikan bilangan bulat dengan penyebut, lalu tambahkan pembilang",
+      cls: "text-cyan-300 border-cyan-400/40 bg-cyan-400/10",
+      formula: "a\\frac{b}{c} = \\frac{a \\times c + b}{c}",
+      example: "2\\frac{3}{4} = \\frac{2 \\times 4 + 3}{4} = \\frac{11}{4}",
+    },
+    {
+      name: "Penjumlahan Pecahan Penyebut Sama",
+      desc: "Langsung jumlahkan pembilang, penyebut tetap",
+      cls: "text-green-300 border-green-400/40 bg-green-400/10",
+      formula: "\\frac{a}{c} + \\frac{b}{c} = \\frac{a+b}{c}",
+      example: "\\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}",
+    },
+    {
+      name: "Penyederhanaan Pecahan",
+      desc: "Bagi pembilang dan penyebut dengan FPB",
+      cls: "text-purple-300 border-purple-400/40 bg-purple-400/10",
+      formula: "\\frac{a \\cdot k}{b \\cdot k} = \\frac{a}{b}",
+      example: "\\frac{6}{8} = \\frac{6 \\div 2}{8 \\div 2} = \\frac{3}{4}",
+    },
+  ];
+  return (
+    <div className="mt-2 space-y-3">
+      {formulas.map((g, i) => {
+        const [tc, bc, bgc] = g.cls.split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 ${bc} ${bgc}`}>
+            <div className={`text-sm font-bold ${tc}`}>{g.name}</div>
+            <div className="text-xs text-white/45 mb-2">{g.desc}</div>
+            <div className="space-y-1">
+              <div className={`px-3 py-2 rounded-lg bg-card/50 border ${bc} text-sm text-center`}>
+                <BlockMath math={g.formula} />
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-card/30 border border-white/10 text-xs text-white/60 text-center">
+                <span className="text-white/40 mr-1">Contoh:</span>
+                <InlineMath math={g.example} />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MateriD = () => {
+  const ops = [
+    {
+      sym: "± ", label: "Penjumlahan / Pengurangan",
+      cls: "text-yellow-300 border-yellow-400/40 bg-yellow-400/10",
+      formula: "\\frac{a}{b} \\pm \\frac{c}{d} = \\frac{ad \\pm bc}{bd}",
+      note: "Samakan penyebut (KPK), lalu operasikan pembilang",
+      example: "\\frac{1}{3} + \\frac{1}{4} = \\frac{4+3}{12} = \\frac{7}{12}",
+    },
+    {
+      sym: "×",  label: "Perkalian",
+      cls: "text-cyan-300 border-cyan-400/40 bg-cyan-400/10",
+      formula: "\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}",
+      note: "Kalikan pembilang dengan pembilang, penyebut dengan penyebut",
+      example: "\\frac{2}{3} \\times \\frac{3}{5} = \\frac{6}{15} = \\frac{2}{5}",
+    },
+    {
+      sym: "÷",  label: "Pembagian",
+      cls: "text-green-300 border-green-400/40 bg-green-400/10",
+      formula: "\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{ad}{bc}",
+      note: "Balikkan (invers) pecahan kedua, lalu kalikan",
+      example: "\\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}",
+    },
+  ];
+  return (
+    <div className="mt-2 space-y-3">
+      {ops.map((op, i) => {
+        const [tc, bc, bgc] = op.cls.split(' ');
+        return (
+          <div key={i} className={`rounded-xl border p-3 ${bc} ${bgc}`}>
+            <div className="flex items-center gap-2 mb-2">
+              <span className={`text-lg font-bold font-mono ${tc}`}>{op.sym}</span>
+              <span className={`text-sm font-bold ${tc}`}>{op.label}</span>
+            </div>
+            <div className="text-xs text-white/40 mb-2 italic">{op.note}</div>
+            <div className="space-y-1">
+              <div className={`px-3 py-2 rounded-lg bg-card/50 border ${bc} text-sm text-center`}>
+                <InlineMath math={op.formula} />
+              </div>
+              <div className="px-3 py-2 rounded-lg bg-card/30 border border-white/10 text-xs text-center">
+                <span className="text-white/40 mr-1">Contoh:</span>
+                <span className="text-white/65"><InlineMath math={op.example} /></span>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const MATERI_COMPONENTS = [<MateriA/>, <MateriB/>, <MateriC/>, <MateriD/>];
 
 interface LatihanSoal {
   no: number;
@@ -1126,32 +1283,39 @@ const OlimpiadeBilanganRasionalPage = () => {
         {activeTab === "materi" && (
           <div className="space-y-3 animate-slide-up">
             {materiSection.sections.map((section, idx) => (
-              <div key={idx} className="bg-card/80 backdrop-blur border border-border rounded-xl overflow-hidden">
+              <div
+                key={idx}
+                className="backdrop-blur border rounded-xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, rgba(30,41,59,0.75) 0%, rgba(15,23,42,0.85) 100%)",
+                  borderColor: expandedSections.includes(idx) ? "rgba(251,191,36,0.4)" : "rgba(255,255,255,0.1)",
+                  boxShadow: expandedSections.includes(idx)
+                    ? "0 0 24px rgba(251,191,36,0.08), inset 0 1px 0 rgba(255,255,255,0.05)"
+                    : "inset 0 1px 0 rgba(255,255,255,0.04)",
+                }}
+              >
                 <button
                   onClick={() => toggleSection(idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left"
+                  className="w-full flex items-center justify-between px-5 py-4 cursor-pointer text-left group"
                 >
-                  <span className="font-display text-sm text-accent font-bold">{section.heading}</span>
-                  {expandedSections.includes(idx) ? (
-                    <ChevronUp className="w-4 h-4 text-accent shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-white/50 shrink-0" />
-                  )}
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold"
+                      style={{ background: "rgba(251,191,36,0.15)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.35)" }}
+                    >
+                      {String.fromCharCode(65 + idx)}
+                    </span>
+                    <span className="font-display text-sm text-accent font-bold group-hover:text-yellow-300 transition-colors">
+                      {section.heading}
+                    </span>
+                  </div>
+                  {expandedSections.includes(idx)
+                    ? <ChevronUp className="w-4 h-4 text-accent shrink-0" />
+                    : <ChevronDown className="w-4 h-4 text-white/40 shrink-0" />}
                 </button>
                 {expandedSections.includes(idx) && (
-                  <div className="px-5 pb-4">
-                    <div className="font-body text-sm text-white/80 leading-relaxed space-y-2">
-                      {section.latexContent?.map((item, i) => {
-                        if (item.type === "text") {
-                          return <p key={i}>{item.value}</p>;
-                        } else if (item.type === "block") {
-                          return <div key={i} className="my-3 text-center"><BlockMath math={item.value} /></div>;
-                        } else if (item.type === "inline") {
-                          return <span key={i}><InlineMath math={item.value} /></span>;
-                        }
-                        return null;
-                      })}
-                    </div>
+                  <div className="px-4 pb-4 border-t border-white/5 pt-3 animate-slide-up">
+                    {MATERI_COMPONENTS[idx]}
                   </div>
                 )}
               </div>
