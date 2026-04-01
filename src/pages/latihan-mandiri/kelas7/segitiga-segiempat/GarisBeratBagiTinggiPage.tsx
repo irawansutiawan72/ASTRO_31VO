@@ -352,25 +352,25 @@ const GarisBeratBagiTinggiLatihanPage = () => {
 
           <div className="space-y-8 text-white/90 font-body text-sm leading-relaxed">
             {questions.map((q) => (
-              <div key={q.id} className="border-l-2 border-accent/50 pl-4">
-                <p className="font-semibold text-accent mb-3">{q.id}.</p>
+              <div key={q.id} className="flex gap-3 items-start">
+                <span className="shrink-0 font-bold text-accent text-sm min-w-[28px] pt-0.5 text-right">{q.id}.</span>
+                <div className="flex-1 space-y-3">
+                  <div>{q.content}</div>
 
-                {/* Optional diagram */}
-                {q.svgDiagram && (
-                  <div className="mb-4">{q.svgDiagram}</div>
-                )}
+                  {q.svgDiagram && (
+                    <div>{q.svgDiagram}</div>
+                  )}
 
-                <div className="mb-4">{q.content}</div>
-
-                <div className="grid grid-cols-1 gap-2 pl-2">
-                  {q.options.map((opt, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-white/80">
-                      <span className="font-semibold text-white/60 shrink-0 w-5 mt-0.5">
-                        {OPTION_LABELS[idx]}.
-                      </span>
-                      <span className="flex-1">{opt}</span>
-                    </div>
-                  ))}
+                  <div className="grid grid-cols-1 gap-2">
+                    {q.options.map((opt, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-white/80">
+                        <span className="font-semibold text-white/60 shrink-0 w-5 mt-0.5">
+                          {OPTION_LABELS[idx]}.
+                        </span>
+                        <span className="flex-1">{opt}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

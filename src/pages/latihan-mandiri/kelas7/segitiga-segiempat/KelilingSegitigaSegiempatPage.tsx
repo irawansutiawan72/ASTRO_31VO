@@ -105,10 +105,12 @@ type QuestionCardProps = {
 };
 
 const QuestionCard = ({ no, question, diagram }: QuestionCardProps) => (
-  <div className="border-l-2 border-accent/50 pl-4 space-y-3">
-    <p className="font-semibold text-accent">{no}.</p>
-    {diagram && <div>{diagram}</div>}
-    <div className="text-white/90 text-sm leading-relaxed">{question}</div>
+  <div className="flex gap-3 items-start">
+    <span className="shrink-0 font-bold text-accent text-sm min-w-[28px] pt-0.5 text-right">{no}.</span>
+    <div className="flex-1 space-y-3">
+      <div className="text-white/90 text-sm leading-relaxed">{question}</div>
+      {diagram && <div>{diagram}</div>}
+    </div>
   </div>
 );
 
