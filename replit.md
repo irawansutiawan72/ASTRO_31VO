@@ -140,6 +140,15 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 - `/math-game-arena/kelas-7/aritmetika-sosial/pph` — Pajak Penghasilan (PPh)
 - Shared reusable game component: `src/components/MeteorShootingGame.tsx`
 
+### Bank Soal - Bangun Ruang Sisi Datar (100 soal, completed)
+- `/bank-soal/bangun-ruang-sisi-datar` — Kubus, Balok, Prisma, Limas
+  - 35 Mudah (Q1–Q35): luas permukaan & volume kubus/balok/prisma/limas, jaring-jaring, diagonal, kontekstual
+  - 35 Sedang (Q36–Q70): diagonal balok/kubus, prisma trapesium, bangun gabungan, ANBK, TKA, HOTS, perbandingan
+  - 30 Sulit (Q71–Q100): HOTS, TKA, ANBK, Literasi Matematika, dimensi berubah, bangun gabungan kompleks
+  - Tipe soal: 88 PG, 7 MCMA (PG Kompleks), 5 Benar/Salah
+  - SVG visual: KubusSVG, BalokSVG, PrismaSegitigaSVG, LimasPersegiSVG, JaringKubusSVG, JaringBalokSVG, DiagonalKubusSVG, GabunganKubusLimasSVG, PrismaTrapesiumSVG, FormulaBoxSVG
+  - File: `src/pages/bank-soal/BangunRuangSisiDatarPage.tsx`
+
 ### Bank Soal - SPLDV (100 soal, completed)
 - `/bank-soal/spldv` — Sistem Persamaan Linear Dua Variabel
   - 35 Mudah (Q1–Q35): konsep dasar, verifikasi solusi, metode substitusi/eliminasi/campuran/grafik, kontekstual

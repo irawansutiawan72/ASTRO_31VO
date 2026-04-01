@@ -48,7 +48,7 @@ const bankSoalTopics = [
   { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/bank-soal/teorema-pythagoras", ready: true },
   { label: "LINGKARAN", icon: Circle, path: "/bank-soal/lingkaran", ready: true },
   { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
-  { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/coming-soon", ready: false },
+  { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/bank-soal/bangun-ruang-sisi-datar", ready: true },
   { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/coming-soon", ready: false },
   { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/coming-soon", ready: false },
   { label: "TRANSFORMASI GEOMETRI", icon: RotateCcw, path: "/coming-soon", ready: false },
