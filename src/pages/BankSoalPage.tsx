@@ -39,7 +39,7 @@ const bankSoalTopics = [
   { label: "ARITMETIKA SOSIAL", icon: Coins, path: "/bank-soal/aritmetika-sosial", ready: true },
   { label: "GARIS DAN SUDUT", icon: Ruler, path: "/bank-soal/garis-sudut", ready: true },
   { label: "SEGITIGA DAN SEGIEMPAT", icon: Triangle, path: "/bank-soal/segitiga-dan-segiempat", ready: true },
-  { label: "HIMPUNAN", icon: CircleDot, path: "/coming-soon", ready: false },
+  { label: "HIMPUNAN", icon: CircleDot, path: "/bank-soal/himpunan", ready: true },
   { label: "POLA BILANGAN", icon: Hash, path: "/bank-soal/pola-bilangan", ready: true },
   { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/coming-soon", ready: false },
   { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/bank-soal/relasi-fungsi", ready: true },
