@@ -42,7 +42,7 @@ const bankSoalTopics = [
   { label: "HIMPUNAN", icon: CircleDot, path: "/coming-soon", ready: false },
   { label: "POLA BILANGAN", icon: Hash, path: "/bank-soal/pola-bilangan", ready: true },
   { label: "KOORDINAT CARTESIUS", icon: Grid3X3, path: "/coming-soon", ready: false },
-  { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/coming-soon", ready: false },
+  { label: "RELASI DAN FUNGSI", icon: ArrowLeftRight, path: "/bank-soal/relasi-fungsi", ready: true },
   { label: "SISTEM PERSAMAAN LINEAR DUA VARIABEL", icon: GitBranch, path: "/coming-soon", ready: false },
   { label: "PERSAMAAN GARIS LURUS", icon: LineChart, path: "/coming-soon", ready: false },
   { label: "TEOREMA PYTHAGORAS", icon: Triangle, path: "/coming-soon", ready: false },
