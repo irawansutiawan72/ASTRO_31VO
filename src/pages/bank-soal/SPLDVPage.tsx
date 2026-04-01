@@ -1410,11 +1410,11 @@ const SoalCard = ({ soal }: { soal: Question }) => {
   return (
     <div className="rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden transition-all">
       <div className="p-4">
-        <div className="flex flex-wrap gap-2 mb-3">
+        <div className="flex flex-wrap gap-2 mb-3 items-center">
+          <span className="text-xs font-bold text-primary/80 bg-primary/10 px-2 py-1 rounded-md font-mono">#{soal.id}</span>
           <span className={`text-xs px-2 py-0.5 rounded-full border font-body ${difficultyColor[soal.difficulty]}`}>{soal.difficulty}</span>
           <span className={`text-xs px-2 py-0.5 rounded-full border font-body ${typeColor[soal.type]}`}>{soal.type === "MCMA" ? "PG Kompleks" : soal.type === "Benar/Salah" ? "B/S Kompleks" : "PG"}</span>
           <span className="text-xs px-2 py-0.5 rounded-full border border-slate-600 text-slate-400 bg-slate-500/10 font-body">{soal.category}</span>
-          <span className="text-xs text-white/30 font-body ml-auto">#{soal.id}</span>
         </div>
 
         <p className="text-sm text-white/90 font-body mb-3 leading-relaxed whitespace-pre-line"><MathText text={soal.question} /></p>
