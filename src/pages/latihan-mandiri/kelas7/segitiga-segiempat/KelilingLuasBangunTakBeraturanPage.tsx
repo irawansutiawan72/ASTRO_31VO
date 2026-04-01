@@ -19,14 +19,14 @@ const DiagramQ1 = () => (
     <polyline points="298,140 298,152 310,152" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
     <polyline points="298,250 298,238 310,238" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
     <polyline points="30,238 42,238 42,250"   fill="none" stroke="#60a5fa" strokeWidth="1.5" />
-    <text x="106" y="22"  fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle">10 cm</text>
-    <text x="255" y="135" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle">8 cm</text>
-    <text x="170" y="268" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle">14 cm</text>
-    <text x="316" y="198" fill="#22d3ee" fontSize="12" fontFamily="monospace">6 cm</text>
-    <text x="14"  y="145" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 145)">11 cm</text>
-    <text x="194" y="88"  fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(-90 194 88)">? cm</text>
+    <text x="106" y="22"  fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">10 cm</text>
+    <text x="255" y="135" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">8 cm</text>
+    <text x="170" y="268" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">14 cm</text>
+    <text x="316" y="198" fill="#ffffff" fontSize="12" fontFamily="monospace">6 cm</text>
+    <text x="14"  y="145" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 145)">11 cm</text>
+    <text x="194" y="88"  fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 194 88)">? cm</text>
     {/* keliling arrow */}
-    <text x="60" y="170" fill="#4ade80" fontSize="11" fontFamily="monospace">Hitung keliling!</text>
+    <text x="60" y="170" fill="#ffffff" fontSize="11" fontFamily="monospace">Hitung keliling!</text>
   </svg>
 );
 
@@ -35,14 +35,14 @@ const DiagramQ2 = () => (
   <svg viewBox="0 0 380 280" className="w-full max-w-sm mx-auto my-3" aria-label="Bangun bertingkat">
     <polygon points="30,250 30,150 120,150 120,30 260,30 260,150 350,150 350,250"
       fill="rgba(167,139,250,0.12)" stroke="#a78bfa" strokeWidth="2" />
-    <text x="185" y="22"  fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle">14 cm</text>
-    <text x="185" y="268" fill="#facc15" fontSize="12" fontFamily="monospace" textAnchor="middle">32 cm</text>
-    <text x="14"  y="200" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 200)">10 cm</text>
-    <text x="364" y="200" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(90 360 200)">10 cm</text>
-    <text x="73"  y="145" fill="#4ade80" fontSize="11" fontFamily="monospace">9 cm</text>
-    <text x="261" y="145" fill="#4ade80" fontSize="11" fontFamily="monospace">9 cm</text>
-    <text x="114" y="92"  fill="#facc15" fontSize="11" fontFamily="monospace" transform="rotate(-90 114 92)">12 cm</text>
-    <text x="261" y="92"  fill="#facc15" fontSize="11" fontFamily="monospace" transform="rotate(90 260 92)">12 cm</text>
+    <text x="185" y="22"  fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">14 cm</text>
+    <text x="185" y="268" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">32 cm</text>
+    <text x="14"  y="200" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 200)">10 cm</text>
+    <text x="364" y="200" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(90 360 200)">10 cm</text>
+    <text x="73"  y="145" fill="#ffffff" fontSize="11" fontFamily="monospace">9 cm</text>
+    <text x="261" y="145" fill="#ffffff" fontSize="11" fontFamily="monospace">9 cm</text>
+    <text x="114" y="92"  fill="#ffffff" fontSize="11" fontFamily="monospace" transform="rotate(-90 114 92)">12 cm</text>
+    <text x="261" y="92"  fill="#ffffff" fontSize="11" fontFamily="monospace" transform="rotate(90 260 92)">12 cm</text>
   </svg>
 );
 
@@ -53,9 +53,9 @@ const DiagramQ3 = () => (
     <polygon points="155,20 50,140 260,140" fill="rgba(74,222,128,0.15)" stroke="#4ade80" strokeWidth="2" />
     <line x1="155" y1="20" x2="155" y2="140" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="155,128 167,128 167,140" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="155" y="268" fill="#22d3ee" fontSize="12" fontFamily="monospace" textAnchor="middle">21 cm</text>
-    <text x="270" y="214" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(90 268 214)">14 cm</text>
-    <text x="163" y="85"  fill="#facc15" fontSize="11" fontFamily="monospace">8 cm</text>
+    <text x="155" y="268" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">21 cm</text>
+    <text x="270" y="214" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(90 268 214)">14 cm</text>
+    <text x="163" y="85"  fill="#ffffff" fontSize="11" fontFamily="monospace">8 cm</text>
   </svg>
 );
 
@@ -64,12 +64,12 @@ const DiagramQ4 = () => (
   <svg viewBox="0 0 320 320" className="w-full max-w-xs mx-auto my-3" aria-label="Bangun plus/salip">
     <polygon points="110,30 200,30 200,110 280,110 280,200 200,200 200,280 110,280 110,200 30,200 30,110 110,110"
       fill="rgba(251,146,60,0.12)" stroke="#fb923c" strokeWidth="2" />
-    <text x="155" y="24"  fill="#facc15" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
-    <text x="155" y="298" fill="#facc15" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
-    <text x="14"  y="160" fill="#22d3ee" fontSize="11" fontFamily="monospace" transform="rotate(-90 14 160)">6 cm</text>
-    <text x="304" y="160" fill="#22d3ee" fontSize="11" fontFamily="monospace" transform="rotate(90 304 160)">6 cm</text>
-    <text x="148" y="160" fill="#4ade80" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
-    <text x="100" y="25"  fill="#e2e8f0" fontSize="10" fontFamily="monospace">6 cm</text>
+    <text x="155" y="24"  fill="#ffffff" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
+    <text x="155" y="298" fill="#ffffff" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
+    <text x="14"  y="160" fill="#ffffff" fontSize="11" fontFamily="monospace" transform="rotate(-90 14 160)">6 cm</text>
+    <text x="304" y="160" fill="#ffffff" fontSize="11" fontFamily="monospace" transform="rotate(90 304 160)">6 cm</text>
+    <text x="148" y="160" fill="#ffffff" fontSize="11" fontFamily="monospace" textAnchor="middle">6 cm</text>
+    <text x="100" y="25"  fill="#ffffff" fontSize="10" fontFamily="monospace">6 cm</text>
   </svg>
 );
 
@@ -92,7 +92,7 @@ const DiagramQ5 = () => {
           ) : null
         )
       )}
-      <text x="100" y="190" fill="#facc15" fontSize="11" fontFamily="monospace" textAnchor="middle">1 kotak = 1 cm²</text>
+      <text x="100" y="190" fill="#ffffff" fontSize="11" fontFamily="monospace" textAnchor="middle">1 kotak = 1 cm²</text>
     </svg>
   );
 };

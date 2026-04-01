@@ -15,18 +15,18 @@ const DiagramPersegi = () => (
     <polyline points="196,42 196,30 208,30"  fill="none" stroke="#60a5fa" strokeWidth="1.5" />
     <polyline points="196,196 196,208 208,208" fill="none" stroke="#60a5fa" strokeWidth="1.5" />
     <polyline points="30,196 42,196 42,208"   fill="none" stroke="#60a5fa" strokeWidth="1.5" />
-    <text x="100" y="22"  fill="#facc15" fontSize="13" fontFamily="monospace" textAnchor="middle">15 cm</text>
-    <text x="100" y="230" fill="#facc15" fontSize="13" fontFamily="monospace" textAnchor="middle">15 cm</text>
-    <text x="16"  y="125" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(-90 18 125)">15 cm</text>
+    <text x="100" y="22"  fill="#ffffff" fontSize="13" fontFamily="monospace" textAnchor="middle">15 cm</text>
+    <text x="100" y="230" fill="#ffffff" fontSize="13" fontFamily="monospace" textAnchor="middle">15 cm</text>
+    <text x="16"  y="125" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 18 125)">15 cm</text>
   </svg>
 );
 
 const DiagramPersegipanjang = () => (
   <svg viewBox="0 0 360 210" className="w-full max-w-sm mx-auto my-3" aria-label="Persegi panjang 22 x 13">
     <rect x="20" y="30" width="300" height="140" fill="rgba(167,139,250,0.10)" stroke="#a78bfa" strokeWidth="2" />
-    <text x="160" y="22"  fill="#facc15" fontSize="13" fontFamily="monospace" textAnchor="middle">22 cm</text>
-    <text x="160" y="195" fill="#facc15" fontSize="13" fontFamily="monospace" textAnchor="middle">22 cm</text>
-    <text x="8"   y="104" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(-90 8 104)">13 cm</text>
+    <text x="160" y="22"  fill="#ffffff" fontSize="13" fontFamily="monospace" textAnchor="middle">22 cm</text>
+    <text x="160" y="195" fill="#ffffff" fontSize="13" fontFamily="monospace" textAnchor="middle">22 cm</text>
+    <text x="8"   y="104" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 8 104)">13 cm</text>
   </svg>
 );
 
@@ -35,8 +35,8 @@ const DiagramJajargenjang = () => (
     <polygon points="60,170 300,170 260,30 20,30" fill="rgba(74,222,128,0.10)" stroke="#4ade80" strokeWidth="2" />
     <line x1="60" y1="30" x2="60" y2="170" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="60,158 72,158 72,170" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="160" y="192" fill="#22d3ee" fontSize="13" fontFamily="monospace" textAnchor="middle">24 cm</text>
-    <text x="74"  y="105" fill="#facc15" fontSize="12" fontFamily="monospace">10 cm</text>
+    <text x="160" y="192" fill="#ffffff" fontSize="13" fontFamily="monospace" textAnchor="middle">24 cm</text>
+    <text x="74"  y="105" fill="#ffffff" fontSize="12" fontFamily="monospace">10 cm</text>
   </svg>
 );
 
@@ -47,10 +47,10 @@ const DiagramTrapesium = () => (
     <polyline points="30,42 42,42 42,30"   fill="none" stroke="#fb923c" strokeWidth="1.5" />
     <line x1="260" y1="30" x2="260" y2="180" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="260,168 272,168 272,180" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="135" y="22"  fill="#22d3ee" fontSize="12" fontFamily="monospace">a = 14 cm</text>
-    <text x="155" y="198" fill="#22d3ee" fontSize="12" fontFamily="monospace">b = 22 cm</text>
-    <text x="14"  y="108" fill="#facc15" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 108)">12 cm</text>
-    <text x="268" y="108" fill="#facc15" fontSize="12" fontFamily="monospace">t</text>
+    <text x="135" y="22"  fill="#ffffff" fontSize="12" fontFamily="monospace">a = 14 cm</text>
+    <text x="155" y="198" fill="#ffffff" fontSize="12" fontFamily="monospace">b = 22 cm</text>
+    <text x="14"  y="108" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-90 14 108)">12 cm</text>
+    <text x="268" y="108" fill="#ffffff" fontSize="12" fontFamily="monospace">t</text>
   </svg>
 );
 
@@ -59,14 +59,14 @@ const DiagramLayangLayang = () => (
     <polygon points="130,20 30,130 130,300 230,130" fill="rgba(248,113,113,0.10)" stroke="#f87171" strokeWidth="2" />
     <line x1="30"  y1="130" x2="230" y2="130" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <line x1="130" y1="20"  x2="130" y2="300" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5,4" />
-    <text x="118" y="14"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="12"  y="138" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="118" y="315" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="235" y="138" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="138" y="82"  fill="#22d3ee" fontSize="12" fontFamily="monospace">20 cm</text>
-    <text x="138" y="220" fill="#22d3ee" fontSize="12" fontFamily="monospace">10 cm</text>
-    <text x="50"  y="125" fill="#facc15" fontSize="12" fontFamily="monospace">15 cm</text>
-    <text x="158" y="125" fill="#facc15" fontSize="12" fontFamily="monospace">15 cm</text>
+    <text x="118" y="14"  fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="12"  y="138" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="118" y="315" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="235" y="138" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="138" y="82"  fill="#ffffff" fontSize="12" fontFamily="monospace">20 cm</text>
+    <text x="138" y="220" fill="#ffffff" fontSize="12" fontFamily="monospace">10 cm</text>
+    <text x="50"  y="125" fill="#ffffff" fontSize="12" fontFamily="monospace">15 cm</text>
+    <text x="158" y="125" fill="#ffffff" fontSize="12" fontFamily="monospace">15 cm</text>
   </svg>
 );
 
@@ -75,12 +75,12 @@ const DiagramBelaKetupat = () => (
     <polygon points="140,20 260,140 140,260 20,140" fill="rgba(34,211,238,0.10)" stroke="#22d3ee" strokeWidth="2" />
     <line x1="20"  y1="140" x2="260" y2="140" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <line x1="140" y1="20"  x2="140" y2="260" stroke="#22d3ee" strokeWidth="1.5" strokeDasharray="5,4" />
-    <text x="128" y="14"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="262" y="146" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="128" y="276" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="4"   y="146" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="148" y="86"  fill="#22d3ee" fontSize="12" fontFamily="monospace">d₂ = 24 cm</text>
-    <text x="75"  y="135" fill="#facc15" fontSize="12" fontFamily="monospace">d₁ = 18 cm</text>
+    <text x="128" y="14"  fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="262" y="146" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="128" y="276" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="4"   y="146" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="148" y="86"  fill="#ffffff" fontSize="12" fontFamily="monospace">d₂ = 24 cm</text>
+    <text x="75"  y="135" fill="#ffffff" fontSize="12" fontFamily="monospace">d₁ = 18 cm</text>
   </svg>
 );
 

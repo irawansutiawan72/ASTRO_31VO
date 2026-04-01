@@ -13,8 +13,8 @@ const DiagramQ1a = () => (
     <polygon points="40,160 240,160 140,30" fill="rgba(59,130,246,0.12)" stroke="#60a5fa" strokeWidth="2" />
     <line x1="140" y1="30" x2="140" y2="160" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="140,148 152,148 152,160" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="145" y="100" fill="#facc15" fontSize="12" fontFamily="monospace">9 cm</text>
-    <text x="130" y="178" fill="#22d3ee" fontSize="12" fontFamily="monospace" textAnchor="middle">12 cm</text>
+    <text x="145" y="100" fill="#ffffff" fontSize="12" fontFamily="monospace">9 cm</text>
+    <text x="130" y="178" fill="#ffffff" fontSize="12" fontFamily="monospace" textAnchor="middle">12 cm</text>
   </svg>
 );
 
@@ -22,8 +22,8 @@ const DiagramQ1b = () => (
   <svg viewBox="0 0 260 200" className="w-full max-w-xs mx-auto my-2" aria-label="Segitiga siku-siku alas 8 tinggi 6">
     <polygon points="30,170 30,50 190,170" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" strokeWidth="2" />
     <polyline points="30,158 42,158 42,170" fill="none" stroke="#a78bfa" strokeWidth="1.5" />
-    <text x="4"  y="115" fill="#facc15" fontSize="12" fontFamily="monospace">6 cm</text>
-    <text x="100" y="188" fill="#22d3ee" fontSize="12" fontFamily="monospace">8 cm</text>
+    <text x="4"  y="115" fill="#ffffff" fontSize="12" fontFamily="monospace">6 cm</text>
+    <text x="100" y="188" fill="#ffffff" fontSize="12" fontFamily="monospace">8 cm</text>
   </svg>
 );
 
@@ -32,8 +32,8 @@ const DiagramQ1c = () => (
     <polygon points="30,180 270,180 80,40" fill="rgba(74,222,128,0.12)" stroke="#4ade80" strokeWidth="2" />
     <line x1="80" y1="40" x2="80" y2="180" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="80,168 92,168 92,180" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="87" y="115" fill="#facc15" fontSize="12" fontFamily="monospace">10 cm</text>
-    <text x="130" y="198" fill="#22d3ee" fontSize="12" fontFamily="monospace">14 cm</text>
+    <text x="87" y="115" fill="#ffffff" fontSize="12" fontFamily="monospace">10 cm</text>
+    <text x="130" y="198" fill="#ffffff" fontSize="12" fontFamily="monospace">14 cm</text>
   </svg>
 );
 
@@ -42,8 +42,8 @@ const DiagramQ2a = () => (
     <polygon points="40,170 240,170 150,30" fill="rgba(251,146,60,0.12)" stroke="#fb923c" strokeWidth="2" />
     <line x1="150" y1="30" x2="150" y2="170" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="150,158 162,158 162,170" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="156" y="105" fill="#facc15" fontSize="12" fontFamily="monospace">15 cm</text>
-    <text x="128" y="188" fill="#22d3ee" fontSize="12" fontFamily="monospace">20 cm</text>
+    <text x="156" y="105" fill="#ffffff" fontSize="12" fontFamily="monospace">15 cm</text>
+    <text x="128" y="188" fill="#ffffff" fontSize="12" fontFamily="monospace">20 cm</text>
   </svg>
 );
 
@@ -54,9 +54,9 @@ const DiagramQ2b = () => (
     <line x1="180" y1="93" x2="190" y2="105" stroke="#22d3ee" strokeWidth="2" />
     <line x1="140" y1="20" x2="140" y2="185" stroke="#facc15" strokeWidth="1.5" strokeDasharray="5,4" />
     <polyline points="140,173 152,173 152,185" fill="none" stroke="#facc15" strokeWidth="1.5" />
-    <text x="148" y="110" fill="#facc15" fontSize="11" fontFamily="monospace">t</text>
-    <text x="110" y="202" fill="#22d3ee" fontSize="12" fontFamily="monospace">18 cm</text>
-    <text x="60"  y="103" fill="#e2e8f0" fontSize="11" fontFamily="monospace" transform="rotate(-56 80 110)">15 cm</text>
+    <text x="148" y="110" fill="#ffffff" fontSize="11" fontFamily="monospace">t</text>
+    <text x="110" y="202" fill="#ffffff" fontSize="12" fontFamily="monospace">18 cm</text>
+    <text x="60"  y="103" fill="#ffffff" fontSize="11" fontFamily="monospace" transform="rotate(-56 80 110)">15 cm</text>
   </svg>
 );
 

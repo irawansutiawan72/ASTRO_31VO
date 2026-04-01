@@ -89,9 +89,9 @@ const Q11A = () => (
     <polygon points="70,10 10,95 130,95" fill="none" stroke="#e2e8f0" strokeWidth="1.5" opacity="0.7" />
     <line x1="70" y1="10" x2="70" y2="95" stroke="#22d3ee" strokeWidth="1.8" />
     <circle cx="70" cy="95" r="3" fill="#22d3ee" />
-    <text x="64" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="64" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -104,9 +104,9 @@ const Q11B = () => (
     {/* AC: A(70,10) to C(130,95). dir=(60,85). |AC|²=3600+7225=10825. (B-A)=(-60,85). dot=(-60)(60)+(85)(85)=-3600+7225=3625. t=3625/10825≈0.335. foot=(70+0.335×60,10+0.335×85)=(90.1,38.5)≈(90,39) */}
     <line x1="10" y1="95" x2="90" y2="39" stroke="#fb923c" strokeWidth="1.8" />
     <rect x="87" y="36" width="7" height="7" fill="none" stroke="#fb923c" strokeWidth="1.2" transform="rotate(35 91 40)" />
-    <text x="64" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="64" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -121,9 +121,9 @@ const Q11C = () => (
     {/* Angle arcs at A */}
     <path d="M 57,28 A 20,20 0 0,0 70,10" fill="none" stroke="#fb923c" strokeWidth="1" strokeDasharray="2,2" />
     <path d="M 70,10 A 20,20 0 0,0 83,28" fill="none" stroke="#fb923c" strokeWidth="1" strokeDasharray="2,2" />
-    <text x="64" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="64" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -135,9 +135,9 @@ const Q11D = () => (
     <line x1="70" y1="10" x2="70" y2="105" stroke="#4ade80" strokeWidth="1.8" strokeDasharray="4,2" />
     <rect x="70" y="88" width="7" height="7" fill="none" stroke="#4ade80" strokeWidth="1.2" />
     <circle cx="70" cy="95" r="3" fill="#4ade80" />
-    <text x="64" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="64" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -151,9 +151,9 @@ const Q12A = () => (
     {/* Midpoint of BC = (70,95) */}
     <line x1="50" y1="10" x2="70" y2="95" stroke="#22d3ee" strokeWidth="1.8" />
     <circle cx="70" cy="95" r="3" fill="#22d3ee" />
-    <text x="44" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="44" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -167,9 +167,9 @@ const Q12B = () => (
     <line x1="50" y1="10" x2="64" y2="95" stroke="#a78bfa" strokeWidth="1.8" />
     <path d="M 38,26 A 18,18 0 0,0 50,10" fill="none" stroke="#fb923c" strokeWidth="1" strokeDasharray="2,2" />
     <path d="M 50,10 A 18,18 0 0,0 64,24" fill="none" stroke="#fb923c" strokeWidth="1" strokeDasharray="2,2" />
-    <text x="44" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="44" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -180,9 +180,9 @@ const Q12C = () => (
     {/* Altitude from A(50,10) to BC (horizontal line y=95): foot = (50,95) */}
     <line x1="50" y1="10" x2="50" y2="95" stroke="#fb923c" strokeWidth="1.8" />
     <rect x="50" y="83" width="7" height="7" fill="none" stroke="#fb923c" strokeWidth="1.2" />
-    <text x="44" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="44" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 
@@ -194,9 +194,9 @@ const Q12D = () => (
     <line x1="70" y1="5" x2="70" y2="105" stroke="#4ade80" strokeWidth="1.8" strokeDasharray="4,2" />
     <rect x="70" y="88" width="7" height="7" fill="none" stroke="#4ade80" strokeWidth="1.2" />
     <circle cx="70" cy="95" r="3" fill="#4ade80" />
-    <text x="44" y="7"  fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="1"  y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="131" y="105" fill="#e2e8f0" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="44" y="7"  fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="1"  y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="131" y="105" fill="#ffffff" fontSize="10" fontFamily="monospace" fontWeight="bold">C</text>
   </svg>
 );
 

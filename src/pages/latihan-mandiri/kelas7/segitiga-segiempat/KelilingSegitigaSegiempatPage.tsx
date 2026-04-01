@@ -84,14 +84,14 @@ const DiagramQ5 = () => (
 const DiagramQ6 = () => (
   <svg viewBox="0 0 340 210" className="w-full max-w-sm mx-auto my-4" aria-label="Trapesium ABCD">
     <polygon points="20,175 300,175 250,35 90,35" fill="rgba(248,113,113,0.10)" stroke="#f87171" strokeWidth="2" />
-    <text x="4"   y="192" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
-    <text x="304" y="192" fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
-    <text x="255" y="28"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
-    <text x="72"  y="28"  fill="#e2e8f0" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
-    <text x="150" y="28"  fill="#facc15" fontSize="13" fontFamily="monospace">10 cm</text>
-    <text x="145" y="195" fill="#facc15" fontSize="13" fontFamily="monospace">16 cm</text>
-    <text x="18"  y="115" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(-75 35 115)">8 cm</text>
-    <text x="292" y="115" fill="#22d3ee" fontSize="12" fontFamily="monospace" transform="rotate(65 292 115)">6 cm</text>
+    <text x="4"   y="192" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">A</text>
+    <text x="304" y="192" fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">B</text>
+    <text x="255" y="28"  fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">C</text>
+    <text x="72"  y="28"  fill="#ffffff" fontSize="13" fontFamily="monospace" fontWeight="bold">D</text>
+    <text x="150" y="28"  fill="#ffffff" fontSize="13" fontFamily="monospace">10 cm</text>
+    <text x="145" y="195" fill="#ffffff" fontSize="13" fontFamily="monospace">16 cm</text>
+    <text x="18"  y="115" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(-75 35 115)">8 cm</text>
+    <text x="292" y="115" fill="#ffffff" fontSize="12" fontFamily="monospace" transform="rotate(65 292 115)">6 cm</text>
   </svg>
 );
 
