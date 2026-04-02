@@ -55,7 +55,7 @@ const bankSoalTopics = [
   { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/coming-soon", ready: false },
   { label: "STATISTIKA", icon: BarChart3, path: "/coming-soon", ready: false },
   { label: "PELUANG", icon: Dices, path: "/bank-soal/peluang", ready: true },
-  { label: "PERSAMAAN KUADRAT (PENGAYAAN)", icon: X, path: "/coming-soon", ready: false },
+  { label: "PERSAMAAN KUADRAT (PENGAYAAN)", icon: X, path: "/bank-soal/persamaan-kuadrat", ready: true },
   { label: "FUNGSI KUADRAT (PENGAYAAN)", icon: TrendingUp, path: "/coming-soon", ready: false },
 ];
 
