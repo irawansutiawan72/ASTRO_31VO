@@ -52,7 +52,7 @@ const bankSoalTopics = [
   { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/bank-soal/bilangan-berpangkat", ready: true },
   { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/coming-soon", ready: false },
   { label: "TRANSFORMASI GEOMETRI", icon: RotateCcw, path: "/coming-soon", ready: false },
-  { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/coming-soon", ready: false },
+  { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/bank-soal/bangun-ruang-sisi-lengkung", ready: true },
   { label: "STATISTIKA", icon: BarChart3, path: "/coming-soon", ready: false },
   { label: "PELUANG", icon: Dices, path: "/bank-soal/peluang", ready: true },
   { label: "PERSAMAAN KUADRAT (PENGAYAAN)", icon: X, path: "/bank-soal/persamaan-kuadrat", ready: true },

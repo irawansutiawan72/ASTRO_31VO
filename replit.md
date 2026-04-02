@@ -142,6 +142,7 @@ vite.config.ts     # Vite config (proxy /api → localhost:3001)
 
 ### Bank Soal - Bangun Ruang Sisi Datar (100 soal, completed)
 - `/bank-soal/bangun-ruang-sisi-datar` — Kubus, Balok, Prisma, Limas
+- `/bank-soal/bangun-ruang-sisi-lengkung` — Tabung, Kerucut, Bola, Belahan Bola, Gabungan (100 soal)
   - 35 Mudah (Q1–Q35): luas permukaan & volume kubus/balok/prisma/limas, jaring-jaring, diagonal, kontekstual
   - 35 Sedang (Q36–Q70): diagonal balok/kubus, prisma trapesium, bangun gabungan, ANBK, TKA, HOTS, perbandingan
   - 30 Sulit (Q71–Q100): HOTS, TKA, ANBK, Literasi Matematika, dimensi berubah, bangun gabungan kompleks
