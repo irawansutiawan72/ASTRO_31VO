@@ -49,7 +49,7 @@ const bankSoalTopics = [
   { label: "LINGKARAN", icon: Circle, path: "/bank-soal/lingkaran", ready: true },
   { label: "GARIS SINGGUNG LINGKARAN", icon: Circle, path: "/coming-soon", ready: false },
   { label: "BANGUN RUANG SISI DATAR", icon: Box, path: "/bank-soal/bangun-ruang-sisi-datar", ready: true },
-  { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/coming-soon", ready: false },
+  { label: "BILANGAN BERPANGKAT", icon: Zap, path: "/bank-soal/bilangan-berpangkat", ready: true },
   { label: "KESEBANGUNAN DAN KEKONGRUENAN", icon: Shapes, path: "/coming-soon", ready: false },
   { label: "TRANSFORMASI GEOMETRI", icon: RotateCcw, path: "/coming-soon", ready: false },
   { label: "BANGUN RUANG SISI LENGKUNG", icon: Cylinder, path: "/coming-soon", ready: false },
